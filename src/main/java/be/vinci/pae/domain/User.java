@@ -1,2 +1,5 @@
-package be.vinci.pae.domain;public class User {
+package be.vinci.pae.domain;
+
+public class User {
+
 }
