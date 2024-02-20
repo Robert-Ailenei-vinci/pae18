@@ -1,5 +1,6 @@
 package be.vinci.pae.domain;
 
-public class DomainFactory {
+public interface DomainFactory {
 
+  User getUser();
 }
