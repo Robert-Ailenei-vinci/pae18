@@ -81,8 +81,7 @@ public class UserDataServiceImpl implements UserDataService {
 
   @Override
   public ObjectNode register(User user) {
-    if (getOne(user.getLogin()) != null) // the user already exists !
-    {
+    if (getOne(user.getLogin()) != null) { // the user already exists !
       return null;
     }
 
