@@ -6,14 +6,14 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Config
+ * Config.
  */
 public class Config {
 
   private static Properties props;
 
   /**
-   * @param file load les dev properties
+   * @param file load les dev properties.
    */
   public static void load(String file) {
     props = new Properties();

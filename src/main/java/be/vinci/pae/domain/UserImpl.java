@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * UserImpl
+ * UserImpl.
  */
 public class UserImpl implements User {
 

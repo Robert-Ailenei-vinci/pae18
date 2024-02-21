@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
- * la resource user
+ * la resource user.
  */
 @Singleton
 @Path("/users")

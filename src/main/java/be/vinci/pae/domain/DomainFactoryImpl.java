@@ -1,7 +1,7 @@
 package be.vinci.pae.domain;
 
 /**
- * DomainFactoryImpl
+ * DomainFactoryImpl.
  */
 public class DomainFactoryImpl implements DomainFactory {
 

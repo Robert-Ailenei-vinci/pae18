@@ -1,7 +1,7 @@
 package be.vinci.pae.domain;
 
 /**
- * User
+ * User.
  */
 public interface User {
 

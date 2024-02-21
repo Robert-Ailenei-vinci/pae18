@@ -6,7 +6,7 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 /**
- * WebExceptionMapper
+ * WebExceptionMapper.
  */
 @Provider
 public class WebExceptionMapper implements ExceptionMapper<Throwable> {

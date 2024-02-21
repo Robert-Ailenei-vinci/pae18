@@ -1,7 +1,7 @@
 package be.vinci.pae.domain;
 
 /**
- * DomainFactory
+ * DomainFactory.
  */
 public interface DomainFactory {
 

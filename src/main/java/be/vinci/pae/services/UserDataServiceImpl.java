@@ -12,7 +12,7 @@ import jakarta.inject.Inject;
 import java.util.List;
 
 /**
- * UserDataServiceImpl
+ * UserDataServiceImpl.
  */
 public class UserDataServiceImpl implements UserDataService {
 

@@ -1,19 +1,19 @@
 package be.vinci.pae.views;
 
 /**
- * Views
+ * Views.
  */
 public class Views {
 
   /**
-   * Public
+   * Public.
    */
   public static class Public {
 
   }
 
   /**
-   * Internal
+   * Internal.
    */
   public static class Internal extends Public {
 

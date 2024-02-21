@@ -58,6 +58,8 @@ public class AuthsResource {
   }
 
   /**
+   * Méthode pour gérer la creation des utilisateurs.
+   *
    * @param user user qui s'inscrit
    * @return publicUser qui contient les info
    * @throws WebApplicationException Si les informations de connexion sont manquantes ou
