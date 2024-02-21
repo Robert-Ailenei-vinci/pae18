@@ -16,6 +16,9 @@ import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 
+/**
+ *
+ */
 @Singleton
 @Provider
 @Authorize

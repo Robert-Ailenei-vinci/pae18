@@ -11,6 +11,9 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
+/**
+ *
+ */
 @Singleton
 @Path("/users")
 public class UserResource {
