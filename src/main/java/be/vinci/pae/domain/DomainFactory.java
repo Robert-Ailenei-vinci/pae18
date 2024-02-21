@@ -5,5 +5,10 @@ package be.vinci.pae.domain;
  */
 public interface DomainFactory {
 
+  /**
+   * get le user
+   *
+   * @return le user
+   */
   User getUser();
 }
