@@ -21,6 +21,18 @@ public class AuthsResource {
   @Inject
   private UserDataService myUserDataService;
 
+  /**
+   * Méthode pour gérer l'authentification des utilisateurs.
+   *
+   * @param json Objet JSON contenant les informations de connexion de l'utilisateur. Doit contenir
+   *             les clés "login" et "password".
+   * @return Un objet JSON représentant les informations publiques de l'utilisateur après connexion.
+   * Cet objet contient généralement des détails tels que le nom d'utilisateur, l'adresse e-mail,
+   * etc.
+   * @throws WebApplicationException Si les informations de connexion sont manquantes ou
+   *                                 incorrectes, une exception est levée avec le code d'erreur
+   *                                 approprié.
+   */
   @POST
   @Path("login")
   @Consumes(MediaType.APPLICATION_JSON)
