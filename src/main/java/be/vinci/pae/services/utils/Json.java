@@ -47,7 +47,7 @@ public class Json<T> {
       if (allCollections.has(collectionName)) {
         ((ObjectNode) allCollections).remove(collectionName); //e.g. it leaves { users:[...]}
       }
-      // Prepare a JSON array from the list of POJOs for the collection to be updated, e.g. [{"film1",...}, ...]
+      // Prepare a JSON array from the list of POJOs for the collection to be updated,
       ArrayNode updatedCollection = jsonMapper.valueToTree(items);
       // Add the JSON array in allCollections, e.g. : { users:[...], items:[...]}
       ((ObjectNode) allCollections).putArray(collectionName).addAll(updatedCollection);
@@ -137,7 +137,7 @@ public class Json<T> {
         ((ObjectNode) allCollections).remove(collectionName); //e.g. it leaves { users:[...]}
       }
 
-      // Prepare a JSON array from the list of POJOs for the collection to be updated, e.g. [{"film1",...}, ...]
+      // Prepare a JSON array from the list of POJOs for the collection to be updated,
       //ArrayNode updatedCollection = jsonMapper.valueToTree(items);
 
       // Add the JSON array in allCollections, e.g. : { users:[...], items:[...]}
