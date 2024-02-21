@@ -13,16 +13,16 @@ public interface User {
   Integer getAge();
 
   /**
-   * change l'age du user
+   * change l'age du user.
    *
-   * @param age nouvelle age du user
+   * @param age nouvelle age du user.
    */
   void setAge(Integer age);
 
   /**
-   * return si le user est marrié ou pas
+   * return si le user est marrié ou pas.
    *
-   * @return si le user est marrié ou pas
+   * @return si le user est marrié ou pas.
    */
   Boolean isMarried();
 
@@ -34,60 +34,60 @@ public interface User {
   void setMarried(Boolean married);
 
   /**
-   * recupere le login
+   * recupere le login.
    *
-   * @return le login
+   * @return le login.
    */
   String getLogin();
 
   /**
-   * change le login
+   * change le login.
    *
-   * @param login le nouveaux lohin
+   * @param login le nouveaux lohin.
    */
   void setLogin(String login);
 
   /**
-   * recuprer l'id
+   * recuprer l'id.
    *
-   * @return l' id
+   * @return l' id.
    */
   int getId();
 
   /**
-   * change le id
+   * change le id.
    *
-   * @param id le nouvelle id
+   * @param id le nouvelle id.
    */
   void setId(int id);
 
   /**
-   * get le mdp
+   * get le mdp.
    *
-   * @return le mdp
+   * @return le mdp.
    */
   String getPassword();
 
   /**
-   * change le mdp
+   * change le mdp.
    *
-   * @param password le nv mdp
+   * @param password le nv mdp.
    */
   void setPassword(String password);
 
   /**
-   * retrun true si le mdp est le meme que celui de la db
+   * retrun true si le mdp est le meme que celui de la db.
    *
-   * @param password le mdp a verifier
-   * @return true si le meme false sinon
+   * @param password le mdp a verifier.
+   * @return true si le meme false sinon.
    */
   boolean checkPassword(String password);
 
   /**
-   * hash le mdp
+   * hash le mdp.
    *
-   * @param password le mdp a hashe
-   * @return le mdp hashé
+   * @param password le mdp a hashe.
+   * @return le mdp hashé.
    */
   String hashPassword(String password);
 }
