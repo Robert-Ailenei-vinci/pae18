@@ -22,7 +22,7 @@ import jakarta.ws.rs.core.Response;
 public class AuthsResource {
 
   /**
-   * myUserDataService permet la conexion avec la db
+   * myUserDataService permet la conexion avec la db.
    */
   @Inject
   private UserDataService myUserDataService;
