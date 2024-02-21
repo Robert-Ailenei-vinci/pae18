@@ -13,6 +13,8 @@ public class Config {
   private static Properties props;
 
   /**
+   * load le fichier properties
+   *
    * @param file load les dev properties.
    */
   public static void load(String file) {

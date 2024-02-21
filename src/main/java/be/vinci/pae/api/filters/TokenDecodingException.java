@@ -4,7 +4,7 @@ import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 
 /**
- * TokenDecodingException
+ * TokenDecodingException.
  */
 public class TokenDecodingException extends WebApplicationException {
 

@@ -17,7 +17,7 @@ import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 
 /**
- * AuthorizationRequestFilter
+ * AuthorizationRequestFilter.
  */
 @Singleton
 @Provider

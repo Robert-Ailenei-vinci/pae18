@@ -16,6 +16,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @param <T> aaa.
+ */
 public class Json<T> {
 
   private static final String DB_FILE_PATH = Config.getProperty("DatabaseFilePath");
@@ -30,6 +33,12 @@ public class Json<T> {
   }
 
 
+  /**
+   * serialize en db.
+   *
+   * @param items          item a serialize.
+   * @param collectionName le nom de la collection en db.
+   */
   public void serialize(List<T> items, String collectionName) {
     try {
       // if no DB file, write a new collection to a new db file
@@ -58,6 +67,12 @@ public class Json<T> {
     }
   }
 
+  /**
+   * parse en db.
+   *
+   * @param collectionName nom de la collection.
+   * @return la liste d'objet.
+   */
   public List<T> parse(String collectionName) {
     try {
       // get allCollections
@@ -78,6 +93,13 @@ public class Json<T> {
     }
   }
 
+  /**
+   * filtre la liste.
+   *
+   * @param list list a filtre.
+   * @param <T>  type d'objet.
+   * @return null .
+   */
   public <T> List<T> filterPublicJsonViewAsList(List<T> list) {
     try {
       JavaType type = jsonMapper.getTypeFactory().constructCollectionType(List.class, this.type);
@@ -96,6 +118,13 @@ public class Json<T> {
 
   }
 
+  /**
+   * AAA.
+   *
+   * @param item dqdqzd.
+   * @param <T>  qaaa.
+   * @return aaaa.
+   */
   public <T> T filterPublicJsonView(T item) {
     try {
       // serialize using JSON Views : public view (all fields not required in the
@@ -113,6 +142,12 @@ public class Json<T> {
 
   }
 
+  /**
+   * AA.
+   *
+   * @param items          AA
+   * @param collectionName AA
+   */
   // To be used if you want to filter attributes when serializing in a JSON file
   public void serializePublicInfoOnly(List<T> items, String collectionName) {
     try {
