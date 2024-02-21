@@ -3,6 +3,9 @@ package be.vinci.pae.api.filters;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 
+/**
+ * TokenDecodingException
+ */
 public class TokenDecodingException extends WebApplicationException {
 
   public TokenDecodingException() {

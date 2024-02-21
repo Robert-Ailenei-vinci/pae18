@@ -1,5 +1,8 @@
 package be.vinci.pae.domain;
 
+/**
+ * User
+ */
 public interface User {
 
   Integer getAge();

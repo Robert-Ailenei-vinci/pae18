@@ -5,10 +5,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Config
+ */
 public class Config {
 
   private static Properties props;
 
+  /**
+   * @param file load les dev properties
+   */
   public static void load(String file) {
     props = new Properties();
     try (InputStream input = new FileInputStream(file)) {

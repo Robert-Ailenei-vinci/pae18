@@ -4,6 +4,9 @@ import be.vinci.pae.domain.User;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.List;
 
+/**
+ * UserDataService
+ */
 public interface UserDataService {
 
   List<User> getAll();

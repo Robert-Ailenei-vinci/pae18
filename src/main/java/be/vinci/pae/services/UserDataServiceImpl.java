@@ -11,6 +11,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
 import java.util.List;
 
+/**
+ * UserDataServiceImpl
+ */
 public class UserDataServiceImpl implements UserDataService {
 
   private static final String COLLECTION_NAME = "users";

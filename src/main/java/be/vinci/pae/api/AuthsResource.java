@@ -15,14 +15,14 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 /**
- *
+ * class permetant le login et register
  */
 @Singleton
 @Path("/auths")
 public class AuthsResource {
 
   /**
-   *
+   * myUserDataService permet la conexion avec la db
    */
   @Inject
   private UserDataService myUserDataService;
@@ -33,8 +33,6 @@ public class AuthsResource {
    * @param json Objet JSON contenant les informations de connexion de l'utilisateur. Doit contenir
    *             les clés "login" et "password".
    * @return Un objet JSON représentant les informations publiques de l'utilisateur après connexion.
-   * Cet objet contient généralement des détails tels que le nom d'utilisateur, l'adresse e-mail,
-   * etc.
    * @throws WebApplicationException Si les informations de connexion sont manquantes ou
    *                                 incorrectes, une exception est levée avec le code d'erreur
    *                                 approprié.
@@ -60,8 +58,11 @@ public class AuthsResource {
   }
 
   /**
-   * @param user
-   * @return
+   * @param user user qui s'inscrit
+   * @return publicUser qui contient les info
+   * @throws WebApplicationException Si les informations de connexion sont manquantes ou
+   *                                 incorrectes, une exception est levée avec le code d'erreur
+   *                                 approprié.
    */
   @POST
   @Path("register")

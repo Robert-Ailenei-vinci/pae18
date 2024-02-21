@@ -4,6 +4,9 @@ import be.vinci.pae.views.Views;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.mindrot.jbcrypt.BCrypt;
 
+/**
+ * UserImpl
+ */
 public class UserImpl implements User {
 
   @JsonView(Views.Public.class)
