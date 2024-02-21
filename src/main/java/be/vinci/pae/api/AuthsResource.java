@@ -15,7 +15,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 /**
- * class permetant le login et register
+ * class permetant le login et register.
  */
 @Singleton
 @Path("/auths")
