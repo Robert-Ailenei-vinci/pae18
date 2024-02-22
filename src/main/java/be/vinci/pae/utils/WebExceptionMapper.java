@@ -6,11 +6,16 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 /**
- * WebExceptionMapper.
+ * This class maps exceptions to appropriate HTTP responses for web applications.
  */
 @Provider
 public class WebExceptionMapper implements ExceptionMapper<Throwable> {
-
+  /**
+   * Maps the given exception to an HTTP response.
+   *
+   * @param exception The exception to map.
+   * @return The HTTP response representing the exception.
+   */
   @Override
   public Response toResponse(Throwable exception) {
     exception.printStackTrace();

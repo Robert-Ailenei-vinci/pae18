@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Authorize.
+ * This annotation is used as a name binding for authorization in JAX-RS resources and methods.
  */
 @NameBinding
 @Retention(RetentionPolicy.RUNTIME)

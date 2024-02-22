@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * UserImpl.
+ * This class represents an implementation of the {@link be.vinci.pae.domain.User} interface.
  */
 public class UserImpl implements User {
 

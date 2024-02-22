@@ -12,7 +12,7 @@ import jakarta.inject.Inject;
 import java.util.List;
 
 /**
- * UserDataServiceImpl.
+ * This class is an implementation of the {@link be.vinci.pae.services.UserDataService} interface.
  */
 public class UserDataServiceImpl implements UserDataService {
 

@@ -1,93 +1,94 @@
 package be.vinci.pae.domain;
 
 /**
- * User.
+ * This interface represents a user.
+ * It defines methods for accessing and modifying user attributes.
  */
 public interface User {
 
   /**
-   * return l'age de l'user.
+   * Returns the age of the user.
    *
-   * @return l'age de l'user.
+   * @return The age of the user.
    */
   Integer getAge();
 
   /**
-   * change l'age du user.
+   * Sets the age of the user.
    *
-   * @param age nouvelle age du user.
+   * @param age The new age of the user.
    */
   void setAge(Integer age);
 
   /**
-   * return si le user est marrié ou pas.
+   * Returns true if the user is married, false otherwise.
    *
-   * @return si le user est marrié ou pas.
+   * @return True if the user is married, false otherwise.
    */
   Boolean isMarried();
 
   /**
-   * change l'etat de marriage du user.
+   * Sets the marital status of the user.
    *
-   * @param married le nouvelle etat de marriage du user.
+   * @param married The new marital status of the user.
    */
   void setMarried(Boolean married);
 
   /**
-   * recupere le login.
+   * Retrieves the login of the user.
    *
-   * @return le login.
+   * @return The login of the user.
    */
   String getLogin();
 
   /**
-   * change le login.
+   * Sets the login of the user.
    *
-   * @param login le nouveaux lohin.
+   * @param login The new login of the user.
    */
   void setLogin(String login);
 
   /**
-   * recuprer l'id.
+   * Retrieves the ID of the user.
    *
-   * @return l' id.
+   * @return The ID of the user.
    */
   int getId();
 
   /**
-   * change le id.
+   * Sets the ID of the user.
    *
-   * @param id le nouvelle id.
+   * @param id The new ID of the user.
    */
   void setId(int id);
 
   /**
-   * get le mdp.
+   * Retrieves the password of the user.
    *
-   * @return le mdp.
+   * @return The password of the user.
    */
   String getPassword();
 
   /**
-   * change le mdp.
+   * Sets the password of the user.
    *
-   * @param password le nv mdp.
+   * @param password The new password of the user.
    */
   void setPassword(String password);
 
   /**
-   * retrun true si le mdp est le meme que celui de la db.
+   * Checks if the provided password matches the user's password stored in the database.
    *
-   * @param password le mdp a verifier.
-   * @return true si le meme false sinon.
+   * @param password The password to be verified.
+   * @return True if the provided password matches the user's password, false otherwise.
    */
   boolean checkPassword(String password);
 
   /**
-   * hash le mdp.
+   * Hashes the provided password.
    *
-   * @param password le mdp a hashe.
-   * @return le mdp hashé.
+   * @param password The password to be hashed.
+   * @return The hashed password.
    */
   String hashPassword(String password);
 }

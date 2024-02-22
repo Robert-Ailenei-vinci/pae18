@@ -9,9 +9,8 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
-
 /**
- * Main class.
+ * This class represents the main entry point for the application.
  */
 public class Main {
 
@@ -42,10 +41,10 @@ public class Main {
   }
 
   /**
-   * Main method.
+   * The main method of the application.
    *
-   * @param args arg
-   * @throws IOException exeption
+   * @param args Command line arguments.
+   * @throws IOException If an I/O error occurs.
    */
   public static void main(String[] args) throws IOException {
     final HttpServer server = startServer();

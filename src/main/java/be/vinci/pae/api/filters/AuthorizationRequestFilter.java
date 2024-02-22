@@ -17,7 +17,8 @@ import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 
 /**
- * AuthorizationRequestFilter.
+ * A ContainerRequestFilter implementation responsible for authorizing incoming requests
+ * based on JWT authentication.
  */
 @Singleton
 @Provider
@@ -30,6 +31,12 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
   @Inject
   private UserDataService myUserDataService;
 
+  /**
+   * Filters incoming requests and authorizes them based on JWT authentication.
+   *
+   * @param requestContext The context of the incoming container request
+   * @throws IOException if an I/O error occurs during the processing of the request
+   */
   @Override
   public void filter(ContainerRequestContext requestContext) throws IOException {
     String token = requestContext.getHeaderString("Authorization");

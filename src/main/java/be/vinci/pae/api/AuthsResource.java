@@ -15,27 +15,27 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 /**
- * class permetant le login et register.
+ * This class represents a resource for handling user authentication (login and registration).
+ * the base path for this resource is "/auths".
  */
 @Singleton
 @Path("/auths")
 public class AuthsResource {
 
   /**
-   * myUserDataService permet la conexion avec la db.
+   * This service provides methods for user-related operations.
    */
   @Inject
   private UserDataService myUserDataService;
 
   /**
-   * Méthode pour gérer l'authentification des utilisateurs.
+   * Method for handling user authentication.
    *
-   * @param json Objet JSON contenant les informations de connexion de l'utilisateur. Doit contenir
-   *             les clés "login" et "password".
-   * @return Un objet JSON représentant les informations publiques de l'utilisateur après connexion.
-   * @throws WebApplicationException Si les informations de connexion sont manquantes ou
-   *                                 incorrectes, une exception est levée avec le code d'erreur
-   *                                 approprié.
+   * @param json JSON object containing the user's login information.
+   *             It must contain keys "login" and "password".
+   * @return A JSON object representing the user's public information after successful authentication.
+   * @throws WebApplicationException If login information is missing or incorrect,
+   *                                 a WebApplicationException with the appropriate error code is thrown.
    */
   @POST
   @Path("login")
@@ -58,13 +58,12 @@ public class AuthsResource {
   }
 
   /**
-   * Méthode pour gérer la creation des utilisateurs.
+   * Method for handling user registration.
    *
-   * @param user user qui s'inscrit
-   * @return publicUser qui contient les info
-   * @throws WebApplicationException Si les informations de connexion sont manquantes ou
-   *                                 incorrectes, une exception est levée avec le code d'erreur
-   *                                 approprié.
+   * @param user The user object to be registered.
+   * @return A JSON object containing the public information of the registered user.
+   * @throws WebApplicationException If required user information is missing or incorrect,
+   *                                 a WebApplicationException with the appropriate error code is thrown.
    */
   @POST
   @Path("register")

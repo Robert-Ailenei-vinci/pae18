@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @param <T> aaa.
+ * This class provides utility methods for serializing and parsing JSON data.
+ *
+ * @param <T> The type of objects to be serialized and parsed.
  */
 public class Json<T> {
 
@@ -26,6 +28,11 @@ public class Json<T> {
   private static Path pathToDb = Paths.get(DB_FILE_PATH);
   private Class<T> type;
 
+  /**
+   * Constructs a new Json utility with the specified class type.
+   *
+   * @param type The class type of objects to be serialized and parsed.
+   */
   // Java generics are mostly compile time, this means that the type information is lost at runtime.
   // To get the type information at runtime you have to add it as an argument of the constructor.
   public Json(Class<T> type) {
@@ -34,10 +41,10 @@ public class Json<T> {
 
 
   /**
-   * serialize en db.
+   * Serializes the provided list of items and stores it in the database under the specified collection name.
    *
-   * @param items          item a serialize.
-   * @param collectionName le nom de la collection en db.
+   * @param items          The list of items to serialize.
+   * @param collectionName The name of the collection in the database.
    */
   public void serialize(List<T> items, String collectionName) {
     try {
@@ -68,10 +75,10 @@ public class Json<T> {
   }
 
   /**
-   * parse en db.
+   * Parses the data stored in the database under the specified collection name and returns a list of objects.
    *
-   * @param collectionName nom de la collection.
-   * @return la liste d'objet.
+   * @param collectionName The name of the collection in the database.
+   * @return The list of parsed objects.
    */
   public List<T> parse(String collectionName) {
     try {
@@ -94,11 +101,10 @@ public class Json<T> {
   }
 
   /**
-   * filtre la liste.
+   * Filters the provided list of items based on the public JSON view and returns the filtered list.
    *
-   * @param list list a filtre.
-   * @param <T>  type d'objet.
-   * @return null .
+   * @param list The list of items to filter.
+   * @return The filtered list based on the public JSON view.
    */
   public <T> List<T> filterPublicJsonViewAsList(List<T> list) {
     try {
@@ -119,11 +125,10 @@ public class Json<T> {
   }
 
   /**
-   * AAA.
+   * Filters the provided item based on the public JSON view and returns the filtered item.
    *
-   * @param item dqdqzd.
-   * @param <T>  qaaa.
-   * @return aaaa.
+   * @param item The item to filter.
+   * @return The filtered item based on the public JSON view.
    */
   public <T> T filterPublicJsonView(T item) {
     try {
@@ -143,10 +148,10 @@ public class Json<T> {
   }
 
   /**
-   * AA.
+   * Serializes the provided list of items, including only public information, and stores it in the database under the specified collection name.
    *
-   * @param items          AA
-   * @param collectionName AA
+   * @param items          The list of items to serialize with only public information.
+   * @param collectionName The name of the collection in the database.
    */
   // To be used if you want to filter attributes when serializing in a JSON file
   public void serializePublicInfoOnly(List<T> items, String collectionName) {

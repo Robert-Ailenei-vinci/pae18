@@ -5,62 +5,62 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.List;
 
 /**
- * UserDataService.
+ * This interface provides methods for interacting with user data.
  */
 public interface UserDataService {
 
   /**
-   * recup tous les user.
+   * Retrieves all users.
    *
-   * @return liste de user.
+   * @return A list of all users.
    */
   List<User> getAll();
 
   /**
-   * recup un user.
+   * Retrieves a user by their ID.
    *
-   * @param id du user a recup.
-   * @return le user.
+   * @param id The ID of the user to retrieve.
+   * @return The user with the specified ID, or null if not found.
    */
   User getOne(int id);
 
   /**
-   * recup un user.
+   * Retrieves a user by their login.
    *
-   * @param login du user a recup.
-   * @return le user.
+   * @param login The login of the user to retrieve.
+   * @return The user with the specified login, or null if not found.
    */
   User getOne(String login);
 
   /**
-   * cree un nv user.
+   * Creates a new user.
    *
-   * @param item le user a cree.
-   * @return le user cree.
+   * @param item The user to create.
+   * @return The created user.
    */
   User createOne(User item);
 
   /**
-   * return le dernier id +1.
+   * Returns the next available item ID.
    *
-   * @return le dernier id +1.
+   * @return The next available item ID.
    */
   int nextItemId();
 
   /**
-   * login.
+   * Logs in a user with the provided login and password.
    *
-   * @param login    le login.
-   * @param password mdp.
-   * @return le user , null si existe pas.
+   * @param login    The user's login.
+   * @param password The user's password.
+   * @return A JSON object representing the user if login is successful, otherwise null.
    */
   ObjectNode login(String login, String password);
 
   /**
-   * cree un user.
+   * Registers a new user.
    *
-   * @param user a cree.
-   * @return le user cree.
+   * @param user The user to register.
+   * @return A JSON object representing the registered user.
    */
   ObjectNode register(User user);
 }

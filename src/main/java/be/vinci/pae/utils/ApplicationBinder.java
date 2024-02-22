@@ -9,7 +9,7 @@ import jakarta.ws.rs.ext.Provider;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 /**
- * ApplicationBinder.
+ * This class binds implementations to their corresponding interfaces using HK2 for dependency injection.
  */
 @Provider
 public class ApplicationBinder extends AbstractBinder {
