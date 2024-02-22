@@ -1,8 +1,8 @@
 package be.vinci.pae.domain;
 
 /**
- * This interface represents a user.
- * It defines methods for accessing and modifying user attributes.
+ * This interface represents a user. It defines methods for accessing and modifying user
+ * attributes.
  */
 public interface User {
 

@@ -17,8 +17,8 @@ import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 
 /**
- * A ContainerRequestFilter implementation responsible for authorizing incoming requests
- * based on JWT authentication.
+ * A ContainerRequestFilter implementation responsible for authorizing incoming requests based on
+ * JWT authentication.
  */
 @Singleton
 @Provider
@@ -28,6 +28,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
   private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
   private final JWTVerifier jwtVerifier = JWT.require(this.jwtAlgorithm).withIssuer("auth0")
       .build();
+
   @Inject
   private UserDataService myUserDataService;
 

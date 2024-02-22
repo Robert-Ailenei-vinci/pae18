@@ -10,6 +10,7 @@ import jakarta.ws.rs.ext.Provider;
  */
 @Provider
 public class WebExceptionMapper implements ExceptionMapper<Throwable> {
+
   /**
    * Maps the given exception to an HTTP response.
    *
