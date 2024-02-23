@@ -8,7 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class UserImpl implements User {
 
   private int id;
-  private String login;
+  private String email;
   private String password;
   private Integer age;
   private Boolean married;
@@ -42,14 +42,14 @@ public class UserImpl implements User {
 
 
   @Override
-  public String getLogin() {
-    return login;
+  public String getEmail() {
+    return email;
   }
 
 
   @Override
-  public void setLogin(String login) {
-    this.login = login;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
 
@@ -90,7 +90,7 @@ public class UserImpl implements User {
 
 
   public String toString() {
-    return "{id:" + id + ", login:" + login + ", password:" + password + "}";
+    return "{id:" + id + ", email:" + email + ", password:" + password + "}";
   }
 
   @Override

@@ -25,12 +25,12 @@ public interface UserDataService {
   User getOne(int id);
 
   /**
-   * Retrieves a user by their login.
+   * Retrieves a user by their email.
    *
-   * @param login The login of the user to retrieve.
+   * @param email The email of the user to retrieve.
    * @return The user with the specified login, or null if not found.
    */
-  User getOne(String login);
+  User getOne(String email);
 
   /**
    * Creates a new user.
@@ -50,11 +50,11 @@ public interface UserDataService {
   /**
    * Logs in a user with the provided login and password.
    *
-   * @param login    The user's login.
+   * @param email    The user's login.
    * @param password The user's password.
    * @return A JSON object representing the user if login is successful, otherwise null.
    */
-  ObjectNode login(String login, String password);
+  ObjectNode login(String email, String password);
 
   /**
    * Registers a new user.

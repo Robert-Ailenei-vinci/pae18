@@ -37,7 +37,7 @@ public class UserDataServiceImpl implements UserDataService {
       while (rs.next()) {
         User user = new UserImpl();
         user.setId(rs.getInt("id"));
-        user.setLogin(rs.getString("login"));
+        user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
         user.setAge(rs.getInt("age"));
         user.setRole(rs.getString("role"));
@@ -59,18 +59,18 @@ public class UserDataServiceImpl implements UserDataService {
   }
 
   @Override
-  public User getOne(String login) {
-    String sql = "SELECT * FROM users WHERE login = ?";
+  public User getOne(String email) {
+    String sql = "SELECT * FROM users WHERE email = ?";
     return getUserMethodFromDB(sql);
   }
 
 
   @Override
   public User createOne(User user) {
-    String sql = "INSERT INTO users (login, password, age, role) VALUES (?, ?, ?, ?)";
+    String sql = "INSERT INTO users (email, password, age, role) VALUES (?, ?, ?, ?)";
     try (Connection conn = dalServices.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)) {
-      stmt.setString(1, user.getLogin());
+      stmt.setString(1, user.getEmail());
       stmt.setString(2, user.getPassword());
       stmt.setInt(3, user.getAge());
       stmt.setString(4, user.getRole());
@@ -104,8 +104,8 @@ public class UserDataServiceImpl implements UserDataService {
   }
 
   @Override
-  public ObjectNode login(String login, String password) {
-    User user = getOne(login);
+  public ObjectNode login(String email, String password) {
+    User user = getOne(email);
     if (user == null || !user.checkPassword(password)) {
       return null;
     }
@@ -116,7 +116,7 @@ public class UserDataServiceImpl implements UserDataService {
       ObjectNode publicUser = jsonMapper.createObjectNode()
           .put("token", token)
           .put("id", user.getId())
-          .put("login", user.getLogin());
+          .put("email", user.getEmail());
       return publicUser;
 
     } catch (Exception e) {
@@ -127,7 +127,7 @@ public class UserDataServiceImpl implements UserDataService {
 
   @Override
   public ObjectNode register(User user) {
-    if (getOne(user.getLogin()) != null) { // the user already exists !
+    if (getOne(user.getEmail()) != null) { // the user already exists !
       return null;
     }
 
@@ -144,7 +144,7 @@ public class UserDataServiceImpl implements UserDataService {
       ObjectNode publicUser = jsonMapper.createObjectNode()
           .put("token", token)
           .put("id", user.getId())
-          .put("login", user.getLogin());
+          .put("email", user.getEmail());
       return publicUser;
 
     } catch (Exception e) {
@@ -159,7 +159,7 @@ public class UserDataServiceImpl implements UserDataService {
       if (rs.next()) {
         User user = new UserImpl();
         user.setId(rs.getInt("id"));
-        user.setLogin(rs.getString("login"));
+        user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
         user.setAge(rs.getInt("age"));
         user.setRole(rs.getString("role"));

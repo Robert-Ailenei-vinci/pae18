@@ -75,7 +75,7 @@ public class AuthsResource {
   public ObjectNode register(User user) {
     // Get and check credentials
     if (user == null || user.getPassword() == null || user.getPassword().isBlank()
-        || user.getLogin() == null || user.getLogin().isBlank()) {
+        || user.getEmail() == null || user.getEmail().isBlank()) {
       throw new WebApplicationException("login or password required", Response.Status.BAD_REQUEST);
     }
     // Try to login
