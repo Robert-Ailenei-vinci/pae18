@@ -1,7 +1,5 @@
 package be.vinci.pae.domain;
 
-import be.vinci.pae.views.Views;
-import com.fasterxml.jackson.annotation.JsonView;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -9,16 +7,12 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class UserImpl implements User {
 
-  @JsonView(Views.Public.class)
   private int id;
-  @JsonView(Views.Public.class)
   private String login;
-  @JsonView(Views.Internal.class)
   private String password;
-  @JsonView(Views.Internal.class)
   private Integer age;
-  @JsonView(Views.Public.class)
   private Boolean married;
+  private String role;
 
 
   @Override
@@ -98,4 +92,20 @@ public class UserImpl implements User {
   public String toString() {
     return "{id:" + id + ", login:" + login + ", password:" + password + "}";
   }
+
+  @Override
+  public String getRole() {
+    if (role.equals("Etudiant") || role.equals("Professeur") || role.equals("Administratif")) {
+      return role;
+    } else {
+      return null;
+    }
+  }
+
+  @Override
+  public String setRole(String role) {
+    return this.role = role;
+
+  }
+
 }
