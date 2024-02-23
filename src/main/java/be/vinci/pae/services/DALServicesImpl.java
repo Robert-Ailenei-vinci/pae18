@@ -18,10 +18,11 @@ public class DALServicesImpl implements DALServices {
    */
   public DALServicesImpl() {
     try {
-      String DATABASE_URL = "jdbc:postgresql://coursinfo.vinci.be:5432/dblars_hanquet?user=lars_hanquet";
-      String DATABASE_USER = "lars_hanquet";
-      String DATABASE_PASSWORD = "123456789";
-      this.connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+      String DATABASEURL =
+          "jdbc:postgresql://coursinfo.vinci.be:5432/dblars_hanquet?user=lars_hanquet";
+      String DATABASEUSER = "lars_hanquet";
+      String DATABASEPASSWORD = "123456789";
+      this.connection = DriverManager.getConnection(DATABASEURL, DATABASEUSER, DATABASEPASSWORD);
     } catch (SQLException e) {
       System.out.println("Unable to connect to database: " + e.getMessage());
     }
@@ -56,14 +57,7 @@ public class DALServicesImpl implements DALServices {
   /**
    * Gets a PreparedStatement object for sending parameterized SQL statements to the database.
    *
-   * @param ps a String representing an SQL statement to be sent to the database
-   * @return a PreparedStatement object containing the precompiled SQL statement
-   */
-
-  /**
-   * Gets a PreparedStatement object for sending parameterized SQL statements to the database.
-   *
-   * @param ps a String representing an SQL statement to be sent to the database
+   * @param sql a String representing an SQL statement to be sent to the database
    * @return a PreparedStatement object containing the precompiled SQL statement
    */
   @Override
