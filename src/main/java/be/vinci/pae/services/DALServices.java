@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
  * DALServices is an interface that provides methods for managing database connections and prepared
  * statements.
  */
+
 public interface DALServices {
 
   /**

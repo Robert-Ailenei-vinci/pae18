@@ -20,6 +20,8 @@ public class UserImpl implements User {
   @JsonView(Views.Public.class)
   private Boolean married;
 
+  private String role;
+
 
   @Override
   public Integer getAge() {
@@ -98,4 +100,20 @@ public class UserImpl implements User {
   public String toString() {
     return "{id:" + id + ", login:" + login + ", password:" + password + "}";
   }
+
+  @Override
+  public String getRole() {
+    if (role.equals("Etudiant") || role.equals("Professeur") || role.equals("Administratif")) {
+      return role;
+    } else {
+      return null;
+    }
+  }
+
+  @Override
+  public String setRole(String role) {
+    return this.role = role;
+
+  }
+
 }

@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * DALServicesImpl is a class that provides methods for managing database connections and prepared
+ * statements.
+ */
 public class DALServicesImpl implements DALServices {
 
   private Connection connection;

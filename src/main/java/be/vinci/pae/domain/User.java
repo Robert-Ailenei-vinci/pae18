@@ -92,5 +92,17 @@ public interface User {
    */
   String hashPassword(String password);
 
+  /**
+   * Retrieves the role of the user.
+   *
+   * @return The role of the user.
+   */
+  String getRole();
 
+  /**
+   * Sets the role of the user.
+   *
+   * @param role The new role of the user.
+   */
+  String setRole(String role);
 }
