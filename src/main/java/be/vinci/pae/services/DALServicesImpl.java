@@ -1,5 +1,6 @@
 package be.vinci.pae.services;
 
+import be.vinci.pae.utils.Config;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,10 +12,20 @@ import java.sql.SQLException;
  */
 public class DALServicesImpl implements DALServices {
 
-  private final String DATABASEURL =
-      "jdbc:postgresql://coursinfo.vinci.be:5432/dblars_hanquet?user=lars_hanquet";
-  private final String DATABASEUSER = "lars_hanquet";
-  private final String DATABASEPASSWORD = "123456789";
+  private static final String DATA_BASEURL;
+
+  private static final String DATABASE_USER;
+
+  private static final String DATABASE_PASSWORD;
+
+  static {
+
+    Config.load("dev.properties");
+    DATA_BASEURL = Config.getProperty("DatabaseFilePath");
+    DATABASE_USER = Config.getProperty("DATABASEUSER");
+    DATABASE_PASSWORD = Config.getProperty("DATABASEPASSWORD");
+  }
+
   private Connection connection;
 
   /**
@@ -22,8 +33,7 @@ public class DALServicesImpl implements DALServices {
    */
   public DALServicesImpl() {
     try {
-
-      this.connection = DriverManager.getConnection(DATABASEURL, DATABASEUSER, DATABASEPASSWORD);
+      this.connection = DriverManager.getConnection(DATA_BASEURL, DATABASE_USER, DATABASE_PASSWORD);
     } catch (SQLException e) {
       System.out.println("Unable to connect to database: " + e.getMessage());
     }
