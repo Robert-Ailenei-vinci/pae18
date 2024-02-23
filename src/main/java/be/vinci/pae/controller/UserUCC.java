@@ -20,7 +20,7 @@ public interface UserUCC {
 
 
   /**
-   * @return
+   * @return all user
    */
   List<User> getAll();
 }
