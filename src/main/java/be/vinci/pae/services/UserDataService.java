@@ -1,6 +1,5 @@
 package be.vinci.pae.services;
 
-import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDTO;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public interface UserDataService {
    *
    * @return A list of all users.
    */
-  List<User> getAll();
+  List<UserDTO> getAll();
 
   /**
    * Retrieves a user by their ID.
@@ -25,12 +24,12 @@ public interface UserDataService {
   UserDTO getOne(int id);
 
   /**
-   * Retrieves a user by their login.
+   * Retrieves a user by their email.
    *
-   * @param login The login of the user to retrieve.
+   * @param email The email of the user to retrieve.
    * @return The user with the specified login, or null if not found.
    */
-  UserDTO getOne(String login);
+  UserDTO getOne(String email);
 
   /**
    * Creates a new user.
@@ -38,7 +37,7 @@ public interface UserDataService {
    * @param item The user to create.
    * @return The created user.
    */
-  UserDTO createOne(User item);
+  UserDTO createOne(UserDTO item);
 
   /**
    * Returns the next available item ID.

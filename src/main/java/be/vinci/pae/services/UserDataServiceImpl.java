@@ -23,15 +23,15 @@ public class UserDataServiceImpl implements UserDataService {
   private DALServices dalServices;
 
   @Override
-  public List<User> getAll() {
+  public List<UserDTO> getAll() {
     String sql = "SELECT * FROM users";
-    List<User> users = new ArrayList<>();
+    List<UserDTO> users = new ArrayList<>();
     try (PreparedStatement stmnt = dalServices.getPreparedStatement(sql);
         ResultSet rs = stmnt.executeQuery(sql)) {
       while (rs.next()) {
-        User user = new UserImpl();
+        UserDTO user = new UserImpl();
         user.setId(rs.getInt("id"));
-        user.setLogin(rs.getString("login"));
+        user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
         user.setAge(rs.getInt("age"));
         user.setRole(rs.getString("role"));
@@ -53,17 +53,17 @@ public class UserDataServiceImpl implements UserDataService {
   }
 
   @Override
-  public UserDTO getOne(String login) {
-    String sql = "SELECT * FROM users WHERE login = ?";
+  public UserDTO getOne(String email) {
+    String sql = "SELECT * FROM users WHERE email = ?";
     return getUserMethodFromDB(sql);
   }
 
 
   @Override
-  public UserDTO createOne(User user) {
-    String sql = "INSERT INTO users (login, password, age, role) VALUES (?, ?, ?, ?)";
+  public UserDTO createOne(UserDTO user) {
+    String sql = "INSERT INTO users (email, password, age, role) VALUES (?, ?, ?, ?)";
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql)) {
-      stmt.setString(1, user.getLogin());
+      stmt.setString(1, user.getEmail());
       stmt.setString(2, user.getPassword());
       stmt.setInt(3, user.getAge());
       stmt.setString(4, user.getRole());
@@ -101,7 +101,7 @@ public class UserDataServiceImpl implements UserDataService {
       if (rs.next()) {
         User user = new UserImpl();
         user.setId(rs.getInt("id"));
-        user.setLogin(rs.getString("login"));
+        user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
         user.setAge(rs.getInt("age"));
         user.setRole(rs.getString("role"));

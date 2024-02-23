@@ -32,18 +32,19 @@ public interface UserDTO {
   void setMarried(Boolean married);
 
   /**
-   * Retrieves the login of the user.
+   * Retrieves the email of the user.
    *
-   * @return The login of the user.
+   * @return The email of the user.
    */
-  String getLogin();
+  String getEmail();
 
   /**
-   * Sets the login of the user.
+   * Sets the email of the user.
    *
-   * @param login The new login of the user.
+   * @param email The new email of the user.
    */
-  void setLogin(String login);
+  void setEmail(String email);
+
 
   /**
    * Retrieves the ID of the user.
