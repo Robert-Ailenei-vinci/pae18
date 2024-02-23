@@ -4,9 +4,6 @@ import be.vinci.pae.domain.DomainFactory;
 import be.vinci.pae.domain.User;
 import be.vinci.pae.domain.UserDTO;
 import be.vinci.pae.domain.UserImpl;
-import be.vinci.pae.utils.Config;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,8 +17,8 @@ import java.util.List;
  */
 public class UserDataServiceImpl implements UserDataService {
 
-  private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
-  private final ObjectMapper jsonMapper = new ObjectMapper();
+  //private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
+  //private final ObjectMapper jsonMapper = new ObjectMapper();
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
