@@ -2,7 +2,12 @@ package be.vinci.pae.api;
 
 import be.vinci.pae.controller.UserUCC;
 import be.vinci.pae.domain.UserDTO;
+import be.vinci.pae.utils.Config;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
@@ -21,6 +26,8 @@ import jakarta.ws.rs.core.Response;
 @Path("/auths")
 public class AuthsResource {
 
+  private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
+  private final ObjectMapper jsonMapper = new ObjectMapper();
   /**
    * This service provides methods for user-related operations.
    */
@@ -41,7 +48,7 @@ public class AuthsResource {
   @Path("login")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public UserDTO login(JsonNode json) {
+  public ObjectNode login(JsonNode json) {
     // Get and check credentials
     if (!json.hasNonNull("login") || !json.hasNonNull("password")) {
       throw new WebApplicationException("login or password required", Response.Status.BAD_REQUEST);
@@ -54,7 +61,21 @@ public class AuthsResource {
       throw new WebApplicationException("Login or password incorrect",
           Response.Status.UNAUTHORIZED);
     }
-    return publicUser;
+    String token;
+    try {
+      token = JWT.create().withIssuer("auth0")
+          .withClaim("user", publicUser.getId()).sign(this.jwtAlgorithm);
+      ObjectNode toReturn = jsonMapper.createObjectNode()
+          .put("token", token)
+          .put("id", publicUser.getId())
+          .put("email", publicUser.getEmail());
+      return toReturn;
+
+    } catch (Exception e) {
+      System.out.println("Unable to create token");
+      return null;
+    }
+
   }
 
   /*
