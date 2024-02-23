@@ -64,8 +64,7 @@ public class UserDataServiceImpl implements UserDataService {
   @Override
   public UserDTO createOne(UserDTO user) {
     String sql = "INSERT INTO users (email, password, age, role) VALUES (?, ?, ?, ?)";
-    try (Connection conn = dalServices.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql)) {
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql)) {
       stmt.setString(1, user.getEmail());
       stmt.setString(2, user.getPassword());
       stmt.setInt(3, user.getAge());
