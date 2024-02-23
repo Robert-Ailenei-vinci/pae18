@@ -91,4 +91,6 @@ public interface User {
    * @return The hashed password.
    */
   String hashPassword(String password);
+
+
 }
