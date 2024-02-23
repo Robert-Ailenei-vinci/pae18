@@ -32,8 +32,7 @@ public class AuthsResource {
    *
    * @param json JSON object containing the user's login information. It must contain keys "login"
    *             and "password".
-   * @return A JSON object representing the user's public information after successful
-   * authentication.
+   * @return A JSON object representing the user's public information after successful auth
    * @throws WebApplicationException If login information is missing or incorrect, a
    *                                 WebApplicationException with the appropriate error code is
    *                                 thrown.
@@ -58,15 +57,6 @@ public class AuthsResource {
     return publicUser;
   }
 
-  /**
-   * Method for handling user registration.
-   *
-   * @param user The user object to be registered.
-   * @return A JSON object containing the public information of the registered user.
-   * @throws WebApplicationException If required user information is missing or incorrect, a
-   *                                 WebApplicationException with the appropriate error code is
-   *                                 thrown.
-   */
   /*
   @POST
   @Path("register")

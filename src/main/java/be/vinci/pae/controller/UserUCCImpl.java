@@ -6,15 +6,17 @@ import be.vinci.pae.services.UserDataService;
 import jakarta.inject.Inject;
 import java.util.List;
 
+/**
+ * implemetation of user UCC.
+ */
 public class UserUCCImpl implements UserUCC {
 
   /**
-   * UserDataService (DAO) object by injection
+   * UserDataService (DAO) object by injection.
    */
   @Inject
   private UserDataService myUserDataService;
 
-  //Doit return user dto
   public UserDTO login(String login, String password) {
 
     User user = (User) myUserDataService.getOne(login);

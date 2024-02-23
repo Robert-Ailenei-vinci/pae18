@@ -11,7 +11,7 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
-/*
+
 /**
  * This class represents a resource for handling user-related operations. The base path for this
  * resource is "/users".
@@ -32,8 +32,7 @@ public class UserResource {
    * responses. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize},
    * indicating that authorization is required to access this endpoint.
    *
-   * @return A list of {@link be.vinci.pae.domain.User} objects representing all users in the
-   * system.
+   * @return list of {@link be.vinci.pae.domain.User} objects representing all users in the system.
    */
 
   @GET
