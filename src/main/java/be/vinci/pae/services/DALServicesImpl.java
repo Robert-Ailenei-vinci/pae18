@@ -19,8 +19,9 @@ public class DALServicesImpl implements DALServices {
   private static final String DATABASE_PASSWORD;
 
   static {
-    Config.load("config.properties");
-    DATA_BASEURL = Config.getProperty("DATABASEURL");
+
+    Config.load("dev.properties");
+    DATA_BASEURL = Config.getProperty("DatabaseFilePath");
     DATABASE_USER = Config.getProperty("DATABASEUSER");
     DATABASE_PASSWORD = Config.getProperty("DATABASEPASSWORD");
   }
