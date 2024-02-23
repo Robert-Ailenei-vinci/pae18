@@ -43,6 +43,7 @@ public class UserDataServiceImpl implements UserDataService {
         user.setRole(rs.getString("role"));
         // Set other user properties here
         users.add(user);
+        rs.close();
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -68,7 +69,7 @@ public class UserDataServiceImpl implements UserDataService {
   public User createOne(User user) {
     String sql = "INSERT INTO users (login, password, age, role) VALUES (?, ?, ?, ?)";
     try (Connection conn = dalServices.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
       stmt.setString(1, user.getLogin());
       stmt.setString(2, user.getPassword());
       stmt.setInt(3, user.getAge());
@@ -153,9 +154,8 @@ public class UserDataServiceImpl implements UserDataService {
   }
 
   private User getUserMethodFromDB(String sql) {
-    try (Connection conn = dalServices.getConnection();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql)) {
+    try (PreparedStatement stmnt = dalServices.getPreparedStatement(sql);
+        ResultSet rs = stmnt.executeQuery(sql)) {
       if (rs.next()) {
         User user = new UserImpl();
         user.setId(rs.getInt("id"));
