@@ -1,8 +1,8 @@
 package be.vinci.pae.api;
 
 import be.vinci.pae.api.filters.Authorize;
+import be.vinci.pae.controller.UserUCC;
 import be.vinci.pae.domain.User;
-import be.vinci.pae.services.UserDataService;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
@@ -23,7 +23,7 @@ public class UserResource {
    * This service provides methods for user-related operations.
    */
   @Inject
-  private UserDataService myUserDataService;
+  private UserUCC myUser;
 
   /**
    * Retrieves a list of all users. This method is annotated with {@link jakarta.ws.rs.GET} and
@@ -34,12 +34,13 @@ public class UserResource {
    * @return A list of {@link be.vinci.pae.domain.User} objects representing all users in the
    * system.
    */
+
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<User> getAll() {
     System.out.println("getAll");
-    return myUserDataService.getAll();
+    return myUser.getAll();
   }
 
 }

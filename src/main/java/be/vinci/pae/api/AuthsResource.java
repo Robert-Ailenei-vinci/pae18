@@ -1,7 +1,7 @@
 package be.vinci.pae.api;
 
+import be.vinci.pae.controller.UserUCC;
 import be.vinci.pae.domain.User;
-import be.vinci.pae.services.UserDataService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
@@ -26,7 +26,7 @@ public class AuthsResource {
    * This service provides methods for user-related operations.
    */
   @Inject
-  private UserDataService myUserDataService;
+  private UserUCC myUser;
 
   /**
    * Method for handling user authentication.
@@ -51,13 +51,14 @@ public class AuthsResource {
     String login = json.get("login").asText();
     String password = json.get("password").asText();
     // Try to login
-    ObjectNode publicUser = myUserDataService.login(login, password);
+    ObjectNode publicUser = myUser.login(login, password);
     if (publicUser == null) {
       throw new WebApplicationException("Login or password incorrect",
           Response.Status.UNAUTHORIZED);
     }
     return publicUser;
   }
+
 
   /**
    * Method for handling user registration.
@@ -68,6 +69,7 @@ public class AuthsResource {
    *                                 WebApplicationException with the appropriate error code is
    *                                 thrown.
    */
+  /*
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -79,12 +81,12 @@ public class AuthsResource {
       throw new WebApplicationException("login or password required", Response.Status.BAD_REQUEST);
     }
     // Try to login
-    ObjectNode publicUser = myUserDataService.register(user);
+    ObjectNode publicUser = myUser.register(user);
     if (publicUser == null) {
       throw new WebApplicationException("this resource already exists", Response.Status.CONFLICT);
     }
     return publicUser;
 
   }
-
+*/
 }

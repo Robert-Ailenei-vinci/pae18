@@ -1,10 +1,9 @@
 package be.vinci.pae.controller;
 
-import be.vinci.pae.domain.User;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public interface UserUCC {
+    ObjectNode login (String login, String password);
 
 
-
-    User login (String login, String password);
 }
