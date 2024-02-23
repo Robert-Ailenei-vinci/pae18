@@ -2,12 +2,13 @@ package be.vinci.pae.services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import org.jvnet.hk2.annotations.Service;
 
 /**
  * DALServices is an interface that provides methods for managing database connections and prepared
  * statements.
  */
-
+@Service
 public interface DALServices {
 
   /**
@@ -30,8 +31,9 @@ public interface DALServices {
    * @param ps a String representing an SQL statement to be sent to the database
    * @return a PreparedStatement object containing the precompiled SQL statement
    */
-  PreparedStatement getPreparedStatement(PreparedStatement ps);
 
+
+  PreparedStatement getPreparedStatement(String sql);
 
   /**
    * Closes the provided PreparedStatement object.

@@ -53,6 +53,12 @@ public class DALServicesImpl implements DALServices {
     }
   }
 
+  /**
+   * Gets a PreparedStatement object for sending parameterized SQL statements to the database.
+   *
+   * @param ps a String representing an SQL statement to be sent to the database
+   * @return a PreparedStatement object containing the precompiled SQL statement
+   */
 
   /**
    * Gets a PreparedStatement object for sending parameterized SQL statements to the database.
@@ -61,8 +67,13 @@ public class DALServicesImpl implements DALServices {
    * @return a PreparedStatement object containing the precompiled SQL statement
    */
   @Override
-  public PreparedStatement getPreparedStatement(PreparedStatement ps) {
-    return ps;
+  public PreparedStatement getPreparedStatement(String sql) {
+    try {
+      return this.connection.prepareStatement(sql);
+    } catch (SQLException e) {
+      System.out.println("Unable to prepare statement: " + e.getMessage());
+      return null;
+    }
   }
 
 

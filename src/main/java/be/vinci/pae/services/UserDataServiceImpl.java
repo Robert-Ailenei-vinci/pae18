@@ -23,16 +23,15 @@ public class UserDataServiceImpl implements UserDataService {
   private final ObjectMapper jsonMapper = new ObjectMapper();
   @Inject
   private DomainFactory myDomainFactory;
-
+  @Inject
   private DALServices dalServices;
 
   @Override
   public List<User> getAll() {
     String sql = "SELECT * FROM users";
     List<User> users = new ArrayList<>();
-    try (Connection conn = dalServices.getConnection();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql)) {
+    try (PreparedStatement stmnt = dalServices.getPreparedStatement(sql);
+        ResultSet rs = stmnt.executeQuery(sql)) {
       while (rs.next()) {
         User user = new UserImpl();
         user.setId(rs.getInt("id"));

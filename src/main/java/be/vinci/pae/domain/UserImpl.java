@@ -1,7 +1,5 @@
 package be.vinci.pae.domain;
 
-import be.vinci.pae.views.Views;
-import com.fasterxml.jackson.annotation.JsonView;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -9,17 +7,11 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class UserImpl implements User {
 
-  @JsonView(Views.Public.class)
   private int id;
-  @JsonView(Views.Public.class)
   private String login;
-  @JsonView(Views.Internal.class)
   private String password;
-  @JsonView(Views.Internal.class)
   private Integer age;
-  @JsonView(Views.Public.class)
   private Boolean married;
-
   private String role;
 
 
