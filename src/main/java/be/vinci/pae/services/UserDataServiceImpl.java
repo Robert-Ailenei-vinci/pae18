@@ -25,13 +25,13 @@ public class UserDataServiceImpl implements UserDataService {
   private DALServices dalServices;
 
   @Override
-  public List<User> getAll() {
+  public List<UserDTO> getAll() {
     String sql = "SELECT * FROM users";
-    List<User> users = new ArrayList<>();
+    List<UserDTO> users = new ArrayList<>();
     try (PreparedStatement stmnt = dalServices.getPreparedStatement(sql);
         ResultSet rs = stmnt.executeQuery(sql)) {
       while (rs.next()) {
-        User user = new UserImpl();
+        UserDTO user = new UserImpl();
         user.setId(rs.getInt("id"));
         user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
@@ -62,7 +62,7 @@ public class UserDataServiceImpl implements UserDataService {
 
 
   @Override
-  public UserDTO createOne(User user) {
+  public UserDTO createOne(UserDTO user) {
     String sql = "INSERT INTO users (email, password, age, role) VALUES (?, ?, ?, ?)";
     try (Connection conn = dalServices.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)) {
