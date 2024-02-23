@@ -1,22 +1,28 @@
 package be.vinci.pae.controller;
 
+import be.vinci.pae.domain.User;
+import be.vinci.pae.domain.UserDTO;
 import be.vinci.pae.services.UserDataService;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
 
 public class UserUCCImpl implements UserUCC {
 
-    /**
-     * UserDataService (DAO) object by injection
-     */
-    @Inject
-    private UserDataService myUserDataService;
+  /**
+   * UserDataService (DAO) object by injection
+   */
+  @Inject
+  private UserDataService myUserDataService;
 
-    //Doit return in user dto
-    public ObjectNode login (String login, String password){
+  //Doit return user dto
+  public UserDTO login(String login, String password) {
 
-        if( myUserDataService.getOne(login).checkPassword(password))
-        return null;
+    User user = (User) myUserDataService.getOne(login);
+
+    if (user.checkPassword(password)) {
+      // return UserDTO
+      return user;
     }
+    return null;
+  }
 
 }

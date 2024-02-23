@@ -2,12 +2,11 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.domain.DomainFactory;
 import be.vinci.pae.domain.User;
+import be.vinci.pae.domain.UserDTO;
 import be.vinci.pae.domain.UserImpl;
 import be.vinci.pae.utils.Config;
-import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,20 +52,20 @@ public class UserDataServiceImpl implements UserDataService {
 
 
   @Override
-  public User getOne(int id) {
+  public UserDTO getOne(int id) {
     String sql = "SELECT * FROM users WHERE id_utilisateur = ?";
     return getUserMethodFromDB(sql);
   }
 
   @Override
-  public User getOne(String login) {
+  public UserDTO getOne(String login) {
     String sql = "SELECT * FROM users WHERE login = ?";
     return getUserMethodFromDB(sql);
   }
 
 
   @Override
-  public User createOne(User user) {
+  public UserDTO createOne(User user) {
     String sql = "INSERT INTO users (login, password, age, role) VALUES (?, ?, ?, ?)";
     try (Connection conn = dalServices.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -101,56 +100,6 @@ public class UserDataServiceImpl implements UserDataService {
       System.out.println(e.getMessage());
     }
     return 1;
-  }
-
-  @Override
-  public ObjectNode login(String login, String password) {
-    User user = getOne(login);
-    if (user == null || !user.checkPassword(password)) {
-      return null;
-    }
-    String token;
-    try {
-      token = JWT.create().withIssuer("auth0")
-          .withClaim("user", user.getId()).sign(this.jwtAlgorithm);
-      ObjectNode publicUser = jsonMapper.createObjectNode()
-          .put("token", token)
-          .put("id", user.getId())
-          .put("login", user.getLogin());
-      return publicUser;
-
-    } catch (Exception e) {
-      System.out.println("Unable to create token");
-      return null;
-    }
-  }
-
-  @Override
-  public ObjectNode register(User user) {
-    if (getOne(user.getLogin()) != null) { // the user already exists !
-      return null;
-    }
-
-    user.setPassword(user.hashPassword(user.getPassword()));
-
-    user = createOne(user); // add an id to the user and serialize it in db.json
-    if (user == null) {
-      return null;
-    }
-    String token;
-    try {
-      token = JWT.create().withIssuer("auth0")
-          .withClaim("user", user.getId()).sign(this.jwtAlgorithm);
-      ObjectNode publicUser = jsonMapper.createObjectNode()
-          .put("token", token)
-          .put("id", user.getId())
-          .put("login", user.getLogin());
-      return publicUser;
-
-    } catch (Exception e) {
-      System.out.println("Unable to create token");
-      return null;
-    }
   }
 
   private User getUserMethodFromDB(String sql) {
