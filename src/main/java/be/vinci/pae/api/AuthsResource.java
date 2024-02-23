@@ -1,9 +1,8 @@
 package be.vinci.pae.api;
 
-import be.vinci.pae.domain.User;
-import be.vinci.pae.services.UserDataService;
+import be.vinci.pae.controller.UserUCC;
+import be.vinci.pae.domain.UserDTO;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
@@ -26,15 +25,14 @@ public class AuthsResource {
    * This service provides methods for user-related operations.
    */
   @Inject
-  private UserDataService myUserDataService;
+  private UserUCC myUser;
 
   /**
    * Method for handling user authentication.
    *
    * @param json JSON object containing the user's login information. It must contain keys "login"
    *             and "password".
-   * @return A JSON object representing the user's public information after successful
-   * authentication.
+   * @return A JSON object representing the user's public information after successful auth
    * @throws WebApplicationException If login information is missing or incorrect, a
    *                                 WebApplicationException with the appropriate error code is
    *                                 thrown.
@@ -43,7 +41,7 @@ public class AuthsResource {
   @Path("login")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public ObjectNode login(JsonNode json) {
+  public UserDTO login(JsonNode json) {
     // Get and check credentials
     if (!json.hasNonNull("login") || !json.hasNonNull("password")) {
       throw new WebApplicationException("login or password required", Response.Status.BAD_REQUEST);
@@ -51,7 +49,7 @@ public class AuthsResource {
     String login = json.get("login").asText();
     String password = json.get("password").asText();
     // Try to login
-    ObjectNode publicUser = myUserDataService.login(login, password);
+    UserDTO publicUser = myUser.login(login, password);
     if (publicUser == null) {
       throw new WebApplicationException("Login or password incorrect",
           Response.Status.UNAUTHORIZED);
@@ -59,15 +57,7 @@ public class AuthsResource {
     return publicUser;
   }
 
-  /**
-   * Method for handling user registration.
-   *
-   * @param user The user object to be registered.
-   * @return A JSON object containing the public information of the registered user.
-   * @throws WebApplicationException If required user information is missing or incorrect, a
-   *                                 WebApplicationException with the appropriate error code is
-   *                                 thrown.
-   */
+  /*
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -79,12 +69,12 @@ public class AuthsResource {
       throw new WebApplicationException("login or password required", Response.Status.BAD_REQUEST);
     }
     // Try to login
-    ObjectNode publicUser = myUserDataService.register(user);
+    ObjectNode publicUser = myUser.register(user);
     if (publicUser == null) {
       throw new WebApplicationException("this resource already exists", Response.Status.CONFLICT);
     }
     return publicUser;
 
   }
-
+*/
 }

@@ -1,6 +1,6 @@
 package be.vinci.pae.api.filters;
 
-import be.vinci.pae.domain.User;
+import be.vinci.pae.domain.UserDTO;
 import be.vinci.pae.services.UserDataService;
 import be.vinci.pae.utils.Config;
 import com.auth0.jwt.JWT;
@@ -51,7 +51,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
       } catch (Exception e) {
         throw new TokenDecodingException(e);
       }
-      User authenticatedUser = myUserDataService.getOne(decodedToken.getClaim("user").asInt());
+      UserDTO authenticatedUser = myUserDataService.getOne(decodedToken.getClaim("user").asInt());
       if (authenticatedUser == null) {
         requestContext.abortWith(Response.status(Status.FORBIDDEN)
             .entity("You are forbidden to access this resource").build());
