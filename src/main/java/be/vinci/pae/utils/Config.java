@@ -11,7 +11,7 @@ import java.util.Properties;
  */
 public class Config {
 
-  private static Properties props;
+  private static Properties props = new Properties();
 
   /**
    * Loads the specified properties file.
@@ -19,7 +19,7 @@ public class Config {
    * @param file The name of the properties file to load.
    */
   public static void load(String file) {
-    props = new Properties();
+
     try (InputStream input = new FileInputStream(file)) {
       props.load(input);
     } catch (IOException e) {
