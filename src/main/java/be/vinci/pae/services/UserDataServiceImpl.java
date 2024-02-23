@@ -9,10 +9,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,14 +66,13 @@ public class UserDataServiceImpl implements UserDataService {
   @Override
   public User createOne(User user) {
     String sql = "INSERT INTO users (login, password, age, role) VALUES (?, ?, ?, ?)";
-    try (Connection conn = dalServices.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql)) {
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql)) {
       stmt.setString(1, user.getLogin());
       stmt.setString(2, user.getPassword());
       stmt.setInt(3, user.getAge());
       stmt.setString(4, user.getRole());
       stmt.executeUpdate();
-      try (ResultSet rs = stmt.getGeneratedKeys()) {
+      try (ResultSet rs = stmt.executeQuery(sql)) {
         if (rs.next()) {
           user.setId(rs.getInt(1));
           return user;
@@ -91,8 +88,7 @@ public class UserDataServiceImpl implements UserDataService {
   @Override
   public int nextItemId() {
     String sql = "SELECT MAX(id) FROM users";
-    try (Connection conn = dalServices.getConnection();
-        Statement stmt = conn.createStatement();
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql);
         ResultSet rs = stmt.executeQuery(sql)) {
       if (rs.next()) {
         return rs.getInt(1) + 1;
