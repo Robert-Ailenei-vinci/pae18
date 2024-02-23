@@ -11,6 +11,10 @@ import java.sql.SQLException;
  */
 public class DALServicesImpl implements DALServices {
 
+  private final String DATABASEURL =
+      "jdbc:postgresql://coursinfo.vinci.be:5432/dblars_hanquet?user=lars_hanquet";
+  private final String DATABASEUSER = "lars_hanquet";
+  private final String DATABASEPASSWORD = "123456789";
   private Connection connection;
 
   /**
@@ -18,10 +22,7 @@ public class DALServicesImpl implements DALServices {
    */
   public DALServicesImpl() {
     try {
-      String DATABASEURL =
-          "jdbc:postgresql://coursinfo.vinci.be:5432/dblars_hanquet?user=lars_hanquet";
-      String DATABASEUSER = "lars_hanquet";
-      String DATABASEPASSWORD = "123456789";
+
       this.connection = DriverManager.getConnection(DATABASEURL, DATABASEUSER, DATABASEPASSWORD);
     } catch (SQLException e) {
       System.out.println("Unable to connect to database: " + e.getMessage());

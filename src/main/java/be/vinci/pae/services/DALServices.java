@@ -28,7 +28,6 @@ public interface DALServices {
   /**
    * Gets a PreparedStatement object for sending parameterized SQL statements to the database.
    *
-   * @param ps a String representing an SQL statement to be sent to the database
    * @return a PreparedStatement object containing the precompiled SQL statement
    */
 
