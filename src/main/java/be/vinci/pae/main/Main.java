@@ -8,6 +8,7 @@ import java.net.URI;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * This class represents the main entry point for the application.
@@ -48,6 +49,7 @@ public class Main {
    * @throws IOException If an I/O error occurs.
    */
   public static void main(String[] args) throws IOException {
+   // System.out.println(BCrypt.hashpw("mdp1", BCrypt.gensalt()));
     final HttpServer server = startServer();
     System.out.println(String.format("Jersey app started with WADL available at "
         + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));

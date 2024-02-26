@@ -1,12 +1,12 @@
 package be.vinci.pae.services;
 
-import be.vinci.pae.domain.UserDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import java.util.List;
 
 /**
  * This interface provides methods for interacting with user data.
  */
-public interface UserDataService {
+public interface UserDAO {
 
   /**
    * Retrieves all users.
@@ -21,7 +21,7 @@ public interface UserDataService {
    * @param id The ID of the user to retrieve.
    * @return The user with the specified ID, or null if not found.
    */
-  UserDTO getOne(int id);
+//  UserDTO getOne(int id);
 
   /**
    * Retrieves a user by their email.
@@ -31,13 +31,6 @@ public interface UserDataService {
    */
   UserDTO getOne(String email);
 
-  /**
-   * Creates a new user.
-   *
-   * @param item The user to create.
-   * @return The created user.
-   */
-  UserDTO createOne(UserDTO item);
 
   /**
    * Returns the next available item ID.

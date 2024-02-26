@@ -1,9 +1,9 @@
-package be.vinci.pae.domain;
+package be.vinci.pae.business.domain;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * This class represents an implementation of the {@link be.vinci.pae.domain.User} interface.
+ * This class represents an implementation of the {@link User} interface.
  */
 public class UserImpl implements User {
 

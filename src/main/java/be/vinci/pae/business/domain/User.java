@@ -1,4 +1,4 @@
-package be.vinci.pae.domain;
+package be.vinci.pae.business.domain;
 
 /**
  * This interface represents a user. It defines methods for accessing and modifying user
