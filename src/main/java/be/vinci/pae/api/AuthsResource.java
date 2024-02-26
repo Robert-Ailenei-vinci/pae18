@@ -59,7 +59,7 @@ public class AuthsResource {
     UserDTO publicUser = myUser.login(login, password);
     if (publicUser == null) {
       throw new WebApplicationException("Login or password incorrect",
-          Response.Status.UNAUTHORIZED);
+          Response.Status.BAD_REQUEST);
     }
     String token;
     try {
