@@ -11,41 +11,41 @@ public class UserImpl implements User {
   private String email;
   private String password;
   private String role;
-  private String name;
-  private String firstname;
-  private String phone_num;
-  private String inscriptionDate;
+  private String lastName;
+  private String firstName;
+  private String phoneNum;
+  private String registrationDate;
 
-  public String getName() {
-    return name;
+  public String getLastName() {
+    return lastName;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 
-  public String getFirstname() {
-    return firstname;
+  public String getFirstName() {
+    return firstName;
   }
 
-  public void setFirstname(String firstname) {
-    this.firstname = firstname;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
 
-  public String getPhone_num() {
-    return phone_num;
+  public String getPhoneNum() {
+    return phoneNum;
   }
 
-  public void setPhone_num(String phone_num) {
-    this.phone_num = phone_num;
+  public void setPhoneNum(String phoneNum) {
+    this.phoneNum = phoneNum;
   }
 
-  public String getInscriptionDate() {
-    return inscriptionDate;
+  public String getRegistrationDate() {
+    return registrationDate;
   }
 
-  public void setInscriptionDate(String inscriptionDate) {
-    this.inscriptionDate = inscriptionDate;
+  public void setRegistrationDate(String registrationDate) {
+    this.registrationDate = registrationDate;
   }
 
   @Override

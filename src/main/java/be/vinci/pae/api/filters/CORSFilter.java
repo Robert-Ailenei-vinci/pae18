@@ -7,6 +7,14 @@ import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 
+/**
+ * An implementation of {@code ContainerResponseFilter} that enables Cross-Origin Resource Sharing
+ * (CORS) by adding appropriate headers to the HTTP response.
+ *
+ * <p>This filter allows requests from any origin, and specifies the allowed HTTP methods and
+ * headers
+ * for CORS. It is typically used to enable cross-origin requests in web applications.</p>
+ */
 @Provider
 public class CORSFilter implements ContainerResponseFilter {
 

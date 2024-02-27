@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "login": "mia.liae@student.vinci.be",
-     "password": "mdp1"
+    "password": "mdp1"
 }
 
 ### Get all the users

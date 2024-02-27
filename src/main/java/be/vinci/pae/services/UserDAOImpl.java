@@ -73,13 +73,12 @@ public class UserDAOImpl implements UserDAO {
     try {
       user.setId(rs.getInt("id_user"));
       user.setEmail(rs.getString("email"));
-      user.setPassword(rs.getString("psw"));
+      user.setPassword(rs.getString("password_u"));
       user.setRole(rs.getString("role_u"));
-      user.setFirstname(rs.getString("firstname"));
-      user.setName(rs.getString("surname"));
-      user.setPhone_num(rs.getString("phone_num"));
-      user.setInscriptionDate(rs.getString("inscription_date"));
-
+      user.setFirstName(rs.getString("first_name"));
+      user.setLastName(rs.getString("last_name"));
+      user.setPhoneNum(rs.getString("phone_number"));
+      user.setRegistrationDate(rs.getString("registration_date"));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }

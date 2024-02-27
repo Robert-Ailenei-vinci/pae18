@@ -10,6 +10,10 @@ import be.vinci.pae.services.UserDAOImpl;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.mockito.Mockito;
 
+/**
+ * A utility class that provides bindings for dependencies used in testing scenarios. This class
+ * extends {@code AbstractBinder}, allowing for custom bindings to be configured.
+ */
 public class TestApplicationBinder extends AbstractBinder {
 
   @Override
