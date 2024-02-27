@@ -1,0 +1,14 @@
+@baseUrl = http://localhost:3000/
+
+###Login the default user
+POST http://localhost:3000/auths/login
+Content-Type: application/json
+
+{
+    "login": "mia.liae@student.vinci.be",
+     "password": "mdp1"
+}
+
+###Get all the users
+GET {{baseUrl}}/users
+Content-Type: application/json
