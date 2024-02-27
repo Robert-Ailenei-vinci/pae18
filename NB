@@ -1,0 +1,7 @@
+UserImpl :
+2 constructeurs
+
+premier vide
+deuxième avec tous les paramètres que prends un user
+
+

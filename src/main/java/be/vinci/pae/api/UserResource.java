@@ -1,8 +1,9 @@
 package be.vinci.pae.api;
 
 import be.vinci.pae.api.filters.Authorize;
-import be.vinci.pae.controller.UserUCC;
-import be.vinci.pae.domain.User;
+import be.vinci.pae.business.controller.UserUCC;
+import be.vinci.pae.business.domain.User;
+import be.vinci.pae.business.domain.UserDTO;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
@@ -32,13 +33,13 @@ public class UserResource {
    * responses. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize},
    * indicating that authorization is required to access this endpoint.
    *
-   * @return list of {@link be.vinci.pae.domain.User} objects representing all users in the system.
+   * @return list of {@link User} objects representing all users in the system.
    */
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public List<User> getAll() {
+  public List<UserDTO> getAll() {
     System.out.println("getAll");
     return myUser.getAll();
   }

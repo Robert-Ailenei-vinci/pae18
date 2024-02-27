@@ -1,7 +1,6 @@
-package be.vinci.pae.controller;
+package be.vinci.pae.business.controller;
 
-import be.vinci.pae.domain.User;
-import be.vinci.pae.domain.UserDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import java.util.List;
 
 /**
@@ -20,7 +19,9 @@ public interface UserUCC {
 
 
   /**
-   * @return all user
+   * Get All User.
+   *
+   * @return all user.
    */
-  List<User> getAll();
+  List<UserDTO> getAll();
 }

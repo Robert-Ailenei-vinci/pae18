@@ -1,4 +1,4 @@
-package be.vinci.pae.domain;
+package be.vinci.pae.business.domain;
 
 /**
  * This interface represents a factory for creating domain objects.
@@ -6,9 +6,9 @@ package be.vinci.pae.domain;
 public interface DomainFactory {
 
   /**
-   * Returns a new instance of the {@link be.vinci.pae.domain.User} object.
+   * Returns a new instance of the {@link User} object.
    *
    * @return A new instance of the User object.
    */
-  User getUser();
+  UserDTO getUser();
 }

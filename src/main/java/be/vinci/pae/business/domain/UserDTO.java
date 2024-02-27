@@ -1,5 +1,8 @@
-package be.vinci.pae.domain;
+package be.vinci.pae.business.domain;
 
+/**
+ * User DTO interface.
+ */
 public interface UserDTO {
 
 
@@ -86,5 +89,5 @@ public interface UserDTO {
    *
    * @param role The new role of the user.
    */
-  String setRole(String role);
+  void setRole(String role);
 }
