@@ -1,7 +1,7 @@
-@baseUrl = http://localhost:3000/
+@baseUrl = http://localhost:3000
 
-###Login the default user
-POST http://localhost:3000/auths/login
+### Login the default user
+POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
@@ -9,6 +9,7 @@ Content-Type: application/json
      "password": "mdp1"
 }
 
-###Get all the users
+### Get all the users
 GET {{baseUrl}}/users
 Content-Type: application/json
+
