@@ -71,7 +71,7 @@ public class UserDAOImpl implements UserDAO {
   private UserDTO getUserMethodFromDB(ResultSet rs) {
     UserDTO user = myDomainFactory.getUser();
     try {
-      user.setId(rs.getInt("id_user "));
+      user.setId(rs.getInt("id_user"));
       user.setEmail(rs.getString("email"));
       user.setPassword(rs.getString("psw"));
       user.setRole(rs.getString("role_u"));
