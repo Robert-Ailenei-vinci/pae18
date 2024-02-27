@@ -2,7 +2,7 @@
 import { Navbar as BootstrapNavbar } from 'bootstrap';
 import { getAuthenticatedUser, isAuthenticated } from '../../utils/auths';
 
-const SITE_NAME = 'yourSiteName';
+const SITE_NAME = 'StaGo';
 
 const Navbar = () => {
   renderNavbar();
@@ -46,7 +46,7 @@ function renderNavbar() {
   const authenticatedUserNavbar = `
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">myMovies</a>
+        <a class="navbar-brand" href="#">StaGo</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -67,7 +67,7 @@ function renderNavbar() {
               <a class="nav-link" href="#" data-uri="/logout">Logout</a>
             </li>    
             <li class="nav-item">
-              <a class="nav-link disabled" href="#">${authenticatedUser?.username}</a>
+              <a class="nav-link disabled" href="#">${authenticatedUser?.email}</a>
             </li>           
           </ul>
         </div>
