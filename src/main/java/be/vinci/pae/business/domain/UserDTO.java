@@ -89,5 +89,5 @@ public interface UserDTO {
    *
    * @param role The new role of the user.
    */
-  String setRole(String role);
+  void setRole(String role);
 }

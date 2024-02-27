@@ -21,13 +21,14 @@ public interface DALServices {
   /**
    * Closes the provided database connection.
    *
-   * @param con the Connection object to be closed
+   * @param con the Connection object to be closed.
    */
   void closeConnection(Connection con);
 
   /**
    * Gets a PreparedStatement object for sending parameterized SQL statements to the database.
    *
+   * @param sql the sql request.
    * @return a PreparedStatement object containing the precompiled SQL statement
    */
 
