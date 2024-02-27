@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public List<UserDTO> getAll() {
     PreparedStatement getAllUsers = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.utilisateurs");
+        "SELECT * FROM pae.users");
     List<UserDTO> users = new ArrayList<>();
     try (ResultSet rs = getAllUsers.executeQuery()) {
       while (rs.next()) {
@@ -41,7 +41,7 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO getOne(String email) {
     PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.utilisateurs WHERE email = ?");
+        "SELECT * FROM pae.users WHERE email = ?");
     try {
       preparedStatement.setString(1, email);
       ResultSet rs = preparedStatement.executeQuery();
