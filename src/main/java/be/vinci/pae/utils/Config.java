@@ -41,8 +41,7 @@ public class Config {
    * Retrieves the integer value of the property associated with the specified key.
    *
    * @param key The key of the property to retrieve.
-   * @return The integer value of the property, or 0 if the key is not found or cannot be parsed as
-   * an integer.
+   * @return int value of the property, or 0 if the key is not found or cannot be parsed.
    */
   public static Integer getIntProperty(String key) {
     return Integer.parseInt(props.getProperty(key));
@@ -52,8 +51,7 @@ public class Config {
    * Retrieves the boolean value of the property associated with the specified key.
    *
    * @param key The key of the property to retrieve.
-   * @return The boolean value of the property, or false if the key is not found or cannot be parsed
-   * as a boolean.
+   * @return bool value of the property,or false if the key is not found or cannot be parsed.
    */
   public static boolean getBoolProperty(String key) {
     return Boolean.parseBoolean(props.getProperty(key));

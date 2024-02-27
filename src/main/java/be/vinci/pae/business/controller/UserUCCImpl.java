@@ -6,7 +6,6 @@ import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
-
 import java.util.List;
 
 /**
@@ -20,16 +19,23 @@ public class UserUCCImpl implements UserUCC {
   @Inject
   private UserDAO myUserDAO;
 
+  /**
+   * login the user
+   *
+   * @param login    the users' login.
+   * @param password the user password.
+   * @return the user
+   */
   public UserDTO login(String login, String password) {
 
     User user = (User) myUserDAO.getOne(login);
 
-    if(user == null) {
+    if (user == null) {
       throw new WebApplicationException("login or password required", Response.Status.UNAUTHORIZED);
     }
 
     if (!user.checkPassword(password)) {
-     throw new WebApplicationException("login or password required", Response.Status.UNAUTHORIZED);
+      throw new WebApplicationException("login or password required", Response.Status.UNAUTHORIZED);
     }
     return user;
   }
