@@ -21,7 +21,7 @@ public interface UserDAO {
    * @param id The ID of the user to retrieve.
    * @return The user with the specified ID, or null if not found.
    */
-//  UserDTO getOne(int id);
+  // UserDTO getOne(int id);
 
   /**
    * Retrieves a user by their email.
