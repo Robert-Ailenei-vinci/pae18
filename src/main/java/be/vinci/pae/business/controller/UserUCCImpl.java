@@ -20,11 +20,11 @@ public class UserUCCImpl implements UserUCC {
   private UserDAO myUserDAO;
 
   /**
-   * login the user
+   * login the user.
    *
    * @param login    the users' login.
    * @param password the user password.
-   * @return the user
+   * @return the user.
    */
   public UserDTO login(String login, String password) {
 
