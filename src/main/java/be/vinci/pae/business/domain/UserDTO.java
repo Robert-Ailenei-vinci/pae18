@@ -7,34 +7,6 @@ public interface UserDTO {
 
 
   /**
-   * Returns the age of the user.
-   *
-   * @return The age of the user.
-   */
-  Integer getAge();
-
-  /**
-   * Sets the age of the user.
-   *
-   * @param age The new age of the user.
-   */
-  void setAge(Integer age);
-
-  /**
-   * Returns true if the user is married, false otherwise.
-   *
-   * @return True if the user is married, false otherwise.
-   */
-  Boolean isMarried();
-
-  /**
-   * Sets the marital status of the user.
-   *
-   * @param married The new marital status of the user.
-   */
-  void setMarried(Boolean married);
-
-  /**
    * Retrieves the email of the user.
    *
    * @return The email of the user.
@@ -90,4 +62,60 @@ public interface UserDTO {
    * @param role The new role of the user.
    */
   void setRole(String role);
+
+  /**
+   * get the name.
+   *
+   * @return the name.
+   */
+  String getName();
+
+  /**
+   * set the name.
+   *
+   * @param name the new name.
+   */
+  void setName(String name);
+
+  /**
+   * get the first name.
+   *
+   * @return the first name.
+   */
+  String getFirstname();
+
+  /**
+   * set a new firstname.
+   *
+   * @param firstname the new firstname.
+   */
+  void setFirstname(String firstname);
+
+  /**
+   * get the phone number.
+   *
+   * @return the phone number.
+   */
+  String getPhone_num();
+
+  /**
+   * set a new phone number.
+   *
+   * @param phone_num the new phone number.
+   */
+  void setPhone_num(String phone_num);
+
+  /**
+   * get the inscription date.
+   *
+   * @return the inscription date.
+   */
+  String getInscriptionDate();
+
+  /**
+   * set a new inscription date.
+   *
+   * @param inscriptionDate the new inscription date
+   */
+  void setInscriptionDate(String inscriptionDate);
 }

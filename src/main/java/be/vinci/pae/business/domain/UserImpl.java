@@ -10,36 +10,43 @@ public class UserImpl implements User {
   private int id;
   private String email;
   private String password;
-  private Integer age;
-  private Boolean married;
   private String role;
+  private String name;
+  private String firstname;
+  private String phone_num;
+  private String inscriptionDate;
 
-
-  @Override
-  public Integer getAge() {
-    return age;
+  public String getName() {
+    return name;
   }
 
-
-  @Override
-  public void setAge(Integer age) {
-    this.age = age;
+  public void setName(String name) {
+    this.name = name;
   }
 
-
-  @Override
-  public Boolean isMarried() {
-    return married;
+  public String getFirstname() {
+    return firstname;
   }
 
-
-  @Override
-  public void setMarried(Boolean married) {
-    this.married = married;
+  public void setFirstname(String firstname) {
+    this.firstname = firstname;
   }
 
-  //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+  public String getPhone_num() {
+    return phone_num;
+  }
 
+  public void setPhone_num(String phone_num) {
+    this.phone_num = phone_num;
+  }
+
+  public String getInscriptionDate() {
+    return inscriptionDate;
+  }
+
+  public void setInscriptionDate(String inscriptionDate) {
+    this.inscriptionDate = inscriptionDate;
+  }
 
   @Override
   public String getEmail() {
@@ -106,5 +113,5 @@ public class UserImpl implements User {
   public void setRole(String role) {
     this.role = role;
   }
-  
+
 }
