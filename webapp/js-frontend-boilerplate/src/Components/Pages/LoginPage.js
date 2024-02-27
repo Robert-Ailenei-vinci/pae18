@@ -64,13 +64,13 @@ function onCheckboxClicked(e) {
 async function onLogin(e) {
   e.preventDefault();
 
-  const username = document.querySelector('#username').value;
+  const login = document.querySelector('#username').value;
   const password = document.querySelector('#password').value;
 
   const options = {
     method: 'POST',
     body: JSON.stringify({
-      username,
+      login,
       password,
     }),
     headers: {
@@ -78,7 +78,7 @@ async function onLogin(e) {
     },
   };
 
-  const response = await fetch(`${process.env.API_BASE_URL}/auths/login`, options);
+  const response = await fetch(`http://localhost:3000//auths/login`, options);
 
   if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
 
