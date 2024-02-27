@@ -71,10 +71,15 @@ public class UserDAOImpl implements UserDAO {
   private UserDTO getUserMethodFromDB(ResultSet rs) {
     UserDTO user = myDomainFactory.getUser();
     try {
-      user.setId(rs.getInt("id_utilisateur"));
+      user.setId(rs.getInt("id_user "));
       user.setEmail(rs.getString("email"));
-      user.setPassword(rs.getString("mot_de_passe"));
+      user.setPassword(rs.getString("psw"));
       user.setRole(rs.getString("role_u"));
+      user.setFirstname(rs.getString("firstname"));
+      user.setName(rs.getString("surname"));
+      user.setPhone_num(rs.getString("phone_num"));
+      user.setInscriptionDate(rs.getString("inscription_date"));
+
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
