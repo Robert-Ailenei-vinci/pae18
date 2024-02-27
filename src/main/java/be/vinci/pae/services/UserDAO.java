@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserDAO {
 
   /**
-   * Retrieves all users.
+   * Retrieves all the users.
    *
    * @return A list of all users.
    */
