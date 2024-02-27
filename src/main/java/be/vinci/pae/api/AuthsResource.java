@@ -77,7 +77,7 @@ public class AuthsResource {
   }
 
   /**
-   * Get the connected User.
+   * Get the connected User for refresh.
    *
    * @param requestContext requestContext
    * @return the connected user
