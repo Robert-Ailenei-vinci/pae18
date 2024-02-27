@@ -103,9 +103,8 @@ public class UserImpl implements User {
   }
 
   @Override
-  public String setRole(String role) {
-    return this.role = role;
-
+  public void setRole(String role) {
+    this.role = role;
   }
-
+  
 }
