@@ -19,6 +19,13 @@ public class UserUCCImpl implements UserUCC {
   @Inject
   private UserDAO myUserDAO;
 
+  /**
+   * login the user.
+   *
+   * @param login    the users' login.
+   * @param password the user password.
+   * @return the user.
+   */
   public UserDTO login(String login, String password) {
 
     User user = (User) myUserDAO.getOne(login);

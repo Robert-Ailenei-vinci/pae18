@@ -76,6 +76,12 @@ public class AuthsResource {
     return publicUser;
   }
 
+  /**
+   * Get the connected User
+   *
+   * @param requestContext requestContext
+   * @return the connected user
+   */
   @GET
   @Path("user")
   @Produces(MediaType.APPLICATION_JSON)

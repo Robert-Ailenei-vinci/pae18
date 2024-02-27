@@ -1,5 +1,8 @@
 package be.vinci.pae.business.domain;
 
+/**
+ * User DTO interface
+ */
 public interface UserDTO {
 
 

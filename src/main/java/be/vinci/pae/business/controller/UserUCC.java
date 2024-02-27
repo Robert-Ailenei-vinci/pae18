@@ -19,7 +19,9 @@ public interface UserUCC {
 
 
   /**
-   * @return all user
+   * Get All User.
+   *
+   * @return all user.
    */
   List<UserDTO> getAll();
 }
