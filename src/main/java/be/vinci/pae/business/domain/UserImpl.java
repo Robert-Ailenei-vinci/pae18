@@ -102,11 +102,7 @@ public class UserImpl implements User {
 
   @Override
   public String getRole() {
-    if (role.equals("Etudiant") || role.equals("Professeur") || role.equals("Administratif")) {
-      return role;
-    } else {
-      return null;
-    }
+    return role;
   }
 
   @Override

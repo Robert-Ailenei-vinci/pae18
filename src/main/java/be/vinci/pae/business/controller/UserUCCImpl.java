@@ -35,7 +35,7 @@ public class UserUCCImpl implements UserUCC {
     }
 
     if (!user.checkPassword(password)) {
-      throw new WebApplicationException("login or password required", Response.Status.UNAUTHORIZED);
+      throw new WebApplicationException("wrong login or password", Response.Status.UNAUTHORIZED);
     }
     return user;
   }
