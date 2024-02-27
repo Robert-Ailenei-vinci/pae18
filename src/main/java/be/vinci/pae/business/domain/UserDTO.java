@@ -68,54 +68,54 @@ public interface UserDTO {
    *
    * @return the name.
    */
-  String getName();
+  String getLastName();
 
   /**
    * set the name.
    *
-   * @param name the new name.
+   * @param lastName the new name.
    */
-  void setName(String name);
+  void setLastName(String lastName);
 
   /**
    * get the first name.
    *
    * @return the first name.
    */
-  String getFirstname();
+  String getFirstName();
 
   /**
    * set a new firstname.
    *
-   * @param firstname the new firstname.
+   * @param firstName the new firstname.
    */
-  void setFirstname(String firstname);
+  void setFirstName(String firstName);
 
   /**
    * get the phone number.
    *
    * @return the phone number.
    */
-  String getPhone_num();
+  String getPhoneNum();
 
   /**
    * set a new phone number.
    *
-   * @param phone_num the new phone number.
+   * @param phoneNum the new phone number.
    */
-  void setPhone_num(String phone_num);
+  void setPhoneNum(String phoneNum);
 
   /**
    * get the inscription date.
    *
    * @return the inscription date.
    */
-  String getInscriptionDate();
+  String getRegistrationDate();
 
   /**
    * set a new inscription date.
    *
-   * @param inscriptionDate the new inscription date
+   * @param registrationDate the new inscription date
    */
-  void setInscriptionDate(String inscriptionDate);
+  void setRegistrationDate(String registrationDate);
 }

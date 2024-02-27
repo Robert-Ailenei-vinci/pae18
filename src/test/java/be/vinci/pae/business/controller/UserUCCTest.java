@@ -16,6 +16,11 @@ import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for {@code UserUCC} which tests various functionalities related to user operations.
+ * This class contains tests for user login, retrieving all users, handling null user during login,
+ * and verifying password during login.
+ */
 public class UserUCCTest {
 
   private UserUCC userUCC;
@@ -23,6 +28,13 @@ public class UserUCCTest {
   private DomainFactory factory;
   private UserDAO userDataService;
 
+  /**
+   * Sets up the environment for each test case by initializing required services and objects. This
+   * method binds a test application binder to the service locator, retrieves necessary services,
+   * and initializes necessary objects using the domain factory.
+   *
+   * @throws Exception if an error occurs during setup
+   */
   @BeforeEach
   public void setUp() {
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
