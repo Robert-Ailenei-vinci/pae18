@@ -15,12 +15,6 @@ public interface UserDAO {
    */
   List<UserDTO> getAll();
 
-  /**
-   * Retrieves a user by their ID.
-   *
-   * @param id The ID of the user to retrieve.
-   * @return The user with the specified ID, or null if not found.
-   */
   // UserDTO getOne(int id);
 
   /**
