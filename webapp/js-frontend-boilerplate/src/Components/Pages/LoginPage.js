@@ -80,7 +80,16 @@ async function onLogin(e) {
 
   const response = await fetch(`http://localhost:3000/auths/login`, options);
 
-  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+  if (!response.ok) {
+    if (response.status === 401) {
+      // Display a popup message for incorrect username or password
+      alert("Username or password is incorrect. Please try again.");
+  } else {
+      // For other errors, handle them accordingly
+      console.error("An error occurred:", response.statusText);
+  }
+      return;
+  }
 
   const authenticatedUser = await response.json();
 
