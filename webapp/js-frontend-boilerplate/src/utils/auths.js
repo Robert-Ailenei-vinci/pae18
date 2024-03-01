@@ -3,7 +3,7 @@ const REMEMBER_ME = 'remembered';
 
 let currentUser;
 
-const apiUrl = "http://localhost:3000/search?pattern+";
+const apiUrl = "http://localhost:3000/users?pattern=";
 
 const getAuthenticatedUser = () => {
   if (currentUser !== undefined) return currentUser;
