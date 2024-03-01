@@ -13,8 +13,6 @@ import java.util.List;
  */
 public class UserDAOImpl implements UserDAO {
 
-  //private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
-  //private final ObjectMapper jsonMapper = new ObjectMapper();
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
@@ -40,13 +38,14 @@ public class UserDAOImpl implements UserDAO {
 
   @Override
   public UserDTO getOne(String email) {
-    PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.users WHERE email = ?");
-    try {
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+        "SELECT * FROM pae.users WHERE email = ?")) {
       preparedStatement.setString(1, email);
-      ResultSet rs = preparedStatement.executeQuery();
-      if (rs.next()) {
-        return getUserMethodFromDB(rs);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+
+        if (rs.next()) {
+          return getUserMethodFromDB(rs);
+        }
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
