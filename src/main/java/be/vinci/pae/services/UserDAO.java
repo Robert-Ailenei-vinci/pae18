@@ -25,6 +25,15 @@ public interface UserDAO {
    */
   UserDTO getOne(String email);
 
+  /**
+   * Retrieves a list of users with their names.
+   *
+   * @param pattern A pattern that each users selected has in their names.
+   * @return The users with the specified pattern, or null if not found.
+   */
+  List<UserDTO> getUsersWithNames(String pattern);
+
+
 
   /**
    * Returns the next available item ID.

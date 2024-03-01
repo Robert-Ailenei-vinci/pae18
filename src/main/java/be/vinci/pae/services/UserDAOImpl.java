@@ -1,10 +1,12 @@
 package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
+import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +68,29 @@ public class UserDAOImpl implements UserDAO {
       System.out.println(e.getMessage());
     }
     return 1;
+  }
+
+  public List<UserDTO> getUsersWithNames(String pattern){
+    List<UserDTO> users = new ArrayList<>();
+    PreparedStatement ps = dalServices.getPreparedStatement(
+            "SELECT * FROM pae.users WHERE first_name LIKE ? OR last_name LIKE ?"
+    );
+    try{
+      ps.setString(1, pattern + "%");
+      ps.setString(2, pattern + "%");
+
+      try (ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+          UserDTO user = getUserMethodFromDB(rs);
+          users.add(user);
+        }
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return users;
   }
 
   private UserDTO getUserMethodFromDB(ResultSet rs) {
