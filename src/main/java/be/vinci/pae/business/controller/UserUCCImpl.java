@@ -29,12 +29,11 @@ public class UserUCCImpl implements UserUCC {
     User user = (User) myUserDAO.getOne(login);
 
     if (user == null) {
-      System.out.println("erroer");
-      ;
+      return null;
     }
 
     if (!user.checkPassword(password)) {
-      System.out.printf("eroroer");
+      return null;
     }
     return user;
   }
