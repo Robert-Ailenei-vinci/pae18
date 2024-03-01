@@ -13,7 +13,7 @@ public interface UserDAO {
    *
    * @return A list of all users.
    */
-  List<UserDTO> getAll();
+  List<UserDTO> getAll(); //references
 
   // UserDTO getOne(int id);
 
