@@ -3,7 +3,7 @@ const REMEMBER_ME = 'remembered';
 
 let currentUser;
 
-const apiUrl = "http://localhost:3000";
+const apiUrl = "http://localhost:3000/search?pattern+";
 
 const getAuthenticatedUser = () => {
   if (currentUser !== undefined) return currentUser;
@@ -65,7 +65,7 @@ async function getUsersWithNames(pattern) {
       return users;
   } catch (error) {
       console.error('Error:', error);
-      throw error; // Re-throw the error to be handled by the calling code
+      throw error;
   }
 }
 
