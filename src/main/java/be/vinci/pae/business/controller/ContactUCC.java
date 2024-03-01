@@ -5,5 +5,5 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
 
 public interface ContactUCC {
-    ContactDTO newContact(UserDTO userDTO, ContactDTO contactDTO, SchoolYearDTO schoolYearDTO);
+    ContactDTO newContact(int userID, int entrepriseId, int schoolYearId);
 }
