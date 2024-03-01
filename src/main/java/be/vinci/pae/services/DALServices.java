@@ -1,6 +1,5 @@
 package be.vinci.pae.services;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import org.jvnet.hk2.annotations.Service;
 
@@ -11,19 +10,6 @@ import org.jvnet.hk2.annotations.Service;
 @Service
 public interface DALServices {
 
-  /**
-   * Gets a connection to the database.
-   *
-   * @return a Connection object representing a connection to the database
-   */
-  Connection getConnection();
-
-  /**
-   * Closes the provided database connection.
-   *
-   * @param con the Connection object to be closed.
-   */
-  void closeConnection(Connection con);
 
   /**
    * Gets a PreparedStatement object for sending parameterized SQL statements to the database.
