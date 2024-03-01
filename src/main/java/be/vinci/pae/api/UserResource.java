@@ -6,7 +6,11 @@ import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.DefaultValue;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +28,7 @@ public class UserResource {
    * This service provides methods for user-related operations.
    */
   @Inject
-  private UserUCC myUser;
+  private UserUCC userUCC;
 
   /**
    * Retrieves a list of all users. This method is annotated with {@link jakarta.ws.rs.GET} and
@@ -38,13 +42,15 @@ public class UserResource {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public List<UserDTO> getAll(@DefaultValue("") @QueryParam("search-pattern") String searchPattern) {
+  public List<UserDTO> getAll(
+      @DefaultValue("") @QueryParam("search-pattern") String searchPattern) {
     if (!searchPattern.isEmpty()) {
-      return myUser.getAll().stream()
-              .filter(user -> user.getFirstName().startsWith(searchPattern) || user.getLastName().startsWith(searchPattern))
-              .collect(Collectors.toList());
+      return userUCC.getAll().stream()
+          .filter(user -> user.getFirstName().startsWith(searchPattern) || user.getLastName()
+              .startsWith(searchPattern))
+          .collect(Collectors.toList());
     } else {
-      return myUser.getAll();
+      return userUCC.getAll();
     }
   }
 
