@@ -31,8 +31,7 @@ public class Main {
 
     // create a resource config that scans for JAX-RS resources and providers
     // in vinci.be package
-    final String RESOURCES = "be.vinci.pae.api";
-    final ResourceConfig rc = new ResourceConfig().packages(RESOURCES)
+    final ResourceConfig rc = new ResourceConfig().packages("be.vinci.pae.api")
         .register(ApplicationBinder.class)
         .register(WebExceptionMapper.class);
 
