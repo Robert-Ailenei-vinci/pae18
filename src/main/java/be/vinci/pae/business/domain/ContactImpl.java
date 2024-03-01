@@ -1,15 +1,13 @@
 package be.vinci.pae.business.domain;
 
-import java.util.Date;
-
 public class ContactImpl implements Contact {
     private int id;
     private String state; //add predefined states
-    private User user;
-    private Entreprise entreprise;
-    private SchoolYear schoolYear;
+    private int userId;
+    private int entrepriseId;
+    private int schoolYearId;
     private String reasonForRefusal;
-    private String MeetingType;
+    private String meetingType;
 
     @Override
     public int getId() {
@@ -23,41 +21,41 @@ public class ContactImpl implements Contact {
 
     @Override
     public void setState(String state) {
-
+        this.state=state;
     }
 
     @Override
     public void setId(int id) {
-
+        this.id=id;
     }
 
     @Override
-    public Entreprise getEntreprise() {
-        return entreprise;
+    public int getEntrepriseId() {
+        return entrepriseId;
     }
 
     @Override
-    public void setEntreprise(Entreprise entreprise) {
-
+    public void setEntrepriseId(int entrepriseId) {
+        this.entrepriseId=entrepriseId;
     }
 
     @Override
-    public SchoolYear getSchoolYear() {
-        return schoolYear;
+    public int getSchoolYearId() {
+        return schoolYearId;
     }
 
     @Override
-    public void setSchoolYear(SchoolYear schoolYear) {
+    public void setSchoolYearId(int schoolYearId) {
 
     }
     @Override
     public String getMeetingType() {
-        return MeetingType;
+        return meetingType;
     }
 
     @Override
     public void setMeetingType(String meetingType) {
-
+        this.meetingType=meetingType;
     }
     @Override
     public String getReasonForRefusal() {
@@ -66,15 +64,14 @@ public class ContactImpl implements Contact {
 
     @Override
     public void setReasonForRefusal(String reasonForRefusal) {
-
+        this.reasonForRefusal=reasonForRefusal;
     }
     @Override
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    @Override
-    public void setUser(User user) {
-
+    public void setUserId(int userId) {
+        this.userId=userId;
     }
 }
