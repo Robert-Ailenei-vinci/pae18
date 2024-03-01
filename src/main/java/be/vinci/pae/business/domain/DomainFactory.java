@@ -11,4 +11,7 @@ public interface DomainFactory {
    * @return A new instance of the User object.
    */
   UserDTO getUser();
+  ContactDTO getContact();
+  EntrepriseDTO getEntreprise();
+  SchoolYearDTO getSchoolYear();
 }
