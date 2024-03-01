@@ -46,7 +46,7 @@ public class ContactImpl implements Contact {
 
     @Override
     public void setSchoolYearId(int schoolYearId) {
-
+        this.schoolYearId=schoolYearId;
     }
     @Override
     public String getMeetingType() {
