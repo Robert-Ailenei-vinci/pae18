@@ -20,8 +20,8 @@ public class DALServicesImpl implements DALServices {
 
   static {
     DATA_BASEURL = Config.getProperty("DatabaseFilePath");
-    DATABASE_USER = Config.getProperty("DATABASEUSER");
-    DATABASE_PASSWORD = Config.getProperty("DATABASEPASSWORD");
+    DATABASE_USER = Config.getProperty("DataBaseUser");
+    DATABASE_PASSWORD = Config.getProperty("DataBasePswd");
   }
 
   private Connection connection;
@@ -42,7 +42,7 @@ public class DALServicesImpl implements DALServices {
    *
    * @return a Connection object representing a connection to the database
    */
-  @Override
+
   public Connection getConnection() {
     return this.connection;
   }
@@ -52,7 +52,7 @@ public class DALServicesImpl implements DALServices {
    *
    * @param con the Connection object to be closed
    */
-  @Override
+
   public void closeConnection(Connection con) {
     try {
       if (con != null && !con.isClosed()) {
