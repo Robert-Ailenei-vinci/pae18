@@ -13,8 +13,6 @@ import java.util.List;
  */
 public class UserDAOImpl implements UserDAO {
 
-  //private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
-  //private final ObjectMapper jsonMapper = new ObjectMapper();
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
