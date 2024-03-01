@@ -23,5 +23,7 @@ public interface User extends UserDTO {
    */
   String hashPassword(String password);
 
+  void setSchoolYear(int schoolYear);
+
 
 }

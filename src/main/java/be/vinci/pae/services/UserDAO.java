@@ -27,10 +27,19 @@ public interface UserDAO {
 
 
   /**
+   * Adds a user to the database.
+   *
+   * @param user The user to add.
+   * @return True if the user was added, false if not.
+   */
+  boolean addUser(UserDTO user);
+
+  /**
    * Returns the next available item ID.
    *
    * @return The next available item ID.
    */
   int nextItemId();
+
 
 }

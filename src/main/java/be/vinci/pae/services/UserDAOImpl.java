@@ -54,6 +54,32 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
+  /**
+   * Adds a user to the database.
+   *
+   * @param user The user to add.
+   * @return True if the user was added, false if not.
+   */
+  @Override
+  public boolean addUser(UserDTO user) {
+    String sql = "INSERT INTO pae.users (id_user, email, psw, role_u, first_name, last_name, phone_number, registration_date, school_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql)) {
+      stmt.setInt(1, user.getId());
+      stmt.setString(2, user.getEmail());
+      stmt.setString(3, user.getPassword());
+      stmt.setString(4, user.getRole());
+      stmt.setString(5, user.getFirstName());
+      stmt.setString(6, user.getLastName());
+      stmt.setString(7, user.getPhoneNum());
+      stmt.setString(8, user.getRegistrationDate());
+      stmt.setInt(9, user.getSchoolYear());
+      return stmt.executeUpdate() == 1;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return false;
+  }
+
   @Override
   public int nextItemId() {
     String sql = "SELECT MAX(id) FROM users";
@@ -84,5 +110,6 @@ public class UserDAOImpl implements UserDAO {
     }
     return user;
   }
+
 
 }

@@ -94,4 +94,20 @@ public class AuthsResource {
     }
     return user;
   }
+
+  @POST
+  @Path("register")
+  public boolean register(JsonNode json) {
+    if (!json.hasNonNull("email") || !json.hasNonNull("password") || !json.hasNonNull("lname")
+        || !json.hasNonNull("fname") || !json.hasNonNull("phoneNum") || !json.hasNonNull("role")) {
+      throw new WebApplicationException("All fields are required", Response.Status.BAD_REQUEST);
+    }
+    String email = json.get("email").asText();
+    String password = json.get("password").asText();
+    String lname = json.get("lname").asText();
+    String fname = json.get("fname").asText();
+    String phoneNum = json.get("phoneNum").asText();
+    String role = json.get("role").asText();
+    return myUser.register(email, password, lname, fname, phoneNum, role);
+  }
 }
