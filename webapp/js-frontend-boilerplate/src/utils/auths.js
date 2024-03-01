@@ -3,6 +3,8 @@ const REMEMBER_ME = 'remembered';
 
 let currentUser;
 
+const apiUrl = "http://localhost:3000";
+
 const getAuthenticatedUser = () => {
   if (currentUser !== undefined) return currentUser;
 
@@ -45,6 +47,30 @@ function setRememberMe(remembered) {
   localStorage.setItem(REMEMBER_ME, rememberedSerialized);
 }
 
+
+async function getUsersWithNames(pattern) {
+  try {
+    
+    let url = apiUrl;
+
+    if (pattern) {
+      url += `?pattern=${encodeURIComponent(pattern)}`;
+    }
+      const response = await fetch(url);
+      if (!response.ok) {
+          throw new Error('Error fetching users');
+      }
+
+      const users = await response.json();
+      return users;
+  } catch (error) {
+      console.error('Error:', error);
+      throw error; // Re-throw the error to be handled by the calling code
+  }
+}
+
+
+
 export {
   getAuthenticatedUser,
   setAuthenticatedUser,
@@ -52,4 +78,5 @@ export {
   clearAuthenticatedUser,
   getRememberMe,
   setRememberMe,
+  getUsersWithNames,
 };

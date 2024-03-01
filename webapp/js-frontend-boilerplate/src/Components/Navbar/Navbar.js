@@ -36,6 +36,9 @@ function renderNavbar() {
             </li>
             <li id="registerItem" class="nav-item">
               <a class="nav-link" href="#" data-uri="/register">Register</a>
+            </li>  
+            <li id="searchItem" class="nav-item">
+              <a class="nav-link" href="#" data-uri="/users">Research</a>
             </li>            
           </ul>
         </div>
