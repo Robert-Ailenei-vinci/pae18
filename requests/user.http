@@ -13,3 +13,15 @@ Content-Type: application/json
 GET {{baseUrl}}/users
 Content-Type: application/json
 
+### Register a new user
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+     "login": "ali.elhannouti@student.vinci.be",
+     "password": "mdp1",
+     "role": "student",
+     "fname": "Ali",
+     "lname": "Elhannouti",
+     "phoneNum": "0477777777"
+}

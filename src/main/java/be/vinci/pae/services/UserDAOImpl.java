@@ -54,31 +54,6 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
-  /**
-   * Adds a user to the database.
-   *
-   * @param user The user to add.
-   * @return True if the user was added, false if not.
-   */
-  @Override
-  public boolean addUser(UserDTO user) {
-    String sql = "INSERT INTO pae.users (id_user, email, psw, role_u, first_name, last_name, phone_number, registration_date, school_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql)) {
-      stmt.setInt(1, user.getId());
-      stmt.setString(2, user.getEmail());
-      stmt.setString(3, user.getPassword());
-      stmt.setString(4, user.getRole());
-      stmt.setString(5, user.getFirstName());
-      stmt.setString(6, user.getLastName());
-      stmt.setString(7, user.getPhoneNum());
-      stmt.setString(8, user.getRegistrationDate());
-      stmt.setInt(9, user.getSchoolYear());
-      return stmt.executeUpdate() == 1;
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
-    return false;
-  }
 
   @Override
   public int nextItemId() {
@@ -111,5 +86,51 @@ public class UserDAOImpl implements UserDAO {
     return user;
   }
 
+  /**
+   * Adds a user to the database.
+   *
+   * @param user The user to add.
+   * @return True if the user was added, false if not.
+   */
+  @Override
+  public boolean addUser(UserDTO user) {
+    int id_year = 0;
+    String sql1 = "SELECT FROM pae.school_years WHERE school_year = ?";
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql1)) {
+      stmt.setInt(1, user.getSchoolYear());
+      ResultSet rs = stmt.executeQuery();
+      if (!rs.next()) {
+        id_year = rs.getInt("id_year");
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
 
+    if (id_year == 0) {
+      String sql2 = "INSERT INTO pae.school_years (school_year) VALUES (?)";
+      try (PreparedStatement stmt = dalServices.getPreparedStatement(sql2)) {
+        stmt.setInt(1, user.getSchoolYear());
+        stmt.executeUpdate();
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
+    }
+
+    String sql3 = "INSERT INTO pae.users (id_user, email, psw, role_u, first_name, last_name, phone_number, registration_date, school_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql3)) {
+      stmt.setInt(1, user.getId());
+      stmt.setString(2, user.getEmail());
+      stmt.setString(3, user.getPassword());
+      stmt.setString(4, user.getRole());
+      stmt.setString(5, user.getFirstName());
+      stmt.setString(6, user.getLastName());
+      stmt.setString(7, user.getPhoneNum());
+      stmt.setString(8, user.getRegistrationDate());
+      stmt.setInt(9, id_year);
+      return stmt.executeUpdate() == 1;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return false;
+  }
 }

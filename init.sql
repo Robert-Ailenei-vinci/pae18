@@ -15,7 +15,7 @@ CREATE TABLE pae.users (
     phone_number TEXT NOT NULL ,
     psw TEXT NOT NULL ,
     registration_date DATE NOT NULL,
-    school_year INTEGER NOT NULL REFERENCES pae.school_years(id_year)
+    school_year INTEGER NOT NULL REFERENCES pae.school_years (id_year)
 );
 
 INSERT INTO pae.school_years VALUES (1, '2024-2025');
