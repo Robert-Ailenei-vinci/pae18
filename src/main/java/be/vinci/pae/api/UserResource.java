@@ -24,7 +24,7 @@ public class UserResource {
    * This service provides methods for user-related operations.
    */
   @Inject
-  private UserUCC myUser;
+  private UserUCC userUCC;
 
   /**
    * Retrieves a list of all users. This method is annotated with {@link jakarta.ws.rs.GET} and
@@ -40,11 +40,11 @@ public class UserResource {
   @Authorize
   public List<UserDTO> getAll(@DefaultValue("") @QueryParam("search-pattern") String searchPattern) {
     if (!searchPattern.isEmpty()) {
-      return myUser.getAll().stream()
+      return userUCC.getAll().stream()
               .filter(user -> user.getFirstName().startsWith(searchPattern) || user.getLastName().startsWith(searchPattern))
               .collect(Collectors.toList());
     } else {
-      return myUser.getAll();
+      return userUCC.getAll();
     }
   }
 
