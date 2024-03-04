@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * UserDataServiceImpl is a class that provides methods for interacting with user data.
+ * This class represents an implementation of the {@link UserDAO} interface.
  */
 public class UserDAOImpl implements UserDAO {
 
@@ -41,6 +41,23 @@ public class UserDAOImpl implements UserDAO {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "SELECT * FROM pae.users WHERE email = ?")) {
       preparedStatement.setString(1, email);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+
+        if (rs.next()) {
+          return getUserMethodFromDB(rs);
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
+  }
+
+  @Override
+  public UserDTO getOne(int id) {
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+        "SELECT * FROM pae.users WHERE id_user = ?")) {
+      preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
         if (rs.next()) {

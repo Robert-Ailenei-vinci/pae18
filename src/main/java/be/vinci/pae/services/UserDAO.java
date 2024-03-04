@@ -25,6 +25,8 @@ public interface UserDAO {
    */
   UserDTO getOne(String email);
 
+  UserDTO getOne(int id);
+
 
   /**
    * Returns the next available item ID.
