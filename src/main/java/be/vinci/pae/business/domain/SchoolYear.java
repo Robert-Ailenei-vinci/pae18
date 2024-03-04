@@ -1,4 +1,8 @@
 package be.vinci.pae.business.domain;
 
-public interface SchoolYear extends SchoolYearDTO{
+/**
+ * This interface extends {@link SchoolYearDTO} and represents a school year.
+ */
+public interface SchoolYear extends SchoolYearDTO {
+
 }

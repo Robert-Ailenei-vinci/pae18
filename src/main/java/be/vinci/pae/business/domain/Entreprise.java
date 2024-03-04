@@ -1,4 +1,8 @@
 package be.vinci.pae.business.domain;
 
-public interface Entreprise extends EntrepriseDTO{
+/**
+ * This interface extends {@link EntrepriseDTO} and represents an enterprise.
+ */
+public interface Entreprise extends EntrepriseDTO {
+
 }
