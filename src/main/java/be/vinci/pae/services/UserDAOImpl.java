@@ -72,7 +72,6 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
-  @Override
   public int nextItemId() {
     try (PreparedStatement stmt = dalServices.getPreparedStatement("SELECT MAX(id) FROM users");
         ResultSet rs = stmt.executeQuery()) {
@@ -82,7 +81,7 @@ public class UserDAOImpl implements UserDAO {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    return null;
+    return -1;
   }
 
   private UserDTO getUserMethodFromDB(ResultSet rs) {
