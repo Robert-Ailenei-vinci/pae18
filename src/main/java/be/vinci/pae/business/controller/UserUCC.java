@@ -19,6 +19,18 @@ public interface UserUCC {
 
 
   /**
+   * Register a user.
+   *
+   * @param email    the users' login.
+   * @param password the user password.
+   * @param lname    the user last name.
+   * @param fname    the user first name.
+   * @param phoneNum the user phone number.
+   * @return true if the user is registered, false if not.
+   */
+  boolean register(String email, String password, String lname, String fname, String phoneNum);
+
+  /**
    * Get All User.
    *
    * @return all user.

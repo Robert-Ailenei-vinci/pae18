@@ -16,6 +16,9 @@ import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 
+/**
+ * This class represents a filter for authorizing access to resources.
+ */
 @Singleton
 @Provider
 @Authorize
