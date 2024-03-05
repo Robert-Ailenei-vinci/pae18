@@ -142,9 +142,7 @@ function onEmailInput(e) {
 
   if (email.endsWith('@student.vinci.be')) {
     role = 'étudiant';
-  }
-
-  if (email.endsWith('@vinci.be')) {
+  } else if (email.endsWith('@vinci.be')) {
     roleAdmin.style.display = 'block';
     roleProf.style.display = 'block';
     roleAdminLabel.style.display = 'block'; // Show label
@@ -154,6 +152,7 @@ function onEmailInput(e) {
     roleProf.style.display = 'none';
     roleAdminLabel.style.display = 'none'; // Hide label
     roleProfLabel.style.display = 'none'; // Hide label
+    return;
   }
 
   // Add event listeners to checkboxes
@@ -172,6 +171,7 @@ function onEmailInput(e) {
 
 
 
+
 async function onRegister(e) {
   e.preventDefault();
 
@@ -185,6 +185,12 @@ async function onRegister(e) {
 
   if (roleAdmin) role = 'administratif';
   if (roleProf) role = 'professeur';
+
+  // Check if the email is either @vinci.be or @student.vinci.be
+  if (!login.endsWith('@vinci.be') && !login.endsWith('@student.vinci.be')) {
+    alert('Invalid email. Please use a @vinci.be or @student.vinci.be email.');
+    return;
+  }
 
   const options = {
     method: 'POST',
@@ -208,8 +214,6 @@ async function onRegister(e) {
   const authenticatedUser = await response.json();
 
   console.log('Newly registered & authenticated user : ', authenticatedUser);
-
- 
 
   Navbar();
 
