@@ -7,8 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
- * DALServicesImpl is a class that provides methods for managing database connections and prepared
- * statements.
+ * This class represents an implementation of the {@link DALServices} interface.
  */
 public class DALServicesImpl implements DALServices {
 

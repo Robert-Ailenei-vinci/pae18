@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * implemetation of user UCC.
+ * This class represents an implementation of the {@link UserUCC} interface.
  */
 public class UserUCCImpl implements UserUCC {
 
@@ -78,6 +78,11 @@ public class UserUCCImpl implements UserUCC {
 
   public List<UserDTO> getAll() {
     return myUserDAO.getAll();
+  }
+
+  @Override
+  public UserDTO getOne(int userId) {
+    return myUserDAO.getOne(userId);
   }
 
 }

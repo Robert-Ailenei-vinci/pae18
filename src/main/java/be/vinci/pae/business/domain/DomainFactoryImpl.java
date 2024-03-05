@@ -9,4 +9,19 @@ public class DomainFactoryImpl implements DomainFactory {
   public UserDTO getUser() {
     return new UserImpl();
   }
+
+  @Override
+  public ContactDTO getContact() {
+    return new ContactImpl();
+  }
+
+  @Override
+  public EntrepriseDTO getEntreprise() {
+    return new EntrepriseImpl();
+  }
+
+  @Override
+  public SchoolYearDTO getSchoolYear() {
+    return new SchoolYearImpl();
+  }
 }
