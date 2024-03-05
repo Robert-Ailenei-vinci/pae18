@@ -131,6 +131,7 @@ public class UserDAOImpl implements UserDAO {
       } catch (Exception e) {
         System.out.println(e.getMessage());
       }
+      idYear = getLastInsertedYearId();
     }
 
     String sql3 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
@@ -156,7 +157,7 @@ public class UserDAOImpl implements UserDAO {
    *
    * @return The year format.
    */
-  public String buildYear() {
+  private String buildYear() {
     int year;
     if (LocalDate.now().getMonth().compareTo(Month.SEPTEMBER) < 0) {
       year = LocalDate.now().getYear() - 1;
@@ -164,5 +165,19 @@ public class UserDAOImpl implements UserDAO {
       year = LocalDate.now().getYear();
     }
     return year + "-" + (year + 1);
+  }
+
+  private int getLastInsertedYearId() {
+    String sql = "SELECT MAX(id_year) FROM pae.school_years";
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql)) {
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt(1);
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return 0; // return 0 or throw an exception if no id was found
   }
 }

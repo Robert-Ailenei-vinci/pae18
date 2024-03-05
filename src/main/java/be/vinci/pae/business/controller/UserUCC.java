@@ -29,7 +29,8 @@ public interface UserUCC {
    * @param phoneNum the user phone number.
    * @return true if the user is registered, false if not.
    */
-  boolean register(String email, String password, String lname, String fname, String phoneNum);
+  boolean register(String email, String password, String lname, String fname, String phoneNum,
+      String role);
 
   /**
    * Get All User.
