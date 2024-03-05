@@ -15,6 +15,8 @@ public class UserImpl implements User {
   private String firstName;
   private String phoneNum;
   private String registrationDate;
+  private int schoolYearId;
+
 
   public String getLastName() {
     return lastName;
@@ -53,48 +55,50 @@ public class UserImpl implements User {
     return email;
   }
 
-
   @Override
   public void setEmail(String email) {
     this.email = email;
   }
 
+  @Override
+  public int getSchooYearId() {
+    return schoolYearId;
+  }
+
+  @Override
+  public void setSchoolYearId(int id) {
+    this.schoolYearId = id;
+  }
 
   @Override
   public int getId() {
     return id;
   }
 
-
   @Override
   public void setId(int id) {
     this.id = id;
   }
-
 
   @Override
   public String getPassword() {
     return password;
   }
 
-
   @Override
   public void setPassword(String password) {
     this.password = password;
   }
-
 
   @Override
   public boolean checkPassword(String password) {
     return BCrypt.checkpw(password, this.password);
   }
 
-
   @Override
   public String hashPassword(String password) {
     return BCrypt.hashpw(password, BCrypt.gensalt());
   }
-
 
   public String toString() {
     return "{id:" + id + ", email:" + email + ", password:" + password + "}";
