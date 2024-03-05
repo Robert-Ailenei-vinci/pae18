@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * UserDataServiceImpl is a class that provides methods for interacting with user data.
+ * This class represents an implementation of the {@link UserDAO} interface.
  */
 public class UserDAOImpl implements UserDAO {
 
@@ -70,6 +70,18 @@ public class UserDAOImpl implements UserDAO {
       System.out.println(e.getMessage());
     }
     return null;
+  }
+
+  public int nextItemId() {
+    try (PreparedStatement stmt = dalServices.getPreparedStatement("SELECT MAX(id) FROM users");
+        ResultSet rs = stmt.executeQuery()) {
+      if (rs.next()) {
+        return rs.getInt(1) + 1;
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return -1;
   }
 
   private UserDTO getUserMethodFromDB(ResultSet rs) {

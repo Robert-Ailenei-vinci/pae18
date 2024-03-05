@@ -30,6 +30,12 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
   @Inject
   private UserDAO userDAO;
 
+  /**
+   * Filters the container request context to authorize requests based on JWT tokens.
+   *
+   * @param requestContext The container request context to be filtered.
+   * @throws IOException if an I/O error occurs.
+   */
   @Override
   public void filter(ContainerRequestContext requestContext) throws IOException {
     String token = requestContext.getHeaderString("Authorization");
