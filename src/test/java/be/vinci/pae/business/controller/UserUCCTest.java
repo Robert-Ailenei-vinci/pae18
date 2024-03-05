@@ -2,7 +2,7 @@ package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -10,7 +10,6 @@ import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.services.UserDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
-import jakarta.ws.rs.WebApplicationException;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
@@ -68,9 +67,7 @@ public class UserUCCTest {
   public void testLoginUserNull() {
     when(userDataService.getOne("testLogin@student.vinci.be")).thenReturn(null);
 
-    assertThrows(WebApplicationException.class, () -> {
-      userUCC.login("testLogin@student.vinci.be", "testPassword");
-    });
+    assertNull(userUCC.login("testLogin@student.vinci.be", "testPassword"));
   }
 
   @Test
@@ -80,9 +77,7 @@ public class UserUCCTest {
 
     when(userDataService.getOne("testLogin@student.vinci.be")).thenReturn(user);
 
-    assertThrows(WebApplicationException.class, () -> {
-      userUCC.login("testLogin@student.vinci.be", "testPassword");
-    });
+    assertNull(userUCC.login("testLogin@student.vinci.be", "testPassword"));
   }
 
 }
