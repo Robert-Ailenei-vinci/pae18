@@ -55,21 +55,6 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
-
-//  @Override
-//  public int nextItemId() {
-//    String sql = "SELECT MAX(id) FROM users";
-//    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql);
-//        ResultSet rs = stmt.executeQuery(sql)) {
-//      if (rs.next()) {
-//        return rs.getInt(1) + 1;
-//      }
-//    } catch (Exception e) {
-//      System.out.println(e.getMessage());
-//    }
-//    return 1;
-//  }
-
   private UserDTO getUserMethodFromDB(ResultSet rs) {
     UserDTO user = myDomainFactory.getUser();
 
