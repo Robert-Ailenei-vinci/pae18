@@ -131,6 +131,6 @@ public class AuthsResource {
     String fname = json.get("fname").asText();
     String phoneNum = json.get("phoneNum").asText();
 
-    return myUser.register(email, password, lname, fname, phoneNum);
+    return userUCC.register(email, password, lname, fname, phoneNum);
   }
 }
