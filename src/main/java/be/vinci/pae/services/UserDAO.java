@@ -34,12 +34,5 @@ public interface UserDAO {
    */
   boolean addUser(UserDTO user);
 
-  /**
-   * Returns the next available item ID.
-   *
-   * @return The next available item ID.
-   */
-  int nextItemId();
-
 
 }
