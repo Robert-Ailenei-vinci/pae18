@@ -18,6 +18,10 @@ public class ContactUCCImpl implements ContactUCC {
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
-    return (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
+    Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
+    if (contact == null) {
+      return null;
+    }
+    return contact;
   }
 }

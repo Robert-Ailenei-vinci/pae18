@@ -42,7 +42,6 @@ public class ContactRessource {
   @POST
   @Path("add")
   @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public ContactDTO addContact(JsonNode json) {
     if (!json.hasNonNull("user")
@@ -56,7 +55,7 @@ public class ContactRessource {
     int schoolYearId = json.get("schooYear").asInt();
 
     // Try to get user, entreprise, and school year
-    UserDTO userDTO = UserUCC.getOne(userId);
+/*    UserDTO userDTO = UserUCC.getOne(userId);
     EntrepriseDTO entrepriseDTO = EntrepriseUCC.getOne(entrepriseId);
     SchoolYearDTO schoolYearDTO = SchoolYearUCC.getOne(schoolYearId);
     if (userDTO == null) {
@@ -77,6 +76,7 @@ public class ContactRessource {
       throw new WebApplicationException("Error creating a new contact",
           Status.BAD_REQUEST);
     }
-    return contactDTO;
+    return contactDTO;*/
+    return null;
   }
 }
