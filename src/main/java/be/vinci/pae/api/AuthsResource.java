@@ -117,6 +117,16 @@ public class AuthsResource {
     return user;
   }
 
+  /**
+   * Register a new user.
+   *
+   * @param json JSON object containing the user's registration information. It must contain keys
+   *             "login", "password", "lname", "fname" and "phoneNum".
+   * @return true if the user is registered, false if not.
+   * @throws WebApplicationException If any of the required fields are missing, a
+   *                                 WebApplicationException with the appropriate error code is
+   *                                 thrown.
+   */
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)

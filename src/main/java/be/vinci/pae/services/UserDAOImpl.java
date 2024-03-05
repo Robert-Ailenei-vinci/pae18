@@ -56,19 +56,19 @@ public class UserDAOImpl implements UserDAO {
   }
 
 
-  @Override
-  public int nextItemId() {
-    String sql = "SELECT MAX(id) FROM users";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql);
-        ResultSet rs = stmt.executeQuery(sql)) {
-      if (rs.next()) {
-        return rs.getInt(1) + 1;
-      }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
-    return 1;
-  }
+//  @Override
+//  public int nextItemId() {
+//    String sql = "SELECT MAX(id) FROM users";
+//    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql);
+//        ResultSet rs = stmt.executeQuery(sql)) {
+//      if (rs.next()) {
+//        return rs.getInt(1) + 1;
+//      }
+//    } catch (Exception e) {
+//      System.out.println(e.getMessage());
+//    }
+//    return 1;
+//  }
 
   private UserDTO getUserMethodFromDB(ResultSet rs) {
     UserDTO user = myDomainFactory.getUser();
@@ -97,19 +97,19 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public boolean addUser(UserDTO user) {
-    int id_year = 0;
+    int idYear = 0;
     String sql1 = "SELECT id_year FROM pae.school_years WHERE years_format = ?";
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql1)) {
       stmt.setString(1, buildYear());
       ResultSet rs = stmt.executeQuery();
       if (rs.next()) {
-        id_year = rs.getInt("id_year");
+        idYear = rs.getInt("id_year");
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
 
-    if (id_year == 0) {
+    if (idYear == 0) {
       String sql2 = "INSERT INTO pae.school_years (years_format) VALUES (?)";
       try (PreparedStatement stmt = dalServices.getPreparedStatement(sql2)) {
         stmt.setString(1, buildYear());
@@ -119,7 +119,8 @@ public class UserDAOImpl implements UserDAO {
       }
     }
 
-    String sql3 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number, psw, registration_date, school_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql3 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
+        + " psw, registration_date, school_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql3)) {
       stmt.setString(1, user.getEmail());
       stmt.setString(2, user.getRole());
@@ -128,7 +129,7 @@ public class UserDAOImpl implements UserDAO {
       stmt.setString(5, user.getPhoneNum());
       stmt.setString(6, user.getPassword());
       stmt.setString(7, user.getRegistrationDate());
-      stmt.setInt(8, id_year);
+      stmt.setInt(8, idYear);
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -136,6 +137,11 @@ public class UserDAOImpl implements UserDAO {
     return false;
   }
 
+  /**
+   * Builds the year format.
+   *
+   * @return The year format.
+   */
   public String buildYear() {
     int year;
     if (LocalDate.now().getMonth().compareTo(Month.SEPTEMBER) < 0) {
