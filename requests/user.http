@@ -5,13 +5,18 @@ POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-    "login": "mia.liae@student.vinci.be",
+    "login": "robert.ailenei@student.vinci.be",
     "password": "mdp1"
 }
+
+> {%
+  client.global.set("user", response.body.token);
+%}
 
 ### Get all the users
 GET {{baseUrl}}/users
 Content-Type: application/json
+Authorization: {{user}}
 
 ### Register a new user
 POST {{baseUrl}}/auths/register

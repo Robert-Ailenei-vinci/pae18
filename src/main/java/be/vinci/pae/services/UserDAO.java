@@ -15,8 +15,6 @@ public interface UserDAO {
    */
   List<UserDTO> getAll();
 
-  // UserDTO getOne(int id);
-
   /**
    * Retrieves a user by their email.
    *
@@ -25,6 +23,13 @@ public interface UserDAO {
    */
   UserDTO getOne(String email);
 
+  /**
+   * Retrieves a user by their id.
+   *
+   * @param id The id of the user to retrieve.
+   * @return The user with the specified id, or null if not found.
+   */
+  UserDTO getOne(int id);
 
   /**
    * Adds a user to the database.
@@ -33,6 +38,8 @@ public interface UserDAO {
    * @return True if the user was added, false if not.
    */
   boolean addUser(UserDTO user);
+
+
 
 
 }
