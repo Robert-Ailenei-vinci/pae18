@@ -19,22 +19,22 @@ import jakarta.ws.rs.core.MediaType;
 @Path("/contacts")
 public class ContactRessource {
 
-    @Inject
-    private ContactUCC myContactUCC;
+  @Inject
+  private ContactUCC myContactUCC;
 
-    /**
-     * Adds a contact.
-     *
-     * @param json The JSON representation of the contact to be added.
-     * @return The added contact.
-     * @throws WebApplicationException If user, entreprise, or school year is missing or not
-     *                                 recognized.
-     */
-    @POST
-    @Path("add")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Authorize
-    public ContactDTO addContact(JsonNode json) {
+  /**
+   * Adds a contact.
+   *
+   * @param json The JSON representation of the contact to be added.
+   * @return The added contact.
+   * @throws WebApplicationException If user, entreprise, or school year is missing or not
+   *                                 recognized.
+   */
+  @POST
+  @Path("add")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Authorize
+  public ContactDTO addContact(JsonNode json) {
     /*    if (!json.hasNonNull("user")
                 || !json.hasNonNull("entreprise")
                 || !json.hasNonNull("schoolYear")) {
@@ -68,6 +68,6 @@ public class ContactRessource {
           Status.BAD_REQUEST);
     }
     return contactDTO;*/
-        return null;
-    }
+    return null;
+  }
 }
