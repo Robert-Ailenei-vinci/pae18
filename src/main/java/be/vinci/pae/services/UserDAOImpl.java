@@ -55,6 +55,23 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
+  @Override
+  public UserDTO getOne(int id) {
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+        "SELECT * FROM pae.users WHERE id_user = ?")) {
+      preparedStatement.setInt(1, id);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+
+        if (rs.next()) {
+          return getUserMethodFromDB(rs);
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
+  }
+
   private UserDTO getUserMethodFromDB(ResultSet rs) {
     UserDTO user = myDomainFactory.getUser();
 
