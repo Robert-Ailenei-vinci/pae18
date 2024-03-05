@@ -15,9 +15,8 @@ public class UserImpl implements User {
   private String firstName;
   private String phoneNum;
   private String registrationDate;
+  private int schoolYearId;
 
-
-  private int schoolYear;
 
   public String getLastName() {
     return lastName;
@@ -61,13 +60,14 @@ public class UserImpl implements User {
     this.email = email;
   }
 
-  public int getSchoolYear() {
-    return schoolYear;
+  @Override
+  public int getSchooYearId() {
+    return schoolYearId;
   }
 
   @Override
-  public void setSchoolYear(int schoolYear) {
-    this.schoolYear = schoolYear;
+  public void setSchoolYearId(int id) {
+    this.schoolYearId = id;
   }
 
   @Override
