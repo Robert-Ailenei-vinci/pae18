@@ -18,9 +18,9 @@ POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-     "login": "ali.elhannouti@student.vinci.be",
+     "login": "robert.ailenei@student.vinci.be",
      "password": "mdp1",
-     "fname": "Ali",
-     "lname": "Elhannouti",
+     "fname": "sef gtgt",
+     "lname": "dzzdq",
      "phoneNum": "0477777777"
 }

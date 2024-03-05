@@ -53,12 +53,11 @@ public class UserUCCImpl implements UserUCC {
    * @param lname    the user last name.
    * @param fname    the user first name.
    * @param phoneNum the user phone number.
-   * @param role     the user role.
    * @return true if the user is registered, false if not.
    */
   @Override
   public boolean register(String email, String password, String lname, String fname,
-      String phoneNum, String role) {
+      String phoneNum) {
     User existingUser = (User) myUserDAO.getOne(email);
     if (existingUser != null) {
       throw new WebApplicationException("An account with this email already exists",
@@ -77,7 +76,7 @@ public class UserUCCImpl implements UserUCC {
       user.setRole("etudiant");
     } else if (user.getEmail().matches(".*@vinci.be")) {
       // Set the role to the value selected by the user(administratif/proffesseur)
-      user.setRole(role);
+      user.setRole("");
     }
     return myUserDAO.addUser(user);
   }
