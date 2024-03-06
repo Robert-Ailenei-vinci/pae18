@@ -25,11 +25,9 @@ function renderRegisterForm() {
   submit.className = 'btn btn-info';
   const cancel = document.createElement('input');
   cancel.value = 'Annuler';
-
   cancel.className = 'btn btn-info';
   const addEntreprise = document.createElement('input');
   addEntreprise.value = 'Ajouter une Entreprise';
-
   addEntreprise.className = 'btn btn-info';
   const formCheckWrapper = document.createElement('div');
   formCheckWrapper.className = 'mb-3 form-check';
@@ -39,10 +37,10 @@ function renderRegisterForm() {
   form.appendChild(formCheckWrapper);
   form.appendChild(cancel);
   form.appendChild(submit);
-  main.appendChild(form);
   form.addEventListener('submit', onSubmit);
   cancel.addEventListener('click', onCancel);
-  entreprise.addEventListener('click', onAddEntreprise);
+  addEntreprise.addEventListener('click', onAddEntreprise);
+  main.appendChild(form);
 }
 
 async function onSubmit(e) {
