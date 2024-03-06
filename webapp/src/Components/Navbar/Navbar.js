@@ -37,6 +37,9 @@ function renderNavbar() {
             <li id="registerItem" class="nav-item">
               <a class="nav-link" href="#" data-uri="/register">Register</a>
             </li>            
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-uri="/addcontact">Add Contact (TO DELETE)</a>
+            </li>  
           </ul>
         </div>
       </div>
@@ -68,7 +71,7 @@ function renderNavbar() {
             </li>    
             <li class="nav-item">
               <a class="nav-link disabled" href="#">${authenticatedUser?.email}</a>
-            </li>           
+            </li> 
           </ul>
         </div>
       </div>
