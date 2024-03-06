@@ -141,7 +141,7 @@ function onEmailInput(e) {
   const roleProfLabel = document.querySelector('#roleProfLabel');
 
   if (email.endsWith('@student.vinci.be')) {
-    role = 'étudiant';
+    role = 'etudiant';
   } else if (email.endsWith('@vinci.be')) {
     roleAdmin.style.display = 'block';
     roleProf.style.display = 'block';
@@ -183,9 +183,15 @@ async function onRegister(e) {
   const roleAdmin = document.querySelector('#roleAdmin').checked;
   const roleProf = document.querySelector('#roleProf').checked;
 
+
+  
   if (roleAdmin) role = 'administratif';
   if (roleProf) role = 'professeur';
-
+// Check if at least one checkbox is checked
+if (!roleAdmin && !roleProf && role!=="etudiant") {
+  alert('Veuillez indiquer si vous etes un administratif ou un professeur: ');
+  return;
+}
   // Check if the email is either @vinci.be or @student.vinci.be
   if (!login.endsWith('@vinci.be') && !login.endsWith('@student.vinci.be')) {
     alert('Invalid email. Please use a @vinci.be or @student.vinci.be email.');
@@ -209,14 +215,17 @@ async function onRegister(e) {
 
   const response = await fetch(`http://localhost:3000/auths/register`, options);
 
-  if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
-
-  const authenticatedUser = await response.json();
-
-  console.log('Newly registered & authenticated user : ', authenticatedUser);
-
+  if (!response.ok) {
+    if (response.status === 400) {
+      // Display a popup message for incorrect username or password
+      alert("L'utilisateur existe déjà, veuillez vous connecter ou créer un autre compte.");
+  } else {
+      // For other errors, handle them accordingly
+      console.error("An error occurred:", response.statusText);
+  }
+      return;
+  }
   Navbar();
-
   Navigate('/login');
 }
 
