@@ -6,12 +6,30 @@ package be.vinci.pae.business.domain;
 public interface DomainFactory {
 
   /**
-   * Returns a new instance of the {@link User} object.
+   * Returns a new instance of the {@link UserDTO} object.
    *
-   * @return A new instance of the User object.
+   * @return A new instance of the UserDTO object.
    */
   UserDTO getUser();
+
+  /**
+   * Returns a new instance of the {@link ContactDTO} object.
+   *
+   * @return A new instance of the ContactDTO object.
+   */
   ContactDTO getContact();
+
+  /**
+   * Returns a new instance of the {@link EntrepriseDTO} object.
+   *
+   * @return A new instance of the EntrepriseDTO object.
+   */
   EntrepriseDTO getEntreprise();
+
+  /**
+   * Returns a new instance of the {@link SchoolYearDTO} object.
+   *
+   * @return A new instance of the SchoolYearDTO object.
+   */
   SchoolYearDTO getSchoolYear();
 }

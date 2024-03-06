@@ -116,4 +116,28 @@ public class AuthsResource {
     }
     return user;
   }
+
+  /**
+   * Register a new user.
+   *
+   * @param json JSON object containing the user's registration information. It must contain keys
+   *             "login", "password", "lname", "fname" and "phoneNum".
+   * @return true if the user is registered, false if not.
+   * @throws WebApplicationException If any of the required fields are missing, a
+   *                                 WebApplicationException with the appropriate error code is
+   *                                 thrown.
+   */
+  @POST
+  @Path("register")
+  @Consumes(MediaType.APPLICATION_JSON)
+  public boolean register(JsonNode json) {
+
+    String email = json.get("login").asText();
+    String password = json.get("password").asText();
+    String lname = json.get("l_name").asText();
+    String fname = json.get("f_name").asText();
+    String phoneNum = json.get("phone_number").asText();
+    String role = json.get("role").asText();
+    return userUCC.register(email, password, lname, fname, phoneNum, role);
+  }
 }

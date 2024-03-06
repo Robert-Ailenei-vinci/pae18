@@ -1,7 +1,8 @@
 package be.vinci.pae.business.domain;
 
-import java.util.Date;
-
-public interface Contact extends ContactDTO{
+/**
+ * This interface extends {@link ContactDTO} and represents a contact.
+ */
+public interface Contact extends ContactDTO {
 
 }

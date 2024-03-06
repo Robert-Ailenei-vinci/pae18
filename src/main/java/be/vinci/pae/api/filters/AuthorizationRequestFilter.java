@@ -16,6 +16,9 @@ import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 
+/**
+ * This class represents a filter for authorizing access to resources.
+ */
 @Singleton
 @Provider
 @Authorize
@@ -27,6 +30,12 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
   @Inject
   private UserDAO userDAO;
 
+  /**
+   * Filters the container request context to authorize requests based on JWT tokens.
+   *
+   * @param requestContext The container request context to be filtered.
+   * @throws IOException if an I/O error occurs.
+   */
   @Override
   public void filter(ContainerRequestContext requestContext) throws IOException {
     String token = requestContext.getHeaderString("Authorization");
@@ -37,10 +46,11 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
       DecodedJWT decodedToken = null;
       try {
         decodedToken = this.jwtVerifier.verify(token);
+        System.out.println("Token verified");
       } catch (Exception e) {
         throw new TokenDecodingException(e);
       }
-      UserDTO authenticatedUser = userDAO.getOne(decodedToken.getClaim("user").asString());
+      UserDTO authenticatedUser = userDAO.getOne(decodedToken.getClaim("user").asInt());
       if (authenticatedUser == null) {
         requestContext.abortWith(Response.status(Status.FORBIDDEN)
             .entity("You are forbidden to access this resource").build());

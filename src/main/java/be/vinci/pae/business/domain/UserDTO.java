@@ -118,4 +118,18 @@ public interface UserDTO {
    * @param registrationDate the new inscription date
    */
   void setRegistrationDate(String registrationDate);
+  
+  /**
+   * get the school year id.
+   *
+   * @return the school year id.
+   */
+  int getSchooYearId();
+
+  /**
+   * set a new school year id.
+   *
+   * @param id the new school year id.
+   */
+  void setSchoolYearId(int id);
 }

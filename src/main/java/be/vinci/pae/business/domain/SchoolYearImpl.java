@@ -1,26 +1,30 @@
 package be.vinci.pae.business.domain;
 
-public class SchoolYearImpl implements SchoolYear{
-    private int id;
-    private String yearFormat;
+/**
+ * This class represents an implementation of the {@link SchoolYear} interface.
+ */
+public class SchoolYearImpl implements SchoolYear {
 
-    @Override
-    public int getId() {
-        return id;
-    }
+  private int id;
+  private String yearFormat;
 
-    @Override
-    public void setId(int id) {
-        this.id=id;
-    }
+  @Override
+  public int getId() {
+    return id;
+  }
 
-    @Override
-    public String getYearFormat() {
-        return yearFormat;
-    }
+  @Override
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    @Override
-    public void setYearFormat(String yearFormat) {
-        this.yearFormat=yearFormat;
-    }
+  @Override
+  public String getYearFormat() {
+    return yearFormat;
+  }
+
+  @Override
+  public void setYearFormat(String yearFormat) {
+    this.yearFormat = yearFormat;
+  }
 }

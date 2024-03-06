@@ -1,80 +1,84 @@
 package be.vinci.pae.business.domain;
 
-import java.util.Date;
-
+/**
+ * This class represents an implementation of the {@link Contact} interface.
+ */
 public class ContactImpl implements Contact {
-    private int id;
-    private String state; //add predefined states
-    private User user;
-    private Entreprise entreprise;
-    private SchoolYear schoolYear;
-    private String reasonForRefusal;
-    private String MeetingType;
 
-    @Override
-    public int getId() {
-        return id;
-    }
+  private int id;
+  private String state; //add predefined states
+  private int userId;
+  private int entrepriseId;
+  private int schoolYearId;
+  private String reasonForRefusal;
+  private String meetingType;
 
-    @Override
-    public String getState() {
-        return state;
-    }
+  @Override
+  public int getId() {
+    return id;
+  }
 
-    @Override
-    public void setState(String state) {
+  @Override
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    }
+  @Override
+  public String getState() {
+    return state;
+  }
 
-    @Override
-    public void setId(int id) {
+  @Override
+  public void setState(String state) {
+    this.state = state;
+  }
 
-    }
+  @Override
+  public int getEntrepriseId() {
+    return entrepriseId;
+  }
 
-    @Override
-    public Entreprise getEntreprise() {
-        return entreprise;
-    }
+  @Override
+  public void setEntrepriseId(int entrepriseId) {
+    this.entrepriseId = entrepriseId;
+  }
 
-    @Override
-    public void setEntreprise(Entreprise entreprise) {
+  @Override
+  public int getSchoolYearId() {
+    return schoolYearId;
+  }
 
-    }
+  @Override
+  public void setSchoolYearId(int schoolYearId) {
+    this.schoolYearId = schoolYearId;
+  }
 
-    @Override
-    public SchoolYear getSchoolYear() {
-        return schoolYear;
-    }
+  @Override
+  public String getMeetingType() {
+    return meetingType;
+  }
 
-    @Override
-    public void setSchoolYear(SchoolYear schoolYear) {
+  @Override
+  public void setMeetingType(String meetingType) {
+    this.meetingType = meetingType;
+  }
 
-    }
-    @Override
-    public String getMeetingType() {
-        return MeetingType;
-    }
+  @Override
+  public String getReasonForRefusal() {
+    return reasonForRefusal;
+  }
 
-    @Override
-    public void setMeetingType(String meetingType) {
+  @Override
+  public void setReasonForRefusal(String reasonForRefusal) {
+    this.reasonForRefusal = reasonForRefusal;
+  }
 
-    }
-    @Override
-    public String getReasonForRefusal() {
-        return reasonForRefusal;
-    }
+  @Override
+  public int getUserId() {
+    return userId;
+  }
 
-    @Override
-    public void setReasonForRefusal(String reasonForRefusal) {
-
-    }
-    @Override
-    public User getUser() {
-        return user;
-    }
-
-    @Override
-    public void setUser(User user) {
-
-    }
+  public void setUserId(int userId) {
+    this.userId = userId;
+  }
 }
