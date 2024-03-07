@@ -19,4 +19,13 @@ public interface ContactUCC {
    * @return The created contact.
    */
   ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear);
+
+  /**
+   * set the state of a contact to meet and the type of meeting.
+   *
+   * @param id_contact  the id of the contact to set.
+   * @param meetingType the type od the meeting.
+   * @return the contact.
+   */
+  public ContactDTO meetContact(int id_contact, String meetingType);
 }
