@@ -178,6 +178,6 @@ public class UserDAOImpl implements UserDAO {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    return 0; // return 0 or throw an exception if no id was found
+    return 0; // return 0 if no id was found
   }
 }

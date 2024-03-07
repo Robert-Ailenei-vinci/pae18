@@ -65,7 +65,10 @@ function renderNavbar() {
             </li>            
             <li class="nav-item">
               <a class="nav-link" href="#" data-uri="/logout">Logout</a>
-            </li>    
+            </li> 
+            <li class="nav-item">
+            <a class="nav-link" href="#" data-uri="/users/userData">Voir données personelles</a>
+          </li>   
             <li class="nav-item">
               <a class="nav-link disabled" href="#">${authenticatedUser?.email}</a>
             </li>           
