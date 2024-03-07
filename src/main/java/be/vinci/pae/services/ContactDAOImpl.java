@@ -74,4 +74,29 @@ public class ContactDAOImpl implements ContactDAO {
     }
     return 1;
   }
+
+  public ContactDTO meetContact(int id_contact, String meetingType) {
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+        "UPDATE pae.contact SET state = 'rencontré', meeting_type = ? WHERE id_contact = ?"
+    )) {
+      preparedStatement.setString(1, meetingType);
+      preparedStatement.setInt(2, id_contact);
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
+            "SELECT * FROM pae.contact WHERE id_contact = ?"
+        )) {
+          selectStatement.setInt(1, id_contact);
+          try (ResultSet rs = selectStatement.executeQuery()) {
+            if (rs.next()) {
+              return getContactMethodFromDB(rs);
+            }
+          }
+        }
+      }
+    } catch (Exception e) {
+      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+    }
+    return null;
+  }
 }

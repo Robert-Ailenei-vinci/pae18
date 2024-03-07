@@ -23,7 +23,17 @@ public interface ContactDAO {
   /**
    * Retrieves the next available item id.
    *
-   * @return the next available item id
+   * @return the next available item id.
    */
   int nextItemId();
+
+
+  /**
+   * Update the state of a contact to meet whith the type of meeting.
+   *
+   * @param id_contact  id_contact the id of the contact to meet.
+   * @param meetingType the type of meeting.
+   * @return the updated contact.
+   */
+  public ContactDTO meetContact(int id_contact, String meetingType);
 }
