@@ -73,12 +73,17 @@ public class ContactRessource {
     return null;
   }
 
+  /**
+   * path to meet a contact.
+   *
+   * @param json the id and meeting type of the contact.
+   * @return the contact updated.
+   */
   @PUT
   @Path("met")
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
   public ContactDTO meetContact(JsonNode json) {
-    //Get and check contact id
     if (!json.hasNonNull("id_contact") || json.hasNonNull("meetingType")) {
       throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
     }
