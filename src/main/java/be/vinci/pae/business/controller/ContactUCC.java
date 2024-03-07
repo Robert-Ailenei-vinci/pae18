@@ -23,9 +23,9 @@ public interface ContactUCC {
   /**
    * set the state of a contact to meet and the type of meeting.
    *
-   * @param id_contact  the id of the contact to set.
+   * @param idContact   the id of the contact to set.
    * @param meetingType the type od the meeting.
    * @return the contact.
    */
-  public ContactDTO meetContact(int id_contact, String meetingType);
+  ContactDTO meetContact(int idContact, String meetingType);
 }

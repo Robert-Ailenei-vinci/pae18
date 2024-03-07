@@ -13,8 +13,7 @@ public interface UserUCC {
    *
    * @param login    the user's login.
    * @param password the user's password.
-   * @return the UserDTO object corresponding to the provided login and password, or null if the
-   * user is not found or the password check fails
+   * @return the User the login, or null if the user is not found or the password check fails
    */
   UserDTO login(String login, String password);
 
@@ -43,8 +42,7 @@ public interface UserUCC {
    * Retrieves a user by its identifier.
    *
    * @param userId the identifier of the user to retrieve
-   * @return the UserDTO object corresponding to the provided identifier, or null if no user with
-   * the given identifier exists
+   * @return User corresponding to the identifier, or null if no user with the identifier exists
    */
   UserDTO getOne(int userId);
 }

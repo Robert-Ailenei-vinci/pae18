@@ -12,8 +12,7 @@ public interface EntrepriseUCC {
    * Retrieves an EntrepriseDTO object by its identifier.
    *
    * @param entrepriseId the identifier of the entreprise to retrieve
-   * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   * entreprise with the given identifier exists
+   * @return the EntrepriseDTO corresponding to the identifier, or null
    */
   EntrepriseDTO getOne(int entrepriseId);
 }

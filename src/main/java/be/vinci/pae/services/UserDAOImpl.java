@@ -72,6 +72,11 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
+  /**
+   * get the id for creating a new user.
+   *
+   * @return the id of the last user +1.
+   */
   public int nextItemId() {
     try (PreparedStatement stmt = dalServices.getPreparedStatement("SELECT MAX(id) FROM users");
         ResultSet rs = stmt.executeQuery()) {

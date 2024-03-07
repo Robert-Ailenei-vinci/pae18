@@ -35,5 +35,5 @@ public interface ContactDAO {
    * @param meetingType the type of meeting.
    * @return the updated contact.
    */
-  public ContactDTO meetContact(int id_contact, String meetingType);
+  ContactDTO meetContact(int idContact, String meetingType);
 }

@@ -25,8 +25,9 @@ public class ContactUCCImpl implements ContactUCC {
     return contact;
   }
 
-  public ContactDTO meetContact(int id_contact, String meetingType) {
-    ContactDTO contactToReturn = myContactDAO.meetContact(id_contact, meetingType);
+  @Override
+  public ContactDTO meetContact(int idContact, String meetingType) {
+    ContactDTO contactToReturn = myContactDAO.meetContact(idContact, meetingType);
     if (contactToReturn == null) {
       return null;
     }
