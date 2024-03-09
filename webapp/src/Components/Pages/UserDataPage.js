@@ -25,8 +25,8 @@ async function renderPersonnalInfoPage() {
 
     // Fetch user data from the server
     const response = await fetch(`http://localhost:3000/users/userData`, options);
-    const user = getAuthenticatedUser(); //user.id dans le back
-    console.log(user);
+    const user = getAuthenticatedUser();
+    console.log(user)
     if (!response.ok) {
         if (response.status === 401) {
           // Display a popup message for incorrect username or password
@@ -43,7 +43,8 @@ async function renderPersonnalInfoPage() {
       { label: 'Email: ', value: user.email },
       { label: 'Numéro de Téléphone: ', value: user.phone },
       { label: 'Date d\'enregistrement: ', value: user.registrationDate },
-      { label: 'Année académique: ', value: user.schoolYear }
+      { label: 'Année académique: ', value: user.schoolYear },
+      { label: 'Role: ', value: user.role}
     ];
   
     items.forEach(item => {
@@ -52,10 +53,22 @@ async function renderPersonnalInfoPage() {
       ul.appendChild(li);
     });
 
+    const submit = document.createElement('input');
+    submit.value = 'Changer mes données personelles';
+    submit.type = 'button';
+    submit.className = 'btn btn-info';
+    submit.addEventListener('click', () => {
+      Navigate('/users/changeData');
+  });
+
     //ajouter tableaux contacts et stages
   
     main.appendChild(ul);
+    main.appendChild(submit);
     //append les tableaux
+
+
+
   }
   Navbar();
 
