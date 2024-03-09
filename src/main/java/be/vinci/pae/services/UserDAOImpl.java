@@ -24,7 +24,8 @@ public class UserDAOImpl implements UserDAO {
   public List<UserDTO> getAll() {
     PreparedStatement getAllUsers = dalServices.getPreparedStatement(
         "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
-            + " u.phone_number, u.psw, u.registration_date, u.school_year, s.years_format AS academic_year "
+            + " u.phone_number, u.psw, u.registration_date,"
+            + " u.school_year, s.years_format AS academic_year "
             + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year");
     List<UserDTO> users = new ArrayList<>();
     try (ResultSet rs = getAllUsers.executeQuery()) {
@@ -44,8 +45,11 @@ public class UserDAOImpl implements UserDAO {
   public UserDTO getOne(String email) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "SELECT u.id_user, u.email, u.role_u, u.last_name,"
-            + " u.first_name, u.phone_number, u.psw, u.registration_date, u.school_year, s.years_format AS academic_year "
-            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year AND u.email=?")) {
+            + " u.first_name, u.phone_number, u.psw,"
+            + " u.registration_date, u.school_year,"
+            + " s.years_format AS academic_year "
+            + "FROM pae.users u, pae.school_years s WHERE"
+            + " u.school_year=s.id_year AND u.email=?")) {
       preparedStatement.setString(1, email);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -63,8 +67,11 @@ public class UserDAOImpl implements UserDAO {
   public UserDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "SELECT u.id_user, u.email, u.role_u, u.last_name, "
-            + "u.first_name, u.phone_number, u.psw, u.registration_date, u.school_year, s.years_format AS academic_year"
-            + " FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year AND u.id_user=?")) {
+            + "u.first_name, u.phone_number, u.psw,"
+            + " u.registration_date, u.school_year,"
+            + " s.years_format AS academic_year"
+            + " FROM pae.users u, pae.school_years s WHERE"
+            + " u.school_year=s.id_year AND u.id_user=?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
