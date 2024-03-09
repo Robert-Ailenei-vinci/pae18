@@ -47,9 +47,8 @@ public class UserResource {
   @GET
   @Path("userData")
   @Produces(MediaType.APPLICATION_JSON)
-  
+
   public UserDTO getUserData() {
     return myUser.getOne(1);
   }
-// /users/userData
 }
