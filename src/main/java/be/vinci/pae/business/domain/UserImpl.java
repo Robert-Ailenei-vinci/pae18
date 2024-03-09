@@ -17,6 +17,30 @@ public class UserImpl implements User {
   private String registrationDate;
   private int schoolYearId;
 
+  private String academicYear;
+
+  public int getSchoolYearId() {
+    return schoolYearId;
+  }
+
+  @Override
+  public void setSchoolYearId(int id) {
+    this.schoolYearId = id;
+  }
+
+  public String getAcademicYear() {
+    return academicYear;
+  }
+
+  @Override
+  public void setAcademicYear(String academicYear) {
+    this.academicYear = academicYear;
+  }
+
+  @Override
+  public String getSchoolYear() {
+    return academicYear;
+  }
 
   public String getLastName() {
     return lastName;
@@ -63,11 +87,6 @@ public class UserImpl implements User {
   @Override
   public int getSchooYearId() {
     return schoolYearId;
-  }
-
-  @Override
-  public void setSchoolYearId(int id) {
-    this.schoolYearId = id;
   }
 
   @Override

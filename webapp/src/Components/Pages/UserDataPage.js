@@ -43,8 +43,7 @@ async function renderPersonnalInfoPage() {
       { label: 'Email: ', value: user.email },
       { label: 'Numéro de Téléphone: ', value: user.phone },
       { label: 'Date d\'enregistrement: ', value: user.registrationDate },
-      { label: 'Année académique: ', value: user.schoolYearId },
-      //ajouter l'année grace a une request dns la bd
+      { label: 'Année académique: ', value: user.schoolYear }
     ];
   
     items.forEach(item => {

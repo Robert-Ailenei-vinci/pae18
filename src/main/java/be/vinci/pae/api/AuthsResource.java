@@ -89,7 +89,8 @@ public class AuthsResource {
           .put("firstname", publicUser.getFirstName())
           .put("lastname", publicUser.getLastName())
           .put("phone", publicUser.getPhoneNum())
-          .put("registrationDate", publicUser.getRegistrationDate());
+          .put("registrationDate", publicUser.getRegistrationDate())
+          .put("schoolYear", publicUser.getSchoolYear());
       return toReturn;
 
     } catch (Exception e) {

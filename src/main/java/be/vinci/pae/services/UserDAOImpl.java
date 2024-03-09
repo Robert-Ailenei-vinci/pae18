@@ -23,7 +23,8 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public List<UserDTO> getAll() {
     PreparedStatement getAllUsers = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.users");
+        "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name, u.phone_number, u.psw, u.registration_date, u.school_year, s.years_format AS academic_year "
+            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year");
     List<UserDTO> users = new ArrayList<>();
     try (ResultSet rs = getAllUsers.executeQuery()) {
       while (rs.next()) {
@@ -41,7 +42,8 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO getOne(String email) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.users WHERE email = ?")) {
+        "SELECT u.id_user, u.email, u.role_u, u.last_name, u.first_name, u.phone_number, u.psw, u.registration_date, u.school_year, s.years_format AS academic_year "
+            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year AND u.email=?")) {
       preparedStatement.setString(1, email);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -58,7 +60,8 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.users WHERE id_user = ?")) {
+        "SELECT u.id_user, u.email, u.role_u, u.last_name, u.first_name, u.phone_number, u.psw, u.registration_date, u.school_year, s.years_format AS academic_year"
+            + " FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year AND u.id_user=?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -97,6 +100,7 @@ public class UserDAOImpl implements UserDAO {
       user.setPhoneNum(rs.getString("phone_number"));
       user.setRegistrationDate(rs.getString("registration_date"));
       user.setSchoolYearId(rs.getInt("school_year"));
+      user.setAcademicYear(rs.getString("academic_year"));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
