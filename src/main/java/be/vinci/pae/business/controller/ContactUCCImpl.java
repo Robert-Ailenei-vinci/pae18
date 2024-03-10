@@ -7,6 +7,7 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.services.ContactDAO;
 import jakarta.inject.Inject;
+import java.util.List;
 
 /**
  * This class is an implementation of the {@link ContactUCC} interface.
@@ -23,5 +24,10 @@ public class ContactUCCImpl implements ContactUCC {
       return null;
     }
     return contact;
+  }
+
+  @Override
+  public List<ContactDTO> getAllContactsByUserId(int userId) {
+    return myContactDAO.getAllContactsByUserId(userId);
   }
 }

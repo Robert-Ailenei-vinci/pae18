@@ -75,7 +75,7 @@ public class UserUCCImpl implements UserUCC {
     return myUserDAO.addUser(user);
   }
 
-
+  @Override
   public List<UserDTO> getAll() {
     return myUserDAO.getAll();
   }

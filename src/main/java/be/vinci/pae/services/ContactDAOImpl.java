@@ -8,6 +8,8 @@ import be.vinci.pae.business.domain.UserDTO;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents an implementation of the {@link ContactDAO} interface.
@@ -18,6 +20,8 @@ public class ContactDAOImpl implements ContactDAO {
   private DomainFactory myDomainFactory;
   @Inject
   private DALServices dalServices;
+  @Inject
+  private EntrepriseDAO entrepriseDAO;
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
@@ -45,21 +49,43 @@ public class ContactDAOImpl implements ContactDAO {
     return null;
   }
 
+  @Override
+  public List<ContactDTO> getAllContactsByUserId(int userId) {
+    PreparedStatement getAllContacts = dalServices.getPreparedStatement(
+        "SELECT * FROM pae.contacts WHERE _user = ?");
+    List<ContactDTO> contacts = new ArrayList<>();
+    try {
+      getAllContacts.setInt(1, userId);
+      try (ResultSet rs = getAllContacts.executeQuery()) {
+        while (rs.next()) {
+          ContactDTO contact;
+          contact = getContactMethodFromDB(rs);
+          contacts.add(contact);
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return contacts;
+  }
+
   private ContactDTO getContactMethodFromDB(ResultSet rs) {
     ContactDTO contact = myDomainFactory.getContact();
     try {
-      contact.setState(rs.getString("state"));
       contact.setId(rs.getInt("id_contact"));
-      contact.setUserId(rs.getInt("user"));
+      contact.setState(rs.getString("state"));
+      contact.setUserId(rs.getInt("_user"));
       contact.setEntrepriseId(rs.getInt("entreprise"));
       contact.setSchoolYearId(rs.getInt("school_year"));
       contact.setReasonForRefusal(rs.getString("reason_for_refusal"));
       contact.setMeetingType(rs.getString("meeting_type"));
+      contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
     return contact;
   }
+
 
   @Override
   public int nextItemId() {

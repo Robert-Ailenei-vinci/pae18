@@ -24,4 +24,9 @@ public class DomainFactoryImpl implements DomainFactory {
   public SchoolYearDTO getSchoolYear() {
     return new SchoolYearImpl();
   }
+
+  @Override
+  public StageDTO getStage() {
+    return new StageImpl();
+  }
 }
