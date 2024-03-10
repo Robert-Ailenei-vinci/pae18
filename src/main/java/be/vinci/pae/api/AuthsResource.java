@@ -132,7 +132,6 @@ public class AuthsResource {
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
   public boolean register(JsonNode json) {
-
     String email = json.get("login").asText();
     String password = json.get("password").asText();
     String lname = json.get("l_name").asText();

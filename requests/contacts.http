@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:3000
+
+### Login the default user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "login": "zaza@student.vinci.be",
+  "password": "mdp1"
+}
+
+> {%
+  client.global.set("user", response.body.token);
+%}
+
+### Login the default user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "login": "zuzu@student.vinci.be",
+  "password": "mdp1"
+}
+
+> {%
+  client.global.set("user", response.body.token);
+%}
+
+### Get all the contacts related to the user
+GET {{baseUrl}}/contacts/allContactsByUserId
+Content-Type: application/json
+Authorization: {{user}}
+
+### Create a new contact
+POST {{baseUrl}}/contacts/add
+Content-Type: application/json
+
+{
+  "salut" : "salut"
+}

@@ -15,4 +15,6 @@ public interface EntrepriseDAO {
    * entreprise with the given identifier exists
    */
   EntrepriseDTO getOne(int id);
+
+  EntrepriseDTO getOneByContactId(int id);
 }

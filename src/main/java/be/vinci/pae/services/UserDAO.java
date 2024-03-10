@@ -40,6 +40,4 @@ public interface UserDAO {
   boolean addUser(UserDTO user);
 
 
-
-
 }

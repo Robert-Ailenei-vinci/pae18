@@ -11,7 +11,11 @@ const UserDataPage = () => {
   renderPersonnalInfoPage();
 };
 
+
+
 async function renderPersonnalInfoPage() {
+    const user = getAuthenticatedUser();
+
     const main = document.querySelector('main');
     const ul = document.createElement('ul');
     ul.className = 'p-5';
@@ -20,56 +24,96 @@ async function renderPersonnalInfoPage() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `${user.token}`,
         },
       };
 
-    // Fetch user data from the server
-    const response = await fetch(`http://localhost:3000/users/userData`, options);
-    const user = getAuthenticatedUser();
-    console.log(user)
-    if (!response.ok) {
-        if (response.status === 401) {
-          // Display a popup message for incorrect username or password
-          alert("Username or password is incorrect. Please try again.");
-      } else {
-          // For other errors, handle them accordingly
-          console.error("An error occurred:", response.statusText);
+    try {
+      const responseContacts = await fetch(`http://localhost:3000/contacts/allContactsByUserId`, options);
+
+      if (!responseContacts.ok) {
+          throw new Error(`Failed to fetch contacts: ${responseContacts.statusText}`);
       }
-          return;
-      }
-    const items = [
-      { label: 'Nom de famille: ', value: user.lastname },
-      { label: 'Prénom: ', value: user.firstname },
-      { label: 'Email: ', value: user.email },
-      { label: 'Numéro de Téléphone: ', value: user.phone },
-      { label: 'Date d\'enregistrement: ', value: user.registrationDate },
-      { label: 'Année académique: ', value: user.schoolYear },
-      { label: 'Role: ', value: user.role}
-    ];
-  
-    items.forEach(item => {
-      const li = document.createElement('li');
-      li.textContent = item.label + item.value;
-      ul.appendChild(li);
-    });
 
-    const submit = document.createElement('input');
-    submit.value = 'Changer mes données personelles';
-    submit.type = 'button';
-    submit.className = 'btn btn-info';
-    submit.addEventListener('click', () => {
-      Navigate('/users/changeData');
-  });
+      const contactsData = await responseContacts.json();
 
-    //ajouter tableaux contacts et stages
-  
-    main.appendChild(ul);
-    main.appendChild(submit);
-    //append les tableaux
+      console.log('Contacts : ', contactsData);
+
+      const items = [
+        { label: 'Nom de famille: ', value: user.lastname },
+        { label: 'Prénom: ', value: user.firstname },
+        { label: 'Email: ', value: user.email },
+        { label: 'Numéro de Téléphone: ', value: user.phone },
+        { label: 'Date d\'enregistrement: ', value: user.registrationDate },
+        { label: 'Année académique: ', value: user.schoolYear },
+        { label: 'Role: ', value: user.role}
+      ];
+    
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item.label + item.value;
+        ul.appendChild(li);
+      });
+
+      const submit = document.createElement('input');
+      submit.value = 'Changer mes données personelles';
+      submit.type = 'button';
+      submit.className = 'btn btn-info';
+      submit.addEventListener('click', () => {
+        Navigate('/users/changeData');
+      });
+
+      // Creating table for contacts
+      const table = document.createElement('table');
+      table.className = 'table';
+      const thead = document.createElement('thead');
+      const tbody = document.createElement('tbody');
+      const trHead = document.createElement('tr');
+
+      ['Entreprise', 'Appelation', 'Adresse', 'Mail', 'N°Telephone', 'Etat', 'Lieu/Type de rencontre', 'Raison de refus'].forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        trHead.appendChild(th);
+      });
+
+      thead.appendChild(trHead);
+      table.appendChild(thead);
+
+      contactsData.forEach(contact => {
+        const tr = document.createElement('tr');
+
+        // Fields from entreprise object
+        ['tradeName', 'designation', 'address', 'email', 'phoneNumber'].forEach(key => {
+          const td = document.createElement('td');
+          td.textContent = contact.entreprise[key] || '-';
+          tr.appendChild(td);
+        });
 
 
+        ['state', 'meetingType', 'reasonForRefusal'].forEach(key => {
+          const td = document.createElement('td');
+          td.textContent = contact[key] || '-';
+          tr.appendChild(td);
+        });
 
-  }
+        tbody.appendChild(tr);
+      });
+
+      table.appendChild(tbody);
+      
+
+      main.appendChild(ul);
+      main.appendChild(submit);
+
+      main.appendChild(table);
+      
+    } catch (error) {
+      console.error('An error occurred:', error.message);
+    }
+
+
+}
+
   Navbar();
 
   Navigate('/');
