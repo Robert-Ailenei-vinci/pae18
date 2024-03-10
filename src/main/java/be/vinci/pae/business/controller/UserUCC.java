@@ -57,6 +57,7 @@ public interface UserUCC {
    * @param lname    the user last name.
    * @param fname    the user first name.
    * @param phoneNum the user phone number.
+   * @param token    the user token.
    * @return the UserDTO object corresponding to the provided identifier, or null if no user with
    * the given identifier exists
    */

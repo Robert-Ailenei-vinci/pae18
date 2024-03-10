@@ -38,12 +38,12 @@ async function renderPersonnalInfoPage() {
       const contactsData = await responseContacts.json();
 
       console.log('Contacts : ', contactsData);
-
+      console.log(user);
       const items = [
-        { label: 'Nom de famille: ', value: user.lastname },
-        { label: 'Prénom: ', value: user.firstname },
+        { label: 'Nom de famille: ', value: user.lastName },
+        { label: 'Prénom: ', value: user.firstName },
         { label: 'Email: ', value: user.email },
-        { label: 'Numéro de Téléphone: ', value: user.phone },
+        { label: 'Numéro de Téléphone: ', value: user.phoneNum },
         { label: 'Date d\'enregistrement: ', value: user.registrationDate },
         { label: 'Année académique: ', value: user.schoolYear },
         { label: 'Role: ', value: user.role}

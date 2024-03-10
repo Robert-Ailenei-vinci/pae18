@@ -114,9 +114,6 @@ async function onSubmit(e) {
   const user = getAuthenticatedUser();
   e.preventDefault();
 
-
-
-
   const login = document.querySelector('#login').value;
   const password = document.querySelector('#password').value;
   const passwordRepet = document.querySelector('#password2').value
@@ -124,25 +121,28 @@ async function onSubmit(e) {
   const l_name = document.querySelector('#l_name').value;
   const phone_number = document.querySelector('#phone_number').value;
 
-  
-  
   if (password !== passwordRepet) {
     alert('The passwords do not match. Please try again.');
     return; // Stop the function if the passwords do not match
   }
 
+  const userData = {
+    login,
+    f_name,
+    l_name,
+    phone_number,
+  };
+
+  // Only include the password in the request body if it's not empty
+  if (password) {
+    userData.password = password;
+  }
+
   const options = {
     method: 'POST',
-    body: JSON.stringify({
-      login,
-      password,
-      f_name,
-      l_name,
-      phone_number,
-    }),
+    body: JSON.stringify(userData),
     headers: {
       'Content-Type': 'application/json',
-      // eslint-disable-next-line prefer-template, no-template-curly-in-string
       'Authorization': `${user.token}`,
     },
   };

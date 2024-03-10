@@ -99,18 +99,22 @@ public class UserUCCImpl implements UserUCC {
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
       String phoneNum) {
-
     User user = (User) myDomainFactory.getUser();
     user.setEmail(email);
-    String hashedPassword = user.hashPassword(password);
-    user.setPassword(hashedPassword);
+
+    if (password == null) {
+      user.setPassword("");
+    } else {
+      String hashedPassword = user.hashPassword(password);
+      user.setPassword(hashedPassword);
+    }
+
     user.setLastName(lname);
     user.setFirstName(fname);
     user.setPhoneNum(phoneNum);
     user.setRegistrationDate(LocalDate.now().toString());
     myUserDAO.changeUser(user);
     return myUserDAO.getOne(email);
-
   }
 
 }
