@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class represents an implementation of the {@link UserDAO} interface.
@@ -98,7 +99,6 @@ public class UserDAOImpl implements UserDAO {
       user.setPhoneNum(rs.getString("phone_number"));
       user.setRegistrationDate(rs.getString("registration_date"));
       user.setSchoolYearId(rs.getInt("school_year"));
-      user.setAcademicYear(rs.getString("academic_year"));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -152,6 +152,63 @@ public class UserDAOImpl implements UserDAO {
       System.out.println(e.getMessage());
     }
     return false;
+  }
+
+  /**
+   * Change user data.
+   *
+   * @param user The user to change.
+   * @return The user with the changed data
+   */
+  @Override
+  public UserDTO changeUser(UserDTO user) {
+    StringBuilder sql = new StringBuilder("UPDATE pae.users SET ");
+    List<Object> parameters = new ArrayList<>();
+
+    if (!Objects.equals(user.getEmail(), "")) {
+      sql.append("email = ?, ");
+      parameters.add(user.getEmail());
+    }
+
+    if (!Objects.equals(user.getLastName(), "")) {
+      sql.append("last_name = ?, ");
+      parameters.add(user.getLastName());
+    }
+
+    if (!Objects.equals(user.getFirstName(), "")) {
+      sql.append("first_name = ?, ");
+      parameters.add(user.getFirstName());
+    }
+
+    if (!Objects.equals(user.getPhoneNum(), "")) {
+      sql.append("phone_number = ?, ");
+      parameters.add(user.getPhoneNum());
+    }
+
+    if (!Objects.equals(user.getPassword(), "")) {
+      sql.append("psw = ?, ");
+      parameters.add(user.getPassword());
+    }
+
+    // Remove the last comma and space
+    sql.delete(sql.length() - 2, sql.length());
+
+    sql.append(" WHERE email = ?");
+    parameters.add(user.getEmail());
+
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
+      for (int i = 0; i < parameters.size(); i++) {
+        if (parameters.get(i) instanceof String) {
+          stmt.setString(i + 1, (String) parameters.get(i));
+        } else if (parameters.get(i) instanceof Integer) {
+          stmt.setInt(i + 1, (Integer) parameters.get(i));
+        }
+      }
+      stmt.executeUpdate();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return user;
   }
 
   /**

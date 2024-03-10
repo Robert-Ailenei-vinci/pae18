@@ -133,8 +133,4 @@ public interface UserDTO {
    */
   void setSchoolYearId(int id);
 
-
-  void setAcademicYear(String academicYear);
-
-  String getSchoolYear();
 }

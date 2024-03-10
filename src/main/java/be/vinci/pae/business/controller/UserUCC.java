@@ -47,4 +47,18 @@ public interface UserUCC {
    * the given identifier exists
    */
   UserDTO getOne(int userId);
+
+
+  /**
+   * Change user data.
+   *
+   * @param email    the users' login.
+   * @param password the user password.
+   * @param lname    the user last name.
+   * @param fname    the user first name.
+   * @param phoneNum the user phone number.
+   * @return the UserDTO object corresponding to the provided identifier, or null if no user with
+   * the given identifier exists
+   */
+  UserDTO changeData(String email, String password, String lname, String fname, String phoneNum);
 }

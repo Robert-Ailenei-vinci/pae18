@@ -22,6 +22,7 @@ import java.util.List;
  */
 @Singleton
 @Path("/users")
+@Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
   /**
@@ -47,20 +48,22 @@ public class UserResource {
     return myUser.getAll();
   }
 
-  @GET
-  @Path("userData")
-  @Produces(MediaType.APPLICATION_JSON)
-
-  public UserDTO getUserData() {
-    return myUser.getOne(1);
-  }
-
-
   @POST
   @Path("changeData")
   @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public UserDTO changeData(JsonNode json) {
-    return myUser.getOne(1);
+    String email = json.get("login").asText();
+    System.out.println(email);
+    String password = json.get("password").asText();
+    System.out.println(password);
+    String lname = json.get("l_name").asText();
+    System.out.println(lname);
+    String fname = json.get("f_name").asText();
+    System.out.println(fname);
+    String phoneNum = json.get("phone_number").asText();
+    System.out.println(phoneNum);
+    return myUser.changeData(email, password, lname, fname, phoneNum);
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { getAuthenticatedUser } from '../../utils/auths';
+import { getAuthenticatedUser, setAuthenticatedUser } from '../../utils/auths';
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
@@ -52,10 +52,10 @@ function renderInfoChangeForm() {
   passwordRepet.disabled = true; 
 
   password.addEventListener('input', function() {
-    if (this.value) {
-        passwordRepet.disabled = false; 
+    if (this.value) { 
         passwordRepet.disabled = true; 
     }
+    passwordRepet.disabled = false;
 });
 
   const last_name = document.createElement('input');
@@ -86,13 +86,6 @@ function renderInfoChangeForm() {
     }
   });
 
-
-
-
-
-
-
-
   const submit = document.createElement('input');
   submit.value = 'Envoyer';
   submit.type = 'submit';
@@ -118,8 +111,9 @@ function renderInfoChangeForm() {
 }
 
 async function onSubmit(e) {
+  const user = getAuthenticatedUser();
   e.preventDefault();
-  const form = document.querySelector('form');
+
 
 
 
@@ -129,14 +123,13 @@ async function onSubmit(e) {
   const f_name = document.querySelector('#f_name').value;
   const l_name = document.querySelector('#l_name').value;
   const phone_number = document.querySelector('#phone_number').value;
+
   
   
-  form.addEventListener('submit', (event) => {
-    if (password.value !== passwordRepet.value) {
-        event.preventDefault();
-        alert('The passwords do not match. Please try again.');
-    }
-});
+  if (password !== passwordRepet) {
+    alert('The passwords do not match. Please try again.');
+    return; // Stop the function if the passwords do not match
+  }
 
   const options = {
     method: 'POST',
@@ -145,14 +138,16 @@ async function onSubmit(e) {
       password,
       f_name,
       l_name,
-      phone_number
+      phone_number,
     }),
     headers: {
       'Content-Type': 'application/json',
+      // eslint-disable-next-line prefer-template, no-template-curly-in-string
+      'Authorization': `${user.token}`,
     },
   };
 
-  const response = await fetch(`http://localhost:3000/changeData`, options);
+  const response = await fetch(`http://localhost:3000/users/changeData`, options);
   console.log(response);
   if (!response.ok) {
     if (response.status === 400) {
@@ -164,6 +159,12 @@ async function onSubmit(e) {
   }
       return;
   }
+  
+  // If the request is successful, update the user data in local storage
+  const updatedUser = await response.json();
+  console.log(updatedUser);
+  localStorage.setItem('user', JSON.stringify(updatedUser));
+  setAuthenticatedUser(updatedUser);
   Navbar();
   Navigate('/');
 }

@@ -16,32 +16,15 @@ async function renderPersonnalInfoPage() {
     const ul = document.createElement('ul');
     ul.className = 'p-5';
     
-    const options = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
 
-    // Fetch user data from the server
-    const response = await fetch(`http://localhost:3000/users/userData`, options);
     const user = getAuthenticatedUser();
     console.log(user)
-    if (!response.ok) {
-        if (response.status === 401) {
-          // Display a popup message for incorrect username or password
-          alert("Username or password is incorrect. Please try again.");
-      } else {
-          // For other errors, handle them accordingly
-          console.error("An error occurred:", response.statusText);
-      }
-          return;
-      }
+  
     const items = [
-      { label: 'Nom de famille: ', value: user.lastname },
-      { label: 'Prénom: ', value: user.firstname },
+      { label: 'Nom de famille: ', value: user.lastName },
+      { label: 'Prénom: ', value: user.firstName },
       { label: 'Email: ', value: user.email },
-      { label: 'Numéro de Téléphone: ', value: user.phone },
+      { label: 'Numéro de Téléphone: ', value: user.phoneNum },
       { label: 'Date d\'enregistrement: ', value: user.registrationDate },
       { label: 'Année académique: ', value: user.schoolYear },
       { label: 'Role: ', value: user.role}

@@ -85,4 +85,32 @@ public class UserUCCImpl implements UserUCC {
     return myUserDAO.getOne(userId);
   }
 
+  /**
+   * Change user data.
+   *
+   * @param email    the users' login.
+   * @param password the user password.
+   * @param lname    the user last name.
+   * @param fname    the user first name.
+   * @param phoneNum the user phone number.
+   * @return the UserDTO object corresponding to the provided identifier, or null if no user with
+   * the given identifier exists
+   */
+  @Override
+  public UserDTO changeData(String email, String password, String lname, String fname,
+      String phoneNum) {
+
+    User user = (User) myDomainFactory.getUser();
+    user.setEmail(email);
+    String hashedPassword = user.hashPassword(password);
+    user.setPassword(hashedPassword);
+    user.setLastName(lname);
+    user.setFirstName(fname);
+    user.setPhoneNum(phoneNum);
+    user.setRegistrationDate(LocalDate.now().toString());
+    myUserDAO.changeUser(user);
+    return myUserDAO.getOne(email);
+
+  }
+
 }

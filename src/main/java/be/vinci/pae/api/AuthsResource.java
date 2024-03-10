@@ -86,11 +86,11 @@ public class AuthsResource {
           .put("id", publicUser.getId())
           .put("email", publicUser.getEmail())
           .put("role", publicUser.getRole())
-          .put("firstname", publicUser.getFirstName())
-          .put("lastname", publicUser.getLastName())
-          .put("phone", publicUser.getPhoneNum())
-          .put("registrationDate", publicUser.getRegistrationDate())
-          .put("schoolYear", publicUser.getSchoolYear());
+          .put("firstName", publicUser.getFirstName())
+          .put("lastName", publicUser.getLastName())
+          .put("phoneNum", publicUser.getPhoneNum())
+          .put("registrationDate", publicUser.getRegistrationDate());
+
       return toReturn;
 
     } catch (Exception e) {
