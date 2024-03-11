@@ -29,4 +29,9 @@ public class DomainFactoryImpl implements DomainFactory {
   public StageDTO getStage() {
     return new StageImpl();
   }
+
+  @Override
+  public SupervisorDTO getSupervisor() {
+    return new SupervisorImpl();
+  }
 }

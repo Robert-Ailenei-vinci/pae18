@@ -21,6 +21,8 @@ public interface ContactDAO {
    */
   ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear);
 
+  ContactDTO getOneContactByStageId(int stageId);
+
   /**
    * Retrieves the next available item id.
    *

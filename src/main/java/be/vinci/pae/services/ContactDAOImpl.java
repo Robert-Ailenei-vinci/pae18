@@ -69,6 +69,23 @@ public class ContactDAOImpl implements ContactDAO {
     return contacts;
   }
 
+  @Override
+  public ContactDTO getOneContactByStageId(int stageId) {
+    PreparedStatement getOneContact = dalServices.getPreparedStatement(
+        "SELECT * FROM pae.contacts WHERE id_contact = ?");
+    try {
+      getOneContact.setInt(1, stageId);
+      try (ResultSet rs = getOneContact.executeQuery()) {
+        if (rs.next()) {
+          return getContactMethodFromDB(rs);
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return null;
+}
+
   private ContactDTO getContactMethodFromDB(ResultSet rs) {
     ContactDTO contact = myDomainFactory.getContact();
     try {

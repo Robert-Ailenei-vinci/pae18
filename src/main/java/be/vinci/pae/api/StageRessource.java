@@ -13,7 +13,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-import java.util.List;
 
 @Singleton
 @Path("/stages")
@@ -24,8 +23,7 @@ public class StageRessource {
   @Path("stageByUserId")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public StageDTO getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
-    System.out.println("getAllContactsByUserId called");
+  public StageDTO getOneStageByUserId(@Context ContainerRequestContext requestContext) {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
     return stageUCC.getOneStageByUserId(userId);

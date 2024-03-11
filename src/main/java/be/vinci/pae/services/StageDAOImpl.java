@@ -2,6 +2,7 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.StageDTO;
+import be.vinci.pae.business.domain.SupervisorImpl;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,15 @@ public class StageDAOImpl implements StageDAO{
   private DomainFactory myDomainFactory;
   @Inject
   private DALServices dalServices;
+  @Inject
+  private ContactDAO contactDAO;
+  @Inject
+  private UserDAO userDAO;
+  @Inject
+  private SupervisorDAO supervisorDAO;
+  @Inject
+  private SchoolYearDAO schoolYearDAO;
+
   @Override
   public StageDTO getOneStageByUserId(int userId) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
@@ -30,13 +40,16 @@ public class StageDAOImpl implements StageDAO{
   private StageDTO getStageMethodFromDB(ResultSet rs) {
     StageDTO stage = myDomainFactory.getStage();
     try {
-      stage.setContact(rs.getInt("contact"));
+      stage.setContactId(rs.getInt("contact"));
       stage.setSignatureDate(rs.getString("signature_date"));
       stage.setInternshipProject(rs.getString("internship_project"));
-      stage.setSupervisor(rs.getInt("supervisor"));
-      stage.setUser(rs.getInt("_user"));
-      stage.setSchoolYear(rs.getInt("school_year"));
-
+      stage.setSupervisorId(rs.getInt("supervisor"));
+      stage.setUserId(rs.getInt("_user"));
+      stage.setSchoolYearId(rs.getInt("school_year"));
+      stage.setContact(contactDAO.getOneContactByStageId(rs.getInt("contact")));
+      stage.setUser(userDAO.getOne(rs.getInt("_user")));
+      stage.setSupervisor(supervisorDAO.getOneById(rs.getInt("supervisor")));
+      stage.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }

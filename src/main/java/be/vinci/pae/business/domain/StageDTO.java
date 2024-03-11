@@ -12,14 +12,14 @@ public interface StageDTO {
    *
    * @return The contact details of the stage.
    */
-  int getContact();
+  int getContactId();
 
   /**
    * Sets the contact details of the stage.
    *
-   * @param contact The contact details of the stage to be set.
+   * @param contactId The contact details of the stage to be set.
    */
-  void setContact(int contact);
+  void setContactId(int contactId);
 
   /**
    * Retrieves the signature date of the stage.
@@ -54,40 +54,95 @@ public interface StageDTO {
    *
    * @return The supervisor ID of the stage.
    */
-  int getSupervisor();
+  int getSupervisorId();
 
   /**
    * Sets the supervisor ID of the stage.
    *
-   * @param supervisor The supervisor ID of the stage to be set.
+   * @param supervisorId The supervisor ID of the stage to be set.
    */
-  void setSupervisor(int supervisor);
+  void setSupervisorId(int supervisorId);
 
   /**
    * Retrieves the user ID associated with the stage.
    *
    * @return The user ID associated with the stage.
    */
-  int getUser();
+  int getUserId();
 
   /**
    * Sets the user ID associated with the stage.
    *
-   * @param user The user ID associated with the stage to be set.
+   * @param userId The user ID associated with the stage to be set.
    */
-  void setUser(int user);
+  void setUserId(int userId);
 
   /**
    * Retrieves the school year of the stage.
    *
    * @return The school year of the stage.
    */
-  int getSchoolYear();
+  int getSchoolYearId();
 
   /**
    * Sets the school year of the stage.
    *
-   * @param schoolYear The school year of the stage to be set.
+   * @param schoolYearId The school year of the stage to be set.
    */
-  void setSchoolYear(int schoolYear);
+  void setSchoolYearId(int schoolYearId);
+
+  /**
+   * Retrieves the contact associated with the stage.
+   *
+   * @return The contact associated with the stage.
+   */
+  ContactDTO getContact();
+
+  /**
+   * Sets the contact associated with the stage.
+   *
+   * @param contactDTO The contact to be associated with the stage.
+   */
+  void setContact(ContactDTO contactDTO);
+
+  /**
+   * Retrieves the user associated with the stage.
+   *
+   * @return The user associated with the stage.
+   */
+  UserDTO getUser();
+
+  /**
+   * Sets the user associated with the stage.
+   *
+   * @param user The user to be associated with the stage.
+   */
+  void setUser(UserDTO user);
+  /**
+   * Retrieves the school year associated with the stage.
+   *
+   * @return the school year associated with the stage
+   */
+  SchoolYearDTO getSchoolYear();
+
+  /**
+   * Sets the school year associated with the stage.
+   *
+   * @param schoolYear the school year associated with the stage
+   */
+  void setSchoolYear(SchoolYearDTO schoolYear);
+
+  /**
+   * Retrieves the supervisor associated with the stage.
+   *
+   * @return the supervisor associated with the stage
+   */
+  SupervisorDTO getSupervisor();
+
+  /**
+   * Sets the supervisor associated with the stage.
+   *
+   * @param supervisor the supervisor associated with the stage
+   */
+  void setSupervisor(SupervisorDTO supervisor);
 }

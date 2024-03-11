@@ -34,4 +34,6 @@ public interface DomainFactory {
   SchoolYearDTO getSchoolYear();
 
   StageDTO getStage();
+
+  SupervisorDTO getSupervisor();
 }

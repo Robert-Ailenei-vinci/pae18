@@ -97,15 +97,23 @@ async function renderPersonnalInfoPage() {
         });
 
         tbody.appendChild(tr);
-      });
 
+      });
       table.appendChild(tbody);
+
+      const responseStages = await fetch(`http://localhost:3000/contacts/allContactsByUserId`, options);
+
+      if (!responseStages.ok) {
+          throw new Error(`Failed to fetch stages: ${responseStages.statusText}`);
+      }
       
 
       main.appendChild(ul);
       main.appendChild(submit);
 
       main.appendChild(table);
+
+
       
     } catch (error) {
       console.error('An error occurred:', error.message);
