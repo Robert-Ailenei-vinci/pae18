@@ -37,7 +37,21 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<EntrepriseDTO> getAll() {
-    System.out.println("getAll");
     return myEntreprise.getAll();
+  }
+
+  /**
+   * Retrieves an entreprise given it's id. This method is accessed via HTTP GET request to the path
+   * "/entreprise/getAll". It returns the list of all enterprises in JSON format. Requires
+   * authorization.
+   *
+   * @return A list of {@link EntrepriseDTO} representing all enterprises.
+   */
+  @GET
+  @Path("getOne")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public EntrepriseDTO getOne(int entrepriseId) {
+    return myEntreprise.getOne(entrepriseId);
   }
 }
