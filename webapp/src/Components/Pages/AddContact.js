@@ -7,123 +7,132 @@ const AddContactPage = async () => {
   clearPage();
   renderPageTitle('Créer un contact');
   renderRegisterForm();
-  await renderEntreprises();
 };
 
 function renderRegisterForm() {
-  const main = document.querySelector('main');
-  const form = document.createElement('form');
-  form.className = 'p-5';
-  form.id = 'entreprise-form';
-  // Entreprise Dropdown
-  const dropdown = document.createElement('input');
-  dropdown.type = 'checkbox';
-  dropdown.id = 'dropdown';
-  dropdown.name = 'dropdown';
-  dropdown.className = 'dropdown';
-  dropdown.required = true;
-  dropdown.className = 'form-control mb-3';
-  // Entreprise Label
-  const dropdownLabel = document.createElement('label');
-  dropdownLabel.className = 'for-dropdown';
-  dropdownLabel.htmlFor = 'dropdown';
-  dropdownLabel.textContent = 'Dropdown Menu ';
-  const dropdownIcon = document.createElement('i');
-  dropdownIcon.className = 'uil uil-arrow-down';
+  const entreprises = ["Entreprise 1", "Entreprise 2", "Entreprise 3"];
 
-  const submit = document.createElement('input');
-  submit.value = 'Confirmer';
-  submit.type = 'submit';
-  submit.className = 'btn btn-info';
-  const cancel = document.createElement('input');
-  cancel.value = 'Annuler';
-  cancel.className = 'btn btn-info';
-  const addEntreprise = document.createElement('input');
-  addEntreprise.value = 'Ajouter une Entreprise';
-  addEntreprise.className = 'btn btn-info';
-  const formCheckWrapper = document.createElement('div');
-  formCheckWrapper.className = 'mb-3 form-check';
+  const form = createFormElement();
 
-  dropdownLabel.appendChild(dropdownIcon);
-  form.appendChild(dropdown);
-  form.appendChild(dropdownLabel);
-  form.appendChild(addEntreprise);
-  form.appendChild(formCheckWrapper);
-  form.appendChild(cancel);
-  form.appendChild(submit);
-  form.addEventListener('submit', onSubmit);
-  cancel.addEventListener('click', onCancel);
-  addEntreprise.addEventListener('click', onAddEntreprise);
-  main.appendChild(form);
-}
+  const row = document.createElement('div');
+  row.className = 'row';
 
-async function renderEntreprises() {
+  const dropdownContainer = createDropdownContainer();
+  dropdownContainer.appendChild(createDropdownButton());
+  const dropdownContent = createDropdownContent(entreprises);
+  dropdownContainer.appendChild(dropdownContent);
+  row.appendChild(dropdownContainer);
 
-  const form = document.getElementById('entreprise-form');
-  // Create dropdown content section
-  const dropdownSection = document.createElement('div');
-  dropdownSection.className = 'section-dropdown';
-  // Create dropdown link
-  const dropdownLink = document.createElement('a');
-  dropdownLink.href = '#';
-  dropdownLink.textContent = 'Dropdown Link ';
-  const dropdownLinkIcon = document.createElement('i');
-  dropdownLinkIcon.className = 'uil uil-arrow-right';
-  dropdownLink.appendChild(dropdownLinkIcon);
-  dropdownSection.appendChild(dropdownLink);
-  // Create dropdown sub checkbox
-  const dropdownSubCheckbox = document.createElement('input');
-  dropdownSubCheckbox.type = 'checkbox';
-  dropdownSubCheckbox.id = 'dropdown-sub';
-  dropdownSubCheckbox.name = 'dropdown-sub';
-  dropdownSubCheckbox.className = 'dropdown-sub';
-  dropdownSection.appendChild(dropdownSubCheckbox);
-  // Create dropdown sub content section
-  const dropdownSubSection = document.createElement('div');
-  dropdownSubSection.className = 'section-dropdown-sub';
-  const entrepriseList = await allEntreprises();
-  entrepriseList.forEach(entreprise => {
-    const dropdownSubLink = document.createElement('a');
-    dropdownSubLink.href = '#';
-    dropdownSubLink.textContent = entreprise;
-    const dropdownSubLinkIcon1 = document.createElement('i');
-    dropdownSubLink.appendChild(dropdownSubLinkIcon1);
-    dropdownSubSection.appendChild(dropdownSubLink);
+  const addEntrepriseButtonContainer = createAddEntrepriseButtonContainer();
+  addEntrepriseButtonContainer.appendChild(createAddEntrepriseButton());
+  row.appendChild(addEntrepriseButtonContainer);
+
+  form.appendChild(row);
+
+  const buttonGroup = document.createElement('div');
+  buttonGroup.className = 'form-group mt-3';
+  buttonGroup.appendChild(createSubmitButton());
+  buttonGroup.appendChild(createCancelButton());
+  form.appendChild(buttonGroup);
+
+  const container = document.createElement('div');
+  container.className = 'container';
+  container.appendChild(form);
+
+  document.body.appendChild(container);
+
+  document.getElementById('dropbtn').addEventListener('click', toggleDropdown);
+  document.getElementById('myForm').addEventListener('submit', handleSubmit);
+
+  dropdownContent.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.getElementById('dropbtn').textContent = item.textContent;
+      // TODO: Add logic for retrieving entreprise name
+    });
   });
-  // Append dropdown sub content to dropdown section
-  dropdownSection.appendChild(dropdownSubSection);
-
-  // Append dropdown section to form
-  form.appendChild(dropdownSection);
 }
 
-
-async function allEntreprises() {
-    const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-  const response = await fetch(`http://localhost:3000/entreprise/getAll`, options);
-
-  if (!response.ok) {
-    if (response.status === 401) {
-      // Display a popup message for incorrect username or password
-      alert('No entreprise have been found');
-    } else {
-      // For other errors, handle them accordingly
-      console.error('An error occurred:', response.statusText);
-    }
-  }
-  return response;
+function createFormElement() {
+  const form = document.createElement('form');
+  form.id = 'myForm';
+  form.className = 'm-3';
+  return form;
 }
 
-async function onSubmit(e) {
-  e.preventDefault();
+function createDropdownContainer() {
+  const dropdownContainer = document.createElement('div');
+  dropdownContainer.className = 'col-md-6 mb-3';
+  return dropdownContainer;
+}
 
+function createDropdownButton() {
+  const dropdownButton = document.createElement('button');
+  dropdownButton.id = 'dropbtn';
+  dropdownButton.className = 'btn btn-secondary dropdown-toggle btn-block';
+  dropdownButton.type = 'button';
+  dropdownButton.textContent = 'Select Entreprise';
+  return dropdownButton;
+}
+
+function createDropdownContent(entreprises) {
+  const dropdownContent = document.createElement('div');
+  dropdownContent.id = 'myDropdown';
+  dropdownContent.className = 'dropdown-menu';
+  entreprises.forEach(entreprise => {
+    const option = document.createElement('button');
+    option.className = 'dropdown-item';
+    option.type = 'button';
+    option.textContent = entreprise;
+    dropdownContent.appendChild(option);
+  });
+  return dropdownContent;
+}
+
+function createAddEntrepriseButtonContainer() {
+  const container = document.createElement('div');
+  container.className = 'col-md-6 mb-3';
+  return container;
+}
+
+function createAddEntrepriseButton() {
+  const addEntrepriseButton = document.createElement('button');
+  addEntrepriseButton.className = 'btn btn-primary btn-block';
+  addEntrepriseButton.textContent = 'Ajouter une entreprise';
+  addEntrepriseButton.addEventListener('click', () => {
+    alert('Add entreprise clicked');
+    // TODO: Add logic for adding an entreprise here
+  });
+  return addEntrepriseButton;
+}
+
+function createSubmitButton() {
+  const submitButton = document.createElement('button');
+  submitButton.type = 'submit';
+  submitButton.className = 'btn btn-primary mr-2';
+  submitButton.textContent = 'Submit';
+  return submitButton;
+}
+
+function createCancelButton() {
+  const cancelButton = document.createElement('button');
+  cancelButton.type = 'button';
+  cancelButton.className = 'btn btn-secondary';
+  cancelButton.textContent = 'Cancel';
+  cancelButton.addEventListener('click', () => {
+    alert('Form cancelled');
+    // TODO: Add cancellation logic here
+  });
+  return cancelButton;
+}
+
+function toggleDropdown() {
+  const dropdownContent = document.getElementById('myDropdown');
+  // eslint-disable-next-line no-unused-expressions
+  dropdownContent.style.display === 'block' ? dropdownContent.style.display = 'none' : dropdownContent.style.display = 'block';
+}
+
+async function handleSubmit() {
   const entreprise = document.querySelector('#entreprise').value;
-
   const options = {
     method: 'POST',
     body: JSON.stringify({
@@ -138,43 +147,22 @@ async function onSubmit(e) {
   const response = await fetch(`http://localhost:3000/contact/add`, options);
 
   if (!response.ok) {
-    if (response.status === 401) {
-      // Display a popup message for incorrect username or password
-      alert('Entreprise not found, please add it before anything.');
-    } else {
-      // For other errors, handle them accordingly
-      console.error('An error occurred:', response.statusText);
-    }
+    handleError(response);
     return;
   }
 
   const newContact = await response.json();
-
   console.log('Added contact : ', newContact);
-
   Navbar();
-
   Navigate('/');
 }
 
-function onCancel(e) {
-  e.preventDefault();
-  // TODO: Redirect to previous page
-  console.log('Canceling');
-
-  Navbar();
-
-  Navigate('/');
-}
-
-function onAddEntreprise(e) {
-  e.preventDefault();
-  // TODO: Redirect to add entreprise
-  console.log('Adding entreprise');
-
-  Navbar();
-
-  Navigate('/');
+function handleError(response) {
+  if (response.status === 401) {
+    alert("Username or password is incorrect. Please try again.");
+  } else {
+    console.error("An error occurred:", response.statusText);
+  }
 }
 
 export default AddContactPage;
