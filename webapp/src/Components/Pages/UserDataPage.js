@@ -101,19 +101,67 @@ async function renderPersonnalInfoPage() {
       });
       table.appendChild(tbody);
 
-      const responseStages = await fetch(`http://localhost:3000/contacts/allContactsByUserId`, options);
+      const responseStage = await fetch(`http://localhost:3000/stages/stageByUserId`, options);
 
-      if (!responseStages.ok) {
-          throw new Error(`Failed to fetch stages: ${responseStages.statusText}`);
+      if (!responseStage.ok) {
+          throw new Error(`Failed to fetch stages: ${responseStage.statusText}`);
       }
-      
+
+const stageData = await responseStage.json();
+
+      const stageTable = document.createElement('table');
+      stageTable.className = 'table';
+      const stageThead = document.createElement('thead');
+      const stageTbody = document.createElement('tbody');
+      const stageTrHead = document.createElement('tr');
+
+      ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone', 'Type de rencontre'].forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        stageTrHead.appendChild(th);
+      });
+
+      stageThead.appendChild(stageTrHead);
+      stageTable.appendChild(stageThead);
+
+      const tr = document.createElement('tr');
+
+// Fields from entreprise object
+      ['tradeName', 'designation', 'email', 'phoneNumber'].forEach(key => {
+        const td = document.createElement('td');
+        td.textContent = stageData.contact.entreprise[key] || '-';
+        tr.appendChild(td);
+      });
+
+// Field for meetingType
+      const td = document.createElement('td');
+      td.textContent = stageData.contact.meetingType || '-';
+      tr.appendChild(td);
+
+      stageTbody.appendChild(tr);
+      stageTable.appendChild(stageTbody);
+
+
 
       main.appendChild(ul);
       main.appendChild(submit);
 
+      // Create and append a div to act as a spacer
+      const spacer = document.createElement('div');
+      spacer.style.height = '20px'; // Adjust the height as needed
+      main.appendChild(spacer);
+
+      // Create and append the title for the contacts table
+      const contactsTitle = document.createElement('h2');
+      contactsTitle.textContent = 'Contacts';
+      main.appendChild(contactsTitle);
       main.appendChild(table);
 
-
+      // Create and append the title for the stage table
+      const stageTitle = document.createElement('h2');
+      stageTitle.textContent = 'Stage';
+      main.appendChild(stageTitle);
+      main.appendChild(stageTable);
       
     } catch (error) {
       console.error('An error occurred:', error.message);
