@@ -1,6 +1,7 @@
 package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.EntrepriseDTO;
+import java.util.List;
 
 /**
  * This interface represents a Data Access Object (DAO) for managing entreprise entities.
@@ -12,7 +13,14 @@ public interface EntrepriseDAO {
    *
    * @param id the identifier of the entreprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   * entreprise with the given identifier exists
+   *     entreprise with the given identifier exists
    */
   EntrepriseDTO getOne(int id);
+
+  /**
+   * Retrieves a list of all enterprises.
+   *
+   * @return A list of {@link EntrepriseDTO} representing all enterprises.
+   */
+  List<EntrepriseDTO> getAll();
 }
