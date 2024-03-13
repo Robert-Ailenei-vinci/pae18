@@ -89,7 +89,8 @@ public class UserUCCImpl implements UserUCC {
    * Changes the data of a user.
    *
    * @param email the new email of the user
-   * @param password the new password of the user. If null, the password will be set to an empty string
+   * @param password the new password of the user.
+   * If null, the password will be set to an empty string
    * @param lname the new last name of the user
    * @param fname the new first name of the user
    * @param phoneNum the new phone number of the user
