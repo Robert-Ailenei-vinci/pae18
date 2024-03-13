@@ -20,6 +20,8 @@ public class UserDAOImpl implements UserDAO {
   private DomainFactory myDomainFactory;
   @Inject
   private DALServices dalServices;
+  @Inject
+  private SchoolYearDAO schoolYearDAO;
 
   @Override
   public List<UserDTO> getAll() {
@@ -98,6 +100,7 @@ public class UserDAOImpl implements UserDAO {
       user.setPhoneNum(rs.getString("phone_number"));
       user.setRegistrationDate(rs.getString("registration_date"));
       user.setSchoolYearId(rs.getInt("school_year"));
+      user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }

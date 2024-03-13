@@ -133,4 +133,18 @@ public interface UserDTO {
    */
   void setSchoolYearId(int id);
 
+  /**
+   * get the school year.
+   *
+   * @return the school year.
+   */
+  SchoolYearDTO getSchoolYear();
+
+  /**
+   * set a new school year.
+   *
+   * @param schoolYear the new school year.
+   */
+  void setSchoolYear(SchoolYearDTO schoolYear);
+
 }

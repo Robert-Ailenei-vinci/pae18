@@ -6,7 +6,6 @@ package be.vinci.pae.business.domain;
  */
 public interface User extends UserDTO {
 
-
   /**
    * Checks if the provided password matches the user's password stored in the database.
    *

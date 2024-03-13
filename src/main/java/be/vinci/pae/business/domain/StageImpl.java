@@ -11,7 +11,6 @@ public class StageImpl implements StageDTO {
   private int supervisorId;
   private int userId;
   private int schoolYearId;
-
   private ContactDTO contact;
   private UserDTO user;
   private SchoolYearDTO schoolYear;

@@ -16,6 +16,7 @@ public class UserImpl implements User {
   private String phoneNum;
   private String registrationDate;
   private int schoolYearId;
+  private SchoolYearDTO schoolYear;
 
   public int getSchoolYearId() {
     return schoolYearId;
@@ -91,6 +92,16 @@ public class UserImpl implements User {
   @Override
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  @Override
+  public SchoolYearDTO getSchoolYear() {
+    return schoolYear;
+  }
+
+  @Override
+  public void setSchoolYear(SchoolYearDTO schoolYear) {
+    this.schoolYear = schoolYear;
   }
 
   @Override
