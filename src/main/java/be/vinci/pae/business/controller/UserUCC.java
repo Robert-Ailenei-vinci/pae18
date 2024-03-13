@@ -13,8 +13,7 @@ public interface UserUCC {
    *
    * @param login    the users' login.
    * @param password the user password.
-   * @return the UserDTO object corresponding to the provided identifier, or null if no user with
-   * the given identifier exists
+   * @return the user
    */
   UserDTO login(String login, String password);
 
