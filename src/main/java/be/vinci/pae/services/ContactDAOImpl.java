@@ -26,7 +26,8 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "INSERT INTO pae.contacts " +
+        "INSERT INTO pae.contacts "
+            +
             "(state, id_contact, user, entreprise, school_year, reason_for_refusal, meeting_type)"
             +
             "VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -84,7 +85,7 @@ public class ContactDAOImpl implements ContactDAO {
       System.out.println(e.getMessage());
     }
     return null;
-}
+  }
 
   private ContactDTO getContactMethodFromDB(ResultSet rs) {
     ContactDTO contact = myDomainFactory.getContact();

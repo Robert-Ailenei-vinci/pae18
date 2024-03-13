@@ -12,7 +12,6 @@ import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.controller.UserUCCImpl;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.DomainFactoryImpl;
-import be.vinci.pae.business.domain.SupervisorImpl;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.ContactDAOImpl;
 import be.vinci.pae.services.DALServices;

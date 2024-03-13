@@ -123,6 +123,7 @@ public interface StageDTO {
    *
    * @return the school year associated with the stage
    */
+
   SchoolYearDTO getSchoolYear();
 
   /**

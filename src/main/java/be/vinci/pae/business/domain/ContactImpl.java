@@ -13,6 +13,7 @@ public class ContactImpl implements Contact {
   private String reasonForRefusal;
   private String meetingType;
   private EntrepriseDTO entreprise;
+
   @Override
   public int getId() {
     return id;

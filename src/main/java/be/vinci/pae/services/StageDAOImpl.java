@@ -2,12 +2,11 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.StageDTO;
-import be.vinci.pae.business.domain.SupervisorImpl;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class StageDAOImpl implements StageDAO{
+public class StageDAOImpl implements StageDAO {
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
