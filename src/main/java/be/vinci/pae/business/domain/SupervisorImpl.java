@@ -1,6 +1,6 @@
 package be.vinci.pae.business.domain;
 
-public class SupervisorImpl implements SupervisorDTO{
+public class SupervisorImpl implements SupervisorDTO {
   private int supervisorId;
   private String lastName;
   private String firstName;

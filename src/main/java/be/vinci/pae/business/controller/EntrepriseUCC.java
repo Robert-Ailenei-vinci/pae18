@@ -9,11 +9,10 @@ import be.vinci.pae.business.domain.EntrepriseDTO;
 public interface EntrepriseUCC {
 
   /**
-   * Retrieves an EntrepriseDTO object by its identifier.
+   * Retrieves the enterprise associated with the specified identifier.
    *
-   * @param entrepriseId the identifier of the entreprise to retrieve
-   * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   * entreprise with the given identifier exists
+   * @param entrepriseId the identifier of the enterprise to retrieve
+   * @return the enterprise associated with the specified identifier
    */
   EntrepriseDTO getOne(int entrepriseId);
 }

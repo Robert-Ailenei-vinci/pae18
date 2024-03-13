@@ -21,7 +21,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "SELECT * FROM pae.entreprises WHERE id_entreprise = ?")) {
       preparedStatement.setInt(1, id);
-      System.out.println("id of entreprise :"+ id);
+      System.out.println("id of entreprise :" + id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
         if (rs.next()) {
@@ -37,7 +37,8 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public EntrepriseDTO getOneByContactId(int id) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.entreprises WHERE id_entreprise = (SELECT entreprise FROM pae.contacts WHERE id_contact = ?)")) {
+        "SELECT * FROM pae.entreprises WHERE id_entreprise = "
+            + "(SELECT entreprise FROM pae.contacts WHERE id_contact = ?)")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 

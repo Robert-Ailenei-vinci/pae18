@@ -13,12 +13,21 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 
+/**
+ * Represents a RESTful API resource for managing stages.
+ */
 @Singleton
 @Path("/stages")
 public class StageRessource {
   @Inject
   private StageUCC stageUCC;
 
+  /**
+   * Get one stage by user id.
+   *
+   * @param requestContext the request context
+   * @return the stage DTO
+   */
   @GET
   @Path("stageByUserId")
   @Produces(MediaType.APPLICATION_JSON)

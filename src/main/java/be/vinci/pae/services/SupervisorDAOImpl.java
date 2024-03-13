@@ -6,7 +6,7 @@ import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class SupervisorDAOImpl implements SupervisorDAO{
+public class SupervisorDAOImpl implements SupervisorDAO {
   @Inject
   private DomainFactory myDomainFactory;
   @Inject

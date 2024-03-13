@@ -9,11 +9,10 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 public interface SchoolYearUCC {
 
   /**
-   * Retrieves a {@link SchoolYearDTO} object by its identifier.
+   * Retrieves the school year associated with the specified identifier.
    *
    * @param schoolYearId the identifier of the school year to retrieve
-   * @return the {@link SchoolYearDTO} object corresponding to the provided identifier, or null if
-   * no school year with the given identifier exists
+   * @return the school year associated with the specified identifier
    */
   SchoolYearDTO getOne(int schoolYearId);
 }

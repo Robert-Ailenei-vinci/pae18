@@ -53,6 +53,15 @@ public class UserResource {
     return myUser.getAll();
   }
 
+  /**
+   * Adds a user. This method is annotated with {@link jakarta.ws.rs.POST} and
+   * {@link jakarta.ws.rs.Consumes}, indicating that it handles HTTP POST requests and consumes JSON
+   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize},
+   * indicating that authorization is required to access this endpoint.
+   *
+   * @param json The JSON representation of the user to be added.
+   * @return The added user.
+   */
   @POST
   @Path("changeData")
   @Consumes(MediaType.APPLICATION_JSON)
