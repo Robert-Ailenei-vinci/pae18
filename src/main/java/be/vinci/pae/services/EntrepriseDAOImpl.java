@@ -34,24 +34,6 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     return null;
   }
 
-  @Override
-  public EntrepriseDTO getOneByContactId(int id) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.entreprises WHERE id_entreprise = "
-            + "(SELECT entreprise FROM pae.contacts WHERE id_contact = ?)")) {
-      preparedStatement.setInt(1, id);
-      try (ResultSet rs = preparedStatement.executeQuery()) {
-
-        if (rs.next()) {
-          return getEntrepriseMethodFromDB(rs);
-        }
-      }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
-    return null;
-  }
-
   private EntrepriseDTO getEntrepriseMethodFromDB(ResultSet rs) {
     EntrepriseDTO entreprise = myDomainFactory.getEntreprise();
     try {
