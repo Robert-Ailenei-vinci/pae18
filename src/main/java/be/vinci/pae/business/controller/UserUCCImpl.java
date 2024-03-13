@@ -86,15 +86,14 @@ public class UserUCCImpl implements UserUCC {
   }
 
   /**
-   * Change user data.
+   * Changes the data of a user.
    *
-   * @param email    the users' login.
-   * @param password the user password.
-   * @param lname    the user last name.
-   * @param fname    the user first name.
-   * @param phoneNum the user phone number.
-   * @return the UserDTO object corresponding to the provided identifier, or null if no user with
-   * the given identifier exists
+   * @param email the new email of the user
+   * @param password the new password of the user. If null, the password will be set to an empty string
+   * @param lname the new last name of the user
+   * @param fname the new first name of the user
+   * @param phoneNum the new phone number of the user
+   * @return the updated UserDTO object
    */
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
