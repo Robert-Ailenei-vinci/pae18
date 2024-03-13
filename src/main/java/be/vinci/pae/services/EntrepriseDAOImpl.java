@@ -5,6 +5,8 @@ import be.vinci.pae.business.domain.EntrepriseDTO;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents an implementation of the {@link EntrepriseDAO} interface.
@@ -16,6 +18,13 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Inject
   private DALServices dalServices;
 
+  /**
+   * Retrieves an enterprise by its identifier from the database.
+   *
+   * @param id the identifier of the enterprise to retrieve
+   * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
+   *     enterprise with the given identifier exists
+   */
   @Override
   public EntrepriseDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
@@ -32,6 +41,28 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       System.out.println(e.getMessage());
     }
     return null;
+  }
+
+  /**
+   * Retrieves a list of all enterprises from the database.
+   *
+   * @return A list of {@link EntrepriseDTO} representing all enterprises.
+   */
+  @Override
+  public List<EntrepriseDTO> getAll() {
+    PreparedStatement getAllUsers = dalServices.getPreparedStatement(
+        "SELECT * FROM pae.entreprises");
+    List<EntrepriseDTO> entreprises = new ArrayList<>();
+    try (ResultSet rs = getAllUsers.executeQuery()) {
+      while (rs.next()) {
+        EntrepriseDTO entreprise;
+        entreprise = getEntrepriseMethodFromDB(rs);
+        entreprises.add(entreprise);
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return entreprises;
   }
 
   private EntrepriseDTO getEntrepriseMethodFromDB(ResultSet rs) {

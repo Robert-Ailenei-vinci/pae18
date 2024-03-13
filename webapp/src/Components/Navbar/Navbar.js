@@ -71,7 +71,10 @@ function renderNavbar() {
           </li>   
             <li class="nav-item">
               <a class="nav-link disabled" href="#">${authenticatedUser?.email}</a>
-            </li>           
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-uri="/addcontact">Ajouter un contact</a>
+            </li>  
           </ul>
         </div>
       </div>
