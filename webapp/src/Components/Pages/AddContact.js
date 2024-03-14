@@ -6,14 +6,10 @@ import Navigate from '../Router/Navigate';
 const AddContactPage = async () => {
   clearPage();
   renderPageTitle('Créer un contact');
-  renderAddContactForm();
+  await renderNewContactForm();
 };
 
-function renderAddContactForm() {
-  const main = document.querySelector('main');
-
-  const entreprises = ["Entreprise 1", "Entreprise 2", "Entreprise 3"];
-
+async function renderNewContactForm() {
   const form = createFormElement();
 
   const row = document.createElement('div');
@@ -21,7 +17,7 @@ function renderAddContactForm() {
 
   const dropdownContainer = createDropdownContainer();
   dropdownContainer.appendChild(createDropdownButton());
-  const dropdownContent = createDropdownContent(entreprises);
+  const dropdownContent = createDropdownContent(await fetchEntreprises());
   dropdownContainer.appendChild(dropdownContent);
   row.appendChild(dropdownContainer);
 
@@ -40,20 +36,19 @@ function renderAddContactForm() {
   const container = document.createElement('div');
   container.className = 'container';
   container.appendChild(form);
+  const main = document.querySelector('main');
+  main.appendChild(container);
 
-  document.body.appendChild(container);
-
-  document.getElementById('dropbtn').addEventListener('click', toggleDropdown);
-  document.getElementById('myForm').addEventListener('submit', handleSubmit);
+  let selectedEntrepriseId = -1;
 
   dropdownContent.querySelectorAll('.dropdown-item').forEach(item => {
     item.addEventListener('click', () => {
+      selectedEntrepriseId = item.id;
       document.getElementById('dropbtn').textContent = item.textContent;
-      // TODO: Add logic for retrieving entreprise name
     });
   });
-
-  main.appendChild(form)
+  document.getElementById('dropbtn').addEventListener('click', toggleDropdown);
+  document.getElementById('myForm').addEventListener('submit', () => handleSubmit(selectedEntrepriseId));
 }
 
 function createFormElement() {
@@ -86,11 +81,13 @@ function createDropdownContent(entreprises) {
     const option = document.createElement('button');
     option.className = 'dropdown-item';
     option.type = 'button';
-    option.textContent = entreprise;
+    option.textContent = entreprise.tradeName;
+    option.id = entreprise.id;
     dropdownContent.appendChild(option);
   });
   return dropdownContent;
 }
+
 
 function createAddEntrepriseButtonContainer() {
   const container = document.createElement('div');
@@ -124,7 +121,8 @@ function createCancelButton() {
   cancelButton.textContent = 'Cancel';
   cancelButton.addEventListener('click', () => {
     alert('Form cancelled');
-    // TODO: Add cancellation logic here
+    Navbar();
+    Navigate('/users/userData');
   });
   return cancelButton;
 }
@@ -135,20 +133,27 @@ function toggleDropdown() {
   dropdownContent.style.display === 'block' ? dropdownContent.style.display = 'none' : dropdownContent.style.display = 'block';
 }
 
-async function handleSubmit() {
-  const entreprise = document.querySelector('#entreprise').value;
+async function handleSubmit(selectedEntrepriseId) {
+  if (selectedEntrepriseId === -1) {
+    alert('Veuillez choisir une entreprise.')
+  } else {
+  const entreprise = selectedEntrepriseId;
+  console.log(entreprise);
+  const currentYearId = "1";
   const options = {
     method: 'POST',
     body: JSON.stringify({
-      login: entreprise,
-      user: getAuthenticatedUser(),
+      entreprise,
+      user: getAuthenticatedUser().id,
+      schoolYear: currentYearId,
     }),
     headers: {
       'Content-Type': 'application/json',
+      'authorization': getAuthenticatedUser().token,
     },
   };
 
-  const response = await fetch(`http://localhost:3000/contact/add`, options);
+  const response = await fetch(`http://localhost:3000/contacts/add`, options);
 
   if (!response.ok) {
     handleError(response);
@@ -156,17 +161,40 @@ async function handleSubmit() {
   }
 
   const newContact = await response.json();
-  console.log('Added contact : ', newContact);
+  alert(`Added contact : ${JSON.stringify(newContact)}`);
   Navbar();
   Navigate('/');
+  }
+
 }
 
 function handleError(response) {
   if (response.status === 401) {
-    alert("Username or password is incorrect. Please try again.");
+    alert("An error occured while fetching with the server.");
   } else {
     console.error("An error occurred:", response.statusText);
   }
+}
+
+async function fetchEntreprises() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': getAuthenticatedUser().token,
+    },
+  };
+
+  const response = await fetch(`http://localhost:3000/entreprise/getAll`, options);
+
+  if (!response.ok) {
+    handleError(response);
+    return null;
+  }
+
+  const entreprises = await response.json();
+  console.log('All entreprises : ', entreprises);
+  return entreprises;
 }
 
 export default AddContactPage;
