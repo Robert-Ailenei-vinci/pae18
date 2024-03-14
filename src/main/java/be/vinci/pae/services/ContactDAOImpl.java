@@ -23,10 +23,8 @@ public class ContactDAOImpl implements ContactDAO {
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "INSERT INTO pae.contacts "
-            +
-            "(state, id_contact, user, entreprise, school_year, reason_for_refusal, meeting_type)"
-            +
-            "VALUES (?, ?, ?, ?, ?, ?, ?)"
+            + "(state, id_contact, user, entreprise, school_year, reason_for_refusal, meeting_type)"
+            + "VALUES (?, ?, ?, ?, ?, ?, ?)"
     )) {
       preparedStatement.setString(1, "initié");
       preparedStatement.setInt(2, nextItemId());

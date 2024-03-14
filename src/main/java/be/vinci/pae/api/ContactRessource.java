@@ -2,7 +2,13 @@ package be.vinci.pae.api;
 
 import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.ContactUCC;
+import be.vinci.pae.business.controller.EntrepriseUCC;
+import be.vinci.pae.business.controller.SchoolYearUCC;
+import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.ContactDTO;
+import be.vinci.pae.business.domain.EntrepriseDTO;
+import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -22,7 +28,13 @@ import jakarta.ws.rs.core.Response;
 public class ContactRessource {
 
   @Inject
+  private EntrepriseUCC myEntrepriseUCC;
+  @Inject
   private ContactUCC myContactUCC;
+  @Inject
+  private UserUCC myUserUCC;
+  @Inject
+  private SchoolYearUCC mySchoolYearUCC;
 
   /**
    * Adds a contact.
@@ -37,20 +49,20 @@ public class ContactRessource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
   public ContactDTO addContact(JsonNode json) {
-    /*    if (!json.hasNonNull("user")
-                || !json.hasNonNull("entreprise")
-                || !json.hasNonNull("schoolYear")) {
-            throw new WebApplicationException("user, entreprise or schoolYear required",
-                    Response.Status.BAD_REQUEST);
-        }
-        int userId = json.get("user").asInt();
-        int entrepriseId = json.get("entreprise").asInt();
-        int schoolYearId = json.get("schooYear").asInt();
+    if (!json.hasNonNull("user")
+        || !json.hasNonNull("entreprise")
+        || !json.hasNonNull("schoolYear")) {
+      throw new WebApplicationException("user, entreprise or schoolYear required",
+          Response.Status.BAD_REQUEST);
+    }
+    int userId = json.get("user").asInt();
+    int entrepriseId = json.get("entreprise").asInt();
+    int schoolYearId = json.get("schooYear").asInt();
 
-        // Try to get user, entreprise, and school year
-    UserDTO userDTO = UserUCC.getOne(userId);
-    EntrepriseDTO entrepriseDTO = EntrepriseUCC.getOne(entrepriseId);
-    SchoolYearDTO schoolYearDTO = SchoolYearUCC.getOne(schoolYearId);
+    // Try to get user, entreprise, and school year
+    UserDTO userDTO = myUserUCC.getOne(userId);
+    EntrepriseDTO entrepriseDTO = myEntrepriseUCC.getOne(entrepriseId);
+    SchoolYearDTO schoolYearDTO = mySchoolYearUCC.getOne(schoolYearId);
     if (userDTO == null) {
       throw new WebApplicationException("User not recognised",
           Response.Status.UNAUTHORIZED);
@@ -64,13 +76,12 @@ public class ContactRessource {
           Response.Status.UNAUTHORIZED);
     }
 
-    ContactDTO contactDTO = ContactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO);
+    ContactDTO contactDTO = myContactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO);
     if (contactDTO == null) {
       throw new WebApplicationException("Error creating a new contact",
-          Status.BAD_REQUEST);
+          Response.Status.BAD_REQUEST);
     }
-    return contactDTO;*/
-    return null;
+    return contactDTO;
   }
 
   /**
