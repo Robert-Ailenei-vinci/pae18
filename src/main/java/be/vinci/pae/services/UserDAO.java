@@ -40,4 +40,13 @@ public interface UserDAO {
   boolean addUser(UserDTO user);
 
 
+  /**
+   * Change user data.
+   *
+   * @param user The user to change.
+   * @return The user with the changed data
+   */
+  UserDTO changeUser(UserDTO user);
+
+
 }

@@ -6,10 +6,12 @@ import Navigate from '../Router/Navigate';
 const AddContactPage = async () => {
   clearPage();
   renderPageTitle('Créer un contact');
-  renderRegisterForm();
+  renderAddContactForm();
 };
 
-function renderRegisterForm() {
+function renderAddContactForm() {
+  const main = document.querySelector('main');
+
   const entreprises = ["Entreprise 1", "Entreprise 2", "Entreprise 3"];
 
   const form = createFormElement();
@@ -50,6 +52,8 @@ function renderRegisterForm() {
       // TODO: Add logic for retrieving entreprise name
     });
   });
+
+  main.appendChild(form)
 }
 
 function createFormElement() {

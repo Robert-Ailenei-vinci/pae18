@@ -32,4 +32,18 @@ public interface DomainFactory {
    * @return A new instance of the SchoolYearDTO object.
    */
   SchoolYearDTO getSchoolYear();
+
+  /**
+   * Returns a new instance of the {@link StageDTO} object.
+   *
+   * @return A new instance of the StageDTO object.
+   */
+  StageDTO getStage();
+
+  /**
+   * Returns a new instance of the {@link UserDTO} object.
+   *
+   * @return A new instance of the UserDTO object.
+   */
+  SupervisorDTO getSupervisor();
 }

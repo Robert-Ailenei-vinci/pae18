@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class represents an implementation of the {@link UserDAO} interface.
@@ -19,6 +20,8 @@ public class UserDAOImpl implements UserDAO {
   private DomainFactory myDomainFactory;
   @Inject
   private DALServices dalServices;
+  @Inject
+  private SchoolYearDAO schoolYearDAO;
 
   /**
    * Retrieves all users from the database.
@@ -28,7 +31,10 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public List<UserDTO> getAll() {
     PreparedStatement getAllUsers = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.users");
+        "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
+            + " u.phone_number, u.psw, u.registration_date,"
+            + " u.school_year, s.years_format AS academic_year "
+            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year");
     List<UserDTO> users = new ArrayList<>();
     try (ResultSet rs = getAllUsers.executeQuery()) {
       while (rs.next()) {
@@ -51,7 +57,12 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO getOne(String email) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.users WHERE email = ?")) {
+        "SELECT u.id_user, u.email, u.role_u, u.last_name,"
+            + " u.first_name, u.phone_number, u.psw,"
+            + " u.registration_date, u.school_year,"
+            + " s.years_format AS academic_year "
+            + "FROM pae.users u, pae.school_years s WHERE"
+            + " u.school_year=s.id_year AND u.email=?")) {
       preparedStatement.setString(1, email);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -74,7 +85,12 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.users WHERE id_user = ?")) {
+        "SELECT u.id_user, u.email, u.role_u, u.last_name, "
+            + "u.first_name, u.phone_number, u.psw,"
+            + " u.registration_date, u.school_year,"
+            + " s.years_format AS academic_year"
+            + " FROM pae.users u, pae.school_years s WHERE"
+            + " u.school_year=s.id_year AND u.id_user=?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -88,26 +104,8 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
-  /**
-   * Retrieves the next available user ID from the database.
-   *
-   * @return The next available user ID.
-   */
-  public int nextItemId() {
-    try (PreparedStatement stmt = dalServices.getPreparedStatement("SELECT MAX(id) FROM users");
-        ResultSet rs = stmt.executeQuery()) {
-      if (rs.next()) {
-        return rs.getInt(1) + 1;
-      }
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
-    return -1;
-  }
-
   private UserDTO getUserMethodFromDB(ResultSet rs) {
     UserDTO user = myDomainFactory.getUser();
-
     try {
       user.setId(rs.getInt("id_user"));
       user.setEmail(rs.getString("email"));
@@ -118,6 +116,7 @@ public class UserDAOImpl implements UserDAO {
       user.setPhoneNum(rs.getString("phone_number"));
       user.setRegistrationDate(rs.getString("registration_date"));
       user.setSchoolYearId(rs.getInt("school_year"));
+      user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -174,6 +173,63 @@ public class UserDAOImpl implements UserDAO {
   }
 
   /**
+   * Change user data.
+   *
+   * @param user The user to change.
+   * @return The user with the changed data
+   */
+  @Override
+  public UserDTO changeUser(UserDTO user) {
+    StringBuilder sql = new StringBuilder("UPDATE pae.users SET ");
+    List<Object> parameters = new ArrayList<>();
+
+    if (!Objects.equals(user.getEmail(), "")) {
+      sql.append("email = ?, ");
+      parameters.add(user.getEmail());
+    }
+
+    if (!Objects.equals(user.getLastName(), "")) {
+      sql.append("last_name = ?, ");
+      parameters.add(user.getLastName());
+    }
+
+    if (!Objects.equals(user.getFirstName(), "")) {
+      sql.append("first_name = ?, ");
+      parameters.add(user.getFirstName());
+    }
+
+    if (!Objects.equals(user.getPhoneNum(), "")) {
+      sql.append("phone_number = ?, ");
+      parameters.add(user.getPhoneNum());
+    }
+
+    if (!Objects.equals(user.getPassword(), "")) {
+      sql.append("psw = ?, ");
+      parameters.add(user.getPassword());
+    }
+
+    // Remove the last comma and space
+    sql.delete(sql.length() - 2, sql.length());
+
+    sql.append(" WHERE email = ?");
+    parameters.add(user.getEmail());
+
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
+      for (int i = 0; i < parameters.size(); i++) {
+        if (parameters.get(i) instanceof String) {
+          stmt.setString(i + 1, (String) parameters.get(i));
+        } else if (parameters.get(i) instanceof Integer) {
+          stmt.setInt(i + 1, (Integer) parameters.get(i));
+        }
+      }
+      stmt.executeUpdate();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return user;
+  }
+
+  /**
    * Builds the year format.
    *
    * @return The year format.
@@ -199,6 +255,6 @@ public class UserDAOImpl implements UserDAO {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-    return 0; // return 0 or throw an exception if no id was found
+    return 0; // return 0 if no id was found
   }
 }

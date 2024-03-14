@@ -13,12 +13,12 @@ function renderRegisterForm() {
   const main = document.querySelector('main');
   const form = document.createElement('form');
   form.className = 'p-5';
-  const username = document.createElement('input');
-  username.type = 'text';
-  username.id = 'username';
-  username.placeholder = 'username';
-  username.required = true;
-  username.className = 'form-control mb-3';
+  const mail = document.createElement('input');
+  mail.type = 'text';
+  mail.id = 'mail';
+  mail.placeholder = 'Adresse mail';
+  mail.required = true;
+  mail.className = 'form-control mb-3';
   const password = document.createElement('input');
   password.type = 'password';
   password.id = 'password';
@@ -49,7 +49,7 @@ function renderRegisterForm() {
   formCheckWrapper.appendChild(rememberme);
   formCheckWrapper.appendChild(checkLabel);
 
-  form.appendChild(username);
+  form.appendChild(mail);
   form.appendChild(password);
   form.appendChild(formCheckWrapper);
   form.appendChild(submit);
@@ -64,7 +64,7 @@ function onCheckboxClicked(e) {
 async function onLogin(e) {
   e.preventDefault();
 
-  const login = document.querySelector('#username').value;
+  const login = document.querySelector('#mail').value;
   const password = document.querySelector('#password').value;
 
   const options = {

@@ -16,8 +16,22 @@ public class UserImpl implements User {
   private String phoneNum;
   private String registrationDate;
   private int schoolYearId;
+  private SchoolYearDTO schoolYear;
 
+  /**
+   * Retrieves the school year ID of the user.
+   *
+   * @return the school year ID of the user
+   */
+  public int getSchoolYearId() {
+    return schoolYearId;
+  }
 
+  @Override
+  public void setSchoolYearId(int id) {
+    this.schoolYearId = id;
+  }
+  
   public String getLastName() {
     return lastName;
   }
@@ -66,11 +80,6 @@ public class UserImpl implements User {
   }
 
   @Override
-  public void setSchoolYearId(int id) {
-    this.schoolYearId = id;
-  }
-
-  @Override
   public int getId() {
     return id;
   }
@@ -88,6 +97,16 @@ public class UserImpl implements User {
   @Override
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  @Override
+  public SchoolYearDTO getSchoolYear() {
+    return schoolYear;
+  }
+
+  @Override
+  public void setSchoolYear(SchoolYearDTO schoolYear) {
+    this.schoolYear = schoolYear;
   }
 
   @Override

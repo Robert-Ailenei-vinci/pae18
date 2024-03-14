@@ -86,10 +86,11 @@ public class AuthsResource {
           .put("id", publicUser.getId())
           .put("email", publicUser.getEmail())
           .put("role", publicUser.getRole())
-          .put("firstname", publicUser.getFirstName())
-          .put("lastname", publicUser.getLastName())
-          .put("phone", publicUser.getPhoneNum())
-          .put("registrationDate", publicUser.getRegistrationDate());
+          .put("firstName", publicUser.getFirstName())
+          .put("lastName", publicUser.getLastName())
+          .put("phoneNum", publicUser.getPhoneNum())
+          .put("registrationDate", publicUser.getRegistrationDate())
+          .put("schoolYearFormat", publicUser.getSchoolYear().getYearFormat());
       return toReturn;
 
     } catch (Exception e) {
@@ -131,7 +132,6 @@ public class AuthsResource {
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
   public boolean register(JsonNode json) {
-
     String email = json.get("login").asText();
     String password = json.get("password").asText();
     String lname = json.get("l_name").asText();

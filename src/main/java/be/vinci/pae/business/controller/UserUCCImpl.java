@@ -75,7 +75,7 @@ public class UserUCCImpl implements UserUCC {
     return myUserDAO.addUser(user);
   }
 
-
+  @Override
   public List<UserDTO> getAll() {
     return myUserDAO.getAll();
   }
@@ -83,6 +83,37 @@ public class UserUCCImpl implements UserUCC {
   @Override
   public UserDTO getOne(int userId) {
     return myUserDAO.getOne(userId);
+  }
+
+  /**
+   * Changes user data based on the provided parameters.
+   *
+   * @param email     The new email for the user.
+   * @param password  The new password for the user.
+   * @param lname     The new last name for the user.
+   * @param fname     The new first name for the user.
+   * @param phoneNum  The new phone number for the user.
+   * @return          The updated UserDTO object.
+   */
+  @Override
+  public UserDTO changeData(String email, String password, String lname, String fname,
+      String phoneNum) {
+    User user = (User) myDomainFactory.getUser();
+    user.setEmail(email);
+
+    if (password == null) {
+      user.setPassword("");
+    } else {
+      String hashedPassword = user.hashPassword(password);
+      user.setPassword(hashedPassword);
+    }
+
+    user.setLastName(lname);
+    user.setFirstName(fname);
+    user.setPhoneNum(phoneNum);
+    user.setRegistrationDate(LocalDate.now().toString());
+    myUserDAO.changeUser(user);
+    return myUserDAO.getOne(email);
   }
 
 }

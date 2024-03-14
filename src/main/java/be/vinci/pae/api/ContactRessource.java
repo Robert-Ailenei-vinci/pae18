@@ -13,12 +13,17 @@ import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Represents a RESTful API resource for managing contacts.
@@ -82,6 +87,23 @@ public class ContactRessource {
           Response.Status.BAD_REQUEST);
     }
     return contactDTO;
+  }
+
+  /**
+   * Retrieves all contacts associated with one user.
+   *
+   * @param requestContext the request context
+   * @return the list of contacts associated with the user
+   */
+  @GET
+  @Path("allContactsByUserId")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
+    System.out.println("getAllContactsByUserId called");
+    UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
+    int userId = authentifiedUser.getId();
+    return myContactUCC.getAllContactsByUserId(userId);
   }
 
   /**
