@@ -13,7 +13,7 @@ public interface SchoolYearUCC {
    *
    * @param schoolYearId the identifier of the school year to retrieve
    * @return the {@link SchoolYearDTO} object corresponding to the provided identifier, or null if
-   * no school year with the given identifier exists
+   *     no school year with the given identifier exists
    */
   SchoolYearDTO getOne(int schoolYearId);
 }
