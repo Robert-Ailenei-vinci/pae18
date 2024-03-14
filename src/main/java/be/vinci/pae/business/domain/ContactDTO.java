@@ -102,4 +102,18 @@ public interface ContactDTO {
    * @param meetingType the meeting type to set for the contact
    */
   void setMeetingType(String meetingType);
+
+  /**
+   * Retrieves the user associated with the contact.
+   *
+   * @return the user associated with the contact
+   */
+  EntrepriseDTO getEntreprise();
+
+  /**
+   * Sets the user associated with the contact.
+   *
+   * @param entreprise the user to set for the contact
+   */
+  void setEntreprise(EntrepriseDTO entreprise);
 }

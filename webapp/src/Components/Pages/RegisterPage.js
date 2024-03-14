@@ -53,6 +53,15 @@ function renderRegisterForm() {
   phone_num.placeholder = 'Numéro de téléphone';
   phone_num.className = 'form-control mb-3';
 
+  // eslint-disable-next-line no-unused-vars
+  phone_num.addEventListener('input', function (event) {
+    const phoneNumberPattern = /^04\d{8}$/;
+    if (!phoneNumberPattern.test(this.value)) {
+      this.setCustomValidity('Invalid phone number. It should start with 04 and followed by 8 digits.');
+    } else {
+      this.setCustomValidity('');
+    }
+  });
 
   const roleAdmin = document.createElement('input');
   roleAdmin.type = 'checkbox'; 
@@ -154,6 +163,8 @@ function onEmailInput(e) {
     roleProfLabel.style.display = 'none'; // Hide label
     return;
   }
+
+  
 
   // Add event listeners to checkboxes
   roleAdmin.addEventListener('change', function() {

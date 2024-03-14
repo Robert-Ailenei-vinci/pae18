@@ -12,7 +12,7 @@ public interface SchoolYearDAO {
    *
    * @param id the identifier of the school year to retrieve
    * @return the SchoolYearDTO object corresponding to the provided identifier, or null if no school
-   *     year with the given identifier exists
+   *         year with the given identifier exists
    */
   SchoolYearDTO getOne(int id);
 }

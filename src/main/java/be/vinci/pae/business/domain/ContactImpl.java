@@ -12,6 +12,7 @@ public class ContactImpl implements Contact {
   private int schoolYearId;
   private String reasonForRefusal;
   private String meetingType;
+  private EntrepriseDTO entreprise;
 
   @Override
   public int getId() {
@@ -80,5 +81,13 @@ public class ContactImpl implements Contact {
 
   public void setUserId(int userId) {
     this.userId = userId;
+  }
+
+  public EntrepriseDTO getEntreprise() {
+    return entreprise;
+  }
+
+  public void setEntreprise(EntrepriseDTO entreprise) {
+    this.entreprise = entreprise;
   }
 }

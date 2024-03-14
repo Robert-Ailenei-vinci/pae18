@@ -41,11 +41,13 @@ public class EntrepriseResource {
   }
 
   /**
-   * Retrieves an entreprise given it's id. This method is accessed via HTTP GET request to the path
-   * "/entreprise/getAll". It returns the list of all enterprises in JSON format. Requires
-   * authorization.
+   * Retrieves an enterprise by its id.
+   * This method is accessed via HTTP GET request to the path "/entreprise/getOne".
+   * It returns the enterprise with the provided id in JSON format.
+   * Requires authorization.
    *
-   * @return A list of {@link EntrepriseDTO} representing all enterprises.
+   * @param entrepriseId The id of the enterprise to retrieve.
+   * @return The {@link EntrepriseDTO} representing the enterprise.
    */
   @GET
   @Path("getOne")
