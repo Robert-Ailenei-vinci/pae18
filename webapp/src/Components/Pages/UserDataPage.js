@@ -166,13 +166,7 @@ const stageData = await responseStage.json();
     } catch (error) {
       console.error('An error occurred:', error.message);
     }
-
-
 }
-
-  Navbar();
-
-  Navigate('/');
 
 
 export default UserDataPage;

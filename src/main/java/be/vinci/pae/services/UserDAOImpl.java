@@ -23,6 +23,11 @@ public class UserDAOImpl implements UserDAO {
   @Inject
   private SchoolYearDAO schoolYearDAO;
 
+  /**
+   * Retrieves all users from the database.
+   *
+   * @return A list of UserDTO objects representing all users in the database.
+   */
   @Override
   public List<UserDTO> getAll() {
     PreparedStatement getAllUsers = dalServices.getPreparedStatement(
@@ -43,7 +48,12 @@ public class UserDAOImpl implements UserDAO {
     return users;
   }
 
-
+  /**
+   * Retrieves a user from the database based on the provided email.
+   *
+   * @param email The email of the user to retrieve.
+   * @return A UserDTO object representing the user with the provided email, or null if not found.
+   */
   @Override
   public UserDTO getOne(String email) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
@@ -66,6 +76,12 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
+  /**
+   * Retrieves a user from the database based on the provided user ID.
+   *
+   * @param id The ID of the user to retrieve.
+   * @return A UserDTO object representing the user with the provided ID, or null if not found.
+   */
   @Override
   public UserDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
@@ -111,7 +127,7 @@ public class UserDAOImpl implements UserDAO {
    * Adds a user to the database.
    *
    * @param user The user to add.
-   * @return True if the user was added, false if not.
+   * @return True if the user was added successfully, false otherwise.
    */
   @Override
   public boolean addUser(UserDTO user) {

@@ -34,7 +34,10 @@ Authorization: {{user}}
 ### Create a new contact
 POST {{baseUrl}}/contacts/add
 Content-Type: application/json
+Authorization: {{user}}
 
 {
-  "salut" : "salut"
+  "user" : "1",
+  "entreprise" : "2",
+  "schoolYear" : "1"
 }
