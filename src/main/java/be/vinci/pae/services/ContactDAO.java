@@ -21,6 +21,11 @@ public interface ContactDAO {
    */
   ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear);
 
+  /**
+   * Retrieves all contacts.
+   *
+   * @return the list of all contacts
+   */
   ContactDTO getOneContactByStageId(int stageId);
 
   /**

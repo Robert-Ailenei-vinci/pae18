@@ -60,6 +60,7 @@ public class UserResource {
    * indicating that authorization is required to access this endpoint.
    *
    * @param json The JSON representation of the user to be added.
+   * @param requestContext The context of the HTTP request.
    * @return The added user.
    */
   @POST

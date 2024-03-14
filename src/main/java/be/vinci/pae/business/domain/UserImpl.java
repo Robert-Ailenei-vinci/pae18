@@ -18,6 +18,11 @@ public class UserImpl implements User {
   private int schoolYearId;
   private SchoolYearDTO schoolYear;
 
+  /**
+   * Retrieves the school year ID of the user.
+   *
+   * @return the school year ID of the user
+   */
   public int getSchoolYearId() {
     return schoolYearId;
   }
