@@ -48,4 +48,13 @@ public class ContactUCCImpl implements ContactUCC {
     }
     return contactToReturn;
   }
+
+  @Override
+  public ContactDTO refusedContact(int contactId, String refusalReason) {
+    ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);
+    if (contactToReturn == null) {
+      return null;
+    }
+    return contactToReturn;
+  }
 }
