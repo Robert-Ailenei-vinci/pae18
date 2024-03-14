@@ -24,7 +24,8 @@ public interface ContactDAO {
   /**
    * Retrieves all contacts.
    *
-   * @return the list of all contacts
+   * @param stageId the id of the stage associated with the contact
+   * @return the contact associated with the stage
    */
   ContactDTO getOneContactByStageId(int stageId);
 
