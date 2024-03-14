@@ -39,4 +39,13 @@ public class ContactUCCImpl implements ContactUCC {
     }
     return contactToReturn;
   }
+
+  @Override
+  public ContactDTO stopFollowContact(int contactId) {
+    ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
+    if (contactToReturn == null) {
+      return null;
+    }
+    return contactToReturn;
+  }
 }

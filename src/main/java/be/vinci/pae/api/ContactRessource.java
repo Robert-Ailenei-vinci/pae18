@@ -125,4 +125,17 @@ public class ContactRessource {
 
     return myContactUCC.meetContact(contactId, meetingType);
   }
+
+  @PUT
+  @Path("stopFollow")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Authorize
+  public ContactDTO stopFollowContact(JsonNode json) {
+    if (!json.hasNonNull("id_contact")) {
+      throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
+    }
+    int contactId = json.get("id_contact").asInt();
+
+    return myContactUCC.stopFollowContact(contactId);
+  }
 }

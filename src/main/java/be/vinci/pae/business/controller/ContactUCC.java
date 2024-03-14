@@ -37,4 +37,6 @@ public interface ContactUCC {
    * @return the contact.
    */
   ContactDTO meetContact(int idContact, String meetingType);
+
+  ContactDTO stopFollowContact(int contactId);
 }
