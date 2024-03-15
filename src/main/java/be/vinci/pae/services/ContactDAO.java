@@ -71,5 +71,11 @@ public interface ContactDAO {
    */
   ContactDTO refusedContact(int contactId, String refusalReason);
 
+  /**
+   * get one contact by id.
+   *
+   * @param idContact the id of contact.
+   * @return the contact.
+   */
   ContactDTO getOneContactById(int idContact);
 }
