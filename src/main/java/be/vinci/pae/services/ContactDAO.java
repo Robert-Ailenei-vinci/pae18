@@ -32,7 +32,7 @@ public interface ContactDAO {
   /**
    * Retrieves the next available item id.
    *
-   * @return the next available item id
+   * @return the next available item id.
    */
   int nextItemId();
 
@@ -43,4 +43,31 @@ public interface ContactDAO {
    * @return the list of contacts associated with the user
    */
   List<ContactDTO> getAllContactsByUserId(int userId);
+
+
+  /**
+   * Update the state of a contact to meet whith the type of meeting.
+   *
+   * @param idContact   id_contact the id of the contact to meet.
+   * @param meetingType the type of meeting.
+   * @return the updated contact.
+   */
+  ContactDTO meetContact(int idContact, String meetingType);
+
+  /**
+   * Update the state of a contact to stop followed.
+   *
+   * @param contactId id_contact the id of the contact to meet.
+   * @return the updated contact.
+   */
+  ContactDTO stopFollowContact(int contactId);
+
+  /**
+   * Update the state of a contact to refused and the reason.
+   *
+   * @param contactId     id_contact the id of the contact to meet.
+   * @param refusalReason the type of meeting.
+   * @return the updated contact.
+   */
+  ContactDTO refusedContact(int contactId, String refusalReason);
 }

@@ -115,4 +115,80 @@ public class ContactDAOImpl implements ContactDAO {
     }
     return 1;
   }
+
+  public ContactDTO meetContact(int idContact, String meetingType) {
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+        "UPDATE pae.contact SET state = 'rencontré', meeting_type = ? WHERE id_contact = ?"
+    )) {
+      preparedStatement.setString(1, meetingType);
+      preparedStatement.setInt(2, idContact);
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
+            "SELECT * FROM pae.contact WHERE id_contact = ?"
+        )) {
+          selectStatement.setInt(1, idContact);
+          try (ResultSet rs = selectStatement.executeQuery()) {
+            if (rs.next()) {
+              return getContactMethodFromDB(rs);
+            }
+          }
+        }
+      }
+    } catch (Exception e) {
+      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+    }
+    return null;
+  }
+
+  @Override
+  public ContactDTO stopFollowContact(int contactId) {
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+        "UPDATE pae.contact SET state = 'suivis stoppé' WHERE id_contact = ?"
+    )) {
+      preparedStatement.setInt(1, contactId);
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
+            "SELECT * FROM pae.contact WHERE id_contact = ?"
+        )) {
+          selectStatement.setInt(1, contactId);
+          try (ResultSet rs = selectStatement.executeQuery()) {
+            if (rs.next()) {
+              return getContactMethodFromDB(rs);
+            }
+          }
+        }
+      }
+    } catch (Exception e) {
+      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+    }
+    return null;
+  }
+
+  @Override
+  public ContactDTO refusedContact(int contactId, String refusalReason) {
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+        "UPDATE pae.contact SET state = 'refusé', reason_for_refusal = ? WHERE id_contact = ?"
+    )) {
+      preparedStatement.setString(1, refusalReason);
+      preparedStatement.setInt(2, contactId);
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
+            "SELECT * FROM pae.contact WHERE id_contact = ?"
+        )) {
+          selectStatement.setInt(1, contactId);
+          try (ResultSet rs = selectStatement.executeQuery()) {
+            if (rs.next()) {
+              return getContactMethodFromDB(rs);
+            }
+          }
+        }
+      }
+    } catch (Exception e) {
+      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+    }
+    return null;
+  }
 }

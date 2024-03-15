@@ -30,4 +30,31 @@ public class ContactUCCImpl implements ContactUCC {
   public List<ContactDTO> getAllContactsByUserId(int userId) {
     return myContactDAO.getAllContactsByUserId(userId);
   }
+
+  @Override
+  public ContactDTO meetContact(int idContact, String meetingType) {
+    ContactDTO contactToReturn = myContactDAO.meetContact(idContact, meetingType);
+    if (contactToReturn == null) {
+      return null;
+    }
+    return contactToReturn;
+  }
+
+  @Override
+  public ContactDTO stopFollowContact(int contactId) {
+    ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
+    if (contactToReturn == null) {
+      return null;
+    }
+    return contactToReturn;
+  }
+
+  @Override
+  public ContactDTO refusedContact(int contactId, String refusalReason) {
+    ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);
+    if (contactToReturn == null) {
+      return null;
+    }
+    return contactToReturn;
+  }
 }

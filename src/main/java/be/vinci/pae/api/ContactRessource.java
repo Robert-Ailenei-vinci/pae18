@@ -15,6 +15,7 @@ import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.WebApplicationException;
@@ -103,5 +104,64 @@ public class ContactRessource {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
     return myContactUCC.getAllContactsByUserId(userId);
+  }
+
+  /**
+   * path to meet a contact.
+   *
+   * @param json the id and meeting type of the contact.
+   * @return the contact updated.
+   */
+  @PUT
+  @Path("met")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Authorize
+  public ContactDTO meetContact(JsonNode json) {
+    if (!json.hasNonNull("id_contact") || json.hasNonNull("meetingType")) {
+      throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
+    }
+    int contactId = json.get("id_contact").asInt();
+    String meetingType = json.get("meetingType").asText();
+
+    return myContactUCC.meetContact(contactId, meetingType);
+  }
+
+  /**
+   * path to stop following a contact.
+   *
+   * @param json the id of the contact.
+   * @return the contact updated.
+   */
+  @PUT
+  @Path("stopFollow")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Authorize
+  public ContactDTO stopFollowContact(JsonNode json) {
+    if (!json.hasNonNull("id_contact")) {
+      throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
+    }
+    int contactId = json.get("id_contact").asInt();
+
+    return myContactUCC.stopFollowContact(contactId);
+  }
+
+  /**
+   * path to refuse a contact.
+   *
+   * @param json the id and reason pf refusal of the contact.
+   * @return the contact updated.
+   */
+  @PUT
+  @Path("refused")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Authorize
+  public ContactDTO refusedContact(JsonNode json) {
+    if (!json.hasNonNull("id_contact") || json.hasNonNull("refusalReason")) {
+      throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
+    }
+    int contactId = json.get("id_contact").asInt();
+    String refusalReason = json.get("refusalReason").asText();
+
+    return myContactUCC.refusedContact(contactId, refusalReason);
   }
 }
