@@ -27,20 +27,20 @@ public class ContactDAOImpl implements ContactDAO {
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "INSERT INTO pae.contacts "
-            + "(state, id_contact, user, entreprise, school_year, reason_for_refusal, meeting_type)"
+            + "(state, id_contact, \"user\", entreprise, school_year, reason_for_refusal, meeting_type)"
             + "VALUES (?, ?, ?, ?, ?, ?, ?)"
     )) {
+      int contactId = nextItemId();
       preparedStatement.setString(1, "initié");
-      preparedStatement.setInt(2, nextItemId());
+      preparedStatement.setInt(2, contactId);
       preparedStatement.setInt(3, user.getId());
       preparedStatement.setInt(4, entreprise.getId());
       preparedStatement.setInt(5, schoolYear.getId());
       preparedStatement.setString(6, null);
       preparedStatement.setString(7, null);
-      try (ResultSet rs = preparedStatement.executeQuery()) {
-        if (rs.next()) {
-          return getContactMethodFromDB(rs);
-        }
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        return getOneContactByStageId(contactId);
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -51,7 +51,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public List<ContactDTO> getAllContactsByUserId(int userId) {
     PreparedStatement getAllContacts = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.contacts WHERE _user = ?");
+        "SELECT * FROM pae.contacts WHERE \"user\" = ?");
     List<ContactDTO> contacts = new ArrayList<>();
     try {
       getAllContacts.setInt(1, userId);
@@ -90,7 +90,7 @@ public class ContactDAOImpl implements ContactDAO {
     try {
       contact.setId(rs.getInt("id_contact"));
       contact.setState(rs.getString("state"));
-      contact.setUserId(rs.getInt("_user"));
+      contact.setUserId(rs.getInt("\"user\""));
       contact.setEntrepriseId(rs.getInt("entreprise"));
       contact.setSchoolYearId(rs.getInt("school_year"));
       contact.setReasonForRefusal(rs.getString("reason_for_refusal"));
@@ -104,9 +104,9 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public int nextItemId() {
-    String sql = "SELECT MAX(id) FROM pae.contacts";
+    String sql = "SELECT MAX(id_contact) FROM pae.contacts";
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql);
-        ResultSet rs = stmt.executeQuery(sql)) {
+        ResultSet rs = stmt.executeQuery()) {
       if (rs.next()) {
         return rs.getInt(1) + 1;
       }
