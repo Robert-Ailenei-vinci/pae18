@@ -10,6 +10,7 @@ import java.sql.ResultSet;
  * This class represents an implementation of the {@link StageDAO} interface.
  */
 public class StageDAOImpl implements StageDAO {
+
   @Inject
   private DomainFactory myDomainFactory;
   @Inject

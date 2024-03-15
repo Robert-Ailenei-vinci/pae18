@@ -34,7 +34,6 @@ public class UserUCCImpl implements UserUCC {
   public UserDTO login(String login, String password) {
 
     User user = (User) myUserDAO.getOne(login);
-
     if (user == null) {
       return null;
     }
@@ -88,12 +87,12 @@ public class UserUCCImpl implements UserUCC {
   /**
    * Changes user data based on the provided parameters.
    *
-   * @param email     The new email for the user.
-   * @param password  The new password for the user.
-   * @param lname     The new last name for the user.
-   * @param fname     The new first name for the user.
-   * @param phoneNum  The new phone number for the user.
-   * @return          The updated UserDTO object.
+   * @param email    The new email for the user.
+   * @param password The new password for the user.
+   * @param lname    The new last name for the user.
+   * @param fname    The new first name for the user.
+   * @param phoneNum The new phone number for the user.
+   * @return The updated UserDTO object.
    */
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
