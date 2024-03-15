@@ -90,4 +90,28 @@ public class ContactImpl implements Contact {
   public void setEntreprise(EntrepriseDTO entreprise) {
     this.entreprise = entreprise;
   }
+
+  @Override
+  public boolean checkStopFollow() {
+    if (state.equals("initié") || state.equals("rencontré")) {
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public boolean checkRefused() {
+    if (state.equals("rencontré")) {
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public boolean checkMeet() {
+    if (state.equals("initié")) {
+      return true;
+    }
+    return false;
+  }
 }

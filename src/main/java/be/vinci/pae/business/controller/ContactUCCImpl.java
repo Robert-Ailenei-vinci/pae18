@@ -32,13 +32,19 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO meetContact(int idContact, String meetingType, int userId) {
+  public ContactDTO meetContact(int contactId, String meetingType, int userId) {
 
-    if (myContactDAO.getOneContactById(idContact).getUserId() != userId) {
+    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+
+    if (!contact.checkMeet()) {
+      throw new BizException("the contact cant be stop follow");
+    }
+
+    if (contact.getUserId() != userId) {
       throw new BizExceptionNotFound("Le contact n'appartient pas au user");
     }
 
-    ContactDTO contactToReturn = myContactDAO.meetContact(idContact, meetingType);
+    ContactDTO contactToReturn = myContactDAO.meetContact(contactId, meetingType);
     if (contactToReturn == null) {
       return null;
     }
@@ -48,8 +54,14 @@ public class ContactUCCImpl implements ContactUCC {
   @Override
   public ContactDTO stopFollowContact(int contactId, int userId) {
 
-    if (myContactDAO.getOneContactById(contactId).getUserId() != userId) {
+    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+
+    if (contact.getUserId() != userId) {
       throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+    }
+
+    if (!contact.checkStopFollow()) {
+      throw new BizException("the contact cant be stop follow");
     }
 
     ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
@@ -61,9 +73,16 @@ public class ContactUCCImpl implements ContactUCC {
 
   @Override
   public ContactDTO refusedContact(int contactId, String refusalReason, int userId) {
-    if (myContactDAO.getOneContactById(contactId).getUserId() != userId) {
+    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+
+    if (contact.getUserId() != userId) {
       throw new BizExceptionNotFound("Le contact n'appartient pas au user");
     }
+
+    if (!contact.checkRefused()) {
+      throw new BizException("the contact cant be stop follow");
+    }
+
     ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);
     if (contactToReturn == null) {
       return null;
