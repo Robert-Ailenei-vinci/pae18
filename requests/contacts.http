@@ -41,3 +41,12 @@ Authorization: {{user}}
   "entreprise" : "2",
   "schoolYear" : "1"
 }
+
+### stop following a contact
+PUT http://localhost:3000/contacts/stopFollow
+Content-Type: application/json
+Authorization: {{user}}
+
+{
+  "id_contact" : "1"
+}

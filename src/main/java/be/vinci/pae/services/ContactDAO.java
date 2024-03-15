@@ -70,4 +70,6 @@ public interface ContactDAO {
    * @return the updated contact.
    */
   ContactDTO refusedContact(int contactId, String refusalReason);
+
+  ContactDTO getOneContactById(int idContact);
 }

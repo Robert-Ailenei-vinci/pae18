@@ -116,14 +116,16 @@ public class ContactRessource {
   @Path("met")
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
-  public ContactDTO meetContact(JsonNode json) {
+  public ContactDTO meetContact(@Context ContainerRequestContext requestContext ,JsonNode json) {
     if (!json.hasNonNull("id_contact") || json.hasNonNull("meetingType")) {
       throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
     }
     int contactId = json.get("id_contact").asInt();
     String meetingType = json.get("meetingType").asText();
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
 
-    return myContactUCC.meetContact(contactId, meetingType);
+    return myContactUCC.meetContact(contactId, meetingType,userId);
   }
 
   /**
@@ -135,14 +137,18 @@ public class ContactRessource {
   @PUT
   @Path("stopFollow")
   @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public ContactDTO stopFollowContact(JsonNode json) {
+  public ContactDTO stopFollowContact(@Context ContainerRequestContext requestContext ,JsonNode json) {
     if (!json.hasNonNull("id_contact")) {
       throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
     }
+    System.out.println("stop follow");
     int contactId = json.get("id_contact").asInt();
-
-    return myContactUCC.stopFollowContact(contactId);
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
+    System.out.println(userId);
+    return myContactUCC.stopFollowContact(contactId,userId);
   }
 
   /**
@@ -155,13 +161,15 @@ public class ContactRessource {
   @Path("refused")
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
-  public ContactDTO refusedContact(JsonNode json) {
+  public ContactDTO refusedContact(@Context ContainerRequestContext requestContext ,JsonNode json) {
     if (!json.hasNonNull("id_contact") || json.hasNonNull("refusalReason")) {
       throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
     }
     int contactId = json.get("id_contact").asInt();
     String refusalReason = json.get("refusalReason").asText();
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
 
-    return myContactUCC.refusedContact(contactId, refusalReason);
+    return myContactUCC.refusedContact(contactId, refusalReason,userId);
   }
 }

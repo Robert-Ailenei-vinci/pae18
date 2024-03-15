@@ -1,12 +1,10 @@
 package be.vinci.pae.business.controller;
 
-import be.vinci.pae.business.domain.Contact;
-import be.vinci.pae.business.domain.ContactDTO;
-import be.vinci.pae.business.domain.EntrepriseDTO;
-import be.vinci.pae.business.domain.SchoolYearDTO;
-import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.business.domain.*;
 import be.vinci.pae.services.ContactDAO;
+import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
+
 import java.util.List;
 
 /**
@@ -32,7 +30,12 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO meetContact(int idContact, String meetingType) {
+  public ContactDTO meetContact(int idContact, String meetingType, int userId) {
+
+    if (myContactDAO.getOneContactById(idContact).getUserId() != userId) {
+      //throw new ExpBiz
+    }
+
     ContactDTO contactToReturn = myContactDAO.meetContact(idContact, meetingType);
     if (contactToReturn == null) {
       return null;
@@ -41,7 +44,13 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO stopFollowContact(int contactId) {
+  public ContactDTO stopFollowContact(int contactId, int userId) {
+
+    if (myContactDAO.getOneContactById(contactId).getUserId() != userId) {
+      //throw new ExpBiz
+
+    }
+
     ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
     if (contactToReturn == null) {
       return null;
@@ -50,7 +59,10 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO refusedContact(int contactId, String refusalReason) {
+  public ContactDTO refusedContact(int contactId, String refusalReason,int userId) {
+    if (myContactDAO.getOneContactById(contactId).getUserId() != userId) {
+      //throw new ExpBiz
+    }
     ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);
     if (contactToReturn == null) {
       return null;

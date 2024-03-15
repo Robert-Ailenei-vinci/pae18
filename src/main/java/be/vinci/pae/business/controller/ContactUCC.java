@@ -36,7 +36,7 @@ public interface ContactUCC {
    * @param meetingType the type od the meeting.
    * @return the contact.
    */
-  ContactDTO meetContact(int idContact, String meetingType);
+  ContactDTO meetContact(int idContact, String meetingType,int userId);
 
   /**
    * set the state of a contact to stop followed.
@@ -44,7 +44,7 @@ public interface ContactUCC {
    * @param contactId the id of the contact to set.
    * @return the contact.
    */
-  ContactDTO stopFollowContact(int contactId);
+  ContactDTO stopFollowContact(int contactId,int userId);
 
   /**
    * set the state of a contact to refused and the reason.
@@ -53,5 +53,5 @@ public interface ContactUCC {
    * @param refusalReason the type od the meeting.
    * @return the contact.
    */
-  ContactDTO refusedContact(int contactId, String refusalReason);
+  ContactDTO refusedContact(int contactId, String refusalReason,int userId);
 }
