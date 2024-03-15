@@ -7,9 +7,17 @@ const UsersPage = () => {
     renderAllUsers2();
 };
 
-async function fetchAllUsers() {
+async function fetchAllUsers(user) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${user.token}`,
+        },
+    };
+
     try {
-        const response = await fetch('http://localhost:3000/users/getAll');
+        const response = await fetch('http://localhost:3000/users/getAll', options);
         if (!response.ok) {
             throw new Error(`Failed to fetch users: ${response.statusText}`);
         }
@@ -24,7 +32,7 @@ async function fetchAllUsers() {
 
 async function renderAllUsers() {
     try {
-        
+
       const usersData = [
         { firstName: 'raf', lastName: 'jsp', role: 'admin', schoolYearFormat: '2023-2024' },
         { firstName: 'robert', lastName: 'ghvg', role: 'professeur', schoolYearFormat: '2023-2024' },
@@ -69,40 +77,40 @@ async function renderAllUsers() {
 
 // QUAND LE FETCH MARCHERA 
 
-async function renderAllUsers2() { 
+async function renderAllUsers2(userData) {
     try {
-      const usersData = await fetchAllUsers();
-      const main = document.querySelector('main');
-  
-      const table = document.createElement('table');
-      table.className = 'user-table';
-  
-      const thead = document.createElement('thead');
-      const headerRow = document.createElement('tr');
-      ['Prénom', 'Nom', 'Rôle', 'Année scolaire'].forEach(headerText => {
-        const th = document.createElement('th');
-        th.textContent = headerText;
-        headerRow.appendChild(th);
-      });
-      thead.appendChild(headerRow);
-      table.appendChild(thead);
-  
-      const tbody = document.createElement('tbody');
-      usersData.forEach(user => {
-        const row = document.createElement('tr');
-        ['firstName', 'lastName', 'role', 'schoolYearFormat'].forEach(fieldName => {
-          const cell = document.createElement('td');
-          cell.textContent = user[fieldName];
-          row.appendChild(cell);
+        const usersData = await fetchAllUsers(userData);
+        const main = document.querySelector('main');
+
+        const table = document.createElement('table');
+        table.className = 'user-table';
+
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        ['Prénom', 'Nom', 'Rôle', 'Année scolaire'].forEach(headerText => {
+            const th = document.createElement('th');
+            th.textContent = headerText;
+            headerRow.appendChild(th);
         });
-        tbody.appendChild(row);
-      });
-      table.appendChild(tbody);
-  
-      main.appendChild(table);
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+        usersData.forEach(user => {
+            const row = document.createElement('tr');
+            ['firstName', 'lastName', 'role', 'schoolYearFormat'].forEach(fieldName => {
+                const cell = document.createElement('td');
+                cell.textContent = user[fieldName];
+                row.appendChild(cell);
+            });
+            tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+
+        main.appendChild(table);
     } catch (error) {
-      console.error('Error rendering all users:', error);
+        console.error('Error rendering all users:', error);
     }
-  }
+}
 
 export default UsersPage;
