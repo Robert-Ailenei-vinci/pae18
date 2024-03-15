@@ -46,6 +46,7 @@ public class UserResource {
    */
 
   @GET
+  @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<UserDTO> getAll() {

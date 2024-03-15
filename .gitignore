@@ -59,6 +59,8 @@ local.properties
 # Tern plugin
 .tern-project
 
+.eslintrc.js
+
 # TeXlipse plugin
 .texlipse
 
