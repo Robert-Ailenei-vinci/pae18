@@ -32,10 +32,10 @@ CREATE TABLE pae.entreprises (
 CREATE TABLE pae.contacts (
                               state TEXT NOT NULL,
                               id_contact SERIAL PRIMARY KEY,
-                              _user INTEGER NOT NULL REFERENCES pae.users(id_user),
+                              "user" INTEGER NOT NULL REFERENCES pae.users(id_user),
                               entreprise INTEGER NOT NULL REFERENCES pae.entreprises(id_entreprise),
                               school_year INTEGER NOT NULL REFERENCES pae.school_years(id_year),
-                              UNIQUE (_user, entreprise, school_year),
+                              UNIQUE ("user", entreprise, school_year),
                               reason_for_refusal TEXT,
                               meeting_type TEXT
 );
