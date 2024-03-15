@@ -1,5 +1,7 @@
 package be.vinci.pae.utils;
 
+import be.vinci.pae.exception.BizException;
+import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.UserNotFoundException;
 import jakarta.ws.rs.NotFoundException;
@@ -41,6 +43,16 @@ public class WebExceptionMapper implements ExceptionMapper<Throwable> {
 
     if (exception instanceof FatalError) {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+          .entity(exception.getMessage())
+          .build();
+    }
+    if (exception instanceof BizException) {
+      return Response.status(Response.Status.CONFLICT)
+          .entity(exception.getMessage())
+          .build();
+    }
+    if (exception instanceof BizExceptionNotFound) {
+      return Response.status(Response.Status.NOT_FOUND)
           .entity(exception.getMessage())
           .build();
     }
