@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:3000
 
 ### Login the default user
-POST http://localhost:3000/auths/login
+POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
@@ -14,12 +14,12 @@ Content-Type: application/json
 %}
 
 ### Get all the users
-GET http://localhost:3000/users
+GET {{baseUrl}}/users
 Content-Type: application/json
 Authorization: {{user}}
 
 ### Register a new user
-POST http://localhost:3000/auths/register
+POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
