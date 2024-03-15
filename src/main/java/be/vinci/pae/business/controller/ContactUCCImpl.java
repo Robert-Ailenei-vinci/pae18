@@ -36,12 +36,12 @@ public class ContactUCCImpl implements ContactUCC {
 
     Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
-    if (!contact.checkMeet()) {
-      throw new BizException("the contact cant be stop follow");
-    }
-
     if (contact.getUserId() != userId) {
       throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+    }
+
+    if (!contact.checkMeet()) {
+      throw new BizException("the contact cant be meet");
     }
 
     ContactDTO contactToReturn = myContactDAO.meetContact(contactId, meetingType);
@@ -80,7 +80,7 @@ public class ContactUCCImpl implements ContactUCC {
     }
 
     if (!contact.checkRefused()) {
-      throw new BizException("the contact cant be stop follow");
+      throw new BizException("the contact cant be refused");
     }
 
     ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);

@@ -115,11 +115,11 @@ public class ContactRessource {
    * @return the contact updated.
    */
   @PUT
-  @Path("met")
+  @Path("meet")
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
   public ContactDTO meetContact(@Context ContainerRequestContext requestContext ,JsonNode json) {
-    if (!json.hasNonNull("id_contact") || json.hasNonNull("meetingType")) {
+    if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
       throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
     }
     int contactId = json.get("id_contact").asInt();
@@ -164,7 +164,7 @@ public class ContactRessource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext ,JsonNode json) {
-    if (!json.hasNonNull("id_contact") || json.hasNonNull("refusalReason")) {
+    if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
       throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
     }
     int contactId = json.get("id_contact").asInt();

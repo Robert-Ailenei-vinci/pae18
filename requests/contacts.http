@@ -37,16 +37,37 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "user" : "1",
+  "user" : "2",
   "entreprise" : "2",
   "schoolYear" : "1"
 }
 
 ### stop following a contact
-PUT http://localhost:3000/contacts/stopFollow
+PUT {{baseUrl}}/contacts/stopFollow
 Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "1"
+  "id_contact" : "5"
+}
+
+### refused a contact
+PUT {{baseUrl}}/contacts/refused
+Content-Type: application/json
+Authorization: {{user}}
+
+{
+  "id_contact" : "5",
+  "refusalReason" : "pas de place"
+
+}
+
+### meet a contact
+PUT {{baseUrl}}/contacts/meet
+Content-Type: application/json
+Authorization: {{user}}
+
+{
+  "id_contact" : "3",
+  "meetingType" : "sur place"
 }
