@@ -5,6 +5,7 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.exception.FatalError;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +44,7 @@ public class ContactDAOImpl implements ContactDAO {
         return getOneContactByStageId(contactId);
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -63,7 +64,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return contacts;
   }
@@ -80,7 +81,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -97,7 +98,7 @@ public class ContactDAOImpl implements ContactDAO {
       contact.setMeetingType(rs.getString("meeting_type"));
       contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return contact;
   }
@@ -111,7 +112,7 @@ public class ContactDAOImpl implements ContactDAO {
         return rs.getInt(1) + 1;
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return 1;
   }
@@ -136,7 +137,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -161,7 +162,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -187,7 +188,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -204,7 +205,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }

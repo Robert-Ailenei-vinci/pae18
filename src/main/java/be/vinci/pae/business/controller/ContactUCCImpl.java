@@ -1,6 +1,8 @@
 package be.vinci.pae.business.controller;
 
 import be.vinci.pae.business.domain.*;
+import be.vinci.pae.exception.BizException;
+import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
@@ -33,7 +35,7 @@ public class ContactUCCImpl implements ContactUCC {
   public ContactDTO meetContact(int idContact, String meetingType, int userId) {
 
     if (myContactDAO.getOneContactById(idContact).getUserId() != userId) {
-      //throw new ExpBiz
+      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
     }
 
     ContactDTO contactToReturn = myContactDAO.meetContact(idContact, meetingType);
@@ -47,8 +49,7 @@ public class ContactUCCImpl implements ContactUCC {
   public ContactDTO stopFollowContact(int contactId, int userId) {
 
     if (myContactDAO.getOneContactById(contactId).getUserId() != userId) {
-      //throw new ExpBiz
-
+      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
     }
 
     ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
@@ -59,9 +60,9 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO refusedContact(int contactId, String refusalReason,int userId) {
+  public ContactDTO refusedContact(int contactId, String refusalReason, int userId) {
     if (myContactDAO.getOneContactById(contactId).getUserId() != userId) {
-      //throw new ExpBiz
+      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
     }
     ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);
     if (contactToReturn == null) {
