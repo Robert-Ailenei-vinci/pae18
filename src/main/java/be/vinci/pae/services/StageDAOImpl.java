@@ -2,6 +2,8 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.StageDTO;
+import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.exception.StageNotFoundException;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +12,7 @@ import java.sql.ResultSet;
  * This class represents an implementation of the {@link StageDAO} interface.
  */
 public class StageDAOImpl implements StageDAO {
+
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
@@ -34,7 +37,7 @@ public class StageDAOImpl implements StageDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new StageNotFoundException("Pas de stage avec l'id de user suivant : " + userId, e);
     }
     return null;
   }
@@ -53,7 +56,7 @@ public class StageDAOImpl implements StageDAO {
       stage.setSupervisor(supervisorDAO.getOneById(rs.getInt("supervisor")));
       stage.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Erreur lors de la récupération du stage");
     }
     return stage;
   }

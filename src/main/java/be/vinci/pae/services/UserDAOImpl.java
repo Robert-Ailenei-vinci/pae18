@@ -45,7 +45,8 @@ public class UserDAOImpl implements UserDAO {
         users.add(user);
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      System.out.println(
+          e.getMessage()); // pas d erreur possible dans un getAll, a pire renvoie liste vide, donc on affiche pas l'erreur
     }
     return users;
   }
@@ -254,7 +255,7 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return 0; // return 0 if no id was found
   }
