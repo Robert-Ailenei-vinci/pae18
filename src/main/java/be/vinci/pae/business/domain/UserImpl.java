@@ -15,6 +15,7 @@ public class UserImpl implements User {
   private String firstName;
   private String phoneNum;
   private String registrationDate;
+  private int version;
   private int schoolYearId;
   private SchoolYearDTO schoolYear;
 
@@ -31,7 +32,7 @@ public class UserImpl implements User {
   public void setSchoolYearId(int id) {
     this.schoolYearId = id;
   }
-  
+
   public String getLastName() {
     return lastName;
   }
@@ -131,6 +132,16 @@ public class UserImpl implements User {
   @Override
   public void setRole(String role) {
     this.role = role;
+  }
+
+  @Override
+  public int getVersion() {
+    return version;
+  }
+
+  @Override
+  public void setVersion(int version) {
+    this.version = version;
   }
 
 }

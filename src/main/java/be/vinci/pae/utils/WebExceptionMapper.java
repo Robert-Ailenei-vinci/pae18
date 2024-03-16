@@ -5,6 +5,7 @@ import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.exception.OptimisticLockException;
 import be.vinci.pae.exception.SchoolYearNotFoundException;
 import be.vinci.pae.exception.StageNotFoundException;
 import be.vinci.pae.exception.SupervisorNotFoundException;
@@ -39,7 +40,11 @@ public class WebExceptionMapper implements ExceptionMapper<Throwable> {
           .entity(exception.getMessage())
           .build();
     }
-
+    if (exception instanceof OptimisticLockException) {
+      return Response.status(Response.Status.CONFLICT)
+          .entity(exception.getMessage())
+          .build();
+    }
     if (exception instanceof FatalError) {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
           .entity(exception.getMessage())
