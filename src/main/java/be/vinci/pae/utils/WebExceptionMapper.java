@@ -1,5 +1,7 @@
 package be.vinci.pae.utils;
 
+import be.vinci.pae.exception.AuthorisationException;
+import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
@@ -9,6 +11,7 @@ import be.vinci.pae.exception.SupervisorNotFoundException;
 import be.vinci.pae.exception.UserNotFoundException;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import java.sql.SQLException;
@@ -66,6 +69,16 @@ public class WebExceptionMapper implements ExceptionMapper<Throwable> {
     }
     if (exception instanceof BizException) {
       return Response.status(Response.Status.CONFLICT)
+          .entity(exception.getMessage())
+          .build();
+    }
+    if (exception instanceof AuthorisationException) {
+      return Response.status(Status.UNAUTHORIZED)
+          .entity(exception.getMessage())
+          .build();
+    }
+    if (exception instanceof BadRequestException) {
+      return Response.status(Response.Status.BAD_REQUEST)
           .entity(exception.getMessage())
           .build();
     }
