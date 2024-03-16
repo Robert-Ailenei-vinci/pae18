@@ -2,6 +2,8 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.exception.UserNotFoundException;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +45,9 @@ public class UserDAOImpl implements UserDAO {
         users.add(user);
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      System.out.println(
+          e.getMessage()); // pas d erreur possible dans un getAll, a pire renvoie liste vide,
+      // donc on affiche pas l'erreur
     }
     return users;
   }
@@ -71,7 +75,7 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new UserNotFoundException("User not found with email " + email, e);
     }
     return null;
   }
@@ -99,7 +103,7 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new UserNotFoundException("User not found with id " + id, e);
     }
     return null;
   }
@@ -118,7 +122,7 @@ public class UserDAOImpl implements UserDAO {
       user.setSchoolYearId(rs.getInt("school_year"));
       user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return user;
   }
@@ -140,7 +144,7 @@ public class UserDAOImpl implements UserDAO {
         idYear = rs.getInt("id_year");
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
 
     if (idYear == 0) {
@@ -149,7 +153,7 @@ public class UserDAOImpl implements UserDAO {
         stmt.setString(1, buildYear());
         stmt.executeUpdate();
       } catch (Exception e) {
-        System.out.println(e.getMessage());
+        throw new FatalError("Error processing result set", e);
       }
       idYear = getLastInsertedYearId();
     }
@@ -167,9 +171,8 @@ public class UserDAOImpl implements UserDAO {
       stmt.setInt(8, idYear);
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
-    return false;
   }
 
   /**
@@ -224,7 +227,7 @@ public class UserDAOImpl implements UserDAO {
       }
       stmt.executeUpdate();
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return user;
   }
@@ -253,7 +256,7 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return 0; // return 0 if no id was found
   }

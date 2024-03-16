@@ -2,6 +2,8 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SupervisorDTO;
+import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.exception.SupervisorNotFoundException;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +12,7 @@ import java.sql.ResultSet;
  * This class represents an implementation of the {@link SupervisorDAO} interface.
  */
 public class SupervisorDAOImpl implements SupervisorDAO {
+
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
@@ -28,7 +31,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new SupervisorNotFoundException("Supervisor not found with this id " + id, e);
     }
     return null;
   }
@@ -44,7 +47,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
       supervisor.setEmail(rs.getString("email"));
       supervisor.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error while getting supervisor from database", e);
     }
     return supervisor;
   }

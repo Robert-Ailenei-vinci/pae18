@@ -1,5 +1,6 @@
 package be.vinci.pae.services;
 
+import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.utils.Config;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,7 +59,7 @@ public class DALServicesImpl implements DALServices {
         con.close();
       }
     } catch (SQLException e) {
-      System.out.println("Unable to close database connection: " + e.getMessage());
+      throw new FatalError("Unable to close connection: " + e.getMessage(), e);
     }
   }
 
@@ -73,8 +74,7 @@ public class DALServicesImpl implements DALServices {
     try {
       return this.connection.prepareStatement(sql);
     } catch (SQLException e) {
-      System.out.println("Unable to prepare statement: " + e.getMessage());
-      return null;
+      throw new FatalError("Unable to create PreparedStatement: " + e.getMessage(), e);
     }
   }
 
@@ -91,7 +91,7 @@ public class DALServicesImpl implements DALServices {
         ps.close();
       }
     } catch (SQLException e) {
-      System.out.println("Unable to close PreparedStatement: " + e.getMessage());
+      throw new FatalError("Unable to close PreparedStatement: " + e.getMessage(), e);
     }
   }
 }

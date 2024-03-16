@@ -28,7 +28,8 @@ public class ContactDAOImpl implements ContactDAO {
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "INSERT INTO pae.contacts "
-            + "(state, id_contact, _user, entreprise, school_year, reason_for_refusal, meeting_type)"
+            + "(state, id_contact, _user, entreprise, school_year, "
+            + "reason_for_refusal, meeting_type)"
             + "VALUES (?, ?, ?, ?, ?, ?, ?)"
     )) {
       int contactId = nextItemId();
@@ -118,6 +119,7 @@ public class ContactDAOImpl implements ContactDAO {
     return 1;
   }
 
+  @Override
   public ContactDTO meetContact(int idContact, String meetingType) {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "UPDATE pae.contact SET state = 'rencontré', meeting_type = ? WHERE id_contact = ?"
