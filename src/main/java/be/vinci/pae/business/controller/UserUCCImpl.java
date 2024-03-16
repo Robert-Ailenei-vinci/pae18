@@ -3,10 +3,9 @@ package be.vinci.pae.business.controller;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.WebApplicationException;
-import jakarta.ws.rs.core.Response;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -63,8 +62,7 @@ public class UserUCCImpl implements UserUCC {
 
     existingUser = (User) myUserDAO.getOne(email);
     if (existingUser != null) {
-      throw new WebApplicationException("An account with this email already exists",
-          Response.Status.BAD_REQUEST);
+      throw new BizException("User already exists");
     }
     User user = (User) myDomainFactory.getUser();
     user.setEmail(email);

@@ -1,5 +1,6 @@
 package be.vinci.pae.utils;
 
+import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.SchoolYearNotFoundException;
@@ -60,6 +61,11 @@ public class WebExceptionMapper implements ExceptionMapper<Throwable> {
 
     if (exception instanceof EntrepriseNotFoundException) {
       return Response.status(Response.Status.NOT_FOUND)
+          .entity(exception.getMessage())
+          .build();
+    }
+    if (exception instanceof BizException) {
+      return Response.status(Response.Status.CONFLICT)
           .entity(exception.getMessage())
           .build();
     }
