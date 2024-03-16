@@ -5,11 +5,13 @@ import RegisterPage from '../Pages/RegisterPage';
 import UserDataPage from '../Pages/UserDataPage';
 import modifyUserDataPage from '../Pages/ModifyUserDataPage';
 import AddContactPage from '../Pages/AddContact';
+import UsersPage from '../Pages/Users';
 
 const routes = {
   '/': HomePage,
   '/login': LoginPage,
   '/register': RegisterPage,
+  '/seeUsers' : UsersPage,
   '/users/userData': UserDataPage,
   '/users/changeData': modifyUserDataPage,
   '/logout': Logout,
