@@ -5,14 +5,22 @@ package be.vinci.pae.exception;
  */
 public class AuthorisationException extends RuntimeException {
 
-
+  /**
+   * Constructs a new AuthorisationException with the specified detail message.
+   *
+   * @param message the detail message
+   */
   public AuthorisationException(String message) {
-    //  super(message) : call the constructor of the parent class with the message as parameter
     super(message);
   }
 
+  /**
+   * Constructs a new AuthorisationException with the specified detail message and cause.
+   *
+   * @param message the detail message
+   * @param cause   the cause
+   */
   public AuthorisationException(String message, Throwable cause) {
-    //  super(message, cause) : call the constructor of the parent class with the message and the cause as parameters
     super(message, cause);
   }
 }
