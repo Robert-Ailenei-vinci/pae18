@@ -5,6 +5,7 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +53,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public List<ContactDTO> getAllContactsByUserId(int userId) {
     PreparedStatement getAllContacts = dalServices.getPreparedStatement(
-        "SELECT * FROM pae.contacts WHERE _user  = ?");
+        "SELECT * FROM pae.contacts WHERE _user = ?");
     List<ContactDTO> contacts = new ArrayList<>();
     try {
       getAllContacts.setInt(1, userId);
@@ -61,6 +62,7 @@ public class ContactDAOImpl implements ContactDAO {
           ContactDTO contact;
           contact = getContactMethodFromDB(rs);
           contacts.add(contact);
+          LoggerUtil.logInfo("contact created");
         }
       }
     } catch (Exception e) {

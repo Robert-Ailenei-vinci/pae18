@@ -33,7 +33,6 @@ public class UserUCCImpl implements UserUCC {
   public UserDTO login(String login, String password) {
 
     User user = (User) myUserDAO.getOne(login);
-
     if (user == null) {
       return null;
     }
