@@ -1,5 +1,8 @@
 package be.vinci.pae.exception;
 
+/**
+ * Represents an exception that is thrown when an entreprise is not found.
+ */
 public class EntrepriseNotFoundException extends RuntimeException {
 
   public EntrepriseNotFoundException(String message) {

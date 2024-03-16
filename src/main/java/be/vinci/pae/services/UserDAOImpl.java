@@ -46,7 +46,8 @@ public class UserDAOImpl implements UserDAO {
       }
     } catch (Exception e) {
       System.out.println(
-          e.getMessage()); // pas d erreur possible dans un getAll, a pire renvoie liste vide, donc on affiche pas l'erreur
+          e.getMessage()); // pas d erreur possible dans un getAll, a pire renvoie liste vide,
+      // donc on affiche pas l'erreur
     }
     return users;
   }
