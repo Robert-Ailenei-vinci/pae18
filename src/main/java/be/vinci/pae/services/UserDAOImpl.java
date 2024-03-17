@@ -216,9 +216,10 @@ public class UserDAOImpl implements UserDAO {
 // Remove the last comma and space
     sql.delete(sql.length() - 2, sql.length());
 
-    sql.append(", _version = _version + 1 WHERE email = ? AND _version = ?;");
+    sql.append(", _version = _version + 1 WHERE email = ? AND _version = 1;");
+
     parameters.add(user.getEmail());
-    updateVersionFromDB(user);
+    getVersionFromDB(user);
     parameters.add(user.getVersion());
 
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
@@ -270,7 +271,7 @@ public class UserDAOImpl implements UserDAO {
     return 0; // return 0 if no id was found
   }
 
-  private void updateVersionFromDB(UserDTO user) {
+  private void getVersionFromDB(UserDTO user) {
     try (PreparedStatement versionStmt = dalServices.getPreparedStatement(
         "SELECT _version FROM pae.users WHERE email = ?")) {
       versionStmt.setString(1, user.getEmail());

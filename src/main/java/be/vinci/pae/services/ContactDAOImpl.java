@@ -5,6 +5,10 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.exception.BadRequestException;
+import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.exception.OptimisticLockException;
+import be.vinci.pae.exception.StageNotFoundException;
 import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
@@ -29,8 +33,8 @@ public class ContactDAOImpl implements ContactDAO {
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
         "INSERT INTO pae.contacts "
             + "(state, id_contact, _user, entreprise, school_year, "
-            + "reason_for_refusal, meeting_type)"
-            + "VALUES (?, ?, ?, ?, ?, ?, ?)"
+            + "reason_for_refusal, meeting_type, _version)"
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, 0)"
     )) {
       int contactId = nextItemId();
       preparedStatement.setString(1, "initié");
@@ -45,7 +49,7 @@ public class ContactDAOImpl implements ContactDAO {
         return getOneContactByStageId(contactId);
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -66,7 +70,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      System.out.println(e.getMessage()); //No error message
     }
     return contacts;
   }
@@ -83,7 +87,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new StageNotFoundException("Stage not found with id :" + stageId, e);
     }
     return null;
   }
@@ -100,7 +104,7 @@ public class ContactDAOImpl implements ContactDAO {
       contact.setMeetingType(rs.getString("meeting_type"));
       contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return contact;
   }
@@ -121,11 +125,14 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO meetContact(int idContact, String meetingType) {
+    ContactDTO contact = getOneContactByStageId(idContact);
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contact SET state = 'rencontré', meeting_type = ? WHERE id_contact = ?"
+        "UPDATE pae.contact SET state = 'rencontré', meeting_type = ? , _version=_version+1 WHERE id_contact = ?"
     )) {
       preparedStatement.setString(1, meetingType);
       preparedStatement.setInt(2, idContact);
+      updateVersionFromDB(contact);
+      preparedStatement.setInt(3, contact.getVersion());
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
@@ -139,18 +146,24 @@ public class ContactDAOImpl implements ContactDAO {
           }
         }
       }
+      if (rowsAffected == 0) {
+        throw new OptimisticLockException("Contact was updated by another transaction");
+      }
     } catch (Exception e) {
-      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+      throw new BadRequestException("Error processing result set");
     }
     return null;
   }
 
   @Override
   public ContactDTO stopFollowContact(int contactId) {
+    ContactDTO contact = getOneContactByStageId(contactId);
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contact SET state = 'suivis stoppé' WHERE id_contact = ?"
+        "UPDATE pae.contact SET state = 'suivis stoppé', _version = _version + 1 WHERE id_contact = ? AND _version= ?"
     )) {
       preparedStatement.setInt(1, contactId);
+      updateVersionFromDB(contact);
+      preparedStatement.setInt(2, contact.getVersion());
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
@@ -164,19 +177,25 @@ public class ContactDAOImpl implements ContactDAO {
           }
         }
       }
+      if (rowsAffected == 0) {
+        throw new OptimisticLockException("Contact was updated by another transaction");
+      }
     } catch (Exception e) {
-      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+      throw new BadRequestException("Error processing result set");
     }
     return null;
   }
 
   @Override
   public ContactDTO refusedContact(int contactId, String refusalReason) {
+    ContactDTO contact = getOneContactByStageId(contactId);
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contact SET state = 'refusé', reason_for_refusal = ? WHERE id_contact = ?"
+        "UPDATE pae.contact SET state = 'refusé', reason_for_refusal = ? , _version=_version+1 WHERE id_contact = ? AND _version=?"
     )) {
       preparedStatement.setString(1, refusalReason);
       preparedStatement.setInt(2, contactId);
+      updateVersionFromDB(contact);
+      preparedStatement.setInt(3, contact.getVersion());
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
@@ -190,9 +209,28 @@ public class ContactDAOImpl implements ContactDAO {
           }
         }
       }
+      if (rowsAffected == 0) {
+        throw new OptimisticLockException("Contact was updated by another transaction");
+      }
     } catch (Exception e) {
-      System.out.println("Erreur lors de la mise à jour du contact : " + e.getMessage());
+      throw new BadRequestException("Error processing result set");
     }
     return null;
+  }
+
+  private void updateVersionFromDB(ContactDTO contact) {
+    try (PreparedStatement versionStmt = dalServices.getPreparedStatement(
+        "SELECT _version FROM pae.contacts WHERE id_contact = ?")) {
+      versionStmt.setInt(1, contact.getId());
+      try (ResultSet rs = versionStmt.executeQuery()) {
+        if (rs.next()) {
+          // Update the version of the UserDTO object in memory
+          contact.setVersion(rs.getInt("_version"));
+          System.out.println(contact.getVersion());
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
   }
 }
