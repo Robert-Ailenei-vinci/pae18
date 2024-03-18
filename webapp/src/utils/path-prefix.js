@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const usePathPrefix = (path) => {
   if (process.env.BUILD_MODE !== 'production') return path;
 

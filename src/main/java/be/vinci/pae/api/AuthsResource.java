@@ -109,13 +109,40 @@ public class AuthsResource {
   @Path("user")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public UserDTO getUser(@Context ContainerRequestContext requestContext) {
+  public ObjectNode getUser(@Context ContainerRequestContext requestContext) {
+    System.out.println("refresh");
     UserDTO user = (UserDTO) requestContext.getProperty("user");
 
     if (user == null) {
       throw new AuthorisationException("User not recognised");
     }
-    return user;
+    String token;
+    Instant now = Instant.now();
+    Instant expirationTime = now.plusSeconds(3600); // 1 heure à partir de maintenant
+
+    try {
+      token = JWT.create()
+          .withIssuer("auth0")
+          .withClaim("user", user.getId())
+          .withExpiresAt(Date.from(expirationTime))
+          .sign(this.jwtAlgorithm);
+      System.out.println("Token " + token);
+      ObjectNode toReturn = jsonMapper.createObjectNode()
+          .put("token", token)
+          .put("id", user.getId())
+          .put("email", user.getEmail())
+          .put("role", user.getRole())
+          .put("firstName", user.getFirstName())
+          .put("lastName", user.getLastName())
+          .put("phoneNum", user.getPhoneNum())
+          .put("registrationDate", user.getRegistrationDate())
+          .put("schoolYearFormat", user.getSchoolYear().getYearFormat());
+      return toReturn;
+
+    } catch (Exception e) {
+      System.out.println("Unable to create token");
+      return null;
+    }
   }
 
   /**
