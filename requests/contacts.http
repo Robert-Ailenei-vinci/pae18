@@ -48,7 +48,7 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "5"
+  "id_contact" : "1"
 }
 
 ### refused a contact

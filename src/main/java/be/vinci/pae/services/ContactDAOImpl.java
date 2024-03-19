@@ -5,7 +5,6 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
-import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.OptimisticLockException;
 import be.vinci.pae.exception.StageNotFoundException;
@@ -127,7 +126,7 @@ public class ContactDAOImpl implements ContactDAO {
   public ContactDTO meetContact(int idContact, String meetingType) {
     ContactDTO contact = getOneContactByStageId(idContact);
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contacts SET state = 'rencontre', meeting_type = ? , _version=_version+1 WHERE id_contact = ?"
+        "UPDATE pae.contacts SET state = 'rencontre', meeting_type = ? , _version=_version+1 WHERE id_contact = ? AND _version=?"
     )) {
       preparedStatement.setString(1, meetingType);
       preparedStatement.setInt(2, idContact);
@@ -150,7 +149,7 @@ public class ContactDAOImpl implements ContactDAO {
         throw new OptimisticLockException("Contact was updated by another transaction");
       }
     } catch (Exception e) {
-      throw new BadRequestException("Error processing result set");
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -182,7 +181,7 @@ public class ContactDAOImpl implements ContactDAO {
       }
     } catch (Exception e) {
 
-      throw new BadRequestException("Error processing result set");
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -214,7 +213,7 @@ public class ContactDAOImpl implements ContactDAO {
         throw new OptimisticLockException("Contact was updated by another transaction");
       }
     } catch (Exception e) {
-      throw new BadRequestException("Error processing result set");
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
