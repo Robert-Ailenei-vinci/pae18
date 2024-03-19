@@ -122,23 +122,41 @@ public class ContactDAOImpl implements ContactDAO {
     return 1;
   }
 
-  @Override
-  public ContactDTO meetContact(int idContact, String meetingType) {
-    ContactDTO contact = getOneContactByStageId(idContact);
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contacts SET state = 'rencontre', meeting_type = ? ,"
-            + " _version=_version+1 WHERE id_contact = ? AND _version=?"
-    )) {
-      preparedStatement.setString(1, meetingType);
-      preparedStatement.setInt(2, idContact);
-      updateVersionFromDB(contact);
-      preparedStatement.setInt(3, contact.getVersion());
+  private ContactDTO updateContactState(int contactId, String newState,
+      String reasonOrMeetingType) {
+    String sqlQuery;
+    if (newState.equals("refuse")) {
+      sqlQuery =
+          "UPDATE pae.contacts SET state = ?, reason_for_refusal = ?, _version = _version + 1"
+              + " WHERE id_contact = ? AND _version = ?";
+    } else if (newState.equals("rencontre")) {
+      sqlQuery = "UPDATE pae.contacts SET state = ?, meeting_type = ?, _version = _version + 1"
+          + " WHERE id_contact = ? AND _version = ?";
+    } else {
+      sqlQuery = "UPDATE pae.contacts SET state = ?, _version = _version + 1"
+          + " WHERE id_contact = ? AND _version = ?";
+    }
+
+    ContactDTO contact = getOneContactByStageId(contactId);
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(sqlQuery)) {
+      preparedStatement.setString(1, newState);
+      if (newState.equals("refuse") || newState.equals("rencontre")) {
+        preparedStatement.setString(2, reasonOrMeetingType);
+        preparedStatement.setInt(3, contactId);
+        updateVersionFromDB(contact);
+        preparedStatement.setInt(4, contact.getVersion());
+      } else {
+        preparedStatement.setInt(2, contactId);
+        updateVersionFromDB(contact);
+        preparedStatement.setInt(3, contact.getVersion());
+      }
+
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
             "SELECT * FROM pae.contacts WHERE id_contact = ?"
         )) {
-          selectStatement.setInt(1, idContact);
+          selectStatement.setInt(1, contactId);
           try (ResultSet rs = selectStatement.executeQuery()) {
             if (rs.next()) {
               return getContactMethodFromDB(rs);
@@ -153,72 +171,20 @@ public class ContactDAOImpl implements ContactDAO {
       throw new FatalError("Error processing result set", e);
     }
     return null;
+  }
+
+  public ContactDTO meetContact(int idContact, String meetingType) {
+    return updateContactState(idContact, "rencontre", meetingType);
   }
 
   @Override
   public ContactDTO stopFollowContact(int contactId) {
-    ContactDTO contact = getOneContactByStageId(contactId);
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contacts SET state = 'suivis stoppe', _version = _version + 1"
-            + " WHERE id_contact = ? AND _version= ?"
-    )) {
-      preparedStatement.setInt(1, contactId);
-      updateVersionFromDB(contact);
-      preparedStatement.setInt(2, contact.getVersion());
-      int rowsAffected = preparedStatement.executeUpdate();
-      if (rowsAffected > 0) {
-        try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
-            "SELECT * FROM pae.contacts WHERE id_contact = ?"
-        )) {
-          selectStatement.setInt(1, contactId);
-          try (ResultSet rs = selectStatement.executeQuery()) {
-            if (rs.next()) {
-              return getContactMethodFromDB(rs);
-            }
-          }
-        }
-      }
-      if (rowsAffected == 0) {
-        throw new OptimisticLockException("Contact was updated by another transaction");
-      }
-    } catch (Exception e) {
-
-      throw new FatalError("Error processing result set", e);
-    }
-    return null;
+    return updateContactState(contactId, "suivis stoppe", null);
   }
 
   @Override
   public ContactDTO refusedContact(int contactId, String refusalReason) {
-    ContactDTO contact = getOneContactByStageId(contactId);
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contacts SET state = 'refuse', reason_for_refusal = ? , _version=_version+1"
-            + " WHERE id_contact = ? AND _version=?"
-    )) {
-      preparedStatement.setString(1, refusalReason);
-      preparedStatement.setInt(2, contactId);
-      updateVersionFromDB(contact);
-      preparedStatement.setInt(3, contact.getVersion());
-      int rowsAffected = preparedStatement.executeUpdate();
-      if (rowsAffected > 0) {
-        try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
-            "SELECT * FROM pae.contacts WHERE id_contact = ?"
-        )) {
-          selectStatement.setInt(1, contactId);
-          try (ResultSet rs = selectStatement.executeQuery()) {
-            if (rs.next()) {
-              return getContactMethodFromDB(rs);
-            }
-          }
-        }
-      }
-      if (rowsAffected == 0) {
-        throw new OptimisticLockException("Contact was updated by another transaction");
-      }
-    } catch (Exception e) {
-      throw new FatalError("Error processing result set", e);
-    }
-    return null;
+    return updateContactState(contactId, "refuse", refusalReason);
   }
 
   /**
