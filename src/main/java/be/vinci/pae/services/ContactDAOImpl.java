@@ -37,7 +37,7 @@ public class ContactDAOImpl implements ContactDAO {
             + "VALUES (?, ?, ?, ?, ?, ?, ?, 0)"
     )) {
       int contactId = nextItemId();
-      preparedStatement.setString(1, "initié");
+      preparedStatement.setString(1, "initie");
       preparedStatement.setInt(2, contactId);
       preparedStatement.setInt(3, user.getId());
       preparedStatement.setInt(4, entreprise.getId());
@@ -127,7 +127,7 @@ public class ContactDAOImpl implements ContactDAO {
   public ContactDTO meetContact(int idContact, String meetingType) {
     ContactDTO contact = getOneContactByStageId(idContact);
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contact SET state = 'rencontré', meeting_type = ? , _version=_version+1 WHERE id_contact = ?"
+        "UPDATE pae.contact SET state = 'rencontre', meeting_type = ? , _version=_version+1 WHERE id_contact = ?"
     )) {
       preparedStatement.setString(1, meetingType);
       preparedStatement.setInt(2, idContact);
@@ -159,7 +159,7 @@ public class ContactDAOImpl implements ContactDAO {
   public ContactDTO stopFollowContact(int contactId) {
     ContactDTO contact = getOneContactByStageId(contactId);
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contact SET state = 'suivis stoppé', _version = _version + 1 WHERE id_contact = ? AND _version= ?"
+        "UPDATE pae.contact SET state = 'suivis stoppe', _version = _version + 1 WHERE id_contact = ? AND _version= ?"
     )) {
       preparedStatement.setInt(1, contactId);
       updateVersionFromDB(contact);
@@ -190,7 +190,7 @@ public class ContactDAOImpl implements ContactDAO {
   public ContactDTO refusedContact(int contactId, String refusalReason) {
     ContactDTO contact = getOneContactByStageId(contactId);
     try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
-        "UPDATE pae.contact SET state = 'refusé', reason_for_refusal = ? , _version=_version+1 WHERE id_contact = ? AND _version=?"
+        "UPDATE pae.contact SET state = 'refuse', reason_for_refusal = ? , _version=_version+1 WHERE id_contact = ? AND _version=?"
     )) {
       preparedStatement.setString(1, refusalReason);
       preparedStatement.setInt(2, contactId);

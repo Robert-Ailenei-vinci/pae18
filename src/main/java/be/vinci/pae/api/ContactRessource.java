@@ -109,7 +109,7 @@ public class ContactRessource {
    * @return the contact updated.
    */
   @PUT
-  @Path("met")
+  @Path("meet")
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
   public ContactDTO meetContact(JsonNode json) {
