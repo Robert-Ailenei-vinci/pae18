@@ -4,7 +4,6 @@ import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.EntrepriseNotFoundException;
-import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.OptimisticLockException;
 import be.vinci.pae.exception.SchoolYearNotFoundException;
@@ -88,8 +87,6 @@ public class WebExceptionMapper implements ExceptionMapper<Throwable> {
           .entity(exception.getMessage())
           .build();
     }
-
-
     return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
         .entity(exception.getMessage())
         .build();
