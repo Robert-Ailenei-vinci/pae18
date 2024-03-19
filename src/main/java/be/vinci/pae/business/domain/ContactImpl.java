@@ -93,7 +93,7 @@ public class ContactImpl implements Contact {
 
   @Override
   public boolean checkStopFollow() {
-    if (state.equals("initié") || state.equals("rencontré")) {
+    if (state.equals("initie") || state.equals("rencontre")) {
       return true;
     }
     return false;
@@ -101,7 +101,7 @@ public class ContactImpl implements Contact {
 
   @Override
   public boolean checkRefused() {
-    if (state.equals("rencontré")) {
+    if (state.equals("rencontre")) {
       return true;
     }
     return false;
@@ -109,7 +109,7 @@ public class ContactImpl implements Contact {
 
   @Override
   public boolean checkMeet() {
-    if (state.equals("initié")) {
+    if (state.equals("initie")) {
       return true;
     }
     return false;

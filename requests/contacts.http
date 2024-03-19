@@ -48,7 +48,7 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "5"
+  "id_contact" : "2"
 }
 
 ### refused a contact
@@ -57,7 +57,7 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "5",
+  "id_contact" : "3",
   "refusalReason" : "pas de place"
 
 }
@@ -68,6 +68,6 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "3",
+  "id_contact" : "4",
   "meetingType" : "sur place"
 }
