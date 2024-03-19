@@ -1,6 +1,7 @@
 package be.vinci.pae.business.controller;
 
 import be.vinci.pae.business.domain.DomainFactory;
+import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
@@ -103,7 +104,7 @@ public class UserUCCImpl implements UserUCC {
 
     if (password == null) {
       user.setPassword("");
-    } else {
+    } else {//did this because if I don't want to change psw, it will be null, look at dao if's
       String hashedPassword = user.hashPassword(password);
       user.setPassword(hashedPassword);
     }
@@ -111,6 +112,8 @@ public class UserUCCImpl implements UserUCC {
     user.setLastName(lname);
     user.setFirstName(fname);
     user.setPhoneNum(phoneNum);
+    SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
+    user.setSchoolYear(academicYear);
     user.setRegistrationDate(LocalDate.now().toString());
     myUserDAO.changeUser(user);
 

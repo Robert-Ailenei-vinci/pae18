@@ -116,4 +116,18 @@ public interface ContactDTO {
    * @param entreprise the user to set for the contact
    */
   void setEntreprise(EntrepriseDTO entreprise);
+
+  /**
+   * Retrieves the version of the contact.
+   *
+   * @return the version of the contact
+   */
+  int getVersion();
+
+  /**
+   * Sets the new version of the contact.
+   *
+   * @param version of the contact to be set
+   */
+  void setVersion(int version);
 }

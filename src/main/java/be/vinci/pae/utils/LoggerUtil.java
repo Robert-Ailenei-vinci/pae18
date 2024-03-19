@@ -11,6 +11,9 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * Logger Class.
+ */
 public class LoggerUtil {
 
   private static final Logger logger = Logger.getLogger(LoggerUtil.class.getName());
@@ -48,10 +51,21 @@ public class LoggerUtil {
     }
   }
 
+  /**
+   * the lofInfo.
+   *
+   * @param message the message.
+   */
   public static void logInfo(String message) {
     logger.info(message);
   }
 
+  /**
+   * add a error in log.
+   *
+   * @param message   the message.
+   * @param throwable the upstream exception.
+   */
   public static void logError(String message, Throwable throwable) {
     logger.log(Level.SEVERE, message, throwable);
   }

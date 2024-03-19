@@ -3,6 +3,7 @@ package be.vinci.pae.services;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.exception.OptimisticLockException;
 import be.vinci.pae.exception.UserNotFoundException;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
@@ -35,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
     PreparedStatement getAllUsers = dalServices.getPreparedStatement(
         "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
             + " u.phone_number, u.psw, u.registration_date,"
-            + " u.school_year, s.years_format AS academic_year "
+            + " u.school_year, s.years_format AS academic_year, u._version "
             + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year");
     List<UserDTO> users = new ArrayList<>();
     try (ResultSet rs = getAllUsers.executeQuery()) {
@@ -64,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
         "SELECT u.id_user, u.email, u.role_u, u.last_name,"
             + " u.first_name, u.phone_number, u.psw,"
             + " u.registration_date, u.school_year,"
-            + " s.years_format AS academic_year "
+            + " s.years_format AS academic_year, u._version "
             + "FROM pae.users u, pae.school_years s WHERE"
             + " u.school_year=s.id_year AND u.email=?")) {
       preparedStatement.setString(1, email);
@@ -92,7 +93,7 @@ public class UserDAOImpl implements UserDAO {
         "SELECT u.id_user, u.email, u.role_u, u.last_name, "
             + "u.first_name, u.phone_number, u.psw,"
             + " u.registration_date, u.school_year,"
-            + " s.years_format AS academic_year"
+            + " s.years_format AS academic_year, u._version "
             + " FROM pae.users u, pae.school_years s WHERE"
             + " u.school_year=s.id_year AND u.id_user=?")) {
       preparedStatement.setInt(1, id);
@@ -121,6 +122,7 @@ public class UserDAOImpl implements UserDAO {
       user.setRegistrationDate(rs.getString("registration_date"));
       user.setSchoolYearId(rs.getInt("school_year"));
       user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
+      user.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
     }
@@ -159,7 +161,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     String sql3 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
-        + " psw, registration_date, school_year) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql3)) {
       stmt.setString(1, user.getEmail());
       stmt.setString(2, user.getRole());
@@ -211,11 +213,14 @@ public class UserDAOImpl implements UserDAO {
       parameters.add(user.getPassword());
     }
 
-    // Remove the last comma and space
+// Remove the last comma and space
     sql.delete(sql.length() - 2, sql.length());
 
-    sql.append(" WHERE email = ?");
+    sql.append(", _version = _version + 1 WHERE email = ? AND _version = ?;");
+
     parameters.add(user.getEmail());
+    getVersionFromDB(user);
+    parameters.add(user.getVersion());
 
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
       for (int i = 0; i < parameters.size(); i++) {
@@ -225,11 +230,16 @@ public class UserDAOImpl implements UserDAO {
           stmt.setInt(i + 1, (Integer) parameters.get(i));
         }
       }
-      stmt.executeUpdate();
+
+      if (stmt.executeUpdate() == 0) {
+        throw new OptimisticLockException("User was updated by another transaction");
+      }
+
+      System.out.println("User updated");
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
     }
-    return user;
+    return getOne(user.getEmail());
   }
 
   /**
@@ -259,5 +269,21 @@ public class UserDAOImpl implements UserDAO {
       throw new FatalError("Error processing result set", e);
     }
     return 0; // return 0 if no id was found
+  }
+
+  private void getVersionFromDB(UserDTO user) {
+    try (PreparedStatement versionStmt = dalServices.getPreparedStatement(
+        "SELECT _version FROM pae.users WHERE email = ?")) {
+      versionStmt.setString(1, user.getEmail());
+      try (ResultSet rs = versionStmt.executeQuery()) {
+        if (rs.next()) {
+          // Update the version of the UserDTO object in memory
+          user.setVersion(rs.getInt("_version"));
+          System.out.println(user.getVersion());
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
   }
 }

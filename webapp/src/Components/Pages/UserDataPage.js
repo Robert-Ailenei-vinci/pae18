@@ -94,7 +94,7 @@ async function renderPersonnalInfoPage() {
     {label: 'Email: ', value: user.email},
     {label: 'Numéro de Téléphone: ', value: user.phoneNum},
     {label: 'Date d\'enregistrement: ', value: user.registrationDate},
-    {label: 'Année académique: ', value: user.schoolYearFormat},
+    {label: 'Année académique: ', value: user.schoolYear},
     {label: 'Role: ', value: user.role}
   ];
 

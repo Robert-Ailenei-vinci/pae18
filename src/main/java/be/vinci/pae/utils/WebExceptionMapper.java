@@ -5,6 +5,7 @@ import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.exception.OptimisticLockException;
 import be.vinci.pae.exception.SchoolYearNotFoundException;
 import be.vinci.pae.exception.StageNotFoundException;
 import be.vinci.pae.exception.SupervisorNotFoundException;
@@ -16,6 +17,9 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import java.sql.SQLException;
 
+/**
+ * the WebExceptionMapper.
+ */
 @Provider
 public class WebExceptionMapper implements ExceptionMapper<Throwable> {
 
@@ -39,7 +43,11 @@ public class WebExceptionMapper implements ExceptionMapper<Throwable> {
           .entity(exception.getMessage())
           .build();
     }
-
+    if (exception instanceof OptimisticLockException) {
+      return Response.status(Response.Status.CONFLICT)
+          .entity(exception.getMessage())
+          .build();
+    }
     if (exception instanceof FatalError) {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
           .entity(exception.getMessage())
@@ -82,7 +90,6 @@ public class WebExceptionMapper implements ExceptionMapper<Throwable> {
           .entity(exception.getMessage())
           .build();
     }
-
     return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
         .entity(exception.getMessage())
         .build();

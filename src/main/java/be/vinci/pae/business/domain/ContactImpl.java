@@ -12,6 +12,7 @@ public class ContactImpl implements Contact {
   private int schoolYearId;
   private String reasonForRefusal;
   private String meetingType;
+  private int version;
   private EntrepriseDTO entreprise;
 
   @Override
@@ -89,5 +90,40 @@ public class ContactImpl implements Contact {
 
   public void setEntreprise(EntrepriseDTO entreprise) {
     this.entreprise = entreprise;
+  }
+
+  @Override
+  public int getVersion() {
+    return version;
+  }
+
+  @Override
+  public void setVersion(int version) {
+    this.version = version;
+  }
+
+
+  @Override
+  public boolean checkStopFollow() {
+    if (state.equals("initie") || state.equals("rencontre")) {
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public boolean checkRefused() {
+    if (state.equals("rencontre")) {
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public boolean checkMeet() {
+    if (state.equals("initie")) {
+      return true;
+    }
+    return false;
   }
 }
