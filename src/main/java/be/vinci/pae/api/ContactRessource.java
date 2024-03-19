@@ -87,7 +87,7 @@ public class ContactRessource {
   }
 
   /**
-   * Retrieves all contacts associated with one user.
+   * Retrieves all  contacts associated with one user.
    *
    * @param requestContext the request context
    * @return the list of contacts associated with the user
