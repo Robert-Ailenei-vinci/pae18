@@ -17,6 +17,9 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import java.sql.SQLException;
 
+/**
+ * the WebExceptionMapper.
+ */
 @Provider
 public class WebExceptionMapper implements ExceptionMapper<Throwable> {
 

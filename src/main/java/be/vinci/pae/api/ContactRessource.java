@@ -46,7 +46,8 @@ public class ContactRessource {
   /**
    * Adds a contact.
    *
-   * @param json The JSON representation of the contact to be added.
+   * @param requestContext the auth user.
+   * @param json           The JSON representation of the contact to be added.
    * @return The added contact.
    * @throws BadRequestException If user, entreprise, or school year is missing or not recognized.
    */
@@ -106,7 +107,8 @@ public class ContactRessource {
   /**
    * path to meet a contact.
    *
-   * @param json the id and meeting type of the contact.
+   * @param requestContext the auth user.
+   * @param json           the id and meeting type of the contact.
    * @return the contact updated.
    */
   @PUT
@@ -129,7 +131,8 @@ public class ContactRessource {
   /**
    * path to stop following a contact.
    *
-   * @param json the id of the contact.
+   * @param requestContext the auth user.
+   * @param json           the id of the contact.
    * @return the contact updated.
    */
   @PUT
@@ -149,10 +152,12 @@ public class ContactRessource {
     return myContactUCC.stopFollowContact(contactId, userId);
   }
 
+
   /**
    * path to refuse a contact.
    *
-   * @param json the id and reason pf refusal of the contact.
+   * @param requestContext the auth user.
+   * @param json           the id and reason pf refusal of the contact.
    * @return the contact updated.
    */
   @PUT
