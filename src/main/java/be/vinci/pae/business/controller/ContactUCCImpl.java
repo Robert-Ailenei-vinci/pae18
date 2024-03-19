@@ -1,12 +1,14 @@
 package be.vinci.pae.business.controller;
 
-import be.vinci.pae.business.domain.*;
+import be.vinci.pae.business.domain.Contact;
+import be.vinci.pae.business.domain.ContactDTO;
+import be.vinci.pae.business.domain.EntrepriseDTO;
+import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.services.ContactDAO;
-import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
-
 import java.util.List;
 
 /**
