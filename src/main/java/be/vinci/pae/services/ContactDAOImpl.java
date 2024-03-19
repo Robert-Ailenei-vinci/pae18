@@ -219,6 +219,29 @@ public class ContactDAOImpl implements ContactDAO {
     return null;
   }
 
+  /**
+   * get one contact by id.
+   *
+   * @param idContact the id of contact.
+   * @return the contact.
+   */
+  @Override
+  public ContactDTO getOneContactById(int idContact) {
+    PreparedStatement getOneContact = dalServices.getPreparedStatement(
+        "SELECT * FROM pae.contacts WHERE id_contact = ?");
+    try {
+      getOneContact.setInt(1, idContact);
+      try (ResultSet rs = getOneContact.executeQuery()) {
+        if (rs.next()) {
+          return getContactMethodFromDB(rs);
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return null;
+  }
+
   private void updateVersionFromDB(ContactDTO contact) {
     try (PreparedStatement versionStmt = dalServices.getPreparedStatement(
         "SELECT _version FROM pae.contacts WHERE id_contact = ?")) {
