@@ -62,7 +62,7 @@ public class ContactRessource {
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int userId = user.getId();
     int entrepriseId = json.get("entreprise").asInt();
-    int schoolYearId = json.get("schoolYear").asInt();
+    int schoolYearId = user.getSchooYearId();
 
     // Try to get user, entreprise, and school year
     UserDTO userDTO = myUserUCC.getOne(userId);
@@ -112,6 +112,7 @@ public class ContactRessource {
   @PUT
   @Path("meet")
   @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public ContactDTO meetContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
@@ -157,6 +158,7 @@ public class ContactRessource {
   @PUT
   @Path("refused")
   @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
