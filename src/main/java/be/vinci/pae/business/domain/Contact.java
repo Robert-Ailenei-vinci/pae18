@@ -5,4 +5,9 @@ package be.vinci.pae.business.domain;
  */
 public interface Contact extends ContactDTO {
 
+  boolean checkStopFollow();
+
+  boolean checkRefused();
+
+  boolean checkMeet();
 }

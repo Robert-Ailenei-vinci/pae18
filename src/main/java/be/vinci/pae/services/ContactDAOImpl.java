@@ -70,7 +70,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage()); //No error message
+      throw new FatalError("Error processing result set", e);
     }
     return contacts;
   }
@@ -118,7 +118,7 @@ public class ContactDAOImpl implements ContactDAO {
         return rs.getInt(1) + 1;
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error processing result set", e);
     }
     return 1;
   }
@@ -136,7 +136,7 @@ public class ContactDAOImpl implements ContactDAO {
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
-            "SELECT * FROM pae.contact WHERE id_contact = ?"
+            "SELECT * FROM pae.contacts WHERE id_contact = ?"
         )) {
           selectStatement.setInt(1, idContact);
           try (ResultSet rs = selectStatement.executeQuery()) {
@@ -167,7 +167,7 @@ public class ContactDAOImpl implements ContactDAO {
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
-            "SELECT * FROM pae.contact WHERE id_contact = ?"
+            "SELECT * FROM pae.contacts WHERE id_contact = ?"
         )) {
           selectStatement.setInt(1, contactId);
           try (ResultSet rs = selectStatement.executeQuery()) {
@@ -181,6 +181,7 @@ public class ContactDAOImpl implements ContactDAO {
         throw new OptimisticLockException("Contact was updated by another transaction");
       }
     } catch (Exception e) {
+
       throw new BadRequestException("Error processing result set");
     }
     return null;
@@ -199,7 +200,7 @@ public class ContactDAOImpl implements ContactDAO {
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
-            "SELECT * FROM pae.contact WHERE id_contact = ?"
+            "SELECT * FROM pae.contacts WHERE id_contact = ?"
         )) {
           selectStatement.setInt(1, contactId);
           try (ResultSet rs = selectStatement.executeQuery()) {

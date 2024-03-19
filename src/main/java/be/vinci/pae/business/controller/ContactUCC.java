@@ -34,24 +34,27 @@ public interface ContactUCC {
    *
    * @param idContact   the id of the contact to set.
    * @param meetingType the type od the meeting.
+   * @param userId      the id of user.
    * @return the contact.
    */
-  ContactDTO meetContact(int idContact, String meetingType);
+  ContactDTO meetContact(int idContact, String meetingType, int userId);
 
   /**
    * set the state of a contact to stop followed.
    *
    * @param contactId the id of the contact to set.
+   * @param userId    the id of user.
    * @return the contact.
    */
-  ContactDTO stopFollowContact(int contactId);
+  ContactDTO stopFollowContact(int contactId, int userId);
 
   /**
    * set the state of a contact to refused and the reason.
    *
    * @param contactId     the id of the contact to set.
    * @param refusalReason the type od the meeting.
+   * @param userId        the id of user.
    * @return the contact.
    */
-  ContactDTO refusedContact(int contactId, String refusalReason);
+  ContactDTO refusedContact(int contactId, String refusalReason, int userId);
 }

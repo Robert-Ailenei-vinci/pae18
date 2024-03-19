@@ -53,13 +53,12 @@ public class ContactRessource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public ContactDTO addContact(JsonNode json) {
-    if (!json.hasNonNull("user")
-        || !json.hasNonNull("entreprise")
-        || !json.hasNonNull("schoolYear")) {
+  public ContactDTO addContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    if (!json.hasNonNull("entreprise")) {
       throw new BadRequestException("User, entreprise, and school year required");
     }
-    int userId = json.get("user").asInt();
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
     int entrepriseId = json.get("entreprise").asInt();
     int schoolYearId = json.get("schoolYear").asInt();
 
@@ -112,14 +111,16 @@ public class ContactRessource {
   @Path("meet")
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
-  public ContactDTO meetContact(JsonNode json) {
-    if (!json.hasNonNull("id_contact") || json.hasNonNull("meetingType")) {
-      throw new BadRequestException("contact id and meeting type required");
+  public ContactDTO meetContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
+      throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
     }
     int contactId = json.get("id_contact").asInt();
     String meetingType = json.get("meetingType").asText();
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
 
-    return myContactUCC.meetContact(contactId, meetingType);
+    return myContactUCC.meetContact(contactId, meetingType, userId);
   }
 
   /**
@@ -131,14 +132,18 @@ public class ContactRessource {
   @PUT
   @Path("stopFollow")
   @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public ContactDTO stopFollowContact(JsonNode json) {
+  public ContactDTO stopFollowContact(@Context ContainerRequestContext requestContext,
+      JsonNode json) {
     if (!json.hasNonNull("id_contact")) {
       throw new BadRequestException("contact id required");
     }
     int contactId = json.get("id_contact").asInt();
-
-    return myContactUCC.stopFollowContact(contactId);
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
+    System.out.println(userId);
+    return myContactUCC.stopFollowContact(contactId, userId);
   }
 
   /**
@@ -151,13 +156,15 @@ public class ContactRessource {
   @Path("refused")
   @Consumes(MediaType.APPLICATION_JSON)
   @Authorize
-  public ContactDTO refusedContact(JsonNode json) {
-    if (!json.hasNonNull("id_contact") || json.hasNonNull("refusalReason")) {
+  public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
       throw new BadRequestException("contact id and refusal reason required");
     }
     int contactId = json.get("id_contact").asInt();
     String refusalReason = json.get("refusalReason").asText();
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
 
-    return myContactUCC.refusedContact(contactId, refusalReason);
+    return myContactUCC.refusedContact(contactId, refusalReason, userId);
   }
 }
