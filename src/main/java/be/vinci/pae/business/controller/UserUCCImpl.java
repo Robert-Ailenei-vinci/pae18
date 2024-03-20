@@ -5,6 +5,7 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
 import java.time.LocalDate;
@@ -20,6 +21,9 @@ public class UserUCCImpl implements UserUCC {
    */
   @Inject
   private UserDAO myUserDAO;
+
+  @Inject
+  private DALServices dalServices;
 
   @Inject
   private DomainFactory myDomainFactory;
@@ -60,20 +64,34 @@ public class UserUCCImpl implements UserUCC {
 
     User existingUser = null;
 
-    existingUser = (User) myUserDAO.getOne(email);
-    if (existingUser != null) {
-      throw new BizException("User already exists");
+    try {
+      // Start a new transaction
+      dalServices.startTransaction();
+
+      existingUser = (User) myUserDAO.getOne(email);
+      if (existingUser != null) {
+        throw new BizException("User already exists");
+      }
+      User user = (User) myDomainFactory.getUser();
+      user.setEmail(email);
+      String hashedPassword = user.hashPassword(password);
+      user.setPassword(hashedPassword);
+      user.setLastName(lname);
+      user.setFirstName(fname);
+      user.setPhoneNum(phoneNum);
+      user.setRegistrationDate(LocalDate.now().toString());
+      user.setRole(role);
+      boolean result = myUserDAO.addUser(user);
+
+      // Commit the transaction
+      dalServices.commitTransaction();
+
+      return result;
+    } catch (Exception e) {
+      // Rollback the transaction in case of an error
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    User user = (User) myDomainFactory.getUser();
-    user.setEmail(email);
-    String hashedPassword = user.hashPassword(password);
-    user.setPassword(hashedPassword);
-    user.setLastName(lname);
-    user.setFirstName(fname);
-    user.setPhoneNum(phoneNum);
-    user.setRegistrationDate(LocalDate.now().toString());
-    user.setRole(role);
-    return myUserDAO.addUser(user);
   }
 
   @Override

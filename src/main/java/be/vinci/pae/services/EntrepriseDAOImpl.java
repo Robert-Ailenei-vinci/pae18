@@ -18,7 +18,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
-  private DALServices dalServices;
+  private DALBackServices dalBackServices;
 
   /**
    * Retrieves an enterprise by its identifier from the database.
@@ -29,7 +29,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
    */
   @Override
   public EntrepriseDTO getOne(int id) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT * FROM pae.entreprises WHERE id_entreprise = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
@@ -51,7 +51,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
    */
   @Override
   public List<EntrepriseDTO> getAll() {
-    PreparedStatement getAllUsers = dalServices.getPreparedStatement(
+    PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
         "SELECT * FROM pae.entreprises");
     List<EntrepriseDTO> entreprises = new ArrayList<>();
     try (ResultSet rs = getAllUsers.executeQuery()) {
