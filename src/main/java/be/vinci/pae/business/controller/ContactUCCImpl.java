@@ -4,6 +4,7 @@ import be.vinci.pae.business.domain.Contact;
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.BizExceptionNotFound;
@@ -22,6 +23,12 @@ public class ContactUCCImpl implements ContactUCC {
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
+    if (!((User) user).checkIsStudent()) {
+      LoggerUtil.logError("BizError", new BizException(
+          "This user is not a student."));
+      throw new BizException(
+          "This user is not a student.");
+    }
     Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
     if (contact.checkUniqueUserEnterpriseSchoolYear(
         myContactDAO.getAllContactsByUserId(user.getId()), entreprise, schoolYear)) {
