@@ -147,4 +147,17 @@ public interface UserDTO {
    */
   void setSchoolYear(SchoolYearDTO schoolYear);
 
+  /**
+   * get the version.
+   *
+   * @return the version.
+   */
+  int getVersion();
+
+  /**
+   * set a new version.
+   *
+   * @param version the new version.
+   */
+  void setVersion(int version);
 }

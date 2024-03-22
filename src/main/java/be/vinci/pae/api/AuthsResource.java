@@ -4,6 +4,8 @@ import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.exception.AuthorisationException;
+import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.utils.Config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -21,7 +23,6 @@ import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import java.time.Instant;
 import java.util.Date;
 
@@ -63,7 +64,7 @@ public class AuthsResource {
   public ObjectNode login(JsonNode json) {
     // Get and check credentials
     if (!json.hasNonNull("login") || !json.hasNonNull("password")) {
-      throw new WebApplicationException("login or password required", Response.Status.BAD_REQUEST);
+      throw new BadRequestException("Login and password required");
     }
     String login = json.get("login").asText();
     String password = json.get("password").asText();
@@ -71,8 +72,7 @@ public class AuthsResource {
     // Try to login
     UserDTO publicUser = userUCC.login(login, password);
     if (publicUser == null) {
-      throw new WebApplicationException("Login or password incorrect",
-          Response.Status.UNAUTHORIZED);
+      throw new AuthorisationException("Login failed");
     }
     String token;
     Instant now = Instant.now();
@@ -94,7 +94,7 @@ public class AuthsResource {
           .put("lastName", publicUser.getLastName())
           .put("phoneNum", publicUser.getPhoneNum())
           .put("registrationDate", publicUser.getRegistrationDate())
-          .put("schoolYearFormat", publicUser.getSchoolYear().getYearFormat());
+          .put("schoolYear", publicUser.getSchoolYear().getYearFormat());
       return toReturn;
 
     } catch (Exception e) {
@@ -113,13 +113,40 @@ public class AuthsResource {
   @Path("user")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public UserDTO getUser(@Context ContainerRequestContext requestContext) {
+  public ObjectNode getUser(@Context ContainerRequestContext requestContext) {
+    System.out.println("refresh");
     UserDTO user = (UserDTO) requestContext.getProperty("user");
 
     if (user == null) {
-      throw new WebApplicationException("User not found", Response.Status.UNAUTHORIZED);
+      throw new AuthorisationException("User not recognised");
     }
-    return user;
+    String token;
+    Instant now = Instant.now();
+    Instant expirationTime = now.plusSeconds(3600); // 1 heure à partir de maintenant
+
+    try {
+      token = JWT.create()
+          .withIssuer("auth0")
+          .withClaim("user", user.getId())
+          .withExpiresAt(Date.from(expirationTime))
+          .sign(this.jwtAlgorithm);
+      System.out.println("Token " + token);
+      ObjectNode toReturn = jsonMapper.createObjectNode()
+          .put("token", token)
+          .put("id", user.getId())
+          .put("email", user.getEmail())
+          .put("role", user.getRole())
+          .put("firstName", user.getFirstName())
+          .put("lastName", user.getLastName())
+          .put("phoneNum", user.getPhoneNum())
+          .put("registrationDate", user.getRegistrationDate())
+          .put("schoolYearFormat", user.getSchoolYear().getYearFormat());
+      return toReturn;
+
+    } catch (Exception e) {
+      System.out.println("Unable to create token");
+      return null;
+    }
   }
 
   /**

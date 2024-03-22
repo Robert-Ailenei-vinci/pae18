@@ -2,6 +2,8 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
+import be.vinci.pae.exception.EntrepriseNotFoundException;
+import be.vinci.pae.exception.FatalError;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +25,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
    *
    * @param id the identifier of the enterprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   *     enterprise with the given identifier exists
+   * enterprise with the given identifier exists
    */
   @Override
   public EntrepriseDTO getOne(int id) {
@@ -37,7 +39,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         }
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new EntrepriseNotFoundException("Entreprise not found with id : " + id, e);
     }
     return null;
   }
@@ -59,7 +61,8 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         entreprises.add(entreprise);
       }
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      System.out.println(
+          e.getMessage()); // no possible error, only if not connected to db, but not managed here
     }
     return entreprises;
   }
@@ -75,7 +78,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       entreprise.setIsBlacklisted(rs.getBoolean("blacklisted"));
       entreprise.setTradeName(rs.getString("trade_name"));
     } catch (Exception e) {
-      System.out.println(e.getMessage());
+      throw new FatalError("Error while getting entreprise from db", e);
     }
     return entreprise;
   }

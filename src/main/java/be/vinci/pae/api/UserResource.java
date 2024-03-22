@@ -46,6 +46,7 @@ public class UserResource {
    */
 
   @GET
+  @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<UserDTO> getAll() {
@@ -56,10 +57,10 @@ public class UserResource {
   /**
    * Adds a user. This method is annotated with {@link jakarta.ws.rs.POST} and
    * {@link jakarta.ws.rs.Consumes}, indicating that it handles HTTP POST requests and consumes JSON
-   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize},
-   * indicating that authorization is required to access this endpoint.
+   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize}, indicating
+   * that authorization is required to access this endpoint.
    *
-   * @param json The JSON representation of the user to be added.
+   * @param json           The JSON representation of the user to be added.
    * @param requestContext The context of the HTTP request.
    * @return The added user.
    */
@@ -85,7 +86,7 @@ public class UserResource {
     System.out.println(phoneNum);
     String token = requestContext.getHeaderString("Authorization");
     System.out.println(token);
-
+    
     UserDTO publicUser = myUser.changeData(email, password, lname, fname, phoneNum);
 
     ObjectNode toReturn = jsonMapper.createObjectNode()
@@ -97,7 +98,8 @@ public class UserResource {
         .put("lastName", publicUser.getLastName())
         .put("phoneNum", publicUser.getPhoneNum())
         .put("registrationDate", publicUser.getRegistrationDate())
-        .put("role", publicUser.getRole());
+        .put("role", publicUser.getRole())
+        .put("schoolYear", publicUser.getSchoolYear().getYearFormat());
 
     return toReturn;
   }

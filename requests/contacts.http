@@ -37,7 +37,35 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "user" : "1",
-  "entreprise" : "2",
-  "schoolYear" : "1"
+  "entreprise" : "1"
+}
+
+### stop following a contact
+PUT {{baseUrl}}/contacts/stopFollow
+Content-Type: application/json
+Authorization: {{user}}
+
+{
+  "id_contact" : "7"
+}
+
+### refused a contact
+PUT {{baseUrl}}/contacts/refused
+Content-Type: application/json
+Authorization: {{user}}
+
+{
+  "id_contact" : "5",
+  "refusalReason" : "pas de place"
+
+}
+
+### meet a contact
+PUT {{baseUrl}}/contacts/meet
+Content-Type: application/json
+Authorization: {{user}}
+
+{
+  "id_contact" : "9",
+  "meetingType" : "sur place"
 }

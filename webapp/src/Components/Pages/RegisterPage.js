@@ -227,7 +227,7 @@ if (!roleAdmin && !roleProf && role!=="etudiant") {
   const response = await fetch(`http://localhost:3000/auths/register`, options);
 
   if (!response.ok) {
-    if (response.status === 400) {
+    if (response.status === 409) {
       // Display a popup message for incorrect username or password
       alert("L'utilisateur existe déjà, veuillez vous connecter ou créer un autre compte.");
   } else {
