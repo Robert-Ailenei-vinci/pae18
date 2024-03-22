@@ -93,7 +93,9 @@ class ContactUCCTest {
     userDTO.setRole("professeur");
     EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
     SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
-    when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(contact);
+    List<ContactDTO> contactDTOList = new ArrayList<>();
+    contactDTOList.add(contact);
+    when(contactDAO.getAllContactsByUserId(userDTO.getId())).thenReturn(contactDTOList);
 
     assertThrows(BizException.class,
         () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
