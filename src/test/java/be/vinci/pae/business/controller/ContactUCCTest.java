@@ -1,12 +1,16 @@
 package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.Contact;
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
+import be.vinci.pae.exception.BizException;
+import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import java.util.ArrayList;
@@ -66,14 +70,52 @@ class ContactUCCTest {
     String meetingType = "new type of meeting";
     contact.setMeetingType("type of meeting");
     contactResult.setMeetingType(meetingType);
-    System.out.println(contact);
-    System.out.println(contactResult);
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
     when(contactDAO.meetContact(contact.getId(), meetingType)).thenReturn(contactResult);
 
     assertEquals(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()),
         contactResult);
+  }
+
+  @Test
+  void meetContactNullFromDAO() {
+    String meetingType = "new type of meeting";
+    contact.setMeetingType("type of meeting");
+    contactResult.setMeetingType(meetingType);
+
+    when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
+    when(contactDAO.meetContact(contact.getId(), meetingType)).thenReturn(null);
+
+    assertNull(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()));
+  }
+
+  @Test
+  void meetContactWrongState() {
+    String meetingType = "new type of meeting";
+    contact.setMeetingType("type of meeting");
+    contact.setState("annule");
+    contactResult.setMeetingType(meetingType);
+
+    when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
+    when(contactDAO.meetContact(contact.getId(), meetingType)).thenReturn(contactResult);
+
+    assertThrows(BizException.class,
+        () -> contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()));
+  }
+
+  @Test
+  void meetContactWrongUser() {
+    String meetingType = "new type of meeting";
+    contactResult.setMeetingType(meetingType);
+    contact.setUserId(456);
+
+    when(contactDAO.getOneContactById(contact.getId())).thenReturn(contactResult);
+    when(contactDAO.meetContact(contact.getId(), meetingType)).thenReturn(contactResult);
+
+    // Assert that a BizException is thrown when trying to meet the contact
+    assertThrows(BizExceptionNotFound.class,
+        () -> contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()));
   }
 
   @Test
@@ -88,6 +130,40 @@ class ContactUCCTest {
   }
 
   @Test
+  void stopFollowContactNullFromDAO() {
+    contactResult.setState("suivis stoppe");
+
+    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
+    when(contactDAO.stopFollowContact(contact.getUserId())).thenReturn(null);
+
+    assertNull(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
+  }
+
+  @Test
+  void stopFollowContactWrongUser() {
+    contactResult.setState("suivis stoppe");
+    contact.setUserId(456);
+
+    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
+    when(contactDAO.stopFollowContact(contact.getUserId())).thenReturn(contactResult);
+
+    assertThrows(BizExceptionNotFound.class,
+        () -> contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
+  }
+
+  @Test
+  void stopFollowContactWrongCheckMeet() {
+    contactResult.setState("suivis stoppe");
+    contact.setState("rencontre");
+
+    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
+    when(contactDAO.stopFollowContact(contact.getUserId())).thenReturn(contactResult);
+
+    assertThrows(BizException.class,
+        () -> contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
+  }
+
+  @Test
   void refusedContact() {
     String refusalReason = "raison de refus";
     contact.setState("rencontre");
@@ -99,5 +175,47 @@ class ContactUCCTest {
 
     assertEquals(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()),
         contactResult);
+  }
+
+  @Test
+  void refusedContactWrongState() {
+    String refusalReason = "raison de refus";
+    contact.setState("refuser");
+    contactResult.setState("refuse");
+    contactResult.setReasonForRefusal(refusalReason);
+
+    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
+    when(contactDAO.refusedContact(contact.getUserId(), refusalReason)).thenReturn(contactResult);
+
+    assertThrows(BizException.class,
+        () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
+  }
+
+  @Test
+  void refusedContactWrongUser() {
+    String refusalReason = "raison de refus";
+    contact.setState("rencontre");
+    contact.setUserId(456);
+    contactResult.setState("refuse");
+    contactResult.setReasonForRefusal(refusalReason);
+
+    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
+    when(contactDAO.refusedContact(contact.getUserId(), refusalReason)).thenReturn(contactResult);
+
+    assertThrows(BizExceptionNotFound.class,
+        () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
+  }
+
+  @Test
+  void refusedContactNullFromDAO() {
+    String refusalReason = "raison de refus";
+    contact.setState("rencontre");
+    contactResult.setState("refuse");
+    contactResult.setReasonForRefusal(refusalReason);
+
+    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
+    when(contactDAO.refusedContact(contact.getUserId(), refusalReason)).thenReturn(null);
+
+    assertNull(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
   }
 }
