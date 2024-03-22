@@ -22,5 +22,6 @@ public interface User extends UserDTO {
    */
   String hashPassword(String password);
 
+  boolean checkIsStudent();
 
 }
