@@ -1,6 +1,10 @@
 package be.vinci.pae.utils;
 
 
+import be.vinci.pae.business.controller.EntrepriseUCC;
+import be.vinci.pae.business.controller.EntrepriseUCCImpl;
+import be.vinci.pae.business.controller.SchoolYearUCC;
+import be.vinci.pae.business.controller.SchoolYearUCCImpl;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.controller.UserUCCImpl;
 import be.vinci.pae.business.domain.DomainFactory;
@@ -24,6 +28,11 @@ public class TestApplicationBinder extends AbstractBinder {
     bind(Mockito.mock(UserDAOImpl.class)).to(UserDAO.class);
     bind(DomainFactoryImpl.class).to(DomainFactory.class);
     // Add more bindings for other interfaces as needed
+    //SCHOOLYEAR
+    bind(SchoolYearUCCImpl.class).to(SchoolYearUCC.class);
     bind(Mockito.mock(SchoolYearDAOImpl.class)).to(SchoolYearDAO.class);
+    //ENTREPRISE
+    bind(EntrepriseUCCImpl.class).to(EntrepriseUCC.class);
+    bind(Mockito.mock(UserDAOImpl.class)).to(UserDAO.class);
   }
 }
