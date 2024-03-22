@@ -66,7 +66,7 @@ async function fetchStageData(user) {
     const stageData = await responseStage.json();
     return stageData;
   } catch (error) {
-    return null;
+    return undefined;
   }
 }
 
@@ -148,6 +148,27 @@ async function renderPersonnalInfoPage() {
       td.textContent = contact[key] || '-';
       tr.appendChild(td);
     });
+
+    // Ajouter le bouton pour changer l'état
+    const tdButton = document.createElement('td');
+    const button = document.createElement('button');
+    button.textContent = 'Changer état';
+    button.className = 'btn btn-info';
+    button.addEventListener('click', () => {
+      const form = document.createElement('form');
+      const select = document.createElement('select');
+      ['Rencontré', 'Suivi stoppé', 'Refusé'].forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText;
+        option.textContent = optionText;
+        select.appendChild(option);
+      });
+      form.appendChild(select);
+      // Insérer le formulaire entre le contact et celui en dessous
+      table.insertBefore(form, table.childNodes[index * 2 + 2]); // index * 2 + 2 car chaque tr et chaque formulaire compte comme un enfant
+    });
+    tdButton.appendChild(button);
+    tr.appendChild(tdButton);
 
     tbody.appendChild(tr);
 
