@@ -2,6 +2,7 @@ package be.vinci.pae.api;
 
 import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.UserUCC;
+import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.utils.Config;
 import com.auth0.jwt.JWT;
@@ -41,6 +42,9 @@ public class AuthsResource {
    */
   @Inject
   private UserUCC userUCC;
+
+  @Inject
+  private DomainFactory myDomainFactory;
 
   /**
    * Method for handling user authentication.
@@ -138,6 +142,14 @@ public class AuthsResource {
     String fname = json.get("f_name").asText();
     String phoneNum = json.get("phone_number").asText();
     String role = json.get("role").asText();
-    return userUCC.register(email, password, lname, fname, phoneNum, role);
+    UserDTO user = myDomainFactory.getUser();
+    user.setEmail(email);
+    user.setPassword(password);
+    user.setFirstName(fname);
+    user.setLastName(lname);
+    user.setPhoneNum(phoneNum);
+    user.setRole(role);
+
+    return userUCC.register(user);
   }
 }
