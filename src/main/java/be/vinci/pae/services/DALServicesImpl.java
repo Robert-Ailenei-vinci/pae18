@@ -56,14 +56,14 @@ public class DALServicesImpl implements DALBackServices, DALServices{
 
   public void closeConnection() {
     Connection connection = threadLocalConnection.get();
-    if (connection != null) {
-      try {
+    try {
+      if (connection != null) {
         connection.close();
-      } catch (SQLException e) {
-        throw new FatalError("Unable to close connection: " + e.getMessage(), e);
-      } finally {
-        threadLocalConnection.remove();
       }
+    } catch (SQLException e) {
+      throw new FatalError("Unable to close connection: " + e.getMessage(), e);
+    } finally {
+      threadLocalConnection.remove();
     }
   }
 

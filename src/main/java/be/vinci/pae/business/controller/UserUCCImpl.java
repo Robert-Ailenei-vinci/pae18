@@ -5,6 +5,7 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.DALBackServices;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
@@ -24,6 +25,9 @@ public class UserUCCImpl implements UserUCC {
 
   @Inject
   private DALServices dalServices;
+
+  @Inject
+  private DALBackServices dalBackServices;
 
   @Inject
   private DomainFactory myDomainFactory;
@@ -85,7 +89,6 @@ public class UserUCCImpl implements UserUCC {
 
       // Commit the transaction
       dalServices.commitTransaction();
-
       return result;
     } catch (Exception e) {
       // Rollback the transaction in case of an error
