@@ -107,9 +107,11 @@ public class UserUCCImpl implements UserUCC {
     SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
     user.setSchoolYear(academicYear);
     user.setRegistrationDate(LocalDate.now().toString());
-    myUserDAO.changeUser(user);
-
+    if (myUserDAO.changeUser(user) == null) {
+      return null;
+    }
     return myUserDAO.getOne(email);
   }
+
 
 }
