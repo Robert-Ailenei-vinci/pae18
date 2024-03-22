@@ -9,6 +9,9 @@ import static org.mockito.Mockito.when;
 import be.vinci.pae.business.domain.Contact;
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
+import be.vinci.pae.business.domain.EntrepriseDTO;
+import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.services.ContactDAO;
@@ -46,14 +49,56 @@ class ContactUCCTest {
 
   @Test
   void createOne() {
-    /*UserDTO userDTO = mock(UserDTO.class);
+    UserDTO userDTO = factory.getUser();
+    userDTO.setId(123);
+    userDTO.setRole("etudiant");
     EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
-    SchoolYearDTO schoolYearDTO = mock(SchoolYear.class);
+    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
+    when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenReturn(new ArrayList<>());
     when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(contact);
-    when((User) userDTO).thenReturn(mock(User.class));
 
-    assertEquals(contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO), contact);*/
+    assertEquals(contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO), contact);
   }
+
+  @Test
+  void createOneNullFromDAO() {
+    UserDTO userDTO = factory.getUser();
+    userDTO.setId(123);
+    userDTO.setRole("etudiant");
+    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
+    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
+    when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenReturn(new ArrayList<>());
+    when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(null);
+
+    assertNull(contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
+  }
+
+  @Test
+  void createOneWrongUserRole() {
+    UserDTO userDTO = factory.getUser();
+    userDTO.setId(123);
+    userDTO.setRole("professeur");
+    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
+    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
+    when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(contact);
+
+    assertThrows(BizException.class,
+        () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
+  }
+
+  @Test
+  void createOneWrongUniqueCondition() {
+    UserDTO userDTO = factory.getUser();
+    userDTO.setId(123);
+    userDTO.setRole("professeur");
+    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
+    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
+    when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(contact);
+
+    assertThrows(BizException.class,
+        () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
+  }
+
 
   @Test
   void getAllContactsByUserId() {
