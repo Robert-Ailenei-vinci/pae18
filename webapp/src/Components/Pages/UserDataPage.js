@@ -1,5 +1,6 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 import {
   getRememberMe,
   setAuthenticatedUser,
@@ -9,6 +10,11 @@ import {
 import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
+import {
+  meetContact,
+  refuseContact,
+  stopFollowContact
+} from "./utils/ChangeState";
 
 const UserDataPage = () => {
   clearPage();
@@ -55,6 +61,10 @@ async function fetchStageData(user) {
     const responseStage = await fetch(
         `http://localhost:3000/stages/stageByUserId`, options);
 
+    if (responseStage == null) {
+      return null;
+    }
+
     if (!responseStage.ok) {
       throw new Error(`Failed to fetch stages: ${responseStage.statusText}`);
     }
@@ -62,8 +72,7 @@ async function fetchStageData(user) {
     const stageData = await responseStage.json();
     return stageData;
   } catch (error) {
-    throw new Error(
-        `An error occurred while fetching stage data: ${error.message}`);
+    return undefined;
   }
 }
 
@@ -119,7 +128,7 @@ async function renderPersonnalInfoPage() {
   const tbody = document.createElement('tbody');
   const trHead = document.createElement('tr');
 
-  ['Entreprise', 'Appelation', 'Adresse', 'Mail', 'N°Telephone', 'Etat',
+  ['Entreprise', 'Appelation', 'Adresse', 'Mail', 'N°Telephone', 'Etat', ' ',
     'Lieu/Type de rencontre', 'Raison de refus'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
@@ -140,14 +149,199 @@ async function renderPersonnalInfoPage() {
           tr.appendChild(td);
         });
 
-    ['state', 'meetingType', 'reasonForRefusal'].forEach(key => {
-      const td = document.createElement('td');
-      td.textContent = contact[key] || '-';
-      tr.appendChild(td);
-    });
+    // État
+    const tdState = document.createElement('td');
+    tdState.textContent = contact.state || '-';
+    tr.appendChild(tdState);
+
+    // Bouton pour changer l'état
+    const tdButton = document.createElement('td');
+    const button = document.createElement('button');
+    button.textContent = 'Changer état';
+    button.className = 'btn btn-primary';
+    button.setAttribute('type', 'button');
+    button.setAttribute('data-bs-toggle', 'collapse');
+    button.setAttribute('data-bs-target', '#collapseExample_' + contact.id);
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-controls', 'collapseExample_' + contact.id);
+
+    const divForm = document.createElement('div');
+    divForm.className = 'collapse';
+    divForm.id = 'collapseExample_' + contact.id;
+
+    if (contact.state == "initie") {
+      // Création du formulaire
+      const form = document.createElement('form');
+      const select = document.createElement('select');
+      select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
+      ['Rencontré', 'Suivi stoppé'].forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText;
+        option.textContent = optionText;
+        select.appendChild(option);
+      });
+      form.appendChild(select);
+
+// Création de la zone de texte pour la raison ou le lieu
+      const extraInput = document.createElement('input');
+      extraInput.type = 'text';
+      extraInput.placeholder = 'Lieu';
+      extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
+
+// Gérer l'affichage de la zone de texte en fonction de la sélection
+      select.addEventListener('change', () => {
+        if (select.value === 'Rencontré') {
+          extraInput.style.display = 'block'; // Afficher la zone de texte si "Rencontré" ou "Refusé" est sélectionné
+        } else {
+          extraInput.style.display = 'none'; // Masquer la zone de texte pour les autres options
+        }
+      });
+
+// Création du bouton de soumission
+      const submitButton = document.createElement('button');
+      submitButton.textContent = 'Soumettre';
+      submitButton.className = 'btn btn-primary';
+      submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
+
+// Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
+      form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Empêcher le comportement par défaut du formulaire
+
+        const selectedOption = select.value;
+        let additionalInfo = ''; // Informations supplémentaires à envoyer avec la soumission
+
+        // Si "Rencontré" ou "Refusé" est sélectionné, récupérez le contenu de la zone de texte
+        if (selectedOption === 'Rencontré') {
+          additionalInfo = extraInput.value;
+        }
+
+        // Passer les informations supplémentaires à la fonction appropriée
+        switch (selectedOption) {
+          case 'Rencontré':
+            meetContact(contact.id, additionalInfo);
+            window.location.reload();
+            break;
+          case 'Suivi stoppé':
+            stopFollowContact(contact.id);
+            window.location.reload();
+
+            break;
+          default:
+            // Action par défaut ou erreur
+            alert("Sélectionnez un état");
+        }
+
+        // Fermer le collapsible après la soumission
+        const collapse = document.getElementById(
+            'collapseExample_' + contact.id);
+        const bsCollapse = new bootstrap.Collapse(collapse);
+        bsCollapse.hide();
+      });
+
+// Ajout des éléments au formulaire
+      form.appendChild(extraInput);
+      form.appendChild(submitButton);
+
+// Ajout du formulaire au divForm
+      divForm.appendChild(form);
+
+      tdButton.appendChild(button);
+      tdButton.appendChild(divForm);
+      tr.appendChild(tdButton);
+    }
+
+    if (contact.state == "rencontre") {// Création du formulaire
+      const form = document.createElement('form');
+      const select = document.createElement('select');
+      select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
+      ['Refusé', 'Suivi stoppé'].forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText;
+        option.textContent = optionText;
+        select.appendChild(option);
+      });
+      form.appendChild(select);
+
+// Création de la zone de texte pour la raison ou le lieu
+      const extraInput = document.createElement('input');
+      extraInput.type = 'text';
+      extraInput.placeholder = 'Raison';
+      extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
+
+// Gérer l'affichage de la zone de texte en fonction de la sélection
+      select.addEventListener('change', () => {
+        if (select.value === 'Refusé') {
+          extraInput.style.display = 'block'; // Afficher la zone de texte si "Rencontré" ou "Refusé" est sélectionné
+        } else {
+          extraInput.style.display = 'none'; // Masquer la zone de texte pour les autres options
+        }
+      });
+
+// Création du bouton de soumission
+      const submitButton = document.createElement('button');
+      submitButton.textContent = 'Soumettre';
+      submitButton.className = 'btn btn-primary';
+      submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
+
+// Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
+      form.addEventListener('submit', (event) => {
+        event.preventDefault(); // Empêcher le comportement par défaut du formulaire
+
+        const selectedOption = select.value;
+        let additionalInfo = ''; // Informations supplémentaires à envoyer avec la soumission
+
+        // Si "Rencontré" ou "Refusé" est sélectionné, récupérez le contenu de la zone de texte
+        if (selectedOption === 'Refusé') {
+          additionalInfo = extraInput.value;
+        }
+
+        // Passer les informations supplémentaires à la fonction appropriée
+        switch (selectedOption) {
+          case 'Suivi stoppé':
+            stopFollowContact(contact.id);
+            window.location.reload();
+
+            break;
+          case 'Refusé':
+            refuseContact(contact.id, additionalInfo);
+            window.location.reload();
+
+            break;
+          default:
+            // Action par défaut ou erreur
+            alert("Sélectionnez un état");
+        }
+
+        // Fermer le collapsible après la soumission
+        const collapse = document.getElementById(
+            'collapseExample_' + contact.id);
+        const bsCollapse = new bootstrap.Collapse(collapse);
+        bsCollapse.hide();
+      });
+
+// Ajout des éléments au formulaire
+      form.appendChild(extraInput);
+      form.appendChild(submitButton);
+
+// Ajout du formulaire au divForm
+      divForm.appendChild(form);
+
+      tdButton.appendChild(button);
+      tdButton.appendChild(divForm);
+      tr.appendChild(tdButton);
+    }
+
+    // Lieu/Type de rencontre
+    const tdMeeting = document.createElement('td');
+    tdMeeting.textContent = contact.meetingType || '-';
+    tr.appendChild(tdMeeting);
+
+    // Raison de refus
+    const tdReason = document.createElement('td');
+    tdReason.textContent = contact.reasonForRefusal || '-';
+    tr.appendChild(tdReason);
 
     tbody.appendChild(tr);
-
   });
   table.appendChild(tbody);
 
@@ -172,13 +366,17 @@ async function renderPersonnalInfoPage() {
 // Fields from entreprise object
   ['tradeName', 'designation', 'email', 'phoneNumber'].forEach(key => {
     const td = document.createElement('td');
-    td.textContent = stageData.contact.entreprise[key] || '-';
+    if (stageData) {
+      td.textContent = stageData.contact.entreprise[key] || '-';
+    }
     tr.appendChild(td);
   });
 
 // Field for meetingType
   const td = document.createElement('td');
-  td.textContent = stageData.contact.meetingType || '-';
+  if (stageData) {
+    td.textContent = stageData.contact.meetingType || '-';
+  }
   tr.appendChild(td);
 
   stageTbody.appendChild(tr);
@@ -192,17 +390,34 @@ async function renderPersonnalInfoPage() {
   spacer.style.height = '20px'; // Adjust the height as needed
   main.appendChild(spacer);
 
+  // Create the button for adding a contact
+  const addButton = document.createElement('button');
+  addButton.textContent = 'Ajouter un contact';
+  addButton.className = 'btn btn-info';
+  addButton.addEventListener('click', () => {
+    Navigate('/addcontact');
+  });
+
   // Create and append the title for the contacts table
   const contactsTitle = document.createElement('h2');
   contactsTitle.textContent = 'Contacts';
+
+  if (!stageData) {
+    contactsTitle.appendChild(addButton);
+  }
+
   main.appendChild(contactsTitle);
+
   main.appendChild(table);
 
   // Create and append the title for the stage table
-  const stageTitle = document.createElement('h2');
-  stageTitle.textContent = 'Stage';
-  main.appendChild(stageTitle);
-  main.appendChild(stageTable);
+  if (stageData) {
+
+    const stageTitle = document.createElement('h2');
+    stageTitle.textContent = 'Stage';
+    main.appendChild(stageTitle);
+    main.appendChild(stageTable);
+  }
 
 }
 

@@ -166,7 +166,7 @@ async function onSubmit(e) {
   localStorage.setItem('user', JSON.stringify(updatedUser));
   setAuthenticatedUser(updatedUser);
   Navbar();
-  Navigate('/');
+  Navigate('/users/userData');
 }
 
 export default modifyUserDataPage;

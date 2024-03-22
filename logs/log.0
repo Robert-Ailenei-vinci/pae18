@@ -60,8 +60,8 @@
 [2024-03-19 19:05:12] [INFO] contact created 
 [2024-03-19 19:13:53] [INFO] contact created 
 [2024-03-19 19:24:42] [INFO] contact created 
-[2024-03-21 20:20:47] [INFO] contact created 
-[2024-03-21 20:21:56] [SEVERE] error 
+[2024-03-21 20:20:47] [INFO] contact created
+[2024-03-21 20:21:56] [SEVERE] error
 [2024-03-21 20:24:53] [SEVERE] error
 be.vinci.pae.exception.BizException: error
 	at be.vinci.pae.business.controller.EntrepriseUCCImpl.getAll(EntrepriseUCCImpl.java:40)
@@ -90,4 +90,4 @@ be.vinci.pae.exception.BizException: error
 	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
 	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
+
