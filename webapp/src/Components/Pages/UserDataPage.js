@@ -55,6 +55,10 @@ async function fetchStageData(user) {
     const responseStage = await fetch(
         `http://localhost:3000/stages/stageByUserId`, options);
 
+    if (responseStage == null) {
+      return null;
+    }
+
     if (!responseStage.ok) {
       throw new Error(`Failed to fetch stages: ${responseStage.statusText}`);
     }
@@ -62,8 +66,7 @@ async function fetchStageData(user) {
     const stageData = await responseStage.json();
     return stageData;
   } catch (error) {
-    throw new Error(
-        `An error occurred while fetching stage data: ${error.message}`);
+    return null;
   }
 }
 
@@ -172,13 +175,17 @@ async function renderPersonnalInfoPage() {
 // Fields from entreprise object
   ['tradeName', 'designation', 'email', 'phoneNumber'].forEach(key => {
     const td = document.createElement('td');
-    td.textContent = stageData.contact.entreprise[key] || '-';
+    if (stageData) {
+      td.textContent = stageData.contact.entreprise[key] || '-';
+    }
     tr.appendChild(td);
   });
 
 // Field for meetingType
   const td = document.createElement('td');
-  td.textContent = stageData.contact.meetingType || '-';
+  if (stageData) {
+    td.textContent = stageData.contact.meetingType || '-';
+  }
   tr.appendChild(td);
 
   stageTbody.appendChild(tr);
@@ -192,17 +199,34 @@ async function renderPersonnalInfoPage() {
   spacer.style.height = '20px'; // Adjust the height as needed
   main.appendChild(spacer);
 
+  // Create the button for adding a contact
+  const addButton = document.createElement('button');
+  addButton.textContent = 'Ajouter un contact';
+  addButton.className = 'btn btn-info';
+  addButton.addEventListener('click', () => {
+    Navigate('/addcontact');
+  });
+
   // Create and append the title for the contacts table
   const contactsTitle = document.createElement('h2');
   contactsTitle.textContent = 'Contacts';
+
+  if (!stageData) {
+    contactsTitle.appendChild(addButton);
+  }
+
   main.appendChild(contactsTitle);
+
   main.appendChild(table);
 
   // Create and append the title for the stage table
-  const stageTitle = document.createElement('h2');
-  stageTitle.textContent = 'Stage';
-  main.appendChild(stageTitle);
-  main.appendChild(stageTable);
+  if (stageData) {
+
+    const stageTitle = document.createElement('h2');
+    stageTitle.textContent = 'Stage';
+    main.appendChild(stageTitle);
+    main.appendChild(stageTable);
+  }
 
 }
 
