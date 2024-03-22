@@ -32,7 +32,7 @@ public class ContactUCCImpl implements ContactUCC {
     for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())
     ) {
       Contact temp_contact = (Contact) contactDTO;
-      if (temp_contact.checkUniqueUserEnterpriseSchoolYear(
+      if (!temp_contact.checkUniqueUserEnterpriseSchoolYear(
           temp_contact.getEntrepriseId(), entreprise.getId(), temp_contact.getSchoolYearId(),
           schoolYear.getId())) {
         LoggerUtil.logError("BizError", new BizException(

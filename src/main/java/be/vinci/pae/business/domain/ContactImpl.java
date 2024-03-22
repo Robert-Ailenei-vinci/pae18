@@ -132,8 +132,8 @@ public class ContactImpl implements Contact {
       int schoolYearId, int wantedSchoolYearId) {
     if (schoolYearId == wantedSchoolYearId
         && entrepriseId == wantedEntrepriseId) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 }

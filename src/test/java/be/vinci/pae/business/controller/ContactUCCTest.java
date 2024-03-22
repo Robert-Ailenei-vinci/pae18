@@ -90,7 +90,7 @@ class ContactUCCTest {
   void createOneWrongUniqueCondition() {
     UserDTO userDTO = factory.getUser();
     userDTO.setId(123);
-    userDTO.setRole("professeur");
+    userDTO.setRole("etudiant");
     EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
     SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
     List<ContactDTO> contactDTOList = new ArrayList<>();
