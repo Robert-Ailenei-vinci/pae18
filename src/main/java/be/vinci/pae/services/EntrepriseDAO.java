@@ -13,7 +13,7 @@ public interface EntrepriseDAO {
    *
    * @param id the identifier of the entreprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   *         entreprise with the given identifier exists
+   *     entreprise with the given identifier exists
    */
   EntrepriseDTO getOne(int id);
 
@@ -23,4 +23,14 @@ public interface EntrepriseDAO {
    * @return A list of {@link EntrepriseDTO} representing all enterprises.
    */
   List<EntrepriseDTO> getAll();
+
+  EntrepriseDTO createOne(String tradeName, String designation, String address, String phoneNum,
+      String email);
+
+  /**
+   * Retrieves the next available item id.
+   *
+   * @return the next available item id.
+   */
+  int nextItemId();
 }

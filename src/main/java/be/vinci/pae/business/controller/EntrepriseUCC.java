@@ -1,6 +1,7 @@
 package be.vinci.pae.business.controller;
 
 import be.vinci.pae.business.domain.EntrepriseDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import java.util.List;
 
 /**
@@ -23,4 +24,7 @@ public interface EntrepriseUCC {
    * @return A list of {@link EntrepriseDTO} representing all enterprises.
    */
   List<EntrepriseDTO> getAll();
+
+  EntrepriseDTO createOne(UserDTO user, String tradeName, String designation, String address,
+      String phoneNum, String email);
 }
