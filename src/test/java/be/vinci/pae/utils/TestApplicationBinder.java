@@ -9,6 +9,8 @@ import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.controller.UserUCCImpl;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.DomainFactoryImpl;
+import be.vinci.pae.services.EntrepriseDAO;
+import be.vinci.pae.services.EntrepriseDAOImpl;
 import be.vinci.pae.services.SchoolYearDAO;
 import be.vinci.pae.services.SchoolYearDAOImpl;
 import be.vinci.pae.services.UserDAO;
@@ -33,6 +35,8 @@ public class TestApplicationBinder extends AbstractBinder {
     bind(Mockito.mock(SchoolYearDAOImpl.class)).to(SchoolYearDAO.class);
     //ENTREPRISE
     bind(EntrepriseUCCImpl.class).to(EntrepriseUCC.class);
+    bind(Mockito.mock(EntrepriseDAOImpl.class)).to(EntrepriseDAO.class);
+    bind(UserDAOImpl.class).to(UserDAO.class);
     bind(Mockito.mock(UserDAOImpl.class)).to(UserDAO.class);
   }
 }
