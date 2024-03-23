@@ -25,6 +25,17 @@ public interface EntrepriseUCC {
    */
   List<EntrepriseDTO> getAll();
 
+  /**
+   * Creates a new enterprise with the provided details.
+   *
+   * @param user        the user associated with the enterprise
+   * @param tradeName   the trade name of the enterprise
+   * @param designation the designation of the enterprise
+   * @param address     the address of the enterprise
+   * @param phoneNum    the phone number of the enterprise
+   * @param email       the email address of the enterprise
+   * @return the newly created {@link EntrepriseDTO} representing the enterprise
+   */
   EntrepriseDTO createOne(UserDTO user, String tradeName, String designation, String address,
       String phoneNum, String email);
 }

@@ -4,7 +4,6 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
-import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -84,7 +83,6 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       preparedStatement.setString(4, address);
       preparedStatement.setString(5, phoneNum);
       preparedStatement.setString(6, email);
-      LoggerUtil.logInfo(entrepriseId + tradeName + designation + address + phoneNum + email);
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         return getOne(entrepriseId);

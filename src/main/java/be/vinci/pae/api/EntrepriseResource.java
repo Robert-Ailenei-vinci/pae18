@@ -7,7 +7,6 @@ import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
-import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -68,13 +67,25 @@ public class EntrepriseResource {
     return myEntreprise.getOne(entrepriseId);
   }
 
+  /**
+   * Adds a new enterprise. This method is accessed via HTTP POST request to the path
+   * "/entreprise/addOne". It expects a JSON object containing the fields: trade_name, designation,
+   * address, phone_num, email. It returns the added enterprise in JSON format. Requires
+   * authorization.
+   *
+   * @param requestContext The context of the HTTP request.
+   * @param json           The JSON object containing enterprise details.
+   * @return The {@link EntrepriseDTO} representing the added enterprise.
+   * @throws BadRequestException    If any required field is missing in the JSON object.
+   * @throws AuthorisationException If the user is not recognized.
+   */
   @POST
   @Path("addOne")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public EntrepriseDTO addEnterprise(@Context ContainerRequestContext requestContext,
-      JsonNode json) {
+      JsonNode json) throws BadRequestException, AuthorisationException {
     if (!json.hasNonNull("trade_name")
         || !json.hasNonNull("address")) {
       throw new BadRequestException("All fields required to create an enterprise.");
@@ -86,8 +97,8 @@ public class EntrepriseResource {
     String address = json.get("address").asText();
     String phoneNum = json.get("phone_num").asText();
     String email = json.get("email").asText();
-    LoggerUtil.logInfo(tradeName + designation + address + phoneNum + email + user);
-    // Try to get user, entreprise, and school year
+
+    // Try to get user, enterprise, and school year
     UserDTO userDTO = myUserUCC.getOne(userId);
     if (userDTO == null) {
       throw new AuthorisationException("User not recognised");
