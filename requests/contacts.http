@@ -5,7 +5,7 @@ POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-  "login": "zaza@student.vinci.be",
+  "login": "zazazu@student.vinci.be",
   "password": "mdp1"
 }
 
@@ -46,7 +46,7 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "7"
+  "id_contact" : "1"
 }
 
 ### refused a contact

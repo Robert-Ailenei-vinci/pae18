@@ -126,4 +126,14 @@ public class ContactImpl implements Contact {
     }
     return false;
   }
+
+  @Override
+  public boolean checkUniqueUserEnterpriseSchoolYear(int entrepriseId, int wantedEntrepriseId,
+      int schoolYearId, int wantedSchoolYearId) {
+    if (schoolYearId == wantedSchoolYearId
+        && entrepriseId == wantedEntrepriseId) {
+      return false;
+    }
+    return true;
+  }
 }

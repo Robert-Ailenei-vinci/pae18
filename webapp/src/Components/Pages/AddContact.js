@@ -48,7 +48,11 @@ async function renderNewContactForm() {
     });
   });
   document.getElementById('dropbtn').addEventListener('click', toggleDropdown);
-  document.getElementById('myForm').addEventListener('submit', () => handleSubmit(selectedEntrepriseId));
+  document.getElementById('myForm').addEventListener('submit', () =>{
+    handleSubmit(selectedEntrepriseId);
+    Navigate('/users/userData');
+    window.location.reload();
+  });
 }
 
 function createFormElement() {
@@ -163,7 +167,7 @@ async function handleSubmit(selectedEntrepriseId) {
   const newContact = await response.json();
   alert(`Added contact : ${JSON.stringify(newContact)}`);
   Navbar();
-  Navigate('/');
+  Navigate('/users/userData');
   }
 
 }

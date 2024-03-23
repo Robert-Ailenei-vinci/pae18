@@ -19,7 +19,7 @@ async function fetchAllUsers(user) {
     };
 
     try {
-        const response = await fetch('http://localhost:3000/users', options);
+        const response = await fetch('http://localhost:3000/users/getAll', options);
         if (!response.ok) {
             throw new Error(`Failed to fetch users: ${response.statusText}`);
         }

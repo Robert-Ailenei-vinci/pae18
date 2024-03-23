@@ -1,6 +1,8 @@
 package be.vinci.pae.utils;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -67,6 +69,10 @@ public class LoggerUtil {
    * @param throwable the upstream exception.
    */
   public static void logError(String message, Throwable throwable) {
-    logger.log(Level.SEVERE, message, throwable);
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter(sw);
+    throwable.printStackTrace(pw);
+    String stackTrace = sw.toString();
+    logger.log(Level.SEVERE, message + "\n" + stackTrace);
   }
 }
