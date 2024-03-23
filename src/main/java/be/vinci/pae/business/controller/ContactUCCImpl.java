@@ -4,10 +4,12 @@ import be.vinci.pae.business.domain.Contact;
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.services.ContactDAO;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.util.List;
 
@@ -21,9 +23,19 @@ public class ContactUCCImpl implements ContactUCC {
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
+    if (!((User) user).checkIsStudent()) {
+      LoggerUtil.logError("BizError", new BizException(
+          "This user is not a student."));
+      throw new BizException(
+          "This user is not a student.");
+    }
     Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
-    if (contact == null) {
-      return null;
+    if (contact.checkUniqueUserEnterpriseSchoolYear(
+        myContactDAO.getAllContactsByUserId(user.getId()), entreprise, schoolYear)) {
+      LoggerUtil.logError("BizError", new BizException(
+          "This user cannot have a contact with this enterprise for this year."));
+      throw new BizException(
+          "This user cannot have a contact with this enterprise for this year.");
     }
     return contact;
   }
@@ -39,11 +51,15 @@ public class ContactUCCImpl implements ContactUCC {
     Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
     if (contact.getUserId() != userId) {
-      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+      LoggerUtil.logError("BizError", new BizException(
+          "The contact does not belong to the user"));
+      throw new BizExceptionNotFound("The contact does not belong to the user");
     }
 
     if (!contact.checkMeet()) {
-      throw new BizException("the contact cant be meet");
+      LoggerUtil.logError("BizError", new BizException(
+          "The contact cannot be met"));
+      throw new BizException("The contact cannot be met");
     }
 
     ContactDTO contactToReturn = myContactDAO.meetContact(contactId, meetingType);
@@ -59,11 +75,11 @@ public class ContactUCCImpl implements ContactUCC {
     Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
     if (contact.getUserId() != userId) {
-      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+      throw new BizExceptionNotFound("The contact does not belong to the user");
     }
 
     if (!contact.checkStopFollow()) {
-      throw new BizException("the contact cant be stop follow");
+      throw new BizException("The contact cannot be stopped from being followed");
     }
 
     ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
@@ -78,11 +94,11 @@ public class ContactUCCImpl implements ContactUCC {
     Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
     if (contact.getUserId() != userId) {
-      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+      throw new BizExceptionNotFound("The contact does not belong to the user");
     }
 
     if (!contact.checkRefused()) {
-      throw new BizException("the contact cant be refused");
+      throw new BizException("The contact cannot be refused");
     }
 
     ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);

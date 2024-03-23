@@ -1,5 +1,7 @@
 package be.vinci.pae.business.domain;
 
+import java.util.List;
+
 /**
  * This class represents an implementation of the {@link Contact} interface.
  */
@@ -125,5 +127,18 @@ public class ContactImpl implements Contact {
       return true;
     }
     return false;
+  }
+
+  @Override
+  public boolean checkUniqueUserEnterpriseSchoolYear(List<ContactDTO> userContacts,
+      EntrepriseDTO entrepriseDTO, SchoolYearDTO schoolYearDTO) {
+    for (ContactDTO contact : userContacts
+    ) {
+      if (contact.getEntrepriseId() == entrepriseDTO.getId()
+          && contact.getSchoolYearId() == schoolYearDTO.getId()) {
+        return false;
+      }
+    }
+    return true;
   }
 }

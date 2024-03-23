@@ -1,5 +1,6 @@
 package be.vinci.pae.business.domain;
 
+import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -144,5 +145,8 @@ public class UserImpl implements User {
     this.version = version;
   }
 
-
+  @Override
+  public boolean checkIsStudent() {
+    return Objects.equals(this.getRole(), "etudiant");
+  }
 }
