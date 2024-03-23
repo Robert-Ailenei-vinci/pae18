@@ -40,17 +40,30 @@ public class UserUCCImpl implements UserUCC {
    * @return the user.
    */
   public UserDTO login(String login, String password) {
+    try {
+      // Start a new transaction
+      dalServices.startTransaction();
 
-    User user = (User) myUserDAO.getOne(login);
-    if (user == null) {
-      return null;
-    }
+      User user = (User) myUserDAO.getOne(login);
+      if (user == null) {
+        return null;
+      }
 
-    if (!user.checkPassword(password)) {
-      return null;
+      if (!user.checkPassword(password)) {
+        return null;
+      }
+
+      // Commit the transaction
+      dalServices.commitTransaction();
+
+      return user;
+    } catch (Exception e) {
+      // Rollback the transaction in case of an error
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    return user;
   }
+
 
   /**
    * Register a user.
@@ -66,7 +79,7 @@ public class UserUCCImpl implements UserUCC {
   public boolean register(String email, String password, String lname, String fname,
       String phoneNum, String role) {
 
-    User existingUser = null;
+    User existingUser;
 
     try {
       // Start a new transaction
@@ -99,12 +112,28 @@ public class UserUCCImpl implements UserUCC {
 
   @Override
   public List<UserDTO> getAll() {
-    return myUserDAO.getAll();
+    try {
+      dalServices.startTransaction();
+      return myUserDAO.getAll();
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    } finally {
+      dalServices.commitTransaction();
+    }
   }
 
   @Override
   public UserDTO getOne(int userId) {
-    return myUserDAO.getOne(userId);
+    try {
+      dalServices.startTransaction();
+      return myUserDAO.getOne(userId);
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    } finally {
+      dalServices.commitTransaction();
+    }
   }
 
   /**
@@ -119,26 +148,34 @@ public class UserUCCImpl implements UserUCC {
    */
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
-      String phoneNum) {
-    User user = (User) myDomainFactory.getUser();
-    user.setEmail(email);
+                            String phoneNum) {
+    try {
+      dalServices.startTransaction();
+      User user = (User) myDomainFactory.getUser();
+      user.setEmail(email);
 
-    if (password == null) {
-      user.setPassword("");
-    } else {//did this because if I don't want to change psw, it will be null, look at dao if's
-      String hashedPassword = user.hashPassword(password);
-      user.setPassword(hashedPassword);
+      if (password == null) {
+        user.setPassword("");
+      } else {
+        String hashedPassword = user.hashPassword(password);
+        user.setPassword(hashedPassword);
+      }
+
+      user.setLastName(lname);
+      user.setFirstName(fname);
+      user.setPhoneNum(phoneNum);
+      SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
+      user.setSchoolYear(academicYear);
+      user.setRegistrationDate(LocalDate.now().toString());
+      myUserDAO.changeUser(user);
+
+      dalServices.commitTransaction();
+
+      return myUserDAO.getOne(email);
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-
-    user.setLastName(lname);
-    user.setFirstName(fname);
-    user.setPhoneNum(phoneNum);
-    SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
-    user.setSchoolYear(academicYear);
-    user.setRegistrationDate(LocalDate.now().toString());
-    myUserDAO.changeUser(user);
-
-    return myUserDAO.getOne(email);
   }
 
 }

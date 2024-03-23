@@ -30,7 +30,7 @@ public class DALServicesImpl implements DALBackServices, DALServices{
     dataSource.setPassword(DATABASE_PASSWORD);
   }
 
-  public Connection getConnection() {
+  private Connection getConnection() {
     Connection connection = threadLocalConnection.get();
     if (connection == null) {
       try {
@@ -43,18 +43,7 @@ public class DALServicesImpl implements DALBackServices, DALServices{
     return connection;
   }
 
-//  public Connection getConnection() {
-//    if (connection.get() == null) {
-//      try {
-//        connection.set(dataSource.getConnection());
-//      } catch (SQLException e) {
-//        throw new RuntimeException(e);
-//      }
-//    }
-//    return connection.get();
-//  }
-
-  public void closeConnection() {
+  private void closeConnection() {
     Connection connection = threadLocalConnection.get();
     try {
       if (connection != null) {
@@ -101,6 +90,7 @@ public class DALServicesImpl implements DALBackServices, DALServices{
     try {
       getConnection().commit();
       getConnection().setAutoCommit(true);
+      closeConnection();
     } catch (SQLException e) {
       throw new FatalError("Unable to commit transaction: " + e.getMessage(), e);
     }
@@ -111,6 +101,7 @@ public class DALServicesImpl implements DALBackServices, DALServices{
     try {
       getConnection().rollback();
       getConnection().setAutoCommit(true);
+      closeConnection();
     } catch (SQLException e) {
       throw new FatalError("Unable to rollback transaction: " + e.getMessage(), e);
     }
