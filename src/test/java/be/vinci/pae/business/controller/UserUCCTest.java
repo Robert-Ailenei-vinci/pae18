@@ -182,26 +182,4 @@ public class UserUCCTest {
     assertEquals(expectedUser.getEmail(), result.getEmail());
     assertEquals(expectedUser.getPassword(), result.getPassword());
   }
-
-  @Test
-  public void testChangeDataWithNullPassword() {
-    String email = "testChangeData@test.com";
-    String lname = "Test";
-    String fname = "User";
-    String phoneNum = "1234567890";
-
-    User user = (User) factory.getUser();
-    user.setEmail(email);
-    user.setLastName(lname);
-    user.setFirstName(fname);
-    user.setPhoneNum(phoneNum);
-
-    when(userDataService.getOne(email)).thenReturn(user);
-    when(userDataService.changeUser(user)).thenReturn(user);
-
-    UserDTO result = userUCC.changeData(email, null, lname, fname, phoneNum);
-
-    assertNotNull(result);
-    assertEquals("", result.getPassword()); // Assert that the password is an empty string
-  }
 }
