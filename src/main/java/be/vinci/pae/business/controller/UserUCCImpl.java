@@ -47,33 +47,25 @@ public class UserUCCImpl implements UserUCC {
   /**
    * Register a user.
    *
-   * @param email    the users' login.
-   * @param password the user password.
-   * @param lname    the user last name.
-   * @param fname    the user first name.
-   * @param phoneNum the user phone number.
+   * @param userDTO the user to register.
    * @return true if the user is registered, false if not.
    */
+
   @Override
-  public boolean register(String email, String password, String lname, String fname,
-      String phoneNum, String role) {
+  public boolean register(UserDTO userDTO) {
 
-    User existingUser = null;
-
-    existingUser = (User) myUserDAO.getOne(email);
-    if (existingUser != null) {
+    UserDTO existingUserDTO = myUserDAO.getOne(userDTO.getEmail());
+    if (existingUserDTO != null) {
       throw new BizException("User already exists");
     }
+
     User user = (User) myDomainFactory.getUser();
-    user.setEmail(email);
-    String hashedPassword = user.hashPassword(password);
-    user.setPassword(hashedPassword);
-    user.setLastName(lname);
-    user.setFirstName(fname);
-    user.setPhoneNum(phoneNum);
-    user.setRegistrationDate(LocalDate.now().toString());
-    user.setRole(role);
-    return myUserDAO.addUser(user);
+    user.setPassword(userDTO.getPassword());
+    String hashedPassword = user.hashPassword(user.getPassword());
+    userDTO.setPassword(hashedPassword);
+    userDTO.setRegistrationDate(LocalDate.now().toString());
+
+    return myUserDAO.addUser(userDTO);
   }
 
   @Override
@@ -115,9 +107,11 @@ public class UserUCCImpl implements UserUCC {
     SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
     user.setSchoolYear(academicYear);
     user.setRegistrationDate(LocalDate.now().toString());
-    myUserDAO.changeUser(user);
-
+    if (myUserDAO.changeUser(user) == null) {
+      return null;
+    }
     return myUserDAO.getOne(email);
   }
+
 
 }
