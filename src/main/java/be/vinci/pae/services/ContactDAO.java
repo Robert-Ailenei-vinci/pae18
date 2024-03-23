@@ -51,7 +51,7 @@ public interface ContactDAO {
    * @param contactDTO the contact to update.
    * @return the updated contact.
    */
-  ContactDTO updateContactState(ContactDTO contactDTO);
+  ContactDTO updateContact(ContactDTO contactDTO);
 
   /**
    * get one contact by id.

@@ -15,11 +15,12 @@ public interface Contact extends ContactDTO {
   boolean stopFollowContact();
 
   /**
-   * Checks if the contact has been marked as refused.
+   * Checks if the contact can be refused and change it.
    *
-   * @return {@code true} if the contact is marked as refused, {@code false} otherwise.
+   * @param refusalReason the refusal reason
+   * @return true if it can be refused or false if not
    */
-  boolean checkRefused();
+  boolean refuseContact(String refusalReason);
 
 
   /**

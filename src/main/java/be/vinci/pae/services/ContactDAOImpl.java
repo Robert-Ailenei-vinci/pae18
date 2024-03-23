@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class represents an implementation of the {@link ContactDAO} interface.
@@ -123,58 +124,56 @@ public class ContactDAOImpl implements ContactDAO {
     return 1;
   }
 
-  public ContactDTO updateContactState(ContactDTO contactDTO) {
+  public ContactDTO updateContact(ContactDTO contactDTO) {
+    StringBuilder sql = new StringBuilder("UPDATE pae.contacts SET ");
+    List<Object> parameters = new ArrayList<>();
 
-    String sqlQuery;
-    if (newState.equals("refuse")) {
-      sqlQuery =
-          "UPDATE pae.contacts SET state = ?, reason_for_refusal = ?, _version = _version + 1"
-              + " WHERE id_contact = ? AND _version = ?";
-    } else if (newState.equals("rencontre")) {
-      sqlQuery = "UPDATE pae.contacts SET state = ?, meeting_type = ?, _version = _version + 1"
-          + " WHERE id_contact = ? AND _version = ?";
-    } else {
-      sqlQuery = "UPDATE pae.contacts SET state = ?, _version = _version + 1"
-          + " WHERE id_contact = ? AND _version = ?";
+    if (!Objects.equals(contactDTO.getState(), "")) {
+      sql.append("state = ?, ");
+      parameters.add(contactDTO.getState());
     }
 
-    ContactDTO contact = getOneContactByStageId(contactId);
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(sqlQuery)) {
-      preparedStatement.setString(1, newState);
-      if (newState.equals("refuse") || newState.equals("rencontre")) {
-        preparedStatement.setString(2, reasonOrMeetingType);
-        preparedStatement.setInt(3, contactId);
-        updateVersionFromDB(contact);
-        preparedStatement.setInt(4, contact.getVersion());
-      } else {
-        preparedStatement.setInt(2, contactId);
-        updateVersionFromDB(contact);
-        preparedStatement.setInt(3, contact.getVersion());
-      }
+    if (!Objects.equals(contactDTO.getReasonForRefusal(), "") && contactDTO.getState()
+        .equals("refuse")) {
+      sql.append("reason_for_refusal = ?, ");
+      parameters.add(contactDTO.getReasonForRefusal());
+    }
 
-      int rowsAffected = preparedStatement.executeUpdate();
-      if (rowsAffected > 0) {
-        try (PreparedStatement selectStatement = dalServices.getPreparedStatement(
-            "SELECT * FROM pae.contacts WHERE id_contact = ?"
-        )) {
-          selectStatement.setInt(1, contactId);
-          try (ResultSet rs = selectStatement.executeQuery()) {
-            if (rs.next()) {
-              return getContactMethodFromDB(rs);
-            }
-          }
+    if (!Objects.equals(contactDTO.getMeetingType(), "") && contactDTO.getState()
+        .equals("rencontre")) {
+      sql.append("meeting_type = ?, ");
+      parameters.add(contactDTO.getMeetingType());
+    }
+
+    // Remove the last comma and space
+    sql.delete(sql.length() - 2, sql.length());
+
+    sql.append(", _version = _version + 1 WHERE id_contact = ? AND _version = ?;");
+
+    parameters.add(contactDTO.getId());
+    getVersionFromDB(contactDTO);
+    parameters.add(contactDTO.getVersion());
+
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
+      for (int i = 0; i < parameters.size(); i++) {
+        if (parameters.get(i) instanceof String) {
+          stmt.setString(i + 1, (String) parameters.get(i));
+        } else if (parameters.get(i) instanceof Integer) {
+          stmt.setInt(i + 1, (Integer) parameters.get(i));
         }
       }
-      if (rowsAffected == 0) {
+
+      if (stmt.executeUpdate() == 0) {
         throw new OptimisticLockException("Contact was updated by another transaction");
       }
+
+      System.out.println("Contact updated");
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
     }
-    return null;
-
-
+    return getOneContactByStageId(contactDTO.getId());
   }
+
 
   @Override
   public ContactDTO getOneContactById(int idContact) {
@@ -193,7 +192,7 @@ public class ContactDAOImpl implements ContactDAO {
     return null;
   }
 
-  private void updateVersionFromDB(ContactDTO contact) {
+  private void getVersionFromDB(ContactDTO contact) {
     try (PreparedStatement versionStmt = dalServices.getPreparedStatement(
         "SELECT _version FROM pae.contacts WHERE id_contact = ?")) {
       versionStmt.setInt(1, contact.getId());
@@ -208,4 +207,5 @@ public class ContactDAOImpl implements ContactDAO {
       throw new FatalError("Error processing result set", e);
     }
   }
+
 }
