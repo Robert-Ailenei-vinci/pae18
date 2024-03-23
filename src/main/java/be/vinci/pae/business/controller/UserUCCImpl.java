@@ -27,9 +27,6 @@ public class UserUCCImpl implements UserUCC {
   private DALServices dalServices;
 
   @Inject
-  private DALBackServices dalBackServices;
-
-  @Inject
   private DomainFactory myDomainFactory;
 
   /**
