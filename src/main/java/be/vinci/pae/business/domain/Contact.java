@@ -12,7 +12,7 @@ public interface Contact extends ContactDTO {
    *
    * @return {@code true} if the contact is marked as stopped to follow, {@code false} otherwise.
    */
-  boolean checkStopFollow();
+  boolean stopFollowContact();
 
   /**
    * Checks if the contact has been marked as refused.
@@ -21,12 +21,14 @@ public interface Contact extends ContactDTO {
    */
   boolean checkRefused();
 
+
   /**
-   * Checks if the contact has been marked as met.
+   * Checks if the contact can be met and set it.
    *
-   * @return {@code true} if the contact is marked as met, {@code false} otherwise.
+   * @param meetingType the type of meeting
+   * @return true if it can be met, fasle if not
    */
-  boolean checkMeet();
+  boolean meetContact(String meetingType);
 
   /**
    * Checks the uniqueness of a contact based on the combination of user, enterprise, and school
@@ -36,7 +38,7 @@ public interface Contact extends ContactDTO {
    * @param enterpriseDTO The enterprise associated with the contact.
    * @param schoolYearDTO The school year associated with the contact.
    * @return {@code true} if the contact is unique based on the provided user, enterprise, and
-   *     school year, {@code false} otherwise.
+   * school year, {@code false} otherwise.
    */
   boolean checkUniqueUserEnterpriseSchoolYear(List<ContactDTO> userContacts,
       EntrepriseDTO enterpriseDTO, SchoolYearDTO schoolYearDTO);

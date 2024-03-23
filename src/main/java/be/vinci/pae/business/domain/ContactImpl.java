@@ -106,8 +106,9 @@ public class ContactImpl implements Contact {
 
 
   @Override
-  public boolean checkStopFollow() {
+  public boolean stopFollowContact() {
     if (state.equals("initie") || state.equals("rencontre")) {
+      this.state = "stop follow";
       return true;
     }
     return false;
@@ -116,14 +117,17 @@ public class ContactImpl implements Contact {
   @Override
   public boolean checkRefused() {
     if (state.equals("rencontre")) {
+
       return true;
     }
     return false;
   }
 
   @Override
-  public boolean checkMeet() {
+  public boolean meetContact(String meetingType) {
     if (state.equals("initie")) {
+      this.state = "rencontre";
+      this.meetingType = meetingType;
       return true;
     }
     return false;

@@ -65,7 +65,7 @@ public class ContactDAOImpl implements ContactDAO {
           ContactDTO contact;
           contact = getContactMethodFromDB(rs);
           contacts.add(contact);
-          LoggerUtil.logInfo("contact created");
+          LoggerUtil.logInfo("get all contact");
         }
       }
     } catch (Exception e) {
@@ -102,6 +102,7 @@ public class ContactDAOImpl implements ContactDAO {
       contact.setReasonForRefusal(rs.getString("reason_for_refusal"));
       contact.setMeetingType(rs.getString("meeting_type"));
       contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
+      contact.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
     }
@@ -122,8 +123,8 @@ public class ContactDAOImpl implements ContactDAO {
     return 1;
   }
 
-  private ContactDTO updateContactState(int contactId, String newState,
-      String reasonOrMeetingType) {
+  public ContactDTO updateContactState(ContactDTO contactDTO) {
+
     String sqlQuery;
     if (newState.equals("refuse")) {
       sqlQuery =
@@ -171,28 +172,10 @@ public class ContactDAOImpl implements ContactDAO {
       throw new FatalError("Error processing result set", e);
     }
     return null;
+
+
   }
 
-  public ContactDTO meetContact(int idContact, String meetingType) {
-    return updateContactState(idContact, "rencontre", meetingType);
-  }
-
-  @Override
-  public ContactDTO stopFollowContact(int contactId) {
-    return updateContactState(contactId, "suivis stoppe", null);
-  }
-
-  @Override
-  public ContactDTO refusedContact(int contactId, String refusalReason) {
-    return updateContactState(contactId, "refuse", refusalReason);
-  }
-
-  /**
-   * get one contact by id.
-   *
-   * @param idContact the id of contact.
-   * @return the contact.
-   */
   @Override
   public ContactDTO getOneContactById(int idContact) {
     PreparedStatement getOneContact = dalServices.getPreparedStatement(
