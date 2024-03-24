@@ -1,5 +1,7 @@
 package be.vinci.pae.services;
 
+import static be.vinci.pae.services.utils.utils.paramStatment;
+
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
@@ -27,6 +29,7 @@ public class ContactDAOImpl implements ContactDAO {
   private DALServices dalServices;
   @Inject
   private EntrepriseDAO entrepriseDAO;
+
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
@@ -155,13 +158,7 @@ public class ContactDAOImpl implements ContactDAO {
     parameters.add(contactDTO.getVersion());
 
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
-      for (int i = 0; i < parameters.size(); i++) {
-        if (parameters.get(i) instanceof String) {
-          stmt.setString(i + 1, (String) parameters.get(i));
-        } else if (parameters.get(i) instanceof Integer) {
-          stmt.setInt(i + 1, (Integer) parameters.get(i));
-        }
-      }
+      paramStatment(parameters, stmt);
 
       if (stmt.executeUpdate() == 0) {
         throw new OptimisticLockException("Contact was updated by another transaction");
@@ -173,7 +170,6 @@ public class ContactDAOImpl implements ContactDAO {
     }
     return getOneContactByStageId(contactDTO.getId());
   }
-
 
   @Override
   public ContactDTO getOneContactById(int idContact) {
