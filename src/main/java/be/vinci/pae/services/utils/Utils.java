@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Utils for DAO Object.
  */
-public class utils {
+public class Utils {
 
   /**
    * Set the parameter to the SQL statement.

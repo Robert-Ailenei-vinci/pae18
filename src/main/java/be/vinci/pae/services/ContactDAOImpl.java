@@ -1,6 +1,6 @@
 package be.vinci.pae.services;
 
-import static be.vinci.pae.services.utils.utils.paramStatement;
+import static be.vinci.pae.services.utils.Utils.paramStatement;
 
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
