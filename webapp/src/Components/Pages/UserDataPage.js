@@ -169,7 +169,7 @@ async function renderPersonnalInfoPage() {
     divForm.className = 'collapse';
     divForm.id = 'collapseExample_' + contact.id;
 
-    if (contact.state == "initie") {
+    if (contact.state === "initie") {
       // Création du formulaire
       const form = document.createElement('form');
       const select = document.createElement('select');
@@ -250,7 +250,8 @@ async function renderPersonnalInfoPage() {
       tr.appendChild(tdButton);
     }
 
-    if (contact.state == "rencontre") {// Création du formulaire
+    if (contact.state === "rencontre") {
+      // Création du formulaire
       const form = document.createElement('form');
       const select = document.createElement('select');
       select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
@@ -329,6 +330,12 @@ async function renderPersonnalInfoPage() {
       tdButton.appendChild(button);
       tdButton.appendChild(divForm);
       tr.appendChild(tdButton);
+    }
+
+    if (contact.state === "stop follow" || contact.state === "refuse"){
+      const tdVide = document.createElement('td');
+      tdVide.textContent = '-';
+      tr.appendChild(tdVide);
     }
 
     // Lieu/Type de rencontre

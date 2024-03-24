@@ -96,7 +96,8 @@ public class UserUCCImpl implements UserUCC {
 
     if (password == null) {
       user.setPassword("");
-    } else {//did this because if I don't want to change psw, it will be null, look at dao if's
+    } else {
+      //did this because if I don't want to change psw, it will be null, look at dao if's
       String hashedPassword = user.hashPassword(password);
       user.setPassword(hashedPassword);
     }

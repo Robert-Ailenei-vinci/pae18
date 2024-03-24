@@ -22,6 +22,11 @@ public interface User extends UserDTO {
    */
   String hashPassword(String password);
 
+  /**
+   * Check if student.
+   *
+   * @return true or false.
+   */
   boolean checkIsStudent();
 
 }
