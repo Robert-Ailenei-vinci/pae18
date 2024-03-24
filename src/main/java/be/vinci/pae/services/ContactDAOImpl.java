@@ -127,6 +127,7 @@ public class ContactDAOImpl implements ContactDAO {
     return 1;
   }
 
+  @Override
   public ContactDTO updateContact(ContactDTO contactDTO) {
     StringBuilder sql = new StringBuilder("UPDATE pae.contacts SET ");
     List<Object> parameters = new ArrayList<>();
