@@ -1,6 +1,7 @@
 package be.vinci.pae.business.controller;
 
 import be.vinci.pae.business.domain.StageDTO;
+import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.StageDAO;
 import jakarta.inject.Inject;
 
@@ -10,9 +11,21 @@ import jakarta.inject.Inject;
 public class StageUCCImpl implements StageUCC {
   @Inject
   private StageDAO stageDAO;
+  @Inject
+  private DALServices dalServices;
 
   @Override
   public StageDTO getOneStageByUserId(int userId) {
-    return stageDAO.getOneStageByUserId(userId);
+    try {
+      dalServices.startTransaction();
+      return stageDAO.getOneStageByUserId(userId);
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+    finally {
+      dalServices.commitTransaction();
+    }
+
   }
 }

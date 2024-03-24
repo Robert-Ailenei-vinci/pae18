@@ -8,6 +8,7 @@ import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.services.ContactDAO;
+import be.vinci.pae.services.DALServices;
 import jakarta.inject.Inject;
 import java.util.List;
 
@@ -18,14 +19,20 @@ public class ContactUCCImpl implements ContactUCC {
 
   @Inject
   private ContactDAO myContactDAO;
+  @Inject
+  private DALServices dalServices;
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
-    Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
-    if (contact == null) {
-      return null;
+    try {
+      dalServices.startTransaction();
+      Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
+      dalServices.commitTransaction();
+      return contact;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    return contact;
   }
 
   @Override
@@ -35,60 +42,61 @@ public class ContactUCCImpl implements ContactUCC {
 
   @Override
   public ContactDTO meetContact(int contactId, String meetingType, int userId) {
-
-    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
-
-    if (contact.getUserId() != userId) {
-      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+    try {
+      dalServices.startTransaction();
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+      if (contact.getUserId() != userId) {
+        throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+      }
+      if (!contact.checkMeet()) {
+        throw new BizException("the contact cant be meet");
+      }
+      ContactDTO contactToReturn = myContactDAO.meetContact(contactId, meetingType);
+      dalServices.commitTransaction();
+      return contactToReturn;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-
-    if (!contact.checkMeet()) {
-      throw new BizException("the contact cant be meet");
-    }
-
-    ContactDTO contactToReturn = myContactDAO.meetContact(contactId, meetingType);
-    if (contactToReturn == null) {
-      return null;
-    }
-    return contactToReturn;
   }
 
   @Override
   public ContactDTO stopFollowContact(int contactId, int userId) {
-
-    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
-
-    if (contact.getUserId() != userId) {
-      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+    try {
+      dalServices.startTransaction();
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+      if (contact.getUserId() != userId) {
+        throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+      }
+      if (!contact.checkStopFollow()) {
+        throw new BizException("the contact cant be stop follow");
+      }
+      ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
+      dalServices.commitTransaction();
+      return contactToReturn;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-
-    if (!contact.checkStopFollow()) {
-      throw new BizException("the contact cant be stop follow");
-    }
-
-    ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
-    if (contactToReturn == null) {
-      return null;
-    }
-    return contactToReturn;
   }
 
   @Override
   public ContactDTO refusedContact(int contactId, String refusalReason, int userId) {
-    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
-
-    if (contact.getUserId() != userId) {
-      throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+    try {
+      dalServices.startTransaction();
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+      if (contact.getUserId() != userId) {
+        throw new BizExceptionNotFound("Le contact n'appartient pas au user");
+      }
+      if (!contact.checkRefused()) {
+        throw new BizException("the contact cant be refused");
+      }
+      ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);
+      dalServices.commitTransaction();
+      return contactToReturn;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-
-    if (!contact.checkRefused()) {
-      throw new BizException("the contact cant be refused");
-    }
-
-    ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);
-    if (contactToReturn == null) {
-      return null;
-    }
-    return contactToReturn;
   }
 }
