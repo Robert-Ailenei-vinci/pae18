@@ -1,6 +1,6 @@
 package be.vinci.pae.services;
 
-import static be.vinci.pae.services.utils.utils.paramStatment;
+import static be.vinci.pae.services.utils.utils.paramStatement;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.UserDTO;
@@ -216,7 +216,7 @@ public class UserDAOImpl implements UserDAO {
       parameters.add(user.getPassword());
     }
 
-// Remove the last comma and space
+    // Remove the last comma and space
     sql.delete(sql.length() - 2, sql.length());
 
     sql.append(", _version = _version + 1 WHERE email = ? AND _version = ?;");
@@ -226,7 +226,7 @@ public class UserDAOImpl implements UserDAO {
     parameters.add(user.getVersion());
 
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
-      paramStatment(parameters, stmt);
+      paramStatement(parameters, stmt);
 
       if (stmt.executeUpdate() == 0) {
         throw new OptimisticLockException("User was updated by another transaction");

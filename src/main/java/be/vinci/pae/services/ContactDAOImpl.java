@@ -1,6 +1,6 @@
 package be.vinci.pae.services;
 
-import static be.vinci.pae.services.utils.utils.paramStatment;
+import static be.vinci.pae.services.utils.utils.paramStatement;
 
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
@@ -158,7 +158,7 @@ public class ContactDAOImpl implements ContactDAO {
     parameters.add(contactDTO.getVersion());
 
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
-      paramStatment(parameters, stmt);
+      paramStatement(parameters, stmt);
 
       if (stmt.executeUpdate() == 0) {
         throw new OptimisticLockException("Contact was updated by another transaction");
