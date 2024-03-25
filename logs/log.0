@@ -63,3 +63,43 @@
 [2024-03-22 09:08:01] [INFO] contact created 
 [2024-03-23 10:54:29] [INFO] contact created 
 [2024-03-23 10:55:22] [INFO] contact created 
+[2024-03-25 03:18:02] [INFO] get all contact 
+[2024-03-25 03:18:02] [INFO] get all contact 
+[2024-03-25 03:18:02] [INFO] get all contact 
+[2024-03-25 03:18:02] [INFO] get all contact 
+[2024-03-25 03:18:02] [INFO] get all contact 
+[2024-03-25 03:18:09] [INFO] get all contact 
+[2024-03-25 03:18:09] [INFO] get all contact 
+[2024-03-25 03:18:09] [INFO] get all contact 
+[2024-03-25 03:18:09] [INFO] get all contact 
+[2024-03-25 03:18:09] [INFO] get all contact 
+[2024-03-25 03:18:10] [INFO] get all contact 
+[2024-03-25 03:19:18] [SEVERE] BizError
+be.vinci.pae.exception.BizException: The contact does not belong to the user
+	at be.vinci.pae.business.controller.ContactUCCImpl.meetContact(ContactUCCImpl.java:76)
+	at be.vinci.pae.api.ContactRessource.meetContact(ContactRessource.java:128)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+ 

@@ -55,7 +55,7 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "5",
+  "id_contact" : "23",
   "refusalReason" : "pas de place"
 
 }
@@ -66,6 +66,6 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "9",
+  "id_contact" : "23",
   "meetingType" : "sur place"
 }

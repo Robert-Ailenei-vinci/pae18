@@ -5,7 +5,6 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
-import be.vinci.pae.services.DALBackServices;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
@@ -70,65 +69,92 @@ public class UserUCCImpl implements UserUCC {
 
   @Override
   public boolean register(UserDTO userDTO) {
+    try {
+      dalServices.startTransaction();
 
-    UserDTO existingUserDTO = myUserDAO.getOne(userDTO.getEmail());
-    if (existingUserDTO != null) {
-      throw new BizException("User already exists");
+      UserDTO existingUserDTO = myUserDAO.getOne(userDTO.getEmail());
+      if (existingUserDTO != null) {
+        throw new BizException("User already exists");
+      }
+
+      User user = (User) myDomainFactory.getUser();
+      user.setPassword(userDTO.getPassword());
+      String hashedPassword = user.hashPassword(user.getPassword());
+      userDTO.setPassword(hashedPassword);
+      userDTO.setRegistrationDate(LocalDate.now().toString());
+
+      boolean result = myUserDAO.addUser(userDTO);
+
+      dalServices.commitTransaction();
+
+      return result;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-
-    User user = (User) myDomainFactory.getUser();
-    user.setPassword(userDTO.getPassword());
-    String hashedPassword = user.hashPassword(user.getPassword());
-    userDTO.setPassword(hashedPassword);
-    userDTO.setRegistrationDate(LocalDate.now().toString());
-
-    return myUserDAO.addUser(userDTO);
   }
 
   @Override
   public List<UserDTO> getAll() {
-    return myUserDAO.getAll();
+    try {
+      dalServices.startTransaction();
+      List<UserDTO> users = myUserDAO.getAll();
+      dalServices.commitTransaction();
+      return users;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
   }
 
   @Override
   public UserDTO getOne(int userId) {
-    return myUserDAO.getOne(userId);
+    try {
+      dalServices.startTransaction();
+      UserDTO user = myUserDAO.getOne(userId);
+      dalServices.commitTransaction();
+      return user;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
   }
 
-  /**
-   * Changes user data based on the provided parameters.
-   *
-   * @param email    The new email for the user.
-   * @param password The new password for the user.
-   * @param lname    The new last name for the user.
-   * @param fname    The new first name for the user.
-   * @param phoneNum The new phone number for the user.
-   * @return The updated UserDTO object.
-   */
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
       String phoneNum) {
-    User user = (User) myDomainFactory.getUser();
-    user.setEmail(email);
+    try {
+      dalServices.startTransaction();
 
-    if (password == null) {
-      user.setPassword("");
-    } else {
-      //did this because if I don't want to change psw, it will be null, look at dao if's
-      String hashedPassword = user.hashPassword(password);
-      user.setPassword(hashedPassword);
-    }
+      User user = (User) myDomainFactory.getUser();
+      user.setEmail(email);
 
-    user.setLastName(lname);
-    user.setFirstName(fname);
-    user.setPhoneNum(phoneNum);
-    SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
-    user.setSchoolYear(academicYear);
-    user.setRegistrationDate(LocalDate.now().toString());
-    if (myUserDAO.changeUser(user) == null) {
-      return null;
+      if (password == null) {
+        user.setPassword("");
+      } else {
+        String hashedPassword = user.hashPassword(password);
+        user.setPassword(hashedPassword);
+      }
+
+      user.setLastName(lname);
+      user.setFirstName(fname);
+      user.setPhoneNum(phoneNum);
+      SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
+      user.setSchoolYear(academicYear);
+      user.setRegistrationDate(LocalDate.now().toString());
+
+      UserDTO updatedUser = myUserDAO.changeUser(user);
+      if (updatedUser == null) {
+        return null;
+      }
+
+      dalServices.commitTransaction();
+
+      return updatedUser;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    return myUserDAO.getOne(email);
   }
 
 

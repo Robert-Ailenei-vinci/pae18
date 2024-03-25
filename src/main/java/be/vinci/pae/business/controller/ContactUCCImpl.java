@@ -26,87 +26,120 @@ public class ContactUCCImpl implements ContactUCC {
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
-    if (!((User) user).checkIsStudent()) {
-      LoggerUtil.logError("BizError", new BizException(
-          "This user is not a student."));
-      throw new BizException(
-          "This user is not a student.");
+    try {
+      dalServices.startTransaction();
+
+      if (!((User) user).checkIsStudent()) {
+        LoggerUtil.logError("BizError", new BizException(
+            "This user is not a student."));
+        throw new BizException(
+            "This user is not a student.");
+      }
+      Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
+      if (contact.checkUniqueUserEnterpriseSchoolYear(
+          myContactDAO.getAllContactsByUserId(user.getId()), entreprise, schoolYear)) {
+        LoggerUtil.logError("BizError", new BizException(
+            "This user cannot have a contact with this enterprise for this year."));
+        throw new BizException(
+            "This user cannot have a contact with this enterprise for this year.");
+      }
+
+      dalServices.commitTransaction();
+      return contact;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
-    if (contact.checkUniqueUserEnterpriseSchoolYear(
-        myContactDAO.getAllContactsByUserId(user.getId()), entreprise, schoolYear)) {
-      LoggerUtil.logError("BizError", new BizException(
-          "This user cannot have a contact with this enterprise for this year."));
-      throw new BizException(
-          "This user cannot have a contact with this enterprise for this year.");
-    }
-    return contact;
   }
 
   @Override
   public List<ContactDTO> getAllContactsByUserId(int userId) {
-    return myContactDAO.getAllContactsByUserId(userId);
+    try {
+      dalServices.startTransaction();
+      List<ContactDTO> contacts = myContactDAO.getAllContactsByUserId(userId);
+      dalServices.commitTransaction();
+      return contacts;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
   }
 
   @Override
   public ContactDTO meetContact(int contactId, String meetingType, int userId) {
+    try {
+      dalServices.startTransaction();
 
-    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
-    if (contact.getUserId() != userId) {
-      LoggerUtil.logError("BizError", new BizException(
-          "The contact does not belong to the user"));
-      throw new BizExceptionNotFound("The contact does not belong to the user");
-    }
+      if (contact.getUserId() != userId) {
+        LoggerUtil.logError("BizError", new BizException(
+            "The contact does not belong to the user"));
+        throw new BizExceptionNotFound("The contact does not belong to the user");
+      }
 
-    if (!contact.meetContact(meetingType)) {
-      LoggerUtil.logError("BizError", new BizException(
-          "The contact cannot be met"));
-      throw new BizException("The contact cannot be met");
+      if (!contact.meetContact(meetingType)) {
+        LoggerUtil.logError("BizError", new BizException(
+            "The contact cannot be met"));
+        throw new BizException("The contact cannot be met");
+      }
+      ContactDTO contactToReturn = myContactDAO.updateContact(contact);
+
+      dalServices.commitTransaction();
+      return contactToReturn;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    ContactDTO contactToReturn = myContactDAO.updateContact(contact);
-    if (contactToReturn == null) {
-      return null;
-    }
-    return contactToReturn;
   }
 
   @Override
   public ContactDTO stopFollowContact(int contactId, int userId) {
+    try {
+      dalServices.startTransaction();
 
-    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
-    if (contact.getUserId() != userId) {
-      throw new BizExceptionNotFound("The contact does not belong to the user");
+      if (contact.getUserId() != userId) {
+        throw new BizExceptionNotFound("The contact does not belong to the user");
+      }
+
+      if (!contact.stopFollowContact()) {
+        throw new BizException("The contact cannot be stopped from being followed");
+      }
+
+      ContactDTO contactToReturn = myContactDAO.updateContact(contact);
+
+      dalServices.commitTransaction();
+      return contactToReturn;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-
-    if (!contact.stopFollowContact()) {
-      throw new BizException("The contact cannot be stopped from being followed");
-    }
-
-    ContactDTO contactToReturn = myContactDAO.updateContact(contact);
-    if (contactToReturn == null) {
-      return null;
-    }
-    return contactToReturn;
   }
 
   @Override
   public ContactDTO refusedContact(int contactId, String refusalReason, int userId) {
-    Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+    try {
+      dalServices.startTransaction();
 
-    if (contact.getUserId() != userId) {
-      throw new BizExceptionNotFound("The contact does not belong to the user");
-    }
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
-    if (!contact.refuseContact(refusalReason)) {
-      throw new BizException("The contact cannot be refused");
-    }
+      if (contact.getUserId() != userId) {
+        throw new BizExceptionNotFound("The contact does not belong to the user");
+      }
 
-    ContactDTO contactToReturn = myContactDAO.updateContact(contact);
-    if (contactToReturn == null) {
-      return null;
+      if (!contact.refuseContact(refusalReason)) {
+        throw new BizException("The contact cannot be refused");
+      }
+
+      ContactDTO contactToReturn = myContactDAO.updateContact(contact);
+
+      dalServices.commitTransaction();
+      return contactToReturn;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    return contactToReturn;
   }
 }
