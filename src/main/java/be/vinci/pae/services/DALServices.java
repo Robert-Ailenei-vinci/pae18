@@ -6,7 +6,8 @@ package be.vinci.pae.services;
  * These methods should be used to ensure that a group of database
  *    operations are executed as a single unit of work.
  * If any operation within the transaction fails,
- *    the transaction can be rolled back to undo the operations that were executed before the failure.
+ *    the transaction can be rolled back
+ *    to undo the operations that were executed before the failure.
  * If all operations within the transaction are successful,
  *    the transaction can be committed to permanently apply the changes
  *    to the database.
