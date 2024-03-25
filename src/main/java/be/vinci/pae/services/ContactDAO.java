@@ -46,30 +46,12 @@ public interface ContactDAO {
 
 
   /**
-   * Update the state of a contact to meet whith the type of meeting.
+   * Update the contact in db.
    *
-   * @param idContact   id_contact the id of the contact to meet.
-   * @param meetingType the type of meeting.
+   * @param contactDTO the contact to update.
    * @return the updated contact.
    */
-  ContactDTO meetContact(int idContact, String meetingType);
-
-  /**
-   * Update the state of a contact to stop followed.
-   *
-   * @param contactId id_contact the id of the contact to meet.
-   * @return the updated contact.
-   */
-  ContactDTO stopFollowContact(int contactId);
-
-  /**
-   * Update the state of a contact to refused and the reason.
-   *
-   * @param contactId     id_contact the id of the contact to meet.
-   * @param refusalReason the type of meeting.
-   * @return the updated contact.
-   */
-  ContactDTO refusedContact(int contactId, String refusalReason);
+  ContactDTO updateContact(ContactDTO contactDTO);
 
   /**
    * get one contact by id.

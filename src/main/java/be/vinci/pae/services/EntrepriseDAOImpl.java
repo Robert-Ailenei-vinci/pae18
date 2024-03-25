@@ -25,7 +25,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
    *
    * @param id the identifier of the enterprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   * enterprise with the given identifier exists
+   *     enterprise with the given identifier exists
    */
   @Override
   public EntrepriseDTO getOne(int id) {
@@ -67,6 +67,32 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     return entreprises;
   }
 
+  @Override
+  public EntrepriseDTO createOne(String tradeName, String designation, String address,
+      String phoneNum, String email) {
+    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+        "INSERT INTO pae.entreprises "
+            + "(id_entreprise, trade_name, designation, address, phone_num, "
+            + "email, blacklisted)"
+            + "VALUES (?, ?, ?, ?, ?, ?, false)"
+    )) {
+      int entrepriseId = nextItemId();
+      preparedStatement.setInt(1, entrepriseId);
+      preparedStatement.setString(2, tradeName);
+      preparedStatement.setString(3, designation);
+      preparedStatement.setString(4, address);
+      preparedStatement.setString(5, phoneNum);
+      preparedStatement.setString(6, email);
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        return getOne(entrepriseId);
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return null;
+  }
+
   private EntrepriseDTO getEntrepriseMethodFromDB(ResultSet rs) {
     EntrepriseDTO entreprise = myDomainFactory.getEntreprise();
     try {
@@ -81,5 +107,19 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       throw new FatalError("Error while getting entreprise from db", e);
     }
     return entreprise;
+  }
+
+  @Override
+  public int nextItemId() {
+    String sql = "SELECT MAX(id_contact) FROM pae.contacts";
+    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql);
+        ResultSet rs = stmt.executeQuery()) {
+      if (rs.next()) {
+        return rs.getInt(1) + 1;
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return 1;
   }
 }

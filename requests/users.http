@@ -14,7 +14,7 @@ Content-Type: application/json
 %}
 
 ### Get all the users
-GET {{baseUrl}}/users
+GET {{baseUrl}}/users/getAll
 Content-Type: application/json
 Authorization: {{user}}
 

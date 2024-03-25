@@ -6,6 +6,7 @@ import UserDataPage from '../Pages/UserDataPage';
 import modifyUserDataPage from '../Pages/ModifyUserDataPage';
 import AddContactPage from '../Pages/AddContact';
 import UsersPage from '../Pages/Users';
+import AddEnterprisePage from '../Pages/AddEnterprise';
 
 const routes = {
   '/': HomePage,
@@ -16,6 +17,7 @@ const routes = {
   '/users/changeData': modifyUserDataPage,
   '/logout': Logout,
   '/addcontact': AddContactPage,
+  '/addEnterprise': AddEnterprisePage,
 };
 
 export default routes;

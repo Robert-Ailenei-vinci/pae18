@@ -75,10 +75,10 @@ public class UserDAOImpl implements UserDAO {
           return getUserMethodFromDB(rs);
         }
       }
+      return null;
     } catch (Exception e) {
       throw new UserNotFoundException("User not found with email " + email, e);
     }
-    return null;
   }
 
   /**

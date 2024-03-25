@@ -1,5 +1,7 @@
 package be.vinci.pae.business.domain;
 
+import java.util.List;
+
 /**
  * This class represents an implementation of the {@link Contact} interface.
  */
@@ -104,26 +106,48 @@ public class ContactImpl implements Contact {
 
 
   @Override
-  public boolean checkStopFollow() {
+  public boolean stopFollowContact() {
     if (state.equals("initie") || state.equals("rencontre")) {
+      this.state = "stop follow";
+      this.reasonForRefusal = "";
+      this.meetingType = "";
       return true;
     }
     return false;
   }
 
   @Override
-  public boolean checkRefused() {
+  public boolean refuseContact(String reasonForRefusal) {
     if (state.equals("rencontre")) {
+      this.state = "refuse";
+      this.reasonForRefusal = reasonForRefusal;
+      this.meetingType = "";
       return true;
     }
     return false;
   }
 
   @Override
-  public boolean checkMeet() {
+  public boolean meetContact(String meetingType) {
     if (state.equals("initie")) {
+      this.state = "rencontre";
+      this.meetingType = meetingType;
+      this.reasonForRefusal = "";
       return true;
     }
     return false;
+  }
+
+  @Override
+  public boolean checkUniqueUserEnterpriseSchoolYear(List<ContactDTO> userContacts,
+      EntrepriseDTO entrepriseDTO, SchoolYearDTO schoolYearDTO) {
+    for (ContactDTO contact : userContacts
+    ) {
+      if (contact.getEntrepriseId() == entrepriseDTO.getId()
+          && contact.getSchoolYearId() == schoolYearDTO.getId()) {
+        return false;
+      }
+    }
+    return true;
   }
 }

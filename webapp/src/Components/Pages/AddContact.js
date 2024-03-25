@@ -48,7 +48,11 @@ async function renderNewContactForm() {
     });
   });
   document.getElementById('dropbtn').addEventListener('click', toggleDropdown);
-  document.getElementById('myForm').addEventListener('submit', () => handleSubmit(selectedEntrepriseId));
+  document.getElementById('myForm').addEventListener('submit', () =>{
+    handleSubmit(selectedEntrepriseId);
+    Navigate('/users/userData');
+    window.location.reload();
+  });
 }
 
 function createFormElement() {
@@ -100,8 +104,7 @@ function createAddEntrepriseButton() {
   addEntrepriseButton.className = 'btn btn-primary btn-block';
   addEntrepriseButton.textContent = 'Ajouter une entreprise';
   addEntrepriseButton.addEventListener('click', () => {
-    alert('Add entreprise clicked');
-    // TODO: Add logic for adding an entreprise here
+    Navigate('/addEnterprise');
   });
   return addEntrepriseButton;
 }
@@ -163,7 +166,7 @@ async function handleSubmit(selectedEntrepriseId) {
   const newContact = await response.json();
   alert(`Added contact : ${JSON.stringify(newContact)}`);
   Navbar();
-  Navigate('/');
+  Navigate('/users/userData');
   }
 
 }
