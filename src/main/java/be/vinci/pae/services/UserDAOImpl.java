@@ -213,7 +213,7 @@ public class UserDAOImpl implements UserDAO {
       parameters.add(user.getPassword());
     }
 
-// Remove the last comma and space
+    // Remove the last comma and space
     sql.delete(sql.length() - 2, sql.length());
 
     sql.append(", _version = _version + 1 WHERE email = ? AND _version = ?;");

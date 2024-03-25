@@ -85,8 +85,8 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
         throw new BizException(
             "This user is not a student.");
       }
-      Entreprise entreprise = (Entreprise) myEntrepriseDAO.createOne(tradeName, designation, address,
-          phoneNum, email);
+      Entreprise entreprise = (Entreprise) myEntrepriseDAO.createOne(tradeName, designation,
+          address, phoneNum, email);
 
       dalServices.commitTransaction();
 

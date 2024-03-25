@@ -17,7 +17,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * This class represents an implementation of the {@link ContactDAO} interface.

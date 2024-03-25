@@ -22,10 +22,8 @@ public class StageUCCImpl implements StageUCC {
     } catch (Exception e) {
       dalServices.rollbackTransaction();
       throw e;
-    }
-    finally {
+    } finally {
       dalServices.commitTransaction();
     }
-
   }
 }

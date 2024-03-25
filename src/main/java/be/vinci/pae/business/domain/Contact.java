@@ -39,7 +39,7 @@ public interface Contact extends ContactDTO {
    * @param enterpriseDTO The enterprise associated with the contact.
    * @param schoolYearDTO The school year associated with the contact.
    * @return {@code true} if the contact is unique based on the provided user, enterprise, and
-   * school year, {@code false} otherwise.
+   *     school year, {@code false} otherwise.
    */
   boolean checkUniqueUserEnterpriseSchoolYear(List<ContactDTO> userContacts,
       EntrepriseDTO enterpriseDTO, SchoolYearDTO schoolYearDTO);

@@ -7,7 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-public class DALServicesImpl implements DALBackServices, DALServices{
+/**
+ * This class represents an implementation of the {@link DALServices} and {@link DALBackServices}
+ * interfaces.
+ */
+public class DALServicesImpl implements DALBackServices, DALServices {
 
   private static final String DATA_BASEURL;
   private static final String DATABASE_USER;
@@ -22,6 +26,12 @@ public class DALServicesImpl implements DALBackServices, DALServices{
   private final ThreadLocal<Connection> threadLocalConnection;
   private final BasicDataSource dataSource;
 
+  /**
+   * Constructs a new DALServicesImpl instance.
+   * Initializes the ThreadLocal for connection
+   *    and sets up the BasicDataSource with the database URL, username, and password.
+   * The database configuration is retrieved from the Config class.
+   */
   public DALServicesImpl() {
     threadLocalConnection = new ThreadLocal<>();
     dataSource = new BasicDataSource();
