@@ -83,9 +83,8 @@ function createCancelButton() {
   cancelButton.className = 'btn btn-secondary';
   cancelButton.textContent = 'Cancel';
   cancelButton.addEventListener('click', () => {
-    alert('Form cancelled');
     Navbar();
-    Navigate('/users/userData');
+    Navigate('/addContact');
   });
   return cancelButton;
 }
@@ -120,7 +119,7 @@ async function handleSubmit(trade_name, designation, address, phone_num, email) 
     const newContact = await response.json();
     alert(`Added enterprise : ${JSON.stringify(newContact)}`);
     Navbar();
-    Navigate('/users/userData');
+    Navigate('/addContact');
   } catch (error) {
     console.error('Error adding contact:', error.message);
     alert('An error occurred while adding contact. Please try again later.');
