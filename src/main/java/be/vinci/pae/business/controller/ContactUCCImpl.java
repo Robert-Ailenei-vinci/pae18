@@ -65,13 +65,12 @@ public class ContactUCCImpl implements ContactUCC {
       throw new BizExceptionNotFound("The contact does not belong to the user");
     }
 
-    if (!contact.checkMeet()) {
+    if (!contact.meetContact(meetingType)) {
       LoggerUtil.logError("BizError", new BizException(
           "The contact cannot be met"));
       throw new BizException("The contact cannot be met");
     }
-
-    ContactDTO contactToReturn = myContactDAO.meetContact(contactId, meetingType);
+    ContactDTO contactToReturn = myContactDAO.updateContact(contact);
     if (contactToReturn == null) {
       return null;
     }
@@ -87,11 +86,11 @@ public class ContactUCCImpl implements ContactUCC {
       throw new BizExceptionNotFound("The contact does not belong to the user");
     }
 
-    if (!contact.checkStopFollow()) {
+    if (!contact.stopFollowContact()) {
       throw new BizException("The contact cannot be stopped from being followed");
     }
 
-    ContactDTO contactToReturn = myContactDAO.stopFollowContact(contactId);
+    ContactDTO contactToReturn = myContactDAO.updateContact(contact);
     if (contactToReturn == null) {
       return null;
     }
@@ -106,11 +105,11 @@ public class ContactUCCImpl implements ContactUCC {
       throw new BizExceptionNotFound("The contact does not belong to the user");
     }
 
-    if (!contact.checkRefused()) {
+    if (!contact.refuseContact(refusalReason)) {
       throw new BizException("The contact cannot be refused");
     }
 
-    ContactDTO contactToReturn = myContactDAO.refusedContact(contactId, refusalReason);
+    ContactDTO contactToReturn = myContactDAO.updateContact(contact);
     if (contactToReturn == null) {
       return null;
     }
