@@ -119,7 +119,7 @@ class ContactUCCTest {
     contactResult.setMeetingType(meetingType);
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
-    when(contactDAO.meetContact(contact.getId(), meetingType)).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertEquals(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()),
         contactResult);
@@ -132,7 +132,7 @@ class ContactUCCTest {
     contactResult.setMeetingType(meetingType);
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
-    when(contactDAO.meetContact(contact.getId(), meetingType)).thenReturn(null);
+    when(contactDAO.updateContact(contact)).thenReturn(null);
 
     assertNull(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()));
   }
@@ -145,7 +145,7 @@ class ContactUCCTest {
     contactResult.setMeetingType(meetingType);
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
-    when(contactDAO.meetContact(contact.getId(), meetingType)).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizException.class,
         () -> contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()));
@@ -158,7 +158,7 @@ class ContactUCCTest {
     contact.setUserId(456);
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contactResult);
-    when(contactDAO.meetContact(contact.getId(), meetingType)).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     // Assert that a BizException is thrown when trying to meet the contact
     assertThrows(BizExceptionNotFound.class,
@@ -170,7 +170,7 @@ class ContactUCCTest {
     contactResult.setState("suivis stoppe");
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
-    when(contactDAO.stopFollowContact(contact.getUserId())).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertEquals(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()),
         contactResult);
@@ -181,7 +181,7 @@ class ContactUCCTest {
     contactResult.setState("suivis stoppe");
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
-    when(contactDAO.stopFollowContact(contact.getUserId())).thenReturn(null);
+    when(contactDAO.updateContact(contact)).thenReturn(null);
 
     assertNull(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
   }
@@ -192,7 +192,7 @@ class ContactUCCTest {
     contact.setUserId(456);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
-    when(contactDAO.stopFollowContact(contact.getUserId())).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizExceptionNotFound.class,
         () -> contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
@@ -204,7 +204,7 @@ class ContactUCCTest {
     contact.setState("rencontre");
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
-    when(contactDAO.stopFollowContact(contact.getUserId())).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizException.class,
         () -> contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
@@ -218,7 +218,7 @@ class ContactUCCTest {
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
-    when(contactDAO.refusedContact(contact.getUserId(), refusalReason)).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertEquals(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()),
         contactResult);
@@ -232,7 +232,7 @@ class ContactUCCTest {
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
-    when(contactDAO.refusedContact(contact.getUserId(), refusalReason)).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizException.class,
         () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
@@ -247,7 +247,7 @@ class ContactUCCTest {
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
-    when(contactDAO.refusedContact(contact.getUserId(), refusalReason)).thenReturn(contactResult);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizExceptionNotFound.class,
         () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
@@ -261,7 +261,7 @@ class ContactUCCTest {
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
-    when(contactDAO.refusedContact(contact.getUserId(), refusalReason)).thenReturn(null);
+    when(contactDAO.updateContact(contact)).thenReturn(null);
 
     assertNull(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
   }
