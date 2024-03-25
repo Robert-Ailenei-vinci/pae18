@@ -25,7 +25,8 @@ Content-Type: application/json
 {
      "login": "robert.ailenei@student.vinci.be",
      "password": "mdp1",
-     "fname": "sef gtgt",
-     "lname": "dzzdq",
-     "phoneNum": "0477777777"
+     "f_name": "sef gtgt",
+     "l_name": "dzzdq",
+     "phone_number": "0477777777",
+      "role": "etudiant"
 }

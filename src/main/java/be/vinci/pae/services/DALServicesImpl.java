@@ -3,19 +3,18 @@ package be.vinci.pae.services;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.utils.Config;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
- * This class represents an implementation of the {@link DALServices} interface.
+ * This class represents an implementation of the {@link DALServices} and {@link DALBackServices}
+ * interfaces.
  */
-public class DALServicesImpl implements DALServices {
+public class DALServicesImpl implements DALBackServices, DALServices {
 
   private static final String DATA_BASEURL;
-
   private static final String DATABASE_USER;
-
   private static final String DATABASE_PASSWORD;
 
   static {
@@ -24,66 +23,58 @@ public class DALServicesImpl implements DALServices {
     DATABASE_PASSWORD = Config.getProperty("DataBasePswd");
   }
 
-  private Connection connection;
+  private final ThreadLocal<Connection> threadLocalConnection;
+  private final BasicDataSource dataSource;
 
   /**
-   * Constructor for DALServicesImpl. It establishes a connection to the database.
+   * Constructs a new DALServicesImpl instance.
+   * Initializes the ThreadLocal for connection
+   *    and sets up the BasicDataSource with the database URL, username, and password.
+   * The database configuration is retrieved from the Config class.
    */
   public DALServicesImpl() {
-    try {
-      this.connection = DriverManager.getConnection(DATA_BASEURL, DATABASE_USER, DATABASE_PASSWORD);
-    } catch (SQLException e) {
-      System.out.println("Unable to connect to database: " + e.getMessage());
+    threadLocalConnection = new ThreadLocal<>();
+    dataSource = new BasicDataSource();
+    dataSource.setUrl(DATA_BASEURL);
+    dataSource.setUsername(DATABASE_USER);
+    dataSource.setPassword(DATABASE_PASSWORD);
+  }
+
+  private Connection getConnection() {
+    Connection connection = threadLocalConnection.get();
+    if (connection == null) {
+      try {
+        connection = dataSource.getConnection();
+        threadLocalConnection.set(connection);
+      } catch (SQLException e) {
+        throw new FatalError("Unable to connect to database: " + e.getMessage(), e);
+      }
     }
+    return connection;
   }
 
-  /**
-   * Gets a connection to the database.
-   *
-   * @return a Connection object representing a connection to the database
-   */
-
-  public Connection getConnection() {
-    return this.connection;
-  }
-
-  /**
-   * Closes the provided database connection.
-   *
-   * @param con the Connection object to be closed
-   */
-
-  public void closeConnection(Connection con) {
+  private void closeConnection() {
+    Connection connection = threadLocalConnection.get();
     try {
-      if (con != null && !con.isClosed()) {
-        con.close();
+      if (connection != null) {
+        connection.close();
       }
     } catch (SQLException e) {
       throw new FatalError("Unable to close connection: " + e.getMessage(), e);
+    } finally {
+      threadLocalConnection.remove();
     }
   }
 
-  /**
-   * Gets a PreparedStatement object for sending parameterized SQL statements to the database.
-   *
-   * @param sql a String representing an SQL statement to be sent to the database
-   * @return a PreparedStatement object containing the precompiled SQL statement
-   */
   @Override
   public PreparedStatement getPreparedStatement(String sql) {
     try {
-      return this.connection.prepareStatement(sql);
+      return getConnection().prepareStatement(sql);
     } catch (SQLException e) {
       throw new FatalError("Unable to create PreparedStatement: " + e.getMessage(), e);
     }
   }
 
-
-  /**
-   * Closes the provided PreparedStatement object.
-   *
-   * @param ps the PreparedStatement object to be closed
-   */
   @Override
   public void closePreparedStatement(PreparedStatement ps) {
     try {
@@ -92,6 +83,37 @@ public class DALServicesImpl implements DALServices {
       }
     } catch (SQLException e) {
       throw new FatalError("Unable to close PreparedStatement: " + e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public void startTransaction() {
+    try {
+      getConnection().setAutoCommit(false);
+    } catch (SQLException e) {
+      throw new FatalError("Unable to start transaction: " + e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public void commitTransaction() {
+    try {
+      getConnection().commit();
+      getConnection().setAutoCommit(true);
+      closeConnection();
+    } catch (SQLException e) {
+      throw new FatalError("Unable to commit transaction: " + e.getMessage(), e);
+    }
+  }
+
+  @Override
+  public void rollbackTransaction() {
+    try {
+      getConnection().rollback();
+      getConnection().setAutoCommit(true);
+      closeConnection();
+    } catch (SQLException e) {
+      throw new FatalError("Unable to rollback transaction: " + e.getMessage(), e);
     }
   }
 }
