@@ -38,7 +38,7 @@ public class ContactUCCImpl implements ContactUCC {
       for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())
       ) {
         Contact tempContact = (Contact) contactDTO;
-        if (!tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
+        if (tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
             schoolYear.getId())) {
           LoggerUtil.logError("BizError", new BizException(
               "This user cannot have a contact with this enterprise for this year."));

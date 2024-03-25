@@ -227,7 +227,7 @@ class ContactUCCTest {
   @Test
   void refusedContactWrongState() {
     String refusalReason = "raison de refus";
-    contact.setState("refuser");
+    contact.setState("refuse");
     contactResult.setState("refuse");
     contactResult.setReasonForRefusal(refusalReason);
 
