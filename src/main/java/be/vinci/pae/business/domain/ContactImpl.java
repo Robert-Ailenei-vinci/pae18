@@ -137,12 +137,9 @@ public class ContactImpl implements Contact {
   }
 
   @Override
-  public boolean checkUniqueUserEnterpriseSchoolYear(int entrepriseId, int wantedEntrepriseId,
-      int schoolYearId, int wantedSchoolYearId) {
-    if (schoolYearId == wantedSchoolYearId
-        && entrepriseId == wantedEntrepriseId) {
-      return false;
-    }
-    return true;
+  public boolean checkUniqueUserEnterpriseSchoolYear(int wantedEntrepriseId,
+      int wantedSchoolYearId) {
+    return schoolYearId == wantedSchoolYearId
+        && entrepriseId == wantedEntrepriseId;
   }
 }

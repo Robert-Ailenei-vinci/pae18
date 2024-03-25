@@ -4,7 +4,8 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
-import be.vinci.pae.exception.BizException;
+import be.vinci.pae.exception.UserNotFoundException;
+import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
 import java.time.LocalDate;
@@ -22,6 +23,9 @@ public class UserUCCImpl implements UserUCC {
   private UserDAO myUserDAO;
 
   @Inject
+  private DALServices dalServices;
+
+  @Inject
   private DomainFactory myDomainFactory;
 
   /**
@@ -32,16 +36,28 @@ public class UserUCCImpl implements UserUCC {
    * @return the user.
    */
   public UserDTO login(String login, String password) {
+    try {
+      // Start a new transaction
+      dalServices.startTransaction();
 
-    User user = (User) myUserDAO.getOne(login);
-    if (user == null) {
-      return null;
-    }
+      User user = (User) myUserDAO.getOne(login);
+      if (user == null) {
+        return null;
+      }
 
-    if (!user.checkPassword(password)) {
-      return null;
+      if (!user.checkPassword(password)) {
+        return null;
+      }
+
+      // Commit the transaction
+      dalServices.commitTransaction();
+
+      return user;
+    } catch (Exception e) {
+      // Rollback the transaction in case of an error
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    return user;
   }
 
   /**
@@ -53,30 +69,71 @@ public class UserUCCImpl implements UserUCC {
 
   @Override
   public boolean register(UserDTO userDTO) {
+    try {
+      dalServices.startTransaction();
 
-    UserDTO existingUserDTO = myUserDAO.getOne(userDTO.getEmail());
-    if (existingUserDTO != null) {
-      throw new BizException("User already exists");
+      User user = (User) myDomainFactory.getUser();
+      user.checkRegisterNotEmpty(userDTO);
+
+      // Check if user already exists
+      User existingUser = null;
+      try {
+        existingUser = (User) myUserDAO.getOne(userDTO.getEmail());
+      } catch (UserNotFoundException e) {
+        System.out.println(e); // User not found, print the error to
+        // continue the prgram and for no empty catch block
+      }
+
+      user.checkExisitngUser(existingUser);
+      user.checkMail(userDTO.getEmail());
+      user.checkRoleFromMail(userDTO.getEmail(), userDTO);
+      user.setPassword(hashPassword(userDTO.getPassword()));
+      userDTO.setPassword(user.getPassword());
+      userDTO.setRegistrationDate(LocalDate.now().toString());
+
+      boolean result = myUserDAO.addUser(userDTO);
+
+      dalServices.commitTransaction();
+
+      return result;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
 
-    User user = (User) myDomainFactory.getUser();
-    user.setPassword(userDTO.getPassword());
-    String hashedPassword = user.hashPassword(user.getPassword());
-    userDTO.setPassword(hashedPassword);
-    userDTO.setRegistrationDate(LocalDate.now().toString());
+  }
 
-    return myUserDAO.addUser(userDTO);
+  public String hashPassword(String password) {
+    User user = (User) myDomainFactory.getUser();
+    return user.hashPassword(password);
   }
 
   @Override
   public List<UserDTO> getAll() {
-    return myUserDAO.getAll();
+    try {
+      dalServices.startTransaction();
+      List<UserDTO> users = myUserDAO.getAll();
+      dalServices.commitTransaction();
+      return users;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
   }
 
   @Override
   public UserDTO getOne(int userId) {
-    return myUserDAO.getOne(userId);
+    try {
+      dalServices.startTransaction();
+      UserDTO user = myUserDAO.getOne(userId);
+      dalServices.commitTransaction();
+      return user;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
   }
+
 
   /**
    * Changes user data based on the provided parameters.
@@ -91,27 +148,40 @@ public class UserUCCImpl implements UserUCC {
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
       String phoneNum) {
-    User user = (User) myDomainFactory.getUser();
-    user.setEmail(email);
+    try {
+      dalServices.startTransaction();
 
-    if (password == null) {
-      user.setPassword("");
-    } else {
-      //did this because if I don't want to change psw, it will be null, look at dao if's
-      String hashedPassword = user.hashPassword(password);
-      user.setPassword(hashedPassword);
-    }
+      User user = (User) myDomainFactory.getUser();
+      user.checkMail(email);
+      user.setEmail(email);
 
-    user.setLastName(lname);
-    user.setFirstName(fname);
-    user.setPhoneNum(phoneNum);
-    SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
-    user.setSchoolYear(academicYear);
-    user.setRegistrationDate(LocalDate.now().toString());
-    if (myUserDAO.changeUser(user) == null) {
-      return null;
+      if (password == null) {
+        user.setPassword("");
+      } else {
+        //did this because if I don't want to change psw, it will be null, look at dao if's
+        String hashedPassword = user.hashPassword(password);
+        user.setPassword(hashedPassword);
+      }
+
+      user.setLastName(lname);
+      user.setFirstName(fname);
+      user.setPhoneNum(phoneNum);
+      SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
+      user.setSchoolYear(academicYear);
+      user.setRegistrationDate(LocalDate.now().toString());
+
+      UserDTO updatedUser = myUserDAO.changeUser(user);
+      if (updatedUser == null) {
+        return null;
+      }
+
+      dalServices.commitTransaction();
+
+      return updatedUser;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
-    return myUserDAO.getOne(email);
   }
 
 

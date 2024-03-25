@@ -33,15 +33,12 @@ public interface Contact extends ContactDTO {
    * Checks the uniqueness of a contact based on the combination of user, enterprise, and school
    * year.
    *
-   * @param entrepriseId       The ID of the enterprise associated with the contact.
    * @param wantedEntrepriseId The ID of the desired enterprise.
-   * @param schoolYearId       The ID of the school year associated with the contact.
    * @param wantedSchoolYearId The ID of the desired school year.
    * @return {@code true} if the contact is unique based on the provided user, enterprise, and
-   * school year, {@code false} otherwise.
+   *     school year, {@code false} otherwise.
    */
-  boolean checkUniqueUserEnterpriseSchoolYear(int entrepriseId,
+  boolean checkUniqueUserEnterpriseSchoolYear(
       int wantedEntrepriseId,
-      int schoolYearId,
       int wantedSchoolYearId);
 }
