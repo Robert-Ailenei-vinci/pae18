@@ -43,7 +43,7 @@ public class ContactUCCImpl implements ContactUCC {
           LoggerUtil.logError("BizError", new BizException(
               "This user cannot have a contact with this enterprise for this year."));
           throw new BizException(
-              "This user cannot have a contact with this enterprise for this year.");
+              "This user cannot have a contact with this enterprise for this year. ");
         }
       }
 
