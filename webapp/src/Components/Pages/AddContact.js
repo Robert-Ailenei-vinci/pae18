@@ -104,7 +104,6 @@ function createAddEntrepriseButton() {
   addEntrepriseButton.className = 'btn btn-primary btn-block';
   addEntrepriseButton.textContent = 'Ajouter une entreprise';
   addEntrepriseButton.addEventListener('click', () => {
-    // TODO: Add logic for adding an entreprise here
     Navigate('/addEnterprise');
   });
   return addEntrepriseButton;

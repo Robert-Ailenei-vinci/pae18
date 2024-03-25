@@ -16,7 +16,7 @@ const routes = {
   '/users/userData': UserDataPage,
   '/users/changeData': modifyUserDataPage,
   '/logout': Logout,
-  '/addContact': AddContactPage,
+  '/addcontact': AddContactPage,
   '/addEnterprise': AddEnterprisePage,
 };
 
