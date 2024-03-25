@@ -58,25 +58,11 @@ POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-  "login": "zaza@vinci.be",
-  "password": "zaza",
-  "f_name": "zaza",
-  "l_name": "zaza",
-  "role": "zaza",
-  "phone_number": "0484118694456"
-}
-
-### Register a new user with wrong role
-POST {{baseUrl}}/auths/register
-Content-Type: application/json
-
-{
-  "login": "zaza@vinci.be",
-  "password": "zaza",
-  "f_name": "zaza",
-  "l_name": "zaza",
-  "role": "etudiant",
-  "phone_number": "0484118694456"
+     "login": "robert.ailenei@student.vinci.be",
+     "password": "mdp1",
+     "fname": "sef gtgt",
+     "lname": "dzzdq",
+     "phoneNum": "0477777777"
 }
 
 ### Register a new user with good role

@@ -11,7 +11,15 @@ import java.util.Properties;
  */
 public class Config {
 
-  private static Properties props = new Properties();
+  private static final Properties props = new Properties();
+
+  static {
+    try {
+      props.load(new FileInputStream("dev.properties"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   /**
    * Loads the specified properties file.
@@ -56,5 +64,4 @@ public class Config {
   public static boolean getBoolProperty(String key) {
     return Boolean.parseBoolean(props.getProperty(key));
   }
-
 }

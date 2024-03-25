@@ -1,7 +1,5 @@
 package be.vinci.pae.services;
 
-import static be.vinci.pae.services.utils.Utils.paramStatement;
-
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.FatalError;
@@ -24,7 +22,7 @@ public class UserDAOImpl implements UserDAO {
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
-  private DALServices dalServices;
+  private DALBackServices dalBackServices;
   @Inject
   private SchoolYearDAO schoolYearDAO;
 
@@ -35,7 +33,7 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public List<UserDTO> getAll() {
-    PreparedStatement getAllUsers = dalServices.getPreparedStatement(
+    PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
         "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
             + " u.phone_number, u.psw, u.registration_date,"
             + " u.school_year, s.years_format AS academic_year, u._version "
@@ -63,7 +61,7 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO getOne(String email) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT u.id_user, u.email, u.role_u, u.last_name,"
             + " u.first_name, u.phone_number, u.psw,"
             + " u.registration_date, u.school_year,"
@@ -91,7 +89,7 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO getOne(int id) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT u.id_user, u.email, u.role_u, u.last_name, "
             + "u.first_name, u.phone_number, u.psw,"
             + " u.registration_date, u.school_year,"
@@ -121,7 +119,7 @@ public class UserDAOImpl implements UserDAO {
   public boolean addUser(UserDTO user) {
     int idYear = 0;
     String sql1 = "SELECT id_year FROM pae.school_years WHERE years_format = ?";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql1)) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql1)) {
       stmt.setString(1, buildYear());
       ResultSet rs = stmt.executeQuery();
       if (rs.next()) {
@@ -133,7 +131,7 @@ public class UserDAOImpl implements UserDAO {
 
     if (idYear == 0) {
       String sql2 = "INSERT INTO pae.school_years (years_format) VALUES (?)";
-      try (PreparedStatement stmt = dalServices.getPreparedStatement(sql2)) {
+      try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql2)) {
         stmt.setString(1, buildYear());
         stmt.executeUpdate();
       } catch (Exception e) {
@@ -143,7 +141,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     String sql3 = "SELECT max(id_user) FROM pae.users";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql3)) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql3)) {
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
           user.setId(rs.getInt(1) + 1);
@@ -155,7 +153,7 @@ public class UserDAOImpl implements UserDAO {
 
     String sql4 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
         + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql4)) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql3)) {
       stmt.setString(1, user.getEmail());
       stmt.setString(2, user.getRole());
       stmt.setString(3, user.getLastName());
@@ -238,8 +236,14 @@ public class UserDAOImpl implements UserDAO {
     getVersionFromDB(user);
     parameters.add(user.getVersion());
 
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
-      paramStatement(parameters, stmt);
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql.toString())) {
+      for (int i = 0; i < parameters.size(); i++) {
+        if (parameters.get(i) instanceof String) {
+          stmt.setString(i + 1, (String) parameters.get(i));
+        } else if (parameters.get(i) instanceof Integer) {
+          stmt.setInt(i + 1, (Integer) parameters.get(i));
+        }
+      }
 
       if (stmt.executeUpdate() == 0) {
         throw new OptimisticLockException("User was updated by another transaction");
@@ -269,7 +273,7 @@ public class UserDAOImpl implements UserDAO {
 
   private int getLastInsertedYearId() {
     String sql = "SELECT MAX(id_year) FROM pae.school_years";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql)) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
           return rs.getInt(1);
@@ -282,7 +286,7 @@ public class UserDAOImpl implements UserDAO {
   }
 
   private void getVersionFromDB(UserDTO user) {
-    try (PreparedStatement versionStmt = dalServices.getPreparedStatement(
+    try (PreparedStatement versionStmt = dalBackServices.getPreparedStatement(
         "SELECT _version FROM pae.users WHERE email = ?")) {
       versionStmt.setString(1, user.getEmail());
       try (ResultSet rs = versionStmt.executeQuery()) {
