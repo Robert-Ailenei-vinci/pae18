@@ -21,7 +21,6 @@ public class UserImpl implements User {
   private int version;
   private int schoolYearId;
   private SchoolYearDTO schoolYear;
-  private DomainFactory myDomainFactory;
 
   /**
    * Retrieves the school year ID of the user.
@@ -176,7 +175,7 @@ public class UserImpl implements User {
       throw new IllegalArgumentException("Role must be student");
     }
     if (mail.endsWith("@vinci.be") &&
-        (!userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur"))) {
+        !userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur")) {
       throw new IllegalArgumentException("Role must be either administratif or professeur");
     }
   }

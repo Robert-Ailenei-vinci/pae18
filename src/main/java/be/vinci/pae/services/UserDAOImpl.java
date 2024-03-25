@@ -153,7 +153,7 @@ public class UserDAOImpl implements UserDAO {
 
     String sql4 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
         + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
-    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql3)) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql4)) {
       stmt.setString(1, user.getEmail());
       stmt.setString(2, user.getRole());
       stmt.setString(3, user.getLastName());

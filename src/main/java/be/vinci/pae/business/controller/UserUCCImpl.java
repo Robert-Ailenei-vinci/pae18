@@ -5,9 +5,7 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.UserNotFoundException;
-import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.DALServices;
-import be.vinci.pae.exception.UserNotFoundException;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
 import java.time.LocalDate;
@@ -74,23 +72,24 @@ public class UserUCCImpl implements UserUCC {
     try {
       dalServices.startTransaction();
 
-    User user = (User) myDomainFactory.getUser();
-    user.checkRegisterNotEmpty(userDTO);
+      User user = (User) myDomainFactory.getUser();
+      user.checkRegisterNotEmpty(userDTO);
 
-    // Check if user already exists
-    User existingUser = null;
-    try {
-      existingUser = (User) myUserDAO.getOne(userDTO.getEmail());
-    } catch (UserNotFoundException e) {
-      // User does not exist, so we can continue with registration
-    }
+      // Check if user already exists
+      User existingUser = null;
+      try {
+        existingUser = (User) myUserDAO.getOne(userDTO.getEmail());
+      } catch (UserNotFoundException e) {
+        System.out.println(e); // User not found, print the error to
+        // continue the prgram and for no empty catch block
+      }
 
-    user.checkExisitngUser(existingUser);
-    user.checkMail(userDTO.getEmail());
-    user.checkRoleFromMail(userDTO.getEmail(), userDTO);
-    user.setPassword(hashPassword(userDTO.getPassword()));
-    userDTO.setPassword(user.getPassword());
-    userDTO.setRegistrationDate(LocalDate.now().toString());
+      user.checkExisitngUser(existingUser);
+      user.checkMail(userDTO.getEmail());
+      user.checkRoleFromMail(userDTO.getEmail(), userDTO);
+      user.setPassword(hashPassword(userDTO.getPassword()));
+      userDTO.setPassword(user.getPassword());
+      userDTO.setRegistrationDate(LocalDate.now().toString());
 
       boolean result = myUserDAO.addUser(userDTO);
 
@@ -101,7 +100,7 @@ public class UserUCCImpl implements UserUCC {
       dalServices.rollbackTransaction();
       throw e;
     }
-   
+
   }
 
   public String hashPassword(String password) {
@@ -152,18 +151,17 @@ public class UserUCCImpl implements UserUCC {
     try {
       dalServices.startTransaction();
 
+      User user = (User) myDomainFactory.getUser();
+      user.checkMail(email);
+      user.setEmail(email);
 
-    User user = (User) myDomainFactory.getUser();
-    user.checkMail(email);
-    user.setEmail(email);
-
-    if (password == null) {
-      user.setPassword("");
-    } else {
-      //did this because if I don't want to change psw, it will be null, look at dao if's
-      String hashedPassword = user.hashPassword(password);
-      user.setPassword(hashedPassword);
-    }
+      if (password == null) {
+        user.setPassword("");
+      } else {
+        //did this because if I don't want to change psw, it will be null, look at dao if's
+        String hashedPassword = user.hashPassword(password);
+        user.setPassword(hashedPassword);
+      }
 
       user.setLastName(lname);
       user.setFirstName(fname);
