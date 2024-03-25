@@ -40,8 +40,7 @@ public interface Contact extends ContactDTO {
    * @return {@code true} if the contact is unique based on the provided user, enterprise, and
    *     school year, {@code false} otherwise.
    */
-  boolean checkUniqueUserEnterpriseSchoolYear(int entrepriseId,
+  boolean checkUniqueUserEnterpriseSchoolYear(
       int wantedEntrepriseId,
-      int schoolYearId,
       int wantedSchoolYearId);
 }

@@ -35,39 +35,24 @@ public class ContactUCCImpl implements ContactUCC {
         throw new BizException(
             "This user is not a student.");
       }
-      Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
-      if (contact.checkUniqueUserEnterpriseSchoolYear(
-          myContactDAO.getAllContactsByUserId(user.getId()), entreprise, schoolYear)) {
-        LoggerUtil.logError("BizError", new BizException(
-            "This user cannot have a contact with this enterprise for this year."));
-        throw new BizException(
-            "This user cannot have a contact with this enterprise for this year.");
+      for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())
+      ) {
+        Contact tempContact = (Contact) contactDTO;
+        if (!tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
+            schoolYear.getId())) {
+          LoggerUtil.logError("BizError", new BizException(
+              "This user cannot have a contact with this enterprise for this year."));
+          throw new BizException(
+              "This user cannot have a contact with this enterprise for this year.");
+        }
       }
-
+      Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
       dalServices.commitTransaction();
       return contact;
     } catch (Exception e) {
       dalServices.rollbackTransaction();
       throw e;
     }
-    for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())
-    ) {
-      Contact temp_contact = (Contact) contactDTO;
-      if (!temp_contact.checkUniqueUserEnterpriseSchoolYear(
-          temp_contact.getEntrepriseId(), entreprise.getId(), temp_contact.getSchoolYearId(),
-          schoolYear.getId())) {
-        LoggerUtil.logError("BizError", new BizException(
-            "This user cannot have a contact with this enterprise for this year."));
-        throw new BizException(
-            "This user cannot have a contact with this enterprise for this year.");
-      }
-    }
-    Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
-
-    if (contact == null) {
-      return null;
-    }
-    return contact;
   }
 
   @Override
