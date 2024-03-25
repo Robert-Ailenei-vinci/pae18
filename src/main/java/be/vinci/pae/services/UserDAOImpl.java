@@ -198,7 +198,6 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO changeUser(UserDTO user) {
-
     StringBuilder sql = new StringBuilder("UPDATE pae.users SET ");
     List<Object> parameters = new ArrayList<>();
 

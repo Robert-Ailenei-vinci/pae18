@@ -7,6 +7,7 @@ import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.UserNotFoundException;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.DALServices;
+import be.vinci.pae.exception.UserNotFoundException;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
 import java.time.LocalDate;
@@ -100,6 +101,7 @@ public class UserUCCImpl implements UserUCC {
       dalServices.rollbackTransaction();
       throw e;
     }
+   
   }
 
   public String hashPassword(String password) {
