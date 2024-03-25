@@ -29,4 +29,25 @@ public interface User extends UserDTO {
    */
   boolean checkIsStudent();
 
+  /**
+   * Check if user exists.
+   *
+   * @param existingUserDTO the existing user.
+   */
+  void checkExisitngUser(UserDTO existingUserDTO);
+
+  /**
+   * Check if register is not empty.
+   *
+   * @param userDTO the user.
+   */
+  void checkRegisterNotEmpty(UserDTO userDTO);
+
+  /**
+   * Check role from mail.
+   *
+   * @param email   the email.
+   * @param userDTO the user.
+   */
+  void checkRoleFromMail(String email, UserDTO userDTO);
 }

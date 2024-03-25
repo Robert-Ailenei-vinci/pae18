@@ -4,7 +4,7 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
-import be.vinci.pae.exception.BizException;
+import be.vinci.pae.exception.UserNotFoundException;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
 import java.time.LocalDate;
@@ -54,18 +54,29 @@ public class UserUCCImpl implements UserUCC {
   @Override
   public boolean register(UserDTO userDTO) {
 
-    UserDTO existingUserDTO = myUserDAO.getOne(userDTO.getEmail());
-    if (existingUserDTO != null) {
-      throw new BizException("User already exists");
+    User user = (User) myDomainFactory.getUser();
+    user.checkRegisterNotEmpty(userDTO);
+
+    // Check if user already exists
+    User existingUser = null;
+    try {
+      existingUser = (User) myUserDAO.getOne(userDTO.getEmail());
+    } catch (UserNotFoundException e) {
+      // User does not exist, so we can continue with registration
     }
 
-    User user = (User) myDomainFactory.getUser();
-    user.setPassword(userDTO.getPassword());
-    String hashedPassword = user.hashPassword(user.getPassword());
-    userDTO.setPassword(hashedPassword);
+    user.checkExisitngUser(existingUser);
+    user.checkRoleFromMail(userDTO.getEmail(), userDTO);
+    user.setPassword(hashPassword(userDTO.getPassword()));
+    userDTO.setPassword(user.getPassword());
     userDTO.setRegistrationDate(LocalDate.now().toString());
 
     return myUserDAO.addUser(userDTO);
+  }
+
+  public String hashPassword(String password) {
+    User user = (User) myDomainFactory.getUser();
+    return user.hashPassword(password);
   }
 
   @Override
