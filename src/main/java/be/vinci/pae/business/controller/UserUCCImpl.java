@@ -90,7 +90,7 @@ public class UserUCCImpl implements UserUCC {
    */
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
-      String phoneNum) {
+      String phoneNum, int version) {
     User user = (User) myDomainFactory.getUser();
     user.setEmail(email);
 
@@ -105,6 +105,7 @@ public class UserUCCImpl implements UserUCC {
     user.setLastName(lname);
     user.setFirstName(fname);
     user.setPhoneNum(phoneNum);
+    user.setVersion(version);
     SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
     user.setSchoolYear(academicYear);
     user.setRegistrationDate(LocalDate.now().toString());

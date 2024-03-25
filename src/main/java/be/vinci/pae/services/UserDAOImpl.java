@@ -1,7 +1,5 @@
 package be.vinci.pae.services;
 
-import static be.vinci.pae.services.utils.Utils.paramStatement;
-
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.FatalError;
@@ -222,12 +220,12 @@ public class UserDAOImpl implements UserDAO {
     sql.append(", _version = _version + 1 WHERE email = ? AND _version = ?;");
 
     parameters.add(user.getEmail());
-    getVersionFromDB(user);
     parameters.add(user.getVersion());
 
     try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
-      paramStatement(parameters, stmt);
-
+      for (int i = 0; i < parameters.size(); i++) {
+        stmt.setObject(i + 1, parameters.get(i));
+      }
       if (stmt.executeUpdate() == 0) {
         throw new OptimisticLockException("User was updated by another transaction");
       }
@@ -268,19 +266,5 @@ public class UserDAOImpl implements UserDAO {
     return 0; // return 0 if no id was found
   }
 
-  private void getVersionFromDB(UserDTO user) {
-    try (PreparedStatement versionStmt = dalServices.getPreparedStatement(
-        "SELECT _version FROM pae.users WHERE email = ?")) {
-      versionStmt.setString(1, user.getEmail());
-      try (ResultSet rs = versionStmt.executeQuery()) {
-        if (rs.next()) {
-          // Update the version of the UserDTO object in memory
-          user.setVersion(rs.getInt("_version"));
-          System.out.println(user.getVersion());
-        }
-      }
-    } catch (Exception e) {
-      throw new FatalError("Error processing result set", e);
-    }
-  }
+
 }

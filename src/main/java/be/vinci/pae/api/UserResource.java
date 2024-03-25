@@ -84,10 +84,12 @@ public class UserResource {
     System.out.println(fname);
     String phoneNum = json.get("phone_number").asText();
     System.out.println(phoneNum);
+    int version = json.get("version").asInt();
+    System.out.println(version);
     String token = requestContext.getHeaderString("Authorization");
     System.out.println(token);
-    
-    UserDTO publicUser = myUser.changeData(email, password, lname, fname, phoneNum);
+
+    UserDTO publicUser = myUser.changeData(email, password, lname, fname, phoneNum, version);
 
     ObjectNode toReturn = jsonMapper.createObjectNode()
         .put("token", token)
@@ -99,7 +101,8 @@ public class UserResource {
         .put("phoneNum", publicUser.getPhoneNum())
         .put("registrationDate", publicUser.getRegistrationDate())
         .put("role", publicUser.getRole())
-        .put("schoolYear", publicUser.getSchoolYear().getYearFormat());
+        .put("schoolYear", publicUser.getSchoolYear().getYearFormat())
+        .put("version", publicUser.getVersion());
 
     return toReturn;
   }

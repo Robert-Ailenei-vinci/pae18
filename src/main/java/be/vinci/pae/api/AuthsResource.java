@@ -94,7 +94,8 @@ public class AuthsResource {
           .put("lastName", publicUser.getLastName())
           .put("phoneNum", publicUser.getPhoneNum())
           .put("registrationDate", publicUser.getRegistrationDate())
-          .put("schoolYear", publicUser.getSchoolYear().getYearFormat());
+          .put("schoolYear", publicUser.getSchoolYear().getYearFormat())
+          .put("version", publicUser.getVersion());
       return toReturn;
 
     } catch (Exception e) {
@@ -140,7 +141,8 @@ public class AuthsResource {
           .put("lastName", user.getLastName())
           .put("phoneNum", user.getPhoneNum())
           .put("registrationDate", user.getRegistrationDate())
-          .put("schoolYearFormat", user.getSchoolYear().getYearFormat());
+          .put("schoolYear", user.getSchoolYear().getYearFormat())
+          .put("version", user.getVersion());
       return toReturn;
 
     } catch (Exception e) {
@@ -169,6 +171,7 @@ public class AuthsResource {
     String fname = json.get("f_name").asText();
     String phoneNum = json.get("phone_number").asText();
     String role = json.get("role").asText();
+    int version = json.get("version").asInt();
     UserDTO user = myDomainFactory.getUser();
     user.setEmail(email);
     user.setPassword(password);
@@ -176,6 +179,7 @@ public class AuthsResource {
     user.setLastName(lname);
     user.setPhoneNum(phoneNum);
     user.setRole(role);
+    user.setVersion(version);
 
     return userUCC.register(user);
   }
