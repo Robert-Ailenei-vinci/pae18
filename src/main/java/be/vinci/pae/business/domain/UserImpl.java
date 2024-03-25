@@ -1,5 +1,6 @@
 package be.vinci.pae.business.domain;
 
+import be.vinci.pae.exception.BizException;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -7,6 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
  * This class represents an implementation of the {@link User} interface.
  */
 public class UserImpl implements User {
+
 
   private int id;
   private String email;
@@ -149,4 +151,39 @@ public class UserImpl implements User {
   public boolean checkIsStudent() {
     return Objects.equals(this.getRole(), "etudiant");
   }
+
+  @Override
+  public void checkExisitngUser(UserDTO userDTO) {
+
+    if (userDTO != null) {
+      throw new BizException("User already exists");
+    }
+
+  }
+
+  @Override
+  public void checkRegisterNotEmpty(UserDTO userDTO) {
+    if (Objects.equals(userDTO.getEmail(), "") || Objects.equals(userDTO.getPassword(), "")
+        || Objects.equals(userDTO.getLastName(), "") || Objects.equals(userDTO.getFirstName(), "")
+        || Objects.equals(userDTO.getPhoneNum(), "") || Objects.equals(userDTO.getRole(), "")) {
+      throw new IllegalArgumentException("All fields must be filled");
+    }
+  }
+
+  public void checkRoleFromMail(String mail, UserDTO userDTO) {
+    if (mail.endsWith("@student.vinci.be") && !userDTO.getRole().equals("etudiant")) {
+      throw new IllegalArgumentException("Role must be student");
+    }
+    if (mail.endsWith("@vinci.be") &&
+        !userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur")) {
+      throw new IllegalArgumentException("Role must be either administratif or professeur");
+    }
+  }
+
+  public void checkMail(String email) {
+    if (!email.endsWith("@vinci.be") && !email.endsWith("@student.vinci.be")) {
+      throw new IllegalArgumentException("Email must end with @vinci.be or @student.vinci.be");
+    }
+  }
 }
+

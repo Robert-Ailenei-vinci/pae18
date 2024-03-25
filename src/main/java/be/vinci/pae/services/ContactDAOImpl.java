@@ -154,7 +154,6 @@ public class ContactDAOImpl implements ContactDAO {
     sql.append(", _version = _version + 1 WHERE id_contact = ? AND _version = ?;");
 
     parameters.add(contactDTO.getId());
-    getVersionFromDB(contactDTO);
     parameters.add(contactDTO.getVersion());
 
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql.toString())) {
@@ -186,21 +185,5 @@ public class ContactDAOImpl implements ContactDAO {
       throw new FatalError("Error processing result set", e);
     }
     return null;
-  }
-
-  private void getVersionFromDB(ContactDTO contact) {
-    try (PreparedStatement versionStmt = dalBackServices.getPreparedStatement(
-        "SELECT _version FROM pae.contacts WHERE id_contact = ?")) {
-      versionStmt.setInt(1, contact.getId());
-      try (ResultSet rs = versionStmt.executeQuery()) {
-        if (rs.next()) {
-          // Update the version of the UserDTO object in memory
-          contact.setVersion(rs.getInt("_version"));
-          System.out.println(contact.getVersion());
-        }
-      }
-    } catch (Exception e) {
-      throw new FatalError("Error processing result set", e);
-    }
   }
 }

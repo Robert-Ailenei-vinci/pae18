@@ -109,26 +109,6 @@ public class UserDAOImpl implements UserDAO {
     return null;
   }
 
-  private UserDTO getUserMethodFromDB(ResultSet rs) {
-    UserDTO user = myDomainFactory.getUser();
-    try {
-      user.setId(rs.getInt("id_user"));
-      user.setEmail(rs.getString("email"));
-      user.setPassword(rs.getString("psw"));
-      user.setRole(rs.getString("role_u"));
-      user.setFirstName(rs.getString("first_name"));
-      user.setLastName(rs.getString("last_name"));
-      user.setPhoneNum(rs.getString("phone_number"));
-      user.setRegistrationDate(rs.getString("registration_date"));
-      user.setSchoolYearId(rs.getInt("school_year"));
-      user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
-      user.setVersion(rs.getInt("_version"));
-    } catch (Exception e) {
-      throw new FatalError("Error processing result set", e);
-    }
-    return user;
-  }
-
   /**
    * Adds a user to the database.
    *
@@ -160,9 +140,20 @@ public class UserDAOImpl implements UserDAO {
       idYear = getLastInsertedYearId();
     }
 
-    String sql3 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
-        + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
+    String sql3 = "SELECT max(id_user) FROM pae.users";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql3)) {
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          user.setId(rs.getInt(1) + 1);
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+
+    String sql4 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
+        + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql4)) {
       stmt.setString(1, user.getEmail());
       stmt.setString(2, user.getRole());
       stmt.setString(3, user.getLastName());
@@ -176,6 +167,28 @@ public class UserDAOImpl implements UserDAO {
       throw new FatalError("Error processing result set", e);
     }
   }
+
+
+  private UserDTO getUserMethodFromDB(ResultSet rs) {
+    UserDTO user = myDomainFactory.getUser();
+    try {
+      user.setId(rs.getInt("id_user"));
+      user.setEmail(rs.getString("email"));
+      user.setPassword(rs.getString("psw"));
+      user.setRole(rs.getString("role_u"));
+      user.setFirstName(rs.getString("first_name"));
+      user.setLastName(rs.getString("last_name"));
+      user.setPhoneNum(rs.getString("phone_number"));
+      user.setRegistrationDate(rs.getString("registration_date"));
+      user.setSchoolYearId(rs.getInt("school_year"));
+      user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
+      user.setVersion(rs.getInt("_version"));
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return user;
+  }
+
 
   /**
    * Change user data.

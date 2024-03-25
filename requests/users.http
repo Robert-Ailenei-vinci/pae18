@@ -18,15 +18,64 @@ GET {{baseUrl}}/users/getAll
 Content-Type: application/json
 Authorization: {{user}}
 
-### Register a new user
+### Register a new empty user
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+
+}
+
+### Register a new user with empty attributes
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+    "login": "",
+   "password": "",
+      "f_name": "",
+      "l_name": "",
+      "role": "",
+  "phone_number": ""
+
+}
+
+### Register a new user with some empty attributes
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "login": "zaza",
+  "password": "zaza",
+  "f_name": "zaza",
+  "l_name": "zaza",
+  "role": "zaza",
+  "phone_number": ""
+}
+
+### Register a new user with no empty attributes
 POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
      "login": "robert.ailenei@student.vinci.be",
      "password": "mdp1",
-     "f_name": "sef gtgt",
-     "l_name": "dzzdq",
-     "phone_number": "0477777777",
-      "role": "etudiant"
+     "fname": "sef gtgt",
+     "lname": "dzzdq",
+     "phoneNum": "0477777777"
 }
+
+### Register a new user with good role
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "login": "zaza@vinci.be",
+  "password": "zaza",
+  "f_name": "zaza",
+  "l_name": "zaza",
+  "role": "administratif",
+  "phone_number": "0484118694456"
+}
+
+
