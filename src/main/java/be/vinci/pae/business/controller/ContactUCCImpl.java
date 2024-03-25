@@ -27,37 +27,29 @@ public class ContactUCCImpl implements ContactUCC {
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
     try {
-      // Start a new transaction
       dalServices.startTransaction();
 
       if (!((User) user).checkIsStudent()) {
-        LoggerUtil.logError("BizError", new BizException("This user is not a student."));
-        throw new BizException("This user is not a student.");
+        LoggerUtil.logError("BizError", new BizException(
+            "This user is not a student."));
+        throw new BizException(
+            "This user is not a student.");
       }
-
-      for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())) {
-        Contact temp_contact = (Contact) contactDTO;
-        if (!temp_contact.checkUniqueUserEnterpriseSchoolYear(
-            temp_contact.getEntrepriseId(), entreprise.getId(), temp_contact.getSchoolYearId(),
+      for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())
+      ) {
+        Contact tempContact = (Contact) contactDTO;
+        if (!tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
             schoolYear.getId())) {
           LoggerUtil.logError("BizError", new BizException(
               "This user cannot have a contact with this enterprise for this year."));
           throw new BizException(
-              "This user cannot have a contact with this enterprise for this year. ");
+              "This user cannot have a contact with this enterprise for this year.");
         }
       }
-
       Contact contact = (Contact) myContactDAO.createOne(user, entreprise, schoolYear);
-
-      // Commit the transaction
       dalServices.commitTransaction();
-
-      if (contact == null) {
-        return null;
-      }
       return contact;
     } catch (Exception e) {
-      // Rollback the transaction in case of an error
       dalServices.rollbackTransaction();
       throw e;
     }
