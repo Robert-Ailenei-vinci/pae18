@@ -16,7 +16,7 @@ public class StageDAOImpl implements StageDAO {
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
-  private DALServices dalServices;
+  private DALBackServices dalBackServices;
   @Inject
   private ContactDAO contactDAO;
   @Inject
@@ -28,7 +28,7 @@ public class StageDAOImpl implements StageDAO {
 
   @Override
   public StageDTO getOneStageByUserId(int userId) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT * FROM pae.stages WHERE _user = ?")) {
       preparedStatement.setInt(1, userId);
       try (ResultSet rs = preparedStatement.executeQuery()) {

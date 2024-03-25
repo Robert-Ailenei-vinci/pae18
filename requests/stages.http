@@ -30,4 +30,3 @@ Content-Type: application/json
 GET {{baseUrl}}/stages/stageByUserId
 Content-Type: application/json
 Authorization: {{user}}
-

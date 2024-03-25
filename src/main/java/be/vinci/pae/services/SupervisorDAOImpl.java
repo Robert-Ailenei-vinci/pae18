@@ -16,13 +16,13 @@ public class SupervisorDAOImpl implements SupervisorDAO {
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
-  private DALServices dalServices;
+  private DALBackServices dalBackServices;
   @Inject
   private EntrepriseDAO entrepriseDAO;
 
   @Override
   public SupervisorDTO getOneById(int id) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT * FROM pae.internship_supervisor WHERE id_supervisor = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
