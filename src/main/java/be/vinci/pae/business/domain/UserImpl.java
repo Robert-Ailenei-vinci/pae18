@@ -180,5 +180,11 @@ public class UserImpl implements User {
       throw new IllegalArgumentException("Role must be either administratif or professeur");
     }
   }
+
+  public void checkMail(String email) {
+    if (!email.endsWith("@vinci.be") && !email.endsWith("@student.vinci.be")) {
+      throw new IllegalArgumentException("Email must end with @vinci.be or @student.vinci.be");
+    }
+  }
 }
 

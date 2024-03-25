@@ -50,4 +50,11 @@ public interface User extends UserDTO {
    * @param userDTO the user.
    */
   void checkRoleFromMail(String email, UserDTO userDTO);
+
+  /**
+   * Check mail.
+   *
+   * @param email the email.
+   */
+  void checkMail(String email);
 }

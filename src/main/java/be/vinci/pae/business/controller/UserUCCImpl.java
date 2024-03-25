@@ -66,6 +66,7 @@ public class UserUCCImpl implements UserUCC {
     }
 
     user.checkExisitngUser(existingUser);
+    user.checkMail(userDTO.getEmail());
     user.checkRoleFromMail(userDTO.getEmail(), userDTO);
     user.setPassword(hashPassword(userDTO.getPassword()));
     userDTO.setPassword(user.getPassword());
@@ -89,6 +90,7 @@ public class UserUCCImpl implements UserUCC {
     return myUserDAO.getOne(userId);
   }
 
+
   /**
    * Changes user data based on the provided parameters.
    *
@@ -103,6 +105,7 @@ public class UserUCCImpl implements UserUCC {
   public UserDTO changeData(String email, String password, String lname, String fname,
       String phoneNum) {
     User user = (User) myDomainFactory.getUser();
+    user.checkMail(email);
     user.setEmail(email);
 
     if (password == null) {
