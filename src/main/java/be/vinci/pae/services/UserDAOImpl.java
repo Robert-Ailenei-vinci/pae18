@@ -151,17 +151,19 @@ public class UserDAOImpl implements UserDAO {
       throw new FatalError("Error processing result set", e);
     }
 
-    String sql4 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
-        + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
+    String sql4 =
+        "INSERT INTO pae.users (id_user,email, role_u, last_name, first_name, phone_number,"
+            + " psw, registration_date, school_year, _version) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,0)";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql4)) {
-      stmt.setString(1, user.getEmail());
-      stmt.setString(2, user.getRole());
-      stmt.setString(3, user.getLastName());
-      stmt.setString(4, user.getFirstName());
-      stmt.setString(5, user.getPhoneNum());
-      stmt.setString(6, user.getPassword());
-      stmt.setString(7, user.getRegistrationDate());
-      stmt.setInt(8, idYear);
+      stmt.setInt(1, user.getId());
+      stmt.setString(2, user.getEmail());
+      stmt.setString(3, user.getRole());
+      stmt.setString(4, user.getLastName());
+      stmt.setString(5, user.getFirstName());
+      stmt.setString(6, user.getPhoneNum());
+      stmt.setString(7, user.getPassword());
+      stmt.setString(8, user.getRegistrationDate());
+      stmt.setInt(9, idYear);
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);

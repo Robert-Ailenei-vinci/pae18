@@ -38,7 +38,8 @@ public class ContactUCCImpl implements ContactUCC {
       for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())
       ) {
         Contact tempContact = (Contact) contactDTO;
-        if (!tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
+
+        if (tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
             schoolYear.getId())) {
           LoggerUtil.logError("BizError", new BizException(
               "This user cannot have a contact with this enterprise for this year."));
@@ -69,7 +70,7 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO meetContact(int contactId, String meetingType, int userId,int version) {
+  public ContactDTO meetContact(int contactId, String meetingType, int userId, int version) {
     try {
       dalServices.startTransaction();
 
@@ -107,10 +108,9 @@ public class ContactUCCImpl implements ContactUCC {
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
-
-    if (!contact.stopFollowContact(version)) {
-      throw new BizException("The contact cannot be stopped from being followed");
-    }
+      if (!contact.stopFollowContact(version)) {
+        throw new BizException("The contact cannot be stopped from being followed");
+      }
 
       ContactDTO contactToReturn = myContactDAO.updateContact(contact);
 
@@ -133,9 +133,9 @@ public class ContactUCCImpl implements ContactUCC {
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
-    if (!contact.refuseContact(refusalReason, version)) {
-      throw new BizException("The contact cannot be refused");
-    }
+      if (!contact.refuseContact(refusalReason, version)) {
+        throw new BizException("The contact cannot be refused");
+      }
 
       ContactDTO contactToReturn = myContactDAO.updateContact(contact);
 
