@@ -171,7 +171,7 @@ public class AuthsResource {
     String fname = json.get("f_name").asText();
     String phoneNum = json.get("phone_number").asText();
     String role = json.get("role").asText();
-    int version = json.get("version").asInt();
+
     UserDTO user = myDomainFactory.getUser();
     user.setEmail(email);
     user.setPassword(password);
@@ -179,7 +179,7 @@ public class AuthsResource {
     user.setLastName(lname);
     user.setPhoneNum(phoneNum);
     user.setRole(role);
-    user.setVersion(version);
+    user.setVersion(0);
 
     return userUCC.register(user);
   }
