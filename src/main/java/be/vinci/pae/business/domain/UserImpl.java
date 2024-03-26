@@ -174,8 +174,10 @@ public class UserImpl implements User {
     }
   }
 
+  @Override
   public void checkRoleFromMail(String mail, UserDTO userDTO) {
-    if (mail.endsWith("@student.vinci.be") && !userDTO.getRole().equals("etudiant")) {
+    if (mail.endsWith("@student.vinci.be")
+        && !userDTO.getRole().equals("etudiant")) {
       throw new BadRequestException("Role doit etre etudiant");
     }
     if (mail.endsWith("@vinci.be") &&
@@ -184,12 +186,14 @@ public class UserImpl implements User {
     }
   }
 
+  @Override
   public void checkMail(String email) {
     if (!email.endsWith("@vinci.be") && !email.endsWith("@student.vinci.be")) {
       throw new BadRequestException("Email doit finir avec @vinci.be ou @student.vinci.be");
     }
   }
 
+  @Override
   public void checkmailFromLnameAndFname(String email, String lastName, String firstName) {
     if (!email.startsWith(lastName.toLowerCase() + "." + firstName.toLowerCase())) {
       throw new BadRequestException(
