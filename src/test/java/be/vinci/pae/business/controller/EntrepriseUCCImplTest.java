@@ -31,8 +31,6 @@ class EntrepriseUCCImplTest {
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
   private EntrepriseDTO expectedEntreprise;
-  private EntrepriseDAO myEntrepriseDAO;
-  private DALServices dalServices;
 
 
   @BeforeEach
