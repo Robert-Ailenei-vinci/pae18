@@ -2,6 +2,8 @@ package be.vinci.pae.business.domain;
 
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.UserDAO;
+import jakarta.inject.Inject;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -10,6 +12,8 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class UserImpl implements User {
 
+  @Inject
+  private UserDAO myUserDAO;
 
   private int id;
   private String email;
@@ -154,13 +158,12 @@ public class UserImpl implements User {
   }
 
   @Override
-  public void checkExisitngUser(UserDTO userDTO) {
-
+  public void checkExistingUser(UserDTO userDTO) {
     if (userDTO != null) {
-      throw new BizException("L'utilisateur existe déjà");
+      throw new BizException("Utilisateur existe deja");
     }
-
   }
+
 
   @Override
   public void checkRegisterNotEmpty(UserDTO userDTO) {

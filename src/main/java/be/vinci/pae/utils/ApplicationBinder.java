@@ -56,7 +56,7 @@ public class ApplicationBinder extends AbstractBinder {
     bind(SchoolYearUCCImpl.class).to(SchoolYearUCC.class).in(Singleton.class);
     bind(SchoolYearDAOImpl.class).to(SchoolYearDAO.class).in(Singleton.class);
     bind(UserImpl.class).to(User.class).in(Singleton.class);
-
+    bind(UserDAO.class).to(User.class).in(Singleton.class);
 
   }
 }

@@ -34,7 +34,7 @@ public interface User extends UserDTO {
    *
    * @param existingUserDTO the existing user.
    */
-  void checkExisitngUser(UserDTO existingUserDTO);
+  void checkExistingUser(UserDTO existingUserDTO);
 
   /**
    * Check if register is not empty.
