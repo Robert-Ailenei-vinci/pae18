@@ -38,7 +38,6 @@ async function fetchAllUsers(user) {
 async function renderAllUsers2() {
     const userData = getAuthenticatedUser();
     try {
-
         const usersData = await fetchAllUsers(userData);
         const main = document.querySelector('main');
 
@@ -58,11 +57,14 @@ async function renderAllUsers2() {
         const tbody = document.createElement('tbody');
         usersData.forEach(userU => {
             const row = document.createElement('tr');
-            ['firstName', 'lastName', 'role', 'schoolYearFormat'].forEach(fieldName => {
+            ['firstName', 'lastName', 'role'].forEach(fieldName => {
                 const cell = document.createElement('td');
                 cell.textContent = userU[fieldName];
                 row.appendChild(cell);
             });
+            const schoolYearCell = document.createElement('td');
+            schoolYearCell.textContent = userU.schoolYear.yearFormat;
+            row.appendChild(schoolYearCell);
             tbody.appendChild(row);
         });
         table.appendChild(tbody);

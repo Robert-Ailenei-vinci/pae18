@@ -121,3 +121,73 @@
 [2024-03-26 00:28:15] [INFO] get all contact 
 [2024-03-26 15:03:44] [INFO] get all contact 
 [2024-03-26 15:04:16] [INFO] get all contact 
+[2024-03-26 17:07:20] [INFO] get all contact 
+[2024-03-26 17:07:35] [INFO] get all contact 
+[2024-03-26 17:07:36] [INFO] get all contact 
+[2024-03-26 17:09:12] [INFO] get all contact 
+[2024-03-26 17:09:12] [INFO] get all contact 
+[2024-03-26 17:09:25] [INFO] get all contact 
+[2024-03-26 17:09:25] [INFO] get all contact 
+[2024-03-26 17:09:25] [INFO] get all contact 
+[2024-03-26 17:09:25] [INFO] get all contact 
+[2024-03-26 17:09:25] [SEVERE] BizError
+be.vinci.pae.exception.BizException: This user cannot have a contact with this enterprise for this year.
+	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:43)
+	at be.vinci.pae.api.ContactRessource.addContact(ContactRessource.java:82)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+ 
+[2024-03-26 17:09:35] [INFO] get all contact 
+[2024-03-26 17:09:35] [INFO] get all contact 
+[2024-03-26 17:09:37] [INFO] get all contact 
+[2024-03-26 17:09:37] [INFO] get all contact 
+[2024-03-26 17:09:49] [INFO] get all contact 
+[2024-03-26 17:09:49] [INFO] get all contact 
+[2024-03-26 17:09:49] [INFO] get all contact 
+[2024-03-26 17:09:49] [INFO] get all contact 
+[2024-03-26 17:09:51] [INFO] get all contact 
+[2024-03-26 17:09:51] [INFO] get all contact 
+[2024-03-26 17:09:51] [INFO] get all contact 
+[2024-03-26 17:22:20] [INFO] get all contact 
+[2024-03-26 17:22:20] [INFO] get all contact 
+[2024-03-26 17:22:20] [INFO] get all contact 
+[2024-03-26 17:37:10] [INFO] get all contact 
+[2024-03-26 17:37:10] [INFO] get all contact 
+[2024-03-26 17:37:10] [INFO] get all contact 
+[2024-03-26 17:50:20] [INFO] get all contact 
+[2024-03-26 17:50:20] [INFO] get all contact 
+[2024-03-26 17:50:20] [INFO] get all contact 
+[2024-03-26 18:11:43] [INFO] get all contact 
+[2024-03-26 18:11:43] [INFO] get all contact 
+[2024-03-26 18:11:43] [INFO] get all contact 
+[2024-03-26 18:14:35] [INFO] get all contact 
+[2024-03-26 18:14:35] [INFO] get all contact 
+[2024-03-26 18:14:35] [INFO] get all contact 
+[2024-03-26 18:14:44] [INFO] get all contact 
+[2024-03-26 18:14:44] [INFO] get all contact 
+[2024-03-26 18:14:44] [INFO] get all contact 
+[2024-03-26 18:36:33] [INFO] get all contact 
+[2024-03-26 18:36:34] [INFO] get all contact 
+[2024-03-26 18:36:34] [INFO] get all contact 
