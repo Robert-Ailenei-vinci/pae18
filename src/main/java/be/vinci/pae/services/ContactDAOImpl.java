@@ -127,6 +127,9 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO updateContact(ContactDTO contactDTO) {
+    if (getOldVersionFromDB(contactDTO.getId()) != contactDTO.getVersion()) {
+      throw new OptimisticLockException("Contact was updated by another transaction");
+    }
     StringBuilder sql = new StringBuilder("UPDATE pae.contacts SET ");
     List<Object> parameters = new ArrayList<>();
 
@@ -187,5 +190,20 @@ public class ContactDAOImpl implements ContactDAO {
     return null;
   }
 
+  private int getOldVersionFromDB(int contactId) {
+    try (PreparedStatement versionStmt = dalServices.getPreparedStatement(
+        "SELECT _version FROM pae.contacts WHERE id_contact = ?")) {
+      versionStmt.setInt(1, contactId);
+      try (ResultSet rs = versionStmt.executeQuery()) {
+        if (rs.next()) {
+          // Update the version of the UserDTO object in memory
+          return rs.getInt("_version");
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return -1;
+  }
 
 }
