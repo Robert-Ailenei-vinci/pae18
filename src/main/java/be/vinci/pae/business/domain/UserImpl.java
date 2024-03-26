@@ -170,16 +170,18 @@ public class UserImpl implements User {
     }
   }
 
+  @Override
   public void checkRoleFromMail(String mail, UserDTO userDTO) {
     if (mail.endsWith("@student.vinci.be") && !userDTO.getRole().equals("etudiant")) {
       throw new IllegalArgumentException("Role must be student");
     }
-    if (mail.endsWith("@vinci.be") &&
-        !userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur")) {
+    if (mail.endsWith("@vinci.be")
+        && !userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur")) {
       throw new IllegalArgumentException("Role must be either administratif or professeur");
     }
   }
 
+  @Override
   public void checkMail(String email) {
     if (!email.endsWith("@vinci.be") && !email.endsWith("@student.vinci.be")) {
       throw new IllegalArgumentException("Email must end with @vinci.be or @student.vinci.be");

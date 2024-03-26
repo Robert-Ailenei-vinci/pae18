@@ -165,8 +165,8 @@ public class AuthsResource {
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
   public boolean register(JsonNode json) {
-    if (!json.hasNonNull("login") || !json.hasNonNull("password") || !json.hasNonNull("l_name") ||
-        !json.hasNonNull("f_name") || !json.hasNonNull("phone_number") || !json.hasNonNull(
+    if (!json.hasNonNull("login") || !json.hasNonNull("password") || !json.hasNonNull("l_name")
+        || !json.hasNonNull("f_name") || !json.hasNonNull("phone_number") || !json.hasNonNull(
         "role")) {
       throw new BadRequestException("All fields are required");
     }

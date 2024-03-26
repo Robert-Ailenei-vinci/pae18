@@ -4,7 +4,6 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
-import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.UserNotFoundException;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.UserDAO;
@@ -181,5 +180,4 @@ public class UserUCCImpl implements UserUCC {
       throw e;
     }
   }
-
-  }
+}
