@@ -94,7 +94,7 @@ class EntrepriseUCCImplTest {
     // 1. Arrange
     user.setRole("professeur");
 
-    // 2. Act and Assert
+    // 2. Act and Asserts
     assertThrows(BizException.class, () -> {
       entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email");
     });
