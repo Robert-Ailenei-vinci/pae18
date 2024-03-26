@@ -2,11 +2,16 @@ package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
+import be.vinci.pae.business.domain.User;
+import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.DALServices;
+import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +30,9 @@ class EntrepriseUCCImplTest {
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
   private EntrepriseDTO expectedEntreprise;
+  private User user;
+  private EntrepriseDAO myEntrepriseDAO;
+  private DALServices dalServices;
 
 
   @BeforeEach
@@ -32,10 +40,13 @@ class EntrepriseUCCImplTest {
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
     this.entrepriseUcc = locator.getService(EntrepriseUCC.class);
     this.factory = locator.getService(DomainFactory.class);
+    this.myEntrepriseDAO = locator.getService(EntrepriseDAO.class);
+    this.dalServices = locator.getService(DALServices.class);
     this.entreprise = (Entreprise) factory.getEntreprise();
     this.entreprise1 = (Entreprise) factory.getEntreprise();
     this.entreprise2 = (Entreprise) factory.getEntreprise();
     this.expectedEntreprise = factory.getEntreprise();
+    this.user = (User) factory.getUser();
   }
 
   @Test
@@ -78,5 +89,37 @@ class EntrepriseUCCImplTest {
     for (int i = 0; i < expectedEntreprises.size(); i++) {
       assertEquals(expectedEntreprises.get(i), actualEntreprises.get(i));
     }
+  }
+
+  @Test
+  void createOne() {
+    // 1. Arrange
+    user.setRole("etudiant");
+    expectedEntreprise = entreprise1;
+    when(entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email"))
+        .thenReturn(expectedEntreprise);
+    when(
+        myEntrepriseDAO.createOne("tradeName", "designation", "address", "phoneNum", "email"))
+        .thenReturn(entreprise1);
+
+    // 2. Act
+    EntrepriseDTO actualEntreprise = entrepriseUcc.createOne(user, "tradeName", "designation",
+        "address", "phoneNum", "email");
+
+    // 3. Assert
+    assertNotNull(actualEntreprise);
+    assertEquals(expectedEntreprise, actualEntreprise);
+
+  }
+
+  @Test
+  void createOneWithException() {
+    // 1. Arrange
+    user.setRole("professeur");
+
+    // 2. Act and Assert
+    assertThrows(BizException.class, () -> {
+      entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email");
+    });
   }
 }
