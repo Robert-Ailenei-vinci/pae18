@@ -94,7 +94,8 @@ public class AuthsResource {
           .put("lastName", publicUser.getLastName())
           .put("phoneNum", publicUser.getPhoneNum())
           .put("registrationDate", publicUser.getRegistrationDate())
-          .put("schoolYear", publicUser.getSchoolYear().getYearFormat());
+          .put("schoolYear", publicUser.getSchoolYear().getYearFormat())
+          .put("version", publicUser.getVersion());
       return toReturn;
 
     } catch (Exception e) {
@@ -140,7 +141,8 @@ public class AuthsResource {
           .put("lastName", user.getLastName())
           .put("phoneNum", user.getPhoneNum())
           .put("registrationDate", user.getRegistrationDate())
-          .put("schoolYear", user.getSchoolYear().getYearFormat());
+          .put("schoolYear", user.getSchoolYear().getYearFormat())
+          .put("version", user.getVersion());
       return toReturn;
 
     } catch (Exception e) {
@@ -182,6 +184,7 @@ public class AuthsResource {
     user.setLastName(lname);
     user.setPhoneNum(phoneNum);
     user.setRole(role);
+    user.setVersion(0);
 
     return userUCC.register(user);
   }

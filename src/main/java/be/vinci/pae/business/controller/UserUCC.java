@@ -52,5 +52,6 @@ public interface UserUCC {
    * @param phoneNum the user phone number.
    * @return the user
    */
-  UserDTO changeData(String email, String password, String lname, String fname, String phoneNum);
+  UserDTO changeData(String email, String password, String lname, String fname, String phoneNum,
+      int version);
 }

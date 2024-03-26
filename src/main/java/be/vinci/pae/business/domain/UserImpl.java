@@ -180,9 +180,9 @@ public class UserImpl implements User {
         && !userDTO.getRole().equals("etudiant")) {
       throw new BadRequestException("Role doit etre etudiant");
     }
-    if (mail.endsWith("@vinci.be") &&
-        !userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur")) {
-      throw new BadRequestException("Role doit etre administratif ou professeur");
+    if (mail.endsWith("@vinci.be")
+        && !userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur")) {
+      throw new IllegalArgumentException("Role must be either administratif or professeur");
     }
   }
 

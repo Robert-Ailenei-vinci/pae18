@@ -151,17 +151,19 @@ public class UserDAOImpl implements UserDAO {
       throw new FatalError("Error processing result set", e);
     }
 
-    String sql4 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
-        + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
+    String sql4 =
+        "INSERT INTO pae.users (id_user,email, role_u, last_name, first_name, phone_number,"
+            + " psw, registration_date, school_year, _version) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,0)";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql4)) {
-      stmt.setString(1, user.getEmail());
-      stmt.setString(2, user.getRole());
-      stmt.setString(3, user.getLastName());
-      stmt.setString(4, user.getFirstName());
-      stmt.setString(5, user.getPhoneNum());
-      stmt.setString(6, user.getPassword());
-      stmt.setString(7, user.getRegistrationDate());
-      stmt.setInt(8, idYear);
+      stmt.setInt(1, user.getId());
+      stmt.setString(2, user.getEmail());
+      stmt.setString(3, user.getRole());
+      stmt.setString(4, user.getLastName());
+      stmt.setString(5, user.getFirstName());
+      stmt.setString(6, user.getPhoneNum());
+      stmt.setString(7, user.getPassword());
+      stmt.setString(8, user.getRegistrationDate());
+      stmt.setInt(9, idYear);
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
@@ -232,18 +234,12 @@ public class UserDAOImpl implements UserDAO {
     sql.append(", _version = _version + 1 WHERE email = ? AND _version = ?;");
 
     parameters.add(user.getEmail());
-    getVersionFromDB(user);
     parameters.add(user.getVersion());
 
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql.toString())) {
       for (int i = 0; i < parameters.size(); i++) {
-        if (parameters.get(i) instanceof String) {
-          stmt.setString(i + 1, (String) parameters.get(i));
-        } else if (parameters.get(i) instanceof Integer) {
-          stmt.setInt(i + 1, (Integer) parameters.get(i));
-        }
+        stmt.setObject(i + 1, parameters.get(i));
       }
-
       if (stmt.executeUpdate() == 0) {
         throw new OptimisticLockException("User was updated by another transaction");
       }
@@ -284,19 +280,5 @@ public class UserDAOImpl implements UserDAO {
     return 0; // return 0 if no id was found
   }
 
-  private void getVersionFromDB(UserDTO user) {
-    try (PreparedStatement versionStmt = dalBackServices.getPreparedStatement(
-        "SELECT _version FROM pae.users WHERE email = ?")) {
-      versionStmt.setString(1, user.getEmail());
-      try (ResultSet rs = versionStmt.executeQuery()) {
-        if (rs.next()) {
-          // Update the version of the UserDTO object in memory
-          user.setVersion(rs.getInt("_version"));
-          System.out.println(user.getVersion());
-        }
-      }
-    } catch (Exception e) {
-      throw new FatalError("Error processing result set", e);
-    }
-  }
+
 }

@@ -35,18 +35,20 @@ public interface ContactUCC {
    * @param idContact   the id of the contact to set.
    * @param meetingType the type od the meeting.
    * @param userId      the id of user.
+   * @param version     the version of the contact in the frontend.
    * @return the contact.
    */
-  ContactDTO meetContact(int idContact, String meetingType, int userId);
+  ContactDTO meetContact(int idContact, String meetingType, int userId, int version);
 
   /**
    * set the state of a contact to stop followed.
    *
    * @param contactId the id of the contact to set.
    * @param userId    the id of user.
+   * @param version   the version of the contact in the frontend.
    * @return the contact.
    */
-  ContactDTO stopFollowContact(int contactId, int userId);
+  ContactDTO stopFollowContact(int contactId, int userId, int version);
 
   /**
    * set the state of a contact to refused and the reason.
@@ -54,7 +56,8 @@ public interface ContactUCC {
    * @param contactId     the id of the contact to set.
    * @param refusalReason the type od the meeting.
    * @param userId        the id of user.
+   * @param version       the version of the contact in the frontend.
    * @return the contact.
    */
-  ContactDTO refusedContact(int contactId, String refusalReason, int userId);
+  ContactDTO refusedContact(int contactId, String refusalReason, int userId, int version);
 }

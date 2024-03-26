@@ -106,7 +106,8 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
-    assertEquals(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()),
+    assertEquals(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId(),
+            contact.getVersion()),
         contactResult);
   }
 
@@ -119,7 +120,8 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(null);
 
-    assertNull(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()));
+    assertNull(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId(),
+        contact.getVersion()));
   }
 
   @Test
@@ -133,7 +135,8 @@ class ContactUCCTest {
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizException.class,
-        () -> contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()));
+        () -> contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId(),
+            contact.getVersion()));
   }
 
   @Test
@@ -147,7 +150,8 @@ class ContactUCCTest {
 
     // Assert that a BizException is thrown when trying to meet the contact
     assertThrows(BizExceptionNotFound.class,
-        () -> contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId()));
+        () -> contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId(),
+            contact.getVersion()));
   }
 
   @Test
@@ -157,7 +161,8 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
-    assertEquals(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()),
+    assertEquals(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId(),
+            contact.getVersion()),
         contactResult);
   }
 
@@ -168,7 +173,8 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(null);
 
-    assertNull(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
+    assertNull(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId(),
+        contact.getVersion()));
   }
 
   @Test
@@ -180,7 +186,8 @@ class ContactUCCTest {
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizExceptionNotFound.class,
-        () -> contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
+        () -> contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId(),
+            contact.getVersion()));
   }
 
   @Test
@@ -192,7 +199,8 @@ class ContactUCCTest {
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizException.class,
-        () -> contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId()));
+        () -> contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId(),
+            contact.getVersion()));
   }
 
   @Test
@@ -205,7 +213,8 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
-    assertEquals(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()),
+    assertEquals(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
+            contact.getVersion()),
         contactResult);
   }
 
@@ -220,7 +229,8 @@ class ContactUCCTest {
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizException.class,
-        () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
+        () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
+            contact.getVersion()));
   }
 
   @Test
@@ -235,7 +245,8 @@ class ContactUCCTest {
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     assertThrows(BizExceptionNotFound.class,
-        () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
+        () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
+            contact.getVersion()));
   }
 
   @Test
@@ -248,6 +259,7 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(null);
 
-    assertNull(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId()));
+    assertNull(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
+        contact.getVersion()));
   }
 }
