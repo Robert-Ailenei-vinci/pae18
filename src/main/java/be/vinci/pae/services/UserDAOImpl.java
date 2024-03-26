@@ -22,7 +22,7 @@ public class UserDAOImpl implements UserDAO {
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
-  private DALServices dalServices;
+  private DALBackServices dalBackServices;
   @Inject
   private SchoolYearDAO schoolYearDAO;
 
@@ -33,7 +33,7 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public List<UserDTO> getAll() {
-    PreparedStatement getAllUsers = dalServices.getPreparedStatement(
+    PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
         "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
             + " u.phone_number, u.psw, u.registration_date,"
             + " u.school_year, s.years_format AS academic_year, u._version "
@@ -61,7 +61,7 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO getOne(String email) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT u.id_user, u.email, u.role_u, u.last_name,"
             + " u.first_name, u.phone_number, u.psw,"
             + " u.registration_date, u.school_year,"
@@ -89,7 +89,7 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO getOne(int id) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT u.id_user, u.email, u.role_u, u.last_name, "
             + "u.first_name, u.phone_number, u.psw,"
             + " u.registration_date, u.school_year,"
@@ -108,6 +108,66 @@ public class UserDAOImpl implements UserDAO {
     }
     return null;
   }
+
+  /**
+   * Adds a user to the database.
+   *
+   * @param user The user to add.
+   * @return True if the user was added successfully, false otherwise.
+   */
+  @Override
+  public boolean addUser(UserDTO user) {
+    int idYear = 0;
+    String sql1 = "SELECT id_year FROM pae.school_years WHERE years_format = ?";
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql1)) {
+      stmt.setString(1, buildYear());
+      ResultSet rs = stmt.executeQuery();
+      if (rs.next()) {
+        idYear = rs.getInt("id_year");
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+
+    if (idYear == 0) {
+      String sql2 = "INSERT INTO pae.school_years (years_format) VALUES (?)";
+      try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql2)) {
+        stmt.setString(1, buildYear());
+        stmt.executeUpdate();
+      } catch (Exception e) {
+        throw new FatalError("Error processing result set", e);
+      }
+      idYear = getLastInsertedYearId();
+    }
+
+    String sql3 = "SELECT max(id_user) FROM pae.users";
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql3)) {
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          user.setId(rs.getInt(1) + 1);
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+
+    String sql4 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
+        + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql4)) {
+      stmt.setString(1, user.getEmail());
+      stmt.setString(2, user.getRole());
+      stmt.setString(3, user.getLastName());
+      stmt.setString(4, user.getFirstName());
+      stmt.setString(5, user.getPhoneNum());
+      stmt.setString(6, user.getPassword());
+      stmt.setString(7, user.getRegistrationDate());
+      stmt.setInt(8, idYear);
+      return stmt.executeUpdate() == 1;
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+  }
+
 
   private UserDTO getUserMethodFromDB(ResultSet rs) {
     UserDTO user = myDomainFactory.getUser();
@@ -129,53 +189,6 @@ public class UserDAOImpl implements UserDAO {
     return user;
   }
 
-  /**
-   * Adds a user to the database.
-   *
-   * @param user The user to add.
-   * @return True if the user was added successfully, false otherwise.
-   */
-  @Override
-  public boolean addUser(UserDTO user) {
-    int idYear = 0;
-    String sql1 = "SELECT id_year FROM pae.school_years WHERE years_format = ?";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql1)) {
-      stmt.setString(1, buildYear());
-      ResultSet rs = stmt.executeQuery();
-      if (rs.next()) {
-        idYear = rs.getInt("id_year");
-      }
-    } catch (Exception e) {
-      throw new FatalError("Error processing result set", e);
-    }
-
-    if (idYear == 0) {
-      String sql2 = "INSERT INTO pae.school_years (years_format) VALUES (?)";
-      try (PreparedStatement stmt = dalServices.getPreparedStatement(sql2)) {
-        stmt.setString(1, buildYear());
-        stmt.executeUpdate();
-      } catch (Exception e) {
-        throw new FatalError("Error processing result set", e);
-      }
-      idYear = getLastInsertedYearId();
-    }
-
-    String sql3 = "INSERT INTO pae.users (email, role_u, last_name, first_name, phone_number,"
-        + " psw, registration_date, school_year, _version) VALUES (?, ?, ?, ?, ?, ?, ?, ?,0)";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql3)) {
-      stmt.setString(1, user.getEmail());
-      stmt.setString(2, user.getRole());
-      stmt.setString(3, user.getLastName());
-      stmt.setString(4, user.getFirstName());
-      stmt.setString(5, user.getPhoneNum());
-      stmt.setString(6, user.getPassword());
-      stmt.setString(7, user.getRegistrationDate());
-      stmt.setInt(8, idYear);
-      return stmt.executeUpdate() == 1;
-    } catch (Exception e) {
-      throw new FatalError("Error processing result set", e);
-    }
-  }
 
   /**
    * Change user data.
@@ -185,7 +198,6 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO changeUser(UserDTO user) {
-
     StringBuilder sql = new StringBuilder("UPDATE pae.users SET ");
     List<Object> parameters = new ArrayList<>();
 
@@ -222,7 +234,7 @@ public class UserDAOImpl implements UserDAO {
     parameters.add(user.getEmail());
     parameters.add(user.getVersion());
 
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql.toString())) {
       for (int i = 0; i < parameters.size(); i++) {
         stmt.setObject(i + 1, parameters.get(i));
       }
@@ -254,7 +266,7 @@ public class UserDAOImpl implements UserDAO {
 
   private int getLastInsertedYearId() {
     String sql = "SELECT MAX(id_year) FROM pae.school_years";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql)) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
           return rs.getInt(1);

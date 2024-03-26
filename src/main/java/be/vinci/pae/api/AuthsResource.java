@@ -165,13 +165,13 @@ public class AuthsResource {
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
   public boolean register(JsonNode json) {
-    String email = json.get("login").asText();
-    String password = json.get("password").asText();
-    String lname = json.get("l_name").asText();
-    String fname = json.get("f_name").asText();
-    String phoneNum = json.get("phone_number").asText();
-    String role = json.get("role").asText();
 
+    String email = json.has("login") ? json.get("login").asText() : "";
+    String password = json.has("password") ? json.get("password").asText() : "";
+    String lname = json.has("l_name") ? json.get("l_name").asText() : "";
+    String fname = json.has("f_name") ? json.get("f_name").asText() : "";
+    String phoneNum = json.has("phone_number") ? json.get("phone_number").asText() : "";
+    String role = json.has("role") ? json.get("role").asText() : "";
     UserDTO user = myDomainFactory.getUser();
     user.setEmail(email);
     user.setPassword(password);

@@ -1,9 +1,7 @@
 package be.vinci.pae.business.domain;
 
-import java.util.List;
-
 /**
- * This interface extends {@link ContactDTO} and represents a contact.
+ * This interface extends {@link ContactDTO} and represents a contact entity.
  */
 public interface Contact extends ContactDTO {
 
@@ -39,12 +37,12 @@ public interface Contact extends ContactDTO {
    * Checks the uniqueness of a contact based on the combination of user, enterprise, and school
    * year.
    *
-   * @param userContacts  The list of contacts associated with the user.
-   * @param enterpriseDTO The enterprise associated with the contact.
-   * @param schoolYearDTO The school year associated with the contact.
+   * @param wantedEntrepriseId The ID of the desired enterprise.
+   * @param wantedSchoolYearId The ID of the desired school year.
    * @return {@code true} if the contact is unique based on the provided user, enterprise, and
-   * school year, {@code false} otherwise.
+   *     school year, {@code false} otherwise.
    */
-  boolean checkUniqueUserEnterpriseSchoolYear(List<ContactDTO> userContacts,
-      EntrepriseDTO enterpriseDTO, SchoolYearDTO schoolYearDTO);
+  boolean checkUniqueUserEnterpriseSchoolYear(
+      int wantedEntrepriseId,
+      int wantedSchoolYearId);
 }

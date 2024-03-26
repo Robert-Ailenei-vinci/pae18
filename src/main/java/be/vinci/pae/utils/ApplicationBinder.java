@@ -12,8 +12,11 @@ import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.controller.UserUCCImpl;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.DomainFactoryImpl;
+import be.vinci.pae.business.domain.User;
+import be.vinci.pae.business.domain.UserImpl;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.ContactDAOImpl;
+import be.vinci.pae.services.DALBackServices;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.DALServicesImpl;
 import be.vinci.pae.services.EntrepriseDAO;
@@ -41,7 +44,7 @@ public class ApplicationBinder extends AbstractBinder {
   protected void configure() {
     bind(DomainFactoryImpl.class).to(DomainFactory.class).in(Singleton.class);
     bind(UserDAOImpl.class).to(UserDAO.class).in(Singleton.class);
-    bind(DALServicesImpl.class).to(DALServices.class).in(Singleton.class);
+    bind(DALServicesImpl.class).to(DALBackServices.class).to(DALServices.class).in(Singleton.class);
     bind(UserUCCImpl.class).to(UserUCC.class).in(Singleton.class);
     bind(ContactUCCImpl.class).to(ContactUCC.class).in(Singleton.class);
     bind(ContactDAOImpl.class).to(ContactDAO.class).in(Singleton.class);
@@ -52,5 +55,8 @@ public class ApplicationBinder extends AbstractBinder {
     bind(SupervisorDAOImpl.class).to(SupervisorDAO.class).in(Singleton.class);
     bind(SchoolYearUCCImpl.class).to(SchoolYearUCC.class).in(Singleton.class);
     bind(SchoolYearDAOImpl.class).to(SchoolYearDAO.class).in(Singleton.class);
+    bind(UserImpl.class).to(User.class).in(Singleton.class);
+
+
   }
 }

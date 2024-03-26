@@ -99,9 +99,9 @@ public class UserUCCTest {
   @Test
   public void testRegisterSuccess() {
 
-    user.setEmail("test@test.com");
+    user.setEmail("test@vinci.be");
     user.setPassword("password");
-    user.setPassword(user.getPassword());
+    user.setRole("administratif");
 
     when(userDataService.addUser(user)).thenReturn(true);
 
@@ -111,9 +111,9 @@ public class UserUCCTest {
   @Test
   public void testRegisterFails() {
 
-    user.setEmail("testFail@test.com");
+    user.setEmail("testFail@vinci.be");
     user.setPassword("testPassword");
-
+    user.setRole("administratif");
     when(userDataService.addUser(user)).thenReturn(false);
 
     assertFalse(userUCC.register(user));
@@ -134,7 +134,7 @@ public class UserUCCTest {
 
   @Test
   public void testChangeDataFailed() {
-    String email = "testChangeData@test.com";
+    String email = "testChangeData@vinci.be";
     String password = "testPassword";
     String lname = "Test";
     String fname = "User";

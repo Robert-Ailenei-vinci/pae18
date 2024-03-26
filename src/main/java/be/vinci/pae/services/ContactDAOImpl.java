@@ -24,14 +24,13 @@ public class ContactDAOImpl implements ContactDAO {
   @Inject
   private DomainFactory myDomainFactory;
   @Inject
-  private DALServices dalServices;
+  private DALBackServices dalBackServices;
   @Inject
   private EntrepriseDAO entrepriseDAO;
 
-
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
-    try (PreparedStatement preparedStatement = dalServices.getPreparedStatement(
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "INSERT INTO pae.contacts "
             + "(state, id_contact, _user, entreprise, school_year, "
             + "reason_for_refusal, meeting_type, _version)"
@@ -57,7 +56,7 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public List<ContactDTO> getAllContactsByUserId(int userId) {
-    PreparedStatement getAllContacts = dalServices.getPreparedStatement(
+    PreparedStatement getAllContacts = dalBackServices.getPreparedStatement(
         "SELECT * FROM pae.contacts WHERE _user = ?");
     List<ContactDTO> contacts = new ArrayList<>();
     try {
@@ -78,7 +77,7 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO getOneContactByStageId(int stageId) {
-    PreparedStatement getOneContact = dalServices.getPreparedStatement(
+    PreparedStatement getOneContact = dalBackServices.getPreparedStatement(
         "SELECT * FROM pae.contacts WHERE id_contact = ?");
     try {
       getOneContact.setInt(1, stageId);
@@ -114,7 +113,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql);
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);
         ResultSet rs = stmt.executeQuery()) {
       if (rs.next()) {
         return rs.getInt(1) + 1;
@@ -155,7 +154,7 @@ public class ContactDAOImpl implements ContactDAO {
     parameters.add(contactDTO.getId());
     parameters.add(contactDTO.getVersion());
 
-    try (PreparedStatement stmt = dalServices.getPreparedStatement(sql.toString())) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql.toString())) {
       for (int i = 0; i < parameters.size(); i++) {
         stmt.setObject(i + 1, parameters.get(i));
       }
@@ -172,7 +171,7 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO getOneContactById(int idContact) {
-    PreparedStatement getOneContact = dalServices.getPreparedStatement(
+    PreparedStatement getOneContact = dalBackServices.getPreparedStatement(
         "SELECT * FROM pae.contacts WHERE id_contact = ?");
     try {
       getOneContact.setInt(1, idContact);
