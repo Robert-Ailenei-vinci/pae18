@@ -10,7 +10,6 @@ import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
-import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import java.util.ArrayList;
@@ -38,8 +37,7 @@ class EntrepriseUCCImplTest {
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
     this.entrepriseUcc = locator.getService(EntrepriseUCC.class);
     this.factory = locator.getService(DomainFactory.class);
-    this.myEntrepriseDAO = locator.getService(EntrepriseDAO.class);
-    this.dalServices = locator.getService(DALServices.class);
+
     this.entreprise = (Entreprise) factory.getEntreprise();
     this.entreprise1 = (Entreprise) factory.getEntreprise();
     this.entreprise2 = (Entreprise) factory.getEntreprise();
