@@ -119,7 +119,7 @@ function renderNavbar() {
     navbar.innerHTML = anonymousUserNavbar;
   }
   else {
-    if (authenticatedUser.role === 'admin' || authenticatedUser.role === 'prof'){
+    if (authenticatedUser.role === 'administratif' || authenticatedUser.role === 'professeur'){
       navbar.innerHTML = authenticatedAdminOrProfNavbar;
     }
     else {
