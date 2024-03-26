@@ -140,7 +140,7 @@ public class AuthsResource {
           .put("lastName", user.getLastName())
           .put("phoneNum", user.getPhoneNum())
           .put("registrationDate", user.getRegistrationDate())
-          .put("schoolYearFormat", user.getSchoolYear().getYearFormat());
+          .put("schoolYear", user.getSchoolYear().getYearFormat());
       return toReturn;
 
     } catch (Exception e) {
