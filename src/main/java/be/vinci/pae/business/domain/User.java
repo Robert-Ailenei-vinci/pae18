@@ -34,7 +34,7 @@ public interface User extends UserDTO {
    *
    * @param existingUserDTO the existing user.
    */
-  void checkExisitngUser(UserDTO existingUserDTO);
+  void checkExistingUser(UserDTO existingUserDTO);
 
   /**
    * Check if register is not empty.
@@ -57,4 +57,13 @@ public interface User extends UserDTO {
    * @param email the email.
    */
   void checkMail(String email);
+
+  /**
+   * Check mail from lname and fname.
+   *
+   * @param email the email.
+   * @param lname the last name.
+   * @param fname the first name.
+   */
+  void checkmailFromLnameAndFname(String email, String lname, String fname);
 }

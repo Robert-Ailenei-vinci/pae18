@@ -77,14 +77,17 @@ public class UserUCCImpl implements UserUCC {
 
       // Check if user already exists
       User existingUser = null;
+
       try {
         existingUser = (User) myUserDAO.getOne(userDTO.getEmail());
       } catch (UserNotFoundException e) {
-        System.out.println(e); // User not found, print the error to
-        // continue the prgram and for no empty catch block
+        System.out.println(e.getMessage()); //normal to have this,
+        //we continue with the program, idk how to test it tho, it works
       }
+      user.checkExistingUser(existingUser);
+      user.checkmailFromLnameAndFname(userDTO.getEmail(), userDTO.getLastName(),
+          userDTO.getFirstName());
 
-      user.checkExisitngUser(existingUser);
       user.checkMail(userDTO.getEmail());
       user.checkRoleFromMail(userDTO.getEmail(), userDTO);
       user.setPassword(hashPassword(userDTO.getPassword()));
