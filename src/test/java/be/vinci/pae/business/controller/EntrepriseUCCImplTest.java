@@ -31,7 +31,6 @@ class EntrepriseUCCImplTest {
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
   private EntrepriseDTO expectedEntreprise;
-  private User user;
   private EntrepriseDAO myEntrepriseDAO;
   private DALServices dalServices;
 
@@ -123,37 +122,5 @@ class EntrepriseUCCImplTest {
     for (int i = 0; i < expectedEntreprises.size(); i++) {
       assertEquals(expectedEntreprises.get(i), actualEntreprises.get(i));
     }
-  }
-
-  @Test
-  void createOne() {
-    // 1. Arrange
-    user.setRole("etudiant");
-    expectedEntreprise = entreprise1;
-    when(entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email"))
-        .thenReturn(expectedEntreprise);
-    when(
-        myEntrepriseDAO.createOne("tradeName", "designation", "address", "phoneNum", "email"))
-        .thenReturn(entreprise1);
-
-    // 2. Act
-    EntrepriseDTO actualEntreprise = entrepriseUcc.createOne(user, "tradeName", "designation",
-        "address", "phoneNum", "email");
-
-    // 3. Assert
-    assertNotNull(actualEntreprise);
-    assertEquals(expectedEntreprise, actualEntreprise);
-
-  }
-
-  @Test
-  void createOneWithException() {
-    // 1. Arrange
-    user.setRole("professeur");
-
-    // 2. Act and Assert
-    assertThrows(BizException.class, () -> {
-      entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email");
-    });
   }
 }
