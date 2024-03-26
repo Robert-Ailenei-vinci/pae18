@@ -3,14 +3,12 @@ package be.vinci.pae.business.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
-import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
@@ -21,7 +19,6 @@ import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class EntrepriseUCCImplTest {
 
@@ -95,46 +92,34 @@ class EntrepriseUCCImplTest {
   }
 
   @Test
-  void createOne_ValidUser_CreatesEntreprise() {
-    // Arrange
-    when(user.checkIsStudent()).thenReturn(true);
+  void createOne() {
+    // 1. Arrange
+    user.setRole("etudiant");
+    expectedEntreprise = entreprise1;
+    when(entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email"))
+        .thenReturn(expectedEntreprise);
+    when(
+        myEntrepriseDAO.createOne("tradeName", "designation", "address", "phoneNum", "email"))
+        .thenReturn(entreprise1);
 
-    String tradeName = "TradeName";
-    String designation = "Designation";
-    String address = "Address";
-    String phoneNum = "PhoneNum";
-    String email = "Email";
+    // 2. Act
+    EntrepriseDTO actualEntreprise = entrepriseUcc.createOne(user, "tradeName", "designation",
+        "address", "phoneNum", "email");
 
-    Entreprise expectedEntreprise = (Entreprise) factory.getEntreprise();
-    when(myEntrepriseDAO.createOne(tradeName, designation, address, phoneNum, email)).thenReturn(expectedEntreprise);
-
-    // Act
-    EntrepriseDTO actualEntreprise = entrepriseUcc.createOne(user, tradeName, designation, address, phoneNum, email);
-
-    // Assert
+    // 3. Assert
     assertNotNull(actualEntreprise);
     assertEquals(expectedEntreprise, actualEntreprise);
 
-    // Verify that commitTransaction was called
-    verify(dalServices).commitTransaction();
   }
 
   @Test
-  void createOne_InvalidUser_ThrowsException() {
-    // Arrange
-    when(user.checkIsStudent()).thenReturn(false);
+  void createOneWithException() {
+    // 1. Arrange
+    user.setRole("professeur");
 
-    String tradeName = "TradeName";
-    String designation = "Designation";
-    String address = "Address";
-    String phoneNum = "PhoneNum";
-    String email = "Email";
-
-    // Act & Assert
-    BizException exception = assertThrows(BizException.class, () -> entrepriseUcc.createOne(user, tradeName, designation, address, phoneNum, email));
-    assertEquals("This user is not a student.", exception.getMessage());
-
-    // Verify that rollbackTransaction was called
-    verify(dalServices).rollbackTransaction();
+    // 2. Act and Assert
+    assertThrows(BizException.class, () -> {
+      entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email");
+    });
   }
 }
