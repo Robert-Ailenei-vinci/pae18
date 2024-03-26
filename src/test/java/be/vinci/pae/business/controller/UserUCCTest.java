@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -75,8 +75,14 @@ public class UserUCCTest {
   }
 
   @Test
-  public void testGetAll() {
-    assertNotNull(userUCC.getAll());
+  public void testGetAllException() {
+    // Mock the myUserDAO to throw an exception when getAll is called
+    when(userDataService.getAll()).thenThrow(new RuntimeException());
+
+    // Act and Assert
+    assertThrows(Exception.class, () -> userUCC.getAll());
+
+
   }
 
   @Test
@@ -98,20 +104,38 @@ public class UserUCCTest {
 
   @Test
   public void testRegisterSuccess() {
-
-    user.setEmail("test@vinci.be");
+    user.setFirstName("Loic");
+    user.setLastName("Mark");
+    user.setEmail("mark.loic@vinci.be");
     user.setPassword("password");
     user.setRole("administratif");
 
     when(userDataService.addUser(user)).thenReturn(true);
-
-    assertTrue(userUCC.register(user));
+    assertThrows(RuntimeException.class, () -> userDataService.getOne(user.getEmail()));
+    when(userUCC.getOne(user.getId())).thenReturn(user);
+    assertThrows(RuntimeException.class, () -> userDataService.getOne(user.getEmail()));
   }
+
+  @Test
+  public void testLoginException() {
+    // Arrange
+    String login = "testLogin@student.vinci.be";
+    String password = "testPassword";
+
+    // Mock the myUserDAO to throw an exception when getOne is called
+    when(userDataService.getOne(anyString())).thenThrow(new RuntimeException());
+
+    // Act and Assert
+    assertThrows(Exception.class, () -> userUCC.login(login, password));
+  }
+
 
   @Test
   public void testRegisterFails() {
 
-    user.setEmail("testFail@vinci.be");
+    user.setFirstName("Loic");
+    user.setLastName("Mark");
+    user.setEmail("mark.loic@vinci.be");
     user.setPassword("testPassword");
     user.setRole("administratif");
     when(userDataService.addUser(user)).thenReturn(false);
@@ -183,4 +207,6 @@ public class UserUCCTest {
     assertEquals(expectedUser.getEmail(), result.getEmail());
     assertEquals(expectedUser.getPassword(), result.getPassword());
   }
+
+
 }

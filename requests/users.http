@@ -65,7 +65,7 @@ Content-Type: application/json
      "phoneNum": "0477777777"
 }
 
-### Register a new user with good role
+### Register a new user with good role but not good mail
 POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
@@ -74,6 +74,19 @@ Content-Type: application/json
   "password": "zaza",
   "f_name": "zaza",
   "l_name": "zaza",
+  "role": "administratif",
+  "phone_number": "0484118694456"
+}
+
+### Register a new user with good role & good mail
+POST {{baseUrl}}/auths/register
+Content-Type: application/json
+
+{
+  "login": "rob.ert@vinci.be",
+  "password": "rob",
+  "f_name": "ert",
+  "l_name": "rob",
   "role": "administratif",
   "phone_number": "0484118694456"
 }

@@ -1,6 +1,9 @@
 package be.vinci.pae.business.domain;
 
+import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.UserDAO;
+import jakarta.inject.Inject;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -9,6 +12,8 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class UserImpl implements User {
 
+  @Inject
+  private UserDAO myUserDAO;
 
   private int id;
   private String email;
@@ -153,27 +158,27 @@ public class UserImpl implements User {
   }
 
   @Override
-  public void checkExisitngUser(UserDTO userDTO) {
-
+  public void checkExistingUser(UserDTO userDTO) {
     if (userDTO != null) {
-      throw new BizException("User already exists");
+      throw new BizException("Utilisateur existe deja");
     }
-
   }
+
 
   @Override
   public void checkRegisterNotEmpty(UserDTO userDTO) {
     if (Objects.equals(userDTO.getEmail(), "") || Objects.equals(userDTO.getPassword(), "")
         || Objects.equals(userDTO.getLastName(), "") || Objects.equals(userDTO.getFirstName(), "")
         || Objects.equals(userDTO.getPhoneNum(), "") || Objects.equals(userDTO.getRole(), "")) {
-      throw new IllegalArgumentException("All fields must be filled");
+      throw new BadRequestException("Tous les champs doivent etre remplis");
     }
   }
 
   @Override
   public void checkRoleFromMail(String mail, UserDTO userDTO) {
-    if (mail.endsWith("@student.vinci.be") && !userDTO.getRole().equals("etudiant")) {
-      throw new IllegalArgumentException("Role must be student");
+    if (mail.endsWith("@student.vinci.be")
+        && !userDTO.getRole().equals("etudiant")) {
+      throw new BadRequestException("Role doit etre etudiant");
     }
     if (mail.endsWith("@vinci.be")
         && !userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur")) {
@@ -184,8 +189,17 @@ public class UserImpl implements User {
   @Override
   public void checkMail(String email) {
     if (!email.endsWith("@vinci.be") && !email.endsWith("@student.vinci.be")) {
-      throw new IllegalArgumentException("Email must end with @vinci.be or @student.vinci.be");
+      throw new BadRequestException("Email doit finir avec @vinci.be ou @student.vinci.be");
     }
   }
+
+  @Override
+  public void checkmailFromLnameAndFname(String email, String lastName, String firstName) {
+    if (!email.startsWith(lastName.toLowerCase() + "." + firstName.toLowerCase())) {
+      throw new BadRequestException(
+          "Mail doit commencer avec ton nom et prenom en minuscule et séparé par un point");
+    }
+  }
+
 }
 
