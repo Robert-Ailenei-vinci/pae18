@@ -12,6 +12,8 @@ import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.DALServices;
+import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,9 @@ class EntrepriseUCCImplTest {
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
   private EntrepriseDTO expectedEntreprise;
+  private User user;
+  private EntrepriseDAO myEntrepriseDAO;
+  private DALServices dalServices;
 
 
   @BeforeEach
@@ -38,10 +43,13 @@ class EntrepriseUCCImplTest {
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
     this.entrepriseUcc = locator.getService(EntrepriseUCC.class);
     this.factory = locator.getService(DomainFactory.class);
+    this.myEntrepriseDAO = locator.getService(EntrepriseDAO.class);
+    this.dalServices = locator.getService(DALServices.class);
     this.entreprise = (Entreprise) factory.getEntreprise();
     this.entreprise1 = (Entreprise) factory.getEntreprise();
     this.entreprise2 = (Entreprise) factory.getEntreprise();
     this.expectedEntreprise = factory.getEntreprise();
+    this.user = (User) factory.getUser();
   }
 
   @Test
@@ -89,8 +97,7 @@ class EntrepriseUCCImplTest {
   @Test
   void createOne_ValidUser_CreatesEntreprise() {
     // Arrange
-    UserDTO user = Mockito.mock(UserDTO.class);
-    when(((User) user).checkIsStudent()).thenReturn(true);
+    when(user.checkIsStudent()).thenReturn(true);
 
     String tradeName = "TradeName";
     String designation = "Designation";
@@ -115,8 +122,7 @@ class EntrepriseUCCImplTest {
   @Test
   void createOne_InvalidUser_ThrowsException() {
     // Arrange
-    UserDTO user = Mockito.mock(UserDTO.class);
-    when(((User) user).checkIsStudent()).thenReturn(false);
+    when(user.checkIsStudent()).thenReturn(false);
 
     String tradeName = "TradeName";
     String designation = "Designation";
