@@ -1,5 +1,6 @@
 package be.vinci.pae.business.domain;
 
+import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
@@ -156,7 +157,7 @@ public class UserImpl implements User {
   public void checkExisitngUser(UserDTO userDTO) {
 
     if (userDTO != null) {
-      throw new BizException("User already exists");
+      throw new BizException("L'utilisateur existe déjà");
     }
 
   }
@@ -166,24 +167,32 @@ public class UserImpl implements User {
     if (Objects.equals(userDTO.getEmail(), "") || Objects.equals(userDTO.getPassword(), "")
         || Objects.equals(userDTO.getLastName(), "") || Objects.equals(userDTO.getFirstName(), "")
         || Objects.equals(userDTO.getPhoneNum(), "") || Objects.equals(userDTO.getRole(), "")) {
-      throw new IllegalArgumentException("All fields must be filled");
+      throw new BadRequestException("Tous les champs doivent etre remplis");
     }
   }
 
   public void checkRoleFromMail(String mail, UserDTO userDTO) {
     if (mail.endsWith("@student.vinci.be") && !userDTO.getRole().equals("etudiant")) {
-      throw new IllegalArgumentException("Role must be student");
+      throw new BadRequestException("Role doit etre etudiant");
     }
     if (mail.endsWith("@vinci.be") &&
         !userDTO.getRole().equals("administratif") && !userDTO.getRole().equals("professeur")) {
-      throw new IllegalArgumentException("Role must be either administratif or professeur");
+      throw new BadRequestException("Role doit etre administratif ou professeur");
     }
   }
 
   public void checkMail(String email) {
     if (!email.endsWith("@vinci.be") && !email.endsWith("@student.vinci.be")) {
-      throw new IllegalArgumentException("Email must end with @vinci.be or @student.vinci.be");
+      throw new BadRequestException("Email doit finir avec @vinci.be ou @student.vinci.be");
     }
   }
+
+  public void checkmailFromLnameAndFname(String email, String lastName, String firstName) {
+    if (!email.startsWith(lastName.toLowerCase() + "." + firstName.toLowerCase())) {
+      throw new BadRequestException(
+          "Mail doit commencer avec ton nom et prenom en minuscule et séparé par un point");
+    }
+  }
+
 }
 
