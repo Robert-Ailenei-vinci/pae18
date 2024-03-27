@@ -4,6 +4,7 @@ import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.UserDAO;
 import jakarta.inject.Inject;
+import java.text.Normalizer;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -26,6 +27,12 @@ public class UserImpl implements User {
   private int version;
   private int schoolYearId;
   private SchoolYearDTO schoolYear;
+
+  private String removeAccents(String input) {
+    return Normalizer
+        .normalize(input, Normalizer.Form.NFD)
+        .replaceAll("[^\\p{ASCII}]", "");
+  }
 
   /**
    * Retrieves the school year ID of the user.
@@ -164,7 +171,6 @@ public class UserImpl implements User {
     }
   }
 
-
   @Override
   public void checkRegisterNotEmpty(UserDTO userDTO) {
     if (Objects.equals(userDTO.getEmail(), "") || Objects.equals(userDTO.getPassword(), "")
@@ -193,13 +199,13 @@ public class UserImpl implements User {
     }
   }
 
-  @Override
   public void checkmailFromLnameAndFname(String email, String lastName, String firstName) {
-    if (!email.startsWith(lastName.toLowerCase() + "." + firstName.toLowerCase())) {
+    String normalizedLastName = removeAccents(lastName).toLowerCase();
+    String normalizedFirstName = removeAccents(firstName).toLowerCase();
+    if (!email.startsWith(normalizedFirstName + "." + normalizedLastName)) {
       throw new BadRequestException(
           "Mail doit commencer avec ton nom et prenom en minuscule et séparé par un point");
     }
   }
-
 }
 

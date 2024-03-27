@@ -51,7 +51,6 @@ async function renderNewContactForm() {
   document.getElementById('myForm').addEventListener('submit', () =>{
     handleSubmit(selectedEntrepriseId);
     Navigate('/users/userData');
-    window.location.reload();
   });
 }
 
