@@ -220,11 +220,9 @@ async function renderPersonnalInfoPage() {
         switch (selectedOption) {
           case 'Rencontré':
             meetContact(contact.id, additionalInfo,contact.version);
-            window.location.reload();
             break;
           case 'Suivi stoppé':
             stopFollowContact(contact.id,contact.version);
-            window.location.reload();
 
             break;
           default:
@@ -301,12 +299,10 @@ async function renderPersonnalInfoPage() {
         switch (selectedOption) {
           case 'Suivi stoppé':
             stopFollowContact(contact.id,contact.version);
-            window.location.reload();
 
             break;
           case 'Refusé':
             refuseContact(contact.id, additionalInfo,contact.version);
-            window.location.reload();
 
             break;
           default:
