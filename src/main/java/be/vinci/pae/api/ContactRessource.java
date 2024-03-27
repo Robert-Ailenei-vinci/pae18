@@ -11,6 +11,7 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
+import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -20,11 +21,9 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -58,6 +57,8 @@ public class ContactRessource {
   @Authorize
   public ContactDTO addContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("entreprise")) {
+      LoggerUtil.logError("Entreprise not found",
+          new BadRequestException("Entreprise not found"));
       throw new BadRequestException("User, entreprise, and school year required");
     }
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
@@ -73,14 +74,20 @@ public class ContactRessource {
       throw new AuthorisationException("User not recognised");
     }
     if (entrepriseDTO == null) {
+      LoggerUtil.logError("Entreprise not found",
+          new AuthorisationException("Entreprise not found"));
       throw new AuthorisationException("Entreprise not recognised");
     }
     if (schoolYearDTO == null) {
+      LoggerUtil.logError("Schoolyear not found",
+          new AuthorisationException("Schoolyear not found"));
       throw new AuthorisationException("Schoolyear not recognised");
     }
 
     ContactDTO contactDTO = myContactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO);
     if (contactDTO == null) {
+      LoggerUtil.logError("Contact not created",
+          new BadRequestException("Contact not created"));
       throw new BadRequestException("Contact not created");
     }
 
@@ -98,7 +105,6 @@ public class ContactRessource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
-    System.out.println("getAllContactsByUserId called");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
     return myContactUCC.getAllContactsByUserId(userId);
@@ -118,7 +124,9 @@ public class ContactRessource {
   @Authorize
   public ContactDTO meetContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
-      throw new WebApplicationException("contact id required", Response.Status.BAD_REQUEST);
+      LoggerUtil.logError("Contact id and meeting type required",
+          new BadRequestException("contact id and meeting type required"));
+      throw new BadRequestException("contact id and meeting type required");
     }
     int contactId = json.get("id_contact").asInt();
     String meetingType = json.get("meetingType").asText();
@@ -144,6 +152,8 @@ public class ContactRessource {
   public ContactDTO stopFollowContact(@Context ContainerRequestContext requestContext,
       JsonNode json) {
     if (!json.hasNonNull("id_contact")) {
+      LoggerUtil.logError("Contact id required",
+          new BadRequestException("contact id required"));
       throw new BadRequestException("contact id required");
     }
     int contactId = json.get("id_contact").asInt();
@@ -169,6 +179,8 @@ public class ContactRessource {
   @Authorize
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
+      LoggerUtil.logError("Contact id and refusal reason required",
+          new BadRequestException("contact id and refusal reason required"));
       throw new BadRequestException("contact id and refusal reason required");
     }
     int contactId = json.get("id_contact").asInt();

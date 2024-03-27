@@ -3,6 +3,7 @@ package be.vinci.pae.business.controller;
 import be.vinci.pae.business.domain.StageDTO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.StageDAO;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 
 /**
@@ -20,6 +21,7 @@ public class StageUCCImpl implements StageUCC {
       dalServices.startTransaction();
       return stageDAO.getOneStageByUserId(userId);
     } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     } finally {

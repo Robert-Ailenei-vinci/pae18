@@ -51,6 +51,7 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contact;
     } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -64,6 +65,7 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contacts;
     } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -92,6 +94,7 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contactToReturn;
     } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -105,10 +108,14 @@ public class ContactUCCImpl implements ContactUCC {
       Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
       if (contact.getUserId() != userId) {
+        LoggerUtil.logError("BizError", new BizException(
+            "The contact does not belong to the user"));
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
       if (!contact.stopFollowContact(version)) {
+        LoggerUtil.logError("BizError", new BizException(
+            "The contact cannot be stopped from being followed"));
         throw new BizException("The contact cannot be stopped from being followed");
       }
 
@@ -117,6 +124,7 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contactToReturn;
     } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -130,10 +138,14 @@ public class ContactUCCImpl implements ContactUCC {
       Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
       if (contact.getUserId() != userId) {
+        LoggerUtil.logError("BizError", new BizException(
+            "The contact does not belong to the user"));
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
       if (!contact.refuseContact(refusalReason, version)) {
+        LoggerUtil.logError("BizError", new BizException(
+            "The contact cannot be refused"));
         throw new BizException("The contact cannot be refused");
       }
 
@@ -142,6 +154,7 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contactToReturn;
     } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }

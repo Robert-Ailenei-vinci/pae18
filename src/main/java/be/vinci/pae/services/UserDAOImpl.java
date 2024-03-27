@@ -5,6 +5,7 @@ import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.OptimisticLockException;
 import be.vinci.pae.exception.UserNotFoundException;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,11 +45,11 @@ public class UserDAOImpl implements UserDAO {
         UserDTO user;
         user = getUserMethodFromDB(rs);
         users.add(user);
+        LoggerUtil.logInfo("get all users");
+
       }
     } catch (Exception e) {
-      System.out.println(
-          e.getMessage()); // pas d erreur possible dans un getAll, a pire renvoie liste vide,
-      // donc on affiche pas l'erreur
+      LoggerUtil.logError("Error while getting all users", e);
     }
     return users;
   }
@@ -72,6 +73,7 @@ public class UserDAOImpl implements UserDAO {
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
         if (rs.next()) {
+          LoggerUtil.logInfo("get one user by email with email: " + email);
           return getUserMethodFromDB(rs);
         }
       }
@@ -100,6 +102,7 @@ public class UserDAOImpl implements UserDAO {
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
         if (rs.next()) {
+          LoggerUtil.logInfo("get one user by id with id: " + id);
           return getUserMethodFromDB(rs);
         }
       }
@@ -164,6 +167,9 @@ public class UserDAOImpl implements UserDAO {
       stmt.setString(7, user.getPassword());
       stmt.setString(8, user.getRegistrationDate());
       stmt.setInt(9, idYear);
+      LoggerUtil.logInfo(
+          "used adduser method with mail: " + user.getEmail() + " and id: " + user.getId());
+
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
@@ -244,7 +250,7 @@ public class UserDAOImpl implements UserDAO {
         throw new OptimisticLockException("User was updated by another transaction");
       }
 
-      System.out.println("User updated");
+      LoggerUtil.logInfo("user with id " + user.getId() + " was changed");
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
     }
@@ -263,6 +269,7 @@ public class UserDAOImpl implements UserDAO {
     } else {
       year = LocalDate.now().getYear();
     }
+    LoggerUtil.logInfo("build year method");
     return year + "-" + (year + 1);
   }
 
@@ -271,6 +278,7 @@ public class UserDAOImpl implements UserDAO {
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
+          LoggerUtil.logInfo("user: getLastYearId");
           return rs.getInt(1);
         }
       }
