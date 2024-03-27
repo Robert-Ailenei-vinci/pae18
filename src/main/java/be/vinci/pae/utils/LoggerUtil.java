@@ -34,7 +34,7 @@ public class LoggerUtil {
       }
 
       // Configure the logger to write log messages to a file
-      FileHandler fileHandler = new FileHandler(logFilePattern, 100000, 15, true);
+      FileHandler fileHandler = new FileHandler(logFilePattern, 1000000, 15, true);
       fileHandler.setFormatter(new SimpleFormatter() {
         @Override
         public synchronized String format(LogRecord lr) {
