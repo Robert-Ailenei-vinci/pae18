@@ -105,8 +105,8 @@ public class ContactImpl implements Contact {
 
   @Override
   public boolean stopFollowContact(int version) {
-    if (state.equals("initie") || state.equals("rencontre")) {
-      this.state = "stop follow";
+    if (state.equals("initié") || state.equals("rencontré")) {
+      this.state = "suspendu";
       this.reasonForRefusal = "";
       this.meetingType = "";
       this.version = version;
@@ -117,8 +117,8 @@ public class ContactImpl implements Contact {
 
   @Override
   public boolean refuseContact(String reasonForRefusal, int version) {
-    if (state.equals("rencontre")) {
-      this.state = "refuse";
+    if (state.equals("rencontré")) {
+      this.state = "refusé";
       this.reasonForRefusal = reasonForRefusal;
       this.meetingType = "";
       this.version = version;
@@ -129,8 +129,8 @@ public class ContactImpl implements Contact {
 
   @Override
   public boolean meetContact(String meetingType, int version) {
-    if (state.equals("initie")) {
-      this.state = "rencontre";
+    if (state.equals("initié")) {
+      this.state = "rencontré";
       this.meetingType = meetingType;
       this.reasonForRefusal = "";
       this.version = version;
