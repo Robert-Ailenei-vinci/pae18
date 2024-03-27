@@ -2,7 +2,6 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
-import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
@@ -26,7 +25,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
    *
    * @param id the identifier of the enterprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   *     enterprise with the given identifier exists
+   * enterprise with the given identifier exists
    */
   @Override
   public EntrepriseDTO getOne(int id) {
@@ -113,6 +112,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     }
     return entreprise;
   }
+
   private int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);

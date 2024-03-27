@@ -2,8 +2,6 @@ package be.vinci.pae.business.domain;
 
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
-import be.vinci.pae.services.UserDAO;
-import jakarta.inject.Inject;
 import java.text.Normalizer;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
@@ -12,6 +10,7 @@ import org.mindrot.jbcrypt.BCrypt;
  * This class represents an implementation of the {@link User} interface.
  */
 public class UserImpl implements User {
+
   private int id;
   private String email;
   private String password;
@@ -195,6 +194,7 @@ public class UserImpl implements User {
     }
   }
 
+  @Override
   public void checkmailFromLnameAndFname(String email, String lastName, String firstName) {
     String normalizedLastName = removeAccents(lastName).toLowerCase();
     String normalizedFirstName = removeAccents(firstName).toLowerCase();

@@ -46,7 +46,7 @@ public class ContactDAOImpl implements ContactDAO {
       preparedStatement.setString(7, null);
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
-        LoggerUtil.logInfo("create one contact with id "+ contactId);
+        LoggerUtil.logInfo("create one contact with id " + contactId);
         return getOneContactByStageId(contactId);
       }
     } catch (Exception e) {
@@ -67,7 +67,7 @@ public class ContactDAOImpl implements ContactDAO {
           ContactDTO contact;
           contact = getContactMethodFromDB(rs);
           contacts.add(contact);
-          LoggerUtil.logInfo("get all contact for the user with id "+userId);
+          LoggerUtil.logInfo("get all contact for the user with id " + userId);
         }
       }
     } catch (Exception e) {
@@ -111,6 +111,7 @@ public class ContactDAOImpl implements ContactDAO {
     }
     return contact;
   }
+
   private int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);
@@ -163,7 +164,7 @@ public class ContactDAOImpl implements ContactDAO {
         throw new OptimisticLockException("Contact was updated by another transaction");
       }
 
-      LoggerUtil.logInfo("Contact nr"+contactDTO.getId()+" updated!");
+      LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
 
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
