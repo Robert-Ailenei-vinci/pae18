@@ -1,10 +1,8 @@
 /* eslint-disable camelcase */
-import { getRememberMe, setRememberMe } from '../../utils/auths';
-import { clearPage, renderPageTitle } from '../../utils/render';
+import {getRememberMe, setRememberMe} from '../../utils/auths';
+import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
-
-
 
 const RegisterPage = () => {
   clearPage();
@@ -23,7 +21,6 @@ function renderRegisterForm() {
   login.required = true;
   login.className = 'form-control mb-3';
   login.addEventListener('input', onEmailInput); // Add event listener for email input
-
 
   const password = document.createElement('input');
   password.type = 'password';
@@ -57,18 +54,18 @@ function renderRegisterForm() {
   phone_num.addEventListener('input', function (event) {
     const phoneNumberPattern = /^04\d{8}$/;
     if (!phoneNumberPattern.test(this.value)) {
-      this.setCustomValidity('Invalid phone number. It should start with 04 and followed by 8 digits.');
+      this.setCustomValidity(
+          'Invalid phone number. It should start with 04 and followed by 8 digits.');
     } else {
       this.setCustomValidity('');
     }
   });
 
   const roleAdmin = document.createElement('input');
-  roleAdmin.type = 'checkbox'; 
-  roleAdmin.id = 'roleAdmin'; 
-  roleAdmin.className = 'form-check-input'; 
+  roleAdmin.type = 'checkbox';
+  roleAdmin.id = 'roleAdmin';
+  roleAdmin.className = 'form-check-input';
   roleAdmin.style.display = 'none'; // Hide by default  
-
 
   // Create labels for the checkboxes
   const roleAdminLabel = document.createElement('label');
@@ -76,12 +73,11 @@ function renderRegisterForm() {
   roleAdminLabel.textContent = 'Administratif';
   roleAdminLabel.id = 'roleAdminLabel'; // Define ID for the label
   roleAdminLabel.style.display = 'none'; // Hide by default
-  
 
-  const roleProf = document.createElement('input'); 
-  roleProf.type = 'checkbox'; 
-  roleProf.id = 'roleProf'; 
-  roleProf.className = 'form-check-input'; 
+  const roleProf = document.createElement('input');
+  roleProf.type = 'checkbox';
+  roleProf.id = 'roleProf';
+  roleProf.className = 'form-check-input';
   roleProf.style.display = 'none'; // Hide by default
 
   const roleProfLabel = document.createElement('label');
@@ -89,7 +85,6 @@ function renderRegisterForm() {
   roleProfLabel.textContent = 'Professeur';
   roleProfLabel.id = 'roleProfLabel'; // Define ID for the label
   roleProfLabel.style.display = 'none'; // Hide by default
-
 
   const submit = document.createElement('input');
   submit.value = 'Register';
@@ -110,21 +105,21 @@ function renderRegisterForm() {
   checkLabel.htmlFor = 'rememberme';
   checkLabel.className = 'form-check-label';
   checkLabel.textContent = 'Remember me';
-  
+
   formCheckWrapper.appendChild(rememberme);
   formCheckWrapper.appendChild(checkLabel);
 
   form.appendChild(login);
   // Create a wrapper for each checkbox and its label
-const roleAdminWrapper = document.createElement('div');
-roleAdminWrapper.appendChild(roleAdmin);
-roleAdminWrapper.appendChild(roleAdminLabel);
-form.appendChild(roleAdminWrapper);
+  const roleAdminWrapper = document.createElement('div');
+  roleAdminWrapper.appendChild(roleAdmin);
+  roleAdminWrapper.appendChild(roleAdminLabel);
+  form.appendChild(roleAdminWrapper);
 
-const roleProfWrapper = document.createElement('div');
-roleProfWrapper.appendChild(roleProf);
-roleProfWrapper.appendChild(roleProfLabel);
-form.appendChild(roleProfWrapper);
+  const roleProfWrapper = document.createElement('div');
+  roleProfWrapper.appendChild(roleProf);
+  roleProfWrapper.appendChild(roleProfLabel);
+  form.appendChild(roleProfWrapper);
 
   form.appendChild(password);
   form.appendChild(first_name);
@@ -142,6 +137,7 @@ function onCheckboxClicked(e) {
 }
 
 let role;
+
 function onEmailInput(e) {
   const email = e.target.value;
   const roleAdmin = document.querySelector('#roleAdmin');
@@ -157,7 +153,7 @@ function onEmailInput(e) {
     roleAdminLabel.style.display = 'block'; // Show label
     roleProfLabel.style.display = 'block'; // Show label
   } else {
-    
+
     roleAdmin.style.display = 'none';
     roleProf.style.display = 'none';
     roleAdminLabel.style.display = 'none'; // Hide label
@@ -165,24 +161,19 @@ function onEmailInput(e) {
     return;
   }
 
-  
-
   // Add event listeners to checkboxes
-  roleAdmin.addEventListener('change', function() {
+  roleAdmin.addEventListener('change', function () {
     if (this.checked) {
       roleProf.checked = false;
     }
   });
 
-  roleProf.addEventListener('change', function() {
+  roleProf.addEventListener('change', function () {
     if (this.checked) {
       roleAdmin.checked = false;
     }
   });
 }
-
-
-
 
 async function onRegister(e) {
   e.preventDefault();
@@ -195,18 +186,22 @@ async function onRegister(e) {
   const roleAdmin = document.querySelector('#roleAdmin').checked;
   const roleProf = document.querySelector('#roleProf').checked;
 
-  if(!login.endsWith('@student.vinci.be') && !login.endsWith('@vinci.be')){
+  if (!login.endsWith('@student.vinci.be') && !login.endsWith('@vinci.be')) {
     alert('Mail doit finir en @vinci.be ou en @student.vinci.be');
     return;
   }
-  
-  if (roleAdmin) role = 'administratif';
-  if (roleProf) role = 'professeur';
+
+  if (roleAdmin) {
+    role = 'administratif';
+  }
+  if (roleProf) {
+    role = 'professeur';
+  }
 // Check if at least one checkbox is checked
-if (!roleAdmin && !roleProf && role!=="etudiant") {
-  alert('Veuillez indiquer si vous etes un administratif ou un professeur: ');
-  return;
-}
+  if (!roleAdmin && !roleProf && role !== "etudiant") {
+    alert('Veuillez indiquer si vous etes un administratif ou un professeur: ');
+    return;
+  }
   const options = {
     method: 'POST',
     body: JSON.stringify({
@@ -229,12 +224,12 @@ if (!roleAdmin && !roleProf && role!=="etudiant") {
       alert(errorMessage);
     });
     return;
-  }else{
+  } else {
     Navigate('/login');
   }
-  }
-  Navbar();
-  Navigate('/login');
+}
 
+Navbar();
+Navigate('/login');
 
 export default RegisterPage;
