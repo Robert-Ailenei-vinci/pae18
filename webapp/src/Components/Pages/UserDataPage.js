@@ -403,7 +403,7 @@ async function renderPersonnalInfoPage() {
   addButton.textContent = 'Ajouter un contact';
   addButton.className = 'btn btn-info';
   addButton.addEventListener('click', () => {
-    Navigate('/addcontact');
+    Navigate('/addContact');
   });
 
   // Create and append the title for the contacts table
