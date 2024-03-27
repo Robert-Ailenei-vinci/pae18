@@ -159,13 +159,13 @@ async function handleSubmit(selectedEntrepriseId) {
 
   if (!response.ok) {
     handleError(response);
-    return;
+    Navbar();
+    Navigate('/addContact');
+  } else {
+    alert(`Added contact`);
+    Navbar();
+    Navigate('/users/userData');  
   }
-
-  const newContact = await response.json();
-  alert(`Added contact : ${JSON.stringify(newContact)}`);
-  Navbar();
-  Navigate('/users/userData');
   }
 
 }
@@ -174,7 +174,9 @@ function handleError(response) {
   if (response.status === 401) {
     alert("An error occured while fetching with the server.");
   } else {
-    console.error("An error occurred:", response.statusText);
+    response.text().then((errorMessage) => {
+      alert(errorMessage);
+    });
   }
 }
 
