@@ -64,7 +64,7 @@ async function stopFollowContact(idContact,version) {
     return contactsData;
   } catch (error) {
     throw new Error(
-        `An error occurred while update contacts: ${error.message}`);
+        `An error occurred while updating contacts: ${error.message}`);
   }
 }
 
