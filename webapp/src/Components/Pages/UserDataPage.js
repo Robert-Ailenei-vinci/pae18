@@ -2,13 +2,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import {
-  getRememberMe,
-  setAuthenticatedUser,
-  setRememberMe,
   getAuthenticatedUser
 } from '../../utils/auths';
-import {clearPage, renderPageTitle} from '../../utils/render';
-import Navbar from '../Navbar/Navbar';
+import { clearPage, renderPageTitle } from '../../utils/render';
 import Navigate from '../Router/Navigate';
 import {
   meetContact,
@@ -72,6 +68,7 @@ async function fetchStageData(user) {
     const stageData = await responseStage.json();
     return stageData;
   } catch (error) {
+    // Returning undefined instead of throwing an error if fetch operation fails
     return undefined;
   }
 }
@@ -79,40 +76,69 @@ async function fetchStageData(user) {
 let isRendering = false;
 
 async function renderPersonnalInfoPage() {
-
   if (isRendering) {
-    // Si le rendu est en cours, ignorer l'appel de la fonction
     return;
   }
 
   const user = getAuthenticatedUser();
   const main = document.querySelector('main');
+  renderUserData(user, main);
+}
+
+async function renderUserData(user, parentElement) {
   const ul = document.createElement('ul');
   ul.className = 'p-5';
 
-  isRendering = true; // Marquer le rendu comme en cours
+  isRendering = true;
   const contactsData = await fetchContactsData(user);
   const stageData = await fetchStageData(user);
-  isRendering = false; // Marquer le rendu comme terminé
+  isRendering = false;
 
   console.log('Contacts : ', contactsData);
   console.log(user);
-  const items = [
-    {label: 'Nom de famille: ', value: user.lastName},
-    {label: 'Prénom: ', value: user.firstName},
-    {label: 'Email: ', value: user.email},
-    {label: 'Numéro de Téléphone: ', value: user.phoneNum},
-    {label: 'Date d\'enregistrement: ', value: user.registrationDate},
-    {label: 'Année académique: ', value: user.schoolYear},
-    {label: 'Role: ', value: user.role}
-  ];
 
+  renderUserDetails(user, ul);
+  renderChangeUserDataButton(parentElement);
+  parentElement.appendChild(ul);
+
+  // Render contact part only for "etudiant" role
+  if (user.role === "etudiant") {
+    renderContactsTable(parentElement, contactsData);
+  }
+
+  // Render stage table if stageData is available
+  if (stageData === "etudiant") {
+    renderStageTable(parentElement, stageData);
+  }
+}
+
+function renderUserDetails(user, parentElement) {
+let temp_role = user.role;
+
+if (user.role === "etudiant") {
+  temp_role = "étudiant";
+}
+
+const items = [
+  { label: 'Nom de famille: ', value: user.lastName },
+  { label: 'Prénom: ', value: user.firstName },
+  { label: 'Email: ', value: user.email },
+  { label: 'Numéro de Téléphone: ', value: user.phoneNum },
+  { label: 'Date d\'enregistrement: ', value: user.registrationDate },
+  { label: 'Année académique: ', value: user.schoolYear },
+  { label: 'Role: ', value: temp_role } 
+];
+
+
+  const ul = parentElement;
   items.forEach(item => {
     const li = document.createElement('li');
     li.textContent = item.label + item.value;
     ul.appendChild(li);
   });
+}
 
+function renderChangeUserDataButton(parentElement) {
   const submit = document.createElement('input');
   submit.value = 'Changer mes données personelles';
   submit.type = 'button';
@@ -121,23 +147,33 @@ async function renderPersonnalInfoPage() {
     Navigate('/users/changeData');
   });
 
-  // Creating table for contacts
+  parentElement.appendChild(submit);
+}
+
+function renderContactsTable(parentElement, contactsData) {
+  // Create a title for the contacts table
+  const contactsTitle = document.createElement('h2');
+  contactsTitle.textContent = 'Contacts';
+  parentElement.appendChild(contactsTitle);
+  
+  // Create the table element
   const table = document.createElement('table');
   table.className = 'table';
-  const thead = document.createElement('thead');
-  const tbody = document.createElement('tbody');
-  const trHead = document.createElement('tr');
 
+  // Create the table header
+  const thead = document.createElement('thead');
+  const trHead = document.createElement('tr');
   ['Entreprise', 'Appelation', 'Adresse', 'Mail', 'N°Telephone', 'Etat', ' ',
     'Lieu/Type de rencontre', 'Raison de refus'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
     trHead.appendChild(th);
   });
-
   thead.appendChild(trHead);
   table.appendChild(thead);
 
+  // Create the table body
+  const tbody = document.createElement('tbody');
   contactsData.forEach(contact => {
     const tr = document.createElement('tr');
 
@@ -169,7 +205,7 @@ async function renderPersonnalInfoPage() {
     divForm.className = 'collapse';
     divForm.id = 'collapseExample_' + contact.id;
 
-    if (contact.state === "initie") {
+    if (contact.state === "initié") {
       // Création du formulaire
       const form = document.createElement('form');
       const select = document.createElement('select');
@@ -250,7 +286,7 @@ async function renderPersonnalInfoPage() {
       tr.appendChild(tdButton);
     }
 
-    if (contact.state === "rencontre") {
+    if (contact.state === "rencontré") {
       // Création du formulaire
       const form = document.createElement('form');
       const select = document.createElement('select');
@@ -332,7 +368,7 @@ async function renderPersonnalInfoPage() {
       tr.appendChild(tdButton);
     }
 
-    if (contact.state === "stop follow" || contact.state === "refuse"){
+    if (contact.state === "suspendu" || contact.state === "refusé"){
       const tdVide = document.createElement('td');
       tdVide.textContent = '-';
       tr.appendChild(tdVide);
@@ -350,27 +386,37 @@ async function renderPersonnalInfoPage() {
 
     tbody.appendChild(tr);
   });
+
   table.appendChild(tbody);
 
+  // Append the table to the parent element
+  parentElement.appendChild(table);
+}
+
+function renderStageTable(parentElement, stageData) {
+  // Create a title for the stage table
+  const stageTitle = document.createElement('h2');
+  stageTitle.textContent = 'Stage';
+  parentElement.appendChild(stageTitle);
+
+  // Create the table element
   const stageTable = document.createElement('table');
   stageTable.className = 'table';
-  const stageThead = document.createElement('thead');
-  const stageTbody = document.createElement('tbody');
-  const stageTrHead = document.createElement('tr');
 
-  ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone',
-    'Type de rencontre'].forEach(text => {
+  // Create the table header
+  const stageThead = document.createElement('thead');
+  const stageTrHead = document.createElement('tr');
+  ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone', 'Type de rencontre'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
     stageTrHead.appendChild(th);
   });
-
   stageThead.appendChild(stageTrHead);
   stageTable.appendChild(stageThead);
 
+  // Create the table body
+  const stageTbody = document.createElement('tbody');
   const tr = document.createElement('tr');
-
-// Fields from entreprise object
   ['tradeName', 'designation', 'email', 'phoneNumber'].forEach(key => {
     const td = document.createElement('td');
     if (stageData) {
@@ -379,7 +425,6 @@ async function renderPersonnalInfoPage() {
     tr.appendChild(td);
   });
 
-// Field for meetingType
   const td = document.createElement('td');
   if (stageData) {
     td.textContent = stageData.contact.meetingType || '-';
@@ -389,43 +434,9 @@ async function renderPersonnalInfoPage() {
   stageTbody.appendChild(tr);
   stageTable.appendChild(stageTbody);
 
-  main.appendChild(ul);
-  main.appendChild(submit);
-
-  // Create and append a div to act as a spacer
-  const spacer = document.createElement('div');
-  spacer.style.height = '20px'; // Adjust the height as needed
-  main.appendChild(spacer);
-
-  // Create the button for adding a contact
-  const addButton = document.createElement('button');
-  addButton.textContent = 'Ajouter un contact';
-  addButton.className = 'btn btn-info';
-  addButton.addEventListener('click', () => {
-    Navigate('/addcontact');
-  });
-
-  // Create and append the title for the contacts table
-  const contactsTitle = document.createElement('h2');
-  contactsTitle.textContent = 'Contacts';
-
-  if (!stageData) {
-    contactsTitle.appendChild(addButton);
-  }
-
-  main.appendChild(contactsTitle);
-
-  main.appendChild(table);
-
-  // Create and append the title for the stage table
-  if (stageData) {
-
-    const stageTitle = document.createElement('h2');
-    stageTitle.textContent = 'Stage';
-    main.appendChild(stageTitle);
-    main.appendChild(stageTable);
-  }
-
+  // Append the table to the parent element
+  parentElement.appendChild(stageTable);
 }
+
 
 export default UserDataPage;
