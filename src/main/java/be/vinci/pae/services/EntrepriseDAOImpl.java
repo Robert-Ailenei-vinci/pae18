@@ -24,8 +24,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
    * Retrieves an enterprise by its identifier from the database.
    *
    * @param id the identifier of the enterprise to retrieve
-   * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   * enterprise with the given identifier exists
+   * @return EntrepriseDTO corresponding to the identifier, or null if no enterprise exists
    */
   @Override
   public EntrepriseDTO getOne(int id) {

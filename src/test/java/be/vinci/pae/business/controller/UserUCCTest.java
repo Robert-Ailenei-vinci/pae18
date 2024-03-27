@@ -158,20 +158,19 @@ public class UserUCCTest {
 
   @Test
   public void testChangeDataFailed() {
-    String email = "testChangeData@vinci.be";
-    String password = "testPassword";
-    String lname = "Test";
-    String fname = "User";
-    String phoneNum = "1234567890";
-    int version = 1;
 
     schoolYear.setId(1);
     schoolYear.setYearFormat("2023-2024");
 
+    String email = "testChangeData@vinci.be";
     user.setEmail(email);
+    String password = "testPassword";
     user.setPassword(password);
+    String lname = "Test";
     user.setLastName(lname);
+    String fname = "User";
     user.setFirstName(fname);
+    String phoneNum = "1234567890";
     user.setPhoneNum(phoneNum);
     user.setSchoolYear(schoolYear);
 
@@ -181,6 +180,7 @@ public class UserUCCTest {
     // Mock the changeUser method to return null
     when(userDataService.changeUser(user)).thenReturn(null);
 
+    int version = 1;
     UserDTO result = userUCC.changeData(email, password, lname, fname, phoneNum, version);
 
     assertNull(result);

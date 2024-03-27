@@ -40,7 +40,7 @@ CREATE TABLE pae.contacts (
     FOREIGN KEY (_user) REFERENCES pae.users(id_user),
     FOREIGN KEY (entreprise) REFERENCES pae.entreprises(id_entreprise),
     FOREIGN KEY (school_year) REFERENCES pae.school_years(id_year),
-    _version INTEGER NOT NULL DEFAULT 0
+    _version INTEGER NOT NULL
 );
 
 CREATE TABLE pae.internship_supervisor (
