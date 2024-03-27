@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import {getRememberMe, setRememberMe} from '../../utils/auths';
-import {clearPage, renderPageTitle} from '../../utils/render';
+import { getRememberMe, setAuthenticatedUser, setRememberMe } from '../../utils/auths';
+import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
 
@@ -17,7 +17,7 @@ function renderRegisterForm() {
   const login = document.createElement('input');
   login.type = 'email';
   login.id = 'login';
-  login.placeholder = 'Email address';
+  login.placeholder = 'Email';
   login.required = true;
   login.className = 'form-control mb-3';
   login.addEventListener('input', onEmailInput); // Add event listener for email input
@@ -224,12 +224,12 @@ async function onRegister(e) {
       alert(errorMessage);
     });
     return;
-  } else {
-    Navigate('/login');
   }
-}
+  const authenticatedUser = await response.json();
+  setAuthenticatedUser(authenticatedUser);
+  Navbar();
+  Navigate('/users/userData');
+  }
 
-Navbar();
-Navigate('/login');
 
 export default RegisterPage;

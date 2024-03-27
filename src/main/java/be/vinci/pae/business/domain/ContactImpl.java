@@ -104,33 +104,36 @@ public class ContactImpl implements Contact {
 
 
   @Override
-  public boolean stopFollowContact() {
+  public boolean stopFollowContact(int version) {
     if (state.equals("initie") || state.equals("rencontre")) {
       this.state = "stop follow";
       this.reasonForRefusal = "";
       this.meetingType = "";
+      this.version = version;
       return true;
     }
     return false;
   }
 
   @Override
-  public boolean refuseContact(String reasonForRefusal) {
+  public boolean refuseContact(String reasonForRefusal, int version) {
     if (state.equals("rencontre")) {
       this.state = "refuse";
       this.reasonForRefusal = reasonForRefusal;
       this.meetingType = "";
+      this.version = version;
       return true;
     }
     return false;
   }
 
   @Override
-  public boolean meetContact(String meetingType) {
+  public boolean meetContact(String meetingType, int version) {
     if (state.equals("initie")) {
       this.state = "rencontre";
       this.meetingType = meetingType;
       this.reasonForRefusal = "";
+      this.version = version;
       return true;
     }
     return false;

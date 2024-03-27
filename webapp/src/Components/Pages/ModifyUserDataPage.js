@@ -120,6 +120,7 @@ async function onSubmit(e) {
   const f_name = document.querySelector('#f_name').value;
   const l_name = document.querySelector('#l_name').value;
   const phone_number = document.querySelector('#phone_number').value;
+  const version = user.version;
 
   if (password !== passwordRepet) {
     alert('The passwords do not match. Please try again.');
@@ -131,6 +132,7 @@ async function onSubmit(e) {
     f_name,
     l_name,
     phone_number,
+    version
   };
 
   // Only include the password in the request body if it's not empty

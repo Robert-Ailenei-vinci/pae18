@@ -4,7 +4,7 @@ import {getAuthenticatedUser} from "../../../utils/auths";
 
 const user = getAuthenticatedUser();
 
-async function meetContact(idContact, lieu) {
+async function meetContact(idContact, lieu,version) {
   console.log("meetcontact");
   const options = {
     method: 'PUT',
@@ -15,6 +15,7 @@ async function meetContact(idContact, lieu) {
     body: JSON.stringify({
       "id_contact": idContact,
       "meetingType": lieu,
+      "version":version,
     }),
   };
 
@@ -35,7 +36,7 @@ async function meetContact(idContact, lieu) {
   }
 }
 
-async function stopFollowContact(idContact) {
+async function stopFollowContact(idContact,version) {
   console.log("stop follow");
 
   const options = {
@@ -46,6 +47,7 @@ async function stopFollowContact(idContact) {
     },
     body: JSON.stringify({
       "id_contact": idContact,
+      "version":version,
     }),
   };
 
@@ -66,7 +68,7 @@ async function stopFollowContact(idContact) {
   }
 }
 
-async function refuseContact(idContact, reason) {
+async function refuseContact(idContact, reason,version) {
   console.log("refude");
 
   const options = {
@@ -77,7 +79,8 @@ async function refuseContact(idContact, reason) {
     },
     body: JSON.stringify({
       "id_contact": idContact,
-      "refusalReason": reason
+      "refusalReason": reason,
+      "version":version,
     }),
   };
 

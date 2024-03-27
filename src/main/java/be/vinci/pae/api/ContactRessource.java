@@ -122,10 +122,11 @@ public class ContactRessource {
     }
     int contactId = json.get("id_contact").asInt();
     String meetingType = json.get("meetingType").asText();
+    int version = json.get("version").asInt();
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int userId = user.getId();
 
-    return myContactUCC.meetContact(contactId, meetingType, userId);
+    return myContactUCC.meetContact(contactId, meetingType, userId, version);
   }
 
   /**
@@ -147,9 +148,10 @@ public class ContactRessource {
     }
     int contactId = json.get("id_contact").asInt();
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int version = json.get("version").asInt();
     int userId = user.getId();
     System.out.println(userId);
-    return myContactUCC.stopFollowContact(contactId, userId);
+    return myContactUCC.stopFollowContact(contactId, userId, version);
   }
 
 
@@ -171,9 +173,10 @@ public class ContactRessource {
     }
     int contactId = json.get("id_contact").asInt();
     String refusalReason = json.get("refusalReason").asText();
+    int version = json.get("version").asInt();
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int userId = user.getId();
 
-    return myContactUCC.refusedContact(contactId, refusalReason, userId);
+    return myContactUCC.refusedContact(contactId, refusalReason, userId, version);
   }
 }

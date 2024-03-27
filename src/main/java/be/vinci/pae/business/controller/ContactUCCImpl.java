@@ -38,7 +38,8 @@ public class ContactUCCImpl implements ContactUCC {
       for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())
       ) {
         Contact tempContact = (Contact) contactDTO;
-        if (!tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
+
+        if (tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
             schoolYear.getId())) {
           LoggerUtil.logError("BizError", new BizException(
               "This user cannot have a contact with this enterprise for this year."));
@@ -69,7 +70,7 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO meetContact(int contactId, String meetingType, int userId) {
+  public ContactDTO meetContact(int contactId, String meetingType, int userId, int version) {
     try {
       dalServices.startTransaction();
 
@@ -81,7 +82,7 @@ public class ContactUCCImpl implements ContactUCC {
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
-      if (!contact.meetContact(meetingType)) {
+      if (!contact.meetContact(meetingType, version)) {
         LoggerUtil.logError("BizError", new BizException(
             "The contact cannot be met"));
         throw new BizException("The contact cannot be met");
@@ -97,7 +98,7 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO stopFollowContact(int contactId, int userId) {
+  public ContactDTO stopFollowContact(int contactId, int userId, int version) {
     try {
       dalServices.startTransaction();
 
@@ -107,7 +108,7 @@ public class ContactUCCImpl implements ContactUCC {
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
-      if (!contact.stopFollowContact()) {
+      if (!contact.stopFollowContact(version)) {
         throw new BizException("The contact cannot be stopped from being followed");
       }
 
@@ -122,7 +123,7 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO refusedContact(int contactId, String refusalReason, int userId) {
+  public ContactDTO refusedContact(int contactId, String refusalReason, int userId, int version) {
     try {
       dalServices.startTransaction();
 
@@ -132,7 +133,7 @@ public class ContactUCCImpl implements ContactUCC {
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
-      if (!contact.refuseContact(refusalReason)) {
+      if (!contact.refuseContact(refusalReason, version)) {
         throw new BizException("The contact cannot be refused");
       }
 

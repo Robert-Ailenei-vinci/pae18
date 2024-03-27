@@ -1,7 +1,5 @@
 package be.vinci.pae.services;
 
-import static be.vinci.pae.services.utils.Utils.paramStatement;
-
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
@@ -157,8 +155,9 @@ public class ContactDAOImpl implements ContactDAO {
     parameters.add(contactDTO.getVersion());
 
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql.toString())) {
-      paramStatement(parameters, stmt);
-
+      for (int i = 0; i < parameters.size(); i++) {
+        stmt.setObject(i + 1, parameters.get(i));
+      }
       if (stmt.executeUpdate() == 0) {
         throw new OptimisticLockException("Contact was updated by another transaction");
       }
@@ -186,4 +185,6 @@ public class ContactDAOImpl implements ContactDAO {
     }
     return null;
   }
+
+
 }

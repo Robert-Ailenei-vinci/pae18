@@ -150,7 +150,7 @@ public class UserUCCImpl implements UserUCC {
    */
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
-      String phoneNum) {
+      String phoneNum, int version) {
     try {
       dalServices.startTransaction();
 
@@ -169,14 +169,11 @@ public class UserUCCImpl implements UserUCC {
       user.setLastName(lname);
       user.setFirstName(fname);
       user.setPhoneNum(phoneNum);
+      user.setVersion(version);
       SchoolYearDTO academicYear = myUserDAO.getOne(email).getSchoolYear();
       user.setSchoolYear(academicYear);
       user.setRegistrationDate(LocalDate.now().toString());
-
       UserDTO updatedUser = myUserDAO.changeUser(user);
-      if (updatedUser == null) {
-        return null;
-      }
 
       dalServices.commitTransaction();
 
@@ -186,6 +183,4 @@ public class UserUCCImpl implements UserUCC {
       throw e;
     }
   }
-
-
 }

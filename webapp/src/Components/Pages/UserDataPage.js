@@ -219,11 +219,11 @@ async function renderPersonnalInfoPage() {
         // Passer les informations supplémentaires à la fonction appropriée
         switch (selectedOption) {
           case 'Rencontré':
-            meetContact(contact.id, additionalInfo);
+            meetContact(contact.id, additionalInfo,contact.version);
             window.location.reload();
             break;
           case 'Suivi stoppé':
-            stopFollowContact(contact.id);
+            stopFollowContact(contact.id,contact.version);
             window.location.reload();
 
             break;
@@ -300,12 +300,12 @@ async function renderPersonnalInfoPage() {
         // Passer les informations supplémentaires à la fonction appropriée
         switch (selectedOption) {
           case 'Suivi stoppé':
-            stopFollowContact(contact.id);
+            stopFollowContact(contact.id,contact.version);
             window.location.reload();
 
             break;
           case 'Refusé':
-            refuseContact(contact.id, additionalInfo);
+            refuseContact(contact.id, additionalInfo,contact.version);
             window.location.reload();
 
             break;

@@ -135,7 +135,7 @@ public class UserUCCTest {
 
     user.setFirstName("Loic");
     user.setLastName("Mark");
-    user.setEmail("mark.loic@vinci.be");
+    user.setEmail("loic.mark@vinci.be");
     user.setPassword("testPassword");
     user.setRole("administratif");
     when(userDataService.addUser(user)).thenReturn(false);
@@ -163,6 +163,7 @@ public class UserUCCTest {
     String lname = "Test";
     String fname = "User";
     String phoneNum = "1234567890";
+    int version = 1;
 
     schoolYear.setId(1);
     schoolYear.setYearFormat("2023-2024");
@@ -180,7 +181,7 @@ public class UserUCCTest {
     // Mock the changeUser method to return null
     when(userDataService.changeUser(user)).thenReturn(null);
 
-    UserDTO result = userUCC.changeData(email, password, lname, fname, phoneNum);
+    UserDTO result = userUCC.changeData(email, password, lname, fname, phoneNum, version);
 
     assertNull(result);
   }
