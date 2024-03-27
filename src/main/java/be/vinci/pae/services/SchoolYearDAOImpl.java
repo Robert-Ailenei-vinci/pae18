@@ -4,6 +4,7 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.SchoolYearNotFoundException;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +27,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
         if (rs.next()) {
+          LoggerUtil.logInfo("schoolyear getone + id : " + id);
           return getSchoolYearMethodFromDB(rs);
         }
       }

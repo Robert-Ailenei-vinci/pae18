@@ -36,11 +36,4 @@ public interface EntrepriseDAO {
    */
   EntrepriseDTO createOne(String tradeName, String designation, String address, String phoneNum,
       String email);
-
-  /**
-   * Retrieves the next available item id.
-   *
-   * @return the next available item id.
-   */
-  int nextItemId();
 }
