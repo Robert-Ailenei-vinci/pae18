@@ -91,17 +91,17 @@ INSERT INTO pae.entreprises VALUES (4,'Sopra Steria', NULL, 'Avenue Arnaud Frait
 
 
 -- Insert into pae.contacts
-INSERT INTO pae.contacts VALUES (4, 'accepté', 11, 2, 1, NULL,'A distance' );
-INSERT INTO pae.contacts VALUES (5, 'accepté', 8, 4, 1, NULL,'Dans l entreprise');
-INSERT INTO pae.contacts VALUES (6, 'refusé', 8, 3, 1, 'N ont pas accepté d avoir un entretien','A distance' );
-INSERT INTO pae.contacts VALUES (7, 'accepté', 9, 1, 1, NULL, 'Dans l entreprise' );
+INSERT INTO pae.contacts VALUES (4, 'accepte', 11, 2, 1, NULL,'A distance' );
+INSERT INTO pae.contacts VALUES (5, 'accepte', 8, 4, 1, NULL,'Dans l entreprise');
+INSERT INTO pae.contacts VALUES (6, 'refuse', 8, 3, 1, 'N ont pas accepté d avoir un entretien','A distance' );
+INSERT INTO pae.contacts VALUES (7, 'accepte', 9, 1, 1, NULL, 'Dans l entreprise' );
 INSERT INTO pae.contacts VALUES (8, 'suspendu', 9, 2, 1, NULL, 'A distance' );
 INSERT INTO pae.contacts VALUES (9, 'suspendu', 9, 4, 1, NULL,NULL);
-INSERT INTO pae.contacts VALUES (10, 'refusé', 9, 3, 1, 'ne prennent qu un seul étudiant','Dans l entreprise');
+INSERT INTO pae.contacts VALUES (10, 'refuse', 9, 3, 1, 'ne prennent qu un seul étudiant','Dans l entreprise');
 INSERT INTO pae.contacts VALUES (11, 'rencontre', 7, 3, 1, NULL,'A distance' );
-INSERT INTO pae.contacts VALUES (12, 'initié', 7, 4, 1, NULL,NULL);
-INSERT INTO pae.contacts VALUES (13, 'initié', 7, 2, 1, NULL,NULL);
-INSERT INTO pae.contacts VALUES (14, 'initié', 10, 4, 1, NULL,NULL);
+INSERT INTO pae.contacts VALUES (12, 'initie', 7, 4, 1, NULL,NULL);
+INSERT INTO pae.contacts VALUES (13, 'initie', 7, 2, 1, NULL,NULL);
+INSERT INTO pae.contacts VALUES (14, 'initie', 10, 4, 1, NULL,NULL);
 
 
 -- Insert into pae.internship_supervisor

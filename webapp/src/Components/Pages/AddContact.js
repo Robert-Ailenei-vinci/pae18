@@ -162,8 +162,6 @@ async function handleSubmit(selectedEntrepriseId) {
     return;
   }
 
-  const newContact = await response.json();
-  alert(`Added contact : ${JSON.stringify(newContact)}`);
   Navbar();
   Navigate('/users/userData');
   }

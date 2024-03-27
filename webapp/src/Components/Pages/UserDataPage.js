@@ -121,6 +121,7 @@ async function renderPersonnalInfoPage() {
     Navigate('/users/changeData');
   });
 
+
   // Creating table for contacts
   const table = document.createElement('table');
   table.className = 'table';
@@ -402,7 +403,7 @@ async function renderPersonnalInfoPage() {
   addButton.textContent = 'Ajouter un contact';
   addButton.className = 'btn btn-info';
   addButton.addEventListener('click', () => {
-    Navigate('/addcontact');
+    Navigate('/addContact');
   });
 
   // Create and append the title for the contacts table
@@ -413,19 +414,25 @@ async function renderPersonnalInfoPage() {
     contactsTitle.appendChild(addButton);
   }
 
-  main.appendChild(contactsTitle);
+  if (user.role === 'etudiant') {
+    main.appendChild(contactsTitle);
 
-  main.appendChild(table);
+    if (contactsData.length === 0) {
+      const noContacts = document.createElement('p');
+      noContacts.textContent = 'Aucun contact trouvé';
+      main.appendChild(noContacts);
+    } else {
+      main.appendChild(table);
+    }
+    // Create and append the title for the stage table
+    if (stageData) {
 
-  // Create and append the title for the stage table
-  if (stageData) {
-
-    const stageTitle = document.createElement('h2');
-    stageTitle.textContent = 'Stage';
-    main.appendChild(stageTitle);
-    main.appendChild(stageTable);
+      const stageTitle = document.createElement('h2');
+      stageTitle.textContent = 'Stage';
+      main.appendChild(stageTitle);
+      main.appendChild(stageTable);
+    }
   }
-
 }
 
 export default UserDataPage;
