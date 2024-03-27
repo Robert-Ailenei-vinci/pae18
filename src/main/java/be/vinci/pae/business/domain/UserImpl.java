@@ -12,10 +12,6 @@ import org.mindrot.jbcrypt.BCrypt;
  * This class represents an implementation of the {@link User} interface.
  */
 public class UserImpl implements User {
-
-  @Inject
-  private UserDAO myUserDAO;
-
   private int id;
   private String email;
   private String password;

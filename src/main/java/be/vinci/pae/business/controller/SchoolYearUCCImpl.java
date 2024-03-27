@@ -3,6 +3,7 @@ package be.vinci.pae.business.controller;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.SchoolYearDAO;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 
 /**
@@ -30,6 +31,7 @@ public class SchoolYearUCCImpl implements SchoolYearUCC {
       return schoolYearDTO;
     } catch (Exception e) {
       // Rollback the transaction in case of an error
+      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }

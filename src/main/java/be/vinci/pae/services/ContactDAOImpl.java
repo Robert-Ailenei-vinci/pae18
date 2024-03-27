@@ -46,6 +46,7 @@ public class ContactDAOImpl implements ContactDAO {
       preparedStatement.setString(7, null);
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
+        LoggerUtil.logInfo("create one contact with id "+ contactId);
         return getOneContactByStageId(contactId);
       }
     } catch (Exception e) {
@@ -66,7 +67,7 @@ public class ContactDAOImpl implements ContactDAO {
           ContactDTO contact;
           contact = getContactMethodFromDB(rs);
           contacts.add(contact);
-          LoggerUtil.logInfo("get all contact");
+          LoggerUtil.logInfo("get all contact for the user with id "+userId);
         }
       }
     } catch (Exception e) {
@@ -83,6 +84,7 @@ public class ContactDAOImpl implements ContactDAO {
       getOneContact.setInt(1, stageId);
       try (ResultSet rs = getOneContact.executeQuery()) {
         if (rs.next()) {
+          LoggerUtil.logInfo("get 1 contact by stage id" + stageId);
           return getContactMethodFromDB(rs);
         }
       }
@@ -109,13 +111,12 @@ public class ContactDAOImpl implements ContactDAO {
     }
     return contact;
   }
-
-  @Override
-  public int nextItemId() {
+  private int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);
         ResultSet rs = stmt.executeQuery()) {
       if (rs.next()) {
+
         return rs.getInt(1) + 1;
       }
     } catch (Exception e) {
@@ -162,7 +163,8 @@ public class ContactDAOImpl implements ContactDAO {
         throw new OptimisticLockException("Contact was updated by another transaction");
       }
 
-      System.out.println("Contact updated");
+      LoggerUtil.logInfo("Contact nr"+contactDTO.getId()+" updated!");
+
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
     }
@@ -177,6 +179,7 @@ public class ContactDAOImpl implements ContactDAO {
       getOneContact.setInt(1, idContact);
       try (ResultSet rs = getOneContact.executeQuery()) {
         if (rs.next()) {
+          LoggerUtil.logInfo("get one contact by id" + idContact);
           return getContactMethodFromDB(rs);
         }
       }

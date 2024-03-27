@@ -7,6 +7,7 @@ import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
+import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -88,6 +89,7 @@ public class EntrepriseResource {
       JsonNode json) throws BadRequestException, AuthorisationException {
     if (!json.hasNonNull("trade_name")
         || !json.hasNonNull("address")) {
+      LoggerUtil.logError("All fields required to create an enterprise.", new BadRequestException(""));
       throw new BadRequestException("All fields required to create an enterprise.");
     }
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int

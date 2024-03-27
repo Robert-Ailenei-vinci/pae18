@@ -4,6 +4,7 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,11 +36,13 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
         if (rs.next()) {
+          LoggerUtil.logInfo("entreprise getone with id " + id);
+
           return getEntrepriseMethodFromDB(rs);
         }
       }
     } catch (Exception e) {
-      throw new EntrepriseNotFoundException("Entreprise not found with id : " + id, e);
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -59,10 +62,11 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         EntrepriseDTO entreprise;
         entreprise = getEntrepriseMethodFromDB(rs);
         entreprises.add(entreprise);
+        LoggerUtil.logInfo("entreprise getAll");
+
       }
     } catch (Exception e) {
-      System.out.println(
-          e.getMessage()); // no possible error, only if not connected to db, but not managed here
+      throw new FatalError("Error processing result set", e);
     }
     return entreprises;
   }
@@ -85,6 +89,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       preparedStatement.setString(6, email);
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
+        LoggerUtil.logInfo("enteprise createOne with id " + entrepriseId);
         return getOne(entrepriseId);
       }
     } catch (Exception e) {
@@ -108,9 +113,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     }
     return entreprise;
   }
-
-  @Override
-  public int nextItemId() {
+  private int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);
         ResultSet rs = stmt.executeQuery()) {

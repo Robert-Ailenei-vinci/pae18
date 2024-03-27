@@ -50,7 +50,6 @@ public class UserResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<UserDTO> getAll() {
-    System.out.println("getAll");
     return myUser.getAll();
   }
 
@@ -72,29 +71,19 @@ public class UserResource {
   public ObjectNode changeData(JsonNode json, @Context ContainerRequestContext requestContext) {
 
     String email = json.get("login").asText();
-    System.out.println(email);
 
     JsonNode passwordNode = json.get("password");
     String password = passwordNode != null ? passwordNode.asText() : null;
-
-    System.out.println(password);
     String lname = json.get("l_name").asText();
-    System.out.println(lname);
     String fname = json.get("f_name").asText();
-    System.out.println(fname);
     String phoneNum = json.get("phone_number").asText();
-    System.out.println(phoneNum);
     int version = json.get("version").asInt();
-    System.out.println(version);
     String token = requestContext.getHeaderString("Authorization");
-    System.out.println(token);
 
     UserDTO publicUser = myUser.changeData(email, password, lname, fname, phoneNum, version);
-
     ObjectNode toReturn = jsonMapper.createObjectNode()
         .put("token", token)
         .put("id", publicUser.getId())
-        .put("password", publicUser.getPassword())
         .put("email", publicUser.getEmail())
         .put("firstName", publicUser.getFirstName())
         .put("lastName", publicUser.getLastName())

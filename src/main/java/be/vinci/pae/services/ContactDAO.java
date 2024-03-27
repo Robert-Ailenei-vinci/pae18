@@ -30,13 +30,6 @@ public interface ContactDAO {
   ContactDTO getOneContactByStageId(int stageId);
 
   /**
-   * Retrieves the next available item id.
-   *
-   * @return the next available item id.
-   */
-  int nextItemId();
-
-  /**
    * Retrieves all contacts associated with the provided user id.
    *
    * @param userId the id of the user associated with the contacts

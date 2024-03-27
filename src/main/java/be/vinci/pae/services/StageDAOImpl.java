@@ -4,6 +4,7 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.StageDTO;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.StageNotFoundException;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ public class StageDAOImpl implements StageDAO {
       preparedStatement.setInt(1, userId);
       try (ResultSet rs = preparedStatement.executeQuery()) {
         if (rs.next()) {
+          LoggerUtil.logInfo("stage getone with id " + userId);
           return getStageMethodFromDB(rs);
         }
       }
