@@ -7,6 +7,7 @@ import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.utils.Config;
+import be.vinci.pae.utils.LoggerUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -64,6 +65,7 @@ public class AuthsResource {
   public ObjectNode login(JsonNode json) {
     // Get and check credentials
     if (!json.hasNonNull("login") || !json.hasNonNull("password")) {
+      LoggerUtil.logError("Login and password required", new BadRequestException(""));
       throw new BadRequestException("Login and password required");
     }
     String login = json.get("login").asText();
@@ -72,6 +74,7 @@ public class AuthsResource {
     // Try to login
     UserDTO publicUser = userUCC.login(login, password);
     if (publicUser == null) {
+      LoggerUtil.logError("Login failed", new AuthorisationException(""));
       throw new AuthorisationException("Login failed");
     }
     String token;
@@ -99,8 +102,8 @@ public class AuthsResource {
       return toReturn;
 
     } catch (Exception e) {
-      System.out.println("Unable to create token");
-      return null;
+      LoggerUtil.logError("Unable to create token", e);
+      throw new AuthorisationException("Unable to create token");
     }
   }
 
@@ -119,6 +122,7 @@ public class AuthsResource {
     UserDTO user = (UserDTO) requestContext.getProperty("user");
 
     if (user == null) {
+      LoggerUtil.logError("User not recognised", new AuthorisationException(""));
       throw new AuthorisationException("User not recognised");
     }
     String token;
@@ -146,8 +150,8 @@ public class AuthsResource {
       return toReturn;
 
     } catch (Exception e) {
-      System.out.println("Unable to create token");
-      return null;
+      LoggerUtil.logError("Unable to create token", e);
+      throw new AuthorisationException("Unable to create token");
     }
   }
 
@@ -164,10 +168,12 @@ public class AuthsResource {
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
-  public boolean register(JsonNode json) {
+  @Produces(MediaType.APPLICATION_JSON)
+  public ObjectNode register(JsonNode json) {
     if (!json.hasNonNull("login") || !json.hasNonNull("password") || !json.hasNonNull("l_name")
         || !json.hasNonNull("f_name") || !json.hasNonNull("phone_number") || !json.hasNonNull(
         "role")) {
+      LoggerUtil.logError("All fields are required", new BadRequestException(""));
       throw new BadRequestException("All fields are required");
     }
 
@@ -185,7 +191,19 @@ public class AuthsResource {
     user.setPhoneNum(phoneNum);
     user.setRole(role);
     user.setVersion(0);
+    if (userUCC.register(user)) {
+      try {
+        ObjectNode toReturn = jsonMapper.createObjectNode()
+            .put("login", email)
+            .put("password", password);
+        LoggerUtil.logInfo(String.valueOf(toReturn));
+        return login(toReturn);
 
-    return userUCC.register(user);
+      } catch (Exception e) {
+        LoggerUtil.logError("Unable to create user", e);
+        throw new AuthorisationException("Unable to create user");
+      }
+    }
+    return null;
   }
 }
