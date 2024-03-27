@@ -118,7 +118,6 @@ public class AuthsResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public ObjectNode getUser(@Context ContainerRequestContext requestContext) {
-    System.out.println("refresh");
     UserDTO user = (UserDTO) requestContext.getProperty("user");
 
     if (user == null) {
@@ -135,7 +134,6 @@ public class AuthsResource {
           .withClaim("user", user.getId())
           .withExpiresAt(Date.from(expirationTime))
           .sign(this.jwtAlgorithm);
-      System.out.println("Token " + token);
       ObjectNode toReturn = jsonMapper.createObjectNode()
           .put("token", token)
           .put("id", user.getId())
