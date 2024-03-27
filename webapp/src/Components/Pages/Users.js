@@ -57,10 +57,11 @@ async function renderAllUsers2() {
 
         const tbody = document.createElement('tbody');
         usersData.forEach(userU => {
+            console.log(userU.schoolYear.yearFormat)
             const row = document.createElement('tr');
-            ['firstName', 'lastName', 'role', 'schoolYearFormat'].forEach(fieldName => {
+            [userU.firstName, userU.lastName, userU.role, userU.schoolYear.yearFormat].forEach(fieldName => {
                 const cell = document.createElement('td');
-                cell.textContent = userU[fieldName];
+                cell.textContent = fieldName;
                 row.appendChild(cell);
             });
             tbody.appendChild(row);
