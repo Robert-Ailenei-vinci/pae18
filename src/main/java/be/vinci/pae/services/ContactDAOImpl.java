@@ -8,7 +8,6 @@ import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.OptimisticLockException;
 import be.vinci.pae.exception.StageNotFoundException;
-import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,7 +36,7 @@ public class ContactDAOImpl implements ContactDAO {
             + "VALUES (?, ?, ?, ?, ?, ?, ?, 0)"
     )) {
       int contactId = nextItemId();
-      preparedStatement.setString(1, "initie");
+      preparedStatement.setString(1, "initié");
       preparedStatement.setInt(2, contactId);
       preparedStatement.setInt(3, user.getId());
       preparedStatement.setInt(4, entreprise.getId());
@@ -66,7 +65,6 @@ public class ContactDAOImpl implements ContactDAO {
           ContactDTO contact;
           contact = getContactMethodFromDB(rs);
           contacts.add(contact);
-          LoggerUtil.logInfo("get all contact");
         }
       }
     } catch (Exception e) {
@@ -135,13 +133,13 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     if (!Objects.equals(contactDTO.getReasonForRefusal(), "") && contactDTO.getState()
-        .equals("refuse")) {
+        .equals("refusé")) {
       sql.append("reason_for_refusal = ?, ");
       parameters.add(contactDTO.getReasonForRefusal());
     }
 
     if (!Objects.equals(contactDTO.getMeetingType(), "") && contactDTO.getState()
-        .equals("rencontre")) {
+        .equals("rencontré")) {
       sql.append("meeting_type = ?, ");
       parameters.add(contactDTO.getMeetingType());
     }
