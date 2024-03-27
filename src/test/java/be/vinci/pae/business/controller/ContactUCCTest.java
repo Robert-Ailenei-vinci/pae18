@@ -42,7 +42,7 @@ class ContactUCCTest {
 
     contact.setUserId(123);
     contact.setId(1);
-    contact.setState("initie");
+    contact.setState("initié");
     contactResult.setUserId(123);
     contactResult.setId(1);
   }
@@ -128,7 +128,7 @@ class ContactUCCTest {
   void meetContactWrongState() {
     String meetingType = "new type of meeting";
     contact.setMeetingType("type of meeting");
-    contact.setState("annule");
+    contact.setState("suspendu");
     contactResult.setMeetingType(meetingType);
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
@@ -156,7 +156,7 @@ class ContactUCCTest {
 
   @Test
   void stopFollowContact() {
-    contactResult.setState("suivis stoppe");
+    contactResult.setState("suspendu");
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
@@ -168,7 +168,7 @@ class ContactUCCTest {
 
   @Test
   void stopFollowContactNullFromDAO() {
-    contactResult.setState("suivis stoppe");
+    contactResult.setState("suspendu");
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(null);
@@ -179,7 +179,7 @@ class ContactUCCTest {
 
   @Test
   void stopFollowContactWrongUser() {
-    contactResult.setState("suivis stoppe");
+    contactResult.setState("suspendu");
     contact.setUserId(456);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
@@ -192,8 +192,8 @@ class ContactUCCTest {
 
   @Test
   void stopFollowContactWrongCheckMeet() {
-    contactResult.setState("suivis stoppe");
-    contact.setState("rencontre");
+    contactResult.setState("suspendu");
+    contact.setState("rencontré");
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
@@ -206,8 +206,8 @@ class ContactUCCTest {
   @Test
   void refusedContact() {
     String refusalReason = "raison de refus";
-    contact.setState("rencontre");
-    contactResult.setState("refuse");
+    contact.setState("rencontré");
+    contactResult.setState("refusé");
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
@@ -221,8 +221,8 @@ class ContactUCCTest {
   @Test
   void refusedContactWrongState() {
     String refusalReason = "raison de refus";
-    contact.setState("refuser");
-    contactResult.setState("refuse");
+    contact.setState("refusé");
+    contactResult.setState("refusé");
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
@@ -236,9 +236,9 @@ class ContactUCCTest {
   @Test
   void refusedContactWrongUser() {
     String refusalReason = "raison de refus";
-    contact.setState("rencontre");
+    contact.setState("rencontré");
     contact.setUserId(456);
-    contactResult.setState("refuse");
+    contactResult.setState("refusé");
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
@@ -252,8 +252,8 @@ class ContactUCCTest {
   @Test
   void refusedContactNullFromDAO() {
     String refusalReason = "raison de refus";
-    contact.setState("rencontre");
-    contactResult.setState("refuse");
+    contact.setState("rencontré");
+    contactResult.setState("refusé");
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
