@@ -135,7 +135,7 @@ public class UserUCCTest {
 
     user.setFirstName("Loic");
     user.setLastName("Mark");
-    user.setEmail("mark.loic@vinci.be");
+    user.setEmail("loic.mark@vinci.be");
     user.setPassword("testPassword");
     user.setRole("administratif");
     when(userDataService.addUser(user)).thenReturn(false);
