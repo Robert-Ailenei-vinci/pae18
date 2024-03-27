@@ -46,7 +46,6 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
       DecodedJWT decodedToken = null;
       try {
         decodedToken = this.jwtVerifier.verify(token);
-        System.out.println("Token verified");
       } catch (Exception e) {
         throw new TokenDecodingException(e);
       }
