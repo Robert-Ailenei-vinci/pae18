@@ -11,6 +11,7 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
+import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -98,9 +99,9 @@ public class ContactRessource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
-    System.out.println("getAllContactsByUserId called");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
+
     return myContactUCC.getAllContactsByUserId(userId);
   }
 
@@ -150,7 +151,7 @@ public class ContactRessource {
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int version = json.get("version").asInt();
     int userId = user.getId();
-    System.out.println(userId);
+
     return myContactUCC.stopFollowContact(contactId, userId, version);
   }
 
@@ -169,6 +170,7 @@ public class ContactRessource {
   @Authorize
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
+      LoggerUtil.logError("contact id and refusal reason required", new BadRequestException(""));
       throw new BadRequestException("contact id and refusal reason required");
     }
     int contactId = json.get("id_contact").asInt();
