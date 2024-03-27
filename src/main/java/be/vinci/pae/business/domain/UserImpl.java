@@ -199,6 +199,7 @@ public class UserImpl implements User {
     }
   }
 
+  @Override
   public void checkmailFromLnameAndFname(String email, String lastName, String firstName) {
     String normalizedLastName = removeAccents(lastName).toLowerCase();
     String normalizedFirstName = removeAccents(firstName).toLowerCase();

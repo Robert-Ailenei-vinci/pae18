@@ -49,9 +49,18 @@ public interface UserUCC {
    * @param password the user password.
    * @param lname    the user last name.
    * @param fname    the user first name.
+   * @param version  the version of the user in the frontend
    * @param phoneNum the user phone number.
    * @return the user
    */
   UserDTO changeData(String email, String password, String lname, String fname, String phoneNum,
       int version);
+
+  /**
+   * hash the password.
+   *
+   * @param password the password to hash.
+   * @return the hashed password.
+   */
+  String hashPassword(String password);
 }

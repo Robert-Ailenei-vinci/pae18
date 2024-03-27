@@ -28,13 +28,7 @@ public class UserUCCImpl implements UserUCC {
   @Inject
   private DomainFactory myDomainFactory;
 
-  /**
-   * login the user.
-   *
-   * @param login    the users' login.
-   * @param password the user password.
-   * @return the user.
-   */
+  @Override
   public UserDTO login(String login, String password) {
     try {
       // Start a new transaction
@@ -59,13 +53,6 @@ public class UserUCCImpl implements UserUCC {
       throw e;
     }
   }
-
-  /**
-   * Register a user.
-   *
-   * @param userDTO the user to register.
-   * @return true if the user is registered, false if not.
-   */
 
   @Override
   public boolean register(UserDTO userDTO) {
@@ -138,16 +125,6 @@ public class UserUCCImpl implements UserUCC {
   }
 
 
-  /**
-   * Changes user data based on the provided parameters.
-   *
-   * @param email    The new email for the user.
-   * @param password The new password for the user.
-   * @param lname    The new last name for the user.
-   * @param fname    The new first name for the user.
-   * @param phoneNum The new phone number for the user.
-   * @return The updated UserDTO object.
-   */
   @Override
   public UserDTO changeData(String email, String password, String lname, String fname,
       String phoneNum, int version) {

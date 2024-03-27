@@ -235,10 +235,10 @@ class ContactUCCTest {
 
   @Test
   void refusedContactWrongUser() {
-    String refusalReason = "raison de refus";
     contact.setState("rencontre");
     contact.setUserId(456);
     contactResult.setState("refuse");
+    String refusalReason = "raison de refus";
     contactResult.setReasonForRefusal(refusalReason);
 
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contactResult);
