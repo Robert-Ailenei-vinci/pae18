@@ -52,13 +52,13 @@ class ContactUCCTest {
     UserDTO userDTO = factory.getUser();
     userDTO.setId(123);
     userDTO.setRole("etudiant");
-    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
-    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
     List<ContactDTO> contactDTOList = new ArrayList<>();
     contactResult.setEntrepriseId(123);
     contactResult.setSchoolYearId(123);
     contactDTOList.add(contactResult);
     when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenReturn(contactDTOList);
+    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
+    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
     when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(contact);
 
     assertEquals(contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO), contact);
@@ -69,12 +69,12 @@ class ContactUCCTest {
     UserDTO userDTO = factory.getUser();
     userDTO.setId(123);
     userDTO.setRole("etudiant");
-    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
-    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
     List<ContactDTO> contactDTOList = new ArrayList<>();
     contactDTOList.add(contactResult);
     contactDTOList.add(contact);
     when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenReturn(contactDTOList);
+    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
+    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
     when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(contact);
 
     assertThrows(BizException.class,
