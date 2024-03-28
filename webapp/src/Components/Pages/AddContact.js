@@ -164,6 +164,7 @@ async function handleSubmit(selectedEntrepriseId) {
 
   Navbar();
   Navigate('/users/userData');
+  window.location.reload();
   }
 
 }
