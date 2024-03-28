@@ -34,24 +34,25 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public List<UserDTO> getAll() {
-    PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
+    try (PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
         "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
             + " u.phone_number, u.psw, u.registration_date,"
             + " u.school_year, s.years_format AS academic_year, u._version "
-            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year");
-    List<UserDTO> users = new ArrayList<>();
-    try (ResultSet rs = getAllUsers.executeQuery()) {
-      while (rs.next()) {
-        UserDTO user;
-        user = getUserMethodFromDB(rs);
-        users.add(user);
-        LoggerUtil.logInfo("get all users");
+            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year")) {
+      List<UserDTO> users = new ArrayList<>();
+      try (ResultSet rs = getAllUsers.executeQuery()) {
+        while (rs.next()) {
+          UserDTO user;
+          user = getUserMethodFromDB(rs);
+          users.add(user);
 
+        }
+        return users;
       }
     } catch (Exception e) {
       LoggerUtil.logError("Error while getting all users", e);
     }
-    return users;
+    return null;
   }
 
   /**

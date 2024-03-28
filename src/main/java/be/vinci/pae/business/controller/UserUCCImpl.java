@@ -4,7 +4,6 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
-import be.vinci.pae.exception.UserNotFoundException;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.UserDAO;
 import be.vinci.pae.utils.LoggerUtil;
@@ -65,14 +64,7 @@ public class UserUCCImpl implements UserUCC {
       user.checkRegisterNotEmpty(userDTO);
 
       // Check if user already exists
-      User existingUser = null;
-
-      try {
-        existingUser = (User) myUserDAO.getOne(userDTO.getEmail());
-      } catch (UserNotFoundException e) {
-        System.out.println(e.getMessage()); //normal to have this,
-        //we continue with the program, idk how to test it tho, it works
-      }
+      User existingUser = (User) myUserDAO.getOne(userDTO.getEmail());
       user.checkExistingUser(existingUser);
       user.checkmailFromLnameAndFname(userDTO.getEmail(), userDTO.getLastName(),
           userDTO.getFirstName());
