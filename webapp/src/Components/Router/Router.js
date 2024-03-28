@@ -46,7 +46,9 @@ function onFrontendLoad() {
     }
 
     const user = getAuthenticatedUser();
+
     if (user) {
+
       console.log("Refresh");
       const options = {
         method: 'GET',
@@ -56,8 +58,10 @@ function onFrontendLoad() {
         },
       };
       try {
+
         const response = await fetch('http://localhost:3000/auths/user',
             options);
+
         if (!response.ok) {
           throw new Error('Failed to fetch user');
         }

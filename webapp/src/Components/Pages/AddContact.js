@@ -169,6 +169,9 @@ async function handleSubmit(selectedEntrepriseId) {
 }
 
 function handleError(response) {
+  if (response.status === 409){
+    alert("Vous avez deja un contact pour cet entreprise");
+  }
   if (response.status === 401) {
     alert("An error occured while fetching with the server.");
   } else {

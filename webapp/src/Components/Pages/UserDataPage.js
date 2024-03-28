@@ -206,7 +206,6 @@ async function renderPersonnalInfoPage() {
 
 // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
       form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Empêcher le comportement par défaut du formulaire
 
         const selectedOption = select.value;
         let additionalInfo = ''; // Informations supplémentaires à envoyer avec la soumission
@@ -220,11 +219,9 @@ async function renderPersonnalInfoPage() {
         switch (selectedOption) {
           case 'Rencontré':
             meetContact(contact.id, additionalInfo,contact.version);
-            window.location.reload();
             break;
           case 'Suivi stoppé':
             stopFollowContact(contact.id,contact.version);
-            window.location.reload();
 
             break;
           default:
@@ -287,7 +284,6 @@ async function renderPersonnalInfoPage() {
 
 // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
       form.addEventListener('submit', (event) => {
-        event.preventDefault(); // Empêcher le comportement par défaut du formulaire
 
         const selectedOption = select.value;
         let additionalInfo = ''; // Informations supplémentaires à envoyer avec la soumission
@@ -301,12 +297,10 @@ async function renderPersonnalInfoPage() {
         switch (selectedOption) {
           case 'Suivi stoppé':
             stopFollowContact(contact.id,contact.version);
-            window.location.reload();
 
             break;
           case 'Refusé':
             refuseContact(contact.id, additionalInfo,contact.version);
-            window.location.reload();
 
             break;
           default:
