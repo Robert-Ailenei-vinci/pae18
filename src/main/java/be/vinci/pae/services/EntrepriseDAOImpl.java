@@ -40,6 +40,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return null;
@@ -64,6 +65,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
 
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return entreprises;
@@ -91,6 +93,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         return getOne(entrepriseId);
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return null;
@@ -107,6 +110,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       entreprise.setIsBlacklisted(rs.getBoolean("blacklisted"));
       entreprise.setTradeName(rs.getString("trade_name"));
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error while getting entreprise from db", e);
     }
     return entreprise;
@@ -120,6 +124,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         return rs.getInt(1) + 1;
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return 1;

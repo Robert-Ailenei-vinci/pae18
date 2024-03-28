@@ -71,6 +71,7 @@ public class ContactRessource {
     EntrepriseDTO entrepriseDTO = myEntrepriseUCC.getOne(entrepriseId);
     SchoolYearDTO schoolYearDTO = mySchoolYearUCC.getOne(schoolYearId);
     if (userDTO == null) {
+      LoggerUtil.logError("User not recognised", new AuthorisationException(""));
       throw new AuthorisationException("User not recognised");
     }
     if (entrepriseDTO == null) {
@@ -84,14 +85,16 @@ public class ContactRessource {
       throw new AuthorisationException("Schoolyear not recognised");
     }
 
-    ContactDTO contactDTO = myContactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO);
-    if (contactDTO == null) {
+    ContactDTO toReturn = myContactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO);
+    if (toReturn == null) {
       LoggerUtil.logError("Contact not created",
           new BadRequestException("Contact not created"));
       throw new BadRequestException("Contact not created");
     }
-
-    return contactDTO;
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Add successful");
+    }
+    return toReturn;
   }
 
   /**
@@ -107,7 +110,11 @@ public class ContactRessource {
   public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
-    return myContactUCC.getAllContactsByUserId(userId);
+    List<ContactDTO> toReturn = myContactUCC.getAllContactsByUserId(userId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAllContactById successful");
+    }
+    return toReturn;
   }
 
   /**
@@ -133,8 +140,11 @@ public class ContactRessource {
     int version = json.get("version").asInt();
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int userId = user.getId();
-
-    return myContactUCC.meetContact(contactId, meetingType, userId, version);
+    ContactDTO toReturn = myContactUCC.meetContact(contactId, meetingType, userId, version);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Meet successful");
+    }
+    return toReturn;
   }
 
   /**
@@ -160,8 +170,11 @@ public class ContactRessource {
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int version = json.get("version").asInt();
     int userId = user.getId();
-    System.out.println(userId);
-    return myContactUCC.stopFollowContact(contactId, userId, version);
+    ContactDTO toReturn = myContactUCC.stopFollowContact(contactId, userId, version);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Stop Follow successful");
+    }
+    return toReturn;
   }
 
 
@@ -188,7 +201,10 @@ public class ContactRessource {
     int version = json.get("version").asInt();
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int userId = user.getId();
-
-    return myContactUCC.refusedContact(contactId, refusalReason, userId, version);
+    ContactDTO toReturn = myContactUCC.refusedContact(contactId, refusalReason, userId, version);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Refused successful");
+    }
+    return toReturn;
   }
 }

@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -13,9 +15,13 @@ import be.vinci.pae.business.domain.SchoolYear;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.SchoolYearDAO;
 import be.vinci.pae.services.UserDAO;
+import be.vinci.pae.utils.LoggerUtil;
 import be.vinci.pae.utils.TestApplicationBinder;
+import java.util.ArrayList;
+import java.util.List;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +43,7 @@ public class UserUCCTest {
   private SchoolYear schoolYear;
   private User expectedUser;
   private UserDTO result;
+  private DALServices dalServices;
 
   /**
    * Sets up the environment for each test case by initializing required services and objects. This
@@ -51,13 +58,15 @@ public class UserUCCTest {
     this.userUCC = locator.getService(UserUCC.class);
     this.factory = locator.getService(DomainFactory.class);
     this.userDataService = locator.getService(UserDAO.class);
-    //utiliser des factory
+    this.dalServices = mock(DALServices.class);
     this.user = (User) factory.getUser();
     this.existingUser = (User) factory.getUser();
     this.schoolYear = (SchoolYear) factory.getSchoolYear();
     this.expectedUser = (User) factory.getUser();
     this.schoolYearDataService = locator.getService(SchoolYearDAO.class);
-
+    doNothing().when(dalServices).startTransaction();
+    doNothing().when(dalServices).commitTransaction();
+    doNothing().when(dalServices).rollbackTransaction();
   }
 
   @Test
@@ -75,14 +84,22 @@ public class UserUCCTest {
   }
 
   @Test
+  public void testGetAll() {
+    List<UserDTO> userDTOList = new ArrayList<>();
+    userDTOList.add(user);
+    // Mock the myUserDAO to throw an exception when getAll is called
+    when(userDataService.getAll()).thenReturn(userDTOList);
+
+    assertEquals(userDTOList, userUCC.getAll());
+  }
+
+  @Test
   public void testGetAllException() {
     // Mock the myUserDAO to throw an exception when getAll is called
-    when(userDataService.getAll()).thenThrow(new RuntimeException());
+    when(userDataService.getAll());
 
     // Act and Assert
-    assertThrows(Exception.class, () -> userUCC.getAll());
-
-
+    assertThrows(RuntimeException.class, () -> userUCC.getAll());
   }
 
   @Test
@@ -157,33 +174,57 @@ public class UserUCCTest {
   }
 
   @Test
-  public void testChangeDataFailed() {
+  public void testChangeData() {
 
     schoolYear.setId(1);
     schoolYear.setYearFormat("2023-2024");
-
     String email = "testChangeData@vinci.be";
-    user.setEmail(email);
-    String password = "testPassword";
-    user.setPassword(password);
     String lname = "Test";
-    user.setLastName(lname);
     String fname = "User";
-    user.setFirstName(fname);
     String phoneNum = "1234567890";
+
+    User initialUser = (User) factory.getUser();
+    initialUser.setEmail(email);
+    initialUser.setPassword("initialPassword");
+    initialUser.setLastName(lname);
+    initialUser.setFirstName(fname);
+    initialUser.setPhoneNum(phoneNum);
+    initialUser.setSchoolYear(schoolYear);
+
+    user.setEmail(email);
+    user.setPassword("");
+    user.setLastName(lname);
+    user.setFirstName(fname);
     user.setPhoneNum(phoneNum);
     user.setSchoolYear(schoolYear);
-
+    LoggerUtil.logInfo(user.toString());
     // Mock the getOne method to return the user
-    when(userDataService.getOne(email)).thenReturn(user);
 
     // Mock the changeUser method to return null
-    when(userDataService.changeUser(user)).thenReturn(null);
+    when(userDataService.changeUser(initialUser)).thenReturn(user);
+    when(userDataService.getOne(email)).thenReturn(user);
 
     int version = 1;
-    UserDTO result = userUCC.changeData(email, password, lname, fname, phoneNum, version);
+    UserDTO result = userUCC.changeData(email, null, lname, fname, phoneNum, version);
 
     assertNull(result);
+  }
+
+  @Test
+  public void testChangeDataWithWexception() {
+    int version = 1;
+    String email = "testChangeData@vinci.be";
+    String password = "testPassword";
+    String lname = "Test";
+    String fname = "User";
+    String phoneNum = "1234567890";
+
+    // Mock the changeUser method to return null
+    when(userDataService.getOne(email)).thenReturn(user);
+    when(userUCC.changeData(email, password, lname, fname, phoneNum, version));
+
+    assertThrows(RuntimeException.class,
+        () -> userUCC.changeData(email, password, lname, fname, phoneNum, version));
   }
 
   @Test
@@ -208,5 +249,18 @@ public class UserUCCTest {
     assertEquals(expectedUser.getPassword(), result.getPassword());
   }
 
+  @Test
+  public void testGetOneWithException() {
+    // Arrange
+    int userId = 1;
+
+    // Mock the getOne method to return the expectedUser
+    when(userUCC.getOne(userId));
+
+    // Assert
+    assertThrows(RuntimeException.class, () -> {
+      userUCC.getOne(userId);
+    });
+  }
 
 }

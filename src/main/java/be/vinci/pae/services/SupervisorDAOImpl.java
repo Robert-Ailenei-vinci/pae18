@@ -33,6 +33,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("No Supervisor found with id : " + id, e);
       throw new SupervisorNotFoundException("Supervisor not found with this id " + id, e);
     }
     return null;
@@ -49,6 +50,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
       supervisor.setEmail(rs.getString("email"));
       supervisor.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
     } catch (Exception e) {
+      LoggerUtil.logError("Error while getting supervisor from database", e);
       throw new FatalError("Error while getting supervisor from database", e);
     }
     return supervisor;

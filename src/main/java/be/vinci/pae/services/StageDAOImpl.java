@@ -39,6 +39,7 @@ public class StageDAOImpl implements StageDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("No Stage found for userId : " + userId, e);
       throw new StageNotFoundException("Pas de stage avec l'id de user suivant : " + userId, e);
     }
     return null;
@@ -58,6 +59,7 @@ public class StageDAOImpl implements StageDAO {
       stage.setSupervisor(supervisorDAO.getOneById(rs.getInt("supervisor")));
       stage.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
     } catch (Exception e) {
+      LoggerUtil.logError("Error fetching stage", e);
       throw new FatalError("Erreur lors de la récupération du stage");
     }
     return stage;

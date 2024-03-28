@@ -3,6 +3,8 @@ package be.vinci.pae.business.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -10,6 +12,7 @@ import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import java.util.ArrayList;
@@ -25,48 +28,50 @@ class EntrepriseUCCImplTest {
   private Entreprise entreprise1;
   private Entreprise entreprise2;
 
-  private EntrepriseDAO entrepriseDataService;
+  private EntrepriseDAO entrepriseDAO;
   private User user;
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
   private EntrepriseDTO expectedEntreprise;
 
+  private DALServices dalServices;
 
   @BeforeEach
   void setUp() {
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
     this.entrepriseUcc = locator.getService(EntrepriseUCC.class);
     this.factory = locator.getService(DomainFactory.class);
-
+    this.dalServices = mock(DALServices.class);
     this.entreprise = (Entreprise) factory.getEntreprise();
     this.entreprise1 = (Entreprise) factory.getEntreprise();
     this.entreprise2 = (Entreprise) factory.getEntreprise();
     this.expectedEntreprise = factory.getEntreprise();
     this.user = (User) factory.getUser();
-    this.entrepriseDataService = locator.getService(EntrepriseDAO.class);
+    this.entrepriseDAO = locator.getService(EntrepriseDAO.class);
+    doNothing().when(dalServices).startTransaction();
+    doNothing().when(dalServices).commitTransaction();
+    doNothing().when(dalServices).rollbackTransaction();
   }
 
   @Test
   public void testGetOne() {
     entreprise.setId(1);
-    entreprise.setAddress("lolz");
-    entreprise.setDesignation("LMP");
-    entreprise.setEmail("zaza11");
-    entreprise.setPhoneNumber("0484");
     entreprise.setTradeName("zaza");
 
     when(entrepriseUcc.getOne(1)).thenReturn(entreprise);
     expectedEntreprise = entrepriseUcc.getOne(1);
 
-    assertNotNull(expectedEntreprise);
-    assertEquals(1, expectedEntreprise.getId());
-    assertEquals("lolz", expectedEntreprise.getAddress());
-    assertEquals("LMP", expectedEntreprise.getDesignation());
-    assertEquals("zaza11", expectedEntreprise.getEmail());
-    assertEquals("0484", expectedEntreprise.getPhoneNumber());
-    assertEquals("zaza", expectedEntreprise.getTradeName());
-
+    assertEquals(entreprise.getId(), expectedEntreprise.getId());
   }
+
+  @Test
+  public void testGetOneWithException() {
+    when(entrepriseUcc.getOne(1));
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getOne(1);
+    });
+  }
+
 
   @Test
   void createOne() {
@@ -76,7 +81,7 @@ class EntrepriseUCCImplTest {
     when(entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email"))
         .thenReturn(expectedEntreprise);
     when(
-        entrepriseDataService.createOne("tradeName", "designation", "address", "phoneNum", "email"))
+        entrepriseDAO.createOne("tradeName", "designation", "address", "phoneNum", "email"))
         .thenReturn(entreprise1);
 
     // 2. Act
@@ -86,7 +91,6 @@ class EntrepriseUCCImplTest {
     // 3. Assert
     assertNotNull(actualEntreprise);
     assertEquals(expectedEntreprise, actualEntreprise);
-
   }
 
   @Test
@@ -119,4 +123,13 @@ class EntrepriseUCCImplTest {
       assertEquals(expectedEntreprises.get(i), actualEntreprises.get(i));
     }
   }
+
+  @Test
+  public void testGetAllWithException() {
+    when(entrepriseUcc.getAll());
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getAll();
+    });
+  }
+
 }

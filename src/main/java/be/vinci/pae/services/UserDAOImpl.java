@@ -34,24 +34,25 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public List<UserDTO> getAll() {
-    PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
+    try (PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
         "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
             + " u.phone_number, u.psw, u.registration_date,"
             + " u.school_year, s.years_format AS academic_year, u._version "
-            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year");
-    List<UserDTO> users = new ArrayList<>();
-    try (ResultSet rs = getAllUsers.executeQuery()) {
-      while (rs.next()) {
-        UserDTO user;
-        user = getUserMethodFromDB(rs);
-        users.add(user);
-        LoggerUtil.logInfo("get all users");
+            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year")) {
+      List<UserDTO> users = new ArrayList<>();
+      try (ResultSet rs = getAllUsers.executeQuery()) {
+        while (rs.next()) {
+          UserDTO user;
+          user = getUserMethodFromDB(rs);
+          users.add(user);
 
+        }
+        return users;
       }
     } catch (Exception e) {
       LoggerUtil.logError("Error while getting all users", e);
     }
-    return users;
+    return null;
   }
 
   /**
@@ -79,6 +80,7 @@ public class UserDAOImpl implements UserDAO {
       }
       return null;
     } catch (Exception e) {
+      LoggerUtil.logError("User not found with emai : " + email, e);
       throw new UserNotFoundException("User not found with email " + email, e);
     }
   }
@@ -107,6 +109,7 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("User not found with id : " + id, e);
       throw new UserNotFoundException("User not found with id " + id, e);
     }
     return null;
@@ -129,6 +132,7 @@ public class UserDAOImpl implements UserDAO {
         idYear = rs.getInt("id_year");
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
 
@@ -138,6 +142,7 @@ public class UserDAOImpl implements UserDAO {
         stmt.setString(1, buildYear());
         stmt.executeUpdate();
       } catch (Exception e) {
+        LoggerUtil.logError("Error processing result set", e);
         throw new FatalError("Error processing result set", e);
       }
       idYear = getLastInsertedYearId();
@@ -151,6 +156,7 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
 
@@ -172,6 +178,7 @@ public class UserDAOImpl implements UserDAO {
 
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
   }
@@ -192,6 +199,7 @@ public class UserDAOImpl implements UserDAO {
       user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
       user.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return user;
@@ -247,11 +255,13 @@ public class UserDAOImpl implements UserDAO {
         stmt.setObject(i + 1, parameters.get(i));
       }
       if (stmt.executeUpdate() == 0) {
+        LoggerUtil.logError("Error processing result set", new OptimisticLockException(""));
         throw new OptimisticLockException("User was updated by another transaction");
       }
 
       LoggerUtil.logInfo("user with id " + user.getId() + " was changed");
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return getOne(user.getEmail());
@@ -283,6 +293,7 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return 0; // return 0 if no id was found
