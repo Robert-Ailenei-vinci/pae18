@@ -1,6 +1,7 @@
 package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -35,5 +36,13 @@ class StageUCCTest {
 
     when(stageDAO.getOneStageByUserId(userId)).thenReturn(stage);
     assertEquals(stageUCC.getOneStageByUserId(userId), stage);
+  }
+
+  @Test
+  void getOneStageByUserIdWithException() {
+    int userId = 123;
+
+    when(stageUCC.getOneStageByUserId(userId));
+    assertThrows(RuntimeException.class, () -> stageUCC.getOneStageByUserId(userId));
   }
 }

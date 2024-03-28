@@ -2,6 +2,7 @@ package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -39,5 +40,12 @@ class SchoolYearUCCImplTest {
     assertNotNull(result);
     assertEquals(1, result.getId());
     assertEquals("2021-2022", result.getYearFormat());
+  }
+
+  @Test
+  void getOneWithException() {
+
+    when(schoolYearUCC.getOne(1));
+    assertThrows(RuntimeException.class, () -> schoolYearUCC.getOne(1));
   }
 }
