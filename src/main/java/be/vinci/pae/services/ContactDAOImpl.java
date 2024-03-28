@@ -50,6 +50,7 @@ public class ContactDAOImpl implements ContactDAO {
         return getOneContactByStageId(contactId);
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return null;
@@ -71,6 +72,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return contacts;
@@ -89,6 +91,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Stage not found with id : " + stageId, e);
       throw new StageNotFoundException("Stage not found with id :" + stageId, e);
     }
     return null;
@@ -107,6 +110,7 @@ public class ContactDAOImpl implements ContactDAO {
       contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
       contact.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return contact;
@@ -121,6 +125,7 @@ public class ContactDAOImpl implements ContactDAO {
         return rs.getInt(1) + 1;
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return 1;
@@ -161,12 +166,15 @@ public class ContactDAOImpl implements ContactDAO {
         stmt.setObject(i + 1, parameters.get(i));
       }
       if (stmt.executeUpdate() == 0) {
+        LoggerUtil.logError("Contact was updated by another transaction",
+            new OptimisticLockException(""));
         throw new OptimisticLockException("Contact was updated by another transaction");
       }
 
       LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
 
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return getOneContactByStageId(contactDTO.getId());
@@ -185,6 +193,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return null;

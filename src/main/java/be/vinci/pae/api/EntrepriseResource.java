@@ -49,7 +49,11 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<EntrepriseDTO> getAll() {
-    return myEntreprise.getAll();
+    List<EntrepriseDTO> toReturn = myEntreprise.getAll();
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAll successful");
+    }
+    return toReturn;
   }
 
   /**
@@ -65,7 +69,11 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public EntrepriseDTO getOne(int entrepriseId) {
-    return myEntreprise.getOne(entrepriseId);
+    EntrepriseDTO toReturn = myEntreprise.getOne(entrepriseId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetOne successful");
+    }
+    return toReturn;
   }
 
   /**
@@ -104,15 +112,17 @@ public class EntrepriseResource {
     // Try to get user, enterprise, and school year
     UserDTO userDTO = myUserUCC.getOne(userId);
     if (userDTO == null) {
+      LoggerUtil.logError("User not recognised", new AuthorisationException(""));
       throw new AuthorisationException("User not recognised");
     }
 
     EntrepriseDTO entrepriseDTO = myEntreprise.createOne(userDTO, tradeName, designation, address,
         phoneNum, email);
     if (entrepriseDTO == null) {
+      LoggerUtil.logError("Contact not created", new BadRequestException(""));
       throw new BadRequestException("Contact not created");
     }
-
+    LoggerUtil.logInfo("addOne successful");
     return entrepriseDTO;
   }
 }

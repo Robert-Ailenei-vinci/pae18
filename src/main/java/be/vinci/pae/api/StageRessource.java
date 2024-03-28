@@ -4,6 +4,7 @@ import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.StageUCC;
 import be.vinci.pae.business.domain.StageDTO;
 import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
@@ -19,6 +20,7 @@ import jakarta.ws.rs.core.MediaType;
 @Singleton
 @Path("/stages")
 public class StageRessource {
+
   @Inject
   private StageUCC stageUCC;
 
@@ -35,6 +37,10 @@ public class StageRessource {
   public StageDTO getOneStageByUserId(@Context ContainerRequestContext requestContext) {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
-    return stageUCC.getOneStageByUserId(userId);
+    StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetStageByUserId successful");
+    }
+    return toReturn;
   }
 }

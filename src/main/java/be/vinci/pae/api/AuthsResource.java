@@ -99,6 +99,9 @@ public class AuthsResource {
           .put("registrationDate", publicUser.getRegistrationDate())
           .put("schoolYear", publicUser.getSchoolYear().getYearFormat())
           .put("version", publicUser.getVersion());
+      if (toReturn != null) {
+        LoggerUtil.logInfo("Login successful");
+      }
       return toReturn;
 
     } catch (Exception e) {
@@ -147,6 +150,9 @@ public class AuthsResource {
           .put("registrationDate", user.getRegistrationDate())
           .put("schoolYear", user.getSchoolYear().getYearFormat())
           .put("version", user.getVersion());
+      if (toReturn != null) {
+        LoggerUtil.logInfo("GetUser successful");
+      }
       return toReturn;
 
     } catch (Exception e) {
@@ -196,7 +202,9 @@ public class AuthsResource {
         ObjectNode toReturn = jsonMapper.createObjectNode()
             .put("login", email)
             .put("password", password);
-        LoggerUtil.logInfo(String.valueOf(toReturn));
+        if (toReturn != null) {
+          LoggerUtil.logInfo("Register successful");
+        }
         return login(toReturn);
 
       } catch (Exception e) {

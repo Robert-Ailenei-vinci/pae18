@@ -4,6 +4,7 @@ import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
+import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -50,7 +51,11 @@ public class UserResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<UserDTO> getAll() {
-    return myUser.getAll();
+    List<UserDTO> toReturn = myUser.getAll();
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Get All successful");
+    }
+    return toReturn;
   }
 
   /**
@@ -92,7 +97,9 @@ public class UserResource {
         .put("role", publicUser.getRole())
         .put("schoolYear", publicUser.getSchoolYear().getYearFormat())
         .put("version", publicUser.getVersion());
-
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Change Data successful");
+    }
     return toReturn;
   }
 }
