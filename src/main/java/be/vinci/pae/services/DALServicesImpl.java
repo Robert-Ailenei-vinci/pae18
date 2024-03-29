@@ -17,15 +17,18 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   private static final String DATA_BASEURL;
   private static final String DATABASE_USER;
   private static final String DATABASE_PASSWORD;
+  private static final int MAX_CONNECTION;
 
   static {
     DATA_BASEURL = Config.getProperty("DatabaseFilePath");
     DATABASE_USER = Config.getProperty("DataBaseUser");
     DATABASE_PASSWORD = Config.getProperty("DataBasePswd");
+    MAX_CONNECTION = Config.getIntProperty("MaxConnections");
   }
 
   private final ThreadLocal<Connection> threadLocalConnection;
   private final BasicDataSource dataSource;
+
 
   /**
    * Constructs a new DALServicesImpl instance. Initializes the ThreadLocal for connection and sets
@@ -35,6 +38,7 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   public DALServicesImpl() {
     threadLocalConnection = new ThreadLocal<>();
     dataSource = new BasicDataSource();
+    dataSource.setMaxTotal(MAX_CONNECTION);
     dataSource.setUrl(DATA_BASEURL);
     dataSource.setUsername(DATABASE_USER);
     dataSource.setPassword(DATABASE_PASSWORD);
