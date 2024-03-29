@@ -1,6 +1,7 @@
 /* eslint-disable spaced-comment */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+import changeInternshipSubject from '../Pages/utils/ChangeInternship';
 import {
   getRememberMe,
   setAuthenticatedUser,
@@ -9,6 +10,7 @@ import {
 } from '../../utils/auths';
 import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
+
 import Navigate from '../Router/Navigate';
 import {
   meetContact,
@@ -371,19 +373,51 @@ async function renderPersonnalInfoPage() {
   ['tradeName', 'designation', 'email', 'phoneNumber'].forEach(key => {
     const td = document.createElement('td');
     if (stageData) {
-      td.textContent = stageData.contact.entreprise[key] || '-';
+      td.textContent = stageData.contact.entreprise[key] || 'Pas de sujet de stage défini';
     }
     tr.appendChild(td);
   });
 
-['internshipProject'].forEach(key => {
-  const td = document.createElement('td');
-  if (stageData) {
-  td.textContent = stageData.internshipProject || '-';
-  }
- 
-  tr.appendChild(td);
-});
+  ['internshipProject'].forEach(key => {
+    const td = document.createElement('td');
+    if (stageData) {
+      td.textContent = stageData.internshipProject || '-';
+    }
+    var btn = document.createElement("button");
+  
+    // Set the text of the button
+    btn.innerHTML = "Modifier sujet de stage";
+    btn.type = 'button'; // Change this to 'button' to prevent form submission on click
+  
+    // Add an event listener to the button
+    btn.addEventListener('click', function() {
+      // Create an input field and a new button
+      var input = document.createElement("input");
+      var confirmBtn = document.createElement("button");
+  
+      // Set the properties of the input field and the new button
+      input.type = 'text';
+      input.value = stageData.internshipProject || 'Pas de sujet de stage defini'; // Set the value of the input field to the text content of the td element
+      confirmBtn.innerHTML = 'Confirmer';
+      confirmBtn.style.backgroundColor = 'green';
+      confirmBtn.type = 'button'; // Change this to 'button' to prevent form submission on click
+  
+      // Add an event listener to the confirm button
+      confirmBtn.addEventListener('click', (event) => {
+        // Call the changeInternshipSubject method
+        changeInternshipSubject(stageData.contact.id, user.id, input.value);
+      });
+  
+      // Replace the text content of the td element with the input field and the new button
+      td.textContent = '';
+      td.appendChild(input);
+      td.appendChild(confirmBtn);
+    });
+  
+    // Append the button to the td element
+    td.appendChild(btn);
+    tr.appendChild(td);
+  });
   
 // Field for meetingType
   const td = document.createElement('td');
