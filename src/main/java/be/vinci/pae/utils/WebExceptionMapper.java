@@ -27,65 +27,77 @@ public class WebExceptionMapper implements ExceptionMapper<Throwable> {
   public Response toResponse(Throwable exception) {
     exception.printStackTrace();
     if (exception instanceof WebApplicationException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(((WebApplicationException) exception).getResponse().getStatus())
           .entity(exception.getMessage())
           .build();
     }
 
     if (exception instanceof SQLException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 3);
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
           .entity(exception.getMessage())
           .build();
     }
 
     if (exception instanceof UserNotFoundException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Response.Status.NOT_FOUND)
           .entity(exception.getMessage())
           .build();
     }
     if (exception instanceof OptimisticLockException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Response.Status.CONFLICT)
           .entity(exception.getMessage())
           .build();
     }
     if (exception instanceof FatalError) {
+      LoggerUtil.logError(exception.getMessage(), exception, 3);
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
           .entity(exception.getMessage())
           .build();
     }
     if (exception instanceof StageNotFoundException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Response.Status.NOT_FOUND)
           .entity(exception.getMessage())
           .build();
     }
 
     if (exception instanceof SupervisorNotFoundException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Response.Status.NOT_FOUND)
           .entity(exception.getMessage())
           .build();
     }
     if (exception instanceof SchoolYearNotFoundException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Response.Status.NOT_FOUND)
           .entity(exception.getMessage())
           .build();
     }
 
     if (exception instanceof EntrepriseNotFoundException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Response.Status.NOT_FOUND)
           .entity(exception.getMessage())
           .build();
     }
     if (exception instanceof BizException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Response.Status.CONFLICT)
           .entity(exception.getMessage())
           .build();
     }
     if (exception instanceof AuthorisationException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Status.UNAUTHORIZED)
           .entity(exception.getMessage())
           .build();
     }
     if (exception instanceof BadRequestException) {
+      LoggerUtil.logError(exception.getMessage(), exception, 10000);
       return Response.status(Response.Status.BAD_REQUEST)
           .entity(exception.getMessage())
           .build();
