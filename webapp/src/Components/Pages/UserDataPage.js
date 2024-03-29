@@ -70,6 +70,7 @@ async function fetchStageData(user) {
     }
 
     const stageData = await responseStage.json();
+   
     return stageData;
   } catch (error) {
     return undefined;
@@ -97,6 +98,7 @@ async function renderPersonnalInfoPage() {
 
   console.log('Contacts : ', contactsData);
   console.log(user);
+  console.log('StageData: ', stageData)
   const items = [
     {label: 'Nom de famille: ', value: user.lastName},
     {label: 'Prénom: ', value: user.firstName},
@@ -353,7 +355,7 @@ async function renderPersonnalInfoPage() {
   const stageTbody = document.createElement('tbody');
   const stageTrHead = document.createElement('tr');
 
-  ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone',
+  ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone', 'Sujet de stage',
     'Type de rencontre'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
@@ -374,6 +376,15 @@ async function renderPersonnalInfoPage() {
     tr.appendChild(td);
   });
 
+['internshipProject'].forEach(key => {
+  const td = document.createElement('td');
+  if (stageData) {
+  td.textContent = stageData.internshipProject || '-';
+  }
+ 
+  tr.appendChild(td);
+});
+  
 // Field for meetingType
   const td = document.createElement('td');
   if (stageData) {
