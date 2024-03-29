@@ -53,4 +53,12 @@ public interface ContactDAO {
    * @return the contact.
    */
   ContactDTO getOneContactById(int idContact);
+
+  /**
+   * Retrieves all contacts associated with the provided enterprise id.
+   *
+   * @param enterpriseId the id of the enterprise associated with the contacts
+   * @return the list of contacts associated with the enterprise
+   */
+  List<ContactDTO> getAllContactsByEnterpriseId(int enterpriseId);
 }

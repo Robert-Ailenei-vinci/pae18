@@ -161,6 +161,11 @@ public class UserImpl implements User {
   }
 
   @Override
+  public boolean checkIsTeacher() {
+    return Objects.equals(this.getRole(), "professeur");
+  }
+
+  @Override
   public void checkExistingUser(UserDTO userDTO) {
     if (userDTO != null) {
       LoggerUtil.logError("Utilisateur existe déjà", new BizException(""));

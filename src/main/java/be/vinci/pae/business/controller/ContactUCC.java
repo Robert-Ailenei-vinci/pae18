@@ -60,4 +60,13 @@ public interface ContactUCC {
    * @return the contact.
    */
   ContactDTO refusedContact(int contactId, String refusalReason, int userId, int version);
+
+  /**
+   * Retrieves all contacts associated with the provided enterprise id.
+   *
+   * @param enterpriseId The id of the enterprise associated with the contacts.
+   * @param userId       The id of the user who made the request.
+   * @return The list of contacts associated with the enterprise.
+   */
+  List<ContactDTO> getAllContactsByEnterpriseId(int enterpriseId, int userId);
 }

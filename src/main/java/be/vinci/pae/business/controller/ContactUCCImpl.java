@@ -159,4 +159,19 @@ public class ContactUCCImpl implements ContactUCC {
       throw e;
     }
   }
+
+  @Override
+  public List<ContactDTO> getAllContactsByEnterpriseId(int enterpriseId, int userId) {
+    try {
+      dalServices.startTransaction();
+      // TODO: Check if isTeacher
+      List<ContactDTO> contacts = myContactDAO.getAllContactsByEnterpriseId(enterpriseId);
+      dalServices.commitTransaction();
+      return contacts;
+    } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
 }

@@ -30,6 +30,13 @@ public interface User extends UserDTO {
   boolean checkIsStudent();
 
   /**
+   * Check if teacher.
+   *
+   * @return true or false.
+   */
+  boolean checkIsTeacher();
+
+  /**
    * Check if user exists.
    *
    * @param existingUserDTO the existing user.

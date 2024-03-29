@@ -20,6 +20,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
@@ -113,6 +114,27 @@ public class ContactRessource {
     List<ContactDTO> toReturn = myContactUCC.getAllContactsByUserId(userId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAllContactById successful");
+    }
+    return toReturn;
+  }
+
+  /**
+   * Retrieves all  contacts associated with one enterprise.
+   *
+   * @param enterpriseId the enterprise id
+   * @return the list of contacts associated with the enterprise
+   */
+  @GET
+  @Path("allContactsByEnterpriseId/{id}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public List<ContactDTO> getAllContactsByEnterpriseId(
+      @Context ContainerRequestContext requestContext, @PathParam("id") int enterpriseId) {
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
+    List<ContactDTO> toReturn = myContactUCC.getAllContactsByEnterpriseId(enterpriseId, userId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAllContactByEnterpriseId successful");
     }
     return toReturn;
   }

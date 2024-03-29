@@ -199,5 +199,27 @@ public class ContactDAOImpl implements ContactDAO {
     return null;
   }
 
+  @Override
+  public List<ContactDTO> getAllContactsByEnterpriseId(int enterpriseId) {
+    PreparedStatement getAllContacts = dalBackServices.getPreparedStatement(
+        "SELECT * FROM pae.contacts WHERE entreprise = ?");
+    List<ContactDTO> contacts = new ArrayList<>();
+    try {
+      getAllContacts.setInt(1, enterpriseId);
+      try (ResultSet rs = getAllContacts.executeQuery()) {
+        while (rs.next()) {
+          ContactDTO contact;
+          contact = getContactMethodFromDB(rs);
+          contacts.add(contact);
+          LoggerUtil.logInfo("get all contact for the enterprise with id " + enterpriseId);
+        }
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
+      throw new FatalError("Error processing result set", e);
+    }
+    return contacts;
+  }
+
 
 }
