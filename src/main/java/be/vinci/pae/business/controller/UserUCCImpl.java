@@ -74,6 +74,7 @@ public class UserUCCImpl implements UserUCC {
       user.setPassword(hashPassword(userDTO.getPassword()));
       userDTO.setPassword(user.getPassword());
       userDTO.setRegistrationDate(LocalDate.now().toString());
+      userDTO.setVersion(0);
 
       boolean result = myUserDAO.addUser(userDTO);
 

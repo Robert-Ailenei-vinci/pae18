@@ -3,6 +3,7 @@ package be.vinci.pae.business.domain;
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.utils.LoggerUtil;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.text.Normalizer;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
@@ -10,19 +11,33 @@ import org.mindrot.jbcrypt.BCrypt;
 /**
  * This class represents an implementation of the {@link User} interface.
  */
-public class UserImpl implements User {
+public class  UserImpl implements User {
 
   private int id;
+  @JsonProperty("email")
   private String email;
+
+  @JsonProperty("password")
   private String password;
-  private String role;
-  private String lastName;
+
+  @JsonProperty("firstName")
   private String firstName;
+
+  @JsonProperty("lastName")
+  private String lastName;
+
+  @JsonProperty("phoneNum")
   private String phoneNum;
+
+  @JsonProperty("role")
+  private String role;
   private String registrationDate;
   private int version;
   private int schoolYearId;
   private SchoolYearDTO schoolYear;
+
+  public UserImpl() {
+  }
 
   private String removeAccents(String input) {
     return Normalizer

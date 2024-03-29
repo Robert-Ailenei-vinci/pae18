@@ -164,7 +164,7 @@ public class AuthsResource {
   /**
    * Register a new user.
    *
-   * @param json JSON object containing the user's registration information. It must contain keys
+   * @param jsonUserDTO JSON object containing the user's registration information. It must contain keys
    *             "login", "password", "lname", "fname" and "phoneNum".
    * @return true if the user is registered, false if not.
    * @throws WebApplicationException If any of the required fields are missing, a
@@ -175,33 +175,31 @@ public class AuthsResource {
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public ObjectNode register(JsonNode json) {
-    if (!json.hasNonNull("login") || !json.hasNonNull("password") || !json.hasNonNull("l_name")
-        || !json.hasNonNull("f_name") || !json.hasNonNull("phone_number") || !json.hasNonNull(
-        "role")) {
-      LoggerUtil.logError("All fields are required", new BadRequestException(""));
+  public ObjectNode register(UserDTO jsonUserDTO) {
+    System.out.println(jsonUserDTO);
+    if (
+        jsonUserDTO.getEmail().isEmpty() ||
+            jsonUserDTO.getEmail().equals("") ||
+            jsonUserDTO.getPassword().isEmpty() ||
+            jsonUserDTO.getPassword().equals("") ||
+            jsonUserDTO.getFirstName().isEmpty() ||
+            jsonUserDTO.getFirstName().equals("") ||
+            jsonUserDTO.getLastName().isEmpty() ||
+            jsonUserDTO.getLastName().equals("") ||
+            jsonUserDTO.getPhoneNum().isEmpty() ||
+            jsonUserDTO.getPhoneNum().equals("") ||
+            jsonUserDTO.getRole().isEmpty() ||
+            jsonUserDTO.getRole().equals("")
+    ){
       throw new BadRequestException("All fields are required");
     }
 
-    String email = json.has("login") ? json.get("login").asText() : "";
-    String password = json.has("password") ? json.get("password").asText() : "";
-    String lname = json.has("l_name") ? json.get("l_name").asText() : "";
-    String fname = json.has("f_name") ? json.get("f_name").asText() : "";
-    String phoneNum = json.has("phone_number") ? json.get("phone_number").asText() : "";
-    String role = json.has("role") ? json.get("role").asText() : "";
-    UserDTO user = myDomainFactory.getUser();
-    user.setEmail(email);
-    user.setPassword(password);
-    user.setFirstName(fname);
-    user.setLastName(lname);
-    user.setPhoneNum(phoneNum);
-    user.setRole(role);
-    user.setVersion(0);
-    if (userUCC.register(user)) {
+
+    if (userUCC.register(jsonUserDTO)) {
       try {
         ObjectNode toReturn = jsonMapper.createObjectNode()
-            .put("login", email)
-            .put("password", password);
+            .put("email", jsonUserDTO.getEmail())
+            .put("password", jsonUserDTO.getPassword());
         if (toReturn != null) {
           LoggerUtil.logInfo("Register successful");
         }
