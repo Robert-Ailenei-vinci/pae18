@@ -25,6 +25,7 @@ import java.util.List;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -69,6 +70,7 @@ public class UserUCCTest {
     doNothing().when(dalServices).rollbackTransaction();
   }
 
+  @DisplayName("Test login")
   @Test
   public void testLogin() {
     user.setEmail("testLogin@student.vinci.be");
@@ -83,6 +85,7 @@ public class UserUCCTest {
     assertEquals(user.getPassword(), result.getPassword());
   }
 
+  @DisplayName("Test getAll")
   @Test
   public void testGetAll() {
     List<UserDTO> userDTOList = new ArrayList<>();
@@ -93,6 +96,7 @@ public class UserUCCTest {
     assertEquals(userDTOList, userUCC.getAll());
   }
 
+  @DisplayName("Test getAll with transaction error")
   @Test
   public void testGetAllException() {
     // Mock the myUserDAO to throw an exception when getAll is called
@@ -102,6 +106,7 @@ public class UserUCCTest {
     assertThrows(RuntimeException.class, () -> userUCC.getAll());
   }
 
+  @DisplayName("Test login with null as given user")
   @Test
   public void testLoginUserNull() {
     when(userDataService.getOne("testLogin@student.vinci.be")).thenReturn(null);
@@ -109,6 +114,7 @@ public class UserUCCTest {
     assertNull(userUCC.login("testLogin@student.vinci.be", "testPassword"));
   }
 
+  @DisplayName("Test login with wrong password given")
   @Test
   public void testLoginPasswordCheckFails() {
     user.setEmail("testLogin@student.vinci.be");
@@ -119,6 +125,7 @@ public class UserUCCTest {
     assertNull(userUCC.login("testLogin@student.vinci.be", "testPassword"));
   }
 
+  @DisplayName("Test register")
   @Test
   public void testRegisterSuccess() {
     user.setFirstName("Loic");
@@ -133,6 +140,7 @@ public class UserUCCTest {
     assertThrows(RuntimeException.class, () -> userDataService.getOne(user.getEmail()));
   }
 
+  @DisplayName("Test login with transaction error")
   @Test
   public void testLoginException() {
     // Arrange
@@ -146,7 +154,8 @@ public class UserUCCTest {
     assertThrows(Exception.class, () -> userUCC.login(login, password));
   }
 
-
+  // TODO: check if this test is useful
+  @DisplayName("Test register ")
   @Test
   public void testRegisterFails() {
 
@@ -160,6 +169,7 @@ public class UserUCCTest {
     assertFalse(userUCC.register(user));
   }
 
+  @DisplayName("Test register with already existing user")
   @Test
   public void testRegisterUserAlreadyExists() {
     existingUser.setEmail("existing@test.com");
@@ -173,6 +183,7 @@ public class UserUCCTest {
     assertThrows(BizException.class, () -> userUCC.register(user));
   }
 
+  @DisplayName("Test changeData")
   @Test
   public void testChangeData() {
 
@@ -210,6 +221,7 @@ public class UserUCCTest {
     assertNull(result);
   }
 
+  @DisplayName("Test changeData with transaction error")
   @Test
   public void testChangeDataWithWexception() {
     int version = 1;
@@ -227,6 +239,7 @@ public class UserUCCTest {
         () -> userUCC.changeData(email, password, lname, fname, phoneNum, version));
   }
 
+  @DisplayName("Test getOne")
   @Test
   public void testGetOne() {
     // Arrange
@@ -249,6 +262,7 @@ public class UserUCCTest {
     assertEquals(expectedUser.getPassword(), result.getPassword());
   }
 
+  @DisplayName("Test getOne with transaction error")
   @Test
   public void testGetOneWithException() {
     // Arrange

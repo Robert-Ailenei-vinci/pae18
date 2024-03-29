@@ -21,6 +21,7 @@ import java.util.List;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ContactUCCTest {
@@ -47,6 +48,7 @@ class ContactUCCTest {
     contactResult.setId(1);
   }
 
+  @DisplayName("Test createOne")
   @Test
   void createOne() {
     UserDTO userDTO = factory.getUser();
@@ -64,6 +66,7 @@ class ContactUCCTest {
     assertEquals(contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO), contact);
   }
 
+  @DisplayName("Test createOne with already existing contact with same entreprise & same year")
   @Test
   void createOneWrongUniqueCondition() {
     UserDTO userDTO = factory.getUser();
@@ -81,6 +84,8 @@ class ContactUCCTest {
         () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
   }
 
+  // TODO : check if test is useful
+  @DisplayName("test createOne with null given from DAO")
   @Test
   void createOneNullFromDAO() {
     UserDTO userDTO = factory.getUser();
@@ -94,6 +99,7 @@ class ContactUCCTest {
     assertNull(contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
   }
 
+  @DisplayName("Test createOne given wrong role")
   @Test
   void createOneWrongUserRole() {
     UserDTO userDTO = factory.getUser();
@@ -107,7 +113,7 @@ class ContactUCCTest {
         () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
   }
 
-
+  @DisplayName("Test getAllContactsByUserId")
   @Test
   void getAllContactsByUserId() {
     List<ContactDTO> contactList = new ArrayList<>();
@@ -118,6 +124,7 @@ class ContactUCCTest {
     assertEquals(contactUCC.getAllContactsByUserId(contact.getUserId()), contactList);
   }
 
+  @DisplayName("Test getAllContactsByUserId with transaction exception")
   @Test
   void getAllContactsByUserIdWithException() {
     when(contactDAO.getAllContactsByUserId(contact.getUserId()));
@@ -126,6 +133,7 @@ class ContactUCCTest {
         () -> contactUCC.getAllContactsByUserId(contact.getUserId()));
   }
 
+  @DisplayName("Test meetContact")
   @Test
   void meetContact() {
     String meetingType = "new type of meeting";
@@ -140,6 +148,8 @@ class ContactUCCTest {
         contactResult);
   }
 
+  // TODO : check if test is usefull
+  @DisplayName("Test meetContact with null from DAO")
   @Test
   void meetContactNullFromDAO() {
     String meetingType = "new type of meeting";
@@ -153,6 +163,7 @@ class ContactUCCTest {
         contact.getVersion()));
   }
 
+  @DisplayName("Test meetContact given wrong state")
   @Test
   void meetContactWrongState() {
     String meetingType = "new type of meeting";
@@ -168,6 +179,7 @@ class ContactUCCTest {
             contact.getVersion()));
   }
 
+  @DisplayName("Test meetContact given wrong user")
   @Test
   void meetContactWrongUser() {
     String meetingType = "new type of meeting";
@@ -183,6 +195,7 @@ class ContactUCCTest {
             contact.getVersion()));
   }
 
+  @DisplayName("Test stopFollowContact")
   @Test
   void stopFollowContact() {
     contactResult.setState("suivis stoppe");
@@ -195,6 +208,8 @@ class ContactUCCTest {
         contactResult);
   }
 
+  // TODO : check if test is usefull
+  @DisplayName("Test stopFollowContact with null from DAO")
   @Test
   void stopFollowContactNullFromDAO() {
     contactResult.setState("suivis stoppe");
@@ -206,6 +221,7 @@ class ContactUCCTest {
         contact.getVersion()));
   }
 
+  @DisplayName("Test stopFollowContact given wrong user")
   @Test
   void stopFollowContactWrongUser() {
     contactResult.setState("suivis stoppe");
@@ -219,6 +235,7 @@ class ContactUCCTest {
             contact.getVersion()));
   }
 
+  @DisplayName("Test stopFollowContact given wrong state")
   @Test
   void stopFollowContactWrongCheckMeet() {
     contactResult.setState("suivis stoppe");
@@ -232,6 +249,7 @@ class ContactUCCTest {
             contact.getVersion()));
   }
 
+  @DisplayName("Test refusedContact")
   @Test
   void refusedContact() {
     String refusalReason = "raison de refus";
@@ -247,6 +265,7 @@ class ContactUCCTest {
         contactResult);
   }
 
+  @DisplayName("Test refusedContact given wrong state")
   @Test
   void refusedContactWrongState() {
     String refusalReason = "raison de refus";
@@ -262,6 +281,7 @@ class ContactUCCTest {
             contact.getVersion()));
   }
 
+  @DisplayName("Test refusedContact given wrong user")
   @Test
   void refusedContactWrongUser() {
     contact.setState("rencontre");
@@ -278,6 +298,8 @@ class ContactUCCTest {
             contact.getVersion()));
   }
 
+  // TODO : check if test is usefull
+  @DisplayName("Test refusedContact given null from DAO")
   @Test
   void refusedContactNullFromDAO() {
     String refusalReason = "raison de refus";

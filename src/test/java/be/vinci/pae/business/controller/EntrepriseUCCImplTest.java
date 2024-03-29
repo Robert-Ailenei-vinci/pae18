@@ -20,6 +20,7 @@ import java.util.List;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class EntrepriseUCCImplTest {
@@ -53,6 +54,7 @@ class EntrepriseUCCImplTest {
     doNothing().when(dalServices).rollbackTransaction();
   }
 
+  @DisplayName("Test getOne")
   @Test
   public void testGetOne() {
     entreprise.setId(1);
@@ -64,6 +66,7 @@ class EntrepriseUCCImplTest {
     assertEquals(entreprise.getId(), expectedEntreprise.getId());
   }
 
+  @DisplayName("Test getOne with transaction error")
   @Test
   public void testGetOneWithException() {
     when(entrepriseUcc.getOne(1));
@@ -72,7 +75,7 @@ class EntrepriseUCCImplTest {
     });
   }
 
-
+  @DisplayName("Test createOne")
   @Test
   void createOne() {
     // 1. Arrange
@@ -93,6 +96,7 @@ class EntrepriseUCCImplTest {
     assertEquals(expectedEntreprise, actualEntreprise);
   }
 
+  @DisplayName("Test createOne with wrong user role")
   @Test
   void createOneWithException() {
     // 1. Arrange
@@ -104,6 +108,7 @@ class EntrepriseUCCImplTest {
     });
   }
 
+  @DisplayName("Test getAll")
   @Test
   void getAll() {
     // 1. Arrange
@@ -124,6 +129,7 @@ class EntrepriseUCCImplTest {
     }
   }
 
+  @DisplayName("Test getAll with transaction error")
   @Test
   public void testGetAllWithException() {
     when(entrepriseUcc.getAll());
