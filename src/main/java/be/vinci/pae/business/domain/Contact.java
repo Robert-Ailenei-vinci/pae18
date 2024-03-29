@@ -45,4 +45,6 @@ public interface Contact extends ContactDTO {
   boolean checkUniqueUserEnterpriseSchoolYear(
       int wantedEntrepriseId,
       int wantedSchoolYearId);
+
+  boolean accepteContact(int version);
 }

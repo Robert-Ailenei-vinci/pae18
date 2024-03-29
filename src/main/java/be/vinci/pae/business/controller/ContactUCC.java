@@ -60,4 +60,14 @@ public interface ContactUCC {
    * @return the contact.
    */
   ContactDTO refusedContact(int contactId, String refusalReason, int userId, int version);
+
+  /**
+   * update th contact to accepted.
+   *
+   * @param contactId the id of the contact to set.
+   * @param userId    the id of user.
+   * @param version   the version of the contact in the frontend.
+   * @return the contact.
+   */
+  ContactDTO accepteContact(int contactId, int userId, int version);
 }

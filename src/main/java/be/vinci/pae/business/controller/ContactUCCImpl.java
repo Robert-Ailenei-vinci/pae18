@@ -159,4 +159,36 @@ public class ContactUCCImpl implements ContactUCC {
       throw e;
     }
   }
+
+  @Override
+  public ContactDTO accepteContact(int contactId, int userId, int version){
+    try {
+      dalServices.startTransaction();
+
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+
+      if (contact.getUserId() != userId) {
+        LoggerUtil.logError("BizError", new BizException(
+            "The contact does not belong to the user"));
+        throw new BizExceptionNotFound("The contact does not belong to the user");
+      }
+
+      if (!contact.accepteContact(version)) {
+        LoggerUtil.logError("BizError", new BizException(
+            "The contact cannot be refused"));
+        throw new BizException("The contact cannot be refused");
+      }
+
+      ContactDTO contactToReturn = myContactDAO.updateContact(contact);
+
+      dalServices.commitTransaction();
+      return contactToReturn;
+
+
+    }catch (Exception e){
+     LoggerUtil.logError("RollBack",e);
+     dalServices.rollbackTransaction();
+     throw e;
+    }
+  }
 }
