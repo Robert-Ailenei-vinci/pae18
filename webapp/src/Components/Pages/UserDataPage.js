@@ -113,15 +113,6 @@ async function renderPersonnalInfoPage() {
     ul.appendChild(li);
   });
 
-  const seeEntreprises = document.createElement('input');
-  seeEntreprises.value = 'Voir toutes les entreprises';
-  seeEntreprises.type = 'button';
-  seeEntreprises.className = 'btn btn-info';
-  seeEntreprises.style.margin = '5px';
-  seeEntreprises.addEventListener('click', () => {
-    Navigate('/allentreprises')
-  });
-
   const changeData = document.createElement('input');
   changeData.value = 'Changer mes données personelles';
   changeData.type = 'button';
@@ -396,7 +387,6 @@ async function renderPersonnalInfoPage() {
   stageTable.appendChild(stageTbody);
 
   main.appendChild(ul);
-  main.appendChild(seeEntreprises);
   main.appendChild(changeData);
 
   // Create and append a div to act as a spacer
