@@ -1,0 +1,17 @@
+### Login the default user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "login": "Caroline.line@student.vinci.be",
+  "password": "mdpuser.1"
+}
+
+> {%
+  client.global.set("user", response.body.token);
+%}
+
+### Get all entreprises
+GET {{baseUrl}}/entreprise/getAll
+Content-Type: application/json
+Authorization: {{user}}
