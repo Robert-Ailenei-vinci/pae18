@@ -7,6 +7,7 @@ import modifyUserDataPage from '../Pages/ModifyUserDataPage';
 import AddContactPage from '../Pages/AddContact';
 import UsersPage from '../Pages/Users';
 import AddEnterprisePage from '../Pages/AddEnterprise';
+import AddSupervisorPage from '../Pages/AddSupervisor';
 
 const routes = {
   '/': HomePage,
@@ -18,6 +19,7 @@ const routes = {
   '/logout': Logout,
   '/addContact': AddContactPage,
   '/addEnterprise': AddEnterprisePage,
+  '/addSupervisor': AddSupervisorPage,
 };
 
 export default routes;
