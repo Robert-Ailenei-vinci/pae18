@@ -7,7 +7,7 @@ import {
   setRememberMe,
   getAuthenticatedUser
 } from '../../utils/auths';
-import {clearPage, renderPageTitle} from '../../utils/render';
+import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
 import {
@@ -33,18 +33,18 @@ async function fetchContactsData(user) {
 
   try {
     const responseContacts = await fetch(
-        `http://localhost:3000/contacts/allContactsByUserId`, options);
+      `http://localhost:3000/contacts/allContactsByUserId`, options);
 
     if (!responseContacts.ok) {
       throw new Error(
-          `Failed to fetch contacts: ${responseContacts.statusText}`);
+        `Failed to fetch contacts: ${responseContacts.statusText}`);
     }
 
     const contactsData = await responseContacts.json();
     return contactsData;
   } catch (error) {
     throw new Error(
-        `An error occurred while fetching contacts: ${error.message}`);
+      `An error occurred while fetching contacts: ${error.message}`);
   }
 }
 
@@ -59,7 +59,7 @@ async function fetchStageData(user) {
 
   try {
     const responseStage = await fetch(
-        `http://localhost:3000/stages/stageByUserId`, options);
+      `http://localhost:3000/stages/stageByUserId`, options);
 
     if (responseStage == null) {
       return null;
@@ -98,13 +98,13 @@ async function renderPersonnalInfoPage() {
   console.log('Contacts : ', contactsData);
   console.log(user);
   const items = [
-    {label: 'Nom de famille: ', value: user.lastName},
-    {label: 'Prénom: ', value: user.firstName},
-    {label: 'Email: ', value: user.email},
-    {label: 'Numéro de Téléphone: ', value: user.phoneNum},
-    {label: 'Date d\'enregistrement: ', value: user.registrationDate},
-    {label: 'Année académique: ', value: user.schoolYear},
-    {label: 'Role: ', value: user.role}
+    { label: 'Nom de famille: ', value: user.lastName },
+    { label: 'Prénom: ', value: user.firstName },
+    { label: 'Email: ', value: user.email },
+    { label: 'Numéro de Téléphone: ', value: user.phoneNum },
+    { label: 'Date d\'enregistrement: ', value: user.registrationDate },
+    { label: 'Année académique: ', value: user.schoolYear },
+    { label: 'Role: ', value: user.role }
   ];
 
   items.forEach(item => {
@@ -113,11 +113,20 @@ async function renderPersonnalInfoPage() {
     ul.appendChild(li);
   });
 
-  const submit = document.createElement('input');
-  submit.value = 'Changer mes données personelles';
-  submit.type = 'button';
-  submit.className = 'btn btn-info';
-  submit.addEventListener('click', () => {
+  const seeEntreprises = document.createElement('input');
+  seeEntreprises.value = 'Voir toutes les entreprises';
+  seeEntreprises.type = 'button';
+  seeEntreprises.className = 'btn btn-info';
+  seeEntreprises.style.margin = '5px';
+  seeEntreprises.addEventListener('click', () => {
+    Navigate('/allentreprises')
+  });
+
+  const changeData = document.createElement('input');
+  changeData.value = 'Changer mes données personelles';
+  changeData.type = 'button';
+  changeData.className = 'btn btn-info';
+  changeData.addEventListener('click', () => {
     Navigate('/users/changeData');
   });
 
@@ -131,10 +140,10 @@ async function renderPersonnalInfoPage() {
 
   ['Entreprise', 'Appelation', 'Adresse', 'Mail', 'N°Telephone', 'Etat', ' ',
     'Lieu/Type de rencontre', 'Raison de refus'].forEach(text => {
-    const th = document.createElement('th');
-    th.textContent = text;
-    trHead.appendChild(th);
-  });
+      const th = document.createElement('th');
+      th.textContent = text;
+      trHead.appendChild(th);
+    });
 
   thead.appendChild(trHead);
   table.appendChild(thead);
@@ -144,11 +153,11 @@ async function renderPersonnalInfoPage() {
 
     // Fields from entreprise object
     ['tradeName', 'designation', 'address', 'email', 'phoneNumber'].forEach(
-        key => {
-          const td = document.createElement('td');
-          td.textContent = contact.entreprise[key] || '-';
-          tr.appendChild(td);
-        });
+      key => {
+        const td = document.createElement('td');
+        td.textContent = contact.entreprise[key] || '-';
+        tr.appendChild(td);
+      });
 
     // État
     const tdState = document.createElement('td');
@@ -165,6 +174,8 @@ async function renderPersonnalInfoPage() {
     button.setAttribute('data-bs-target', '#collapseExample_' + contact.id);
     button.setAttribute('aria-expanded', 'false');
     button.setAttribute('aria-controls', 'collapseExample_' + contact.id);
+
+
 
     const divForm = document.createElement('div');
     divForm.className = 'collapse';
@@ -183,13 +194,13 @@ async function renderPersonnalInfoPage() {
       });
       form.appendChild(select);
 
-// Création de la zone de texte pour la raison ou le lieu
+      // Création de la zone de texte pour la raison ou le lieu
       const extraInput = document.createElement('input');
       extraInput.type = 'text';
       extraInput.placeholder = 'Lieu';
       extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
 
-// Gérer l'affichage de la zone de texte en fonction de la sélection
+      // Gérer l'affichage de la zone de texte en fonction de la sélection
       select.addEventListener('change', () => {
         if (select.value === 'Rencontré') {
           extraInput.style.display = 'block'; // Afficher la zone de texte si "Rencontré" ou "Refusé" est sélectionné
@@ -198,13 +209,13 @@ async function renderPersonnalInfoPage() {
         }
       });
 
-// Création du bouton de soumission
+      // Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
       submitButton.className = 'btn btn-primary';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
-// Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
+      // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
       form.addEventListener('submit', (event) => {
 
         const selectedOption = select.value;
@@ -218,10 +229,10 @@ async function renderPersonnalInfoPage() {
         // Passer les informations supplémentaires à la fonction appropriée
         switch (selectedOption) {
           case 'Rencontré':
-            meetContact(contact.id, additionalInfo,contact.version);
+            meetContact(contact.id, additionalInfo, contact.version);
             break;
           case 'Suivi stoppé':
-            stopFollowContact(contact.id,contact.version);
+            stopFollowContact(contact.id, contact.version);
 
             break;
           default:
@@ -231,16 +242,16 @@ async function renderPersonnalInfoPage() {
 
         // Fermer le collapsible après la soumission
         const collapse = document.getElementById(
-            'collapseExample_' + contact.id);
+          'collapseExample_' + contact.id);
         const bsCollapse = new bootstrap.Collapse(collapse);
         bsCollapse.hide();
       });
 
-// Ajout des éléments au formulaire
+      // Ajout des éléments au formulaire
       form.appendChild(extraInput);
       form.appendChild(submitButton);
 
-// Ajout du formulaire au divForm
+      // Ajout du formulaire au divForm
       divForm.appendChild(form);
 
       tdButton.appendChild(button);
@@ -261,13 +272,13 @@ async function renderPersonnalInfoPage() {
       });
       form.appendChild(select);
 
-// Création de la zone de texte pour la raison ou le lieu
+      // Création de la zone de texte pour la raison ou le lieu
       const extraInput = document.createElement('input');
       extraInput.type = 'text';
       extraInput.placeholder = 'Raison';
       extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
 
-// Gérer l'affichage de la zone de texte en fonction de la sélection
+      // Gérer l'affichage de la zone de texte en fonction de la sélection
       select.addEventListener('change', () => {
         if (select.value === 'Refusé') {
           extraInput.style.display = 'block'; // Afficher la zone de texte si "Rencontré" ou "Refusé" est sélectionné
@@ -276,13 +287,13 @@ async function renderPersonnalInfoPage() {
         }
       });
 
-// Création du bouton de soumission
+      // Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
       submitButton.className = 'btn btn-primary';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
-// Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
+      // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
       form.addEventListener('submit', (event) => {
 
         const selectedOption = select.value;
@@ -296,11 +307,11 @@ async function renderPersonnalInfoPage() {
         // Passer les informations supplémentaires à la fonction appropriée
         switch (selectedOption) {
           case 'Suivi stoppé':
-            stopFollowContact(contact.id,contact.version);
+            stopFollowContact(contact.id, contact.version);
 
             break;
           case 'Refusé':
-            refuseContact(contact.id, additionalInfo,contact.version);
+            refuseContact(contact.id, additionalInfo, contact.version);
 
             break;
           default:
@@ -310,16 +321,16 @@ async function renderPersonnalInfoPage() {
 
         // Fermer le collapsible après la soumission
         const collapse = document.getElementById(
-            'collapseExample_' + contact.id);
+          'collapseExample_' + contact.id);
         const bsCollapse = new bootstrap.Collapse(collapse);
         bsCollapse.hide();
       });
 
-// Ajout des éléments au formulaire
+      // Ajout des éléments au formulaire
       form.appendChild(extraInput);
       form.appendChild(submitButton);
 
-// Ajout du formulaire au divForm
+      // Ajout du formulaire au divForm
       divForm.appendChild(form);
 
       tdButton.appendChild(button);
@@ -327,7 +338,7 @@ async function renderPersonnalInfoPage() {
       tr.appendChild(tdButton);
     }
 
-    if (contact.state === "stop follow" || contact.state === "refuse"){
+    if (contact.state === "stop follow" || contact.state === "refuse") {
       const tdVide = document.createElement('td');
       tdVide.textContent = '-';
       tr.appendChild(tdVide);
@@ -355,17 +366,17 @@ async function renderPersonnalInfoPage() {
 
   ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone',
     'Type de rencontre'].forEach(text => {
-    const th = document.createElement('th');
-    th.textContent = text;
-    stageTrHead.appendChild(th);
-  });
+      const th = document.createElement('th');
+      th.textContent = text;
+      stageTrHead.appendChild(th);
+    });
 
   stageThead.appendChild(stageTrHead);
   stageTable.appendChild(stageThead);
 
   const tr = document.createElement('tr');
 
-// Fields from entreprise object
+  // Fields from entreprise object
   ['tradeName', 'designation', 'email', 'phoneNumber'].forEach(key => {
     const td = document.createElement('td');
     if (stageData) {
@@ -374,7 +385,7 @@ async function renderPersonnalInfoPage() {
     tr.appendChild(td);
   });
 
-// Field for meetingType
+  // Field for meetingType
   const td = document.createElement('td');
   if (stageData) {
     td.textContent = stageData.contact.meetingType || '-';
@@ -385,7 +396,8 @@ async function renderPersonnalInfoPage() {
   stageTable.appendChild(stageTbody);
 
   main.appendChild(ul);
-  main.appendChild(submit);
+  main.appendChild(seeEntreprises);
+  main.appendChild(changeData);
 
   // Create and append a div to act as a spacer
   const spacer = document.createElement('div');
