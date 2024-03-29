@@ -405,7 +405,7 @@ async function renderPersonnalInfoPage() {
       // Add an event listener to the confirm button
       confirmBtn.addEventListener('click', (event) => {
         // Call the changeInternshipSubject method
-        changeInternshipSubject(stageData.contact.id, user.id, input.value);
+        changeInternshipSubject(stageData.contact.id,input.value);
       });
   
       // Replace the text content of the td element with the input field and the new button

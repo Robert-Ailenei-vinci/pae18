@@ -2,8 +2,10 @@ import {getAuthenticatedUser} from "../../../utils/auths";
 
 const user = getAuthenticatedUser();
 
-export default async function changeInternshipSubject(idContact, idUser, text) {
+export default async function changeInternshipSubject(idContact, text) {
     console.log("changeInternshipSubject");
+    console.log('text :',text)
+    console.log('idcontact :', idContact)
     const options = {
       method: 'PUT',
       headers: {
@@ -12,14 +14,14 @@ export default async function changeInternshipSubject(idContact, idUser, text) {
       },
       body: JSON.stringify({
         "id_contact": idContact,
-        "id_user": idUser,
         "internship_project": text
       }),
+      
     };
   
     try {
       const responseContacts = await fetch(
-          `http://localhost:3000/stages/modify`, options);
+          `http://localhost:3000/stages/modifyStage`, options);
   
       if (!responseContacts.ok) {
         throw new Error(

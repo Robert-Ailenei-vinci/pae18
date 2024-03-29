@@ -8,6 +8,7 @@ import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
@@ -37,6 +38,21 @@ public class StageRessource {
   public StageDTO getOneStageByUserId(@Context ContainerRequestContext requestContext) {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
+    StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetStageByUserId successful");
+    }
+    return toReturn;
+  }
+
+  @PUT
+  @Path("modifyStage")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public StageDTO modifyStage(@Context ContainerRequestContext requestContext) {
+    UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
+    int userId = authentifiedUser.getId();
+    
     StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetStageByUserId successful");

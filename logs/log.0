@@ -785,3 +785,278 @@ be.vinci.pae.exception.BadRequestException: Role doit etre etudiant
 [2024-03-29 11:27:01] [INFO] entreprise getone with id 2 
 [2024-03-29 11:27:01] [INFO] schoolyear getone + id : 1 
 [2024-03-29 11:27:01] [INFO] GetStageByUserId successful 
+[2024-03-29 11:31:56] [INFO] get one user by id with id: 11 
+[2024-03-29 11:31:56] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:31:56] [INFO] GetUser successful 
+[2024-03-29 11:31:56] [INFO] get one user by id with id: 11 
+[2024-03-29 11:31:56] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:31:56] [INFO] entreprise getone with id 2 
+[2024-03-29 11:31:56] [INFO] get all contact for the user with id 11 
+[2024-03-29 11:31:56] [INFO] GetAllContactById successful 
+[2024-03-29 11:31:56] [INFO] get one user by id with id: 11 
+[2024-03-29 11:31:56] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:31:56] [INFO] stage getone with id 11 
+[2024-03-29 11:31:56] [INFO] get 1 contact by stage id4 
+[2024-03-29 11:31:56] [INFO] entreprise getone with id 2 
+[2024-03-29 11:31:56] [INFO] get one user by id with id: 11 
+[2024-03-29 11:31:56] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:31:56] [INFO] Supervisor getone with id 3 
+[2024-03-29 11:31:56] [INFO] entreprise getone with id 2 
+[2024-03-29 11:31:57] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:31:57] [INFO] GetStageByUserId successful 
+[2024-03-29 11:33:10] [INFO] get one user by id with id: 11 
+[2024-03-29 11:33:10] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:33:10] [INFO] GetUser successful 
+[2024-03-29 11:33:10] [INFO] get one user by id with id: 11 
+[2024-03-29 11:33:10] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:33:10] [INFO] entreprise getone with id 2 
+[2024-03-29 11:33:10] [INFO] get all contact for the user with id 11 
+[2024-03-29 11:33:10] [INFO] GetAllContactById successful 
+[2024-03-29 11:33:10] [INFO] get one user by id with id: 11 
+[2024-03-29 11:33:11] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:33:11] [INFO] stage getone with id 11 
+[2024-03-29 11:33:11] [INFO] get 1 contact by stage id4 
+[2024-03-29 11:33:11] [INFO] entreprise getone with id 2 
+[2024-03-29 11:33:11] [INFO] get one user by id with id: 11 
+[2024-03-29 11:33:11] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:33:11] [INFO] Supervisor getone with id 3 
+[2024-03-29 11:33:11] [INFO] entreprise getone with id 2 
+[2024-03-29 11:33:11] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:33:11] [INFO] GetStageByUserId successful 
+[2024-03-29 11:52:46] [INFO] get one user by id with id: 11 
+[2024-03-29 11:52:46] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:52:46] [INFO] stage getone with id 11 
+[2024-03-29 11:52:46] [INFO] get 1 contact by stage id4 
+[2024-03-29 11:52:47] [INFO] entreprise getone with id 2 
+[2024-03-29 11:52:47] [INFO] get one user by id with id: 11 
+[2024-03-29 11:52:47] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:52:47] [INFO] Supervisor getone with id 3 
+[2024-03-29 11:52:47] [INFO] entreprise getone with id 2 
+[2024-03-29 11:52:47] [INFO] schoolyear getone + id : 1 
+[2024-03-29 11:52:47] [INFO] GetStageByUserId successful 
+[2024-03-29 12:28:26] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:26] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:26] [INFO] GetUser successful 
+[2024-03-29 12:28:26] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:26] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:26] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:26] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:28:26] [INFO] GetAllContactById successful 
+[2024-03-29 12:28:26] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:26] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:26] [INFO] stage getone with id 11 
+[2024-03-29 12:28:26] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:28:26] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:26] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:26] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:26] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:28:26] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:26] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:26] [INFO] GetStageByUserId successful 
+[2024-03-29 12:28:32] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:32] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:32] [INFO] stage getone with id 11 
+[2024-03-29 12:28:32] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:28:32] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:32] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:32] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:32] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:28:32] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:32] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:32] [INFO] GetStageByUserId successful 
+[2024-03-29 12:28:56] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:56] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:56] [INFO] GetUser successful 
+[2024-03-29 12:28:56] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:56] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:56] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:56] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:28:56] [INFO] GetAllContactById successful 
+[2024-03-29 12:28:56] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:56] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:56] [INFO] stage getone with id 11 
+[2024-03-29 12:28:56] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:28:56] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:56] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:56] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:56] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:28:56] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:57] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:57] [INFO] GetStageByUserId successful 
+[2024-03-29 12:28:59] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:59] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:59] [INFO] GetUser successful 
+[2024-03-29 12:28:59] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:59] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:59] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:59] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:28:59] [INFO] GetAllContactById successful 
+[2024-03-29 12:28:59] [INFO] get one user by id with id: 11 
+[2024-03-29 12:28:59] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:28:59] [INFO] stage getone with id 11 
+[2024-03-29 12:28:59] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:28:59] [INFO] entreprise getone with id 2 
+[2024-03-29 12:28:59] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:00] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:00] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:29:00] [INFO] entreprise getone with id 2 
+[2024-03-29 12:29:00] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:00] [INFO] GetStageByUserId successful 
+[2024-03-29 12:29:05] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:05] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:05] [INFO] stage getone with id 11 
+[2024-03-29 12:29:05] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:29:05] [INFO] entreprise getone with id 2 
+[2024-03-29 12:29:05] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:05] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:05] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:29:05] [INFO] entreprise getone with id 2 
+[2024-03-29 12:29:05] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:05] [INFO] GetStageByUserId successful 
+[2024-03-29 12:29:47] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:47] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:47] [INFO] GetUser successful 
+[2024-03-29 12:29:47] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:47] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:47] [INFO] entreprise getone with id 2 
+[2024-03-29 12:29:47] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:29:47] [INFO] GetAllContactById successful 
+[2024-03-29 12:29:47] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:47] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:47] [INFO] stage getone with id 11 
+[2024-03-29 12:29:47] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:29:47] [INFO] entreprise getone with id 2 
+[2024-03-29 12:29:47] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:47] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:47] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:29:47] [INFO] entreprise getone with id 2 
+[2024-03-29 12:29:47] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:47] [INFO] GetStageByUserId successful 
+[2024-03-29 12:29:57] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:57] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:57] [INFO] stage getone with id 11 
+[2024-03-29 12:29:57] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:29:57] [INFO] entreprise getone with id 2 
+[2024-03-29 12:29:57] [INFO] get one user by id with id: 11 
+[2024-03-29 12:29:57] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:57] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:29:57] [INFO] entreprise getone with id 2 
+[2024-03-29 12:29:57] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:29:57] [INFO] GetStageByUserId successful 
+[2024-03-29 12:30:24] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:24] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:24] [INFO] GetUser successful 
+[2024-03-29 12:30:24] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:24] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:24] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:24] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:30:24] [INFO] GetAllContactById successful 
+[2024-03-29 12:30:24] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:24] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:24] [INFO] stage getone with id 11 
+[2024-03-29 12:30:24] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:30:24] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:24] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:24] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:24] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:30:24] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:24] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:24] [INFO] GetStageByUserId successful 
+[2024-03-29 12:30:28] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:28] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:28] [INFO] GetUser successful 
+[2024-03-29 12:30:28] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:28] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:28] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:28] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:30:28] [INFO] GetAllContactById successful 
+[2024-03-29 12:30:29] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:29] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:29] [INFO] stage getone with id 11 
+[2024-03-29 12:30:29] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:30:29] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:29] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:29] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:29] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:30:29] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:29] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:29] [INFO] GetStageByUserId successful 
+[2024-03-29 12:30:33] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:33] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:33] [INFO] GetUser successful 
+[2024-03-29 12:30:34] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:34] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:34] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:34] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:30:34] [INFO] GetAllContactById successful 
+[2024-03-29 12:30:34] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:34] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:34] [INFO] stage getone with id 11 
+[2024-03-29 12:30:34] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:30:34] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:34] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:34] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:34] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:30:34] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:34] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:34] [INFO] GetStageByUserId successful 
+[2024-03-29 12:30:38] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:38] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:38] [INFO] stage getone with id 11 
+[2024-03-29 12:30:38] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:30:38] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:38] [INFO] get one user by id with id: 11 
+[2024-03-29 12:30:38] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:38] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:30:38] [INFO] entreprise getone with id 2 
+[2024-03-29 12:30:38] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:30:38] [INFO] GetStageByUserId successful 
+[2024-03-29 12:31:52] [INFO] get one user by id with id: 11 
+[2024-03-29 12:31:52] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:31:52] [INFO] GetUser successful 
+[2024-03-29 12:31:52] [INFO] get one user by id with id: 11 
+[2024-03-29 12:31:52] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:31:52] [INFO] entreprise getone with id 2 
+[2024-03-29 12:31:52] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:31:53] [INFO] GetAllContactById successful 
+[2024-03-29 12:31:53] [INFO] get one user by id with id: 11 
+[2024-03-29 12:31:53] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:31:53] [INFO] stage getone with id 11 
+[2024-03-29 12:31:53] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:31:53] [INFO] entreprise getone with id 2 
+[2024-03-29 12:31:53] [INFO] get one user by id with id: 11 
+[2024-03-29 12:31:53] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:31:53] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:31:53] [INFO] entreprise getone with id 2 
+[2024-03-29 12:31:53] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:31:53] [INFO] GetStageByUserId successful 
+[2024-03-29 12:32:13] [INFO] get one user by id with id: 11 
+[2024-03-29 12:32:13] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:32:13] [INFO] GetUser successful 
+[2024-03-29 12:32:13] [INFO] get one user by id with id: 11 
+[2024-03-29 12:32:13] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:32:13] [INFO] entreprise getone with id 2 
+[2024-03-29 12:32:13] [INFO] get all contact for the user with id 11 
+[2024-03-29 12:32:13] [INFO] GetAllContactById successful 
+[2024-03-29 12:32:13] [INFO] get one user by id with id: 11 
+[2024-03-29 12:32:13] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:32:13] [INFO] stage getone with id 11 
+[2024-03-29 12:32:13] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:32:13] [INFO] entreprise getone with id 2 
+[2024-03-29 12:32:13] [INFO] get one user by id with id: 11 
+[2024-03-29 12:32:13] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:32:13] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:32:13] [INFO] entreprise getone with id 2 
+[2024-03-29 12:32:13] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:32:13] [INFO] GetStageByUserId successful 
+[2024-03-29 12:32:23] [INFO] get one user by id with id: 11 
+[2024-03-29 12:32:23] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:32:23] [INFO] stage getone with id 11 
+[2024-03-29 12:32:23] [INFO] get 1 contact by stage id4 
+[2024-03-29 12:32:23] [INFO] entreprise getone with id 2 
+[2024-03-29 12:32:23] [INFO] get one user by id with id: 11 
+[2024-03-29 12:32:23] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:32:23] [INFO] Supervisor getone with id 3 
+[2024-03-29 12:32:23] [INFO] entreprise getone with id 2 
+[2024-03-29 12:32:23] [INFO] schoolyear getone + id : 1 
+[2024-03-29 12:32:23] [INFO] GetStageByUserId successful 
