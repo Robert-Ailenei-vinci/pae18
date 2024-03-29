@@ -3,6 +3,7 @@ import { getAuthenticatedUser, setAuthenticatedUser } from '../../utils/auths';
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
+import baseURL from '../../../config';
 
 
 
@@ -149,7 +150,7 @@ async function onSubmit(e) {
     },
   };
 
-  const response = await fetch(`http://localhost:3000/users/changeData`, options);
+  const response = await fetch(`${baseURL}/users/changeData`, options);
   console.log(response);
   if (!response.ok) {
     if (response.status === 400) {

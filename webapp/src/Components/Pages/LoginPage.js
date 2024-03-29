@@ -2,6 +2,8 @@ import { getRememberMe, setAuthenticatedUser, setRememberMe } from '../../utils/
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
+import baseURL from '../../../config';
+
 
 const LoginPage = () => {
   clearPage();
@@ -78,7 +80,7 @@ async function onLogin(e) {
     },
   };
 
-  const response = await fetch(`http://localhost:3000/auths/login`, options);
+  const response = await fetch(`${baseURL}/auths/login`, options);
 
   if (!response.ok) {
     if (response.status === 401) {

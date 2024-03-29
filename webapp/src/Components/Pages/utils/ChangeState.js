@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import {getAuthenticatedUser} from "../../../utils/auths";
-
+import baseURL from './config.js';
 const user = getAuthenticatedUser();
 
 async function meetContact(idContact, lieu,version) {
@@ -21,7 +21,7 @@ async function meetContact(idContact, lieu,version) {
 
   try {
     const responseContacts = await fetch(
-        `http://localhost:3000/contacts/meet`, options);
+        `${baseURL}/contacts/meet`, options);
 
     if (!responseContacts.ok) {
       throw new Error(
@@ -53,7 +53,7 @@ async function stopFollowContact(idContact,version) {
 
   try {
     const responseContacts = await fetch(
-        `http://localhost:3000/contacts/stopFollow`, options);
+        `${baseURL}contacts/stopFollow`, options);
 
     if (!responseContacts.ok) {
       throw new Error(
@@ -86,7 +86,7 @@ async function refuseContact(idContact, reason,version) {
 
   try {
     const responseContacts = await fetch(
-        `http://localhost:3000/contacts/refused`, options);
+        `${baseURL}/contacts/refused`, options);
 
     if (!responseContacts.ok) {
       throw new Error(

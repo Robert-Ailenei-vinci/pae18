@@ -205,11 +205,11 @@ async function onRegister(e) {
   const options = {
     method: 'POST',
     body: JSON.stringify({
-      login,
+      email,
       password,
-      f_name,
-      l_name,
-      phone_number,
+      firstName,
+      lastName,
+      phoneNum,
       role
     }),
     headers: {
@@ -217,7 +217,7 @@ async function onRegister(e) {
     },
   };
 
-  const response = await fetch(`http://localhost:3000/auths/register`, options);
+  const response = await fetch(`${baseURL}/auths/register`, options);
 
   if (!response.ok) {
     response.text().then((errorMessage) => {
