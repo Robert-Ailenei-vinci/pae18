@@ -15,19 +15,19 @@ public @interface Authorize {
 
   @Retention(RetentionPolicy.RUNTIME)
   @Target({ElementType.METHOD, ElementType.TYPE})
-  public @interface AuthorizeStudent {
+  @interface AuthorizeStudent {
 
   }
 
   @Retention(RetentionPolicy.RUNTIME)
   @Target({ElementType.METHOD, ElementType.TYPE})
-  public @interface AuthorizeTeacher {
+  @interface AuthorizeTeacher {
 
   }
 
   @Retention(RetentionPolicy.RUNTIME)
   @Target({ElementType.METHOD, ElementType.TYPE})
-  public @interface AuthorizeSupervisor {
+  @interface AuthorizeSupervisor {
 
   }
 }
