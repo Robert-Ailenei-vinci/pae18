@@ -15,6 +15,8 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This class represents a filter for authorizing access to resources.
@@ -29,6 +31,20 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
       .build();
   @Inject
   private UserDAO userDAO;
+
+  private List<String> expectedRoles;
+
+  /**
+   * Factory method to create an instance of AuthorizationRequestFilter.
+   *
+   * @param roles The roles to authorize.
+   * @return An instance of AuthorizationRequestFilter configured for the specified roles.
+   */
+  public static AuthorizationRequestFilter forRoles(String... roles) {
+    AuthorizationRequestFilter filter = new AuthorizationRequestFilter();
+    filter.expectedRoles = Arrays.asList(roles);
+    return filter;
+  }
 
   /**
    * Filters the container request context to authorize requests based on JWT tokens.
@@ -51,7 +67,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
         throw new TokenDecodingException(e);
       }
       UserDTO authenticatedUser = userDAO.getOne(decodedToken.getClaim("user").asInt());
-      if (authenticatedUser == null) {
+      if (authenticatedUser == null || !expectedRoles.contains(authenticatedUser.getRole())) {
         requestContext.abortWith(Response.status(Status.FORBIDDEN)
             .entity("You are forbidden to access this resource").build());
       }
@@ -59,5 +75,4 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
       requestContext.setProperty("user", authenticatedUser);
     }
   }
-
 }
