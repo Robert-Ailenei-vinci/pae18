@@ -1,6 +1,8 @@
 package be.vinci.pae.api;
 
-import be.vinci.pae.api.filters.Authorize;
+import be.vinci.pae.api.filters.Authorize.AuthorizeStudent;
+import be.vinci.pae.api.filters.Authorize.AuthorizeSupervisor;
+import be.vinci.pae.api.filters.Authorize.AuthorizeTeacher;
 import be.vinci.pae.business.controller.ContactUCC;
 import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.SchoolYearUCC;
@@ -54,7 +56,7 @@ public class ContactRessource {
   @Path("add")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
   public ContactDTO addContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("entreprise")) {
       LoggerUtil.logError("Entreprise not found",
@@ -106,7 +108,9 @@ public class ContactRessource {
   @GET
   @Path("allContactsByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
+  @AuthorizeTeacher
+  @AuthorizeSupervisor
   public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
@@ -128,7 +132,7 @@ public class ContactRessource {
   @Path("meet")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
   public ContactDTO meetContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
       LoggerUtil.logError("Contact id and meeting type required",
@@ -158,7 +162,7 @@ public class ContactRessource {
   @Path("stopFollow")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
   public ContactDTO stopFollowContact(@Context ContainerRequestContext requestContext,
       JsonNode json) {
     if (!json.hasNonNull("id_contact")) {
@@ -189,7 +193,7 @@ public class ContactRessource {
   @Path("refused")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
       LoggerUtil.logError("Contact id and refusal reason required",

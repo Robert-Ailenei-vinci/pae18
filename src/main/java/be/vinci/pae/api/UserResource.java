@@ -1,6 +1,7 @@
 package be.vinci.pae.api;
 
 import be.vinci.pae.api.filters.Authorize;
+import be.vinci.pae.api.filters.Authorize.AuthorizeTeacher;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
@@ -50,6 +51,7 @@ public class UserResource {
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
+  @AuthorizeTeacher
   public List<UserDTO> getAll() {
     List<UserDTO> toReturn = myUser.getAll();
     if (toReturn != null) {

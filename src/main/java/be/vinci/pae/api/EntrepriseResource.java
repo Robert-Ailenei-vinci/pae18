@@ -1,6 +1,8 @@
 package be.vinci.pae.api;
 
-import be.vinci.pae.api.filters.Authorize;
+import be.vinci.pae.api.filters.Authorize.AuthorizeStudent;
+import be.vinci.pae.api.filters.Authorize.AuthorizeSupervisor;
+import be.vinci.pae.api.filters.Authorize.AuthorizeTeacher;
 import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.EntrepriseDTO;
@@ -47,7 +49,9 @@ public class EntrepriseResource {
   @GET
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
+  @AuthorizeTeacher
+  @AuthorizeSupervisor
   public List<EntrepriseDTO> getAll() {
     List<EntrepriseDTO> toReturn = myEntreprise.getAll();
     if (toReturn != null) {
@@ -67,7 +71,8 @@ public class EntrepriseResource {
   @GET
   @Path("getOne")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
+  @AuthorizeTeacher
   public EntrepriseDTO getOne(int entrepriseId) {
     EntrepriseDTO toReturn = myEntreprise.getOne(entrepriseId);
     if (toReturn != null) {
@@ -92,7 +97,7 @@ public class EntrepriseResource {
   @Path("addOne")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
   public EntrepriseDTO addEnterprise(@Context ContainerRequestContext requestContext,
       JsonNode json) throws BadRequestException, AuthorisationException {
     if (!json.hasNonNull("trade_name")

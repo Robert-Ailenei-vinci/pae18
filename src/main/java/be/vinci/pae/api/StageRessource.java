@@ -1,6 +1,6 @@
 package be.vinci.pae.api;
 
-import be.vinci.pae.api.filters.Authorize;
+import be.vinci.pae.api.filters.Authorize.AuthorizeStudent;
 import be.vinci.pae.business.controller.StageUCC;
 import be.vinci.pae.business.domain.StageDTO;
 import be.vinci.pae.business.domain.UserDTO;
@@ -33,7 +33,7 @@ public class StageRessource {
   @GET
   @Path("stageByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @AuthorizeStudent
   public StageDTO getOneStageByUserId(@Context ContainerRequestContext requestContext) {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
