@@ -50,8 +50,8 @@ public class UserDAOImpl implements UserDAO {
         return users;
       }
     } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
     }
-    return null;
   }
 
   /**
