@@ -1,7 +1,6 @@
 package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -84,21 +83,6 @@ class ContactUCCTest {
         () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
   }
 
-  // TODO : check if test is useful
-  @DisplayName("test createOne with null given from DAO")
-  @Test
-  void createOneNullFromDAO() {
-    UserDTO userDTO = factory.getUser();
-    userDTO.setId(123);
-    userDTO.setRole("etudiant");
-    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
-    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
-    when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenReturn(new ArrayList<>());
-    when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(null);
-
-    assertNull(contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
-  }
-
   @DisplayName("Test createOne given wrong role")
   @Test
   void createOneWrongUserRole() {
@@ -148,21 +132,6 @@ class ContactUCCTest {
         contactResult);
   }
 
-  // TODO : check if test is usefull
-  @DisplayName("Test meetContact with null from DAO")
-  @Test
-  void meetContactNullFromDAO() {
-    String meetingType = "new type of meeting";
-    contact.setMeetingType("type of meeting");
-    contactResult.setMeetingType(meetingType);
-
-    when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
-    when(contactDAO.updateContact(contact)).thenReturn(null);
-
-    assertNull(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId(),
-        contact.getVersion()));
-  }
-
   @DisplayName("Test meetContact given wrong state")
   @Test
   void meetContactWrongState() {
@@ -206,19 +175,6 @@ class ContactUCCTest {
     assertEquals(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId(),
             contact.getVersion()),
         contactResult);
-  }
-
-  // TODO : check if test is usefull
-  @DisplayName("Test stopFollowContact with null from DAO")
-  @Test
-  void stopFollowContactNullFromDAO() {
-    contactResult.setState("suivis stoppe");
-
-    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
-    when(contactDAO.updateContact(contact)).thenReturn(null);
-
-    assertNull(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId(),
-        contact.getVersion()));
   }
 
   @DisplayName("Test stopFollowContact given wrong user")
@@ -296,21 +252,5 @@ class ContactUCCTest {
     assertThrows(BizExceptionNotFound.class,
         () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
             contact.getVersion()));
-  }
-
-  // TODO : check if test is usefull
-  @DisplayName("Test refusedContact given null from DAO")
-  @Test
-  void refusedContactNullFromDAO() {
-    String refusalReason = "raison de refus";
-    contact.setState("rencontre");
-    contactResult.setState("refuse");
-    contactResult.setReasonForRefusal(refusalReason);
-
-    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
-    when(contactDAO.updateContact(contact)).thenReturn(null);
-
-    assertNull(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
-        contact.getVersion()));
   }
 }

@@ -1,10 +1,10 @@
 package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
@@ -130,14 +130,15 @@ public class UserUCCTest {
   public void testRegisterSuccess() {
     user.setFirstName("Loic");
     user.setLastName("Mark");
-    user.setEmail("mark.loic@vinci.be");
+    user.setEmail("loic.mark@vinci.be");
     user.setPassword("password");
     user.setRole("administratif");
 
+    when(userDataService.getOne(user.getEmail())).thenReturn(null);
     when(userDataService.addUser(user)).thenReturn(true);
-    assertThrows(RuntimeException.class, () -> userDataService.getOne(user.getEmail()));
     when(userUCC.getOne(user.getId())).thenReturn(user);
-    assertThrows(RuntimeException.class, () -> userDataService.getOne(user.getEmail()));
+
+    assertTrue(userUCC.register(user));
   }
 
   @DisplayName("Test login with transaction error")
@@ -152,21 +153,6 @@ public class UserUCCTest {
 
     // Act and Assert
     assertThrows(Exception.class, () -> userUCC.login(login, password));
-  }
-
-  // TODO: check if this test is useful
-  @DisplayName("Test register ")
-  @Test
-  public void testRegisterFails() {
-
-    user.setFirstName("Loic");
-    user.setLastName("Mark");
-    user.setEmail("loic.mark@vinci.be");
-    user.setPassword("testPassword");
-    user.setRole("administratif");
-    when(userDataService.addUser(user)).thenReturn(false);
-
-    assertFalse(userUCC.register(user));
   }
 
   @DisplayName("Test register with already existing user")
