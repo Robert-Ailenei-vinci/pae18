@@ -65,4 +65,20 @@ public class StageDAOImpl implements StageDAO {
     return stage;
   }
 
+  @Override
+  public StageDTO modifyStage(StageDTO stageDTO) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "UPDATE pae.stages SET internship_project = ? "
+            + "WHERE _user = ? AND contact = ?")) {
+      preparedStatement.setString(1, stageDTO.getInternshipProject());
+      preparedStatement.setInt(2, stageDTO.getUserId());
+      preparedStatement.setInt(3, stageDTO.getContactId());
+      preparedStatement.executeUpdate();
+      return stageDTO;
+    } catch (Exception e) {
+      LoggerUtil.logError("Error modifying stage", e);
+      throw new FatalError("Erreur lors de la modification du stage");
+    }
+  }
+
 }

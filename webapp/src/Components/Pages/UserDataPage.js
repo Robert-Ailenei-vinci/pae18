@@ -406,6 +406,7 @@ async function renderPersonnalInfoPage() {
       confirmBtn.addEventListener('click', (event) => {
         // Call the changeInternshipSubject method
         changeInternshipSubject(stageData.contact.id,input.value);
+        location.reload();
       });
   
       // Replace the text content of the td element with the input field and the new button

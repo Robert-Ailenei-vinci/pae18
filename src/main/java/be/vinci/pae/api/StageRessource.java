@@ -5,6 +5,7 @@ import be.vinci.pae.business.controller.StageUCC;
 import be.vinci.pae.business.domain.StageDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.utils.LoggerUtil;
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
@@ -45,15 +46,24 @@ public class StageRessource {
     return toReturn;
   }
 
+
+  /**
+   * Modify internship subject data.
+   *
+   * @param requestContext the request context
+   * @return the stage DTO
+   */
   @PUT
   @Path("modifyStage")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public StageDTO modifyStage(@Context ContainerRequestContext requestContext) {
+  public StageDTO modifyStage(JsonNode json, @Context ContainerRequestContext requestContext) {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
-    
-    StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
+    String subject = json.get("internship_project").asText();
+    int contactId = json.get("id_contact").asInt();
+
+    StageDTO toReturn = stageUCC.modifyStage(userId, subject, contactId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetStageByUserId successful");
     }
