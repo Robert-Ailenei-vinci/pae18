@@ -15,6 +15,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
   @Inject
   private UserDAO userDAO;
 
-  private List<String> expectedRoles;
+  private List<String> expectedRoles = new ArrayList<>();
 
   /**
    * Factory method to create an instance of AuthorizationRequestFilter.
