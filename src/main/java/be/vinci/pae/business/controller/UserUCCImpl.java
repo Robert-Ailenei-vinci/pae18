@@ -64,7 +64,7 @@ public class UserUCCImpl implements UserUCC {
       user.checkRegisterNotEmpty(userDTO);
 
       // Check if user already exists
-      User existingUser = (User) myUserDAO.getOne(userDTO.getEmail());
+      User existingUser = (User) myUserDAO.getOne(userDTO.getId());
       user.checkExistingUser(existingUser);
       user.checkmailFromLnameAndFname(userDTO.getEmail(), userDTO.getLastName(),
           userDTO.getFirstName());
