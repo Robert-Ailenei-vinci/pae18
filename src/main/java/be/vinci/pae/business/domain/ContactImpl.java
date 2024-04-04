@@ -145,4 +145,14 @@ public class ContactImpl implements Contact {
     return schoolYearId == wantedSchoolYearId
         && entrepriseId == wantedEntrepriseId;
   }
+
+  @Override
+  public boolean accepteContact(int version) {
+    if (state.equals("rencontre")) {
+      this.state = "accepte";
+      this.version = version;
+      return true;
+    }
+    return false;
+  }
 }

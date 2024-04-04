@@ -199,5 +199,28 @@ public class ContactDAOImpl implements ContactDAO {
     return null;
   }
 
+  @Override
+  public void cancelAllContact(ContactDTO contactDTO) {
+    StringBuilder sql = new StringBuilder(
+        "UPDATE pae.contacts SET state = 'suspendu', _version = _version + 1 WHERE id_contact <> ? AND _user = ? AND ( state = 'initie' OR state = 'rencontre') AND school_year = ?;");
+
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql.toString())) {
+
+      stmt.setObject(1, contactDTO.getId());
+      stmt.setObject(1, contactDTO.getUserId());
+      stmt.setObject(1, contactDTO.getSchoolYearId());
+
+      if (stmt.executeUpdate() == 0) {
+        throw new OptimisticLockException("Contact was updated by another transaction");
+      }
+
+      LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
+
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+
+  }
+
 
 }
