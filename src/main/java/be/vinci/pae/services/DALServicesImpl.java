@@ -30,7 +30,7 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   /**
    * Constructs a new DALServicesImpl instance. Initializes the ThreadLocal for connection and sets
    * up the BasicDataSource with the database URL, username, and password. The database
-   * configuration is retrieved from the Config class.
+   * configuration is retrieved from the Config clas
    */
   public DALServicesImpl() {
     threadLocalConnection = new ThreadLocal<>();
