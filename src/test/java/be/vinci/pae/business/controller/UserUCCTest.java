@@ -64,9 +64,6 @@ public class UserUCCTest {
     this.schoolYear = (SchoolYear) factory.getSchoolYear();
     this.expectedUser = (User) factory.getUser();
     this.schoolYearDataService = locator.getService(SchoolYearDAO.class);
-    doNothing().when(dalServices).startTransaction();
-    doNothing().when(dalServices).commitTransaction();
-    doNothing().when(dalServices).rollbackTransaction();
   }
 
   @Test

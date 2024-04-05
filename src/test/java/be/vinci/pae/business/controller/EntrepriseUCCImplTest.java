@@ -48,9 +48,6 @@ class EntrepriseUCCImplTest {
     this.expectedEntreprise = factory.getEntreprise();
     this.user = (User) factory.getUser();
     this.entrepriseDAO = locator.getService(EntrepriseDAO.class);
-    doNothing().when(dalServices).startTransaction();
-    doNothing().when(dalServices).commitTransaction();
-    doNothing().when(dalServices).rollbackTransaction();
   }
 
   @Test
