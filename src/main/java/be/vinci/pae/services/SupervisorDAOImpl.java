@@ -1,6 +1,7 @@
 package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
+import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SupervisorDTO;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.SupervisorNotFoundException;
@@ -37,6 +38,11 @@ public class SupervisorDAOImpl implements SupervisorDAO {
       throw new SupervisorNotFoundException("Supervisor not found with this id " + id, e);
     }
     return null;
+  }
+
+  @Override
+  public SupervisorDTO createOne(String last_name, String first_name, EntrepriseDTO entreprise, String email, String numero) {
+
   }
 
   private SupervisorDTO getSupervisorMethodFromDB(ResultSet rs) {

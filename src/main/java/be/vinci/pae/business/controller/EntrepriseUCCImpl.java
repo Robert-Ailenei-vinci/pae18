@@ -84,7 +84,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       if (!((User) user).checkIsStudent()) {
         LoggerUtil.logError("BizError", new BizException(
             "This user is not a student."));
-        throw new BizException(
+        throw new BizException(                                        // a retirre
             "This user is not a student.");
       }
       Entreprise entreprise = (Entreprise) myEntrepriseDAO.createOne(tradeName, designation,

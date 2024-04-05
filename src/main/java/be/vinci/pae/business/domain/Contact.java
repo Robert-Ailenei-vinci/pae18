@@ -3,7 +3,7 @@ package be.vinci.pae.business.domain;
 /**
  * This interface extends {@link ContactDTO} and represents a contact entity.
  */
-public interface Contact extends ContactDTO {
+public interface  Contact extends ContactDTO {
 
 
   /**

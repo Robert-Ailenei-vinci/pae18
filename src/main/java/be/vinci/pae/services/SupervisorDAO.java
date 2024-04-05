@@ -1,5 +1,6 @@
 package be.vinci.pae.services;
 
+import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SupervisorDTO;
 
 /**
@@ -15,4 +16,6 @@ public interface SupervisorDAO {
    * @return The {@link SupervisorDTO} representing the supervisor.
    */
   SupervisorDTO getOneById(int id);
+
+  SupervisorDTO createOne(String last_name, String first_name, EntrepriseDTO entreprise, String email, String numero);
 }
