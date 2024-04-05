@@ -47,4 +47,5 @@ public interface EntrepriseUCC {
    * @return The list of contacts associated with the enterprise.
    */
   List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId);
+
 }

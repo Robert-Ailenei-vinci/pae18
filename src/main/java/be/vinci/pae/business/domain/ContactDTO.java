@@ -130,4 +130,8 @@ public interface ContactDTO {
    * @param version of the contact to be set
    */
   void setVersion(int version);
+  UserDTO getUser();
+  void setUser(UserDTO user);
+  SchoolYearDTO getSchoolYearDTO();
+  void setSchoolYearDTO(SchoolYearDTO schoolYearDTO);
 }

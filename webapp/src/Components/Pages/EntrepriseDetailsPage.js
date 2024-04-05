@@ -3,6 +3,7 @@ import {usePathParams} from "../../utils/path-params";
 import {getAuthenticatedUser} from "../../utils/auths";
 import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
+import {makeStateClean} from "./utils/MakeStateClean";
 
 const EntrepriseDetailsPage = () => {
   clearPage();
@@ -42,14 +43,19 @@ async function renderDetailsEntreprise() {
 
   const main = document.querySelector('main');
 
-  const subtitle = document.createElement('h5');
-  subtitle.textContent = 'Contacts de l\'entreprise : ';
+  const nbStudentTitle = document.createElement('h4')
+  nbStudentTitle.textContent = 'Nombre d\'étudiants en stage pour l\'année courante : '
+
+  main.appendChild(nbStudentTitle)
+
+  const tableContactsTitle = document.createElement('h5');
+  tableContactsTitle.textContent = 'Contacts de l\'entreprise : ';
 
   const table = document.createElement('table');
 
 // Create a header row and append it to the table
   const headerRow = document.createElement('tr');
-  ['Etat', 'Lieu de rencontre', 'Raison du refus'].forEach(text => {
+  ['Nom de l\'étudiant','Prénom de l\'étudiant','Année académique','Etat', 'Lieu de rencontre', 'Raison du refus'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
     headerRow.appendChild(th);
@@ -60,8 +66,20 @@ async function renderDetailsEntreprise() {
   allContactsData.forEach(contact => {
     const row = document.createElement('tr');
 
+    const firstNameStudentCell = document.createElement('td');
+    firstNameStudentCell.textContent = contact.user.firstlastName || '-';
+    row.appendChild(firstNameStudentCell);
+
+    const lastNameStudentCell = document.createElement('td');
+    lastNameStudentCell.textContent = contact.user.lastName || '-';
+    row.appendChild(lastNameStudentCell);
+
+    const schoolYearCell = document.createElement('td');
+    schoolYearCell.textContent = contact.schoolYearDTO.yearFormat || '-';
+    row.appendChild(schoolYearCell);
+
     const stateCell = document.createElement('td');
-    stateCell.textContent = contact.state || '-';
+    makeStateClean(contact.state,stateCell)
     row.appendChild(stateCell);
 
     const meetingLocationCell = document.createElement('td');
@@ -75,7 +93,7 @@ async function renderDetailsEntreprise() {
     table.appendChild(row);
   });
 
-  main.appendChild(subtitle);
+  main.appendChild(tableContactsTitle);
   main.appendChild(table);
 
   Navbar();

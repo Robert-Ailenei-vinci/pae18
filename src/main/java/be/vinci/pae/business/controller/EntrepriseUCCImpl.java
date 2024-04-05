@@ -9,6 +9,7 @@ import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
+import be.vinci.pae.services.StageDAO;
 import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.util.List;
@@ -22,6 +23,8 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
   private EntrepriseDAO myEntrepriseDAO;
   @Inject
   private ContactDAO contactDAO;
+  @Inject
+  private StageDAO stageDAO;
   @Inject
   private DALServices dalServices;
 

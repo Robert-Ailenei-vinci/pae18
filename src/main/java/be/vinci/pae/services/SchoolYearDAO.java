@@ -15,4 +15,8 @@ public interface SchoolYearDAO {
    *         year with the given identifier exists
    */
   SchoolYearDTO getOne(int id);
+
+  SchoolYearDTO getCurrentSchoolYear();
+
+  String buildYear();
 }

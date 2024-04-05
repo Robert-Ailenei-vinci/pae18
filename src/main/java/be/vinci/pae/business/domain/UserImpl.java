@@ -5,6 +5,8 @@ import be.vinci.pae.exception.BizException;
 import be.vinci.pae.utils.LoggerUtil;
 import java.text.Normalizer;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
@@ -14,6 +16,7 @@ public class UserImpl implements User {
 
   private int id;
   private String email;
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
   private String role;
   private String lastName;

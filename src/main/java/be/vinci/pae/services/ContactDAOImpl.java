@@ -27,6 +27,10 @@ public class ContactDAOImpl implements ContactDAO {
   private DALBackServices dalBackServices;
   @Inject
   private EntrepriseDAO entrepriseDAO;
+  @Inject
+  private UserDAO userDAO;
+  @Inject
+  private SchoolYearDAO schoolYearDAO;
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
@@ -108,6 +112,8 @@ public class ContactDAOImpl implements ContactDAO {
       contact.setReasonForRefusal(rs.getString("reason_for_refusal"));
       contact.setMeetingType(rs.getString("meeting_type"));
       contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
+      contact.setUser(userDAO.getOne(rs.getInt("_user")));
+      contact.setSchoolYearDTO(schoolYearDAO.getOne(rs.getInt("school_year")));
       contact.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
       LoggerUtil.logError("Error processing result set", e);
