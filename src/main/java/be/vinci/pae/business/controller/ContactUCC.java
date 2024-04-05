@@ -60,4 +60,6 @@ public interface ContactUCC {
    * @return the contact.
    */
   ContactDTO refusedContact(int contactId, String refusalReason, int userId, int version);
+
+  ContactDTO acceptContact(int contactId, int userId, int version);
 }
