@@ -254,7 +254,7 @@ async function renderPersonnalInfoPage() {
       const form = document.createElement('form');
       const select = document.createElement('select');
       select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
-      ['Refusé', 'Suivi stoppé'].forEach(optionText => {
+      ['Refusé', 'Suivi stoppé','Accepté'].forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText;
         option.textContent = optionText;
