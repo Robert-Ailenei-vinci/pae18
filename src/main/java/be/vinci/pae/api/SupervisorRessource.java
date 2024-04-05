@@ -59,11 +59,11 @@ public class SupervisorRessource {
         String email = json.get("email").asText();
 
         EntrepriseDTO entrepriseDTO = myEntreprise.getOne(entrepriseId);
-        int entrepriseID = entrepriseDTO.getId();
         if (entrepriseDTO == null) {
             LoggerUtil.logError("Entreprise not recognised", new AuthorisationException(""));
             throw new AuthorisationException("Entreprise not recognised");
         }
+        int entrepriseID = entrepriseDTO.getId();
 
         SupervisorDTO supervisorDTO = mySupervisorUCC.createOne(lastName, firstName, entrepriseID, phoneNumber, email);
         if (supervisorDTO == null) {
