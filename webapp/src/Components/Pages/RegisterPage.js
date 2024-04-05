@@ -3,6 +3,7 @@ import { getRememberMe, setAuthenticatedUser, setRememberMe } from '../../utils/
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
+import baseURL from "../../../config";
 
 const RegisterPage = () => {
   clearPage();
@@ -178,15 +179,15 @@ function onEmailInput(e) {
 async function onRegister(e) {
   e.preventDefault();
 
-  const login = document.querySelector('#login').value;
+  const email = document.querySelector('#login').value;
   const password = document.querySelector('#password').value;
-  const f_name = document.querySelector('#f_name').value;
-  const l_name = document.querySelector('#l_name').value;
-  const phone_number = document.querySelector('#phone_number').value;
+  const firstName = document.querySelector('#f_name').value;
+  const lastName = document.querySelector('#l_name').value;
+  const phoneNum = document.querySelector('#phone_number').value;
   const roleAdmin = document.querySelector('#roleAdmin').checked;
   const roleProf = document.querySelector('#roleProf').checked;
 
-  if (!login.endsWith('@student.vinci.be') && !login.endsWith('@vinci.be')) {
+  if (!email.endsWith('@student.vinci.be') && !email.endsWith('@vinci.be')) {
     alert('Mail doit finir en @vinci.be ou en @student.vinci.be');
     return;
   }

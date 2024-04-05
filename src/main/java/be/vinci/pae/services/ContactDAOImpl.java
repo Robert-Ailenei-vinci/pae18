@@ -128,6 +128,7 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO updateContact(ContactDTO contactDTO) {
+    System.out.println(contactDTO.getState());
 
     if (getLastVersionFromDB(contactDTO.getId()) != contactDTO.getVersion()) {
       throw new OptimisticLockException("Optimisitc lock exception");
@@ -165,6 +166,7 @@ public class ContactDAOImpl implements ContactDAO {
       for (int i = 0; i < parameters.size(); i++) {
         stmt.setObject(i + 1, parameters.get(i));
       }
+      stmt.executeUpdate();
 
       LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
 
@@ -194,7 +196,7 @@ public class ContactDAOImpl implements ContactDAO {
 
   private int getLastVersionFromDB(int contactId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT _version FROM pae.contacts WHERE contact = ? ")) {
+        "SELECT _version FROM pae.contacts WHERE id_contact = ? ")) {
       preparedStatement.setInt(1, contactId);
       try (ResultSet rs = preparedStatement.executeQuery()) {
         if (rs.next()) {

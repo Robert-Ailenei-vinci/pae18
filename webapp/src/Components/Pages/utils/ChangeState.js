@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
 import {getAuthenticatedUser} from "../../../utils/auths";
-import baseURL from './config.js';
+import baseURL from "../../../../config";
 const user = getAuthenticatedUser();
 
 async function meetContact(idContact, lieu,version) {
@@ -53,7 +53,7 @@ async function stopFollowContact(idContact,version) {
 
   try {
     const responseContacts = await fetch(
-        `${baseURL}contacts/stopFollow`, options);
+        `${baseURL}/contacts/stopFollow`, options);
 
     if (!responseContacts.ok) {
       throw new Error(

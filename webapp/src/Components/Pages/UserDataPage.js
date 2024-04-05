@@ -206,7 +206,7 @@ async function renderPersonnalInfoPage() {
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
 // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
-      form.addEventListener('submit', (event) => {
+      form.addEventListener('submit', () => {
 
         const selectedOption = select.value;
         let additionalInfo = ''; // Informations supplémentaires à envoyer avec la soumission
