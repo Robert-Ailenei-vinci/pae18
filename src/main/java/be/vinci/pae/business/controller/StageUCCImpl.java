@@ -2,7 +2,6 @@ package be.vinci.pae.business.controller;
 
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.StageDTO;
-import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.StageDAO;
@@ -48,10 +47,6 @@ public class StageUCCImpl implements StageUCC {
     try {
       dalServices.startTransaction();
 
-      if (!((User) contact).checkIsStudent()) {
-        throw new BizException(
-            "This user is not a student.");
-      }
       if (!checkDateFormat(signatureDate)) {
         throw new BizException("The date format is not valid");
       }
