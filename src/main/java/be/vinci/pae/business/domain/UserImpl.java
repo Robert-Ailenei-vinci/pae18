@@ -14,22 +14,16 @@ import org.mindrot.jbcrypt.BCrypt;
 public class  UserImpl implements User {
 
   private int id;
-  @JsonProperty("email")
   private String email;
 
-  @JsonProperty("password")
   private String password;
 
-  @JsonProperty("firstName")
   private String firstName;
 
-  @JsonProperty("lastName")
   private String lastName;
 
-  @JsonProperty("phoneNum")
   private String phoneNum;
 
-  @JsonProperty("role")
   private String role;
   private String registrationDate;
   private int version;

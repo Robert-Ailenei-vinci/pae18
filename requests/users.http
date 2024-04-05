@@ -85,8 +85,8 @@ Content-Type: application/json
 {
   "email": "rob.ert@vinci.be",
   "password": "rob",
-  "firstName": "ert",
-  "lastName": "rob",
+  "firstName": "robbbbbaazzr",
+  "lastName": "ert",
   "phoneNum": "0484118694456",
   "role": "administratif"
 }

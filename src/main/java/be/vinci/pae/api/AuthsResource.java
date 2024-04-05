@@ -64,15 +64,14 @@ public class AuthsResource {
   @Produces(MediaType.APPLICATION_JSON)
   public ObjectNode login(JsonNode json) {
     // Get and check credentials
-    if (!json.hasNonNull("login") || !json.hasNonNull("password")) {
-      LoggerUtil.logError("Login and password required", new BadRequestException(""));
-      throw new BadRequestException("Login and password required");
+    if (!json.hasNonNull("email") || !json.hasNonNull("password")) {
+      throw new BadRequestException("email and password required");
     }
-    String login = json.get("login").asText();
+    String email = json.get("email").asText();
     String password = json.get("password").asText();
 
     // Try to login
-    UserDTO publicUser = userUCC.login(login, password);
+    UserDTO publicUser = userUCC.login(email, password);
     if (publicUser == null) {
       LoggerUtil.logError("Login failed", new AuthorisationException(""));
       throw new AuthorisationException("Login failed");
@@ -164,46 +163,37 @@ public class AuthsResource {
   /**
    * Register a new user.
    *
-   * @param jsonUserDTO JSON object containing the user's registration information. It must contain keys
-   *             "login", "password", "lname", "fname" and "phoneNum".
+   * @param jsonUserDTO JSON object cast into UserDTO containing the user's registration
+   *                    information. It must contain keys *             "email", "password",
+   *                    "lname", "fname" and "phoneNum".
    * @return true if the user is registered, false if not.
-   * @throws WebApplicationException If any of the required fields are missing, a
-   *                                 WebApplicationException with the appropriate error code is
-   *                                 thrown.
    */
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public ObjectNode register(UserDTO jsonUserDTO) {
-    System.out.println(jsonUserDTO);
+    String psw = jsonUserDTO.getPassword();
     if (
-        jsonUserDTO.getEmail().isEmpty() ||
-            jsonUserDTO.getEmail().equals("") ||
-            jsonUserDTO.getPassword().isEmpty() ||
-            jsonUserDTO.getPassword().equals("") ||
-            jsonUserDTO.getFirstName().isEmpty() ||
-            jsonUserDTO.getFirstName().equals("") ||
-            jsonUserDTO.getLastName().isEmpty() ||
-            jsonUserDTO.getLastName().equals("") ||
-            jsonUserDTO.getPhoneNum().isEmpty() ||
-            jsonUserDTO.getPhoneNum().equals("") ||
-            jsonUserDTO.getRole().isEmpty() ||
-            jsonUserDTO.getRole().equals("")
-    ){
+        jsonUserDTO.getEmail() == null || jsonUserDTO.getEmail().isEmpty() ||
+            jsonUserDTO.getPassword() == null || jsonUserDTO.getPassword().isEmpty() ||
+            jsonUserDTO.getFirstName() == null || jsonUserDTO.getFirstName().isEmpty() ||
+            jsonUserDTO.getLastName() == null || jsonUserDTO.getLastName().isEmpty() ||
+            jsonUserDTO.getPhoneNum() == null || jsonUserDTO.getPhoneNum().isEmpty() ||
+            jsonUserDTO.getRole() == null || jsonUserDTO.getRole().isEmpty()
+    ) {
       throw new BadRequestException("All fields are required");
     }
 
-
     if (userUCC.register(jsonUserDTO)) {
       try {
-        ObjectNode toReturn = jsonMapper.createObjectNode()
+        ObjectNode toLogin = jsonMapper.createObjectNode()
             .put("email", jsonUserDTO.getEmail())
-            .put("password", jsonUserDTO.getPassword());
-        if (toReturn != null) {
+            .put("password", psw);
+        if (toLogin != null) {
           LoggerUtil.logInfo("Register successful");
         }
-        return login(toReturn);
+        return login(toLogin);
 
       } catch (Exception e) {
         LoggerUtil.logError("Unable to create user", e);
