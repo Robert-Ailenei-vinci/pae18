@@ -256,7 +256,7 @@ public class UserDAOImpl implements UserDAO {
       }
       if (stmt.executeUpdate() == 0) {
         LoggerUtil.logError("Error processing result set", new OptimisticLockException(""));
-        throw new OptimisticLockException("User was updated by another transaction");
+        throw new OptimisticLockException("User was updated by another transaction.");
       }
 
       LoggerUtil.logInfo("user with id " + user.getId() + " was changed");

@@ -1,1338 +1,570 @@
-[2024-04-05 10:16:59] [INFO] GetUser successful 
-[2024-04-05 10:17:00] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] GetUser successful 
-[2024-04-05 10:17:00] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:00] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:17:00] [INFO] GetAllContactById successful 
-[2024-04-05 10:17:00] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] stage getone with id 11 
-[2024-04-05 10:17:00] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:17:00] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:00] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:17:00] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:00] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:00] [INFO] GetStageByUserId successful 
-[2024-04-05 10:17:00] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:17:00] [INFO] GetAllContactById successful 
-[2024-04-05 10:17:00] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] stage getone with id 11 
-[2024-04-05 10:17:00] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:17:00] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:00] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:17:00] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:00] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:00] [INFO] GetStageByUserId successful 
-[2024-04-05 10:17:04] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:04] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:04] [INFO] GetStageByUserId successful 
-[2024-04-05 10:17:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:05] [INFO] GetUser successful 
-[2024-04-05 10:17:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:05] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:05] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:17:05] [INFO] GetAllContactById successful 
-[2024-04-05 10:17:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:05] [INFO] stage getone with id 11 
-[2024-04-05 10:17:05] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:17:05] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:05] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:17:05] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:05] [INFO] GetStageByUserId successful 
-[2024-04-05 10:17:18] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:18] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:18] [INFO] GetStageByUserId successful 
-[2024-04-05 10:17:18] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:18] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:19] [INFO] GetUser successful 
-[2024-04-05 10:17:19] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
+[2024-04-05 12:13:21] [SEVERE] Unable to connect to database
+java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
+	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
+	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
+	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
+	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
+	at be.vinci.pae.business.controller.ContactUCCImpl.refusedContact(ContactUCCImpl.java:136)
+	at be.vinci.pae.business.controller.ContactUCCTest.refusedContact(ContactUCCTest.java:245)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:444)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
+	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
+	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
+	... 74 more
  
-[2024-04-05 10:17:19] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:19] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:19] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:17:19] [INFO] GetAllContactById successful 
-[2024-04-05 10:17:19] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:19] [INFO] stage getone with id 11 
-[2024-04-05 10:17:19] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:17:19] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:19] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:19] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:17:19] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:19] [INFO] GetStageByUserId successful 
-[2024-04-05 10:17:22] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:22] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:22] [INFO] GetUser successful 
-[2024-04-05 10:17:22] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:22] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:22] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:22] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:17:22] [INFO] GetAllContactById successful 
-[2024-04-05 10:17:22] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:22] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:22] [INFO] stage getone with id 11 
-[2024-04-05 10:17:22] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:17:22] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:22] [INFO] get one user by id with id: 11 
-[2024-04-05 10:17:22] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:22] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:17:22] [INFO] entreprise getone with id 2 
-[2024-04-05 10:17:22] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:17:22] [INFO] GetStageByUserId successful 
-[2024-04-05 10:18:08] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:09] [INFO] GetStageByUserId successful 
-[2024-04-05 10:18:09] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:09] [INFO] GetUser successful 
-[2024-04-05 10:18:09] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:09] [INFO] entreprise getone with id 2 
-[2024-04-05 10:18:09] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:18:09] [INFO] GetAllContactById successful 
-[2024-04-05 10:18:09] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:09] [INFO] stage getone with id 11 
-[2024-04-05 10:18:09] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:18:09] [INFO] entreprise getone with id 2 
-[2024-04-05 10:18:09] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:09] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:18:09] [INFO] entreprise getone with id 2 
-[2024-04-05 10:18:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:09] [INFO] GetStageByUserId successful 
-[2024-04-05 10:18:10] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:10] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:10] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
+[2024-04-05 12:13:21] [SEVERE] BizError
+be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
+	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:51)
+	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
+	at be.vinci.pae.business.controller.ContactUCCImpl.refusedContact(ContactUCCImpl.java:136)
+	at be.vinci.pae.business.controller.ContactUCCTest.refusedContact(ContactUCCTest.java:245)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+Caused by: java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
+	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
+	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
+	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
+	... 71 more
+Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:444)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
+	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
+	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
+	... 74 more
  
-[2024-04-05 10:18:12] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:12] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:12] [INFO] GetUser successful 
-[2024-04-05 10:18:12] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:12] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:12] [INFO] entreprise getone with id 2 
-[2024-04-05 10:18:12] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:18:12] [INFO] GetAllContactById successful 
-[2024-04-05 10:18:12] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:12] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:12] [INFO] stage getone with id 11 
-[2024-04-05 10:18:12] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:18:12] [INFO] entreprise getone with id 2 
-[2024-04-05 10:18:12] [INFO] get one user by id with id: 11 
-[2024-04-05 10:18:12] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:12] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:18:13] [INFO] entreprise getone with id 2 
-[2024-04-05 10:18:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:18:13] [INFO] GetStageByUserId successful 
-[2024-04-05 10:20:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:23] [INFO] GetStageByUserId successful 
-[2024-04-05 10:20:24] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:24] [INFO] GetUser successful 
-[2024-04-05 10:20:24] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:24] [INFO] entreprise getone with id 2 
-[2024-04-05 10:20:24] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:20:24] [INFO] GetAllContactById successful 
-[2024-04-05 10:20:24] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:24] [INFO] stage getone with id 11 
-[2024-04-05 10:20:24] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:20:24] [INFO] entreprise getone with id 2 
-[2024-04-05 10:20:24] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:24] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:20:24] [INFO] entreprise getone with id 2 
-[2024-04-05 10:20:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:24] [INFO] GetStageByUserId successful 
-[2024-04-05 10:20:26] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:26] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:26] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
+[2024-04-05 12:13:21] [SEVERE] Unable to connect to database
+java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
+	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
+	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
+	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
+	at be.vinci.pae.services.DALServicesImpl.rollbackTransaction(DALServicesImpl.java:118)
+	at be.vinci.pae.business.controller.ContactUCCImpl.refusedContact(ContactUCCImpl.java:158)
+	at be.vinci.pae.business.controller.ContactUCCTest.refusedContact(ContactUCCTest.java:245)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:444)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
+	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
+	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
+	... 74 more
  
-[2024-04-05 10:20:33] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:33] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:33] [INFO] GetUser successful 
-[2024-04-05 10:20:33] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:33] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:33] [INFO] entreprise getone with id 2 
-[2024-04-05 10:20:33] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:20:33] [INFO] GetAllContactById successful 
-[2024-04-05 10:20:33] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:33] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:33] [INFO] stage getone with id 11 
-[2024-04-05 10:20:34] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:20:34] [INFO] entreprise getone with id 2 
-[2024-04-05 10:20:34] [INFO] get one user by id with id: 11 
-[2024-04-05 10:20:34] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:34] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:20:34] [INFO] entreprise getone with id 2 
-[2024-04-05 10:20:34] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:20:34] [INFO] GetStageByUserId successful 
-[2024-04-05 10:21:30] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:30] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:30] [INFO] GetStageByUserId successful 
-[2024-04-05 10:21:31] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:31] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:31] [INFO] GetUser successful 
-[2024-04-05 10:21:31] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:31] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:31] [INFO] entreprise getone with id 2 
-[2024-04-05 10:21:31] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:21:31] [INFO] GetAllContactById successful 
-[2024-04-05 10:21:31] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:31] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:31] [INFO] stage getone with id 11 
-[2024-04-05 10:21:31] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:21:31] [INFO] entreprise getone with id 2 
-[2024-04-05 10:21:31] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:31] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:31] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:21:31] [INFO] entreprise getone with id 2 
-[2024-04-05 10:21:31] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:31] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:31] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:31] [INFO] GetStageByUserId successful 
-[2024-04-05 10:21:31] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
+[2024-04-05 12:13:21] [SEVERE] Unable to connect to database
+java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
+	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
+	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
+	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
+	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
+	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:30)
+	at be.vinci.pae.business.controller.ContactUCCTest.lambda$createOneWrongUniqueCondition$0(ContactUCCTest.java:81)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.ContactUCCTest.createOneWrongUniqueCondition(ContactUCCTest.java:80)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:444)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
+	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
+	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
+	... 78 more
  
-[2024-04-05 10:21:33] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:33] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:33] [INFO] GetUser successful 
-[2024-04-05 10:21:33] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:33] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:33] [INFO] entreprise getone with id 2 
-[2024-04-05 10:21:33] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:21:33] [INFO] GetAllContactById successful 
-[2024-04-05 10:21:33] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:33] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:33] [INFO] stage getone with id 11 
-[2024-04-05 10:21:33] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:21:33] [INFO] entreprise getone with id 2 
-[2024-04-05 10:21:34] [INFO] get one user by id with id: 11 
-[2024-04-05 10:21:34] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:34] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:21:34] [INFO] entreprise getone with id 2 
-[2024-04-05 10:21:34] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:21:34] [INFO] GetStageByUserId successful 
-[2024-04-05 10:30:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:23] [INFO] GetUser successful 
-[2024-04-05 10:30:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:23] [INFO] GetUser successful 
-[2024-04-05 10:30:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:30:23] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:30:23] [INFO] GetAllContactById successful 
-[2024-04-05 10:30:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:23] [INFO] stage getone with id 11 
-[2024-04-05 10:30:23] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:30:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:30:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:23] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:30:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:30:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:23] [INFO] GetStageByUserId successful 
-[2024-04-05 10:30:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:30:23] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:30:23] [INFO] GetAllContactById successful 
-[2024-04-05 10:30:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:23] [INFO] stage getone with id 11 
-[2024-04-05 10:30:23] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:30:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:30:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:30:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:24] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:30:24] [INFO] entreprise getone with id 2 
-[2024-04-05 10:30:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:30:24] [INFO] GetStageByUserId successful 
-[2024-04-05 10:31:18] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:18] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:18] [INFO] GetUser successful 
-[2024-04-05 10:31:18] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:18] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:18] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:18] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:31:18] [INFO] GetAllContactById successful 
-[2024-04-05 10:31:18] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:18] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:18] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:18] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:18] [INFO] GetUser successful 
-[2024-04-05 10:31:19] [INFO] stage getone with id 11 
-[2024-04-05 10:31:19] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:31:19] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:19] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:19] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:19] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:31:19] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:19] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:31:19] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:19] [INFO] GetAllContactById successful 
-[2024-04-05 10:31:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:19] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:19] [INFO] GetStageByUserId successful 
-[2024-04-05 10:31:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:19] [INFO] stage getone with id 11 
-[2024-04-05 10:31:19] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:31:19] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:19] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:19] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:31:19] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:19] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:19] [INFO] GetStageByUserId successful 
-[2024-04-05 10:31:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] GetUser successful 
-[2024-04-05 10:31:23] [INFO] GetUser successful 
-[2024-04-05 10:31:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:23] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:31:23] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:31:23] [INFO] GetAllContactById successful 
-[2024-04-05 10:31:23] [INFO] GetAllContactById successful 
-[2024-04-05 10:31:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:23] [INFO] stage getone with id 11 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:31:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:23] [INFO] stage getone with id 11 
-[2024-04-05 10:31:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:23] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:23] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:31:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:31:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] entreprise getone with id 2 
-[2024-04-05 10:31:23] [INFO] GetStageByUserId successful 
-[2024-04-05 10:31:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:31:23] [INFO] GetStageByUserId successful 
-[2024-04-05 10:32:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:05] [INFO] GetStageByUserId successful 
-[2024-04-05 10:32:06] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:06] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:06] [INFO] GetUser successful 
-[2024-04-05 10:32:06] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:06] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:06] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:06] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:32:06] [INFO] GetAllContactById successful 
-[2024-04-05 10:32:06] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:06] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:06] [INFO] stage getone with id 11 
-[2024-04-05 10:32:06] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:32:06] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:06] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:06] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:06] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:32:06] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:06] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:06] [INFO] GetStageByUserId successful 
-[2024-04-05 10:32:09] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:09] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
+[2024-04-05 12:13:21] [SEVERE] BizError
+be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
+	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:51)
+	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
+	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:30)
+	at be.vinci.pae.business.controller.ContactUCCTest.lambda$createOneWrongUniqueCondition$0(ContactUCCTest.java:81)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.ContactUCCTest.createOneWrongUniqueCondition(ContactUCCTest.java:80)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+Caused by: java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
+	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
+	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
+	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
+	... 75 more
+Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:444)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
+	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
+	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
+	... 78 more
  
-[2024-04-05 10:32:13] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:13] [INFO] GetUser successful 
-[2024-04-05 10:32:13] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:13] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:13] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:32:13] [INFO] GetAllContactById successful 
-[2024-04-05 10:32:13] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:13] [INFO] stage getone with id 11 
-[2024-04-05 10:32:13] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:32:13] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:13] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:13] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:32:14] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:14] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:14] [INFO] GetStageByUserId successful 
-[2024-04-05 10:32:23] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:23] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:23] [INFO] GetStageByUserId successful 
-[2024-04-05 10:32:24] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:24] [INFO] GetUser successful 
-[2024-04-05 10:32:24] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:24] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:24] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:32:24] [INFO] GetAllContactById successful 
-[2024-04-05 10:32:24] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:24] [INFO] stage getone with id 11 
-[2024-04-05 10:32:24] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:32:24] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:24] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:24] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:32:24] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:24] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:24] [INFO] GetStageByUserId successful 
-[2024-04-05 10:32:26] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:26] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:26] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
+[2024-04-05 12:13:22] [SEVERE] Unable to connect to database
+java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
+	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
+	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
+	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
+	at be.vinci.pae.services.DALServicesImpl.rollbackTransaction(DALServicesImpl.java:118)
+	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:55)
+	at be.vinci.pae.business.controller.ContactUCCTest.lambda$createOneWrongUniqueCondition$0(ContactUCCTest.java:81)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.ContactUCCTest.createOneWrongUniqueCondition(ContactUCCTest.java:80)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
+	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
+	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
+	at org.postgresql.Driver.makeConnection(Driver.java:444)
+	at org.postgresql.Driver.connect(Driver.java:297)
+	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
+	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
+	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
+	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
+	... 78 more
  
-[2024-04-05 10:32:27] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:27] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:27] [INFO] GetUser successful 
-[2024-04-05 10:32:27] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:27] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:27] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:27] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:32:27] [INFO] GetAllContactById successful 
-[2024-04-05 10:32:28] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:28] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:28] [INFO] stage getone with id 11 
-[2024-04-05 10:32:28] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:32:28] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:28] [INFO] get one user by id with id: 11 
-[2024-04-05 10:32:28] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:28] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:32:28] [INFO] entreprise getone with id 2 
-[2024-04-05 10:32:28] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:32:28] [INFO] GetStageByUserId successful 
-[2024-04-05 10:33:25] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:25] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:25] [INFO] GetUser successful 
-[2024-04-05 10:33:25] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:25] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:25] [INFO] GetUser successful 
-[2024-04-05 10:33:25] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:25] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:25] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:25] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:33:25] [INFO] GetAllContactById successful 
-[2024-04-05 10:33:25] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:25] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:25] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:25] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:33:25] [INFO] GetAllContactById successful 
-[2024-04-05 10:33:25] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:25] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:25] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:25] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:25] [INFO] stage getone with id 11 
-[2024-04-05 10:33:25] [INFO] stage getone with id 11 
-[2024-04-05 10:33:25] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:33:25] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:33:26] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:26] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:26] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:26] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:26] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:26] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:26] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:33:26] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:33:26] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:26] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:26] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:26] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:26] [INFO] GetStageByUserId successful 
-[2024-04-05 10:33:26] [INFO] GetStageByUserId successful 
-[2024-04-05 10:33:35] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:35] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:35] [INFO] GetStageByUserId successful 
-[2024-04-05 10:33:35] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:35] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:35] [INFO] GetUser successful 
-[2024-04-05 10:33:36] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:36] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:36] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:36] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:33:36] [INFO] GetAllContactById successful 
-[2024-04-05 10:33:36] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:36] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:36] [INFO] stage getone with id 11 
-[2024-04-05 10:33:36] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:33:36] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:36] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:36] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:36] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:33:36] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:36] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:36] [INFO] GetStageByUserId successful 
-[2024-04-05 10:33:37] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:37] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:37] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
-[2024-04-05 10:33:39] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:39] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:39] [INFO] GetUser successful 
-[2024-04-05 10:33:39] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:39] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:39] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:39] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:33:39] [INFO] GetAllContactById successful 
-[2024-04-05 10:33:39] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:39] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:39] [INFO] stage getone with id 11 
-[2024-04-05 10:33:39] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:33:39] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:39] [INFO] get one user by id with id: 11 
-[2024-04-05 10:33:39] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:39] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:33:39] [INFO] entreprise getone with id 2 
-[2024-04-05 10:33:39] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:33:39] [INFO] GetStageByUserId successful 
-[2024-04-05 10:34:04] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:04] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:04] [INFO] GetStageByUserId successful 
-[2024-04-05 10:34:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:05] [INFO] GetUser successful 
-[2024-04-05 10:34:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:05] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:05] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:34:05] [INFO] GetAllContactById successful 
-[2024-04-05 10:34:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:05] [INFO] stage getone with id 11 
-[2024-04-05 10:34:05] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:34:05] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:05] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:34:05] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:05] [INFO] GetStageByUserId successful 
-[2024-04-05 10:34:05] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:05] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:05] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
-[2024-04-05 10:34:07] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:07] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:07] [INFO] GetUser successful 
-[2024-04-05 10:34:07] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:07] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:07] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:07] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:34:07] [INFO] GetAllContactById successful 
-[2024-04-05 10:34:07] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:07] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:08] [INFO] stage getone with id 11 
-[2024-04-05 10:34:08] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:34:08] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:08] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:08] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:08] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:34:08] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:08] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:08] [INFO] GetStageByUserId successful 
-[2024-04-05 10:34:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:46] [INFO] GetStageByUserId successful 
-[2024-04-05 10:34:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:46] [INFO] GetUser successful 
-[2024-04-05 10:34:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:46] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:34:46] [INFO] GetAllContactById successful 
-[2024-04-05 10:34:47] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:47] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:47] [INFO] stage getone with id 11 
-[2024-04-05 10:34:47] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:34:47] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:47] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:47] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:47] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:34:47] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:47] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:47] [INFO] GetStageByUserId successful 
-[2024-04-05 10:34:48] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:48] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:48] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Version du stage incorrecte
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:67)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
-[2024-04-05 10:34:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:51] [INFO] GetUser successful 
-[2024-04-05 10:34:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:51] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:34:51] [INFO] GetAllContactById successful 
-[2024-04-05 10:34:52] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:52] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:52] [INFO] stage getone with id 11 
-[2024-04-05 10:34:52] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:34:52] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:52] [INFO] get one user by id with id: 11 
-[2024-04-05 10:34:52] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:52] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:34:52] [INFO] entreprise getone with id 2 
-[2024-04-05 10:34:52] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:34:52] [INFO] GetStageByUserId successful 
-[2024-04-05 10:39:39] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:39] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:39] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:39] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:39] [INFO] GetUser successful 
-[2024-04-05 10:39:39] [INFO] GetStageByUserId successful 
-[2024-04-05 10:39:39] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:39] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:40] [INFO] entreprise getone with id 2 
-[2024-04-05 10:39:40] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:39:40] [INFO] GetAllContactById successful 
-[2024-04-05 10:39:40] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:40] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:40] [INFO] stage getone with id 11 
-[2024-04-05 10:39:40] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:39:40] [INFO] entreprise getone with id 2 
-[2024-04-05 10:39:40] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:40] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:40] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:39:40] [INFO] entreprise getone with id 2 
-[2024-04-05 10:39:40] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:40] [INFO] GetStageByUserId successful 
-[2024-04-05 10:39:43] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:43] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:43] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Zaza
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:77)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:66)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
-[2024-04-05 10:39:45] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:45] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:45] [INFO] GetUser successful 
-[2024-04-05 10:39:45] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:45] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:45] [INFO] entreprise getone with id 2 
-[2024-04-05 10:39:45] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:39:45] [INFO] GetAllContactById successful 
-[2024-04-05 10:39:45] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:45] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:46] [INFO] stage getone with id 11 
-[2024-04-05 10:39:46] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:39:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:39:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:39:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:46] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:39:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:39:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:39:46] [INFO] GetStageByUserId successful 
-[2024-04-05 10:41:31] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:31] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:32] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:32] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:32] [INFO] GetUser successful 
-[2024-04-05 10:41:32] [INFO] GetStageByUserId successful 
-[2024-04-05 10:41:32] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:32] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:32] [INFO] entreprise getone with id 2 
-[2024-04-05 10:41:32] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:41:32] [INFO] GetAllContactById successful 
-[2024-04-05 10:41:32] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:32] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:32] [INFO] stage getone with id 11 
-[2024-04-05 10:41:32] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:41:32] [INFO] entreprise getone with id 2 
-[2024-04-05 10:41:32] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:32] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:32] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:41:32] [INFO] entreprise getone with id 2 
-[2024-04-05 10:41:32] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:32] [INFO] GetStageByUserId successful 
-[2024-04-05 10:41:35] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:35] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:35] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Optimisitc lock exception
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:66)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
-[2024-04-05 10:41:36] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:36] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:36] [INFO] GetUser successful 
-[2024-04-05 10:41:36] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:36] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:36] [INFO] entreprise getone with id 2 
-[2024-04-05 10:41:37] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:41:37] [INFO] GetAllContactById successful 
-[2024-04-05 10:41:37] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:37] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:37] [INFO] stage getone with id 11 
-[2024-04-05 10:41:37] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:41:37] [INFO] entreprise getone with id 2 
-[2024-04-05 10:41:37] [INFO] get one user by id with id: 11 
-[2024-04-05 10:41:37] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:37] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:41:37] [INFO] entreprise getone with id 2 
-[2024-04-05 10:41:37] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:41:37] [INFO] GetStageByUserId successful 
-[2024-04-05 10:45:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:45:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:51] [INFO] GetUser successful 
-[2024-04-05 10:45:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:45:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:45:51] [INFO] GetUser successful 
-[2024-04-05 10:45:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:45:51] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:45:51] [INFO] GetAllContactById successful 
-[2024-04-05 10:45:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:45:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:51] [INFO] stage getone with id 11 
-[2024-04-05 10:45:51] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:45:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:45:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:45:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:45:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:51] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:45:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:45:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:45:51] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:45:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:51] [INFO] GetAllContactById successful 
-[2024-04-05 10:45:51] [INFO] GetStageByUserId successful 
-[2024-04-05 10:45:52] [INFO] get one user by id with id: 11 
-[2024-04-05 10:45:52] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:52] [INFO] stage getone with id 11 
-[2024-04-05 10:45:52] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:45:52] [INFO] entreprise getone with id 2 
-[2024-04-05 10:45:52] [INFO] get one user by id with id: 11 
-[2024-04-05 10:45:52] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:52] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:45:52] [INFO] entreprise getone with id 2 
-[2024-04-05 10:45:52] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:45:52] [INFO] GetStageByUserId successful 
-[2024-04-05 10:46:12] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:12] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:12] [INFO] GetStageByUserId successful 
-[2024-04-05 10:46:13] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:13] [INFO] GetUser successful 
-[2024-04-05 10:46:13] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:13] [INFO] entreprise getone with id 2 
-[2024-04-05 10:46:13] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:46:13] [INFO] GetAllContactById successful 
-[2024-04-05 10:46:13] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:13] [INFO] stage getone with id 11 
-[2024-04-05 10:46:13] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:46:13] [INFO] entreprise getone with id 2 
-[2024-04-05 10:46:13] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:13] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:46:13] [INFO] entreprise getone with id 2 
-[2024-04-05 10:46:13] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:13] [INFO] GetStageByUserId successful 
-[2024-04-05 10:46:17] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:17] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:17] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Optimisitc lock exception
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:66)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
-[2024-04-05 10:46:20] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:20] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:20] [INFO] GetUser successful 
-[2024-04-05 10:46:20] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:20] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:20] [INFO] entreprise getone with id 2 
-[2024-04-05 10:46:20] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:46:20] [INFO] GetAllContactById successful 
-[2024-04-05 10:46:20] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:20] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:20] [INFO] stage getone with id 11 
-[2024-04-05 10:46:20] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:46:20] [INFO] entreprise getone with id 2 
-[2024-04-05 10:46:20] [INFO] get one user by id with id: 11 
-[2024-04-05 10:46:20] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:20] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:46:20] [INFO] entreprise getone with id 2 
-[2024-04-05 10:46:20] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:46:20] [INFO] GetStageByUserId successful 
-[2024-04-05 10:48:56] [INFO] get one user by id with id: 11 
-[2024-04-05 10:48:56] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:56] [INFO] GetUser successful 
-[2024-04-05 10:48:57] [INFO] get one user by id with id: 11 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] GetUser successful 
-[2024-04-05 10:48:57] [INFO] get one user by id with id: 11 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] entreprise getone with id 2 
-[2024-04-05 10:48:57] [INFO] get one user by id with id: 11 
-[2024-04-05 10:48:57] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] GetAllContactById successful 
-[2024-04-05 10:48:57] [INFO] entreprise getone with id 2 
-[2024-04-05 10:48:57] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:48:57] [INFO] get one user by id with id: 11 
-[2024-04-05 10:48:57] [INFO] GetAllContactById successful 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] get one user by id with id: 11 
-[2024-04-05 10:48:57] [INFO] stage getone with id 11 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:48:57] [INFO] stage getone with id 11 
-[2024-04-05 10:48:57] [INFO] entreprise getone with id 2 
-[2024-04-05 10:48:57] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:48:57] [INFO] get one user by id with id: 11 
-[2024-04-05 10:48:57] [INFO] entreprise getone with id 2 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] get one user by id with id: 11 
-[2024-04-05 10:48:57] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] entreprise getone with id 2 
-[2024-04-05 10:48:57] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] entreprise getone with id 2 
-[2024-04-05 10:48:57] [INFO] GetStageByUserId successful 
-[2024-04-05 10:48:57] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:48:57] [INFO] GetStageByUserId successful 
-[2024-04-05 10:49:08] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:08] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:08] [INFO] GetStageByUserId successful 
-[2024-04-05 10:49:09] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:09] [INFO] GetUser successful 
-[2024-04-05 10:49:09] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:09] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:09] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:49:09] [INFO] GetAllContactById successful 
-[2024-04-05 10:49:09] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:09] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:09] [INFO] stage getone with id 11 
-[2024-04-05 10:49:09] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:49:09] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:10] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:10] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:10] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:49:10] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:10] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:10] [INFO] GetStageByUserId successful 
-[2024-04-05 10:49:12] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:12] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:12] [SEVERE] BizError
-be.vinci.pae.exception.OptimisticLockException: Optimisitc lock exception
-	at be.vinci.pae.services.StageDAOImpl.modifyStage(StageDAOImpl.java:76)
-	at be.vinci.pae.business.controller.StageUCCImpl.modifyStage(StageUCCImpl.java:50)
-	at be.vinci.pae.api.StageRessource.modifyStage(StageRessource.java:66)
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
-	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
-	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
-	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
-	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
-	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
-	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
-	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
-	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
-	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
-	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
-	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
-	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
-	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
-[2024-04-05 10:49:14] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:14] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:14] [INFO] GetUser successful 
-[2024-04-05 10:49:14] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:14] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:14] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:14] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:49:14] [INFO] GetAllContactById successful 
-[2024-04-05 10:49:14] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:14] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:14] [INFO] stage getone with id 11 
-[2024-04-05 10:49:14] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:49:14] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:14] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:14] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:14] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:49:14] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:14] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:14] [INFO] GetStageByUserId successful 
-[2024-04-05 10:49:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] GetUser successful 
-[2024-04-05 10:49:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] GetUser successful 
-[2024-04-05 10:49:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:46] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:49:46] [INFO] GetAllContactById successful 
-[2024-04-05 10:49:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:46] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:49:46] [INFO] GetAllContactById successful 
-[2024-04-05 10:49:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] stage getone with id 11 
-[2024-04-05 10:49:46] [INFO] stage getone with id 11 
-[2024-04-05 10:49:46] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:49:46] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:49:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:46] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:49:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:46] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:49:46] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:46] [INFO] GetStageByUserId successful 
-[2024-04-05 10:49:46] [INFO] GetStageByUserId successful 
-[2024-04-05 10:49:47] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:47] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:47] [INFO] GetUser successful 
-[2024-04-05 10:49:47] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:47] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:47] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:47] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:49:47] [INFO] GetAllContactById successful 
-[2024-04-05 10:49:47] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:47] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:47] [INFO] GetUser successful 
-[2024-04-05 10:49:50] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:50] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:50] [INFO] GetUser successful 
-[2024-04-05 10:49:50] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:50] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:50] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:50] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:49:51] [INFO] GetAllContactById successful 
-[2024-04-05 10:49:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:51] [INFO] stage getone with id 11 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:49:51] [INFO] stage getone with id 11 
-[2024-04-05 10:49:51] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:49:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:51] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:49:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] GetStageByUserId successful 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] GetStageByUserId successful 
-[2024-04-05 10:49:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] GetUser successful 
-[2024-04-05 10:49:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:51] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:49:51] [INFO] GetAllContactById successful 
-[2024-04-05 10:49:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:51] [INFO] get all contact for the user with id 11 
-[2024-04-05 10:49:51] [INFO] GetAllContactById successful 
-[2024-04-05 10:49:51] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:51] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:51] [INFO] stage getone with id 11 
-[2024-04-05 10:49:52] [INFO] get 1 contact by stage id4 
-[2024-04-05 10:49:52] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:52] [INFO] get one user by id with id: 11 
-[2024-04-05 10:49:52] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:52] [INFO] Supervisor getone with id 3 
-[2024-04-05 10:49:52] [INFO] entreprise getone with id 2 
-[2024-04-05 10:49:52] [INFO] schoolyear getone + id : 1 
-[2024-04-05 10:49:52] [INFO] GetStageByUserId successful 
