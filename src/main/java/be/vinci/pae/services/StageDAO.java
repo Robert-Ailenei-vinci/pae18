@@ -14,4 +14,7 @@ public interface StageDAO {
    * @return The {@link StageDTO} representing the stage.
    */
   StageDTO getOneStageByUserId(int userId);
+
+  StageDTO createOne(int contactId, String signatureDate, String internshipProject,
+      int supervisorId, int userId, int schoolYearId);
 }

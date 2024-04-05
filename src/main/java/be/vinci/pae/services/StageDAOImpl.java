@@ -45,6 +45,31 @@ public class StageDAOImpl implements StageDAO {
     return null;
   }
 
+  @Override
+  public StageDTO createOne(int contactId, String signatureDate, String internshipProject,
+      int supervisorId, int userId, int schoolYearId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "INSERT INTO pae.stages "
+            + "(contact, signature_date, internship_project, supervisor, user, "
+            + "school_year, _version)"
+            + "VALUES (?, ?, ?, ?, ?, ?, 0)"
+    )) {
+      preparedStatement.setInt(1, contactId);
+      preparedStatement.setString(2, signatureDate);
+      preparedStatement.setString(3, internshipProject);
+      preparedStatement.setInt(4, supervisorId);
+      preparedStatement.setInt(5, userId);
+      preparedStatement.setInt(6, schoolYearId);
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        return getOneStageByUserId(userId);
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return null;
+  }
+
   private StageDTO getStageMethodFromDB(ResultSet rs) {
     StageDTO stage = myDomainFactory.getStage();
     try {
