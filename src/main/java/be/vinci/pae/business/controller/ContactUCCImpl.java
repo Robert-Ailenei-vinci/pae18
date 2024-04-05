@@ -13,6 +13,7 @@ import be.vinci.pae.services.DALServices;
 import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class is an implementation of the {@link ContactUCC} interface.
@@ -178,7 +179,9 @@ public class ContactUCCImpl implements ContactUCC {
         if (tempContact.checkStateAccepted()) {
           throw new BizException("The user already has accepted an internship");
         }
-        if (tempContact.getId() != contact.getId()) {
+        if (tempContact.getId() != contact.getId()
+            && (Objects.equals(tempContact.getState(), "initie")
+            || Objects.equals(tempContact.getState(), "rencontre"))) {
           tempContact.cancelContact(version);
           myContactDAO.updateContact(tempContact);
         }
