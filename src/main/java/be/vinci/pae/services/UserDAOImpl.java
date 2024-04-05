@@ -252,6 +252,7 @@ public class UserDAOImpl implements UserDAO {
         stmt.setObject(i + 1, parameters.get(i));
       }
 
+      stmt.executeUpdate();
       LoggerUtil.logInfo("user with id " + user.getId() + " was changed");
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
