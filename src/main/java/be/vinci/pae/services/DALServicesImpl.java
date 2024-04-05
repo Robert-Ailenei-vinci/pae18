@@ -39,6 +39,7 @@ public class DALServicesImpl implements DALBackServices, DALServices {
     dataSource = new BasicDataSource();
     dataSource.setMaxTotal(MAX_CONNECTION);
     dataSource.setUrl(DATA_BASEURL);
+    dataSource.setMaxTotal(5); // Set maximum number of connections to 5
     dataSource.setUsername(DATABASE_USER);
     dataSource.setPassword(DATABASE_PASSWORD);
   }
