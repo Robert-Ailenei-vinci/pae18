@@ -61,13 +61,12 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         EntrepriseDTO entreprise;
         entreprise = getEntrepriseMethodFromDB(rs);
         entreprises.add(entreprise);
-        LoggerUtil.logInfo("entreprise getAll");
-
       }
     } catch (Exception e) {
       LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
+    LoggerUtil.logInfo("entreprise getAll");
     return entreprises;
   }
 
@@ -109,6 +108,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       entreprise.setPhoneNumber(rs.getString("phone_num"));
       entreprise.setIsBlacklisted(rs.getBoolean("blacklisted"));
       entreprise.setTradeName(rs.getString("trade_name"));
+      entreprise.setBlacklistReason(rs.getString("reason_blacklist"));
     } catch (Exception e) {
       LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error while getting entreprise from db", e);

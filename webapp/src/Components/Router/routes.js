@@ -8,6 +8,7 @@ import AddContactPage from '../Pages/AddContact';
 import UsersPage from '../Pages/Users';
 import AddEnterprisePage from '../Pages/AddEnterprise';
 import EntreprisesListPage from '../Pages/EntreprisesListPage';
+import EntrepriseDetailsPage from '../Pages/EntrepriseDetailsPage';
 
 const routes = {
   '/': HomePage,
@@ -19,7 +20,8 @@ const routes = {
   '/logout': Logout,
   '/addContact': AddContactPage,
   '/addEnterprise': AddEnterprisePage,
-  '/seeEntreprises' : EntreprisesListPage
+  '/seeEntreprises' : EntreprisesListPage,
+  '/detailsEntreprise/:id': EntrepriseDetailsPage,
 };
 
 export default routes;

@@ -104,4 +104,18 @@ public interface EntrepriseDTO {
    * @param isBlacklisted true if the enterprise is blacklisted, false otherwise
    */
   void setIsBlacklisted(boolean isBlacklisted);
+
+  /**
+   * Retrieves the reason for blacklisting the enterprise.
+   *
+   * @return the reason for blacklisting the enterprise
+   */
+  String getBlacklistReason();
+
+  /**
+   * Sets the reason for blacklisting the enterprise.
+   *
+   * @param blacklistReason the reason for blacklisting the enterprise
+   */
+  void setBlacklistReason(String blacklistReason);
 }

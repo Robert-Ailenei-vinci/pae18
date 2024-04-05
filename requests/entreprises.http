@@ -1,3 +1,5 @@
+@baseUrl = http://localhost:3000
+
 ### Login the default user
 POST {{baseUrl}}/auths/login
 Content-Type: application/json
@@ -13,5 +15,10 @@ Content-Type: application/json
 
 ### Get all entreprises
 GET {{baseUrl}}/entreprise/getAll
+Content-Type: application/json
+Authorization: {{user}}
+
+### Get all the contacts related to the entreprise
+GET {{baseUrl}}/entreprise/entrepriseDetailsAllContacts/1
 Content-Type: application/json
 Authorization: {{user}}

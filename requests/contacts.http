@@ -5,8 +5,8 @@ POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-  "login": "zaza@student.vinci.be",
-  "password": "mdp1"
+  "login": "Caroline.line@student.vinci.be",
+  "password": "mdpuser.1"
 }
 
 > {%

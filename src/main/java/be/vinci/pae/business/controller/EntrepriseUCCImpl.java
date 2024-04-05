@@ -1,10 +1,12 @@
 package be.vinci.pae.business.controller;
 
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.LoggerUtil;
@@ -19,6 +21,8 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
   @Inject
   private EntrepriseDAO myEntrepriseDAO;
   @Inject
+  private ContactDAO contactDAO;
+  @Inject
   private DALServices dalServices;
 
   /**
@@ -26,7 +30,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
    *
    * @param entrepriseId the identifier of the entreprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   *     entreprise with the given identifier exists
+   * entreprise with the given identifier exists
    */
   @Override
   public EntrepriseDTO getOne(int entrepriseId) {
@@ -93,6 +97,20 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       dalServices.commitTransaction();
 
       return entreprise;
+    } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
+
+  @Override
+  public List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId) {
+    try {
+      dalServices.startTransaction();
+      List<ContactDTO> contacts = contactDAO.getAllContactsByEntrepriseId(entrepriseId);
+      dalServices.commitTransaction();
+      return contacts;
     } catch (Exception e) {
       LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();

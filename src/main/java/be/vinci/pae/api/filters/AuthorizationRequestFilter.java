@@ -55,7 +55,6 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
         requestContext.abortWith(Response.status(Status.FORBIDDEN)
             .entity("You are forbidden to access this resource").build());
       }
-
       requestContext.setProperty("user", authenticatedUser);
     }
   }
