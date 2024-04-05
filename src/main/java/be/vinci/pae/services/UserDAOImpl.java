@@ -206,6 +206,11 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO changeUser(UserDTO user) {
+
+    if (getLastVersionFromDB(user.getEmail()) != user.getVersion()){
+      throw new OptimisticLockException("User was updated by another transaction");
+    }
+
     StringBuilder sql = new StringBuilder("UPDATE pae.users SET ");
     List<Object> parameters = new ArrayList<>();
 
@@ -246,9 +251,6 @@ public class UserDAOImpl implements UserDAO {
       for (int i = 0; i < parameters.size(); i++) {
         stmt.setObject(i + 1, parameters.get(i));
       }
-      if (stmt.executeUpdate() == 0) {
-        throw new OptimisticLockException("User was updated by another transaction");
-      }
 
       LoggerUtil.logInfo("user with id " + user.getId() + " was changed");
     } catch (Exception e) {
@@ -286,6 +288,22 @@ public class UserDAOImpl implements UserDAO {
       throw new FatalError("Error processing result set", e);
     }
     return 0; // return 0 if no id was found
+  }
+
+  private int getLastVersionFromDB(String userId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "SELECT _version FROM pae.users WHERE email = ? ")) {
+      preparedStatement.setString(1, userId);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt("_version");
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Erreur lors de la récupération de la dernière version");
+    }
+    return 0;
+
   }
 
 

@@ -128,6 +128,11 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO updateContact(ContactDTO contactDTO) {
+
+    if (getLastVersionFromDB(contactDTO.getId()) != contactDTO.getVersion()) {
+      throw new OptimisticLockException("Optimisitc lock exception");
+    }
+
     StringBuilder sql = new StringBuilder("UPDATE pae.contacts SET ");
     List<Object> parameters = new ArrayList<>();
 
@@ -160,9 +165,6 @@ public class ContactDAOImpl implements ContactDAO {
       for (int i = 0; i < parameters.size(); i++) {
         stmt.setObject(i + 1, parameters.get(i));
       }
-      if (stmt.executeUpdate() == 0) {
-        throw new OptimisticLockException("Contact was updated by another transaction");
-      }
 
       LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
 
@@ -188,6 +190,22 @@ public class ContactDAOImpl implements ContactDAO {
       throw new FatalError("Error processing result set", e);
     }
     return null;
+  }
+
+  private int getLastVersionFromDB(int contactId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "SELECT _version FROM pae.contacts WHERE contact = ? ")) {
+      preparedStatement.setInt(1, contactId);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt("_version");
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Erreur lors de la récupération de la dernière version");
+    }
+    return 0;
+
   }
 
 
