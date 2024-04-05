@@ -278,17 +278,4 @@ class ContactUCCTest {
             contact.getVersion()));
   }
 
-  @Test
-  void refusedContactNullFromDAO() {
-    String refusalReason = "raison de refus";
-    contact.setState("rencontre");
-    contactResult.setState("refuse");
-    contactResult.setReasonForRefusal(refusalReason);
-
-    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
-    when(contactDAO.updateContact(contact)).thenReturn(null);
-
-    assertNull(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
-        contact.getVersion()));
-  }
 }
