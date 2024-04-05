@@ -33,7 +33,7 @@ class EntrepriseUCCImplTest {
   private User user;
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
-  private EntrepriseDTO expectedEntreprise;
+  private EntrepriseDTO actualEntreprise;
 
   private DALServices dalServices;
 
@@ -46,7 +46,7 @@ class EntrepriseUCCImplTest {
     this.entreprise = (Entreprise) factory.getEntreprise();
     this.entreprise1 = (Entreprise) factory.getEntreprise();
     this.entreprise2 = (Entreprise) factory.getEntreprise();
-    this.expectedEntreprise = factory.getEntreprise();
+    this.actualEntreprise = factory.getEntreprise();
     this.user = (User) factory.getUser();
     this.entrepriseDAO = locator.getService(EntrepriseDAO.class);
     doNothing().when(dalServices).startTransaction();
@@ -61,9 +61,9 @@ class EntrepriseUCCImplTest {
     entreprise.setTradeName("zaza");
 
     when(entrepriseUcc.getOne(1)).thenReturn(entreprise);
-    expectedEntreprise = entrepriseUcc.getOne(1);
+    actualEntreprise = entrepriseUcc.getOne(1);
 
-    assertEquals(entreprise.getId(), expectedEntreprise.getId());
+    assertEquals(entreprise.getId(), actualEntreprise.getId());
   }
 
   @DisplayName("Test getOne with transaction error")
@@ -80,9 +80,9 @@ class EntrepriseUCCImplTest {
   void createOne() {
     // 1. Arrange
     user.setRole("etudiant");
-    expectedEntreprise = entreprise1;
+    entreprise = entreprise1;
     when(entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email"))
-        .thenReturn(expectedEntreprise);
+        .thenReturn(entreprise);
     when(
         entrepriseDAO.createOne("tradeName", "designation", "address", "phoneNum", "email"))
         .thenReturn(entreprise1);
@@ -93,7 +93,7 @@ class EntrepriseUCCImplTest {
 
     // 3. Assert
     assertNotNull(actualEntreprise);
-    assertEquals(expectedEntreprise, actualEntreprise);
+    assertEquals(this.entreprise, actualEntreprise);
   }
 
   @DisplayName("Test createOne with wrong user role")

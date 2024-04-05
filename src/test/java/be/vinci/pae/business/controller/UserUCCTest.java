@@ -92,7 +92,7 @@ public class UserUCCTest {
 
   @DisplayName("Test login with user not found")
   @Test
-  public void testLoginUserNull() {
+  public void testLoginUserNotFound() {
     when(userDataService.getOne("testLogin@student.vinci.be")).thenReturn(null);
 
     assertNull(userUCC.login("testLogin@student.vinci.be", "testPassword"));
@@ -126,12 +126,17 @@ public class UserUCCTest {
   @DisplayName("Test getAll")
   @Test
   public void testGetAll() {
-    List<UserDTO> userDTOList = new ArrayList<>();
-    userDTOList.add(user);
+    List<UserDTO> expectedList = new ArrayList<>();
+    expectedList.add(user);
     // Mock the myUserDAO to throw an exception when getAll is called
-    when(userDataService.getAll()).thenReturn(userDTOList);
+    when(userDataService.getAll()).thenReturn(expectedList);
 
-    assertEquals(userDTOList, userUCC.getAll());
+    List<UserDTO> actualList = userUCC.getAll();
+    assertNotNull(actualList);
+    assertEquals(expectedList.size(), actualList.size());
+    for (int i = 0; i < expectedList.size(); i++) {
+      assertEquals(expectedList.get(i), actualList.get(i));
+    }
   }
 
   @DisplayName("Test register")

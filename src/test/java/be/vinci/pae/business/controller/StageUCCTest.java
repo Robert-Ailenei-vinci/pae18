@@ -37,7 +37,7 @@ class StageUCCTest {
     int userId = 123;
 
     when(stageDAO.getOneStageByUserId(userId)).thenReturn(stage);
-    assertEquals(stageUCC.getOneStageByUserId(userId), stage);
+    assertEquals(stage, stageUCC.getOneStageByUserId(userId));
   }
 
   @DisplayName("Test getOneStageByUserId with transaction error")

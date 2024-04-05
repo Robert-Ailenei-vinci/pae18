@@ -54,15 +54,17 @@ class ContactUCCTest {
     userDTO.setId(123);
     userDTO.setRole("etudiant");
     List<ContactDTO> contactDTOList = new ArrayList<>();
-    contactResult.setEntrepriseId(123);
-    contactResult.setSchoolYearId(123);
+    contactResult.setId(123);
+    contactResult.setEntrepriseId(456);
+    contactResult.setSchoolYearId(789);
     contactDTOList.add(contactResult);
     when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenReturn(contactDTOList);
     EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
     SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
     when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenReturn(contact);
 
-    assertEquals(contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO), contact);
+    assertEquals(contact.getId(),
+        contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO).getId());
   }
 
   @DisplayName("Test createOne with already existing contact with same entreprise & same year")
@@ -105,7 +107,7 @@ class ContactUCCTest {
     contactList.add(mockedContact);
     when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenReturn(contactList);
 
-    assertEquals(contactUCC.getAllContactsByUserId(contact.getUserId()), contactList);
+    assertEquals(contactList, contactUCC.getAllContactsByUserId(contact.getUserId()));
   }
 
   @DisplayName("Test getAllContactsByUserId with transaction exception")
@@ -127,9 +129,9 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
-    assertEquals(contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId(),
-            contact.getVersion()),
-        contactResult);
+    assertEquals(contactResult.getMeetingType(),
+        contactUCC.meetContact(contact.getId(), meetingType, contact.getUserId(),
+            contact.getVersion()).getMeetingType());
   }
 
   @DisplayName("Test meetContact given wrong state")
@@ -172,9 +174,9 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
-    assertEquals(contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId(),
-            contact.getVersion()),
-        contactResult);
+    assertEquals(contactResult.getState(),
+        contactUCC.stopFollowContact(contact.getUserId(), contact.getUserId(),
+            contact.getVersion()).getState());
   }
 
   @DisplayName("Test stopFollowContact given wrong user")
@@ -216,9 +218,9 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
-    assertEquals(contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
-            contact.getVersion()),
-        contactResult);
+    assertEquals(contactResult.getState(),
+        contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
+            contact.getVersion()).getState());
   }
 
   @DisplayName("Test refusedContact given wrong state")
