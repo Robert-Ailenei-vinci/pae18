@@ -12,6 +12,7 @@ import be.vinci.pae.utils.TestApplicationBinder;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class SchoolYearUCCImplTest {
@@ -29,6 +30,7 @@ class SchoolYearUCCImplTest {
 
   }
 
+  @DisplayName("Test getOne")
   @Test
   void getOne() {
     schoolYear.setId(1);
@@ -42,6 +44,7 @@ class SchoolYearUCCImplTest {
     assertEquals("2021-2022", result.getYearFormat());
   }
 
+  @DisplayName("Test getOne with transaction error")
   @Test
   void getOneWithException() {
 
