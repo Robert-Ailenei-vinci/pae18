@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.StageDTO;
+import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.services.StageDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -45,7 +46,7 @@ class StageUCCTest {
   void getOneStageByUserIdWithException() {
     int userId = 123;
 
-    when(stageUCC.getOneStageByUserId(userId));
-    assertThrows(RuntimeException.class, () -> stageUCC.getOneStageByUserId(userId));
+    when(stageUCC.getOneStageByUserId(userId)).thenThrow(FatalError.class);
+    assertThrows(FatalError.class, () -> stageUCC.getOneStageByUserId(userId));
   }
 }

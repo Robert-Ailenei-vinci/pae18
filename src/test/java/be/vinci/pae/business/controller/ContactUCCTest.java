@@ -13,6 +13,7 @@ import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.BizExceptionNotFound;
+import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import java.util.ArrayList;
@@ -111,9 +112,9 @@ class ContactUCCTest {
   @DisplayName("Test getAllContactsByUserId with transaction exception")
   @Test
   void getAllContactsByUserIdWithException() {
-    when(contactDAO.getAllContactsByUserId(contact.getUserId()));
+    when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenThrow(FatalError.class);
 
-    assertThrows(RuntimeException.class,
+    assertThrows(FatalError.class,
         () -> contactUCC.getAllContactsByUserId(contact.getUserId()));
   }
 

@@ -14,6 +14,7 @@ import be.vinci.pae.business.domain.SchoolYear;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.SchoolYearDAO;
 import be.vinci.pae.services.UserDAO;
@@ -117,10 +118,10 @@ public class UserUCCTest {
     String password = "testPassword";
 
     // Mock the myUserDAO to throw an exception when getOne is called
-    when(userDataService.getOne(anyString())).thenThrow(new RuntimeException());
+    when(userDataService.getOne(anyString())).thenThrow(FatalError.class);
 
     // Act and Assert
-    assertThrows(Exception.class, () -> userUCC.login(login, password));
+    assertThrows(FatalError.class, () -> userUCC.login(login, password));
   }
 
   @DisplayName("Test getAll")
@@ -174,10 +175,10 @@ public class UserUCCTest {
   @Test
   public void testGetAllException() {
     // Mock the myUserDAO to throw an exception when getAll is called
-    when(userDataService.getAll()).thenThrow(new RuntimeException());
+    when(userDataService.getAll()).thenThrow(FatalError.class);
 
     // Act and Assert
-    assertThrows(RuntimeException.class, () -> userUCC.getAll());
+    assertThrows(FatalError.class, () -> userUCC.getAll());
   }
 
 
@@ -230,10 +231,10 @@ public class UserUCCTest {
     String phoneNum = "1234567890";
 
     // Mock the changeUser method to return null
-    when(userDataService.getOne(email)).thenReturn(user);
-    when(userUCC.changeData(email, password, lname, fname, phoneNum, version));
+    when(userDataService.getOne(email)).thenThrow(
+        FatalError.class);
 
-    assertThrows(RuntimeException.class,
+    assertThrows(FatalError.class,
         () -> userUCC.changeData(email, password, lname, fname, phoneNum, version));
   }
 
@@ -267,10 +268,10 @@ public class UserUCCTest {
     int userId = 1;
 
     // Mock the getOne method to return the expectedUser
-    when(userUCC.getOne(userId)).thenThrow(new RuntimeException());
+    when(userUCC.getOne(userId)).thenThrow(FatalError.class);
 
     // Assert
-    assertThrows(RuntimeException.class, () -> {
+    assertThrows(FatalError.class, () -> {
       userUCC.getOne(userId);
     });
   }

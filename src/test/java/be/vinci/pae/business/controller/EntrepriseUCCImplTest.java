@@ -3,7 +3,6 @@ package be.vinci.pae.business.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -12,6 +11,7 @@ import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
@@ -66,8 +66,8 @@ class EntrepriseUCCImplTest {
   @DisplayName("Test getOne with transaction error")
   @Test
   public void testGetOneWithException() {
-    when(entrepriseUcc.getOne(1));
-    assertThrows(RuntimeException.class, () -> {
+    when(entrepriseUcc.getOne(1)).thenThrow(FatalError.class);
+    assertThrows(FatalError.class, () -> {
       entrepriseUcc.getOne(1);
     });
   }
@@ -129,8 +129,8 @@ class EntrepriseUCCImplTest {
   @DisplayName("Test getAll with transaction error")
   @Test
   public void testGetAllWithException() {
-    when(entrepriseUcc.getAll());
-    assertThrows(RuntimeException.class, () -> {
+    when(entrepriseUcc.getAll()).thenThrow(FatalError.class);
+    assertThrows(FatalError.class, () -> {
       entrepriseUcc.getAll();
     });
   }

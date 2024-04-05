@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SchoolYear;
 import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.utils.TestApplicationBinder;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
@@ -48,7 +49,7 @@ class SchoolYearUCCImplTest {
   @Test
   void getOneWithException() {
 
-    when(schoolYearUCC.getOne(1));
-    assertThrows(RuntimeException.class, () -> schoolYearUCC.getOne(1));
+    when(schoolYearUCC.getOne(1)).thenThrow(FatalError.class);
+    assertThrows(FatalError.class, () -> schoolYearUCC.getOne(1));
   }
 }
