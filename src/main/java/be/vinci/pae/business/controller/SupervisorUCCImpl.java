@@ -16,11 +16,11 @@ public class SupervisorUCCImpl implements SupervisorUCC {
     private SupervisorDAO mySupervisor;
 
     @Override
-    public SupervisorDTO createOne(String last_name, String first_name, EntrepriseDTO entreprise, String email, String numero) {
+    public SupervisorDTO createOne(String last_name, String first_name, int id_entreprise, String email, String numero) {
         try {
             dalServices.startTransaction();
 
-            Supervisor supervisor = (Supervisor) mySupervisor.createOne(last_name, first_name, entreprise,
+            Supervisor supervisor = (Supervisor) mySupervisor.createOne(last_name, first_name, id_entreprise,
                     email, numero);
 
             dalServices.commitTransaction();
@@ -31,6 +31,5 @@ public class SupervisorUCCImpl implements SupervisorUCC {
             dalServices.rollbackTransaction();
             throw e;
         }
-    }
     }
 }

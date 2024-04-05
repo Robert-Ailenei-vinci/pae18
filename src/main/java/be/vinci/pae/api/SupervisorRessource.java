@@ -59,12 +59,13 @@ public class SupervisorRessource {
         String email = json.get("email").asText();
 
         EntrepriseDTO entrepriseDTO = myEntreprise.getOne(entrepriseId);
+        int entrepriseID = entrepriseDTO.getId();
         if (entrepriseDTO == null) {
             LoggerUtil.logError("Entreprise not recognised", new AuthorisationException(""));
             throw new AuthorisationException("Entreprise not recognised");
         }
 
-        SupervisorDTO supervisorDTO = mySupervisorUCC.createOne(lastName, firstName, entrepriseDTO, phoneNumber, email);
+        SupervisorDTO supervisorDTO = mySupervisorUCC.createOne(lastName, firstName, entrepriseID, phoneNumber, email);
         if (supervisorDTO == null) {
             LoggerUtil.logError("Supervisor not created", new be.vinci.pae.exception.BadRequestException(""));
             throw new be.vinci.pae.exception.BadRequestException("Supervisor not created");

@@ -17,5 +17,5 @@ public interface SupervisorDAO {
    */
   SupervisorDTO getOneById(int id);
 
-  SupervisorDTO createOne(String last_name, String first_name, EntrepriseDTO entreprise, String email, String numero);
+  SupervisorDTO createOne(String last_name, String first_name, int id_entreprise, String email, String numero);
 }
