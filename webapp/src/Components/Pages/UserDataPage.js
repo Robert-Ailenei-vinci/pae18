@@ -1,3 +1,4 @@
+/* eslint-disable no-self-assign */
 /* eslint-disable spaced-comment */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -403,11 +404,16 @@ async function renderPersonnalInfoPage() {
       confirmBtn.type = 'button'; // Change this to 'button' to prevent form submission on click
   
       // Add an event listener to the confirm button
-      confirmBtn.addEventListener('click', (event) => {
+      confirmBtn.addEventListener('click', () => {
         // Call the changeInternshipSubject method
-        changeInternshipSubject(stageData.contact.id,input.value);
-        location.reload();
-      });
+        changeInternshipSubject(stageData.contact.id,input.value, stageData._version);
+        // Wait for 2 seconds (2000 milliseconds) and then reload the page
+    setTimeout(function() {
+      location.reload();  
+  }, 500);
+        
+
+     });
   
       // Replace the text content of the td element with the input field and the new button
       td.textContent = '';

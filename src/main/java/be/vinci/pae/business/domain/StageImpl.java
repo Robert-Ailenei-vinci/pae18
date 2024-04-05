@@ -16,6 +16,17 @@ public class StageImpl implements Stage {
   private UserDTO user;
   private SchoolYearDTO schoolYear;
   private SupervisorDTO supervisor;
+  private int _version;
+
+  @Override
+  public int get_version() {
+    return _version;
+  }
+
+  @Override
+  public void set_version(int _version) {
+    this._version = _version;
+  }
 
   @Override
   public int getContactId() {

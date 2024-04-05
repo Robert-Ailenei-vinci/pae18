@@ -37,7 +37,7 @@ public class StageUCCImpl implements StageUCC {
   }
 
   @Override
-  public StageDTO modifyStage(int userId, String subject, int contactId) {
+  public StageDTO modifyStage(int userId, String subject, int contactId, int version) {
     try {
       dalServices.startTransaction();
 
@@ -46,7 +46,7 @@ public class StageUCCImpl implements StageUCC {
       stage.setUserId(userId);
       stage.setContactId(contactId);
       stage.setInternshipProject(subject);
-
+      stage.set_version(version);
       StageDTO updatedStage = stageDAO.modifyStage(stage);
       dalServices.commitTransaction();
       return updatedStage;

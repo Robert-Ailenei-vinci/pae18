@@ -22,7 +22,8 @@ public interface StageUCC {
    * @param userId    the user id
    * @param subject   the subject
    * @param contactId the contact id
+   * @param version   the version
    * @return the modified stage
    */
-  StageDTO modifyStage(int userId, String subject, int contactId);
+  StageDTO modifyStage(int userId, String subject, int contactId, int version);
 }

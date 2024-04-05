@@ -62,8 +62,8 @@ public class StageRessource {
     int userId = authentifiedUser.getId();
     String subject = json.get("internship_project").asText();
     int contactId = json.get("id_contact").asInt();
-
-    StageDTO toReturn = stageUCC.modifyStage(userId, subject, contactId);
+    int ver = json.get("version").asInt();
+    StageDTO toReturn = stageUCC.modifyStage(userId, subject, contactId, ver);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetStageByUserId successful");
     }

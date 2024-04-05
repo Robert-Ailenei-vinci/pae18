@@ -2,7 +2,7 @@ import {getAuthenticatedUser} from "../../../utils/auths";
 
 const user = getAuthenticatedUser();
 
-export default async function changeInternshipSubject(idContact, text) {
+export default async function changeInternshipSubject(idContact, text, version) {
     console.log("changeInternshipSubject");
     console.log('text :',text)
     console.log('idcontact :', idContact);
@@ -16,26 +16,29 @@ export default async function changeInternshipSubject(idContact, text) {
       },
       body: JSON.stringify({
         "id_contact": idContact,
-        "internship_project": text
+        "internship_project": text,
+        "version": version
       }),
       
     };
   
     try {
-      const responseContacts = await fetch(
-          `http://localhost:3000/stages/modifyStage`, options);
-  
-      if (!responseContacts.ok) {
-        throw new Error(
-            `Failed to modify stage: ${responseContacts.statusText}`);
+      const responseContacts = await fetch(`http://localhost:3000/stages/modifyStage`, options);
+    
+      if (responseContacts.status === 409) {
+        alert('Le sujet de stage a déjà été modifé par quelquun en meme temps que vous');
+        throw new Error('Conflict');
       }
-  
+    
+      if (!responseContacts.ok) {
+        throw new Error(`Unexpected response status: ${responseContacts.status}`);
+      }
+    
       const contactsData = await responseContacts.json();
       return contactsData;
-      
+    
     } catch (error) {
-      throw new Error(
-          `An error occurred while update contacts: ${error.message}`);
+      console.log(`An error occurred while update internship: ${error.message}`);
     }
   }
 
