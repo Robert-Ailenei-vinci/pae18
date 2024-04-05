@@ -97,8 +97,6 @@ public class EntrepriseResource {
       JsonNode json) throws BadRequestException, AuthorisationException {
     if (!json.hasNonNull("trade_name")
         || !json.hasNonNull("address")) {
-      LoggerUtil.logError("All fields required to create an enterprise.",
-          new BadRequestException(""));
       throw new BadRequestException("All fields required to create an enterprise.");
     }
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
@@ -112,14 +110,12 @@ public class EntrepriseResource {
     // Try to get user, enterprise, and school year
     UserDTO userDTO = myUserUCC.getOne(userId);
     if (userDTO == null) {
-      LoggerUtil.logError("User not recognised", new AuthorisationException(""));
       throw new AuthorisationException("User not recognised");
     }
 
     EntrepriseDTO entrepriseDTO = myEntreprise.createOne(userDTO, tradeName, designation, address,
         phoneNum, email);
     if (entrepriseDTO == null) {
-      LoggerUtil.logError("Contact not created", new BadRequestException(""));
       throw new BadRequestException("Contact not created");
     }
     LoggerUtil.logInfo("addOne successful");

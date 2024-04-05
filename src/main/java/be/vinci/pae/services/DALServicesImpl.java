@@ -2,7 +2,6 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.utils.Config;
-import be.vinci.pae.utils.LoggerUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -47,7 +46,6 @@ public class DALServicesImpl implements DALBackServices, DALServices {
         connection = dataSource.getConnection();
         threadLocalConnection.set(connection);
       } catch (SQLException e) {
-        LoggerUtil.logError("Unable to connect to database", e);
         throw new FatalError("Unable to connect to database: " + e.getMessage(), e);
       }
     }
@@ -61,7 +59,6 @@ public class DALServicesImpl implements DALBackServices, DALServices {
         connection.close();
       }
     } catch (SQLException e) {
-      LoggerUtil.logError("Unable to close connection", e);
       throw new FatalError("Unable to close connection: " + e.getMessage(), e);
     } finally {
       threadLocalConnection.remove();
@@ -73,7 +70,6 @@ public class DALServicesImpl implements DALBackServices, DALServices {
     try {
       return getConnection().prepareStatement(sql);
     } catch (SQLException e) {
-      LoggerUtil.logError("Unable to create PreparedStatement", e);
       throw new FatalError("Unable to create PreparedStatement: " + e.getMessage(), e);
     }
   }
@@ -85,7 +81,6 @@ public class DALServicesImpl implements DALBackServices, DALServices {
         ps.close();
       }
     } catch (SQLException e) {
-      LoggerUtil.logError("Unable to close PreparedStatement", e);
       throw new FatalError("Unable to close PreparedStatement: " + e.getMessage(), e);
     }
   }
@@ -95,7 +90,6 @@ public class DALServicesImpl implements DALBackServices, DALServices {
     try {
       getConnection().setAutoCommit(false);
     } catch (SQLException e) {
-      LoggerUtil.logError("Unable to start transaction", e);
       throw new FatalError("Unable to start transaction: " + e.getMessage(), e);
     }
   }
@@ -107,7 +101,6 @@ public class DALServicesImpl implements DALBackServices, DALServices {
       getConnection().setAutoCommit(true);
       closeConnection();
     } catch (SQLException e) {
-      LoggerUtil.logError("Unable to commit transaction", e);
       throw new FatalError("Unable to commit transaction: " + e.getMessage(), e);
     }
   }
@@ -119,7 +112,6 @@ public class DALServicesImpl implements DALBackServices, DALServices {
       getConnection().setAutoCommit(true);
       closeConnection();
     } catch (SQLException e) {
-      LoggerUtil.logError("Unable to rollback transaction", e);
       throw new FatalError("Unable to rollback transaction: " + e.getMessage(), e);
     }
   }

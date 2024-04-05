@@ -6,7 +6,6 @@ import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.UserDAO;
-import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
@@ -49,7 +48,6 @@ public class UserUCCImpl implements UserUCC {
       return user;
     } catch (Exception e) {
       // Rollback the transaction in case of an error
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -82,7 +80,6 @@ public class UserUCCImpl implements UserUCC {
 
       return result;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -102,7 +99,6 @@ public class UserUCCImpl implements UserUCC {
       dalServices.commitTransaction();
       return users;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -116,7 +112,6 @@ public class UserUCCImpl implements UserUCC {
       dalServices.commitTransaction();
       return user;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -154,7 +149,6 @@ public class UserUCCImpl implements UserUCC {
 
       return updatedUser;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }

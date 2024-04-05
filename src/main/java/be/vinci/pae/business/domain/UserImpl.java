@@ -2,8 +2,6 @@ package be.vinci.pae.business.domain;
 
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
-import be.vinci.pae.utils.LoggerUtil;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.text.Normalizer;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
@@ -11,7 +9,7 @@ import org.mindrot.jbcrypt.BCrypt;
 /**
  * This class represents an implementation of the {@link User} interface.
  */
-public class  UserImpl implements User {
+public class UserImpl implements User {
 
   private int id;
   private String email;
@@ -172,7 +170,6 @@ public class  UserImpl implements User {
   @Override
   public void checkExistingUser(UserDTO userDTO) {
     if (userDTO != null) {
-      LoggerUtil.logError("Utilisateur existe déjà", new BizException(""));
       throw new BizException("Utilisateur existe deja");
     }
   }

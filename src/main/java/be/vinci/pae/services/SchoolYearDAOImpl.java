@@ -32,7 +32,6 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("No SchoolYear for input id : " + id, e);
       throw new SchoolYearNotFoundException("No Schoolyear for input id : " + id + e.getMessage());
     }
     return null;
@@ -44,7 +43,6 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
       schoolYear.setId(rs.getInt("id_year"));
       schoolYear.setYearFormat(rs.getString("years_format"));
     } catch (Exception e) {
-      LoggerUtil.logError("Error in getSchoolYearMethodFromDB", e);
       throw new FatalError("Error in getSchoolYearMethodFromDB" + e.getMessage());
     }
     return schoolYear;

@@ -7,7 +7,6 @@ import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
-import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
    *
    * @param entrepriseId the identifier of the entreprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   *     entreprise with the given identifier exists
+   * entreprise with the given identifier exists
    */
   @Override
   public EntrepriseDTO getOne(int entrepriseId) {
@@ -43,7 +42,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       return entrepriseDTO;
     } catch (Exception e) {
       // Rollback the transaction in case of an error
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -69,7 +67,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       return entrepriseDTOs;
     } catch (Exception e) {
       // Rollback the transaction in case of an error
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -82,8 +79,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       dalServices.startTransaction();
 
       if (!((User) user).checkIsStudent()) {
-        LoggerUtil.logError("BizError", new BizException(
-            "This user is not a student."));
         throw new BizException(
             "This user is not a student.");
       }
@@ -94,7 +89,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
       return entreprise;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }

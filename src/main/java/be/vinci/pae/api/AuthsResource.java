@@ -73,7 +73,6 @@ public class AuthsResource {
     // Try to login
     UserDTO publicUser = userUCC.login(email, password);
     if (publicUser == null) {
-      LoggerUtil.logError("Login failed", new AuthorisationException(""));
       throw new AuthorisationException("Login failed");
     }
     String token;
@@ -104,7 +103,6 @@ public class AuthsResource {
       return toReturn;
 
     } catch (Exception e) {
-      LoggerUtil.logError("Unable to create token", e);
       throw new AuthorisationException("Unable to create token");
     }
   }
@@ -124,7 +122,6 @@ public class AuthsResource {
     UserDTO user = (UserDTO) requestContext.getProperty("user");
 
     if (user == null) {
-      LoggerUtil.logError("User not recognised", new AuthorisationException(""));
       throw new AuthorisationException("User not recognised");
     }
     String token;
@@ -155,7 +152,6 @@ public class AuthsResource {
       return toReturn;
 
     } catch (Exception e) {
-      LoggerUtil.logError("Unable to create token", e);
       throw new AuthorisationException("Unable to create token");
     }
   }
@@ -196,7 +192,6 @@ public class AuthsResource {
         return login(toLogin);
 
       } catch (Exception e) {
-        LoggerUtil.logError("Unable to create user", e);
         throw new AuthorisationException("Unable to create user");
       }
     }
