@@ -7,7 +7,7 @@ public class SupervisorUCCImpl implements SupervisorUCC {
 
 
     @Override
-    public SupervisorDTO createOne(int id, String last_name, String first_name, EntrepriseDTO entreprise, String email, String numero) {
+    public SupervisorDTO createOne(String last_name, String first_name, EntrepriseDTO entreprise, String email, String numero) {
         return null;
     }
 }
