@@ -374,7 +374,7 @@ async function renderPersonnalInfoPage() {
   ['tradeName', 'designation', 'email', 'phoneNumber'].forEach(key => {
     const td = document.createElement('td');
     if (stageData) {
-      td.textContent = stageData.contact.entreprise[key] || 'Pas de sujet de stage défini';
+      td.textContent = stageData.contact.entreprise[key] || '----';
     }
     tr.appendChild(td);
   });
