@@ -2,6 +2,7 @@ package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -44,5 +45,34 @@ class StageUCCTest {
 
     when(stageUCC.getOneStageByUserId(userId));
     assertThrows(RuntimeException.class, () -> stageUCC.getOneStageByUserId(userId));
+  }
+
+
+  @Test
+  void modifyStageSuccess() {
+    int userId = 123;
+    String subject = "Test Subject";
+    int contactId = 456;
+    int version = 1;
+
+    when(stageDAO.modifyStage(any(StageDTO.class))).thenReturn(stage);
+
+    StageDTO result = stageUCC.modifyStage(userId, subject, contactId, version);
+
+    assertEquals(stage, result);
+  }
+
+  @Test
+  void modifyStageWithException() {
+    int userId = 123;
+    String subject = "Test Subject";
+    int contactId = 456;
+    int version = 1;
+
+    when(stageDAO.modifyStage(any(StageDTO.class))).thenThrow(new RuntimeException());
+
+    assertThrows(RuntimeException.class,
+        () -> stageUCC.modifyStage(userId, subject, contactId, version));
+
   }
 }

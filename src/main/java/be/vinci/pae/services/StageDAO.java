@@ -14,4 +14,12 @@ public interface StageDAO {
    * @return The {@link StageDTO} representing the stage.
    */
   StageDTO getOneStageByUserId(int userId);
+
+  /**
+   * Modifies a stage.
+   *
+   * @param stageDTO The {@link StageDTO} representing the stage to modify.
+   * @return The modified {@link StageDTO} representing the stage.
+   */
+  StageDTO modifyStage(StageDTO stageDTO);
 }
