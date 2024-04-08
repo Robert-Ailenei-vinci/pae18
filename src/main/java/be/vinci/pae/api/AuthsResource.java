@@ -63,6 +63,7 @@ public class AuthsResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public ObjectNode login(JsonNode json) {
+    LoggerUtil.logInfo("Starting : login");
     // Get and check credentials
     if (!json.hasNonNull("login") || !json.hasNonNull("password")) {
       LoggerUtil.logError("Login and password required", new BadRequestException(""));
@@ -119,9 +120,9 @@ public class AuthsResource {
   @GET
   @Path("user")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public ObjectNode getUser(@Context ContainerRequestContext requestContext) {
-    System.out.println("refresh");
+    LoggerUtil.logInfo("Starting : refresh");
     UserDTO user = (UserDTO) requestContext.getProperty("user");
 
     if (user == null) {
@@ -176,6 +177,7 @@ public class AuthsResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public ObjectNode register(JsonNode json) {
+    LoggerUtil.logInfo("Starting : register");
     if (!json.hasNonNull("login") || !json.hasNonNull("password") || !json.hasNonNull("l_name")
         || !json.hasNonNull("f_name") || !json.hasNonNull("phone_number") || !json.hasNonNull(
         "role")) {

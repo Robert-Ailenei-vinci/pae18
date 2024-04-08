@@ -1,8 +1,6 @@
 package be.vinci.pae.api;
 
-import be.vinci.pae.api.filters.Authorize.AuthorizeStudent;
-import be.vinci.pae.api.filters.Authorize.AuthorizeSupervisor;
-import be.vinci.pae.api.filters.Authorize.AuthorizeTeacher;
+import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.EntrepriseDTO;
@@ -49,10 +47,9 @@ public class EntrepriseResource {
   @GET
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
-  @AuthorizeStudent
-  @AuthorizeTeacher
-  @AuthorizeSupervisor
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<EntrepriseDTO> getAll() {
+    LoggerUtil.logInfo("Starting : enterprises/getAll");
     List<EntrepriseDTO> toReturn = myEntreprise.getAll();
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAll successful");
@@ -71,9 +68,9 @@ public class EntrepriseResource {
   @GET
   @Path("getOne")
   @Produces(MediaType.APPLICATION_JSON)
-  @AuthorizeStudent
-  @AuthorizeTeacher
+  @Authorize(roles = {"etudiant", "professeur"})
   public EntrepriseDTO getOne(int entrepriseId) {
+    LoggerUtil.logInfo("Starting : enterprise/getOne");
     EntrepriseDTO toReturn = myEntreprise.getOne(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetOne successful");
@@ -97,9 +94,10 @@ public class EntrepriseResource {
   @Path("addOne")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @AuthorizeStudent
+  @Authorize(roles = {"etudiant"})
   public EntrepriseDTO addEnterprise(@Context ContainerRequestContext requestContext,
       JsonNode json) throws BadRequestException, AuthorisationException {
+    LoggerUtil.logInfo("Starting : enterprise/addOne");
     if (!json.hasNonNull("trade_name")
         || !json.hasNonNull("address")) {
       LoggerUtil.logError("All fields required to create an enterprise.",

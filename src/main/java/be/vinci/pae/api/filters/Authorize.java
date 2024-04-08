@@ -12,36 +12,9 @@ import java.lang.annotation.Target;
  */
 @NameBinding
 @Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE})
 public @interface Authorize {
 
-  /**
-   * An inner annotation to specify authorization for student role. This annotation can be applied
-   * to JAX-RS resources and methods.
-   */
-  @Retention(RetentionPolicy.RUNTIME)
-  @Target({ElementType.METHOD, ElementType.TYPE})
-  @interface AuthorizeStudent {
-
-  }
-
-  /**
-   * An inner annotation to specify authorization for teacher role. This annotation can be applied
-   * to JAX-RS resources and methods.
-   */
-  @Retention(RetentionPolicy.RUNTIME)
-  @Target({ElementType.METHOD, ElementType.TYPE})
-  @interface AuthorizeTeacher {
-
-  }
-
-  /**
-   * An inner annotation to specify authorization for supervisor role. This annotation can be
-   * applied to JAX-RS resources and methods.
-   */
-  @Retention(RetentionPolicy.RUNTIME)
-  @Target({ElementType.METHOD, ElementType.TYPE})
-  @interface AuthorizeSupervisor {
-
-  }
+  String[] roles() default {"etudiant", "professeur", "administratif"};
 }
 

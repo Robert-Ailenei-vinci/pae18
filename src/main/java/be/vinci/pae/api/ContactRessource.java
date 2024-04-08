@@ -1,8 +1,6 @@
 package be.vinci.pae.api;
 
-import be.vinci.pae.api.filters.Authorize.AuthorizeStudent;
-import be.vinci.pae.api.filters.Authorize.AuthorizeSupervisor;
-import be.vinci.pae.api.filters.Authorize.AuthorizeTeacher;
+import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.ContactUCC;
 import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.SchoolYearUCC;
@@ -56,8 +54,9 @@ public class ContactRessource {
   @Path("add")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @AuthorizeStudent
+  @Authorize(roles = {"etudiant"})
   public ContactDTO addContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/add");
     if (!json.hasNonNull("entreprise")) {
       LoggerUtil.logError("Entreprise not found",
           new BadRequestException("Entreprise not found"));
@@ -108,10 +107,9 @@ public class ContactRessource {
   @GET
   @Path("allContactsByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @AuthorizeStudent
-  @AuthorizeTeacher
-  @AuthorizeSupervisor
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
+    LoggerUtil.logInfo("Starting : contact/getAllContactsByUserId");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
     List<ContactDTO> toReturn = myContactUCC.getAllContactsByUserId(userId);
@@ -132,8 +130,9 @@ public class ContactRessource {
   @Path("meet")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @AuthorizeStudent
+  @Authorize(roles = {"etudiant"})
   public ContactDTO meetContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/meet");
     if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
       LoggerUtil.logError("Contact id and meeting type required",
           new BadRequestException("contact id and meeting type required"));
@@ -162,9 +161,10 @@ public class ContactRessource {
   @Path("stopFollow")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @AuthorizeStudent
+  @Authorize(roles = {"etudiant"})
   public ContactDTO stopFollowContact(@Context ContainerRequestContext requestContext,
       JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/stopFollow");
     if (!json.hasNonNull("id_contact")) {
       LoggerUtil.logError("Contact id required",
           new BadRequestException("contact id required"));
@@ -193,8 +193,9 @@ public class ContactRessource {
   @Path("refused")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @AuthorizeStudent
+  @Authorize(roles = {"etudiant"})
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/refused");
     if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
       LoggerUtil.logError("Contact id and refusal reason required",
           new BadRequestException("contact id and refusal reason required"));
