@@ -18,8 +18,7 @@ import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
 
 /**
- * This class represents a filter for authorizing access to resources based on JWT tokens and user
- * roles.
+ * This class represents a filter for authorizing access to resources.
  */
 @Singleton
 @Provider
@@ -118,6 +117,5 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
         return true;
       }
     }
-    return false;
   }
 }
