@@ -16,6 +16,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * This class represents a filter for authorizing access to resources.
@@ -41,13 +42,11 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
    */
   @Override
   public void filter(ContainerRequestContext requestContext) throws IOException {
+
     LoggerUtil.logInfo("Starting : authorize");
     Authorize authorize = getClass().getAnnotation(Authorize.class);
     String[] rolesAllowed = authorize.roles();
-    for (String role : authorize.roles()
-    ) {
-      LoggerUtil.logInfo("Roles: " + role);
-    }
+    LoggerUtil.logInfo("Roles: " + Arrays.toString(rolesAllowed));
     // Check if the user has required roles
     if (!userHasValidToken(requestContext)) {
       requestContext.abortWith(Response.status(Status.FORBIDDEN)
@@ -113,7 +112,7 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
    */
   private boolean userHasRequiredRoles(UserDTO authenticatedUser, String[] rolesAllowed) {
     for (String allowedRole : rolesAllowed) {
-      if (allowedRole.contains(authenticatedUser.getRole())) {
+      if (authenticatedUser.getRole().equals(allowedRole)) {
         return true;
       }
     }

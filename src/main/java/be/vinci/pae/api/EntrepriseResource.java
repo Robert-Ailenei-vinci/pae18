@@ -47,7 +47,7 @@ public class EntrepriseResource {
   @GET
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  @Authorize
   public List<EntrepriseDTO> getAll() {
     LoggerUtil.logInfo("Starting : enterprises/getAll");
     List<EntrepriseDTO> toReturn = myEntreprise.getAll();

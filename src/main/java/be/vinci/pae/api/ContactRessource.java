@@ -107,7 +107,7 @@ public class ContactRessource {
   @GET
   @Path("allContactsByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  @Authorize
   public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
     LoggerUtil.logInfo("Starting : contact/getAllContactsByUserId");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
