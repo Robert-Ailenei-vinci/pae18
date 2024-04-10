@@ -5,7 +5,6 @@ package be.vinci.pae.business.domain;
  */
 public interface EntrepriseDTO {
 
-  //TODO: change fields to match database name
 
   /**
    * Retrieves the identifier of the enterprise.

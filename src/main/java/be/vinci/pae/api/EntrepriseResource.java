@@ -68,10 +68,10 @@ public class EntrepriseResource {
    * @return The {@link EntrepriseDTO} representing the enterprise.
    */
   @GET
-  @Path("getOne")
+  @Path("getOne/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public EntrepriseDTO getOne(int entrepriseId) {
+  public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
     EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetOne successful");
