@@ -38,4 +38,12 @@ public interface EntrepriseUCC {
    */
   EntrepriseDTO createOne(UserDTO user, String tradeName, String designation, String address,
       String phoneNum, String email);
+
+  /**
+   * Blacklists an enterprise.
+   * @param entrepriseId
+   * @param reason
+   * @return
+   */
+  EntrepriseDTO blacklist(int entrepriseId, String reason);
 }

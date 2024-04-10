@@ -1,6 +1,7 @@
 package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
+import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.utils.LoggerUtil;
@@ -91,6 +92,31 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       if (rowsAffected > 0) {
         LoggerUtil.logInfo("enteprise createOne with id " + entrepriseId);
         return getOne(entrepriseId);
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
+      throw new FatalError("Error processing result set", e);
+    }
+    return null;
+  }
+
+  /**
+   * Blacklists an enterprise.
+   *
+   * @param entreprise
+   * @return the newly updated entreprise and it s blacklistred if no errors prior to that
+   */
+  @Override
+  public EntrepriseDTO blacklist(Entreprise entreprise) {
+
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "UPDATE pae.entreprises SET blacklisted = true , reason_blacklist = ? WHERE id_entreprise = ?")) {
+      preparedStatement.setString(1, entreprise.getBlacklistReason());
+      preparedStatement.setInt(2, entreprise.getId());
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        LoggerUtil.logInfo("entreprise blacklist with id " + entreprise.getId());
+        return getOne(entreprise.getId());
       }
     } catch (Exception e) {
       LoggerUtil.logError("Error processing result set", e);

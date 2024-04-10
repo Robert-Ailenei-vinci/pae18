@@ -1,5 +1,6 @@
 package be.vinci.pae.services;
 
+import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import java.util.List;
 
@@ -36,4 +37,11 @@ public interface EntrepriseDAO {
    */
   EntrepriseDTO createOne(String tradeName, String designation, String address, String phoneNum,
       String email);
+
+  /**
+   * Blacklists an enterprise.
+   * @param entreprise
+   * @return the newly updated entreprise and it s blacklistred if no errors prior to that
+   */
+  EntrepriseDTO blacklist(Entreprise entreprise);
 }

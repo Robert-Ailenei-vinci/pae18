@@ -26,7 +26,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
    *
    * @param entrepriseId the identifier of the entreprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   *     entreprise with the given identifier exists
+   * entreprise with the given identifier exists
    */
   @Override
   public EntrepriseDTO getOne(int entrepriseId) {
@@ -93,6 +93,32 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       dalServices.commitTransaction();
 
       return entreprise;
+    } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
+
+  /**
+   * Blacklists an enterprise.
+   *
+   * @param entrepriseId
+   * @param reason
+   * @return
+   */
+  @Override
+  public EntrepriseDTO blacklist(int entrepriseId, String reason) {
+    try {
+      dalServices.startTransaction();
+
+      Entreprise entreprise = (Entreprise) myEntrepriseDAO.getOne(entrepriseId);
+      entreprise.setIsBlacklisted(true);
+      entreprise.setBlacklistReason(reason);
+
+      dalServices.commitTransaction();
+      EntrepriseDTO updatedEntreprise = myEntrepriseDAO.blacklist(entreprise);
+      return updatedEntreprise;
     } catch (Exception e) {
       LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();

@@ -78,6 +78,40 @@ public class EntrepriseResource {
   }
 
   /**
+   * Blacklists an enterprise. This method is accessed via HTTP POST request to the path
+   * "/entreprise/blacklist/{id}". It returns the blacklisted enterprise in JSON format. Requires
+   * authorization.
+   *
+   * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
+   */
+  @POST
+  @Path("blacklist")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+
+  public EntrepriseDTO blacklist(JsonNode json,
+      @Context ContainerRequestContext requestContext) {
+    String reason = json.get("reason").asText();
+    int entrepriseId = json.get("id").asInt();
+    String token = requestContext.getHeaderString("Authorization");
+
+
+
+    if (entrepriseId == 0 && reason.isEmpty()) {
+      LoggerUtil.logError("All fields required to blacklist an enterprise.",
+          new BadRequestException(""));
+      throw new BadRequestException("All fields required to blacklist an enterprise.");
+    }
+
+    EntrepriseDTO toReturn = myEntreprise.blacklist(entrepriseId, reason);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Blacklist successful");
+    }
+    return toReturn;
+  }
+
+
+  /**
    * Adds a new enterprise. This method is accessed via HTTP POST request to the path
    * "/entreprise/addOne". It expects a JSON object containing the fields: trade_name, designation,
    * address, phone_num, email. It returns the added enterprise in JSON format. Requires
