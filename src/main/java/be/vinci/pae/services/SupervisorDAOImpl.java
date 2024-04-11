@@ -8,6 +8,8 @@ import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents an implementation of the {@link SupervisorDAO} interface.
@@ -36,6 +38,25 @@ public class SupervisorDAOImpl implements SupervisorDAO {
       throw new SupervisorNotFoundException("Supervisor not found with this id " + id, e);
     }
     return null;
+  }
+
+  @Override
+  public List<SupervisorDTO> getAll() {
+    PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
+        "SELECT * FROM pae.internship_supervisor");
+    List<SupervisorDTO> supervisorDTOS = new ArrayList<>();
+    try (ResultSet rs = getAllUsers.executeQuery()) {
+      while (rs.next()) {
+        SupervisorDTO supervisorDTO;
+        supervisorDTO = getSupervisorMethodFromDB(rs);
+        supervisorDTOS.add(supervisorDTO);
+
+      }
+      LoggerUtil.logInfo("supervisor getAll");
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return supervisorDTOS;
   }
 
   private SupervisorDTO getSupervisorMethodFromDB(ResultSet rs) {

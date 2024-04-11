@@ -1,6 +1,7 @@
 package be.vinci.pae.business.controller;
 
 import be.vinci.pae.business.domain.SupervisorDTO;
+import java.util.List;
 
 /**
  * Represents the controller for managing supervisors.
@@ -15,4 +16,10 @@ public interface SupervisorUCC {
    */
   SupervisorDTO getOneById(int supervisorId);
 
+  /**
+   * Retrieves a list of all supervisors.
+   *
+   * @return A list of {@link SupervisorDTO} representing all enterprises.
+   */
+  List<SupervisorDTO> getAll();
 }

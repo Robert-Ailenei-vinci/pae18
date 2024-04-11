@@ -3,8 +3,8 @@ package be.vinci.pae.business.controller;
 import be.vinci.pae.business.domain.SupervisorDTO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.SupervisorDAO;
-import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
+import java.util.List;
 
 public class SupervisorUCCImpl implements SupervisorUCC {
 
@@ -28,7 +28,26 @@ public class SupervisorUCCImpl implements SupervisorUCC {
       return supervisorDTO;
     } catch (Exception e) {
       // Rollback the transaction in case of an error
-      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
+
+  @Override
+  public List<SupervisorDTO> getAll() {
+    try {
+      // Start a new transaction
+      dalServices.startTransaction();
+
+      // Retrieve the list of EntrepriseDTO from the DAO
+      List<SupervisorDTO> supervisorDTOs = mySupervisorDAO.getAll();
+
+      // Commit the transaction
+      dalServices.commitTransaction();
+
+      return supervisorDTOs;
+    } catch (Exception e) {
+      // Rollback the transaction in case of an error
       dalServices.rollbackTransaction();
       throw e;
     }
