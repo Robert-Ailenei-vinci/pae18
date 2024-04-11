@@ -140,34 +140,6 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO accepteContact(int contactId, int userId, int version) {
-    try {
-      dalServices.startTransaction();
-
-      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
-
-      if (contact.getUserId() != userId) {
-        throw new BizExceptionNotFound("The contact does not belong to the user");
-      }
-
-      if (!contact.accepteContact(version)) {
-        throw new BizException("The contact cannot be accepted");
-      }
-
-      ContactDTO contactToReturn = myContactDAO.updateContact(contact);
-      myContactDAO.cancelAllContact(contact);
-
-      dalServices.commitTransaction();
-      return contactToReturn;
-
-
-    } catch (Exception e) {
-      dalServices.rollbackTransaction();
-      throw e;
-    }
-  }
-
-  @Override
   public ContactDTO acceptContact(int contactId, int userId, int version) {
     try {
       dalServices.startTransaction();
@@ -196,13 +168,18 @@ public class ContactUCCImpl implements ContactUCC {
       if (!contact.acceptContact(version)) {
         throw new BizException("The contact cannot be accepted");
       }
+
       ContactDTO contactToReturn = myContactDAO.updateContact(contact);
+      myContactDAO.cancelAllContact(contact);
 
       dalServices.commitTransaction();
       return contactToReturn;
+
+
     } catch (Exception e) {
       dalServices.rollbackTransaction();
       throw e;
     }
   }
+
 }
