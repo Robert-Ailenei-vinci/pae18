@@ -4,7 +4,8 @@ package be.vinci.pae.business.domain;
  * Implementation of the StageDTO interface representing a stage.
  */
 
-public class StageImpl implements StageDTO {
+public class StageImpl implements Stage {
+
   private int contactId;
   private String signatureDate;
   private String internshipProject;
@@ -15,6 +16,17 @@ public class StageImpl implements StageDTO {
   private UserDTO user;
   private SchoolYearDTO schoolYear;
   private SupervisorDTO supervisor;
+  private int _version;
+
+  @Override
+  public int get_version() {
+    return _version;
+  }
+
+  @Override
+  public void set_version(int _version) {
+    this._version = _version;
+  }
 
   @Override
   public int getContactId() {

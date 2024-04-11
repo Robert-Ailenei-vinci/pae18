@@ -12,6 +12,8 @@ import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.controller.UserUCCImpl;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.DomainFactoryImpl;
+import be.vinci.pae.business.domain.Stage;
+import be.vinci.pae.business.domain.StageImpl;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserImpl;
 import be.vinci.pae.services.ContactDAO;
@@ -57,6 +59,6 @@ public class ApplicationBinder extends AbstractBinder {
     bind(SchoolYearDAOImpl.class).to(SchoolYearDAO.class).in(Singleton.class);
     bind(UserImpl.class).to(User.class).in(Singleton.class);
     bind(UserDAO.class).to(User.class).in(Singleton.class);
-
+    bind(StageImpl.class).to(Stage.class).in(Singleton.class);
   }
 }

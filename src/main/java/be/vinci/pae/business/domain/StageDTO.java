@@ -1,9 +1,9 @@
 package be.vinci.pae.business.domain;
 
 /**
- * Represents a Data Transfer Object (DTO) for a stage in a school year.
- * This interface defines methods to access and manipulate stage information, including
- * contact details, signature date, internship project, supervisor, user, and school year.
+ * Represents a Data Transfer Object (DTO) for a stage in a school year. This interface defines
+ * methods to access and manipulate stage information, including contact details, signature date,
+ * internship project, supervisor, user, and school year.
  */
 public interface StageDTO {
 
@@ -118,6 +118,7 @@ public interface StageDTO {
    * @param user The user to be associated with the stage.
    */
   void setUser(UserDTO user);
+
   /**
    * Retrieves the school year associated with the stage.
    *
@@ -146,4 +147,18 @@ public interface StageDTO {
    * @param supervisor the supervisor associated with the stage
    */
   void setSupervisor(SupervisorDTO supervisor);
+
+  /**
+   * Retrieves the version of the stage.
+   *
+   * @return the version of the stage
+   */
+  int get_version();
+
+  /**
+   * Sets the version of the stage.
+   *
+   * @param _version the version of the stage
+   */
+  void set_version(int _version);
 }
