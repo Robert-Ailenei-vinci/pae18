@@ -733,3 +733,261 @@ Caused by: org.postgresql.util.PSQLException: Pas de valeur spécifiée pour le 
 	at be.vinci.pae.services.ContactDAOImpl.cancelAllContact(ContactDAOImpl.java:229)
 	... 26 more
  
+[2024-04-11 23:37:07] [INFO] get one user by id with id: 7 
+[2024-04-11 23:37:07] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:37:07] [INFO] get one contact by id13 
+[2024-04-11 23:37:07] [INFO] entreprise getone with id 2 
+[2024-04-11 23:37:07] [INFO] Contact nr13 updated! 
+[2024-04-11 23:37:07] [INFO] get 1 contact by stage id13 
+[2024-04-11 23:37:07] [INFO] entreprise getone with id 2 
+[2024-04-11 23:37:07] [INFO] Contact nr13 updated! 
+[2024-04-11 23:37:07] [INFO] Supervisor getone with id 6 
+[2024-04-11 23:37:07] [INFO] entreprise getone with id 2 
+[2024-04-11 23:37:07] [WARNING] The date format is not valid
+be.vinci.pae.exception.BizException: The date format is not valid
+	at be.vinci.pae.business.controller.StageUCCImpl.createOne(StageUCCImpl.java:77)
+	at be.vinci.pae.api.ContactRessource.acceptContact(ContactRessource.java:237)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+ 
+[2024-04-11 23:39:49] [INFO] get one user by id with id: 7 
+[2024-04-11 23:39:49] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:39:49] [INFO] get one contact by id13 
+[2024-04-11 23:39:49] [INFO] entreprise getone with id 2 
+[2024-04-11 23:39:50] [WARNING] Optimisitc lock exception
+be.vinci.pae.exception.OptimisticLockException: Optimisitc lock exception
+	at be.vinci.pae.services.ContactDAOImpl.updateContact(ContactDAOImpl.java:138)
+	at be.vinci.pae.business.controller.ContactUCCImpl.acceptContact(ContactUCCImpl.java:177)
+	at be.vinci.pae.api.ContactRessource.acceptContact(ContactRessource.java:235)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+ 
+[2024-04-11 23:40:19] [INFO] get one user by id with id: 7 
+[2024-04-11 23:40:19] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:40:19] [INFO] entreprise getone with id 4 
+[2024-04-11 23:40:19] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:40:19] [INFO] entreprise getone with id 3 
+[2024-04-11 23:40:19] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:40:19] [INFO] entreprise getone with id 2 
+[2024-04-11 23:40:19] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:40:19] [INFO] GetAllContactById successful 
+[2024-04-11 23:40:19] [INFO] get one user by id with id: 7 
+[2024-04-11 23:40:19] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:40:24] [INFO] get one user by id with id: 7 
+[2024-04-11 23:40:24] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:40:24] [INFO] entreprise getone with id 2 
+[2024-04-11 23:40:24] [INFO] entreprise getone with id 2 
+[2024-04-11 23:40:24] [INFO] supervisor getAll in DAO 
+[2024-04-11 23:40:24] [INFO] GetAll successful 
+[2024-04-11 23:40:35] [INFO] get one user by id with id: 7 
+[2024-04-11 23:40:35] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:40:35] [INFO] get one contact by id13 
+[2024-04-11 23:40:35] [INFO] entreprise getone with id 2 
+[2024-04-11 23:40:35] [INFO] Contact nr13 updated! 
+[2024-04-11 23:40:35] [INFO] get 1 contact by stage id13 
+[2024-04-11 23:40:35] [INFO] entreprise getone with id 2 
+[2024-04-11 23:40:35] [INFO] Contact nr13 updated! 
+[2024-04-11 23:40:35] [INFO] Supervisor getone with id 3 
+[2024-04-11 23:40:35] [INFO] entreprise getone with id 2 
+[2024-04-11 23:40:35] [WARNING] The date format is not valid
+be.vinci.pae.exception.BizException: The date format is not valid
+	at be.vinci.pae.business.controller.StageUCCImpl.createOne(StageUCCImpl.java:76)
+	at be.vinci.pae.api.ContactRessource.acceptContact(ContactRessource.java:237)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+ 
+[2024-04-11 23:44:33] [INFO] get one user by id with id: 7 
+[2024-04-11 23:44:33] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:44:33] [INFO] entreprise getone with id 4 
+[2024-04-11 23:44:33] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:44:33] [INFO] entreprise getone with id 3 
+[2024-04-11 23:44:33] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:44:33] [INFO] entreprise getone with id 2 
+[2024-04-11 23:44:33] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:44:33] [INFO] GetAllContactById successful 
+[2024-04-11 23:44:33] [INFO] get one user by id with id: 7 
+[2024-04-11 23:44:33] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:44:38] [INFO] get one user by id with id: 7 
+[2024-04-11 23:44:38] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:44:38] [INFO] entreprise getone with id 2 
+[2024-04-11 23:44:38] [INFO] entreprise getone with id 2 
+[2024-04-11 23:44:38] [INFO] supervisor getAll in DAO 
+[2024-04-11 23:44:38] [INFO] GetAll successful 
+[2024-04-11 23:44:46] [INFO] get one user by id with id: 7 
+[2024-04-11 23:44:46] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:44:46] [INFO] get one contact by id13 
+[2024-04-11 23:44:46] [INFO] entreprise getone with id 2 
+[2024-04-11 23:44:46] [INFO] Contact nr13 updated! 
+[2024-04-11 23:44:46] [INFO] get 1 contact by stage id13 
+[2024-04-11 23:44:46] [INFO] entreprise getone with id 2 
+[2024-04-11 23:44:46] [INFO] Contact nr13 updated! 
+[2024-04-11 23:44:46] [INFO] Supervisor getone with id 3 
+[2024-04-11 23:44:46] [INFO] entreprise getone with id 2 
+[2024-04-11 23:44:46] [SEVERE] Error processing result set
+be.vinci.pae.exception.FatalError: Error processing result set
+	at be.vinci.pae.services.StageDAOImpl.createOne(StageDAOImpl.java:68)
+	at be.vinci.pae.business.controller.StageUCCImpl.createOne(StageUCCImpl.java:78)
+	at be.vinci.pae.api.ContactRessource.acceptContact(ContactRessource.java:237)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: org.postgresql.util.PSQLException: ERROR: syntax error at or near "user"
+  Position : 82
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2400)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:367)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:498)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190)
+	at org.postgresql.jdbc.PgPreparedStatement.executeUpdate(PgPreparedStatement.java:152)
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:137)
+	at org.apache.commons.dbcp2.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:137)
+	at be.vinci.pae.services.StageDAOImpl.createOne(StageDAOImpl.java:63)
+	... 26 more
+ 
+[2024-04-11 23:49:08] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:08] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:08] [INFO] entreprise getone with id 4 
+[2024-04-11 23:49:08] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:49:08] [INFO] entreprise getone with id 3 
+[2024-04-11 23:49:08] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:49:08] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:08] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:49:08] [INFO] GetAllContactById successful 
+[2024-04-11 23:49:08] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:08] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:11] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:11] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:11] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:11] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:11] [INFO] supervisor getAll in DAO 
+[2024-04-11 23:49:11] [INFO] GetAll successful 
+[2024-04-11 23:49:18] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:18] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:18] [INFO] get one contact by id13 
+[2024-04-11 23:49:18] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:18] [INFO] Contact nr13 updated! 
+[2024-04-11 23:49:18] [INFO] get 1 contact by stage id13 
+[2024-04-11 23:49:18] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:18] [INFO] Contact nr13 updated! 
+[2024-04-11 23:49:18] [INFO] Supervisor getone with id 3 
+[2024-04-11 23:49:18] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:18] [INFO] stage getone with id 7 
+[2024-04-11 23:49:18] [INFO] get 1 contact by stage id13 
+[2024-04-11 23:49:18] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:18] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:18] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:18] [INFO] Supervisor getone with id 3 
+[2024-04-11 23:49:18] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:18] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:18] [INFO] Stage accepted successfully 
+[2024-04-11 23:49:20] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:20] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:20] [INFO] GetUser successful 
+[2024-04-11 23:49:20] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:20] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:20] [INFO] entreprise getone with id 4 
+[2024-04-11 23:49:20] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:49:20] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:20] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:49:20] [INFO] entreprise getone with id 3 
+[2024-04-11 23:49:20] [INFO] get all contact for the user with id 7 
+[2024-04-11 23:49:20] [INFO] GetAllContactById successful 
+[2024-04-11 23:49:20] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:20] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:20] [INFO] stage getone with id 7 
+[2024-04-11 23:49:21] [INFO] get 1 contact by stage id13 
+[2024-04-11 23:49:21] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:21] [INFO] get one user by id with id: 7 
+[2024-04-11 23:49:21] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:21] [INFO] Supervisor getone with id 3 
+[2024-04-11 23:49:21] [INFO] entreprise getone with id 2 
+[2024-04-11 23:49:21] [INFO] schoolyear getone + id : 1 
+[2024-04-11 23:49:21] [INFO] GetStageByUserId successful 

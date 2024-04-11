@@ -128,13 +128,9 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO updateContact(ContactDTO contactDTO) {
-    System.out.println(contactDTO.getState());
 
     if (getLastVersionFromDB(contactDTO.getId()) != contactDTO.getVersion()) {
-      System.out.println("version");
-      System.out.println(contactDTO.getId());
-      System.out.println(getLastVersionFromDB(contactDTO.getId()));
-      System.out.println(contactDTO.getVersion());
+
       throw new OptimisticLockException("Optimisitc lock exception");
     }
 

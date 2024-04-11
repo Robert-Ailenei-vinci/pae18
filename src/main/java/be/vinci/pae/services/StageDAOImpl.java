@@ -50,7 +50,7 @@ public class StageDAOImpl implements StageDAO {
       int supervisorId, int userId, int schoolYearId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "INSERT INTO pae.stages "
-            + "(contact, signature_date, internship_project, supervisor, user, "
+            + "(contact, signature_date, internship_project, supervisor, _user, "
             + "school_year, _version)"
             + "VALUES (?, ?, ?, ?, ?, ?, 0)"
     )) {
