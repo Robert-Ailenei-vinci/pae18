@@ -49,7 +49,7 @@ public class StageUCCImpl implements StageUCC {
       dalServices.commitTransaction();
       return updatedStage;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
+
       dalServices.rollbackTransaction();
       throw e;
     }
