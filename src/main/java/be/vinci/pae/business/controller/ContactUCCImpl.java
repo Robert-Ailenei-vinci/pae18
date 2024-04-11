@@ -161,7 +161,6 @@ public class ContactUCCImpl implements ContactUCC {
 
 
     } catch (Exception e) {
-      LoggerUtil.logError("RollBack", e);
       dalServices.rollbackTransaction();
       throw e;
     }

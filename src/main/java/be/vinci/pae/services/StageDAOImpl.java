@@ -84,7 +84,6 @@ public class StageDAOImpl implements StageDAO {
       preparedStatement.executeUpdate();
       System.out.println(stageDTO);
     } catch (Exception e) {
-      LoggerUtil.logError("Error modifying stage", e);
       throw new FatalError("Erreur lors de la modification du stage");
     }
     return stageDTO;
@@ -100,7 +99,6 @@ public class StageDAOImpl implements StageDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error fetching last version", e);
       throw new FatalError("Erreur lors de la récupération de la dernière version");
     }
     return 0;
