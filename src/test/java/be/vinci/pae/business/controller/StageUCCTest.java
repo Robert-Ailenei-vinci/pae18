@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.StageDTO;
+import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.StageDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -19,6 +21,7 @@ class StageUCCTest {
 
   private StageUCC stageUCC;
   private StageDTO stage;
+  private StageDTO expectedStage;
   private DomainFactory factory;
   private StageDAO stageDAO;
 
@@ -30,6 +33,7 @@ class StageUCCTest {
     this.stageDAO = locator.getService(StageDAO.class);
     //utiliser des factory
     this.stage = factory.getStage();
+    this.expectedStage = factory.getStage();
   }
 
   @DisplayName("Test getOneStageByUserId")
@@ -48,6 +52,48 @@ class StageUCCTest {
 
     when(stageUCC.getOneStageByUserId(userId));
     assertThrows(RuntimeException.class, () -> stageUCC.getOneStageByUserId(userId));
+  }
+
+  @DisplayName("Test createOne")
+  @Test
+  void createOne() {
+    ContactDTO contact = factory.getContact();
+    contact.setId(123);
+    contact.setUserId(456);
+
+    expectedStage.setContactId(123);
+    expectedStage.setUserId(456);
+    expectedStage.setSchoolYearId(789);
+    String expectedDesc = "test";
+    String expectedDate = "01/01/2000";
+    int expectedSupervisor = 852;
+
+    when(stageUCC.createOne(contact, expectedDate, expectedDesc, expectedSupervisor)).thenReturn(
+        expectedStage);
+
+    StageDTO actualStage = stageUCC.createOne(contact, expectedDate, expectedDesc,
+        expectedSupervisor);
+    assertEquals(expectedStage.getContactId(), actualStage.getContactId());
+    assertEquals(expectedStage.getUserId(), actualStage.getUserId());
+    assertEquals(expectedStage.getSchoolYearId(), actualStage.getSchoolYearId());
+  }
+
+  @DisplayName("Test createOne with wrong given format on signatureDate")
+  @Test
+  void createOneWrongDate() {
+    ContactDTO contact = factory.getContact();
+    contact.setId(123);
+    contact.setUserId(456);
+
+    expectedStage.setContactId(123);
+    expectedStage.setUserId(456);
+    expectedStage.setSchoolYearId(789);
+    String expectedDesc = "test";
+    String expectedDate = "01/001/2000";
+    int expectedSupervisor = 852;
+
+    assertThrows(BizException.class,
+        () -> stageUCC.createOne(contact, expectedDate, expectedDesc, expectedSupervisor));
   }
 
 

@@ -1,5 +1,6 @@
 package be.vinci.pae.business.controller;
 
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.StageDTO;
 
 /**
@@ -14,6 +15,9 @@ public interface StageUCC {
    * @return the stage of the user
    */
   StageDTO getOneStageByUserId(int userId);
+
+  StageDTO createOne(ContactDTO contact, String signatureDate, String internshipProject,
+      int supervisorId);
 
 
   /**
