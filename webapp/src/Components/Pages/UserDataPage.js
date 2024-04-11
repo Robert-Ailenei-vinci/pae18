@@ -18,6 +18,7 @@ import {
   refuseContact,
   stopFollowContact
 } from "./utils/ChangeState";
+import baseURL from '../../../config';
 
 const UserDataPage = () => {
   clearPage();
@@ -36,7 +37,7 @@ async function fetchContactsData(user) {
 
   try {
     const responseContacts = await fetch(
-        `http://localhost:3000/contacts/allContactsByUserId`, options);
+        `${baseURL}/contacts/allContactsByUserId`, options);
 
     if (!responseContacts.ok) {
       throw new Error(
@@ -62,7 +63,7 @@ async function fetchStageData(user) {
 
   try {
     const responseStage = await fetch(
-        `http://localhost:3000/stages/stageByUserId`, options);
+        `${baseURL}/stages/stageByUserId`, options);
 
     if (responseStage == null) {
       return null;
@@ -210,7 +211,7 @@ async function renderPersonnalInfoPage() {
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
 // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
-      form.addEventListener('submit', (event) => {
+      form.addEventListener('submit', () => {
 
         const selectedOption = select.value;
         let additionalInfo = ''; // Informations supplémentaires à envoyer avec la soumission
@@ -258,7 +259,7 @@ async function renderPersonnalInfoPage() {
       const form = document.createElement('form');
       const select = document.createElement('select');
       select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
-      ['Refusé', 'Suivi stoppé'].forEach(optionText => {
+      ['Refusé', 'Suivi stoppé','Accepté'].forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText;
         option.textContent = optionText;
