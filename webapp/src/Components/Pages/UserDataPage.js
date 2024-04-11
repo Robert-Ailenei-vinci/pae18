@@ -19,6 +19,7 @@ import {
   stopFollowContact
 } from "./utils/ChangeState";
 import baseURL from '../../../config';
+import CreateStagePage from "./CreateStagePage";
 
 const UserDataPage = () => {
   clearPage();
@@ -74,7 +75,7 @@ async function fetchStageData(user) {
     }
 
     const stageData = await responseStage.json();
-   
+
     return stageData;
   } catch (error) {
     return undefined;
@@ -126,7 +127,6 @@ async function renderPersonnalInfoPage() {
   submit.addEventListener('click', () => {
     Navigate('/users/changeData');
   });
-
 
   // Creating table for contacts
   const table = document.createElement('table');
@@ -224,10 +224,10 @@ async function renderPersonnalInfoPage() {
         // Passer les informations supplémentaires à la fonction appropriée
         switch (selectedOption) {
           case 'Rencontré':
-            meetContact(contact.id, additionalInfo,contact.version);
+            meetContact(contact.id, additionalInfo, contact.version);
             break;
           case 'Suivi stoppé':
-            stopFollowContact(contact.id,contact.version);
+            stopFollowContact(contact.id, contact.version);
 
             break;
           default:
@@ -259,7 +259,7 @@ async function renderPersonnalInfoPage() {
       const form = document.createElement('form');
       const select = document.createElement('select');
       select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
-      ['Refusé', 'Suivi stoppé','Accepté'].forEach(optionText => {
+      ['Refusé', 'Suivi stoppé', 'Accepté'].forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText;
         option.textContent = optionText;
@@ -302,13 +302,17 @@ async function renderPersonnalInfoPage() {
         // Passer les informations supplémentaires à la fonction appropriée
         switch (selectedOption) {
           case 'Suivi stoppé':
-            stopFollowContact(contact.id,contact.version);
+            stopFollowContact(contact.id, contact.version);
 
             break;
           case 'Refusé':
-            refuseContact(contact.id, additionalInfo,contact.version);
+            refuseContact(contact.id, additionalInfo, contact.version);
 
             break;
+          case 'Accepté':
+            CreateStagePage(contact);
+
+            return;
           default:
             // Action par défaut ou erreur
             alert("Sélectionnez un état");
@@ -333,7 +337,7 @@ async function renderPersonnalInfoPage() {
       tr.appendChild(tdButton);
     }
 
-    if (contact.state === "stop follow" || contact.state === "refuse"){
+    if (contact.state === "stop follow" || contact.state === "refuse") {
       const tdVide = document.createElement('td');
       tdVide.textContent = '-';
       tr.appendChild(tdVide);
@@ -386,47 +390,48 @@ async function renderPersonnalInfoPage() {
       td.textContent = stageData.internshipProject || '-';
     }
     var btn = document.createElement("button");
-  
+
     // Set the text of the button
     btn.innerHTML = "Modifier sujet de stage";
     btn.type = 'button'; // Change this to 'button' to prevent form submission on click
-  
+
     // Add an event listener to the button
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       // Create an input field and a new button
       var input = document.createElement("input");
       var confirmBtn = document.createElement("button");
-  
+
       // Set the properties of the input field and the new button
       input.type = 'text';
-      input.value = stageData.internshipProject || 'Pas de sujet de stage defini'; // Set the value of the input field to the text content of the td element
+      input.value = stageData.internshipProject
+          || 'Pas de sujet de stage defini'; // Set the value of the input field to the text content of the td element
       confirmBtn.innerHTML = 'Confirmer';
       confirmBtn.style.backgroundColor = 'green';
       confirmBtn.type = 'button'; // Change this to 'button' to prevent form submission on click
-  
+
       // Add an event listener to the confirm button
       confirmBtn.addEventListener('click', () => {
         // Call the changeInternshipSubject method
-        changeInternshipSubject(stageData.contact.id,input.value, stageData._version);
+        changeInternshipSubject(stageData.contact.id, input.value,
+            stageData._version);
         // Wait for 2 seconds (2000 milliseconds) and then reload the page
-    setTimeout(function() {
-      location.reload();  
-  }, 500);
-        
+        setTimeout(function () {
+          location.reload();
+        }, 500);
 
-     });
-  
+      });
+
       // Replace the text content of the td element with the input field and the new button
       td.textContent = '';
       td.appendChild(input);
       td.appendChild(confirmBtn);
     });
-  
+
     // Append the button to the td element
     td.appendChild(btn);
     tr.appendChild(td);
   });
-  
+
 // Field for meetingType
   const td = document.createElement('td');
   if (stageData) {
