@@ -4,31 +4,39 @@ import {main} from "@popperjs/core";
 import Navbar from "../Navbar/Navbar";
 import {getAuthenticatedUser} from "../../utils/auths";
 import baseURL from "../../../config";
+import Navigate from "../Router/Navigate";
 
 const CreateStagePage = (contact) => {
   clearPage();
-  renderPageTitle(`Accepté le contact et crée un stage pour ${contact.entreprise.tradeName}`);
+  renderPageTitle(
+      `Accepté le contact et crée un stage pour ${contact.entreprise.tradeName}`);
   renderCreateStageForm(contact);
 
 }
 
-function renderCreateStageForm(contact) {
-  console.log(contact);
+async function renderCreateStageForm(contact) {
   const main = document.querySelector('main');
+
+  const row = document.createElement('div');
+  row.className = 'row';
 
   const form = createFormElement();
 
+  const allSupervisor = await getAllSupervisor(contact.entrepriseId)
+
   const dropdownContainer = createDropdownContainer();
   dropdownContainer.appendChild(createDropdownButton());
-  const dropdownContent = createDropdownContent(getAllSupervisor(contact.entrepriseId));
+  const dropdownContent = createDropdownContent(allSupervisor);
   dropdownContainer.appendChild(dropdownContent);
+  row.appendChild(dropdownContainer);
 
-  const inputProject = createTextInput(`project`, `Objectif du stage`);
+  form.appendChild(row);
+
+  const inputProject = createTextInput('project', `Objectif du stage`);
   form.appendChild(inputProject);
 
-  const dateSign = createDateInput('dateSign','Date de Signature')
+  const dateSign = createDateInput('dateSign', 'Date de Signature')
   form.appendChild(dateSign);
-
 
   const buttonGroup = document.createElement('div');
   buttonGroup.className = 'form-group mt-3';
@@ -36,11 +44,73 @@ function renderCreateStageForm(contact) {
   buttonGroup.appendChild(createCancelButton());
   form.appendChild(buttonGroup);
 
+  const container = document.createElement('div');
+  container.className = 'container';
+  container.appendChild(form);
+  main.appendChild(container);
 
-  main.appendChild(form);
+  let selectedSupervisorId = -1;
+
+  dropdownContent.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', () => {
+      selectedSupervisorId = item.id;
+      document.getElementById('dropbtn').textContent = item.textContent;
+    });
+  });
+  document.getElementById('dropbtn').addEventListener('click', toggleDropdown);
+  document.getElementById('myForm').addEventListener('submit', async () => {
+    event.preventDefault();
+    if (selectedSupervisorId === -1) {
+      alert('Please select a supervisor');
+      return;
+
+    }
+    const project = document.getElementById('project').value;
+    const dateSign = document.getElementById('dateSign').value;
+    try {
+    await createStage(selectedSupervisorId, contact.id, dateSign, project,
+        contact.version);
+    alert('Un stage a été crée');
+    location.reload();
+    }catch(error){
+      alert('An error occurred while create stage from contact. Please try again later.');
+      return;
+    }
+  });
 }
 
-async function createStage() {
+async function createStage(selectedSupervisorId, contactId, dateSign, project,
+    VersionContact) {
+  console.log(
+      'Data pour stage- idSupervisor:' + selectedSupervisorId + ' idContact:'
+      + contactId + ' dateSign:' + dateSign + ' project:' + project
+      + ' version contact:' + VersionContact)
+
+  const options = {
+    method: 'PUT',
+    body: JSON.stringify({
+      id_supervisor: selectedSupervisorId,
+      id_contact: contactId,
+      signatureDate: dateSign,
+      intershipProject: project,
+      version: VersionContact,
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': getAuthenticatedUser().token,
+    },
+  };
+
+  try {
+    const response = await fetch(`${baseURL}/contacts/accept`, options);
+    if (!response.ok) {
+      alert(`Failed to create stage from contact: ${response.statusText}`);
+    }
+    const newContact = await response.json();
+  } catch (error) {
+    console.error('Error adding contact:', error.message);
+    throw error
+  }
 
 }
 
@@ -54,7 +124,9 @@ async function getAllSupervisor(entrepriseId) {
     },
   };
 
-  const response = await fetch(`${baseURL}/entreprise/getAll`, options);
+  const response = await fetch(
+      `${baseURL}/supervisor/getAllForOneEnterprise?entrepriseId=${entrepriseId}`,
+      options);
 
   if (!response.ok) {
     alert('Prob avec fetch')
@@ -62,6 +134,7 @@ async function getAllSupervisor(entrepriseId) {
   }
 
   const supervisors = await response.json();
+
   return supervisors;
 
 }
@@ -124,14 +197,26 @@ function createDropdownContent(supervisors) {
   const dropdownContent = document.createElement('div');
   dropdownContent.id = 'myDropdown';
   dropdownContent.className = 'dropdown-menu';
-  supervisors.forEach(supervisor => {
-    const option = document.createElement('button');
-    option.className = 'dropdown-item';
-    option.type = 'button';
-    option.textContent = supervisor.lastName+' '+supervisor.firstName;
-    option.id = supervisor.id;
-    dropdownContent.appendChild(option);
-  });
+
+  if (supervisors.length > 0) {
+
+    supervisors.forEach(supervisor => {
+      const option = document.createElement('button');
+      option.className = 'dropdown-item';
+      option.type = 'button';
+      option.textContent = supervisor.lastName + ' ' + supervisor.firstName;
+      option.id = supervisor.supervisorId;
+      dropdownContent.appendChild(option);
+    });
+  } else {
+
+    const message = document.createElement('span');
+    message.className = 'dropdown-item';
+    message.textContent = 'No supervisors available';
+    dropdownContent.appendChild(message);
+
+  }
+
   return dropdownContent;
 }
 
@@ -149,10 +234,17 @@ function createCancelButton() {
   cancelButton.className = 'btn btn-secondary';
   cancelButton.textContent = 'Cancel';
   cancelButton.addEventListener('click', () => {
-    Navbar();
     location.reload()
   });
   return cancelButton;
+}
+
+function toggleDropdown() {
+  const dropdownContent = document.getElementById('myDropdown');
+  // eslint-disable-next-line no-unused-expressions
+  dropdownContent.style.display === 'block'
+      ? dropdownContent.style.display = 'none'
+      : dropdownContent.style.display = 'block';
 }
 
 export default CreateStagePage;

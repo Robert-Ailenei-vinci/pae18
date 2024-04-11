@@ -2,6 +2,7 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SupervisorDTO;
+import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.SupervisorNotFoundException;
 import be.vinci.pae.utils.LoggerUtil;
@@ -41,22 +42,30 @@ public class SupervisorDAOImpl implements SupervisorDAO {
   }
 
   @Override
-  public List<SupervisorDTO> getAll() {
-    PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
-        "SELECT * FROM pae.internship_supervisor");
-    List<SupervisorDTO> supervisorDTOS = new ArrayList<>();
-    try (ResultSet rs = getAllUsers.executeQuery()) {
-      while (rs.next()) {
-        SupervisorDTO supervisorDTO;
-        supervisorDTO = getSupervisorMethodFromDB(rs);
-        supervisorDTOS.add(supervisorDTO);
+  public List<SupervisorDTO> getAll(int entrepriseId) {
 
+    try (PreparedStatement getAll = dalBackServices.getPreparedStatement(
+        "SELECT * FROM pae.internship_supervisor WHERE entreprise = ? ")) {
+      getAll.setInt(1, entrepriseId);
+
+      List<SupervisorDTO> supervisorDTOS = new ArrayList<>();
+      try (ResultSet rs = getAll.executeQuery()) {
+        while (rs.next()) {
+          SupervisorDTO supervisorDTO;
+          supervisorDTO = getSupervisorMethodFromDB(rs);
+          supervisorDTOS.add(supervisorDTO);
+
+        }
+        LoggerUtil.logInfo("supervisor getAll in DAO");
+
+        return supervisorDTOS;
+      } catch (Exception e) {
+        throw new FatalError("Error processing result set", e);
       }
-      LoggerUtil.logInfo("supervisor getAll");
+
     } catch (Exception e) {
-      throw new FatalError("Error processing result set", e);
+      throw new EntrepriseNotFoundException("Entreprise not found with this id " + entrepriseId, e);
     }
-    return supervisorDTOS;
   }
 
   private SupervisorDTO getSupervisorMethodFromDB(ResultSet rs) {

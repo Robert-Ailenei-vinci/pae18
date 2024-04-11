@@ -16,6 +16,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -40,11 +41,16 @@ public class SupervisorRessource {
    * @return A list of {@link SupervisorDTO} representing all enterprises.
    */
   @GET
-  @Path("getAll")
+  @Path("getAllForOneEnterprise")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public List<SupervisorDTO> getAll() {
-    List<SupervisorDTO> toReturn = mySupervisorUCC.getAll();
+  public List<SupervisorDTO> getAllForOneEnterprise(@QueryParam("entrepriseId") int entrepriseId) {
+    if (entrepriseId <= 0) {
+      throw new BadRequestException(
+          "L'identifiant de l'entreprise est requis et doit être supérieur à zéro");
+    }
+
+    List<SupervisorDTO> toReturn = mySupervisorUCC.getAll(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAll successful");
     }

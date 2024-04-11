@@ -20,7 +20,8 @@ public interface SupervisorDAO {
   /**
    * Retrieves a list of all supervisor.
    *
+   * @param entrepriseId enterprise id.
    * @return A list of {@link SupervisorDTO} representing all enterprises.
    */
-  List<SupervisorDTO> getAll();
+  List<SupervisorDTO> getAll(int entrepriseId);
 }

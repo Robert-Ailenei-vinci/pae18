@@ -34,13 +34,13 @@ public class SupervisorUCCImpl implements SupervisorUCC {
   }
 
   @Override
-  public List<SupervisorDTO> getAll() {
+  public List<SupervisorDTO> getAll(int entrepriseId) {
     try {
       // Start a new transaction
       dalServices.startTransaction();
 
       // Retrieve the list of EntrepriseDTO from the DAO
-      List<SupervisorDTO> supervisorDTOs = mySupervisorDAO.getAll();
+      List<SupervisorDTO> supervisorDTOs = mySupervisorDAO.getAll(entrepriseId);
 
       // Commit the transaction
       dalServices.commitTransaction();

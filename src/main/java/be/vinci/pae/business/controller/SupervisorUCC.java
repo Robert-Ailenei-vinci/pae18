@@ -16,10 +16,17 @@ public interface SupervisorUCC {
    */
   SupervisorDTO getOneById(int supervisorId);
 
+
   /**
-   * Retrieves a list of all supervisors.
+   * Retrieves a list of all supervisors for an enterprise.
    *
+   * @param entrepriseId enterprise id.
    * @return A list of {@link SupervisorDTO} representing all enterprises.
    */
-  List<SupervisorDTO> getAll();
+  List<SupervisorDTO> getAll(int entrepriseId);
 }
+/**
+ * Retrieves a list of all supervisors.
+ *
+ * @return A list of {@link SupervisorDTO} representing all enterprises.
+ */

@@ -131,6 +131,10 @@ public class ContactDAOImpl implements ContactDAO {
     System.out.println(contactDTO.getState());
 
     if (getLastVersionFromDB(contactDTO.getId()) != contactDTO.getVersion()) {
+      System.out.println("version");
+      System.out.println(contactDTO.getId());
+      System.out.println(getLastVersionFromDB(contactDTO.getId()));
+      System.out.println(contactDTO.getVersion());
       throw new OptimisticLockException("Optimisitc lock exception");
     }
 
@@ -212,18 +216,16 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public void cancelAllContact(ContactDTO contactDTO) {
-    StringBuilder sql = new StringBuilder(
-        "UPDATE pae.contacts SET state = 'suspendu', _version = _version + 1 WHERE id_contact <> ? AND _user = ? AND ( state = 'initie' OR state = 'rencontre') AND school_year = ?;");
+    System.out.println("GGG");
 
-    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql.toString())) {
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(
+        "UPDATE pae.contacts SET state = 'suspendu', _version = _version + 1 WHERE id_contact <> ? AND _user = ? AND ( state = 'initie' OR state = 'rencontre') AND school_year = ?;")) {
 
-      stmt.setObject(1, contactDTO.getId());
-      stmt.setObject(1, contactDTO.getUserId());
-      stmt.setObject(1, contactDTO.getSchoolYearId());
+      stmt.setInt(1, contactDTO.getId());
+      stmt.setInt(2, contactDTO.getUserId());
+      stmt.setInt(3, contactDTO.getSchoolYearId());
 
-      if (stmt.executeUpdate() == 0) {
-        throw new OptimisticLockException("Contact was updated by another transaction");
-      }
+      stmt.executeUpdate();
 
       LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
 

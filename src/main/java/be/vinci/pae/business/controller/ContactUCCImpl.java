@@ -12,7 +12,6 @@ import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import jakarta.inject.Inject;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This class is an implementation of the {@link ContactUCC} interface.
@@ -143,13 +142,17 @@ public class ContactUCCImpl implements ContactUCC {
   public ContactDTO acceptContact(int contactId, int userId, int version) {
     try {
       dalServices.startTransaction();
-
+      System.out.println("BBB");
+      System.out.println(contactId);
       Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+      System.out.println("CCC");
+      System.out.println(contact.getId());
 
       if (contact.getUserId() != userId) {
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
+      /*
       List<ContactDTO> userContacts = myContactDAO.getAllContactsByUserId(userId);
       for (ContactDTO tempContactDTO : userContacts
       ) {
@@ -163,14 +166,20 @@ public class ContactUCCImpl implements ContactUCC {
           tempContact.cancelContact(version);
           myContactDAO.updateContact(tempContact);
         }
-      }
+      }*/
 
       if (!contact.acceptContact(version)) {
         throw new BizException("The contact cannot be accepted");
       }
 
+      System.out.println("DDd");
+      System.out.println(contact.getId());
       ContactDTO contactToReturn = myContactDAO.updateContact(contact);
+      System.out.println("FFF");
       myContactDAO.cancelAllContact(contact);
+
+      System.out.println("EEE");
+      System.out.println(contactToReturn.getId());
 
       dalServices.commitTransaction();
       return contactToReturn;
