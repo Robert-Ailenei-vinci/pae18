@@ -9,8 +9,8 @@ import java.lang.annotation.Target;
 /**
  * This annotation is used as a name binding for authorization in JAX-RS resources and methods. It
  * serves as a container for role-specific annotations.
- * <p>
- * Example usage:
+ *
+ * <p>Example usage:
  * <pre>{@code
  * \@Authorize(roles = {"etudiant", "professeur"})
  * public class MyResource {

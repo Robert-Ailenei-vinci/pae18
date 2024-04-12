@@ -90,7 +90,6 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
     } else {
       try {
         jwtVerifier.verify(token.replace("Bearer ", ""));
-        // You may add additional checks here if needed, such as token expiration or issuer validation
         LoggerUtil.logInfo("Token verified");
       } catch (Exception e) {
         throw new TokenDecodingException(e);
