@@ -146,4 +146,32 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       throw e;
     }
   }
+
+    @Override
+    public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
+        try {
+            dalServices.startTransaction();
+            List<EntrepriseDTO> entreprises = myEntrepriseDAO.getAllForSchoolYear(idSchoolYear);
+            dalServices.commitTransaction();
+            return entreprises;
+        } catch (Exception e) {
+            LoggerUtil.logError("BizError", e);
+            dalServices.rollbackTransaction();
+            throw e;
+        }
+    }
+
+    @Override
+    public int getStagesCountForSchoolYear(int idEntreprise) {
+        try {
+            dalServices.startTransaction();
+            int count = myEntrepriseDAO.getNbStagesForCurrentYear(idEntreprise);
+            dalServices.commitTransaction();
+            return count;
+        } catch (Exception e) {
+            LoggerUtil.logError("BizError", e);
+            dalServices.rollbackTransaction();
+            throw e;
+        }
+    }
 }

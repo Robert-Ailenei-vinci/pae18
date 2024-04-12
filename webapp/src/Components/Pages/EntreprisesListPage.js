@@ -42,13 +42,13 @@ async function fetchSchoolYears(user) {
         return [];
     }
     const schoolYears = await response.json();
+    console.log('Fetched school years:', schoolYears);
     return schoolYears;
 }
 
 async function renderEntreprisesWithSchoolYear() {
     const user = getAuthenticatedUser();
     const main = document.querySelector('main');
-    main.innerHTML = '';
 
     const selectSchoolYearLabel = document.createElement('label');
     selectSchoolYearLabel.textContent = 'Choisir une année académique : ';
@@ -59,8 +59,13 @@ async function renderEntreprisesWithSchoolYear() {
         const option = document.createElement('option');
         option.value = schoolYear.id;
         option.textContent = schoolYear.yearFormat;
+        console.log('Option:', option);
         selectSchoolYear.appendChild(option);
     });
+
+    // Append the dropdown to the main element before fetching and rendering enterprises
+    main.appendChild(selectSchoolYearLabel);
+    main.appendChild(selectSchoolYear);
 
     // Fetch and render enterprises for the default school year when the page is loaded
     const defaultYear = await getDefaultSchoolYear();
@@ -73,7 +78,9 @@ async function renderEntreprisesWithSchoolYear() {
     // Update the enterprises whenever a different year is selected from the dropdown
     selectSchoolYear.addEventListener('change', async () => {
         const selectedYearId = selectSchoolYear.value;
+        console.log('Selected year:', selectedYearId)
         const entreprises = await fetchEntreprisesForSchoolYear(user, selectedYearId);
+        console.log('Fetched entreprises for selected school year:', entreprises);
         // Clear the current enterprises before rendering the new ones
         const table = main.querySelector('table');
         if (table) {
@@ -81,9 +88,6 @@ async function renderEntreprisesWithSchoolYear() {
         }
         renderEntreprisesTable(entreprises);
     });
-
-    main.appendChild(selectSchoolYearLabel);
-    main.appendChild(selectSchoolYear);
 }
 
 async function getDefaultSchoolYear() {
@@ -100,6 +104,7 @@ function renderEntreprisesTable(entreprises) {
     console.log('Rendering entreprises:', entreprises);
     const main = document.querySelector('main');
     const table = document.createElement('table');
+    table.className = 'table table-bordered table-striped';
     const tableHead = document.createElement('tr')
     const columns = ["Nom", "Appelation", "N°Téléphone","Adresse","Blacklisté", "Raison du blacklist"];
     columns.forEach(text => {

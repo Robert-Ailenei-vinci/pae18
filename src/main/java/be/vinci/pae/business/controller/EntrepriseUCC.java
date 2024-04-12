@@ -56,4 +56,7 @@ public interface EntrepriseUCC {
    * @return
    */
   EntrepriseDTO blacklist(int entrepriseId, String reason);
+    List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);
+
+    int getStagesCountForSchoolYear(int idEntreprise);
 }

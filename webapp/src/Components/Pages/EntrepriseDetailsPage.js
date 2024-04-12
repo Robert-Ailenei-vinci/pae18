@@ -5,9 +5,8 @@ import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
 import {makeStateClean} from "./utils/MakeStateClean";
 
-const EntrepriseDetailsPage = () => {
+const EntrepriseDetailsPage = async () => {
   clearPage();
-  renderPageTitle('Détails de l\'entreprise : ' + usePathParams());
   renderDetailsEntreprise().then(r => console.log(r));
 };
 
@@ -30,6 +29,45 @@ async function fetchEntrepriseContacts(user) {
   return response.json();
 }
 
+async function fetchEntrepriseDetails(user) {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `${user.token}`,
+    },
+  };
+  console.log("usePathParams() : "+usePathParams());
+  const response = await fetch(`http://localhost:3000/entreprise/getOne/${usePathParams()}`, options);
+  if (!response.ok) {
+    if (response.status === 401) {
+      alert("Username or password is incorrect. Please try again.");
+    } else {
+      alert("An error occurred:"+response.statusText);
+    }
+  }
+  return response.json();
+}
+
+async function fetchStagesCountForCurrentYear(user) {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `${user.token}`,
+    },
+  };
+  const response = await fetch(`http://localhost:3000/entreprise/getStagesCountForCurrentYear/${usePathParams()}`, options);
+  if (!response.ok) {
+    if (response.status === 401) {
+      alert("Username or password is incorrect. Please try again.");
+    } else {
+      alert("An error occurred:"+response.statusText);
+    }
+  }
+  return response.json();
+}
+
 let isRendering = false;
 async function renderDetailsEntreprise() {
   if (isRendering) {
@@ -37,21 +75,27 @@ async function renderDetailsEntreprise() {
   }
   const user = getAuthenticatedUser();
   isRendering = true;
+  const entreprise = await fetchEntrepriseDetails(user);
+  renderPageTitle('Détails de l\'entreprise : ' + entreprise.tradeName);
   const allContactsData = await fetchEntrepriseContacts(user);
+  const nbStages = await fetchStagesCountForCurrentYear(user);
+  console.log("nbStages : "+nbStages);
   isRendering = false;
   console.log("Contacts data : "+JSON.stringify(allContactsData));
 
   const main = document.querySelector('main');
 
   const nbStudentTitle = document.createElement('h4')
-  nbStudentTitle.textContent = 'Nombre d\'étudiants en stage pour l\'année courante : '
+  nbStudentTitle.textContent = 'Nombre d\'étudiants en stage ' +
+      'pour l\'année courante : '+nbStages;
 
   main.appendChild(nbStudentTitle)
 
   const tableContactsTitle = document.createElement('h5');
-  tableContactsTitle.textContent = 'Contacts de l\'entreprise : ';
+  tableContactsTitle.textContent = `Contacts de l'entreprise (${allContactsData.length}) : `;
 
   const table = document.createElement('table');
+  table.className = 'table table-bordered table-striped';
 
 // Create a header row and append it to the table
   const headerRow = document.createElement('tr');
@@ -67,11 +111,11 @@ async function renderDetailsEntreprise() {
     const row = document.createElement('tr');
 
     const firstNameStudentCell = document.createElement('td');
-    firstNameStudentCell.textContent = contact.user.firstlastName || '-';
+    firstNameStudentCell.textContent = contact.user.lastName || '-';
     row.appendChild(firstNameStudentCell);
 
     const lastNameStudentCell = document.createElement('td');
-    lastNameStudentCell.textContent = contact.user.lastName || '-';
+    lastNameStudentCell.textContent = contact.user.firstName || '-';
     row.appendChild(lastNameStudentCell);
 
     const schoolYearCell = document.createElement('td');
