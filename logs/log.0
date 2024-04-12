@@ -741,3 +741,193 @@ be.vinci.pae.exception.AuthorisationException:
 [2024-04-05 10:09:18] [INFO] schoolyear getone + id : 1 
 [2024-04-05 10:09:18] [INFO] get all contact for the entreprise with id 3 
 [2024-04-05 10:09:18] [INFO] GetAllContactById successful 
+[2024-04-12 03:21:47] [INFO] get one user by email with email: raphael.baroni@vinci.be 
+[2024-04-12 03:21:47] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:21:47] [INFO] Login successful 
+[2024-04-12 03:21:47] [INFO] get one user by id with id: 3 
+[2024-04-12 03:21:47] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:21:47] [INFO] GetAllContactById successful 
+[2024-04-12 03:21:47] [INFO] get one user by id with id: 3 
+[2024-04-12 03:21:47] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:21:58] [INFO] get one user by id with id: 3 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:21:58] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:21:59] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:21:59] [INFO] Get All successful 
+[2024-04-12 03:22:00] [INFO] get one user by id with id: 3 
+[2024-04-12 03:22:00] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:22:00] [INFO] GetAllContactById successful 
+[2024-04-12 03:22:00] [INFO] get one user by id with id: 3 
+[2024-04-12 03:22:00] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:25:00] [INFO] get one user by id with id: 3 
+[2024-04-12 03:25:00] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:25:00] [INFO] GetUser successful 
+[2024-04-12 03:40:25] [INFO] get one user by id with id: 3 
+[2024-04-12 03:40:25] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:40:25] [INFO] GetAllContactById successful 
+[2024-04-12 03:40:25] [INFO] get one user by id with id: 3 
+[2024-04-12 03:40:25] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:40:26] [INFO] get one user by id with id: 3 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:40:26] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:40:26] [INFO] Get All successful 
+[2024-04-12 03:47:09] [INFO] get one user by email with email: raphael.baroni@vinci.be 
+[2024-04-12 03:47:09] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:47:09] [INFO] Login successful 
+[2024-04-12 03:47:09] [INFO] get one user by id with id: 3 
+[2024-04-12 03:47:09] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:47:10] [INFO] GetAllContactById successful 
+[2024-04-12 03:47:10] [INFO] get one user by id with id: 3 
+[2024-04-12 03:47:10] [INFO] schoolyear getone + id : 2 
+[2024-04-12 03:50:35] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 03:50:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:50:35] [INFO] Login successful 
+[2024-04-12 03:50:38] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 03:50:38] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:50:38] [INFO] Login successful 
+[2024-04-12 03:53:50] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 03:53:50] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:53:51] [INFO] Login successful 
+[2024-04-12 03:56:20] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 03:56:20] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:56:20] [INFO] Login successful 
+[2024-04-12 03:56:42] [INFO] get one user by id with id: 7 
+[2024-04-12 03:56:42] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:56:42] [INFO] entreprise getone with id 1 
+[2024-04-12 03:56:42] [INFO] get one user by id with id: 9 
+[2024-04-12 03:56:42] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:56:42] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:56:42] [INFO] get all contact for the entreprise with id 1 
+[2024-04-12 03:56:42] [INFO] GetAllContactById successful 
+[2024-04-12 03:56:45] [INFO] get one user by id with id: 7 
+[2024-04-12 03:56:45] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:56:46] [INFO] entreprise getAll 
+[2024-04-12 03:56:46] [INFO] GetAll successful 
+[2024-04-12 03:57:18] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 03:57:18] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:57:18] [INFO] Login successful 
+[2024-04-12 03:58:48] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 03:58:48] [INFO] schoolyear getone + id : 1 
+[2024-04-12 03:58:48] [INFO] Login successful 
+[2024-04-12 04:01:03] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 04:01:03] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:01:03] [INFO] Login successful 
+[2024-04-12 04:01:28] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 04:01:28] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:01:28] [INFO] Login successful 
+[2024-04-12 04:01:31] [INFO] get one user by id with id: 7 
+[2024-04-12 04:01:31] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:01:31] [INFO] schoolyear getAll 
+[2024-04-12 04:01:39] [INFO] get one user by id with id: 7 
+[2024-04-12 04:01:39] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:01:39] [INFO] schoolyear getAll 
+[2024-04-12 04:02:08] [INFO] get one user by id with id: 7 
+[2024-04-12 04:02:08] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:02:08] [INFO] build year method 
+[2024-04-12 04:02:08] [INFO] Current school year found: 2023-2024 
+[2024-04-12 04:06:35] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 04:06:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:35] [INFO] Login successful 
+[2024-04-12 04:06:35] [INFO] get one user by id with id: 7 
+[2024-04-12 04:06:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:35] [INFO] entreprise getone with id 4 
+[2024-04-12 04:06:35] [INFO] get one user by id with id: 7 
+[2024-04-12 04:06:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:35] [INFO] get all contact for the user with id 7 
+[2024-04-12 04:06:35] [INFO] entreprise getone with id 2 
+[2024-04-12 04:06:35] [INFO] get one user by id with id: 7 
+[2024-04-12 04:06:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:35] [INFO] get all contact for the user with id 7 
+[2024-04-12 04:06:35] [INFO] entreprise getone with id 3 
+[2024-04-12 04:06:35] [INFO] get one user by id with id: 7 
+[2024-04-12 04:06:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:35] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:35] [INFO] get all contact for the user with id 7 
+[2024-04-12 04:06:35] [INFO] GetAllContactById successful 
+[2024-04-12 04:06:35] [INFO] get one user by id with id: 7 
+[2024-04-12 04:06:36] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:36] [INFO] stage getone with id 7 
+[2024-04-12 04:06:36] [INFO] get 1 contact by stage id13 
+[2024-04-12 04:06:36] [INFO] entreprise getone with id 2 
+[2024-04-12 04:06:36] [INFO] get one user by id with id: 7 
+[2024-04-12 04:06:36] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:36] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:36] [INFO] get one user by id with id: 7 
+[2024-04-12 04:06:36] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:36] [INFO] Supervisor getone with id 3 
+[2024-04-12 04:06:36] [INFO] entreprise getone with id 2 
+[2024-04-12 04:06:36] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:06:36] [INFO] GetStageByUserId successful 
+[2024-04-12 04:06:40] [INFO] get one user by email with email: raphael.baroni@vinci.be 
+[2024-04-12 04:06:40] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:06:40] [INFO] Login successful 
+[2024-04-12 04:06:40] [INFO] get one user by id with id: 3 
+[2024-04-12 04:06:40] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:06:40] [INFO] GetAllContactById successful 
+[2024-04-12 04:06:40] [INFO] get one user by id with id: 3 
+[2024-04-12 04:06:40] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:06:42] [INFO] get one user by id with id: 3 
+[2024-04-12 04:06:42] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:06:42] [INFO] schoolyear getAll 
+[2024-04-12 04:06:59] [INFO] get one user by id with id: 3 
+[2024-04-12 04:06:59] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:06:59] [INFO] GetAllContactById successful 
+[2024-04-12 04:06:59] [INFO] get one user by id with id: 3 
+[2024-04-12 04:06:59] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:09:00] [INFO] get one user by id with id: 3 
+[2024-04-12 04:09:00] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:09:00] [INFO] GetUser successful 
+[2024-04-12 04:09:00] [INFO] get one user by id with id: 3 
+[2024-04-12 04:09:00] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:09:00] [INFO] GetAllContactById successful 
+[2024-04-12 04:09:01] [INFO] get one user by id with id: 3 
+[2024-04-12 04:09:01] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:09:02] [INFO] get one user by id with id: 3 
+[2024-04-12 04:09:02] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:09:02] [INFO] schoolyear getAll 
+[2024-04-12 04:12:01] [INFO] get one user by id with id: 3 
+[2024-04-12 04:12:01] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:12:01] [INFO] GetUser successful 
+[2024-04-12 04:12:01] [INFO] get one user by id with id: 3 
+[2024-04-12 04:12:01] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:12:01] [INFO] schoolyear getAll 
+[2024-04-12 04:12:13] [INFO] get one user by email with email: raphael.baroni@vinci.be 
+[2024-04-12 04:12:13] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:12:13] [INFO] Login successful 
+[2024-04-12 04:12:14] [INFO] get one user by id with id: 3 
+[2024-04-12 04:12:14] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:12:14] [INFO] GetAllContactById successful 
+[2024-04-12 04:12:14] [INFO] get one user by id with id: 3 
+[2024-04-12 04:12:14] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:12:16] [INFO] get one user by id with id: 3 
+[2024-04-12 04:12:16] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:12:16] [INFO] schoolyear getAll 
+[2024-04-12 04:15:03] [INFO] get one user by id with id: 3 
+[2024-04-12 04:15:03] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:15:03] [INFO] GetUser successful 
+[2024-04-12 04:15:03] [INFO] get one user by id with id: 3 
+[2024-04-12 04:15:03] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:15:03] [INFO] schoolyear getAll 
+[2024-04-12 04:15:05] [INFO] get one user by id with id: 3 
+[2024-04-12 04:15:05] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:15:05] [INFO] schoolyear getAll 
+[2024-04-12 04:15:06] [INFO] get one user by id with id: 3 
+[2024-04-12 04:15:06] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:15:06] [INFO] schoolyear getAll 

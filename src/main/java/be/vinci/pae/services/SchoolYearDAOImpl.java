@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents an implementation of the {@link SchoolYearDAO} interface.
@@ -45,7 +47,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
     String schoolYearFormat = buildYear();
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-            "SELECT * FROM pae.school_years WHERE years_format = ?")) {
+        "SELECT * FROM pae.school_years WHERE years_format = ?")) {
       preparedStatement.setString(1, schoolYearFormat);
       try (ResultSet rs = preparedStatement.executeQuery()) {
         if (rs.next()) {
@@ -60,10 +62,10 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
 
     // Handle the case where the current school year is not found
     LoggerUtil.logError("Current school year not found: " + schoolYearFormat,
-            new SchoolYearNotFoundException(
+        new SchoolYearNotFoundException(
             "Current school year not found: " + schoolYearFormat));
     throw new SchoolYearNotFoundException("Current school year not found: "
-            + schoolYearFormat);
+        + schoolYearFormat);
   }
 
 
@@ -79,7 +81,8 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
     return year + "-" + (year + 1);
   }
 
-  private SchoolYearDTO getSchoolYearMethodFromDB(ResultSet rs) {
+  @Override
+  public SchoolYearDTO getSchoolYearMethodFromDB(ResultSet rs) {
     SchoolYearDTO schoolYear = myDomainFactory.getSchoolYear();
     try {
       schoolYear.setId(rs.getInt("id_year"));
@@ -89,5 +92,23 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
       throw new FatalError("Error in getSchoolYearMethodFromDB" + e.getMessage());
     }
     return schoolYear;
+  }
+
+  @Override
+  public List<SchoolYearDTO> getAllSchoolYears() {
+    PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "SELECT * FROM pae.school_years");
+    List<SchoolYearDTO> schoolYears = new ArrayList<>();
+    try (ResultSet rs = preparedStatement.executeQuery()) {
+      while (rs.next()) {
+        SchoolYearDTO schoolYear = getSchoolYearMethodFromDB(rs);
+        schoolYears.add(schoolYear);
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
+      throw new FatalError("Error processing result set", e);
+    }
+    LoggerUtil.logInfo("schoolyear getAll");
+    return schoolYears;
   }
 }
