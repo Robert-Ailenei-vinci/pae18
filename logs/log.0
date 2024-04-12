@@ -931,3 +931,75 @@ be.vinci.pae.exception.AuthorisationException:
 [2024-04-12 04:15:06] [INFO] get one user by id with id: 3 
 [2024-04-12 04:15:06] [INFO] schoolyear getone + id : 2 
 [2024-04-12 04:15:06] [INFO] schoolyear getAll 
+[2024-04-12 04:18:08] [INFO] get one user by email with email: raphael.baroni@vinci.be 
+[2024-04-12 04:18:08] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:18:08] [INFO] Login successful 
+[2024-04-12 04:18:08] [INFO] get one user by id with id: 3 
+[2024-04-12 04:18:08] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:18:08] [INFO] GetAllContactById successful 
+[2024-04-12 04:18:08] [INFO] get one user by id with id: 3 
+[2024-04-12 04:18:08] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:18:10] [INFO] get one user by id with id: 3 
+[2024-04-12 04:18:10] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:18:10] [INFO] schoolyear getAll 
+[2024-04-12 04:20:13] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 04:20:13] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:20:13] [INFO] Login successful 
+[2024-04-12 04:20:15] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-12 04:20:15] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:20:15] [INFO] Login successful 
+[2024-04-12 04:20:17] [INFO] get one user by id with id: 7 
+[2024-04-12 04:20:17] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:20:17] [INFO] schoolyear getAll 
+[2024-04-12 04:20:19] [INFO] get one user by id with id: 7 
+[2024-04-12 04:20:19] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:20:19] [INFO] build year method 
+[2024-04-12 04:20:19] [INFO] Current school year found: 2023-2024 
+[2024-04-12 04:21:45] [INFO] get one user by id with id: 3 
+[2024-04-12 04:21:45] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:45] [INFO] GetUser successful 
+[2024-04-12 04:21:45] [INFO] get one user by id with id: 3 
+[2024-04-12 04:21:45] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:45] [INFO] schoolyear getAll 
+[2024-04-12 04:21:47] [INFO] get one user by id with id: 3 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:21:47] [INFO] schoolyear getone + id : 1 
+[2024-04-12 04:21:48] [INFO] Get All successful 
+[2024-04-12 04:21:48] [INFO] get one user by id with id: 3 
+[2024-04-12 04:21:48] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:48] [INFO] schoolyear getAll 
+[2024-04-12 04:21:49] [INFO] get one user by id with id: 3 
+[2024-04-12 04:21:49] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:21:49] [INFO] schoolyear getAll 
+[2024-04-12 04:22:34] [INFO] get one user by id with id: 3 
+[2024-04-12 04:22:34] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:22:34] [INFO] schoolyear getAll 
+[2024-04-12 04:23:04] [INFO] get one user by id with id: 3 
+[2024-04-12 04:23:04] [INFO] get one user by email with email: raphael.baroni@vinci.be 
+[2024-04-12 04:23:04] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:23:04] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:23:04] [INFO] GetUser successful 
+[2024-04-12 04:23:04] [INFO] Login successful 
+[2024-04-12 04:23:04] [INFO] get one user by id with id: 3 
+[2024-04-12 04:23:04] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:23:04] [INFO] GetAllContactById successful 
+[2024-04-12 04:23:04] [INFO] get one user by id with id: 3 
+[2024-04-12 04:23:04] [INFO] get one user by id with id: 3 
+[2024-04-12 04:23:04] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:23:04] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:23:04] [INFO] schoolyear getAll 
+[2024-04-12 04:23:04] [INFO] build year method 
+[2024-04-12 04:23:04] [INFO] Current school year found: 2023-2024 
+[2024-04-12 04:23:05] [INFO] get one user by id with id: 3 
+[2024-04-12 04:23:05] [INFO] schoolyear getone + id : 2 
+[2024-04-12 04:23:05] [INFO] schoolyear getAll 
+[2024-04-12 04:23:05] [INFO] build year method 
+[2024-04-12 04:23:05] [INFO] Current school year found: 2023-2024 

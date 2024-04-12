@@ -64,6 +64,7 @@ async function renderEntreprisesWithSchoolYear() {
 
     // Fetch and render enterprises for the default school year when the page is loaded
     const defaultYear = await getDefaultSchoolYear();
+    console.log('Default year:', defaultYear);
     if (defaultYear !== null) {
         const defaultEntreprises = await fetchEntreprisesForSchoolYear(user, defaultYear.id);
         renderEntreprisesTable(defaultEntreprises);
@@ -96,6 +97,7 @@ async function getDefaultSchoolYear() {
 }
 
 function renderEntreprisesTable(entreprises) {
+    console.log('Rendering entreprises:', entreprises);
     const main = document.querySelector('main');
     const table = document.createElement('table');
     const tableHead = document.createElement('tr')
