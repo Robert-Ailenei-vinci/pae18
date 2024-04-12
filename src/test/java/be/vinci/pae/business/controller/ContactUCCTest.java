@@ -254,4 +254,46 @@ class ContactUCCTest {
             contact.getVersion()));
   }
 
+  @DisplayName("Test acceptContact")
+  @Test
+  void acceptContact() {
+    contact.setId(123);
+    contact.setState("rencontre");
+    contactResult.setId(456);
+    contactResult.setState("accepte");
+
+    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
+
+    ContactDTO result = contactUCC.acceptContact(contact.getId(), contact.getUserId(),
+        contact.getVersion());
+
+    assertEquals(contactResult.getId(), result.getId());
+    assertEquals(contactResult.getState(), result.getState());
+  }
+
+  @DisplayName("Test acceptContact with wrong given user")
+  @Test
+  void acceptContactWrongUser() {
+    contact.setId(123);
+    contact.setUserId(789);
+
+    when(contactDAO.getOneContactById(123)).thenReturn(contact);
+
+    assertThrows(BizExceptionNotFound.class, () -> contactUCC.acceptContact(contact.getId(), 123,
+        contact.getVersion()));
+  }
+
+  @DisplayName("Test acceptContact with wrong given state")
+  @Test
+  void acceptContactWrongState() {
+    contact.setId(123);
+    contact.setState("refuse");
+
+    when(contactDAO.getOneContactById(contact.getUserId())).thenReturn(contact);
+
+    assertThrows(BizException.class,
+        () -> contactUCC.acceptContact(contact.getId(), contact.getUserId(),
+            contact.getVersion()));
+  }
 }
