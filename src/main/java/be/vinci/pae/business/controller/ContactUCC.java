@@ -78,5 +78,5 @@ public interface ContactUCC {
    * @param version   The version of the contact in the frontend.
    * @return The updated contact.
    */
-  ContactDTO acceptContact(int contactId, int userId, int version);
+  ContactDTO acceptContact(int contactId, int userId, int version,int supervisorId,String signatureDate,String internshipProject);
 }
