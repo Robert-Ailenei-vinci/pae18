@@ -213,7 +213,7 @@ public class ContactRessource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public StageDTO acceptContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+  public ContactDTO acceptContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact")) {
       throw new BadRequestException("contact id required");
     }
@@ -225,18 +225,15 @@ public class ContactRessource {
     if (signatureDate.isBlank() || signatureDate.isEmpty()) {
       throw new BadRequestException("Signature date is mandatory");
     }
-    if (internshipProject.isBlank() || internshipProject.isEmpty()) {
-      throw new BadRequestException("Internship project is mandatory");
-    }
+
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int userId = user.getId();
-    ContactDTO acceptedContact = myContactUCC.acceptContact(contactId, userId, contactVersion);
-    SupervisorDTO supervisor = mySupervisorUCC.getOneById(supervisorId);
-    StageDTO toReturn = myStageUCC.createOne(acceptedContact, signatureDate, internshipProject,
-        supervisor.getSupervisorId());
-    if (toReturn != null) {
+    ContactDTO acceptedContact = myContactUCC.acceptContact(contactId, userId, contactVersion,
+        supervisorId, signatureDate, internshipProject);
+
+    if (acceptedContact != null) {
       LoggerUtil.logInfo("Stage accepted successfully");
     }
-    return toReturn;
+    return acceptedContact;
   }
 }

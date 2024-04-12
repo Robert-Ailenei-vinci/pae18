@@ -4,6 +4,8 @@ import be.vinci.pae.business.domain.Contact;
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.business.domain.StageDTO;
+import be.vinci.pae.business.domain.SupervisorDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
@@ -22,6 +24,12 @@ public class ContactUCCImpl implements ContactUCC {
   private ContactDAO myContactDAO;
   @Inject
   private DALServices dalServices;
+
+  @Inject
+  private SupervisorUCC mySupervisorUCC;
+
+  @Inject
+  private StageUCC myStageUCC;
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
@@ -139,7 +147,7 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO acceptContact(int contactId, int userId, int version) {
+  public ContactDTO acceptContact(int contactId, int userId, int version,int supervisorId,String signatureDate,String internshipProject) {
     try {
       dalServices.startTransaction();
 
@@ -148,22 +156,6 @@ public class ContactUCCImpl implements ContactUCC {
       if (contact.getUserId() != userId) {
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
-
-      /*
-      List<ContactDTO> userContacts = myContactDAO.getAllContactsByUserId(userId);
-      for (ContactDTO tempContactDTO : userContacts
-      ) {
-        Contact tempContact = (Contact) tempContactDTO;
-        if (tempContact.checkStateAccepted()) {
-          throw new BizException("The user already has accepted an internship");
-        }
-        if (tempContact.getId() != contact.getId()
-            && (Objects.equals(tempContact.getState(), "initie")
-            || Objects.equals(tempContact.getState(), "rencontre"))) {
-          tempContact.cancelContact(version);
-          myContactDAO.updateContact(tempContact);
-        }
-      }*/
 
       if (!contact.acceptContact(version)) {
         throw new BizException("The contact cannot be accepted");
@@ -174,6 +166,12 @@ public class ContactUCCImpl implements ContactUCC {
       myContactDAO.cancelAllContact(contact);
 
       dalServices.commitTransaction();
+
+      SupervisorDTO supervisor = mySupervisorUCC.getOneById(supervisorId);
+
+      StageDTO stage = myStageUCC.createOne(contactToReturn, signatureDate, internshipProject,
+          supervisor.getSupervisorId());
+
       return contactToReturn;
 
 
