@@ -3,6 +3,7 @@ package be.vinci.pae.api;
 import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.UserUCC;
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
@@ -34,7 +35,7 @@ public class EntrepriseResource {
    * The business controller for enterprise-related operations.
    */
   @Inject
-  EntrepriseUCC myEntreprise;
+  EntrepriseUCC myEntrepriseUCC;
   @Inject
   UserUCC myUserUCC;
 
@@ -50,7 +51,8 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<EntrepriseDTO> getAll() {
-    List<EntrepriseDTO> toReturn = myEntreprise.getAll();
+    List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAll();
+
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAll successful");
     }
@@ -70,7 +72,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
-    EntrepriseDTO toReturn = myEntreprise.getOne(entrepriseId);
+    EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetOne successful");
     }
@@ -151,7 +153,8 @@ public class EntrepriseResource {
       throw new AuthorisationException("User not recognised");
     }
 
-    EntrepriseDTO entrepriseDTO = myEntreprise.createOne(userDTO, tradeName, designation, address,
+    EntrepriseDTO entrepriseDTO = myEntrepriseUCC.createOne(userDTO, tradeName, designation,
+        address,
         phoneNum, email);
     if (entrepriseDTO == null) {
       LoggerUtil.logError("Contact not created", new BadRequestException(""));
@@ -159,5 +162,24 @@ public class EntrepriseResource {
     }
     LoggerUtil.logInfo("addOne successful");
     return entrepriseDTO;
+  }
+
+  /**
+   * Retrieves all contacts associated with one entreprise.
+   *
+   * @param entrepriseId the entreprise id
+   * @return the list of contacts associated with the entreprise
+   */
+  @GET
+  @Path("entrepriseDetailsAllContacts/{entrepriseId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public List<ContactDTO> getAllContactsByEntrepriseId(
+      @PathParam("entrepriseId") int entrepriseId) {
+    List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAllContactById successful");
+    }
+    return toReturn;
   }
 }

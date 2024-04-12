@@ -27,6 +27,10 @@ public class ContactDAOImpl implements ContactDAO {
   private DALBackServices dalBackServices;
   @Inject
   private EntrepriseDAO entrepriseDAO;
+  @Inject
+  private UserDAO userDAO;
+  @Inject
+  private SchoolYearDAO schoolYearDAO;
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
@@ -108,6 +112,8 @@ public class ContactDAOImpl implements ContactDAO {
       contact.setReasonForRefusal(rs.getString("reason_for_refusal"));
       contact.setMeetingType(rs.getString("meeting_type"));
       contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
+      contact.setUser(userDAO.getOne(rs.getInt("_user")));
+      contact.setSchoolYearDTO(schoolYearDAO.getOne(rs.getInt("school_year")));
       contact.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
       LoggerUtil.logError("Error processing result set", e);
@@ -199,5 +205,25 @@ public class ContactDAOImpl implements ContactDAO {
     return null;
   }
 
-
+  @Override
+  public List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId) {
+    PreparedStatement getAllContacts = dalBackServices.getPreparedStatement(
+        "SELECT * FROM pae.contacts WHERE entreprise = ?");
+    List<ContactDTO> contacts = new ArrayList<>();
+    try {
+      getAllContacts.setInt(1, entrepriseId);
+      try (ResultSet rs = getAllContacts.executeQuery()) {
+        while (rs.next()) {
+          ContactDTO contact;
+          contact = getContactMethodFromDB(rs);
+          contacts.add(contact);
+        }
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
+      throw new FatalError("Error processing result set", e);
+    }
+    LoggerUtil.logInfo("get all contact for the entreprise with id " + entrepriseId);
+    return contacts;
+  }
 }

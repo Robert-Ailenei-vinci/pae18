@@ -13,7 +13,9 @@ public class ContactImpl implements Contact {
   private String reasonForRefusal;
   private String meetingType;
   private int version;
+  private SchoolYearDTO schoolYearDTO;
   private EntrepriseDTO entreprise;
+  private UserDTO user;
 
   @Override
   public int getId() {
@@ -102,6 +104,21 @@ public class ContactImpl implements Contact {
     this.version = version;
   }
 
+  public UserDTO getUser() {
+    return user;
+  }
+
+  public void setUser(UserDTO user) {
+    this.user = user;
+  }
+
+  public SchoolYearDTO getSchoolYearDTO() {
+    return schoolYearDTO;
+  }
+
+  public void setSchoolYearDTO(SchoolYearDTO schoolYearDTO) {
+    this.schoolYearDTO = schoolYearDTO;
+  }
 
   @Override
   public boolean stopFollowContact(int version) {

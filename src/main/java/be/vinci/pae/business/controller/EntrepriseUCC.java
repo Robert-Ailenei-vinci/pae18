@@ -1,5 +1,6 @@
 package be.vinci.pae.business.controller;
 
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import java.util.List;
@@ -38,6 +39,15 @@ public interface EntrepriseUCC {
    */
   EntrepriseDTO createOne(UserDTO user, String tradeName, String designation, String address,
       String phoneNum, String email);
+
+  /**
+   * Retrieves all contacts associated with the provided enterprise id.
+   *
+   * @param entrepriseId The id of the enterprise associated with the contacts.
+   * @return The list of contacts associated with the enterprise.
+   */
+  List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId);
+
 
   /**
    * Blacklists an enterprise.

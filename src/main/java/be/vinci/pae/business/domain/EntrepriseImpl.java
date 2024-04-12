@@ -84,23 +84,11 @@ public class EntrepriseImpl implements Entreprise {
     this.isBlacklisted = isBlacklisted;
   }
 
-  /**
-   * Sets the reason for blacklisting the enterprise.
-   *
-   * @param reason
-   */
-  @Override
-  public void setBlacklistReason(String reason) {
-    this.blacklistReason = reason;
-  }
-
-  /**
-   * Retrieves the reason for blacklisting the enterprise.
-   *
-   * @return the reason for blacklisting the enterprise
-   */
-  @Override
   public String getBlacklistReason() {
     return blacklistReason;
+  }
+
+  public void setBlacklistReason(String blacklistReason) {
+    this.blacklistReason = blacklistReason;
   }
 }

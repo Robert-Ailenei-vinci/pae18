@@ -1,6 +1,7 @@
 package be.vinci.pae.business.controller;
 
 import be.vinci.pae.business.domain.SchoolYearDTO;
+import java.util.List;
 
 /**
  * The interface SchoolYearUCC represents the controller for managing {@link SchoolYearDTO}
@@ -15,4 +16,8 @@ public interface SchoolYearUCC {
    * @return the school year associated with the specified identifier
    */
   SchoolYearDTO getOne(int schoolYearId);
+
+  List<SchoolYearDTO> getAllSchoolYears();
+
+  SchoolYearDTO getCurrentSchoolYear();
 }
