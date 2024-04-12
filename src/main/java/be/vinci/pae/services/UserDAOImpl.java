@@ -50,9 +50,8 @@ public class UserDAOImpl implements UserDAO {
         return users;
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error while getting all users", e);
+      throw new FatalError("Error processing result set", e);
     }
-    return null;
   }
 
   /**
@@ -80,7 +79,6 @@ public class UserDAOImpl implements UserDAO {
       }
       return null;
     } catch (Exception e) {
-      LoggerUtil.logError("User not found with emai : " + email, e);
       throw new UserNotFoundException("User not found with email " + email, e);
     }
   }
@@ -109,7 +107,6 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("User not found with id : " + id, e);
       throw new UserNotFoundException("User not found with id " + id, e);
     }
     return null;
@@ -132,7 +129,6 @@ public class UserDAOImpl implements UserDAO {
         idYear = rs.getInt("id_year");
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
 
@@ -142,7 +138,6 @@ public class UserDAOImpl implements UserDAO {
         stmt.setString(1, buildYear());
         stmt.executeUpdate();
       } catch (Exception e) {
-        LoggerUtil.logError("Error processing result set", e);
         throw new FatalError("Error processing result set", e);
       }
       idYear = getLastInsertedYearId();
@@ -156,7 +151,6 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
 
@@ -178,7 +172,6 @@ public class UserDAOImpl implements UserDAO {
 
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
   }
@@ -199,7 +192,6 @@ public class UserDAOImpl implements UserDAO {
       user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
       user.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return user;
@@ -214,6 +206,11 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO changeUser(UserDTO user) {
+
+    if (getLastVersionFromDB(user.getEmail()) != user.getVersion()) {
+      throw new OptimisticLockException("User was updated by another transaction");
+    }
+
     StringBuilder sql = new StringBuilder("UPDATE pae.users SET ");
     List<Object> parameters = new ArrayList<>();
 
@@ -254,14 +251,10 @@ public class UserDAOImpl implements UserDAO {
       for (int i = 0; i < parameters.size(); i++) {
         stmt.setObject(i + 1, parameters.get(i));
       }
-      if (stmt.executeUpdate() == 0) {
-        LoggerUtil.logError("Error processing result set", new OptimisticLockException(""));
-        throw new OptimisticLockException("User was updated by another transaction.");
-      }
 
+      stmt.executeUpdate();
       LoggerUtil.logInfo("user with id " + user.getId() + " was changed");
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return getOne(user.getEmail());
@@ -293,10 +286,25 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return 0; // return 0 if no id was found
+  }
+
+  private int getLastVersionFromDB(String userId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "SELECT _version FROM pae.users WHERE email = ? ")) {
+      preparedStatement.setString(1, userId);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt("_version");
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Erreur lors de la récupération de la dernière version");
+    }
+    return 0;
+
   }
 
 

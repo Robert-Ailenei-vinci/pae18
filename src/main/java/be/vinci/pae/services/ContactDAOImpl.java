@@ -50,7 +50,6 @@ public class ContactDAOImpl implements ContactDAO {
         return getOneContactByStageId(contactId);
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return null;
@@ -72,7 +71,6 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return contacts;
@@ -91,7 +89,6 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Stage not found with id : " + stageId, e);
       throw new StageNotFoundException("Stage not found with id :" + stageId, e);
     }
     return null;
@@ -110,7 +107,6 @@ public class ContactDAOImpl implements ContactDAO {
       contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
       contact.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return contact;
@@ -125,7 +121,6 @@ public class ContactDAOImpl implements ContactDAO {
         return rs.getInt(1) + 1;
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return 1;
@@ -133,6 +128,12 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO updateContact(ContactDTO contactDTO) {
+
+    if (getLastVersionFromDB(contactDTO.getId()) != contactDTO.getVersion()) {
+
+      throw new OptimisticLockException("Optimisitc lock exception");
+    }
+
     StringBuilder sql = new StringBuilder("UPDATE pae.contacts SET ");
     List<Object> parameters = new ArrayList<>();
 
@@ -165,16 +166,11 @@ public class ContactDAOImpl implements ContactDAO {
       for (int i = 0; i < parameters.size(); i++) {
         stmt.setObject(i + 1, parameters.get(i));
       }
-      if (stmt.executeUpdate() == 0) {
-        LoggerUtil.logError("Contact was updated by another transaction",
-            new OptimisticLockException(""));
-        throw new OptimisticLockException("Contact was updated by another transaction");
-      }
+      stmt.executeUpdate();
 
       LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
 
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return getOneContactByStageId(contactDTO.getId());
@@ -193,10 +189,49 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return null;
+  }
+
+  private int getLastVersionFromDB(int contactId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "SELECT _version FROM pae.contacts WHERE id_contact = ? ")) {
+      preparedStatement.setInt(1, contactId);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt("_version");
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Erreur lors de la récupération de la dernière version");
+    }
+    return 0;
+
+  }
+
+  @Override
+  public void cancelAllContact(ContactDTO contactDTO) {
+    System.out.println("GGG");
+
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(
+        "UPDATE pae.contacts SET state = 'suspendu', _version = _version + 1 "
+            + "WHERE id_contact <> ? AND _user = ? "
+            + "AND ( state = 'initie' OR state = 'rencontre') "
+            + "AND school_year = ?;")) {
+
+      stmt.setInt(1, contactDTO.getId());
+      stmt.setInt(2, contactDTO.getUserId());
+      stmt.setInt(3, contactDTO.getSchoolYearId());
+
+      stmt.executeUpdate();
+
+      LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
+
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+
   }
 
 

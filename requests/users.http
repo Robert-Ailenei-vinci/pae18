@@ -83,12 +83,13 @@ POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-  "login": "rob.ert@vinci.be",
+  "email": "rob.ertt@vinci.be",
   "password": "rob",
-  "f_name": "ert",
-  "l_name": "rob",
-  "role": "administratif",
-  "phone_number": "0484118694456"
+  "firstName": "rob",
+  "lastName": "ertt",
+  "phoneNum": "0484118694456",
+  "role": "administratif"
 }
+
 
 
