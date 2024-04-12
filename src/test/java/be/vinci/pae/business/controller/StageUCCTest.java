@@ -65,7 +65,7 @@ class StageUCCTest {
     expectedStage.setUserId(456);
     expectedStage.setSchoolYearId(789);
     String expectedDesc = "test";
-    String expectedDate = "01/01/2000";
+    String expectedDate = "2000-01-01";
     int expectedSupervisor = 852;
 
     when(stageUCC.createOne(contact, expectedDate, expectedDesc, expectedSupervisor)).thenReturn(
