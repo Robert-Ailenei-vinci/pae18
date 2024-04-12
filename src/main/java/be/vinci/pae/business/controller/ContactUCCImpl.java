@@ -137,4 +137,50 @@ public class ContactUCCImpl implements ContactUCC {
       throw e;
     }
   }
+
+  @Override
+  public ContactDTO acceptContact(int contactId, int userId, int version) {
+    try {
+      dalServices.startTransaction();
+
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+      
+      if (contact.getUserId() != userId) {
+        throw new BizExceptionNotFound("The contact does not belong to the user");
+      }
+
+      /*
+      List<ContactDTO> userContacts = myContactDAO.getAllContactsByUserId(userId);
+      for (ContactDTO tempContactDTO : userContacts
+      ) {
+        Contact tempContact = (Contact) tempContactDTO;
+        if (tempContact.checkStateAccepted()) {
+          throw new BizException("The user already has accepted an internship");
+        }
+        if (tempContact.getId() != contact.getId()
+            && (Objects.equals(tempContact.getState(), "initie")
+            || Objects.equals(tempContact.getState(), "rencontre"))) {
+          tempContact.cancelContact(version);
+          myContactDAO.updateContact(tempContact);
+        }
+      }*/
+
+      if (!contact.acceptContact(version)) {
+        throw new BizException("The contact cannot be accepted");
+      }
+
+      ContactDTO contactToReturn = myContactDAO.updateContact(contact);
+
+      myContactDAO.cancelAllContact(contact);
+
+      dalServices.commitTransaction();
+      return contactToReturn;
+
+
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
+
 }

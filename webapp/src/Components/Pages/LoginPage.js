@@ -66,13 +66,13 @@ function onCheckboxClicked(e) {
 async function onLogin(e) {
   e.preventDefault();
 
-  const login = document.querySelector('#mail').value;
+  const email = document.querySelector('#mail').value;
   const password = document.querySelector('#password').value;
 
   const options = {
     method: 'POST',
     body: JSON.stringify({
-      login,
+      email,
       password,
     }),
     headers: {

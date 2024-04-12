@@ -15,6 +15,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
@@ -65,10 +66,10 @@ public class EntrepriseResource {
    * @return The {@link EntrepriseDTO} representing the enterprise.
    */
   @GET
-  @Path("getOne")
+  @Path("getOne/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public EntrepriseDTO getOne(int entrepriseId) {
+  public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
     EntrepriseDTO toReturn = myEntreprise.getOne(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetOne successful");

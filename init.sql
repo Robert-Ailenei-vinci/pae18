@@ -60,10 +60,12 @@ CREATE TABLE pae.stages (
                             supervisor INTEGER NOT NULL ,
                             _user INTEGER NOT NULL ,
                             school_year INTEGER NOT NULL ,
+                            _version INTEGER NOT NULL,
                             FOREIGN KEY (contact) REFERENCES pae.contacts(id_contact),
                             FOREIGN KEY (supervisor) REFERENCES pae.internship_supervisor(id_supervisor),
                             FOREIGN KEY (_user) REFERENCES pae.users(id_user),
                             FOREIGN KEY (school_year) REFERENCES pae.school_years(id_year)
+
 );
 
 -- Insert into pae.school_years

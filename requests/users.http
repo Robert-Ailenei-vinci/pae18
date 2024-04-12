@@ -70,7 +70,7 @@ POST {{baseUrl}}/auths/register
 Content-Type: application/json
 
 {
-  "login": "zaza@vinci.be",
+  "login": "zaza.zaza@student.vinci.be",
   "password": "zaza",
   "f_name": "zaza",
   "l_name": "zaza",

@@ -96,7 +96,7 @@ async function refuseContact(idContact, reason,version) {
     const contactsData = await responseContacts.json();
     return contactsData;
   } catch (error) {
-    throw new Error(
+    console.log(
         `An error occurred while update contacts: ${error.message}`);
   }
 }

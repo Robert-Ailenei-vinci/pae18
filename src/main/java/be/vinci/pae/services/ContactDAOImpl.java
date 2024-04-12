@@ -128,9 +128,9 @@ public class ContactDAOImpl implements ContactDAO {
 
   @Override
   public ContactDTO updateContact(ContactDTO contactDTO) {
-    System.out.println(contactDTO.getState());
 
     if (getLastVersionFromDB(contactDTO.getId()) != contactDTO.getVersion()) {
+
       throw new OptimisticLockException("Optimisitc lock exception");
     }
 
@@ -207,6 +207,30 @@ public class ContactDAOImpl implements ContactDAO {
       throw new FatalError("Erreur lors de la récupération de la dernière version");
     }
     return 0;
+
+  }
+
+  @Override
+  public void cancelAllContact(ContactDTO contactDTO) {
+    System.out.println("GGG");
+
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(
+        "UPDATE pae.contacts SET state = 'suspendu', _version = _version + 1 "
+            + "WHERE id_contact <> ? AND _user = ? "
+            + "AND ( state = 'initie' OR state = 'rencontre') "
+            + "AND school_year = ?;")) {
+
+      stmt.setInt(1, contactDTO.getId());
+      stmt.setInt(2, contactDTO.getUserId());
+      stmt.setInt(3, contactDTO.getSchoolYearId());
+
+      stmt.executeUpdate();
+
+      LoggerUtil.logInfo("Contact nr" + contactDTO.getId() + " updated!");
+
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
 
   }
 
