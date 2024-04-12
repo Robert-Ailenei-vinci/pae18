@@ -46,7 +46,7 @@ public class StageUCCImpl implements StageUCC {
       stage.setUserId(userId);
       stage.setContactId(contactId);
       stage.setInternshipProject(subject);
-      stage.set_version(version);
+      stage.setVersion(version);
       StageDTO updatedStage = stageDAO.modifyStage(stage);
       dalServices.commitTransaction();
       return updatedStage;

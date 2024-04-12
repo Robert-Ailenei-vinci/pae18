@@ -81,24 +81,24 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
    * @return true if the user has required roles, false otherwise.
    */
   private boolean userHasValidToken(ContainerRequestContext requestContext) {
-    // Logic to check if the user has required roles
-    // This could involve checking the user's roles against rolesAllowed
-    // Return true if user has required roles, false otherwise
-    // For demonstration purposes, always return true
     String token = requestContext.getHeaderString("Authorization");
+
     if (token == null) {
       requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
           .entity("A token is needed to access this resource").build());
       return false;
     } else {
-      DecodedJWT decodedToken = null;
       try {
+        DecodedJWT decodedToken = jwtVerifier.verify(token.replace("Bearer ", ""));
+        // You may add additional checks here if needed, such as token expiration or issuer validation
+        LoggerUtil.logInfo("Token verified");
       } catch (Exception e) {
         throw new TokenDecodingException(e);
       }
       return true;
     }
   }
+
 
   /**
    * Authenticates the user based on JWT token.
