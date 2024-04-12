@@ -141,11 +141,12 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   }
 
   @Override
-  public int getNbStagesForCurrentYear(int entrepriseId){
+  public int getNbStagesForCurrentYear(int entrepriseId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-            "SELECT COUNT(*) FROM pae.entreprises e " +
-                    "JOIN pae.contacts c ON e.id_entreprise = c.entreprise " +
-                    "WHERE c.school_year = ? AND e.id_entreprise = ?")) {
+            "SELECT COUNT(*) FROM pae.stages s " +
+                    "JOIN pae.contacts c ON s.contact = c.id_contact " +
+                    "JOIN pae.entreprises e ON c.entreprise = e.id_entreprise " +
+                    "WHERE s.school_year = ? AND e.id_entreprise = ?")) {
       preparedStatement.setInt(1,schoolYearDAO.getCurrentSchoolYear().getId());
       preparedStatement.setInt(2, entrepriseId); // Set the entreprise id
       try (ResultSet rs = preparedStatement.executeQuery()) {
@@ -158,7 +159,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       throw new FatalError("Error processing result set", e);
     }
     return 0;
-  }
+}
 
   private int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";

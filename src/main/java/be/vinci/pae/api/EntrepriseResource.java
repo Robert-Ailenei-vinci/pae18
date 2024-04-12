@@ -10,6 +10,8 @@ import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
@@ -38,6 +40,8 @@ public class EntrepriseResource {
   EntrepriseUCC myEntrepriseUCC;
   @Inject
   UserUCC myUserUCC;
+
+  private final ObjectMapper jsonMapper = new ObjectMapper();
 
   /**
    * Retrieves a list of all enterprises. This method is accessed via HTTP GET request to the path
@@ -176,10 +180,12 @@ public class EntrepriseResource {
     @Path("getStagesCountForCurrentYear/{entrepriseId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Authorize
-    public int getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
-      int toReturn = -1;
-        toReturn = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
-        if (toReturn != -1) {
+    public ObjectNode getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
+        ObjectNode toReturn = jsonMapper.createObjectNode();
+        int nbStages = -1;
+        nbStages = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
+        toReturn.put("nbStages", nbStages);
+        if (nbStages != -1) {
             LoggerUtil.logInfo("GetStagesCountForCurrentYear successful");
         }
         return toReturn;
