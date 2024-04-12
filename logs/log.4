@@ -1,16 +1,83 @@
-[2024-04-05 12:13:17] [SEVERE] Unable to connect to database
-java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
-	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:30)
-	at be.vinci.pae.business.controller.ContactUCCTest.lambda$createOneWrongUserRole$1(ContactUCCTest.java:107)
+[2024-04-10 18:44:28] [INFO] schoolyear getone + id : 1 
+[2024-04-10 18:44:28] [SEVERE] Login failed
+be.vinci.pae.exception.AuthorisationException: 
+	at be.vinci.pae.api.AuthsResource.login(AuthsResource.java:77)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+ 
+[2024-04-10 18:44:43] [INFO] get one user by email with email: Carole.skile@student.vinci.be 
+[2024-04-10 18:44:43] [INFO] schoolyear getone + id : 1 
+[2024-04-10 18:44:43] [INFO] Login successful 
+[2024-04-10 18:47:48] [INFO] get one user by email with email: Carole.skile@student.vinci.be 
+[2024-04-10 18:47:48] [INFO] schoolyear getone + id : 1 
+[2024-04-10 18:47:48] [INFO] Login successful 
+[2024-04-10 18:48:01] [INFO] get one user by email with email: Carole.skile@student.vinci.be 
+[2024-04-10 18:48:01] [INFO] schoolyear getone + id : 1 
+[2024-04-10 18:48:01] [INFO] Login successful 
+[2024-04-10 18:51:54] [INFO] get one user by email with email: Carole.skile@student.vinci.be 
+[2024-04-10 18:51:54] [INFO] schoolyear getone + id : 1 
+[2024-04-10 18:51:54] [INFO] Login successful 
+[2024-04-10 18:52:39] [INFO] get one user by email with email: Carole.skile@student.vinci.be 
+[2024-04-10 18:52:39] [INFO] schoolyear getone + id : 1 
+[2024-04-10 18:52:39] [INFO] Login successful 
+[2024-04-10 18:54:43] [INFO] get one user by email with email: Carole.skile@student.vinci.be 
+[2024-04-10 18:54:43] [INFO] schoolyear getone + id : 1 
+[2024-04-10 18:54:43] [INFO] Login successful 
+[2024-04-10 18:55:28] [INFO] entreprise getone with id 1 
+[2024-04-10 18:56:18] [INFO] entreprise blacklist with id 1 
+[2024-04-10 18:56:20] [INFO] entreprise getone with id 1 
+[2024-04-10 18:56:32] [INFO] Blacklist successful 
+[2024-04-10 18:57:47] [INFO] get one user by email with email: Carole.skile@student.vinci.be 
+[2024-04-10 18:57:47] [INFO] schoolyear getone + id : 1 
+[2024-04-10 18:57:47] [INFO] Login successful 
+[2024-04-10 18:57:52] [INFO] entreprise getone with id 2 
+[2024-04-10 18:57:52] [INFO] entreprise blacklist with id 2 
+[2024-04-10 18:57:52] [INFO] entreprise getone with id 2 
+[2024-04-10 18:57:52] [INFO] Blacklist successful 
+[2024-04-12 10:52:04] [SEVERE] BizError
+org.mockito.exceptions.misusing.UnfinishedStubbingException: 
+Unfinished stubbing detected here:
+-> at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetOneWithException(EntrepriseUCCImplTest.java:70)
+
+E.g. thenReturn() may be missing.
+Examples of correct stubbing:
+    when(mock.isOk()).thenReturn(true);
+    when(mock.isOk()).thenThrow(exception);
+    doThrow(exception).when(mock).someVoidMethod();
+Hints:
+ 1. missing thenReturn()
+ 2. you are trying to stub a final method, which is not supported
+ 3. you are stubbing the behaviour of another mock inside before 'thenReturn' instruction is completed
+
+	at be.vinci.pae.services.EntrepriseDAOImpl.getOne(EntrepriseDAOImpl.java:32)
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.getOne(EntrepriseUCCImpl.java:38)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$testGetOneWithException$0(EntrepriseUCCImplTest.java:72)
 	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
 	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
 	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
-	at be.vinci.pae.business.controller.ContactUCCTest.createOneWrongUserRole(ContactUCCTest.java:106)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetOneWithException(EntrepriseUCCImplTest.java:71)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -79,31 +146,29 @@ java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 78 more
  
-[2024-04-05 12:13:17] [SEVERE] BizError
-be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:51)
-	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
-	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:30)
-	at be.vinci.pae.business.controller.ContactUCCTest.lambda$createOneWrongUserRole$1(ContactUCCTest.java:107)
+[2024-04-12 10:52:05] [SEVERE] BizError
+org.mockito.exceptions.misusing.UnfinishedStubbingException: 
+Unfinished stubbing detected here:
+-> at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetAllWithException(EntrepriseUCCImplTest.java:130)
+
+E.g. thenReturn() may be missing.
+Examples of correct stubbing:
+    when(mock.isOk()).thenReturn(true);
+    when(mock.isOk()).thenThrow(exception);
+    doThrow(exception).when(mock).someVoidMethod();
+Hints:
+ 1. missing thenReturn()
+ 2. you are trying to stub a final method, which is not supported
+ 3. you are stubbing the behaviour of another mock inside before 'thenReturn' instruction is completed
+
+	at be.vinci.pae.services.EntrepriseDAOImpl.getAll(EntrepriseDAOImpl.java:57)
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.getAll(EntrepriseUCCImpl.java:64)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$testGetAllWithException$2(EntrepriseUCCImplTest.java:132)
 	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
 	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
 	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
-	at be.vinci.pae.business.controller.ContactUCCTest.createOneWrongUserRole(ContactUCCTest.java:106)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetAllWithException(EntrepriseUCCImplTest.java:131)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -172,40 +237,15 @@ be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	... 75 more
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 78 more
  
-[2024-04-05 12:13:17] [SEVERE] Unable to connect to database
-java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	at be.vinci.pae.services.DALServicesImpl.rollbackTransaction(DALServicesImpl.java:118)
-	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:55)
-	at be.vinci.pae.business.controller.ContactUCCTest.lambda$createOneWrongUserRole$1(ContactUCCTest.java:107)
+[2024-04-12 10:52:06] [SEVERE] BizError
+be.vinci.pae.exception.BizException: This user is not a student.
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.createOne(EntrepriseUCCImpl.java:85)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$createOneWithException$1(EntrepriseUCCImplTest.java:104)
 	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
 	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
 	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
-	at be.vinci.pae.business.controller.ContactUCCTest.createOneWrongUserRole(ContactUCCTest.java:106)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.createOneWithException(EntrepriseUCCImplTest.java:103)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -274,30 +314,15 @@ java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 78 more
  
-[2024-04-05 12:13:17] [SEVERE] Unable to connect to database
-java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
-	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:30)
-	at be.vinci.pae.business.controller.ContactUCCTest.createOneNullFromDAO(ContactUCCTest.java:94)
+[2024-04-12 10:52:06] [SEVERE] BizError
+be.vinci.pae.exception.BizException: This user is not a student.
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.createOne(EntrepriseUCCImpl.java:87)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$createOneWithException$1(EntrepriseUCCImplTest.java:104)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.createOneWithException(EntrepriseUCCImplTest.java:103)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -366,27 +391,16 @@ java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 74 more
  
-[2024-04-05 12:13:17] [SEVERE] BizError
-be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:51)
-	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
-	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:30)
-	at be.vinci.pae.business.controller.ContactUCCTest.createOneNullFromDAO(ContactUCCTest.java:94)
+[2024-04-12 10:52:07] [SEVERE] BizError
+java.lang.RuntimeException
+	at be.vinci.pae.services.EntrepriseDAOImpl.getOne(EntrepriseDAOImpl.java:32)
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.blacklist(EntrepriseUCCImpl.java:115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$blacklistWithException$3(EntrepriseUCCImplTest.java:164)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.blacklistWithException(EntrepriseUCCImplTest.java:163)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -455,36 +469,12 @@ be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	... 71 more
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 74 more
  
-[2024-04-05 12:13:17] [SEVERE] Unable to connect to database
-java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	at be.vinci.pae.services.DALServicesImpl.rollbackTransaction(DALServicesImpl.java:118)
-	at be.vinci.pae.business.controller.ContactUCCImpl.createOne(ContactUCCImpl.java:55)
-	at be.vinci.pae.business.controller.ContactUCCTest.createOneNullFromDAO(ContactUCCTest.java:94)
+[2024-04-12 10:52:08] [SEVERE] BizError
+java.lang.RuntimeException
+	at be.vinci.pae.services.EntrepriseDAOImpl.getOne(EntrepriseDAOImpl.java:32)
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.getOne(EntrepriseUCCImpl.java:38)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetOne(EntrepriseUCCImplTest.java:62)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -553,30 +543,29 @@ java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 74 more
  
-[2024-04-05 12:13:18] [SEVERE] Unable to connect to database
-java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
-	at be.vinci.pae.business.controller.ContactUCCImpl.meetContact(ContactUCCImpl.java:77)
-	at be.vinci.pae.business.controller.ContactUCCTest.meetContactNullFromDAO(ContactUCCTest.java:152)
+[2024-04-12 10:52:53] [SEVERE] BizError
+org.mockito.exceptions.misusing.UnfinishedStubbingException: 
+Unfinished stubbing detected here:
+-> at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetOneWithException(EntrepriseUCCImplTest.java:70)
+
+E.g. thenReturn() may be missing.
+Examples of correct stubbing:
+    when(mock.isOk()).thenReturn(true);
+    when(mock.isOk()).thenThrow(exception);
+    doThrow(exception).when(mock).someVoidMethod();
+Hints:
+ 1. missing thenReturn()
+ 2. you are trying to stub a final method, which is not supported
+ 3. you are stubbing the behaviour of another mock inside before 'thenReturn' instruction is completed
+
+	at be.vinci.pae.services.EntrepriseDAOImpl.getOne(EntrepriseDAOImpl.java:32)
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.getOne(EntrepriseUCCImpl.java:38)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$testGetOneWithException$0(EntrepriseUCCImplTest.java:72)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetOneWithException(EntrepriseUCCImplTest.java:71)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -645,27 +634,29 @@ java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 74 more
  
-[2024-04-05 12:13:18] [SEVERE] BizError
-be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:51)
-	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
-	at be.vinci.pae.business.controller.ContactUCCImpl.meetContact(ContactUCCImpl.java:77)
-	at be.vinci.pae.business.controller.ContactUCCTest.meetContactNullFromDAO(ContactUCCTest.java:152)
+[2024-04-12 10:52:54] [SEVERE] BizError
+org.mockito.exceptions.misusing.UnfinishedStubbingException: 
+Unfinished stubbing detected here:
+-> at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetAllWithException(EntrepriseUCCImplTest.java:130)
+
+E.g. thenReturn() may be missing.
+Examples of correct stubbing:
+    when(mock.isOk()).thenReturn(true);
+    when(mock.isOk()).thenThrow(exception);
+    doThrow(exception).when(mock).someVoidMethod();
+Hints:
+ 1. missing thenReturn()
+ 2. you are trying to stub a final method, which is not supported
+ 3. you are stubbing the behaviour of another mock inside before 'thenReturn' instruction is completed
+
+	at be.vinci.pae.services.EntrepriseDAOImpl.getAll(EntrepriseDAOImpl.java:57)
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.getAll(EntrepriseUCCImpl.java:64)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$testGetAllWithException$2(EntrepriseUCCImplTest.java:132)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetAllWithException(EntrepriseUCCImplTest.java:131)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -734,36 +725,15 @@ be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	... 71 more
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 74 more
  
-[2024-04-05 12:13:18] [SEVERE] Unable to connect to database
-java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	at be.vinci.pae.services.DALServicesImpl.rollbackTransaction(DALServicesImpl.java:118)
-	at be.vinci.pae.business.controller.ContactUCCImpl.meetContact(ContactUCCImpl.java:98)
-	at be.vinci.pae.business.controller.ContactUCCTest.meetContactNullFromDAO(ContactUCCTest.java:152)
+[2024-04-12 10:52:55] [SEVERE] BizError
+be.vinci.pae.exception.BizException: This user is not a student.
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.createOne(EntrepriseUCCImpl.java:85)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$createOneWithException$1(EntrepriseUCCImplTest.java:104)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.createOneWithException(EntrepriseUCCImplTest.java:103)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -832,30 +802,15 @@ java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 74 more
  
-[2024-04-05 12:13:18] [SEVERE] Unable to connect to database
-java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
-	at be.vinci.pae.business.controller.ContactUCCImpl.stopFollowContact(ContactUCCImpl.java:106)
-	at be.vinci.pae.business.controller.ContactUCCTest.stopFollowContact(ContactUCCTest.java:193)
+[2024-04-12 10:52:55] [SEVERE] BizError
+be.vinci.pae.exception.BizException: This user is not a student.
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.createOne(EntrepriseUCCImpl.java:87)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$createOneWithException$1(EntrepriseUCCImplTest.java:104)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.createOneWithException(EntrepriseUCCImplTest.java:103)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -924,27 +879,16 @@ java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 74 more
  
-[2024-04-05 12:13:18] [SEVERE] BizError
-be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:51)
-	at be.vinci.pae.services.DALServicesImpl.startTransaction(DALServicesImpl.java:96)
-	at be.vinci.pae.business.controller.ContactUCCImpl.stopFollowContact(ContactUCCImpl.java:106)
-	at be.vinci.pae.business.controller.ContactUCCTest.stopFollowContact(ContactUCCTest.java:193)
+[2024-04-12 10:52:56] [SEVERE] BizError
+java.lang.RuntimeException
+	at be.vinci.pae.services.EntrepriseDAOImpl.getOne(EntrepriseDAOImpl.java:32)
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.blacklist(EntrepriseUCCImpl.java:115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.lambda$blacklistWithException$3(EntrepriseUCCImplTest.java:164)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.blacklistWithException(EntrepriseUCCImplTest.java:163)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
@@ -1013,24 +957,78 @@ be.vinci.pae.exception.FatalError: Unable to connect to database: Cannot create 
 	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
 	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
 	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
-Caused by: java.sql.SQLException: Cannot create PoolableConnectionFactory (FATAL: too many connections for database "dblars_hanquet")
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:636)
-	at org.apache.commons.dbcp2.BasicDataSource.createDataSource(BasicDataSource.java:538)
-	at org.apache.commons.dbcp2.BasicDataSource.getConnection(BasicDataSource.java:714)
-	at be.vinci.pae.services.DALServicesImpl.getConnection(DALServicesImpl.java:47)
-	... 71 more
-Caused by: org.postgresql.util.PSQLException: FATAL: too many connections for database "dblars_hanquet"
-	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2712)
-	at org.postgresql.core.v3.QueryExecutorImpl.readStartupMessages(QueryExecutorImpl.java:2824)
-	at org.postgresql.core.v3.QueryExecutorImpl.<init>(QueryExecutorImpl.java:174)
-	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:313)
-	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
-	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:263)
-	at org.postgresql.Driver.makeConnection(Driver.java:444)
-	at org.postgresql.Driver.connect(Driver.java:297)
-	at org.apache.commons.dbcp2.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:52)
-	at org.apache.commons.dbcp2.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:414)
-	at org.apache.commons.dbcp2.BasicDataSource.validateConnectionFactory(BasicDataSource.java:113)
-	at org.apache.commons.dbcp2.BasicDataSource.createPoolableConnectionFactory(BasicDataSource.java:632)
-	... 74 more
+ 
+[2024-04-12 10:52:57] [SEVERE] BizError
+java.lang.RuntimeException
+	at be.vinci.pae.services.EntrepriseDAOImpl.getOne(EntrepriseDAOImpl.java:32)
+	at be.vinci.pae.business.controller.EntrepriseUCCImpl.getOne(EntrepriseUCCImpl.java:38)
+	at be.vinci.pae.business.controller.EntrepriseUCCImplTest.testGetOne(EntrepriseUCCImplTest.java:62)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:728)
+	at org.junit.jupiter.engine.execution.MethodInvocation.proceed(MethodInvocation.java:60)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$ValidatingInvocation.proceed(InvocationInterceptorChain.java:131)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.intercept(TimeoutExtension.java:156)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestableMethod(TimeoutExtension.java:147)
+	at org.junit.jupiter.engine.extension.TimeoutExtension.interceptTestMethod(TimeoutExtension.java:86)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker$ReflectiveInterceptorCall.lambda$ofVoidMethod$0(InterceptingExecutableInvoker.java:103)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.lambda$invoke$0(InterceptingExecutableInvoker.java:93)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain$InterceptedInvocation.proceed(InvocationInterceptorChain.java:106)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.proceed(InvocationInterceptorChain.java:64)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.chainAndInvoke(InvocationInterceptorChain.java:45)
+	at org.junit.jupiter.engine.execution.InvocationInterceptorChain.invoke(InvocationInterceptorChain.java:37)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:92)
+	at org.junit.jupiter.engine.execution.InterceptingExecutableInvoker.invoke(InterceptingExecutableInvoker.java:86)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$invokeTestMethod$7(TestMethodTestDescriptor.java:218)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.invokeTestMethod(TestMethodTestDescriptor.java:214)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:139)
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.execute(TestMethodTestDescriptor.java:69)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:151)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:63)
+	at com.intellij.junit5.JUnit5IdeaTestRunner.startRunnerWithArgs(JUnit5IdeaTestRunner.java:57)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
  

@@ -3,6 +3,8 @@ package be.vinci.pae.business.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -33,7 +35,6 @@ class EntrepriseUCCImplTest {
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
   private EntrepriseDTO expectedEntreprise;
-
   private DALServices dalServices;
 
   @BeforeEach
@@ -51,17 +52,40 @@ class EntrepriseUCCImplTest {
     doNothing().when(dalServices).startTransaction();
     doNothing().when(dalServices).commitTransaction();
     doNothing().when(dalServices).rollbackTransaction();
+
+    // Arrange
+    // Arrange
+    Entreprise entreprise = (Entreprise) factory.getEntreprise();
+    entreprise.setId(1);
+    when(entrepriseDAO.getOne(anyInt())).thenReturn(entreprise);
   }
 
   @Test
-  public void testGetOne() {
-    entreprise.setId(1);
-    entreprise.setTradeName("zaza");
+  void getOneSuccess() {
+    // Arrange
+    int entrepriseId = 1;
+    Entreprise entreprise = (Entreprise) factory.getEntreprise();
+    entreprise.setId(entrepriseId);
 
-    when(entrepriseUcc.getOne(1)).thenReturn(entreprise);
-    expectedEntreprise = entrepriseUcc.getOne(1);
+    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
+    // Act
+    EntrepriseDTO retrievedEntreprise = entrepriseUcc.getOne(entrepriseId);
 
-    assertEquals(entreprise.getId(), expectedEntreprise.getId());
+    // Assert
+    assertNotNull(retrievedEntreprise);
+    assertEquals(entrepriseId, retrievedEntreprise.getId());
+  }
+
+  @Test
+  void getOneWithException() {
+    // Arrange
+    int entrepriseId = 1;
+    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
+
+    // Act and Assert
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getOne(entrepriseId);
+    });
   }
 
   @Test
@@ -129,6 +153,38 @@ class EntrepriseUCCImplTest {
     when(entrepriseUcc.getAll());
     assertThrows(RuntimeException.class, () -> {
       entrepriseUcc.getAll();
+    });
+  }
+
+  @Test
+  void blacklistSuccess() {
+    // Arrange
+    int entrepriseId = 1;
+    String reason = "Test reason";
+    Entreprise entreprise = (Entreprise) factory.getEntreprise();
+    entreprise.setId(entrepriseId);
+    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
+    when(entrepriseDAO.blacklist(entreprise)).thenReturn(entreprise);
+
+    // Act
+    EntrepriseDTO blacklistedEntreprise = entrepriseUcc.blacklist(entrepriseId, reason);
+
+    // Assert
+    assertNotNull(blacklistedEntreprise);
+    assertTrue(blacklistedEntreprise.isBlacklisted());
+    assertEquals(reason, blacklistedEntreprise.getBlacklistReason());
+  }
+
+  @Test
+  void blacklistWithException() {
+    // Arrange
+    int entrepriseId = 1;
+    String reason = "Test reason";
+    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
+
+    // Act and Assert
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.blacklist(entrepriseId, reason);
     });
   }
 
