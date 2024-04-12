@@ -25,8 +25,3 @@ public interface SupervisorUCC {
    */
   List<SupervisorDTO> getAll(int entrepriseId);
 }
-/**
- * Retrieves a list of all supervisors.
- *
- * @return A list of {@link SupervisorDTO} representing all enterprises.
- */

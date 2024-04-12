@@ -171,12 +171,12 @@ public class AuthsResource {
   public ObjectNode register(UserDTO jsonUserDTO) {
     String psw = jsonUserDTO.getPassword();
     if (
-        jsonUserDTO.getEmail() == null || jsonUserDTO.getEmail().isEmpty() ||
-            jsonUserDTO.getPassword() == null || jsonUserDTO.getPassword().isEmpty() ||
-            jsonUserDTO.getFirstName() == null || jsonUserDTO.getFirstName().isEmpty() ||
-            jsonUserDTO.getLastName() == null || jsonUserDTO.getLastName().isEmpty() ||
-            jsonUserDTO.getPhoneNum() == null || jsonUserDTO.getPhoneNum().isEmpty() ||
-            jsonUserDTO.getRole() == null || jsonUserDTO.getRole().isEmpty()
+        jsonUserDTO.getEmail() == null || jsonUserDTO.getEmail().isEmpty()
+            || jsonUserDTO.getPassword() == null || jsonUserDTO.getPassword().isEmpty()
+            || jsonUserDTO.getFirstName() == null || jsonUserDTO.getFirstName().isEmpty()
+            || jsonUserDTO.getLastName() == null || jsonUserDTO.getLastName().isEmpty()
+            || jsonUserDTO.getPhoneNum() == null || jsonUserDTO.getPhoneNum().isEmpty()
+            || jsonUserDTO.getRole() == null || jsonUserDTO.getRole().isEmpty()
     ) {
       throw new BadRequestException("All fields are required");
     }

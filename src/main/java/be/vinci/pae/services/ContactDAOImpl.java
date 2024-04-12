@@ -215,7 +215,10 @@ public class ContactDAOImpl implements ContactDAO {
     System.out.println("GGG");
 
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(
-        "UPDATE pae.contacts SET state = 'suspendu', _version = _version + 1 WHERE id_contact <> ? AND _user = ? AND ( state = 'initie' OR state = 'rencontre') AND school_year = ?;")) {
+        "UPDATE pae.contacts SET state = 'suspendu', _version = _version + 1 "
+            + "WHERE id_contact <> ? AND _user = ? "
+            + "AND ( state = 'initie' OR state = 'rencontre') "
+            + "AND school_year = ?;")) {
 
       stmt.setInt(1, contactDTO.getId());
       stmt.setInt(2, contactDTO.getUserId());

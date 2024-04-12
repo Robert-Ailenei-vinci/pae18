@@ -207,7 +207,7 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO changeUser(UserDTO user) {
 
-    if (getLastVersionFromDB(user.getEmail()) != user.getVersion()){
+    if (getLastVersionFromDB(user.getEmail()) != user.getVersion()) {
       throw new OptimisticLockException("User was updated by another transaction");
     }
 

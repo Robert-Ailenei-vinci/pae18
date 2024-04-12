@@ -26,7 +26,8 @@ public class StageUCCImpl implements StageUCC {
 
 
   private static boolean checkDateFormat(String dateString) {
-    String pattern = "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])"; // Validating days: 01-31, months: 01-12
+    String pattern = "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])";
+    //Validating days: 01-31, months: 01-12
     Pattern regex = Pattern.compile(pattern);
     Matcher matcher = regex.matcher(dateString);
     return matcher.matches();
@@ -55,7 +56,7 @@ public class StageUCCImpl implements StageUCC {
       stage.setUserId(userId);
       stage.setContactId(contactId);
       stage.setInternshipProject(subject);
-      stage.set_version(version);
+      stage.setVersion(version);
       StageDTO updatedStage = stageDAO.modifyStage(stage);
       dalServices.commitTransaction();
       return updatedStage;

@@ -6,6 +6,9 @@ import be.vinci.pae.services.SupervisorDAO;
 import jakarta.inject.Inject;
 import java.util.List;
 
+/**
+ * This class represents an implementation of the {@link SupervisorUCC} interface.
+ */
 public class SupervisorUCCImpl implements SupervisorUCC {
 
   @Inject

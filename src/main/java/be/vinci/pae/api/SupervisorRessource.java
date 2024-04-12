@@ -22,6 +22,9 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
+/**
+ * Represents a RESTful API resource for managing supervisors.
+ */
 @Singleton
 @Path("/supervisor")
 public class SupervisorRessource {
