@@ -103,6 +103,18 @@ public class EntrepriseResource {
       throw new BadRequestException("All fields required to blacklist an enterprise.");
     }
 
+    EntrepriseDTO entreprise = myEntrepriseUCC.getOne(entrepriseId);
+
+    if (entreprise == null) {
+      LoggerUtil.logError("Enterprise not found", new BadRequestException(""));
+      throw new BadRequestException("Enterprise not found");
+    }
+
+    if (entreprise.isBlacklisted()) {
+      LoggerUtil.logError("Enterprise already blacklisted", new BadRequestException(""));
+      throw new BadRequestException("Enterprise already blacklisted");
+    }
+
     EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason);
     if (toReturn != null) {
       LoggerUtil.logInfo("Blacklist successful");
@@ -181,39 +193,40 @@ public class EntrepriseResource {
     return toReturn;
   }
 
-    /**
-     * Retrieves all enterprises for a given school year.
-     *
-     * @param idSchoolYear the school year id
-     * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
-     */
-    @GET
-    @Path("getAllForSchoolYear/{idSchoolYear}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Authorize
-    public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear) {
-        List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear);
-        if (toReturn != null) {
-            LoggerUtil.logInfo("GetAllForSchoolYear successful");
-        }
-        return toReturn;
+  /**
+   * Retrieves all enterprises for a given school year.
+   *
+   * @param idSchoolYear the school year id
+   * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
+   */
+  @GET
+  @Path("getAllForSchoolYear/{idSchoolYear}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear) {
+    List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAllForSchoolYear successful");
     }
+    return toReturn;
+  }
 
   /**
    * Count the number of stages for the entreprise.
+   *
    * @param entrepriseId the entreprise id
    * @return the number of stages for the entreprise
    */
-    @GET
-    @Path("getStagesCountForCurrentYear/{entrepriseId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Authorize
-    public int getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
-      int toReturn = -1;
-        toReturn = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
-        if (toReturn != -1) {
-            LoggerUtil.logInfo("GetStagesCountForCurrentYear successful");
-        }
-        return toReturn;
+  @GET
+  @Path("getStagesCountForCurrentYear/{entrepriseId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public int getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
+    int toReturn = -1;
+    toReturn = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
+    if (toReturn != -1) {
+      LoggerUtil.logInfo("GetStagesCountForCurrentYear successful");
     }
+    return toReturn;
+  }
 }
