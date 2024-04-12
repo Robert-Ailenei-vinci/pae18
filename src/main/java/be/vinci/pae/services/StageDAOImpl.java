@@ -40,8 +40,32 @@ public class StageDAOImpl implements StageDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("No Stage found for userId : " + userId, e);
       throw new StageNotFoundException("Pas de stage avec l'id de user suivant : " + userId, e);
+    }
+    return null;
+  }
+
+  @Override
+  public StageDTO createOne(int contactId, String signatureDate, String internshipProject,
+      int supervisorId, int userId, int schoolYearId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "INSERT INTO pae.stages "
+            + "(contact, signature_date, internship_project, supervisor, _user, "
+            + "school_year, _version)"
+            + "VALUES (?, ?, ?, ?, ?, ?, 0)"
+    )) {
+      preparedStatement.setInt(1, contactId);
+      preparedStatement.setString(2, signatureDate);
+      preparedStatement.setString(3, internshipProject);
+      preparedStatement.setInt(4, supervisorId);
+      preparedStatement.setInt(5, userId);
+      preparedStatement.setInt(6, schoolYearId);
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        return getOneStageByUserId(userId);
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
     }
     return null;
   }
@@ -61,7 +85,6 @@ public class StageDAOImpl implements StageDAO {
       stage.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
       stage.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
-      LoggerUtil.logError("Error fetching stage", e);
       throw new FatalError("Erreur lors de la récupération du stage");
     }
     return stage;
@@ -86,7 +109,6 @@ public class StageDAOImpl implements StageDAO {
       preparedStatement.executeUpdate();
       System.out.println(stageDTO);
     } catch (Exception e) {
-      LoggerUtil.logError("Error modifying stage", e);
       throw new FatalError("Erreur lors de la modification du stage");
     }
     return stageDTO;
@@ -102,7 +124,6 @@ public class StageDAOImpl implements StageDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error fetching last version", e);
       throw new FatalError("Erreur lors de la récupération de la dernière version");
     }
     return 0;

@@ -53,4 +53,6 @@ public interface ContactDAO {
    * @return the contact.
    */
   ContactDTO getOneContactById(int idContact);
+
+  void cancelAllContact(ContactDTO contact);
 }
