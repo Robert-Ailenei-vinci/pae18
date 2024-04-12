@@ -120,7 +120,7 @@ public class AuthsResource {
   @GET
   @Path("user")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public ObjectNode getUser(@Context ContainerRequestContext requestContext) {
     LoggerUtil.logInfo("Starting : refresh");
     UserDTO user = (UserDTO) requestContext.getProperty("user");

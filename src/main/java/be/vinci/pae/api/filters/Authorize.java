@@ -15,6 +15,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface Authorize {
 
-  String[] roles() default {"etudiant", "professeur", "administratif"};
+  String[] roles() default {};
 }
 

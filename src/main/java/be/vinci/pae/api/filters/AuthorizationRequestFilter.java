@@ -12,11 +12,13 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.container.ResourceInfo;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
-import java.util.Arrays;
+import java.lang.reflect.Method;
 
 /**
  * This class represents a filter for authorizing access to resources.
@@ -32,6 +34,8 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
 
   @Inject
   private UserDAO userDAO;
+  @Context
+  private ResourceInfo resourceInfo;
 
   /**
    * Filters the container request context to authorize requests based on JWT tokens and user
@@ -42,11 +46,15 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
    */
   @Override
   public void filter(ContainerRequestContext requestContext) throws IOException {
-
     LoggerUtil.logInfo("Starting : authorize");
-    Authorize authorize = getClass().getAnnotation(Authorize.class);
-    String[] rolesAllowed = authorize.roles();
-    LoggerUtil.logInfo("Roles: " + Arrays.toString(rolesAllowed));
+    String[] rolesAllowed = null;
+    Method method = resourceInfo.getResourceMethod();
+    if (method != null) {
+      Authorize rolesAnnotation = method.getAnnotation(Authorize.class);
+      if (rolesAnnotation != null) {
+        rolesAllowed = rolesAnnotation.roles();
+      }
+    }
     // Check if the user has required roles
     if (!userHasValidToken(requestContext)) {
       requestContext.abortWith(Response.status(Status.FORBIDDEN)
@@ -54,8 +62,11 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
       return;
     }
     UserDTO authenticatedUser = authenticateUser(requestContext);
+    if (rolesAllowed == null) {
+      requestContext.abortWith(Response.status(Status.FORBIDDEN)
+          .entity("Error initialising Authorize").build());
+    }
     if (!userHasRequiredRoles(authenticatedUser, rolesAllowed)) {
-      LoggerUtil.logInfo("UNTRUE");
       requestContext.abortWith(Response.status(Status.FORBIDDEN)
           .entity("You are forbidden to access this resource").build());
       return;
@@ -82,7 +93,6 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
     } else {
       DecodedJWT decodedToken = null;
       try {
-        LoggerUtil.logInfo("Token verified");
       } catch (Exception e) {
         throw new TokenDecodingException(e);
       }
