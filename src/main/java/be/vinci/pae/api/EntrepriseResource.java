@@ -101,20 +101,14 @@ public class EntrepriseResource {
       throw new BadRequestException("All fields required to create an enterprise.");
     }
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
-    int userId = user.getId();
+
     String tradeName = json.get("trade_name").asText();
     String designation = json.get("designation").asText();
     String address = json.get("address").asText();
     String phoneNum = json.get("phone_num").asText();
     String email = json.get("email").asText();
 
-    // Try to get user, enterprise, and school year
-    UserDTO userDTO = myUserUCC.getOne(userId);
-    if (userDTO == null) {
-      throw new AuthorisationException("User not recognised");
-    }
-
-    EntrepriseDTO entrepriseDTO = myEntreprise.createOne(userDTO, tradeName, designation, address,
+    EntrepriseDTO entrepriseDTO = myEntreprise.createOne(user, tradeName, designation, address,
         phoneNum, email);
     if (entrepriseDTO == null) {
       throw new BadRequestException("Contact not created");
