@@ -163,7 +163,7 @@ async function renderPersonnalInfoPage() {
     // Bouton pour changer l'état
     const tdButton = document.createElement('td');
     const button = document.createElement('button');
-    button.textContent = 'Changer état';
+    button.textContent = 'Avancement';
     button.className = 'btn btn-primary';
     button.setAttribute('type', 'button');
     button.setAttribute('data-bs-toggle', 'collapse');
@@ -282,7 +282,7 @@ async function renderPersonnalInfoPage() {
       // Création du formulaire
       const form = document.createElement('form');
       const select = document.createElement('select');
-      select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
+      select.className = 'form-select mt-2 mb-2'; // Ajoutez des classes Bootstrap si nécessaire
       ['Refusé', 'Suivi stoppé', 'Accepté'].forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText;
@@ -295,6 +295,7 @@ async function renderPersonnalInfoPage() {
       const extraInput = document.createElement('input');
       extraInput.type = 'text';
       extraInput.placeholder = 'Raison';
+      extraInput.className = 'm-2'
       extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
 
 // Gérer l'affichage de la zone de texte en fonction de la sélection
@@ -309,7 +310,7 @@ async function renderPersonnalInfoPage() {
 // Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
-      submitButton.className = 'btn btn-primary';
+      submitButton.className = 'btn btn-primary me-2';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
 // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
