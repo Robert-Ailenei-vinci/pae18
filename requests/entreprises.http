@@ -13,6 +13,11 @@ Content-Type: application/json
   client.global.set("user", response.body.token);
 %}
 
+### Get one entreprise
+GET {{baseUrl}}/entreprise/getOne/1
+Content-Type: application/json
+Authorization: {{user}}
+
 ### Get all entreprises
 GET {{baseUrl}}/entreprise/getAll
 Content-Type: application/json
@@ -20,5 +25,15 @@ Authorization: {{user}}
 
 ### Get all the contacts related to the entreprise
 GET {{baseUrl}}/entreprise/entrepriseDetailsAllContacts/1
+Content-Type: application/json
+Authorization: {{user}}
+
+### Get all entreprises for a school year
+GET {{baseUrl}}/entreprise/getAllForSchoolYear/1
+Content-Type: application/json
+Authorization: {{user}}
+
+### Get number of stages for the entreprise for current school year
+GET {{baseUrl}}/entreprise/getStagesCountForCurrentYear/1
 Content-Type: application/json
 Authorization: {{user}}

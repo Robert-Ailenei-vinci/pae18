@@ -19,6 +19,8 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   private DomainFactory myDomainFactory;
   @Inject
   private DALBackServices dalBackServices;
+  @Inject
+    private SchoolYearDAO schoolYearDAO;
 
   /**
    * Retrieves an enterprise by its identifier from the database.
@@ -98,6 +100,28 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     return null;
   }
 
+  @Override
+  public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
+    PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+            "SELECT DISTINCT e.* FROM pae.entreprises e " +
+                    "JOIN pae.contacts c ON e.id_entreprise = c.entreprise " +
+                    "WHERE c.school_year = ?");
+    List<EntrepriseDTO> entreprises = new ArrayList<>();
+    try {
+      preparedStatement.setInt(1, idSchoolYear);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        while (rs.next()) {
+          EntrepriseDTO entreprise = getEntrepriseMethodFromDB(rs);
+          entreprises.add(entreprise);
+        }
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
+      throw new FatalError("Error processing result set", e);
+    }
+    return entreprises;
+}
+
   private EntrepriseDTO getEntrepriseMethodFromDB(ResultSet rs) {
     EntrepriseDTO entreprise = myDomainFactory.getEntreprise();
     try {
@@ -114,6 +138,26 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       throw new FatalError("Error while getting entreprise from db", e);
     }
     return entreprise;
+  }
+
+  @Override
+  public int getNbStagesForCurrentYear(int entrepriseId){
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+            "SELECT COUNT(*) FROM pae.entreprises e " +
+                    "JOIN pae.contacts c ON e.id_entreprise = c.entreprise " +
+                    "WHERE c.school_year = ? AND e.id_entreprise = ?")) {
+      preparedStatement.setInt(1,schoolYearDAO.getCurrentSchoolYear().getId());
+      preparedStatement.setInt(2, entrepriseId); // Set the entreprise id
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt(1);
+        }
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
+      throw new FatalError("Error processing result set", e);
+    }
+    return 0;
   }
 
   private int nextItemId() {

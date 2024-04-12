@@ -129,7 +129,6 @@ async function renderPersonnalInfoPage() {
 
   // Creating table for contacts
   const table = document.createElement('table');
-  table.className = 'table';
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
   const trHead = document.createElement('tr');
