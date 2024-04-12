@@ -223,8 +223,6 @@ public class ContactRessource {
       throw new BadRequestException("contact id required");
     }
     int contactId = json.get("id_contact").asInt();
-    System.out.println("AA");
-    System.out.println(contactId);
     int contactVersion = json.get("version").asInt();
     int supervisorId = json.get("id_supervisor").asInt();
     String signatureDate = json.get("signatureDate").asText();
