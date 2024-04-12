@@ -97,15 +97,13 @@ public class EntrepriseResource {
     int entrepriseId = json.get("id").asInt();
     String token = requestContext.getHeaderString("Authorization");
 
-
-
     if (entrepriseId == 0 && reason.isEmpty()) {
       LoggerUtil.logError("All fields required to blacklist an enterprise.",
           new BadRequestException(""));
       throw new BadRequestException("All fields required to blacklist an enterprise.");
     }
 
-    EntrepriseDTO toReturn = myEntreprise.blacklist(entrepriseId, reason);
+    EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason);
     if (toReturn != null) {
       LoggerUtil.logInfo("Blacklist successful");
     }
