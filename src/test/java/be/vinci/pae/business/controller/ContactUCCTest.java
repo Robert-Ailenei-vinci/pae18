@@ -127,6 +127,23 @@ class ContactUCCTest {
         () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
   }
 
+  @DisplayName("Test CreateOne with transaction error")
+  @Test
+  void createOneWithTransactionError() {
+    // Arrange
+    UserDTO userDTO = factory.getUser();
+    userDTO.setId(123);
+    userDTO.setRole("professeur");
+
+    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
+    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
+    when(contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO)).thenThrow(
+        RuntimeException.class);
+
+    assertThrows(RuntimeException.class,
+        () -> contactDAO.createOne(userDTO, entrepriseDTO, schoolYearDTO));
+  }
+
   @DisplayName("Test getAllContactsByUserId")
   @Test
   void getAllContactsByUserId() {
@@ -138,6 +155,17 @@ class ContactUCCTest {
 
     // Act and Assert
     assertEquals(contactList, contactUCC.getAllContactsByUserId(contact.getUserId()));
+  }
+
+  @DisplayName("Test getAllContactsByUserId with transaction error")
+  @Test
+  void getAllContactsByUserIdWithTransactionError() {
+    // Arrange
+    when(contactDAO.getAllContactsByUserId(contact.getUserId())).thenThrow(RuntimeException.class);
+
+    // Act and Assert
+    assertThrows(RuntimeException.class,
+        () -> contactUCC.getAllContactsByUserId(contact.getUserId()));
   }
 
   @DisplayName("Test meetContact")
