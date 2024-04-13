@@ -3,8 +3,6 @@ package be.vinci.pae.business.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -12,7 +10,6 @@ import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
-import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
@@ -74,6 +71,19 @@ class EntrepriseUCCImplTest {
 
     // Assert
     assertEquals(entreprise.getId(), actualEntreprise.getId());
+  }
+
+  @DisplayName("Test getOne with exception")
+  @Test
+  public void testGetOneWithException() {
+    // Arrange
+    entreprise.setId(1);
+    entreprise.setTradeName("zaza");
+
+    when(entrepriseDAO.getOne(1)).thenThrow(RuntimeException.class);
+
+    // Act & Act
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getOne(1));
   }
 
   @DisplayName("Test createOne")
@@ -141,5 +151,15 @@ class EntrepriseUCCImplTest {
     for (int i = 0; i < expectedEntreprises.size(); i++) {
       assertEquals(expectedEntreprises.get(i), actualEntreprises.get(i));
     }
+  }
+
+  @DisplayName("Test getOne with exception")
+  @Test
+  void getOneWithException() {
+    // Arrange
+    when(entrepriseDAO.getAll()).thenThrow(RuntimeException.class);
+
+    // Act and Asserts
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getAll());
   }
 }
