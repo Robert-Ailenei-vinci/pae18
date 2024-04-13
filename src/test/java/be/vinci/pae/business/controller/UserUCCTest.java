@@ -110,6 +110,16 @@ public class UserUCCTest {
     assertNull(userUCC.login("testLogin@student.vinci.be", "testPassword"));
   }
 
+  @DisplayName("Test login with exception")
+  @Test
+  public void testLoginWithException() {
+    // Arrange
+    when(userDAO.getOne("test")).thenThrow(RuntimeException.class);
+
+    // Act & Assert
+    assertThrows(RuntimeException.class, () -> userUCC.login("test", "pass"));
+  }
+
   @DisplayName("Test getAll")
   @Test
   public void testGetAll() {
@@ -127,6 +137,16 @@ public class UserUCCTest {
     for (int i = 0; i < expectedList.size(); i++) {
       assertEquals(expectedList.get(i), actualList.get(i));
     }
+  }
+
+  @DisplayName("Test getAll with exception")
+  @Test
+  public void testGetAllWithException() {
+    // Arrange
+    when(userDAO.getAll()).thenThrow(RuntimeException.class);
+
+    // Act & Assert
+    assertThrows(RuntimeException.class, () -> userUCC.getAll());
   }
 
   @DisplayName("Test register")
@@ -166,9 +186,9 @@ public class UserUCCTest {
     assertThrows(BizException.class, () -> userUCC.register(user));
   }
 
-  @DisplayName("Test changeData")
+  @DisplayName("Test changeData with empty password")
   @Test
-  public void testChangeData() {
+  public void testChangeDataWithEmptyPassword() {
     // Arrange
     schoolYear.setId(1);
     schoolYear.setYearFormat("2023-2024");
@@ -202,6 +222,79 @@ public class UserUCCTest {
 
     // Assert
     assertNull(result);
+  }
+
+  @DisplayName("Test changeData")
+  @Test
+  public void testChangeData() {
+    // Arrange
+    schoolYear.setId(1);
+    schoolYear.setYearFormat("2023-2024");
+    String email = "testChangeData@vinci.be";
+    String lname = "Test";
+    String fname = "User";
+    String phoneNum = "1234567890";
+
+    User initialUser = (User) factory.getUser();
+    initialUser.setEmail(email);
+    initialUser.setPassword("initialPassword");
+    initialUser.setLastName(lname);
+    initialUser.setFirstName(fname);
+    initialUser.setPhoneNum(phoneNum);
+    initialUser.setSchoolYear(schoolYear);
+
+    user.setEmail(email);
+    user.setPassword("testPassword");
+    user.setLastName(lname);
+    user.setFirstName(fname);
+    user.setPhoneNum(phoneNum);
+    user.setSchoolYear(schoolYear);
+
+    // Mock the methods
+    when(userDAO.changeUser(initialUser)).thenReturn(user);
+    when(userDAO.getOne(email)).thenReturn(user);
+
+    // Act
+    int version = 1;
+    UserDTO result = userUCC.changeData(email, "testPassword", lname, fname, phoneNum, version);
+
+    // Assert
+    assertNull(result);
+  }
+
+  @DisplayName("Test changeData with exception")
+  @Test
+  public void testChangeDataWithException() {
+    // Arrange
+    schoolYear.setId(1);
+    schoolYear.setYearFormat("2023-2024");
+    String email = "testChangeData@vinci.be";
+    String lname = "Test";
+    String fname = "User";
+    String phoneNum = "1234567890";
+
+    User initialUser = (User) factory.getUser();
+    initialUser.setEmail(email);
+    initialUser.setPassword("initialPassword");
+    initialUser.setLastName(lname);
+    initialUser.setFirstName(fname);
+    initialUser.setPhoneNum(phoneNum);
+    initialUser.setSchoolYear(schoolYear);
+
+    user.setEmail(email);
+    user.setPassword("testPassword");
+    user.setLastName(lname);
+    user.setFirstName(fname);
+    user.setPhoneNum(phoneNum);
+    user.setSchoolYear(schoolYear);
+
+    // Mock the methods
+    when(userDAO.changeUser(initialUser)).thenReturn(user);
+    when(userDAO.getOne(email)).thenThrow(RuntimeException.class);
+
+    // Act & Assert
+    assertThrows(RuntimeException.class,
+        () -> userUCC.changeData(email, null, lname, fname, phoneNum, 1));
   }
 
   @DisplayName("Test getOne")
