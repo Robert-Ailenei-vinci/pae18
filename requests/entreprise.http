@@ -19,6 +19,6 @@ POST {{baseUrl}}/entreprise/blacklist
 Content-Type: application/json
 
 {
-  "id": 2,
+  "id": 4,
   "reason": "Raison de la blacklist"
 }

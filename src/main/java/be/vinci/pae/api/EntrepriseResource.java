@@ -90,11 +90,11 @@ public class EntrepriseResource {
   @Path("blacklist")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-
+  @Authorize
   public EntrepriseDTO blacklist(JsonNode json,
       @Context ContainerRequestContext requestContext) {
-    String reason = json.get("reason").asText();
-    int entrepriseId = json.get("id").asInt();
+    String reason = json.get("reason_blacklist").asText();
+    int entrepriseId = json.get("id_entreprise").asInt();
     String token = requestContext.getHeaderString("Authorization");
 
     if (entrepriseId == 0 && reason.isEmpty()) {

@@ -7,7 +7,7 @@ const user = getAuthenticatedUser();
 async function blacklistEntreprise(reason, id){
     console.log("blacklist entreprise");
     const options = {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `${user.token}`,
