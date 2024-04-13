@@ -2,6 +2,7 @@ package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -28,7 +29,7 @@ class SchoolYearUCCImplTest {
 
   @BeforeEach
   void setUp() {
-    // 1. Arrange
+    // Arrange
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
     schoolYearUCC = locator.getService(SchoolYearUCC.class);
     schoolYearDAO = locator.getService(SchoolYearDAO.class);
@@ -46,16 +47,26 @@ class SchoolYearUCCImplTest {
   @DisplayName("Test getOne")
   @Test
   void getOne() {
-    // 2. Act
+    // Arrange
     schoolYear.setId(1);
     schoolYear.setYearFormat("2021-2022");
 
     when(schoolYearDAO.getOne(1)).thenReturn(schoolYear);
     SchoolYearDTO result = schoolYearUCC.getOne(1);
 
-    // 3. Assert
+    // Act & Assert
     assertNotNull(result);
     assertEquals(1, result.getId());
     assertEquals("2021-2022", result.getYearFormat());
+  }
+
+  @DisplayName("Test getOne with exception")
+  @Test
+  void getOneWithException() {
+    // Arrange
+    when(schoolYearDAO.getOne(1)).thenThrow(RuntimeException.class);
+
+    // Act & Assert
+    assertThrows(RuntimeException.class, () -> schoolYearUCC.getOne(1));
   }
 }
