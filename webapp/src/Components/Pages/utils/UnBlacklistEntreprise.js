@@ -3,8 +3,8 @@ import {getAuthenticatedUser} from "../../../utils/auths";
 
 const user = getAuthenticatedUser();
 
-async function blacklistEntreprise(reason, id){
-    console.log("blacklist entreprise");
+async function unblacklistEntreprise(id){
+    console.log("unblacklist entreprise");
     const options = {
         method: 'POST',
         headers: {
@@ -12,13 +12,12 @@ async function blacklistEntreprise(reason, id){
           'Authorization': `${user.token}`,
         },
         body: JSON.stringify({
-          "reason_blacklist": reason,
           "id_entreprise": id
         }),
       };
       try {
         const responseContacts = await fetch(
-            `http://localhost:3000/entreprise/blacklist`, options);
+            `http://localhost:3000/entreprise/unblacklist`, options);
     
         if (!responseContacts.ok) {
           throw new Error(
@@ -34,5 +33,5 @@ async function blacklistEntreprise(reason, id){
 }
 
 export{
-    blacklistEntreprise
+    unblacklistEntreprise
 }

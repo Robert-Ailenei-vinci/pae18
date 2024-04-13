@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
 import {makeStateClean} from "./utils/MakeStateClean";
 import {blacklistEntreprise} from "./utils/BlacklistEntreprise";
+import {unblacklistEntreprise} from "./utils/UnBlacklistEntreprise";
 
 const EntrepriseDetailsPage = async () => {
   clearPage();
@@ -214,7 +215,7 @@ form.addEventListener('submit', function(event) {
       if (isConfirmed) {
         // If confirmed, unblacklist the company
         // Replace "unblacklistEntreprise" with the actual function to unblacklist the company
-        //unblacklistEntreprise(entreprise.id);
+        unblacklistEntreprise(entreprise.id);
         setTimeout(function() {
           Navigate('/seeEntreprises');
         }, 500);

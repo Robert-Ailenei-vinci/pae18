@@ -126,6 +126,29 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     return null;
   }
 
+  /**
+   * Unblacklists an entreprise.
+   *
+   * @param entrepriseId id of the entreprise to unblacklist
+   * @return the newly updated entreprise and it s blacklistred if no errors prior to that
+   */
+  @Override
+  public EntrepriseDTO unblacklist(int entrepriseId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "UPDATE pae.entreprises SET blacklisted = false , reason_blacklist = null WHERE id_entreprise = ?")) {
+      preparedStatement.setInt(1, entrepriseId);
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        LoggerUtil.logInfo("entreprise unblacklist with id " + entrepriseId);
+        return getOne(entrepriseId);
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
+      throw new FatalError("Error processing result set", e);
+    }
+    return null;
+  }
+
   @Override
   public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
     PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(

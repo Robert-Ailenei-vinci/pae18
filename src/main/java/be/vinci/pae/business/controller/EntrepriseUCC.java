@@ -51,11 +51,20 @@ public interface EntrepriseUCC {
 
   /**
    * Blacklists an enterprise.
-   * @param entrepriseId
-   * @param reason
-   * @return
+   * @param entrepriseId id of the entreprise to blacklist
+   * @param reason  reason for blacklisting
+   * @return blacklisted entreprise
    */
   EntrepriseDTO blacklist(int entrepriseId, String reason);
+
+  /**
+   * Unblacklists an enterprise.
+   * @param entrepriseId id of the entreprise to unblacklist
+   * @return unblacklisted entreprise
+   */
+  EntrepriseDTO unblacklist(int entrepriseId);
+
+
     List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);
 
     int getStagesCountForSchoolYear(int idEntreprise);

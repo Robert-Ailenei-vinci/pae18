@@ -147,7 +147,33 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
     }
   }
 
-    @Override
+  /**
+   * Unblacklists an enterprise.
+   *
+   * @param entrepriseId id of the entreprise to unblacklist
+   * @return unblacklisted entreprise
+   */
+  @Override
+  public EntrepriseDTO unblacklist(int entrepriseId) {
+    try {
+      dalServices.startTransaction();
+
+      Entreprise entreprise = (Entreprise) myEntrepriseDAO.getOne(entrepriseId);
+      entreprise.setIsBlacklisted(false);
+      entreprise.setBlacklistReason(null);
+
+      dalServices.commitTransaction();
+      EntrepriseDTO updatedEntreprise = myEntrepriseDAO.unblacklist(entreprise.getId());
+      return updatedEntreprise;
+    } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
+
+
+  @Override
     public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
         try {
             dalServices.startTransaction();

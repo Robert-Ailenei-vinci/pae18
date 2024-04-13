@@ -81,7 +81,7 @@ public class EntrepriseResource {
 
   /**
    * Blacklists an enterprise. This method is accessed via HTTP POST request to the path
-   * "/entreprise/blacklist/{id}". It returns the blacklisted enterprise in JSON format. Requires
+   * "/entreprise/blacklist". It returns the blacklisted enterprise in JSON format. Requires
    * authorization.
    *
    * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
@@ -116,6 +116,48 @@ public class EntrepriseResource {
     }
 
     EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Blacklist successful");
+    }
+    return toReturn;
+  }
+
+  /**
+   * Blacklists an enterprise. This method is accessed via HTTP POST request to the path
+   * "/entreprise/blacklist". It returns the blacklisted enterprise in JSON format. Requires
+   * authorization.
+   *
+   * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
+   */
+  @POST
+  @Path("unblacklist")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public EntrepriseDTO unblacklist(JsonNode json,
+      @Context ContainerRequestContext requestContext) {
+    int entrepriseId = json.get("id_entreprise").asInt();
+    String token = requestContext.getHeaderString("Authorization");
+
+    if (entrepriseId == 0 ) {
+      LoggerUtil.logError("All fields required to blacklist an enterprise.",
+          new BadRequestException(""));
+      throw new BadRequestException("All fields required to blacklist an enterprise.");
+    }
+
+    EntrepriseDTO entreprise = myEntrepriseUCC.getOne(entrepriseId);
+
+    if (entreprise == null) {
+      LoggerUtil.logError("Enterprise not found", new BadRequestException(""));
+      throw new BadRequestException("Enterprise not found");
+    }
+
+    if (!entreprise.isBlacklisted()) {
+      LoggerUtil.logError("Enterprise already blacklisted", new BadRequestException(""));
+      throw new BadRequestException("Enterprise not blacklisted");
+    }
+
+    EntrepriseDTO toReturn = myEntrepriseUCC.unblacklist(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("Blacklist successful");
     }
