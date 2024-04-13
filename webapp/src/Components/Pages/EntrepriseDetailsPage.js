@@ -193,6 +193,36 @@ form.addEventListener('submit', function(event) {
   Navbar();
 
   Navigate(`/detailsEntreprise/${usePathParams()}`);
+  }else {
+    const main = document.querySelector('main');
+
+    // Create a title
+    const title = document.createElement('h2');
+    title.textContent = 'Cette entreprise a été blacklistée';
+    main.appendChild(title);
+  
+    // Create the "Deblacklister" button
+    const deblacklistButton = document.createElement('button');
+    deblacklistButton.textContent = 'Deblacklister';
+    deblacklistButton.className = 'btn btn-primary';
+    deblacklistButton.type = 'button';
+  
+    // Add an event listener to the "Deblacklister" button
+    deblacklistButton.addEventListener('click', function() {
+      // Show an alert asking for confirmation
+      const isConfirmed = confirm('Are you sure?');
+      if (isConfirmed) {
+        // If confirmed, unblacklist the company
+        // Replace "unblacklistEntreprise" with the actual function to unblacklist the company
+        //unblacklistEntreprise(entreprise.id);
+        setTimeout(function() {
+          Navigate('/seeEntreprises');
+        }, 500);
+      }
+    });
+  
+    // Add the "Deblacklister" button to the main element
+    main.appendChild(deblacklistButton);
   }
 }
 
