@@ -226,4 +226,23 @@ public class ContactDAOImpl implements ContactDAO {
     LoggerUtil.logInfo("get all contact for the entreprise with id " + entrepriseId);
     return contacts;
   }
+
+  @Override
+  public boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId) {
+    PreparedStatement cancelInternships = dalBackServices.getPreparedStatement(
+        "UPDATE pae.contacts SET state = 'annule', reason_for_refusal = 'Entreprise blacklistée' "
+            + "WHERE entreprise = ? AND state = 'initie' OR state = 'rencontre'");
+    try {
+      cancelInternships.setInt(1, entrepriseId);
+      int rowsAffected = cancelInternships.executeUpdate();
+      if (rowsAffected > 0) {
+        LoggerUtil.logInfo("cancel internships for the entreprise with id " + entrepriseId);
+        return true;
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
+      throw new FatalError("Error processing result set", e);
+    }
+    return false;
+  }
 }

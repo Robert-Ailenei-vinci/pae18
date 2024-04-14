@@ -60,4 +60,12 @@ public interface ContactUCC {
    * @return the contact.
    */
   ContactDTO refusedContact(int contactId, String refusalReason, int userId, int version);
+
+
+  /**
+   * set all internships of a contact to refusé if an entreprise is blacklisted.
+   * @param idEntreprise
+   * @return
+   */
+  boolean cancelInternshipsBasedOnEntreprise(int idEntreprise);
 }

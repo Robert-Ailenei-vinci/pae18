@@ -1,6 +1,7 @@
 package be.vinci.pae.api;
 
 import be.vinci.pae.api.filters.Authorize;
+import be.vinci.pae.business.controller.ContactUCC;
 import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.ContactDTO;
@@ -38,6 +39,8 @@ public class EntrepriseResource {
   EntrepriseUCC myEntrepriseUCC;
   @Inject
   UserUCC myUserUCC;
+  @Inject
+  ContactUCC myContactUCC;
 
   /**
    * Retrieves a list of all enterprises. This method is accessed via HTTP GET request to the path
@@ -116,6 +119,7 @@ public class EntrepriseResource {
     }
 
     EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason);
+    myContactUCC.cancelInternshipsBasedOnEntreprise(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("Blacklist successful");
     }

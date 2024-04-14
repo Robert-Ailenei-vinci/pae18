@@ -159,4 +159,25 @@ public class ContactUCCImpl implements ContactUCC {
       throw e;
     }
   }
+
+  /**
+   * set all internships of a contact to refusé if an entreprise is blacklisted.
+   *
+   * @param idEntreprise
+   * @return
+   */
+  @Override
+  public boolean cancelInternshipsBasedOnEntreprise(int idEntreprise) {
+
+    try {
+      dalServices.startTransaction();
+      boolean result = myContactDAO.cancelInternshipsBasedOnEntrepriseId(idEntreprise);
+      dalServices.commitTransaction();
+      return result;
+    } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
 }

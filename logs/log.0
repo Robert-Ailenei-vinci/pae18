@@ -116,3 +116,189 @@ be.vinci.pae.exception.BadRequestException:
 [2024-04-14 01:05:14] [INFO] build year method 
 [2024-04-14 01:05:14] [INFO] Current school year found: 2023-2024 
 [2024-04-14 01:05:14] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-14 16:35:45] [INFO] get one user by email with email: zaza.zaza@vinci.be 
+[2024-04-14 16:35:45] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:35:45] [INFO] Login successful 
+[2024-04-14 16:35:45] [INFO] get one user by id with id: 12 
+[2024-04-14 16:35:45] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:35:46] [INFO] GetAllContactById successful 
+[2024-04-14 16:35:46] [INFO] get one user by id with id: 12 
+[2024-04-14 16:35:46] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:35:47] [INFO] get one user by id with id: 12 
+[2024-04-14 16:35:47] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:35:47] [INFO] schoolyear getAll 
+[2024-04-14 16:35:47] [INFO] build year method 
+[2024-04-14 16:35:47] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:35:48] [INFO] get one user by id with id: 12 
+[2024-04-14 16:35:48] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:35:48] [INFO] GetAllForSchoolYear successful 
+[2024-04-14 16:36:03] [INFO] get one user by id with id: 12 
+[2024-04-14 16:36:03] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:03] [INFO] GetUser successful 
+[2024-04-14 16:36:03] [INFO] get one user by id with id: 12 
+[2024-04-14 16:36:03] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:03] [INFO] entreprise getone with id 4 
+[2024-04-14 16:36:03] [INFO] GetOne successful 
+[2024-04-14 16:36:03] [INFO] get one user by id with id: 12 
+[2024-04-14 16:36:03] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] entreprise getone with id 4 
+[2024-04-14 16:36:04] [INFO] get one user by id with id: 8 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] entreprise getone with id 4 
+[2024-04-14 16:36:04] [INFO] get one user by id with id: 9 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] entreprise getone with id 4 
+[2024-04-14 16:36:04] [INFO] get one user by id with id: 7 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] entreprise getone with id 4 
+[2024-04-14 16:36:04] [INFO] get one user by id with id: 10 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] get all contact for the entreprise with id 4 
+[2024-04-14 16:36:04] [INFO] GetAllContactById successful 
+[2024-04-14 16:36:04] [INFO] get one user by id with id: 12 
+[2024-04-14 16:36:04] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:04] [INFO] build year method 
+[2024-04-14 16:36:04] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:36:04] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-14 16:36:48] [INFO] get one user by id with id: 12 
+[2024-04-14 16:36:48] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:48] [INFO] entreprise getone with id 4 
+[2024-04-14 16:36:48] [INFO] entreprise getone with id 4 
+[2024-04-14 16:36:48] [INFO] entreprise blacklist with id 4 
+[2024-04-14 16:36:48] [INFO] entreprise getone with id 4 
+[2024-04-14 16:36:48] [INFO] Blacklist successful 
+[2024-04-14 16:36:48] [INFO] get one user by id with id: 12 
+[2024-04-14 16:36:48] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:48] [INFO] schoolyear getAll 
+[2024-04-14 16:36:48] [INFO] build year method 
+[2024-04-14 16:36:49] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:36:49] [INFO] get one user by id with id: 12 
+[2024-04-14 16:36:49] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:36:49] [INFO] GetAllForSchoolYear successful 
+[2024-04-14 16:38:35] [INFO] build year method 
+[2024-04-14 16:38:35] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:38:52] [INFO] build year method 
+[2024-04-14 16:38:52] [INFO] used adduser method with mail: zaza.zaza@vinci.be and id: 12 
+[2024-04-14 16:38:52] [INFO] Register successful 
+[2024-04-14 16:38:52] [INFO] get one user by email with email: zaza.zaza@vinci.be 
+[2024-04-14 16:38:52] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:52] [INFO] Login successful 
+[2024-04-14 16:38:52] [INFO] get one user by id with id: 12 
+[2024-04-14 16:38:52] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:52] [INFO] GetAllContactById successful 
+[2024-04-14 16:38:52] [INFO] get one user by id with id: 12 
+[2024-04-14 16:38:52] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:54] [INFO] get one user by id with id: 12 
+[2024-04-14 16:38:54] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:54] [INFO] schoolyear getAll 
+[2024-04-14 16:38:54] [INFO] build year method 
+[2024-04-14 16:38:54] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:38:54] [INFO] get one user by id with id: 12 
+[2024-04-14 16:38:54] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:54] [INFO] GetAllForSchoolYear successful 
+[2024-04-14 16:38:58] [INFO] get one user by id with id: 12 
+[2024-04-14 16:38:58] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:58] [INFO] GetUser successful 
+[2024-04-14 16:38:59] [INFO] get one user by id with id: 12 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] entreprise getone with id 4 
+[2024-04-14 16:38:59] [INFO] GetOne successful 
+[2024-04-14 16:38:59] [INFO] get one user by id with id: 12 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] entreprise getone with id 4 
+[2024-04-14 16:38:59] [INFO] get one user by id with id: 8 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] entreprise getone with id 4 
+[2024-04-14 16:38:59] [INFO] get one user by id with id: 9 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] entreprise getone with id 4 
+[2024-04-14 16:38:59] [INFO] get one user by id with id: 7 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] entreprise getone with id 4 
+[2024-04-14 16:38:59] [INFO] get one user by id with id: 10 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:38:59] [INFO] get all contact for the entreprise with id 4 
+[2024-04-14 16:38:59] [INFO] GetAllContactById successful 
+[2024-04-14 16:39:00] [INFO] get one user by id with id: 12 
+[2024-04-14 16:39:00] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:39:00] [INFO] build year method 
+[2024-04-14 16:39:00] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:39:00] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-14 16:39:22] [INFO] get one user by id with id: 12 
+[2024-04-14 16:39:22] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:39:22] [INFO] entreprise getone with id 4 
+[2024-04-14 16:39:23] [INFO] entreprise getone with id 4 
+[2024-04-14 16:39:23] [INFO] entreprise blacklist with id 4 
+[2024-04-14 16:39:23] [INFO] entreprise getone with id 4 
+[2024-04-14 16:39:23] [INFO] cancel internships for the entreprise with id 4 
+[2024-04-14 16:39:23] [INFO] Blacklist successful 
+[2024-04-14 16:39:23] [INFO] get one user by id with id: 12 
+[2024-04-14 16:39:23] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:39:23] [INFO] schoolyear getAll 
+[2024-04-14 16:39:23] [INFO] build year method 
+[2024-04-14 16:39:23] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:39:23] [INFO] get one user by id with id: 12 
+[2024-04-14 16:39:23] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:39:23] [INFO] GetAllForSchoolYear successful 
+[2024-04-14 16:40:29] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:29] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:29] [INFO] GetUser successful 
+[2024-04-14 16:40:29] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:29] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:29] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:29] [INFO] GetOne successful 
+[2024-04-14 16:40:47] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:47] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:47] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:47] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:47] [INFO] entreprise unblacklist with id 4 
+[2024-04-14 16:40:47] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:47] [INFO] Blacklist successful 
+[2024-04-14 16:40:47] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:47] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:47] [INFO] schoolyear getAll 
+[2024-04-14 16:40:47] [INFO] build year method 
+[2024-04-14 16:40:47] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:40:47] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:48] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:48] [INFO] GetAllForSchoolYear successful 
+[2024-04-14 16:40:50] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:50] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:50] [INFO] GetUser successful 
+[2024-04-14 16:40:50] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:50] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:50] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:50] [INFO] GetOne successful 
+[2024-04-14 16:40:51] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:51] [INFO] get one user by id with id: 8 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:51] [INFO] get one user by id with id: 9 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:51] [INFO] get one user by id with id: 7 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] entreprise getone with id 4 
+[2024-04-14 16:40:51] [INFO] get one user by id with id: 10 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] get all contact for the entreprise with id 4 
+[2024-04-14 16:40:51] [INFO] GetAllContactById successful 
+[2024-04-14 16:40:51] [INFO] get one user by id with id: 12 
+[2024-04-14 16:40:51] [INFO] schoolyear getone + id : 1 
+[2024-04-14 16:40:51] [INFO] build year method 
+[2024-04-14 16:40:51] [INFO] Current school year found: 2023-2024 
+[2024-04-14 16:40:51] [INFO] GetStagesCountForCurrentYear successful 

@@ -28,6 +28,8 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
   @Inject
   private DALServices dalServices;
 
+
+
   /**
    * Retrieves an EntrepriseDTO object by its identifier.
    *
