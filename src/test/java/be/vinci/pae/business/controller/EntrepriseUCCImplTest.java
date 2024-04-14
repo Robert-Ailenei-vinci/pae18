@@ -7,6 +7,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
@@ -132,4 +133,74 @@ class EntrepriseUCCImplTest {
     });
   }
 
+  @Test
+  public void testGetAllForSchoolYear() {
+    // 1. Arrange
+    List<EntrepriseDTO> expectedEntreprises = new ArrayList<>();
+    expectedEntreprises.add(entreprise1);
+    expectedEntreprises.add(entreprise2);
+
+    when(entrepriseUcc.getAllForSchoolYear(1)).thenReturn(expectedEntreprises);
+
+    // 2. Act
+    List<EntrepriseDTO> actualEntreprises = entrepriseUcc.getAllForSchoolYear(1);
+
+    // 3. Assert
+    assertNotNull(actualEntreprises);
+    assertEquals(expectedEntreprises.size(), actualEntreprises.size());
+    for (int i = 0; i < expectedEntreprises.size(); i++) {
+      assertEquals(expectedEntreprises.get(i), actualEntreprises.get(i));
+    }
+  }
+
+  @Test
+  public void testGetAllForSchoolYearWithException() {
+    when(entrepriseUcc.getAllForSchoolYear(1));
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getAllForSchoolYear(1);
+    });
+  }
+
+  @Test
+  public void testGetAllContactsByEntrepriseId() {
+    // 1. Arrange
+    List<ContactDTO> expectedContacts = new ArrayList<>();
+    ContactDTO contact1 = factory.getContact();
+    ContactDTO contact2 = factory.getContact();
+    expectedContacts.add(contact1);
+    expectedContacts.add(contact2);
+
+    when(entrepriseUcc.getAllContactsByEntrepriseId(1)).thenReturn(expectedContacts);
+
+    // 2. Act
+    List<ContactDTO> actualContacts = entrepriseUcc.getAllContactsByEntrepriseId(1);
+
+    // 3. Assert
+    assertNotNull(actualContacts);
+    assertEquals(expectedContacts.size(), actualContacts.size());
+    for (int i = 0; i < expectedContacts.size(); i++) {
+      assertEquals(expectedContacts.get(i), actualContacts.get(i));
+    }
+  }
+
+  @Test
+  public void testGetAllContactsByEntrepriseIdWithException() {
+    when(entrepriseUcc.getAllContactsByEntrepriseId(1));
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getAllContactsByEntrepriseId(1);
+    });
+  }
+
+  @Test
+  public void getStagesCountForSchoolYear() {
+    // 1. Arrange
+    int expectedCount = 2;
+    when(entrepriseUcc.getStagesCountForSchoolYear(1)).thenReturn(expectedCount);
+
+    // 2. Act
+    int actualCount = entrepriseUcc.getStagesCountForSchoolYear(1);
+
+    // 3. Assert
+    assertEquals(expectedCount, actualCount);
+  }
 }

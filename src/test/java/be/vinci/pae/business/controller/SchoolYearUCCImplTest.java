@@ -9,6 +9,7 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SchoolYear;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.utils.TestApplicationBinder;
+import java.util.List;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,5 +48,46 @@ class SchoolYearUCCImplTest {
 
     when(schoolYearUCC.getOne(1));
     assertThrows(RuntimeException.class, () -> schoolYearUCC.getOne(1));
+  }
+
+  @Test
+  void getCurrentSchoolYear() {
+    schoolYear.setId(1);
+    schoolYear.setYearFormat("2021-2022");
+
+    when(schoolYearUCC.getCurrentSchoolYear()).thenReturn(schoolYear);
+    SchoolYearDTO result = schoolYearUCC.getCurrentSchoolYear();
+
+    assertNotNull(result);
+    assertEquals(1, result.getId());
+    assertEquals("2021-2022", result.getYearFormat());
+  }
+
+  @Test
+  void getCurrentSchoolYearWithException() {
+
+    when(schoolYearUCC.getCurrentSchoolYear());
+    assertThrows(RuntimeException.class, () -> schoolYearUCC.getCurrentSchoolYear());
+  }
+
+  @Test
+  void getAllSchoolYears() {
+    schoolYear.setId(1);
+    schoolYear.setYearFormat("2021-2022");
+
+    when(schoolYearUCC.getAllSchoolYears()).thenReturn(List.of(schoolYear));
+    List<SchoolYearDTO> result = schoolYearUCC.getAllSchoolYears();
+
+    assertNotNull(result);
+    assertEquals(1, result.size());
+    assertEquals(1, result.get(0).getId());
+    assertEquals("2021-2022", result.get(0).getYearFormat());
+  }
+
+  @Test
+  void getAllSchoolYearsWithException() {
+
+    when(schoolYearUCC.getAllSchoolYears());
+    assertThrows(RuntimeException.class, () -> schoolYearUCC.getAllSchoolYears());
   }
 }
