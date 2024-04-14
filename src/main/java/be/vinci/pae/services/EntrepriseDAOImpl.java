@@ -108,6 +108,8 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         + "GROUP BY e.id_entreprise ";
     if (orderBy != null && !orderBy.isEmpty()) {
       sql += "ORDER BY " + orderBy;
+    } else {
+      sql += "ORDER BY e.trade_name,e.designation";
     }
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(sql)) {
       preparedStatement.setInt(1, idSchoolYear);
