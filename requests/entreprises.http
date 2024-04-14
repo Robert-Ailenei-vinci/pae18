@@ -24,7 +24,7 @@ Content-Type: application/json
 Authorization: {{user}}
 
 ### Get all the contacts related to the entreprise
-GET {{baseUrl}}/entreprise/entrepriseDetailsAllContacts/1
+GET {{baseUrl}}/entreprise/entrepriseDetailsAllContacts/1?orderBy=''
 Content-Type: application/json
 Authorization: {{user}}
 

@@ -48,7 +48,7 @@ public interface EntrepriseUCC {
    */
   List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId);
 
-    List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);
+  int getStagesCountForSchoolYear(int idEntreprise);
 
-    int getStagesCountForSchoolYear(int idEntreprise);
+  List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear, String orderBy);
 }

@@ -20,9 +20,11 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,6 +35,7 @@ import java.util.List;
 @Path("/entreprise")
 public class EntrepriseResource {
 
+  private final ObjectMapper jsonMapper = new ObjectMapper();
   /**
    * The business controller for enterprise-related operations.
    */
@@ -40,8 +43,6 @@ public class EntrepriseResource {
   EntrepriseUCC myEntrepriseUCC;
   @Inject
   UserUCC myUserUCC;
-
-  private final ObjectMapper jsonMapper = new ObjectMapper();
 
   /**
    * Retrieves a list of all enterprises. This method is accessed via HTTP GET request to the path
@@ -153,41 +154,62 @@ public class EntrepriseResource {
     return toReturn;
   }
 
-    /**
-     * Retrieves all enterprises for a given school year.
-     *
-     * @param idSchoolYear the school year id
-     * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
-     */
-    @GET
-    @Path("getAllForSchoolYear/{idSchoolYear}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Authorize
-    public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear) {
-        List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear);
-        if (toReturn != null) {
-            LoggerUtil.logInfo("GetAllForSchoolYear successful");
+  /**
+   * Retrieves all enterprises for a given school year.
+   *
+   * @param idSchoolYear the school year id
+   * @param orderBy      the field to order by
+   * @return the list of enterprises for the school year
+   */
+  @GET
+  @Path("getAllForSchoolYear/{idSchoolYear}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear,
+      @QueryParam("orderBy") String orderBy) {
+    // Validate orderBy parameter
+    if (orderBy != null && !orderBy.isEmpty()) {
+      String[] fields = orderBy.split(",");
+      for (String field : fields) {
+        if (!isValidField(field)) {
+          LoggerUtil.logError("Invalid field name in orderBy parameter: " + field,
+              new BadRequestException(""));
+          throw new BadRequestException("Invalid field name in orderBy parameter: " + field);
         }
-        return toReturn;
+      }
     }
+    List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear, orderBy);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAllForSchoolYear successful");
+    }
+    return toReturn;
+  }
+
+  private boolean isValidField(String field) {
+    // List of valid field names in the pae.entreprises table
+    List<String> validFields = Arrays.asList("id_entreprise", "email", "designation", "address",
+        "phone_num", "blacklisted", "trade_name", "reason_blacklist");
+    return validFields.contains(field);
+  }
 
   /**
    * Count the number of stages for the entreprise.
+   *
    * @param entrepriseId the entreprise id
    * @return the number of stages for the entreprise
    */
-    @GET
-    @Path("getStagesCountForCurrentYear/{entrepriseId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Authorize
-    public ObjectNode getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
-        ObjectNode toReturn = jsonMapper.createObjectNode();
-        int nbStages = -1;
-        nbStages = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
-        toReturn.put("nbStages", nbStages);
-        if (nbStages != -1) {
-            LoggerUtil.logInfo("GetStagesCountForCurrentYear successful");
-        }
-        return toReturn;
+  @GET
+  @Path("getStagesCountForCurrentYear/{entrepriseId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public ObjectNode getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
+    ObjectNode toReturn = jsonMapper.createObjectNode();
+    int nbStages = -1;
+    nbStages = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
+    toReturn.put("nbStages", nbStages);
+    if (nbStages != -1) {
+      LoggerUtil.logInfo("GetStagesCountForCurrentYear successful");
     }
+    return toReturn;
+  }
 }

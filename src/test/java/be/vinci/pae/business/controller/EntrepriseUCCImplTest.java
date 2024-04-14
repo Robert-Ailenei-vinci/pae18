@@ -137,13 +137,15 @@ class EntrepriseUCCImplTest {
   public void testGetAllForSchoolYear() {
     // 1. Arrange
     List<EntrepriseDTO> expectedEntreprises = new ArrayList<>();
+    EntrepriseDTO entreprise1 = factory.getEntreprise();
+    EntrepriseDTO entreprise2 = factory.getEntreprise();
     expectedEntreprises.add(entreprise1);
     expectedEntreprises.add(entreprise2);
 
-    when(entrepriseUcc.getAllForSchoolYear(1)).thenReturn(expectedEntreprises);
+    when(entrepriseUcc.getAllForSchoolYear(1, "orderBy")).thenReturn(expectedEntreprises);
 
     // 2. Act
-    List<EntrepriseDTO> actualEntreprises = entrepriseUcc.getAllForSchoolYear(1);
+    List<EntrepriseDTO> actualEntreprises = entrepriseUcc.getAllForSchoolYear(1, "orderBy");
 
     // 3. Assert
     assertNotNull(actualEntreprises);
@@ -155,9 +157,9 @@ class EntrepriseUCCImplTest {
 
   @Test
   public void testGetAllForSchoolYearWithException() {
-    when(entrepriseUcc.getAllForSchoolYear(1));
+    when(entrepriseUcc.getAllForSchoolYear(1, "orderBy"));
     assertThrows(RuntimeException.class, () -> {
-      entrepriseUcc.getAllForSchoolYear(1);
+      entrepriseUcc.getAllForSchoolYear(1, "orderBy");
     });
   }
 
