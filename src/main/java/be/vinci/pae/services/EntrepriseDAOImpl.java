@@ -4,6 +4,7 @@ import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.exception.FatalError;
+import be.vinci.pae.exception.OptimisticLockException;
 import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
@@ -32,7 +33,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public EntrepriseDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT * FROM pae.entreprises WHERE id_entreprise = ?")) {
+        "SELECT id_entreprise, trade_name,  designation, address, phone_num, email, blacklisted, reason_blacklist,  _version as ver FROM pae.entreprises WHERE id_entreprise = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -108,12 +109,19 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
    * @return the newly updated entreprise and it s blacklistred if no errors prior to that
    */
   @Override
-  public EntrepriseDTO blacklist(Entreprise entreprise) {
+  public EntrepriseDTO blacklist(EntrepriseDTO entreprise, int version) {
+    int lastVersion = getLastVersionFromDB(entreprise.getVersion());
+
+    if (lastVersion != version) {
+      throw new OptimisticLockException("Optimisitc lock exception");
+    }
+
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "UPDATE pae.entreprises SET blacklisted = true , reason_blacklist = ? WHERE id_entreprise = ?")) {
+        "UPDATE pae.entreprises SET blacklisted = true , reason_blacklist = ? , _version= _version+1 WHERE id_entreprise = ? AND _version = ?")) {
       preparedStatement.setString(1, entreprise.getBlacklistReason());
       preparedStatement.setInt(2, entreprise.getId());
+      preparedStatement.setInt(3, version);
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
         LoggerUtil.logInfo("entreprise blacklist with id " + entreprise.getId());
@@ -221,5 +229,22 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
       throw new FatalError("Error processing result set", e);
     }
     return 1;
+  }
+
+  private int getLastVersionFromDB(int entrepriseId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "SELECT _version FROM pae.entreprises WHERE id_entreprise = ? ")) {
+      preparedStatement.setInt(1, entrepriseId);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt("_version");
+        }
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("Error fetching last version", e);
+      throw new FatalError("Erreur lors de la récupération de la dernière version");
+    }
+    return 0;
+
   }
 }

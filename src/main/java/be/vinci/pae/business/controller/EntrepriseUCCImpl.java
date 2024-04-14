@@ -45,7 +45,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
       // Retrieve the EntrepriseDTO from the DAO
       EntrepriseDTO entrepriseDTO = myEntrepriseDAO.getOne(entrepriseId);
-
+      System.out.println(entrepriseDTO.getVersion());
       // Commit the transaction
       dalServices.commitTransaction();
 
@@ -131,7 +131,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
    * @return
    */
   @Override
-  public EntrepriseDTO blacklist(int entrepriseId, String reason) {
+  public EntrepriseDTO blacklist(int entrepriseId, String reason, int version) {
     try {
       dalServices.startTransaction();
 
@@ -140,7 +140,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       entreprise.setBlacklistReason(reason);
 
       dalServices.commitTransaction();
-      EntrepriseDTO updatedEntreprise = myEntrepriseDAO.blacklist(entreprise);
+      EntrepriseDTO updatedEntreprise = myEntrepriseDAO.blacklist(entreprise, version);
       return updatedEntreprise;
     } catch (Exception e) {
       LoggerUtil.logError("BizError", e);

@@ -3,7 +3,7 @@ import {getAuthenticatedUser} from "../../../utils/auths";
 
 const user = getAuthenticatedUser();
 
-async function blacklistEntreprise(reason, id){
+async function blacklistEntreprise(reason, id, version){
     console.log("blacklist entreprise");
     const options = {
         method: 'POST',
@@ -13,23 +13,22 @@ async function blacklistEntreprise(reason, id){
         },
         body: JSON.stringify({
           "reason_blacklist": reason,
-          "id_entreprise": id
+          "id_entreprise": id,
+          "version": version
         }),
       };
       try {
         const responseContacts = await fetch(
             `http://localhost:3000/entreprise/blacklist`, options);
     
-        if (!responseContacts.ok) {
-          throw new Error(
-              `Failed to update contacts: ${responseContacts.statusText}`);
-        }
+       if(responseContacts.status === 400) {
+        alert("Ceci a déjà été modifié par quelqu'un en meme temps que vous")
+       }
     
         const contactsData = await responseContacts.json();
         return contactsData;
       } catch (error) {
-        throw new Error(
-            `An error occurred while update contacts: ${error.message}`);
+        console.log(error);
       }
 }
 

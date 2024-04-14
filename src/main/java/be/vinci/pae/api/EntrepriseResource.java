@@ -98,7 +98,7 @@ public class EntrepriseResource {
       @Context ContainerRequestContext requestContext) {
     String reason = json.get("reason_blacklist").asText();
     int entrepriseId = json.get("id_entreprise").asInt();
-    String token = requestContext.getHeaderString("Authorization");
+    int version = json.get("version").asInt();
 
     if (entrepriseId == 0 && reason.isEmpty()) {
       LoggerUtil.logError("All fields required to blacklist an enterprise.",
@@ -118,7 +118,7 @@ public class EntrepriseResource {
       throw new BadRequestException("Enterprise already blacklisted");
     }
 
-    EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason);
+    EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason, version);
     myContactUCC.cancelInternshipsBasedOnEntreprise(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("Blacklist successful");

@@ -115,4 +115,11 @@ public interface EntrepriseDTO {
    * @return the reason for blacklisting the enterprise
    */
   String getBlacklistReason();
+
+  /**
+   * Retrieves the version of the enterprise.
+   *
+   * @return the version of the enterprise
+   */
+  int getVersion();
 }

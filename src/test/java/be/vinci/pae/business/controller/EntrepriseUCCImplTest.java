@@ -164,10 +164,11 @@ class EntrepriseUCCImplTest {
     Entreprise entreprise = (Entreprise) factory.getEntreprise();
     entreprise.setId(entrepriseId);
     when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
-    when(entrepriseDAO.blacklist(entreprise)).thenReturn(entreprise);
+    when(entrepriseDAO.blacklist(entreprise, entreprise.getVersion())).thenReturn(entreprise);
 
     // Act
-    EntrepriseDTO blacklistedEntreprise = entrepriseUcc.blacklist(entrepriseId, reason);
+    EntrepriseDTO blacklistedEntreprise = entrepriseUcc.blacklist(entrepriseId, reason,
+        entreprise.getVersion());
 
     // Assert
     assertNotNull(blacklistedEntreprise);
@@ -184,7 +185,7 @@ class EntrepriseUCCImplTest {
 
     // Act and Assert
     assertThrows(RuntimeException.class, () -> {
-      entrepriseUcc.blacklist(entrepriseId, reason);
+      entrepriseUcc.blacklist(entrepriseId, reason, entreprise.getVersion());
     });
   }
 

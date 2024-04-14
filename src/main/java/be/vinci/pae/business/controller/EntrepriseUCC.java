@@ -53,9 +53,10 @@ public interface EntrepriseUCC {
    * Blacklists an enterprise.
    * @param entrepriseId id of the entreprise to blacklist
    * @param reason  reason for blacklisting
+   * @param version version of the entreprise
    * @return blacklisted entreprise
    */
-  EntrepriseDTO blacklist(int entrepriseId, String reason);
+  EntrepriseDTO blacklist(int entrepriseId, String reason, int version);
 
   /**
    * Unblacklists an enterprise.

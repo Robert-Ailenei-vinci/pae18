@@ -134,7 +134,7 @@ form.addEventListener('submit', function(event) {
   const isConfirmed = confirm('Are you sure?');
   if (isConfirmed) {
     //
-    blacklistEntreprise(input.value, entreprise.id);
+    blacklistEntreprise(input.value, entreprise.id, entreprise.version);
     setTimeout(function() {
       Navigate('/seeEntreprises');
     }, 500);
