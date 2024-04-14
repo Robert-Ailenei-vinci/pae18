@@ -203,4 +203,12 @@ class EntrepriseUCCImplTest {
     // 3. Assert
     assertEquals(expectedCount, actualCount);
   }
+
+  @Test
+  public void getStagesCountForSchoolYearWithException() {
+    when(entrepriseUcc.getStagesCountForSchoolYear(1));
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getStagesCountForSchoolYear(1);
+    });
+  }
 }
