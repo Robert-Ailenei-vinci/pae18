@@ -32,8 +32,10 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public EntrepriseDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT e.id_entreprise, e.trade_name, e.designation, e.address , e.phone_num, e.email,"
-          + " e.blacklisted, e.reason_blacklist, e._version FROM pae.entreprises e WHERE e.id_entreprise = ?")) {
+        "SELECT e.id_entreprise, e.trade_name, e.designation,"
+          + " e.address , e.phone_num, e.email,"
+          + " e.blacklisted, e.reason_blacklist, e._version"
+          + " FROM pae.entreprises e WHERE e.id_entreprise = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 

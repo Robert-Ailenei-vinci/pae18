@@ -64,6 +64,7 @@ public interface ContactUCC {
 
   /**
    * set all internships of a contact to refusé if an entreprise is blacklisted.
+   *
    * @param idEntreprise the id of the entreprise.
    * @return true if the internships are canceled.
    */
