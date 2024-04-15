@@ -224,7 +224,7 @@ public class UserUCCTest {
     when(userUCC.changeData(email, password, lname, fname, phoneNum, version));
 
     assertThrows(RuntimeException.class,
-      () -> userUCC.changeData(email, password, lname, fname, phoneNum, version));
+        () -> userUCC.changeData(email, password, lname, fname, phoneNum, version));
   }
 
   @Test

@@ -91,7 +91,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
       if (!((User) user).checkIsStudent()) {
         LoggerUtil.logError("BizError", new BizException(
-           "This user is not a student."));
+            "This user is not a student."));
         throw new BizException(
           "This user is not a student.");
       }

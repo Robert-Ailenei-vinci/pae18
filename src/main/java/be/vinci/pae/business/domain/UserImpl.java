@@ -4,9 +4,8 @@ import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.utils.LoggerUtil;
 import java.text.Normalizer;
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**

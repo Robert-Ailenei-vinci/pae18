@@ -130,8 +130,33 @@ public interface ContactDTO {
    * @param version of the contact to be set
    */
   void setVersion(int version);
+
+  /**
+   * Retrieves the user associated with the contact.
+   *
+   * @return the user associated with the contact
+   */
   UserDTO getUser();
+
+  /**
+   * Sets the user associated with the contact.
+   *
+   * @param user the user to set for the contact
+   */
   void setUser(UserDTO user);
+
+  /**
+   * Retrieves the school year associated with the contact.
+   *
+   * @return the school year associated with the contact
+   */
   SchoolYearDTO getSchoolYearDTO();
+
+
+  /**
+   * Sets the school year associated with the contact.
+   *
+   * @param schoolYearDTO the school year to set for the contact
+   */
   void setSchoolYearDTO(SchoolYearDTO schoolYearDTO);
 }

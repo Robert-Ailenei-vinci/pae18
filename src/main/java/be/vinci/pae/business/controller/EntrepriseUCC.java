@@ -38,7 +38,7 @@ public interface EntrepriseUCC {
    * @return the newly created {@link EntrepriseDTO} representing the enterprise
    */
   EntrepriseDTO createOne(UserDTO user, String tradeName, String designation, String address,
-    String phoneNum, String email);
+      String phoneNum, String email);
 
   /**
    * Retrieves all contacts associated with the provided enterprise id.
