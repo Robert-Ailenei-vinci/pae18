@@ -86,9 +86,8 @@ public class EntrepriseResource {
    * Blacklists an enterprise. This method is accessed via HTTP POST request to the path
    * "/entreprise/blacklist". It returns the blacklisted enterprise in JSON format. Requires
    * authorization.
-   * @param json The JSON object containing the enterprise id and the reason for blacklisting.
    *
-   *
+   * @param json The JSON object containing the enterprise id and the reason for blacklisting
    * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
    */
   @POST
@@ -129,8 +128,8 @@ public class EntrepriseResource {
    * "/entreprise/blacklist". It returns the unblacklisted enterprise in JSON format. Requires
    * authorization. This doesn't change the state of the contacts, it just allows to take a contact
    * with the blacklisted entreprise.
-   * @param json The JSON object containing the enterprise id.
    *
+   * @param json The JSON object containing the enterprise id.
    * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
    */
   @POST

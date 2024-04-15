@@ -220,6 +220,7 @@ public class ContactDAOImpl implements ContactDAO {
     LoggerUtil.logInfo("get all contact for the entreprise with id " + entrepriseId);
     return contacts;
   }
+
   private int getLastVersionFromDB(int contactId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT _version FROM pae.contacts WHERE id_contact = ? ")) {
