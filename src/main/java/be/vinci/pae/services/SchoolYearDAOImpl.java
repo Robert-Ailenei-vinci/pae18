@@ -42,6 +42,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
     return null;
   }
 
+  @Override
   public SchoolYearDTO getCurrentSchoolYear() {
     // Construct the school year format using the buildYear() method
     String schoolYearFormat = buildYear();
@@ -69,7 +70,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
   }
 
 
-  // Integrate the buildYear() method here
+  @Override
   public String buildYear() {
     int year;
     if (LocalDate.now().getMonth().compareTo(Month.SEPTEMBER) < 0) {

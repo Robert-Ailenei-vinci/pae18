@@ -20,6 +20,10 @@ public interface SchoolYearDAO {
 
   SchoolYearDTO getCurrentSchoolYear();
 
+  /**
+   * Builds a year if it doesn't exist in the db
+   * @return the year
+   */
   String buildYear();
 
   SchoolYearDTO getSchoolYearMethodFromDB(ResultSet rs);

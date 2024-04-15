@@ -59,7 +59,7 @@ public class StageDAOImpl implements StageDAO {
       stage.setUser(userDAO.getOne(rs.getInt("_user")));
       stage.setSupervisor(supervisorDAO.getOneById(rs.getInt("supervisor")));
       stage.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
-      stage.set_version(rs.getInt("_version"));
+      stage.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
       LoggerUtil.logError("Error fetching stage", e);
       throw new FatalError("Erreur lors de la récupération du stage");
@@ -72,7 +72,7 @@ public class StageDAOImpl implements StageDAO {
 
     int lastVersion = getLastVersionFromDB(stageDTO.getContactId());
 
-    if (lastVersion != stageDTO.get_version()) {
+    if (lastVersion != stageDTO.getVersion()) {
       throw new OptimisticLockException("Optimisitc lock exception");
     }
 
@@ -82,7 +82,7 @@ public class StageDAOImpl implements StageDAO {
       preparedStatement.setString(1, stageDTO.getInternshipProject());
       preparedStatement.setInt(2, stageDTO.getUserId());
       preparedStatement.setInt(3, stageDTO.getContactId());
-      preparedStatement.setInt(4, stageDTO.get_version());
+      preparedStatement.setInt(4, stageDTO.getVersion());
       preparedStatement.executeUpdate();
       System.out.println(stageDTO);
     } catch (Exception e) {

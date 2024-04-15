@@ -32,7 +32,8 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public EntrepriseDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT e.id_entreprise, e.trade_name, e.designation, e.address , e.phone_num, e.email, e.blacklisted, e.reason_blacklist, e._version FROM pae.entreprises e WHERE e.id_entreprise = ?")) {
+        "SELECT e.id_entreprise, e.trade_name, e.designation, e.address , e.phone_num, e.email,"
+          + " e.blacklisted, e.reason_blacklist, e._version FROM pae.entreprises e WHERE e.id_entreprise = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -106,7 +107,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   /**
    * Blacklists an enterprise.
    *
-   * @param entreprise
+   * @param entreprise entreprise to blacklist
    * @return the newly updated entreprise and it s blacklistred if no errors prior to that
    */
   @Override
@@ -118,7 +119,8 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     }
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "UPDATE pae.entreprises SET blacklisted = true , reason_blacklist = ? , _version= _version+1 WHERE id_entreprise = ? AND _version = ?")) {
+        "UPDATE pae.entreprises SET blacklisted = true , reason_blacklist = ? ,"
+          + " _version= _version+1 WHERE id_entreprise = ? AND _version = ?")) {
       preparedStatement.setString(1, entreprise.getBlacklistReason());
       preparedStatement.setInt(2, entreprise.getId());
       preparedStatement.setInt(3, version);
@@ -149,7 +151,8 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     }
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "UPDATE pae.entreprises SET blacklisted = false , reason_blacklist = null ,_version = _version + 1 WHERE id_entreprise = ? AND _version = ?")) {
+        "UPDATE pae.entreprises SET blacklisted = false , reason_blacklist = null "
+          + ",_version = _version + 1 WHERE id_entreprise = ? AND _version = ?")) {
       preparedStatement.setInt(1, entreprise.getId());
       preparedStatement.setInt(2, version);
       int rowsAffected = preparedStatement.executeUpdate();
@@ -167,9 +170,9 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
     PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT DISTINCT e.* FROM pae.entreprises e " +
-        "JOIN pae.contacts c ON e.id_entreprise = c.entreprise " +
-        "WHERE c.school_year = ?");
+        "SELECT DISTINCT e.* FROM pae.entreprises e "
+          + "JOIN pae.contacts c ON e.id_entreprise = c.entreprise "
+          + "WHERE c.school_year = ?");
     List<EntrepriseDTO> entreprises = new ArrayList<>();
     try {
       preparedStatement.setInt(1, idSchoolYear);
@@ -207,9 +210,9 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public int getNbStagesForCurrentYear(int entrepriseId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT COUNT(*) FROM pae.entreprises e " +
-        "JOIN pae.contacts c ON e.id_entreprise = c.entreprise " +
-        "WHERE c.school_year = ? AND e.id_entreprise = ?")) {
+        "SELECT COUNT(*) FROM pae.entreprises e "
+          + "JOIN pae.contacts c ON e.id_entreprise = c.entreprise "
+          + "WHERE c.school_year = ? AND e.id_entreprise = ?")) {
       preparedStatement.setInt(1, schoolYearDAO.getCurrentSchoolYear().getId());
       preparedStatement.setInt(2, entrepriseId); // Set the entreprise id
       try (ResultSet rs = preparedStatement.executeQuery()) {
