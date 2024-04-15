@@ -1,6 +1,5 @@
 package be.vinci.pae.services;
 
-import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 
 import java.util.List;

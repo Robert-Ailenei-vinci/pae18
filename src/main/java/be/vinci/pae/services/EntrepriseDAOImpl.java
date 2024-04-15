@@ -1,7 +1,6 @@
 package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
-import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.OptimisticLockException;
