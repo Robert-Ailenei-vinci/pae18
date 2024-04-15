@@ -129,7 +129,6 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         return getOne(entreprise.getId());
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return null;
@@ -160,7 +159,6 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         return getOne(entreprise.getId());
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return null;
@@ -182,7 +180,6 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return entreprises;
@@ -219,7 +216,6 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return 0;
@@ -248,7 +244,6 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error fetching last version", e);
       throw new FatalError("Erreur lors de la récupération de la dernière version");
     }
     return 0;

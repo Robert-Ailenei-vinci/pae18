@@ -56,14 +56,11 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error while fetching current school year", e);
       throw new FatalError("Error while fetching current school year: " + e.getMessage());
     }
 
     // Handle the case where the current school year is not found
-    LoggerUtil.logError("Current school year not found: " + schoolYearFormat,
-      new SchoolYearNotFoundException(
-        "Current school year not found: " + schoolYearFormat));
+
     throw new SchoolYearNotFoundException("Current school year not found: "
       + schoolYearFormat);
   }
@@ -104,7 +101,6 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
         schoolYears.add(schoolYear);
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     LoggerUtil.logInfo("schoolyear getAll");

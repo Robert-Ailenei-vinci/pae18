@@ -215,7 +215,6 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     LoggerUtil.logInfo("get all contact for the entreprise with id " + entrepriseId);
@@ -275,7 +274,6 @@ public class ContactDAOImpl implements ContactDAO {
         return true;
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return false;

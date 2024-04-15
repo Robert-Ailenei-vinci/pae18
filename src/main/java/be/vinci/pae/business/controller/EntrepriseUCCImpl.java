@@ -110,7 +110,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       dalServices.commitTransaction();
       return contacts;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -136,7 +135,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       EntrepriseDTO updatedEntreprise = myEntrepriseDAO.blacklist(entreprise, version);
       return updatedEntreprise;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -161,7 +159,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       EntrepriseDTO updatedEntreprise = myEntrepriseDAO.unblacklist(entreprise, version);
       return updatedEntreprise;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -176,7 +173,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       dalServices.commitTransaction();
       return entreprises;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -190,7 +186,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       dalServices.commitTransaction();
       return count;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }

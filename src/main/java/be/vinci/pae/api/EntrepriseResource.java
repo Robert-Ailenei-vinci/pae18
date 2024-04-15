@@ -102,20 +102,17 @@ public class EntrepriseResource {
     int version = json.get("version").asInt();
 
     if (entrepriseId == 0 && reason.isEmpty()) {
-      LoggerUtil.logError("All fields required to blacklist an enterprise.",
-        new BadRequestException(""));
+
       throw new BadRequestException("All fields required to blacklist an enterprise.");
     }
 
     EntrepriseDTO entreprise = myEntrepriseUCC.getOne(entrepriseId);
 
     if (entreprise == null) {
-      LoggerUtil.logError("Enterprise not found", new BadRequestException(""));
       throw new BadRequestException("Enterprise not found");
     }
 
     if (entreprise.isBlacklisted()) {
-      LoggerUtil.logError("Enterprise already blacklisted", new BadRequestException(""));
       throw new BadRequestException("Enterprise already blacklisted");
     }
 
@@ -145,20 +142,17 @@ public class EntrepriseResource {
     int entrepriseId = json.get("id_entreprise").asInt();
     int version = json.get("version").asInt();
     if (entrepriseId == 0) {
-      LoggerUtil.logError("All fields required to blacklist an enterprise.",
-        new BadRequestException(""));
+
       throw new BadRequestException("All fields required to blacklist an enterprise.");
     }
 
     EntrepriseDTO entreprise = myEntrepriseUCC.getOne(entrepriseId);
 
     if (entreprise == null) {
-      LoggerUtil.logError("Enterprise not found", new BadRequestException(""));
       throw new BadRequestException("Enterprise not found");
     }
 
     if (!entreprise.isBlacklisted()) {
-      LoggerUtil.logError("Enterprise already blacklisted", new BadRequestException(""));
       throw new BadRequestException("Enterprise not blacklisted");
     }
 
