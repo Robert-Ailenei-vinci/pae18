@@ -63,7 +63,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public List<ContactDTO> getAllContactsByUserId(int userId) {
     PreparedStatement getAllContacts = dalBackServices.getPreparedStatement(
-       "SELECT * FROM pae.contacts WHERE _user = ?");
+        "SELECT * FROM pae.contacts WHERE _user = ?");
     List<ContactDTO> contacts = new ArrayList<>();
     try {
       getAllContacts.setInt(1, userId);
@@ -85,7 +85,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public ContactDTO getOneContactByStageId(int stageId) {
     PreparedStatement getOneContact = dalBackServices.getPreparedStatement(
-       "SELECT * FROM pae.contacts WHERE id_contact = ?");
+        "SELECT * FROM pae.contacts WHERE id_contact = ?");
     try {
       getOneContact.setInt(1, stageId);
       try (ResultSet rs = getOneContact.executeQuery()) {
@@ -125,7 +125,7 @@ public class ContactDAOImpl implements ContactDAO {
   private int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);
-       ResultSet rs = stmt.executeQuery()) {
+        ResultSet rs = stmt.executeQuery()) {
       if (rs.next()) {
 
         return rs.getInt(1) + 1;
@@ -220,7 +220,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-        LoggerUtil.logError("Error processing result set", e);
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     LoggerUtil.logInfo("get all contact for the entreprise with id " + entrepriseId);
@@ -230,7 +230,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId) {
     PreparedStatement cancelInternships = dalBackServices.getPreparedStatement(
-      "UPDATE pae.contacts SET state = 'annule', reason_for_refusal = 'Entreprise blacklistée' "
+        "UPDATE pae.contacts SET state = 'annule', reason_for_refusal = 'Entreprise blacklistée' "
         + "WHERE entreprise = ? AND state = 'initie' OR state = 'rencontre'");
     try {
       cancelInternships.setInt(1, entrepriseId);
