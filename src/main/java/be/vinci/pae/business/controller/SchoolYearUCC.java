@@ -17,7 +17,17 @@ public interface SchoolYearUCC {
    */
   SchoolYearDTO getOne(int schoolYearId);
 
+  /**
+   * Retrieves a list of all school years.
+   *
+   * @return A list of {@link SchoolYearDTO} representing all school years.
+   */
   List<SchoolYearDTO> getAllSchoolYears();
 
+  /**
+   * Retrieves the current school year.
+   *
+   * @return the current school year
+   */
   SchoolYearDTO getCurrentSchoolYear();
 }
