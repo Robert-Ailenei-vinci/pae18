@@ -65,8 +65,8 @@ public interface ContactDAO {
   /**
    * cancel the internships if entreprise is blacklisted.
    *
-   * @param entrepriseId
-   * @return
+   * @param entrepriseId the id of entreprise.
+   * @return true if the internships are canceled.
    */
   boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId);
 }

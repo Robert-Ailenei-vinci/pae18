@@ -125,9 +125,9 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
   /**
    * Blacklists an enterprise.
    *
-   * @param entrepriseId
-   * @param reason
-   * @return
+   * @param entrepriseId id of the entreprise to blacklist
+   * @param reason      reason for blacklisting
+   * @return blacklisted entreprise
    */
   @Override
   public EntrepriseDTO blacklist(int entrepriseId, String reason, int version) {
