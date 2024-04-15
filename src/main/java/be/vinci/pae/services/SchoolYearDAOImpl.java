@@ -26,7 +26,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
   @Override
   public SchoolYearDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT * FROM pae.school_years WHERE id_year = ?")) {
+      "SELECT * FROM pae.school_years WHERE id_year = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -47,7 +47,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
     String schoolYearFormat = buildYear();
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT * FROM pae.school_years WHERE years_format = ?")) {
+      "SELECT * FROM pae.school_years WHERE years_format = ?")) {
       preparedStatement.setString(1, schoolYearFormat);
       try (ResultSet rs = preparedStatement.executeQuery()) {
         if (rs.next()) {
@@ -62,10 +62,10 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
 
     // Handle the case where the current school year is not found
     LoggerUtil.logError("Current school year not found: " + schoolYearFormat,
-        new SchoolYearNotFoundException(
-            "Current school year not found: " + schoolYearFormat));
+      new SchoolYearNotFoundException(
+        "Current school year not found: " + schoolYearFormat));
     throw new SchoolYearNotFoundException("Current school year not found: "
-        + schoolYearFormat);
+      + schoolYearFormat);
   }
 
 
@@ -97,7 +97,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
   @Override
   public List<SchoolYearDTO> getAllSchoolYears() {
     PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT * FROM pae.school_years");
+      "SELECT * FROM pae.school_years");
     List<SchoolYearDTO> schoolYears = new ArrayList<>();
     try (ResultSet rs = preparedStatement.executeQuery()) {
       while (rs.next()) {

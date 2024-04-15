@@ -29,7 +29,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
   private DALServices dalServices;
 
 
-
   /**
    * Retrieves an EntrepriseDTO object by its identifier.
    *
@@ -86,18 +85,18 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
   @Override
   public EntrepriseDTO createOne(UserDTO user, String tradeName, String designation, String address,
-      String phoneNum, String email) {
+    String phoneNum, String email) {
     try {
       dalServices.startTransaction();
 
       if (!((User) user).checkIsStudent()) {
         LoggerUtil.logError("BizError", new BizException(
-            "This user is not a student."));
+          "This user is not a student."));
         throw new BizException(
-            "This user is not a student.");
+          "This user is not a student.");
       }
       Entreprise entreprise = (Entreprise) myEntrepriseDAO.createOne(tradeName, designation,
-          address, phoneNum, email);
+        address, phoneNum, email);
 
       dalServices.commitTransaction();
 
@@ -176,30 +175,30 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
 
   @Override
-    public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
-        try {
-            dalServices.startTransaction();
-            List<EntrepriseDTO> entreprises = myEntrepriseDAO.getAllForSchoolYear(idSchoolYear);
-            dalServices.commitTransaction();
-            return entreprises;
-        } catch (Exception e) {
-            LoggerUtil.logError("BizError", e);
-            dalServices.rollbackTransaction();
-            throw e;
-        }
+  public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
+    try {
+      dalServices.startTransaction();
+      List<EntrepriseDTO> entreprises = myEntrepriseDAO.getAllForSchoolYear(idSchoolYear);
+      dalServices.commitTransaction();
+      return entreprises;
+    } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
     }
+  }
 
-    @Override
-    public int getStagesCountForSchoolYear(int idEntreprise) {
-        try {
-            dalServices.startTransaction();
-            int count = myEntrepriseDAO.getNbStagesForCurrentYear(idEntreprise);
-            dalServices.commitTransaction();
-            return count;
-        } catch (Exception e) {
-            LoggerUtil.logError("BizError", e);
-            dalServices.rollbackTransaction();
-            throw e;
-        }
+  @Override
+  public int getStagesCountForSchoolYear(int idEntreprise) {
+    try {
+      dalServices.startTransaction();
+      int count = myEntrepriseDAO.getNbStagesForCurrentYear(idEntreprise);
+      dalServices.commitTransaction();
+      return count;
+    } catch (Exception e) {
+      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
     }
+  }
 }

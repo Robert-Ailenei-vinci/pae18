@@ -35,10 +35,10 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public List<UserDTO> getAll() {
     try (PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
-        "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
-            + " u.phone_number, u.psw, u.registration_date,"
-            + " u.school_year, s.years_format AS academic_year, u._version "
-            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year")) {
+      "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
+        + " u.phone_number, u.psw, u.registration_date,"
+        + " u.school_year, s.years_format AS academic_year, u._version "
+        + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year")) {
       List<UserDTO> users = new ArrayList<>();
       try (ResultSet rs = getAllUsers.executeQuery()) {
         while (rs.next()) {
@@ -64,12 +64,12 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO getOne(String email) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT u.id_user, u.email, u.role_u, u.last_name,"
-            + " u.first_name, u.phone_number, u.psw,"
-            + " u.registration_date, u.school_year,"
-            + " s.years_format AS academic_year, u._version "
-            + "FROM pae.users u, pae.school_years s WHERE"
-            + " u.school_year=s.id_year AND u.email=?")) {
+      "SELECT u.id_user, u.email, u.role_u, u.last_name,"
+        + " u.first_name, u.phone_number, u.psw,"
+        + " u.registration_date, u.school_year,"
+        + " s.years_format AS academic_year, u._version "
+        + "FROM pae.users u, pae.school_years s WHERE"
+        + " u.school_year=s.id_year AND u.email=?")) {
       preparedStatement.setString(1, email);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -94,12 +94,12 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT u.id_user, u.email, u.role_u, u.last_name, "
-            + "u.first_name, u.phone_number, u.psw,"
-            + " u.registration_date, u.school_year,"
-            + " s.years_format AS academic_year, u._version "
-            + " FROM pae.users u, pae.school_years s WHERE"
-            + " u.school_year=s.id_year AND u.id_user=?")) {
+      "SELECT u.id_user, u.email, u.role_u, u.last_name, "
+        + "u.first_name, u.phone_number, u.psw,"
+        + " u.registration_date, u.school_year,"
+        + " s.years_format AS academic_year, u._version "
+        + " FROM pae.users u, pae.school_years s WHERE"
+        + " u.school_year=s.id_year AND u.id_user=?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -161,8 +161,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
     String sql4 =
-        "INSERT INTO pae.users (id_user,email, role_u, last_name, first_name, phone_number,"
-            + " psw, registration_date, school_year, _version) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,0)";
+      "INSERT INTO pae.users (id_user,email, role_u, last_name, first_name, phone_number,"
+        + " psw, registration_date, school_year, _version) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,0)";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql4)) {
       stmt.setInt(1, user.getId());
       stmt.setString(2, user.getEmail());
@@ -174,7 +174,7 @@ public class UserDAOImpl implements UserDAO {
       stmt.setString(8, user.getRegistrationDate());
       stmt.setInt(9, idYear);
       LoggerUtil.logInfo(
-          "used adduser method with mail: " + user.getEmail() + " and id: " + user.getId());
+        "used adduser method with mail: " + user.getEmail() + " and id: " + user.getId());
 
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {

@@ -64,6 +64,7 @@ public interface ContactDAO {
 
   /**
    * cancel the internships if entreprise is blacklisted.
+   *
    * @param entrepriseId
    * @return
    */

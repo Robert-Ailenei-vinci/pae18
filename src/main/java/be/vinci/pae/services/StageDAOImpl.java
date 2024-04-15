@@ -16,36 +16,36 @@ import java.sql.ResultSet;
  */
 public class StageDAOImpl implements StageDAO {
 
-    @Inject
-    private DomainFactory myDomainFactory;
-    @Inject
-    private DALBackServices dalBackServices;
-    @Inject
-    private ContactDAO contactDAO;
-    @Inject
-    private UserDAO userDAO;
-    @Inject
-    private SupervisorDAO supervisorDAO;
-    @Inject
-    private SchoolYearDAO schoolYearDAO;
+  @Inject
+  private DomainFactory myDomainFactory;
+  @Inject
+  private DALBackServices dalBackServices;
+  @Inject
+  private ContactDAO contactDAO;
+  @Inject
+  private UserDAO userDAO;
+  @Inject
+  private SupervisorDAO supervisorDAO;
+  @Inject
+  private SchoolYearDAO schoolYearDAO;
 
-    @Override
-    public StageDTO getOneStageByUserId(int userId) {
-        try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-                "SELECT * FROM pae.stages WHERE _user = ?")) {
-            preparedStatement.setInt(1, userId);
-            try (ResultSet rs = preparedStatement.executeQuery()) {
-                if (rs.next()) {
-                    LoggerUtil.logInfo("stage getone with id " + userId);
-                    return getStageMethodFromDB(rs);
-                }
-            }
-        } catch (Exception e) {
-            LoggerUtil.logError("No Stage found for userId : " + userId, e);
-            throw new StageNotFoundException("Pas de stage avec l'id de user suivant : " + userId, e);
+  @Override
+  public StageDTO getOneStageByUserId(int userId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+      "SELECT * FROM pae.stages WHERE _user = ?")) {
+      preparedStatement.setInt(1, userId);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        if (rs.next()) {
+          LoggerUtil.logInfo("stage getone with id " + userId);
+          return getStageMethodFromDB(rs);
         }
-        return null;
+      }
+    } catch (Exception e) {
+      LoggerUtil.logError("No Stage found for userId : " + userId, e);
+      throw new StageNotFoundException("Pas de stage avec l'id de user suivant : " + userId, e);
     }
+    return null;
+  }
 
   private StageDTO getStageMethodFromDB(ResultSet rs) {
     StageDTO stage = myDomainFactory.getStage();
@@ -78,8 +78,8 @@ public class StageDAOImpl implements StageDAO {
     }
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "UPDATE pae.stages SET internship_project = ? , _version = _version + 1"
-            + "WHERE _user = ? AND contact = ? AND _version = ?")) {
+      "UPDATE pae.stages SET internship_project = ? , _version = _version + 1"
+        + "WHERE _user = ? AND contact = ? AND _version = ?")) {
       preparedStatement.setString(1, stageDTO.getInternshipProject());
       preparedStatement.setInt(2, stageDTO.getUserId());
       preparedStatement.setInt(3, stageDTO.getContactId());
@@ -95,7 +95,7 @@ public class StageDAOImpl implements StageDAO {
 
   private int getLastVersionFromDB(int contactId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT _version FROM pae.stages WHERE contact = ? ")) {
+      "SELECT _version FROM pae.stages WHERE contact = ? ")) {
       preparedStatement.setInt(1, contactId);
       try (ResultSet rs = preparedStatement.executeQuery()) {
         if (rs.next()) {

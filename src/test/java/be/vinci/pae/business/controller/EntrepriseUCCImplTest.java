@@ -105,14 +105,14 @@ class EntrepriseUCCImplTest {
     user.setRole("etudiant");
     expectedEntreprise = entreprise1;
     when(entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email"))
-        .thenReturn(expectedEntreprise);
+      .thenReturn(expectedEntreprise);
     when(
-        entrepriseDAO.createOne("tradeName", "designation", "address", "phoneNum", "email"))
-        .thenReturn(entreprise1);
+      entrepriseDAO.createOne("tradeName", "designation", "address", "phoneNum", "email"))
+      .thenReturn(entreprise1);
 
     // 2. Act
     EntrepriseDTO actualEntreprise = entrepriseUcc.createOne(user, "tradeName", "designation",
-        "address", "phoneNum", "email");
+      "address", "phoneNum", "email");
 
     // 3. Assert
     assertNotNull(actualEntreprise);
@@ -170,7 +170,7 @@ class EntrepriseUCCImplTest {
 
     // Act
     EntrepriseDTO blacklistedEntreprise = entrepriseUcc.blacklist(entrepriseId, reason,
-        entreprise.getVersion());
+      entreprise.getVersion());
 
     // Assert
     assertNotNull(blacklistedEntreprise);
@@ -202,7 +202,8 @@ class EntrepriseUCCImplTest {
     when(entrepriseDAO.unblacklist(entreprise, entreprise.getVersion())).thenReturn(entreprise);
 
     // Act
-    EntrepriseDTO unblacklistedEntreprise = entrepriseUcc.unblacklist(entrepriseId, entreprise.getVersion());
+    EntrepriseDTO unblacklistedEntreprise = entrepriseUcc.unblacklist(entrepriseId,
+      entreprise.getVersion());
 
     // Assert
     assertNotNull(unblacklistedEntreprise);
