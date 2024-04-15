@@ -10,7 +10,6 @@ import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.services.StageDAO;
-import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.util.List;
 
