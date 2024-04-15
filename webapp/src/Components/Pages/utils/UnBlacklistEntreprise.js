@@ -3,7 +3,7 @@ import {getAuthenticatedUser} from "../../../utils/auths";
 
 const user = getAuthenticatedUser();
 
-async function unblacklistEntreprise(id){
+async function unblacklistEntreprise(id, version){
     console.log("unblacklist entreprise");
     const options = {
         method: 'POST',
@@ -12,24 +12,23 @@ async function unblacklistEntreprise(id){
           'Authorization': `${user.token}`,
         },
         body: JSON.stringify({
-          "id_entreprise": id
+          "id_entreprise": id,
+          "version": version
         }),
       };
       try {
         const responseContacts = await fetch(
             `http://localhost:3000/entreprise/unblacklist`, options);
     
-        if (!responseContacts.ok) {
-          throw new Error(
-              `Failed to update contacts: ${responseContacts.statusText}`);
-        }
-    
-        const contactsData = await responseContacts.json();
-        return contactsData;
-      } catch (error) {
-        throw new Error(
-            `An error occurred while update contacts: ${error.message}`);
-      }
+            if(responseContacts.status === 400) {
+              alert("Ceci a déjà été modifié par quelqu'un en meme temps que vous")
+             }
+          
+              const contactsData = await responseContacts.json();
+              return contactsData;
+            } catch (error) {
+              console.log(error);
+            }
 }
 
 export{

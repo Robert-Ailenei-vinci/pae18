@@ -97,4 +97,9 @@ public class EntrepriseImpl implements Entreprise {
   public int getVersion() {
     return version;
   }
+
+  @Override
+  public void setVersion(int version) {
+    this.version = version;
+  }
 }

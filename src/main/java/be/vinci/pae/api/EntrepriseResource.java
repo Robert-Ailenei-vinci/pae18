@@ -127,9 +127,10 @@ public class EntrepriseResource {
   }
 
   /**
-   * Blacklists an enterprise. This method is accessed via HTTP POST request to the path
-   * "/entreprise/blacklist". It returns the blacklisted enterprise in JSON format. Requires
-   * authorization.
+   * Unblacklists an enterprise. This method is accessed via HTTP POST request to the path
+   * "/entreprise/blacklist". It returns the unblacklisted enterprise in JSON format. Requires
+   * authorization. This doesn't change the state of the contacts, it just allows to take a contact
+   * with the blacklisted entreprise.
    *
    * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
    */
@@ -141,8 +142,7 @@ public class EntrepriseResource {
   public EntrepriseDTO unblacklist(JsonNode json,
       @Context ContainerRequestContext requestContext) {
     int entrepriseId = json.get("id_entreprise").asInt();
-    String token = requestContext.getHeaderString("Authorization");
-
+    int version = json.get("version").asInt();
     if (entrepriseId == 0 ) {
       LoggerUtil.logError("All fields required to blacklist an enterprise.",
           new BadRequestException(""));
@@ -161,7 +161,7 @@ public class EntrepriseResource {
       throw new BadRequestException("Enterprise not blacklisted");
     }
 
-    EntrepriseDTO toReturn = myEntrepriseUCC.unblacklist(entrepriseId);
+    EntrepriseDTO toReturn = myEntrepriseUCC.unblacklist(entrepriseId, version);
     if (toReturn != null) {
       LoggerUtil.logInfo("Blacklist successful");
     }

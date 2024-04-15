@@ -122,4 +122,11 @@ public interface EntrepriseDTO {
    * @return the version of the enterprise
    */
   int getVersion();
+
+  /**
+   * Sets the version of the enterprise.
+   *
+   * @param version the version to set for the enterprise
+   */
+  void setVersion(int version);
 }

@@ -33,14 +33,16 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public EntrepriseDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT id_entreprise, trade_name,  designation, address, phone_num, email, blacklisted, reason_blacklist,  _version as ver FROM pae.entreprises WHERE id_entreprise = ?")) {
+        "SELECT e.id_entreprise, e.trade_name, e.designation, e.address , e.phone_num, e.email, e.blacklisted, e.reason_blacklist, e._version FROM pae.entreprises e WHERE e.id_entreprise = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
         if (rs.next()) {
           LoggerUtil.logInfo("entreprise getone with id " + id);
 
-          return getEntrepriseMethodFromDB(rs);
+          EntrepriseDTO entreprise = getEntrepriseMethodFromDB(rs);
+          entreprise.setVersion(rs.getInt("_version")); // Set the version
+          return entreprise;
         }
       }
     } catch (Exception e) {
@@ -110,7 +112,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
    */
   @Override
   public EntrepriseDTO blacklist(EntrepriseDTO entreprise, int version) {
-    int lastVersion = getLastVersionFromDB(entreprise.getVersion());
+    int lastVersion = getLastVersionFromDB(entreprise.getId());
 
     if (lastVersion != version) {
       throw new OptimisticLockException("Optimisitc lock exception");
@@ -137,18 +139,25 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   /**
    * Unblacklists an entreprise.
    *
-   * @param entrepriseId id of the entreprise to unblacklist
+   * @param entreprise  the entreprise to unblacklist
    * @return the newly updated entreprise and it s blacklistred if no errors prior to that
    */
   @Override
-  public EntrepriseDTO unblacklist(int entrepriseId) {
+  public EntrepriseDTO unblacklist(EntrepriseDTO entreprise, int version) {
+    int lastVersion = getLastVersionFromDB(entreprise.getId());
+
+    if (lastVersion != version) {
+      throw new OptimisticLockException("Optimisitc lock exception");
+    }
+
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "UPDATE pae.entreprises SET blacklisted = false , reason_blacklist = null WHERE id_entreprise = ?")) {
-      preparedStatement.setInt(1, entrepriseId);
+        "UPDATE pae.entreprises SET blacklisted = false , reason_blacklist = null ,_version = _version + 1 WHERE id_entreprise = ? AND _version = ?")) {
+      preparedStatement.setInt(1, entreprise.getId());
+      preparedStatement.setInt(2, version);
       int rowsAffected = preparedStatement.executeUpdate();
       if (rowsAffected > 0) {
-        LoggerUtil.logInfo("entreprise unblacklist with id " + entrepriseId);
-        return getOne(entrepriseId);
+        LoggerUtil.logInfo("entreprise unblacklist with id " + entreprise.getId());
+        return getOne(entreprise.getId());
       }
     } catch (Exception e) {
       LoggerUtil.logError("Error processing result set", e);

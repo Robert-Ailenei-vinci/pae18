@@ -61,9 +61,10 @@ public interface EntrepriseUCC {
   /**
    * Unblacklists an enterprise.
    * @param entrepriseId id of the entreprise to unblacklist
+   * @param version version of the entreprise
    * @return unblacklisted entreprise
    */
-  EntrepriseDTO unblacklist(int entrepriseId);
+  EntrepriseDTO unblacklist(int entrepriseId, int version);
 
 
     List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);

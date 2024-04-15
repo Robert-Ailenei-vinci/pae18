@@ -195,6 +195,8 @@ form.addEventListener('submit', function(event) {
 
   Navigate(`/detailsEntreprise/${usePathParams()}`);
   }else {
+    const entrepriseBlacklisted = await fetchEntrepriseDetails(user);
+
     const main = document.querySelector('main');
 
     // Create a title
@@ -211,11 +213,12 @@ form.addEventListener('submit', function(event) {
     // Add an event listener to the "Deblacklister" button
     deblacklistButton.addEventListener('click', function() {
       // Show an alert asking for confirmation
+      console.log(entrepriseBlacklisted, " ver")
       const isConfirmed = confirm('Are you sure?');
       if (isConfirmed) {
         // If confirmed, unblacklist the company
         // Replace "unblacklistEntreprise" with the actual function to unblacklist the company
-        unblacklistEntreprise(entreprise.id);
+        unblacklistEntreprise(entreprise.id, entreprise.version);
         setTimeout(function() {
           Navigate('/seeEntreprises');
         }, 500);

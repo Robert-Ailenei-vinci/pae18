@@ -60,8 +60,9 @@ public interface EntrepriseDAO {
 
   /**
    * Unblacklists an entreprise.
-   * @param entrepriseId id of the entreprise to unblacklist
+   * @param entreprise entreprise to unblacklist
+   * @param version version of the entreprise
    * @return the newly updated entreprise and it s blacklistred if no errors prior to that
    */
-  EntrepriseDTO unblacklist(int entrepriseId);
+  EntrepriseDTO unblacklist(EntrepriseDTO entreprise, int version);
 }
