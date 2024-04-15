@@ -37,7 +37,7 @@ public interface EntrepriseDAO {
    * @return the newly created {@link EntrepriseDTO} representing the enterprise
    */
   EntrepriseDTO createOne(String tradeName, String designation, String address, String phoneNum,
-    String email);
+      String email);
 
   /**
    * Retrieves all enterprises for a given school year.

@@ -38,7 +38,7 @@ public interface EntrepriseUCC {
    * @return the newly created {@link EntrepriseDTO} representing the enterprise
    */
   EntrepriseDTO createOne(UserDTO user, String tradeName, String designation, String address,
-      String phoneNum, String email);
+    String phoneNum, String email);
 
   /**
    * Retrieves all contacts associated with the provided enterprise id.
@@ -51,23 +51,25 @@ public interface EntrepriseUCC {
 
   /**
    * Blacklists an enterprise.
+   *
    * @param entrepriseId id of the entreprise to blacklist
-   * @param reason  reason for blacklisting
-   * @param version version of the entreprise
+   * @param reason       reason for blacklisting
+   * @param version      version of the entreprise
    * @return blacklisted entreprise
    */
   EntrepriseDTO blacklist(int entrepriseId, String reason, int version);
 
   /**
    * Unblacklists an enterprise.
+   *
    * @param entrepriseId id of the entreprise to unblacklist
-   * @param version version of the entreprise
+   * @param version      version of the entreprise
    * @return unblacklisted entreprise
    */
   EntrepriseDTO unblacklist(int entrepriseId, int version);
 
 
-    List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);
+  List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);
 
-    int getStagesCountForSchoolYear(int idEntreprise);
+  int getStagesCountForSchoolYear(int idEntreprise);
 }

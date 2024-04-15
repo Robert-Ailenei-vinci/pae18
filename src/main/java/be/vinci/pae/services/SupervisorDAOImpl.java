@@ -24,7 +24,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
   @Override
   public SupervisorDTO getOneById(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "SELECT * FROM pae.internship_supervisor WHERE id_supervisor = ?")) {
+        "SELECT * FROM pae.internship_supervisor WHERE id_supervisor = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
         if (rs.next()) {

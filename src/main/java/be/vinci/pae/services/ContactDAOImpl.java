@@ -35,7 +35,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "INSERT INTO pae.contacts "
+        "INSERT INTO pae.contacts "
         + "(state, id_contact, _user, entreprise, school_year, "
         + "reason_for_refusal, meeting_type, _version)"
         + "VALUES (?, ?, ?, ?, ?, ?, ?, 0)"
@@ -63,7 +63,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public List<ContactDTO> getAllContactsByUserId(int userId) {
     PreparedStatement getAllContacts = dalBackServices.getPreparedStatement(
-      "SELECT * FROM pae.contacts WHERE _user = ?");
+       "SELECT * FROM pae.contacts WHERE _user = ?");
     List<ContactDTO> contacts = new ArrayList<>();
     try {
       getAllContacts.setInt(1, userId);
@@ -85,7 +85,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public ContactDTO getOneContactByStageId(int stageId) {
     PreparedStatement getOneContact = dalBackServices.getPreparedStatement(
-      "SELECT * FROM pae.contacts WHERE id_contact = ?");
+       "SELECT * FROM pae.contacts WHERE id_contact = ?");
     try {
       getOneContact.setInt(1, stageId);
       try (ResultSet rs = getOneContact.executeQuery()) {
@@ -125,7 +125,7 @@ public class ContactDAOImpl implements ContactDAO {
   private int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);
-      ResultSet rs = stmt.executeQuery()) {
+       ResultSet rs = stmt.executeQuery()) {
       if (rs.next()) {
 
         return rs.getInt(1) + 1;
@@ -148,13 +148,13 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     if (!Objects.equals(contactDTO.getReasonForRefusal(), "") && contactDTO.getState()
-      .equals("refuse")) {
+        .equals("refuse")) {
       sql.append("reason_for_refusal = ?, ");
       parameters.add(contactDTO.getReasonForRefusal());
     }
 
     if (!Objects.equals(contactDTO.getMeetingType(), "") && contactDTO.getState()
-      .equals("rencontre")) {
+        .equals("rencontre")) {
       sql.append("meeting_type = ?, ");
       parameters.add(contactDTO.getMeetingType());
     }
@@ -189,7 +189,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public ContactDTO getOneContactById(int idContact) {
     PreparedStatement getOneContact = dalBackServices.getPreparedStatement(
-      "SELECT * FROM pae.contacts WHERE id_contact = ?");
+        "SELECT * FROM pae.contacts WHERE id_contact = ?");
     try {
       getOneContact.setInt(1, idContact);
       try (ResultSet rs = getOneContact.executeQuery()) {
@@ -208,7 +208,7 @@ public class ContactDAOImpl implements ContactDAO {
   @Override
   public List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId) {
     PreparedStatement getAllContacts = dalBackServices.getPreparedStatement(
-      "SELECT * FROM pae.contacts WHERE entreprise = ?");
+        "SELECT * FROM pae.contacts WHERE entreprise = ?");
     List<ContactDTO> contacts = new ArrayList<>();
     try {
       getAllContacts.setInt(1, entrepriseId);
@@ -220,7 +220,7 @@ public class ContactDAOImpl implements ContactDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
+        LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     LoggerUtil.logInfo("get all contact for the entreprise with id " + entrepriseId);

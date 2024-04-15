@@ -95,7 +95,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public EntrepriseDTO blacklist(JsonNode json,
-    @Context ContainerRequestContext requestContext) {
+      @Context ContainerRequestContext requestContext) {
     String reason = json.get("reason_blacklist").asText();
     int entrepriseId = json.get("id_entreprise").asInt();
     int version = json.get("version").asInt();
@@ -140,7 +140,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public EntrepriseDTO unblacklist(JsonNode json,
-    @Context ContainerRequestContext requestContext) {
+      @Context ContainerRequestContext requestContext) {
     int entrepriseId = json.get("id_entreprise").asInt();
     int version = json.get("version").asInt();
     if (entrepriseId == 0) {
@@ -187,9 +187,9 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public EntrepriseDTO addEnterprise(@Context ContainerRequestContext requestContext,
-    JsonNode json) throws BadRequestException, AuthorisationException {
+      JsonNode json) throws BadRequestException, AuthorisationException {
     if (!json.hasNonNull("trade_name")
-      || !json.hasNonNull("address")) {
+        || !json.hasNonNull("address")) {
       LoggerUtil.logError("All fields required to create an enterprise.",
         new BadRequestException(""));
       throw new BadRequestException("All fields required to create an enterprise.");
@@ -210,8 +210,8 @@ public class EntrepriseResource {
     }
 
     EntrepriseDTO entrepriseDTO = myEntrepriseUCC.createOne(userDTO, tradeName, designation,
-      address,
-      phoneNum, email);
+        address,
+        phoneNum, email);
     if (entrepriseDTO == null) {
       LoggerUtil.logError("Contact not created", new BadRequestException(""));
       throw new BadRequestException("Contact not created");
@@ -231,7 +231,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<ContactDTO> getAllContactsByEntrepriseId(
-    @PathParam("entrepriseId") int entrepriseId) {
+      @PathParam("entrepriseId") int entrepriseId) {
     List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAllContactById successful");

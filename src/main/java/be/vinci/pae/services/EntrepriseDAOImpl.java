@@ -33,7 +33,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public EntrepriseDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "SELECT e.id_entreprise, e.trade_name, e.designation, e.address , e.phone_num, e.email, e.blacklisted, e.reason_blacklist, e._version FROM pae.entreprises e WHERE e.id_entreprise = ?")) {
+        "SELECT e.id_entreprise, e.trade_name, e.designation, e.address , e.phone_num, e.email, e.blacklisted, e.reason_blacklist, e._version FROM pae.entreprises e WHERE e.id_entreprise = ?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -60,7 +60,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public List<EntrepriseDTO> getAll() {
     PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
-      "SELECT * FROM pae.entreprises");
+        "SELECT * FROM pae.entreprises");
     List<EntrepriseDTO> entreprises = new ArrayList<>();
     try (ResultSet rs = getAllUsers.executeQuery()) {
       while (rs.next()) {
@@ -78,9 +78,9 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
 
   @Override
   public EntrepriseDTO createOne(String tradeName, String designation, String address,
-    String phoneNum, String email) {
+     String phoneNum, String email) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "INSERT INTO pae.entreprises "
+        "INSERT INTO pae.entreprises "
         + "(id_entreprise, trade_name, designation, address, phone_num, "
         + "email, blacklisted)"
         + "VALUES (?, ?, ?, ?, ?, ?, false)"
@@ -119,7 +119,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     }
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "UPDATE pae.entreprises SET blacklisted = true , reason_blacklist = ? , _version= _version+1 WHERE id_entreprise = ? AND _version = ?")) {
+        "UPDATE pae.entreprises SET blacklisted = true , reason_blacklist = ? , _version= _version+1 WHERE id_entreprise = ? AND _version = ?")) {
       preparedStatement.setString(1, entreprise.getBlacklistReason());
       preparedStatement.setInt(2, entreprise.getId());
       preparedStatement.setInt(3, version);
@@ -150,7 +150,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     }
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "UPDATE pae.entreprises SET blacklisted = false , reason_blacklist = null ,_version = _version + 1 WHERE id_entreprise = ? AND _version = ?")) {
+       "UPDATE pae.entreprises SET blacklisted = false , reason_blacklist = null ,_version = _version + 1 WHERE id_entreprise = ? AND _version = ?")) {
       preparedStatement.setInt(1, entreprise.getId());
       preparedStatement.setInt(2, version);
       int rowsAffected = preparedStatement.executeUpdate();
@@ -168,7 +168,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
     PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "SELECT DISTINCT e.* FROM pae.entreprises e " +
+       "SELECT DISTINCT e.* FROM pae.entreprises e " +
         "JOIN pae.contacts c ON e.id_entreprise = c.entreprise " +
         "WHERE c.school_year = ?");
     List<EntrepriseDTO> entreprises = new ArrayList<>();
@@ -208,7 +208,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public int getNbStagesForCurrentYear(int entrepriseId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "SELECT COUNT(*) FROM pae.entreprises e " +
+        "SELECT COUNT(*) FROM pae.entreprises e " +
         "JOIN pae.contacts c ON e.id_entreprise = c.entreprise " +
         "WHERE c.school_year = ? AND e.id_entreprise = ?")) {
       preparedStatement.setInt(1, schoolYearDAO.getCurrentSchoolYear().getId());
@@ -228,7 +228,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   private int nextItemId() {
     String sql = "SELECT MAX(id_contact) FROM pae.contacts";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);
-      ResultSet rs = stmt.executeQuery()) {
+       ResultSet rs = stmt.executeQuery()) {
       if (rs.next()) {
         return rs.getInt(1) + 1;
       }
@@ -241,7 +241,7 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
 
   private int getLastVersionFromDB(int entrepriseId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-      "SELECT _version FROM pae.entreprises WHERE id_entreprise = ? ")) {
+        "SELECT _version FROM pae.entreprises WHERE id_entreprise = ? ")) {
       preparedStatement.setInt(1, entrepriseId);
       try (ResultSet rs = preparedStatement.executeQuery()) {
         if (rs.next()) {
