@@ -86,6 +86,8 @@ public class EntrepriseResource {
    * Blacklists an enterprise. This method is accessed via HTTP POST request to the path
    * "/entreprise/blacklist". It returns the blacklisted enterprise in JSON format. Requires
    * authorization.
+   * @param json The JSON object containing the enterprise id and the reason for blacklisting.
+   *
    *
    * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
    */
@@ -94,8 +96,7 @@ public class EntrepriseResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public EntrepriseDTO blacklist(JsonNode json,
-      @Context ContainerRequestContext requestContext) {
+  public EntrepriseDTO blacklist(JsonNode json) {
     String reason = json.get("reason_blacklist").asText();
     int entrepriseId = json.get("id_entreprise").asInt();
     int version = json.get("version").asInt();
@@ -131,6 +132,7 @@ public class EntrepriseResource {
    * "/entreprise/blacklist". It returns the unblacklisted enterprise in JSON format. Requires
    * authorization. This doesn't change the state of the contacts, it just allows to take a contact
    * with the blacklisted entreprise.
+   * @param json The JSON object containing the enterprise id.
    *
    * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
    */
@@ -139,8 +141,7 @@ public class EntrepriseResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
-  public EntrepriseDTO unblacklist(JsonNode json,
-      @Context ContainerRequestContext requestContext) {
+  public EntrepriseDTO unblacklist(JsonNode json) {
     int entrepriseId = json.get("id_entreprise").asInt();
     int version = json.get("version").asInt();
     if (entrepriseId == 0) {
