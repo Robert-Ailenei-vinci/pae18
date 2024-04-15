@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3000
+
+### Login the default user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "login": "Carole.skile@student.vinci.be",
+  "password": "mdpuser.1"
+}
+
+> {%
+  client.global.set("user", response.body.token);
+%}
+
+
+### Blacklist an entreprise
+POST {{baseUrl}}/entreprise/blacklist
+Content-Type: application/json
+
+{
+  "id": 4,
+  "reason": "Raison de la blacklist"
+}

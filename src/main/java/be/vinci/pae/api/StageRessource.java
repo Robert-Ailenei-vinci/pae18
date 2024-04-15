@@ -51,6 +51,7 @@ public class StageRessource {
    * Modify internship subject data.
    *
    * @param requestContext the request context
+   * @param json           the json
    * @return the stage DTO
    */
   @PUT
