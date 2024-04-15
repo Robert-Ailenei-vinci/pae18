@@ -1,7 +1,9 @@
 package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -186,6 +188,37 @@ class EntrepriseUCCImplTest {
     // Act and Assert
     assertThrows(RuntimeException.class, () -> {
       entrepriseUcc.blacklist(entrepriseId, reason, entreprise.getVersion());
+    });
+  }
+
+
+  @Test
+  void unblacklistSuccess() {
+    // Arrange
+    int entrepriseId = 1;
+    Entreprise entreprise = (Entreprise) factory.getEntreprise();
+    entreprise.setId(entrepriseId);
+    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
+    when(entrepriseDAO.unblacklist(entreprise, entreprise.getVersion())).thenReturn(entreprise);
+
+    // Act
+    EntrepriseDTO unblacklistedEntreprise = entrepriseUcc.unblacklist(entrepriseId, entreprise.getVersion());
+
+    // Assert
+    assertNotNull(unblacklistedEntreprise);
+    assertFalse(unblacklistedEntreprise.isBlacklisted());
+    assertNull(unblacklistedEntreprise.getBlacklistReason());
+  }
+
+  @Test
+  void unblacklistWithException() {
+    // Arrange
+    int entrepriseId = 1;
+    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
+
+    // Act and Assert
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.unblacklist(entrepriseId, entreprise.getVersion());
     });
   }
 
