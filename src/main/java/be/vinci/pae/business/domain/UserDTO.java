@@ -1,8 +1,11 @@
 package be.vinci.pae.business.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 /**
  * User DTO interface.
  */
+@JsonDeserialize(as = UserImpl.class)
 public interface UserDTO {
 
 

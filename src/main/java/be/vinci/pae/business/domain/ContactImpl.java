@@ -1,5 +1,7 @@
 package be.vinci.pae.business.domain;
 
+import java.util.Objects;
+
 /**
  * This class represents an implementation of the {@link Contact} interface.
  */
@@ -161,5 +163,27 @@ public class ContactImpl implements Contact {
       int wantedSchoolYearId) {
     return schoolYearId == wantedSchoolYearId
         && entrepriseId == wantedEntrepriseId;
+  }
+
+  @Override
+  public boolean acceptContact(int version) {
+    if (state.equals("rencontre")) {
+      this.state = "accepte";
+      this.version = version;
+      return true;
+    }
+    return false;
+  }
+
+  @Override
+  public boolean checkStateAccepted() {
+    return Objects.equals(this.state, "accepte");
+  }
+
+  @Override
+  public boolean cancelContact(int version) {
+    this.version = version;
+    this.state = "annule";
+    return false;
   }
 }

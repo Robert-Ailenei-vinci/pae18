@@ -43,14 +43,13 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
       // Retrieve the EntrepriseDTO from the DAO
       EntrepriseDTO entrepriseDTO = myEntrepriseDAO.getOne(entrepriseId);
-      System.out.println(entrepriseDTO.getVersion());
+
       // Commit the transaction
       dalServices.commitTransaction();
 
       return entrepriseDTO;
     } catch (Exception e) {
       // Rollback the transaction in case of an error
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -76,7 +75,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       return entrepriseDTOs;
     } catch (Exception e) {
       // Rollback the transaction in case of an error
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -89,8 +87,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       dalServices.startTransaction();
 
       if (!((User) user).checkIsStudent()) {
-        LoggerUtil.logError("BizError", new BizException(
-            "This user is not a student."));
         throw new BizException(
           "This user is not a student.");
       }
@@ -101,7 +97,6 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
       return entreprise;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }

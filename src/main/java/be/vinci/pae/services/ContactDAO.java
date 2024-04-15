@@ -69,4 +69,6 @@ public interface ContactDAO {
    * @return true if the internships are canceled.
    */
   boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId);
+
+  void cancelAllContact(ContactDTO contact);
 }

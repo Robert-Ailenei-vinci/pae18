@@ -68,11 +68,26 @@ public class LoggerUtil {
    * @param message   the message.
    * @param throwable the upstream exception.
    */
-  public static void logError(String message, Throwable throwable) {
+  public static void logError(String message, Throwable throwable, int errorCode) {
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter(sw);
     throwable.printStackTrace(pw);
     String stackTrace = sw.toString();
-    logger.log(Level.SEVERE, message + "\n" + stackTrace);
+    Level logLevel = mapErrorCodeToLogLevel(errorCode);
+    logger.log(logLevel, message + "\n" + stackTrace);
+  }
+
+  private static Level mapErrorCodeToLogLevel(int errorCode) {
+    // Define mapping logic for HTTP error codes to logging levels
+    switch (errorCode) {
+      case 1:
+        return Level.FINE; // Presentation Error
+      case 2:
+        return Level.WARNING; // Business Error
+      case 3:
+        return Level.SEVERE; // Services Error
+      default:
+        return Level.INFO; // Default level for unknown error codes
+    }
   }
 }

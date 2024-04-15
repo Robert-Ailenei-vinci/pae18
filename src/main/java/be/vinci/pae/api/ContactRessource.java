@@ -4,10 +4,14 @@ import be.vinci.pae.api.filters.Authorize;
 import be.vinci.pae.business.controller.ContactUCC;
 import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.SchoolYearUCC;
+import be.vinci.pae.business.controller.StageUCC;
+import be.vinci.pae.business.controller.SupervisorUCC;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.business.domain.StageDTO;
+import be.vinci.pae.business.domain.SupervisorDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
@@ -41,6 +45,10 @@ public class ContactRessource {
   private UserUCC myUserUCC;
   @Inject
   private SchoolYearUCC mySchoolYearUCC;
+  @Inject
+  private StageUCC myStageUCC;
+  @Inject
+  private SupervisorUCC mySupervisorUCC;
 
   /**
    * Adds a contact.
@@ -57,8 +65,6 @@ public class ContactRessource {
   @Authorize
   public ContactDTO addContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("entreprise")) {
-      LoggerUtil.logError("Entreprise not found",
-          new BadRequestException("Entreprise not found"));
       throw new BadRequestException("User, entreprise, and school year required");
     }
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
@@ -71,24 +77,17 @@ public class ContactRessource {
     EntrepriseDTO entrepriseDTO = myEntrepriseUCC.getOne(entrepriseId);
     SchoolYearDTO schoolYearDTO = mySchoolYearUCC.getOne(schoolYearId);
     if (userDTO == null) {
-      LoggerUtil.logError("User not recognised", new AuthorisationException(""));
       throw new AuthorisationException("User not recognised");
     }
     if (entrepriseDTO == null) {
-      LoggerUtil.logError("Entreprise not found",
-          new AuthorisationException("Entreprise not found"));
       throw new AuthorisationException("Entreprise not recognised");
     }
     if (schoolYearDTO == null) {
-      LoggerUtil.logError("Schoolyear not found",
-          new AuthorisationException("Schoolyear not found"));
       throw new AuthorisationException("Schoolyear not recognised");
     }
 
     ContactDTO toReturn = myContactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO);
     if (toReturn == null) {
-      LoggerUtil.logError("Contact not created",
-          new BadRequestException("Contact not created"));
       throw new BadRequestException("Contact not created");
     }
     if (toReturn != null) {
@@ -131,8 +130,6 @@ public class ContactRessource {
   @Authorize
   public ContactDTO meetContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
-      LoggerUtil.logError("Contact id and meeting type required",
-          new BadRequestException("contact id and meeting type required"));
       throw new BadRequestException("contact id and meeting type required");
     }
     int contactId = json.get("id_contact").asInt();
@@ -162,8 +159,6 @@ public class ContactRessource {
   public ContactDTO stopFollowContact(@Context ContainerRequestContext requestContext,
       JsonNode json) {
     if (!json.hasNonNull("id_contact")) {
-      LoggerUtil.logError("Contact id required",
-          new BadRequestException("contact id required"));
       throw new BadRequestException("contact id required");
     }
     int contactId = json.get("id_contact").asInt();
@@ -192,8 +187,6 @@ public class ContactRessource {
   @Authorize
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
-      LoggerUtil.logError("Contact id and refusal reason required",
-          new BadRequestException("contact id and refusal reason required"));
       throw new BadRequestException("contact id and refusal reason required");
     }
     int contactId = json.get("id_contact").asInt();
@@ -204,6 +197,47 @@ public class ContactRessource {
     ContactDTO toReturn = myContactUCC.refusedContact(contactId, refusalReason, userId, version);
     if (toReturn != null) {
       LoggerUtil.logInfo("Refused successful");
+    }
+    return toReturn;
+  }
+
+  /**
+   * path to accept a contact thus creating a stage.
+   *
+   * @param requestContext the auth user.
+   * @param json           the id of the contact.
+   * @return the created stage.
+   */
+  @PUT
+  @Path("accept")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public StageDTO acceptContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    if (!json.hasNonNull("id_contact")) {
+      throw new BadRequestException("contact id required");
+    }
+    int contactId = json.get("id_contact").asInt();
+    System.out.println("AA");
+    System.out.println(contactId);
+    int contactVersion = json.get("version").asInt();
+    int supervisorId = json.get("id_supervisor").asInt();
+    String signatureDate = json.get("signatureDate").asText();
+    String internshipProject = json.get("intershipProject").asText();
+    if (signatureDate.isBlank() || signatureDate.isEmpty()) {
+      throw new BadRequestException("Signature date is mandatory");
+    }
+    if (internshipProject.isBlank() || internshipProject.isEmpty()) {
+      throw new BadRequestException("Internship project is mandatory");
+    }
+    UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
+    int userId = user.getId();
+    ContactDTO acceptedContact = myContactUCC.acceptContact(contactId, userId, contactVersion);
+    SupervisorDTO supervisor = mySupervisorUCC.getOneById(supervisorId);
+    StageDTO toReturn = myStageUCC.createOne(acceptedContact, signatureDate, internshipProject,
+        supervisor.getSupervisorId());
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Stage accepted successfully");
     }
     return toReturn;
   }

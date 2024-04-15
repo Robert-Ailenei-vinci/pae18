@@ -16,15 +16,23 @@ public class UserImpl implements User {
   private int id;
   private String email;
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
   private String password;
-  private String role;
-  private String lastName;
+
   private String firstName;
+
+  private String lastName;
+
   private String phoneNum;
+
+  private String role;
   private String registrationDate;
   private int version;
   private int schoolYearId;
   private SchoolYearDTO schoolYear;
+
+  public UserImpl() {
+  }
 
   private String removeAccents(String input) {
     return Normalizer
@@ -165,7 +173,6 @@ public class UserImpl implements User {
   @Override
   public void checkExistingUser(UserDTO userDTO) {
     if (userDTO != null) {
-      LoggerUtil.logError("Utilisateur existe déjà", new BizException(""));
       throw new BizException("Utilisateur existe deja");
     }
   }

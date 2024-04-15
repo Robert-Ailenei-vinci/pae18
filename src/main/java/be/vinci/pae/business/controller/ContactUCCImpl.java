@@ -10,7 +10,6 @@ import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
-import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.util.List;
 
@@ -30,8 +29,6 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.startTransaction();
 
       if (!((User) user).checkIsStudent()) {
-        LoggerUtil.logError("BizError", new BizException(
-            "This user is not a student."));
         throw new BizException(
             "This user is not a student.");
       }
@@ -41,8 +38,6 @@ public class ContactUCCImpl implements ContactUCC {
 
         if (tempContact.checkUniqueUserEnterpriseSchoolYear(entreprise.getId(),
             schoolYear.getId())) {
-          LoggerUtil.logError("BizError", new BizException(
-              "This user cannot have a contact with this enterprise for this year."));
           throw new BizException(
               "This user cannot have a contact with this enterprise for this year. ");
         }
@@ -51,7 +46,6 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contact;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -65,7 +59,6 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contacts;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -79,14 +72,10 @@ public class ContactUCCImpl implements ContactUCC {
       Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
       if (contact.getUserId() != userId) {
-        LoggerUtil.logError("BizError", new BizException(
-            "The contact does not belong to the user"));
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
       if (!contact.meetContact(meetingType, version)) {
-        LoggerUtil.logError("BizError", new BizException(
-            "The contact cannot be met"));
         throw new BizException("The contact cannot be met");
       }
       ContactDTO contactToReturn = myContactDAO.updateContact(contact);
@@ -94,7 +83,6 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contactToReturn;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -108,14 +96,10 @@ public class ContactUCCImpl implements ContactUCC {
       Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
       if (contact.getUserId() != userId) {
-        LoggerUtil.logError("BizError", new BizException(
-            "The contact does not belong to the user"));
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
       if (!contact.stopFollowContact(version)) {
-        LoggerUtil.logError("BizError", new BizException(
-            "The contact cannot be stopped from being followed"));
         throw new BizException("The contact cannot be stopped from being followed");
       }
 
@@ -124,7 +108,6 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contactToReturn;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -138,14 +121,10 @@ public class ContactUCCImpl implements ContactUCC {
       Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
 
       if (contact.getUserId() != userId) {
-        LoggerUtil.logError("BizError", new BizException(
-            "The contact does not belong to the user"));
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
 
       if (!contact.refuseContact(refusalReason, version)) {
-        LoggerUtil.logError("BizError", new BizException(
-            "The contact cannot be refused"));
         throw new BizException("The contact cannot be refused");
       }
 
@@ -154,7 +133,51 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return contactToReturn;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
+
+  @Override
+  public ContactDTO acceptContact(int contactId, int userId, int version) {
+    try {
+      dalServices.startTransaction();
+
+      Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
+
+      if (contact.getUserId() != userId) {
+        throw new BizExceptionNotFound("The contact does not belong to the user");
+      }
+
+      /*
+      List<ContactDTO> userContacts = myContactDAO.getAllContactsByUserId(userId);
+      for (ContactDTO tempContactDTO : userContacts
+      ) {
+        Contact tempContact = (Contact) tempContactDTO;
+        if (tempContact.checkStateAccepted()) {
+          throw new BizException("The user already has accepted an internship");
+        }
+        if (tempContact.getId() != contact.getId()
+            && (Objects.equals(tempContact.getState(), "initie")
+            || Objects.equals(tempContact.getState(), "rencontre"))) {
+          tempContact.cancelContact(version);
+          myContactDAO.updateContact(tempContact);
+        }
+      }*/
+
+      if (!contact.acceptContact(version)) {
+        throw new BizException("The contact cannot be accepted");
+      }
+
+      ContactDTO contactToReturn = myContactDAO.updateContact(contact);
+
+      myContactDAO.cancelAllContact(contact);
+
+      dalServices.commitTransaction();
+      return contactToReturn;
+
+
+    } catch (Exception e) {
       dalServices.rollbackTransaction();
       throw e;
     }
@@ -175,7 +198,6 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.commitTransaction();
       return result;
     } catch (Exception e) {
-      LoggerUtil.logError("BizError", e);
       dalServices.rollbackTransaction();
       throw e;
     }
