@@ -1,8 +1,10 @@
 package be.vinci.pae.api;
 
 import be.vinci.pae.api.filters.Authorize;
+import be.vinci.pae.business.controller.ContactUCC;
 import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.UserUCC;
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
@@ -34,9 +36,11 @@ public class EntrepriseResource {
    * The business controller for enterprise-related operations.
    */
   @Inject
-  EntrepriseUCC myEntreprise;
+  EntrepriseUCC myEntrepriseUCC;
   @Inject
   UserUCC myUserUCC;
+  @Inject
+  ContactUCC myContactUCC;
 
   /**
    * Retrieves a list of all enterprises. This method is accessed via HTTP GET request to the path
@@ -51,7 +55,8 @@ public class EntrepriseResource {
   @Authorize
   public List<EntrepriseDTO> getAll() {
     LoggerUtil.logInfo("Starting : enterprises/getAll");
-    List<EntrepriseDTO> toReturn = myEntreprise.getAll();
+    List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAll();
+
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAll successful");
     }
@@ -72,12 +77,93 @@ public class EntrepriseResource {
   @Authorize
   public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
     LoggerUtil.logInfo("Starting : enterprise/getOne");
-    EntrepriseDTO toReturn = myEntreprise.getOne(entrepriseId);
+    EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetOne successful");
     }
     return toReturn;
   }
+
+  /**
+   * Blacklists an enterprise. This method is accessed via HTTP POST request to the path
+   * "/entreprise/blacklist". It returns the blacklisted enterprise in JSON format. Requires
+   * authorization.
+   *
+   * @param json The JSON object containing the enterprise id and the reason for blacklisting
+   * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
+   */
+  @POST
+  @Path("blacklist")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"professeur"})
+  public EntrepriseDTO blacklist(JsonNode json) {
+    String reason = json.get("reason_blacklist").asText();
+    int entrepriseId = json.get("id_entreprise").asInt();
+    int version = json.get("version").asInt();
+
+    if (entrepriseId == 0 && reason.isEmpty()) {
+
+      throw new BadRequestException("All fields required to blacklist an enterprise.");
+    }
+
+    EntrepriseDTO entreprise = myEntrepriseUCC.getOne(entrepriseId);
+
+    if (entreprise == null) {
+      throw new BadRequestException("Enterprise not found");
+    }
+
+    if (entreprise.isBlacklisted()) {
+      throw new BadRequestException("Enterprise already blacklisted");
+    }
+
+    EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason, version);
+    myContactUCC.cancelInternshipsBasedOnEntreprise(entrepriseId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Blacklist successful");
+    }
+    return toReturn;
+  }
+
+  /**
+   * Unblacklists an enterprise. This method is accessed via HTTP POST request to the path
+   * "/entreprise/blacklist". It returns the unblacklisted enterprise in JSON format. Requires
+   * authorization. This doesn't change the state of the contacts, it just allows to take a contact
+   * with the blacklisted entreprise.
+   *
+   * @param json The JSON object containing the enterprise id.
+   * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
+   */
+  @POST
+  @Path("unblacklist")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"professeur"})
+  public EntrepriseDTO unblacklist(JsonNode json) {
+    int entrepriseId = json.get("id_entreprise").asInt();
+    int version = json.get("version").asInt();
+    if (entrepriseId == 0) {
+
+      throw new BadRequestException("All fields required to blacklist an enterprise.");
+    }
+
+    EntrepriseDTO entreprise = myEntrepriseUCC.getOne(entrepriseId);
+
+    if (entreprise == null) {
+      throw new BadRequestException("Enterprise not found");
+    }
+
+    if (!entreprise.isBlacklisted()) {
+      throw new BadRequestException("Enterprise not blacklisted");
+    }
+
+    EntrepriseDTO toReturn = myEntrepriseUCC.unblacklist(entrepriseId, version);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("Blacklist successful");
+    }
+    return toReturn;
+  }
+
 
   /**
    * Adds a new enterprise. This method is accessed via HTTP POST request to the path
@@ -117,12 +203,69 @@ public class EntrepriseResource {
       throw new AuthorisationException("User not recognised");
     }
 
-    EntrepriseDTO entrepriseDTO = myEntreprise.createOne(userDTO, tradeName, designation, address,
+    EntrepriseDTO entrepriseDTO = myEntrepriseUCC.createOne(userDTO, tradeName, designation,
+        address,
         phoneNum, email);
     if (entrepriseDTO == null) {
       throw new BadRequestException("Contact not created");
     }
     LoggerUtil.logInfo("addOne successful");
     return entrepriseDTO;
+  }
+
+  /**
+   * Retrieves all contacts associated with one entreprise.
+   *
+   * @param entrepriseId the entreprise id
+   * @return the list of contacts associated with the entreprise
+   */
+  @GET
+  @Path("entrepriseDetailsAllContacts/{entrepriseId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public List<ContactDTO> getAllContactsByEntrepriseId(
+      @PathParam("entrepriseId") int entrepriseId) {
+    List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAllContactById successful");
+    }
+    return toReturn;
+  }
+
+  /**
+   * Retrieves all enterprises for a given school year.
+   *
+   * @param idSchoolYear the school year id
+   * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
+   */
+  @GET
+  @Path("getAllForSchoolYear/{idSchoolYear}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear) {
+    List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAllForSchoolYear successful");
+    }
+    return toReturn;
+  }
+
+  /**
+   * Count the number of stages for the entreprise.
+   *
+   * @param entrepriseId the entreprise id
+   * @return the number of stages for the entreprise
+   */
+  @GET
+  @Path("getStagesCountForCurrentYear/{entrepriseId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize
+  public int getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
+    int toReturn = -1;
+    toReturn = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
+    if (toReturn != -1) {
+      LoggerUtil.logInfo("GetStagesCountForCurrentYear successful");
+    }
+    return toReturn;
   }
 }

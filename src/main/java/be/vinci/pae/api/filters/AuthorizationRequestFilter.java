@@ -31,7 +31,6 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
   private final Algorithm jwtAlgorithm = Algorithm.HMAC256(Config.getProperty("JWTSecret"));
   private final JWTVerifier jwtVerifier = JWT.require(this.jwtAlgorithm).withIssuer("auth0")
       .build();
-
   @Inject
   private UserDAO userDAO;
   @Context
@@ -82,7 +81,6 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
    */
   private boolean userHasValidToken(ContainerRequestContext requestContext) {
     String token = requestContext.getHeaderString("Authorization");
-
     if (token == null) {
       requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
           .entity("A token is needed to access this resource").build());

@@ -12,6 +12,8 @@ public class EntrepriseImpl implements Entreprise {
   private String phoneNumber;
   private String email;
   private boolean isBlacklisted;
+  private String blacklistReason;
+  private int version;
 
   @Override
   public int getId() {
@@ -81,5 +83,23 @@ public class EntrepriseImpl implements Entreprise {
   @Override
   public void setIsBlacklisted(boolean isBlacklisted) {
     this.isBlacklisted = isBlacklisted;
+  }
+
+  public String getBlacklistReason() {
+    return blacklistReason;
+  }
+
+  public void setBlacklistReason(String blacklistReason) {
+    this.blacklistReason = blacklistReason;
+  }
+
+  @Override
+  public int getVersion() {
+    return version;
+  }
+
+  @Override
+  public void setVersion(int version) {
+    this.version = version;
   }
 }
