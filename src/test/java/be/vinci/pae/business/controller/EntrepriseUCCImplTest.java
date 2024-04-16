@@ -116,7 +116,6 @@ class EntrepriseUCCImplTest {
     expectedEntreprises.add(entreprise1);
     expectedEntreprises.add(entreprise2);
 
-
     when(entrepriseDAO.getAll()).thenReturn(expectedEntreprises);
 
     // 2. Act
@@ -142,11 +141,11 @@ class EntrepriseUCCImplTest {
   void blacklistSuccess() {
     // Arrange
     int entrepriseId = 1;
-    String reason = "Test reason";
     Entreprise entreprise = (Entreprise) factory.getEntreprise();
     entreprise.setId(entrepriseId);
     when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
     when(entrepriseDAO.blacklist(entreprise, entreprise.getVersion())).thenReturn(entreprise);
+    String reason = "Test reason";
 
     // Act
     EntrepriseDTO blacklistedEntreprise = entrepriseUcc.blacklist(entrepriseId, reason,

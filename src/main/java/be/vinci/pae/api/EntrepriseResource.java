@@ -100,8 +100,6 @@ public class EntrepriseResource {
   public EntrepriseDTO blacklist(JsonNode json) {
     String reason = json.get("reason_blacklist").asText();
     int entrepriseId = json.get("id_entreprise").asInt();
-    int version = json.get("version").asInt();
-
     if (entrepriseId == 0 && reason.isEmpty()) {
 
       throw new BadRequestException("All fields required to blacklist an enterprise.");
@@ -116,7 +114,7 @@ public class EntrepriseResource {
     if (entreprise.isBlacklisted()) {
       throw new BadRequestException("Enterprise already blacklisted");
     }
-
+    int version = json.get("version").asInt();
     EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason, version);
     myContactUCC.cancelInternshipsBasedOnEntreprise(entrepriseId);
     if (toReturn != null) {

@@ -53,7 +53,6 @@ public class StageRessource {
    *
    * @param json           new data in JSON format
    * @param requestContext the request context
-   * @param json           the json
    * @return the stage DTO
    */
   @PUT

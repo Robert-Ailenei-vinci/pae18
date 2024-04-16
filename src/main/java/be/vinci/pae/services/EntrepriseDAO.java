@@ -45,9 +45,8 @@ public interface EntrepriseDAO {
   List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);
 
 
-
   /**
-   * Retrieves number of stages for a given year
+   * Retrieves number of stages for a given year.
    *
    * @param entrepriseId the id of the entreprise
    * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
@@ -59,7 +58,7 @@ public interface EntrepriseDAO {
    * Blacklists an enterprise.
    *
    * @param entreprise entreprise to blacklist
-   * @param version   version of the entreprise
+   * @param version    version of the entreprise
    * @return the newly updated entreprise and it s blacklistred if no errors prior to that
    */
   EntrepriseDTO blacklist(EntrepriseDTO entreprise, int version);
