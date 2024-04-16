@@ -139,7 +139,6 @@ public class EntrepriseResource {
   @Authorize(roles = {"professeur"})
   public EntrepriseDTO unblacklist(JsonNode json) {
     int entrepriseId = json.get("id_entreprise").asInt();
-    int version = json.get("version").asInt();
     if (entrepriseId == 0) {
 
       throw new BadRequestException("All fields required to blacklist an enterprise.");
@@ -154,6 +153,7 @@ public class EntrepriseResource {
     if (!entreprise.isBlacklisted()) {
       throw new BadRequestException("Enterprise not blacklisted");
     }
+    int version = json.get("version").asInt();
 
     EntrepriseDTO toReturn = myEntrepriseUCC.unblacklist(entrepriseId, version);
     if (toReturn != null) {
