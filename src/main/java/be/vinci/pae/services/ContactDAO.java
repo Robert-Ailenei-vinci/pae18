@@ -55,9 +55,20 @@ public interface ContactDAO {
   ContactDTO getOneContactById(int idContact);
 
   /**
-   * Cancels all contacts associated with the provided contact.
+   * get all contacts by entreprise id.
    *
-   * @param contact the contact to cancel
+   * @param entrepriseId the id of entreprise.
+   * @return the list of contacts.
    */
+  List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId);
+
+  /**
+   * cancel the internships if entreprise is blacklisted.
+   *
+   * @param entrepriseId the id of entreprise.
+   * @return true if the internships are canceled.
+   */
+  boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId);
+
   void cancelAllContact(ContactDTO contact);
 }

@@ -1,8 +1,13 @@
 package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.DomainFactory;
@@ -10,6 +15,7 @@ import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
@@ -162,4 +168,77 @@ class EntrepriseUCCImplTest {
     // Act and Asserts
     assertThrows(RuntimeException.class, () -> entrepriseUcc.getAll());
   }
+  @Test
+  public void testGetAllWithException() {
+    when(entrepriseUcc.getAll());
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getAll();
+    });
+  }
+
+  @Test
+  void blacklistSuccess() {
+    // Arrange
+    int entrepriseId = 1;
+    String reason = "Test reason";
+    Entreprise entreprise = (Entreprise) factory.getEntreprise();
+    entreprise.setId(entrepriseId);
+    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
+    when(entrepriseDAO.blacklist(entreprise, entreprise.getVersion())).thenReturn(entreprise);
+
+    // Act
+    EntrepriseDTO blacklistedEntreprise = entrepriseUcc.blacklist(entrepriseId, reason,
+        entreprise.getVersion());
+
+    // Assert
+    assertNotNull(blacklistedEntreprise);
+    assertTrue(blacklistedEntreprise.isBlacklisted());
+    assertEquals(reason, blacklistedEntreprise.getBlacklistReason());
+  }
+
+  @Test
+  void blacklistWithException() {
+    // Arrange
+    int entrepriseId = 1;
+    String reason = "Test reason";
+    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
+
+    // Act and Assert
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.blacklist(entrepriseId, reason, entreprise.getVersion());
+    });
+  }
+
+
+  @Test
+  void unblacklistSuccess() {
+    // Arrange
+    int entrepriseId = 1;
+    Entreprise entreprise = (Entreprise) factory.getEntreprise();
+    entreprise.setId(entrepriseId);
+    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
+    when(entrepriseDAO.unblacklist(entreprise, entreprise.getVersion())).thenReturn(entreprise);
+
+    // Act
+    EntrepriseDTO unblacklistedEntreprise = entrepriseUcc.unblacklist(entrepriseId,
+        entreprise.getVersion());
+
+    // Assert
+    assertNotNull(unblacklistedEntreprise);
+    assertFalse(unblacklistedEntreprise.isBlacklisted());
+    assertNull(unblacklistedEntreprise.getBlacklistReason());
+  }
+
+  @Test
+  void unblacklistWithException() {
+    // Arrange
+    int entrepriseId = 1;
+    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
+
+    // Act and Assert
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.unblacklist(entrepriseId, entreprise.getVersion());
+    });
+  }
+
 }

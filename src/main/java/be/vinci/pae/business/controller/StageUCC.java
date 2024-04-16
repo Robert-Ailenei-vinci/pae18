@@ -29,6 +29,7 @@ public interface StageUCC {
   StageDTO createOne(ContactDTO contact, String signatureDate, String internshipProject,
       int supervisorId);
 
+
   /**
    * Modifies the stage with the provided user ID, subject, contact ID, and version.
    *

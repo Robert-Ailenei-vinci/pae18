@@ -1,0 +1,24 @@
+@baseUrl = http://localhost:3000
+
+### Login the default user
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "login": "Caroline.line@student.vinci.be",
+  "password": "mdpuser.1"
+}
+
+> {%
+  client.global.set("user", response.body.token);
+%}
+
+### Get all the schoolYears
+GET {{baseUrl}}/schoolYears/getAllSchoolYears
+Content-Type: application/json
+Authorization: {{user}}
+
+### Get the current schoolYear
+GET {{baseUrl}}/schoolYears/getDefaultSchoolYear
+Content-Type: application/json
+Authorization: {{user}}
