@@ -6,16 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import be.vinci.pae.business.domain.Contact;
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
-import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
@@ -40,6 +39,7 @@ class EntrepriseUCCImplTest {
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
   private EntrepriseDTO actualEntreprise;
+  private ContactDTO contact;
 
   private DALServices dalServices;
 
@@ -54,6 +54,7 @@ class EntrepriseUCCImplTest {
     this.entreprise2 = (Entreprise) factory.getEntreprise();
     this.actualEntreprise = factory.getEntreprise();
     this.user = (User) factory.getUser();
+    this.contact = (Contact) factory.getContact();
     this.entrepriseDAO = locator.getService(EntrepriseDAO.class);
   }
 
@@ -168,6 +169,7 @@ class EntrepriseUCCImplTest {
     // Act and Asserts
     assertThrows(RuntimeException.class, () -> entrepriseUcc.getAll());
   }
+
   @Test
   public void testGetAllWithException() {
     when(entrepriseUcc.getAll());
@@ -241,4 +243,54 @@ class EntrepriseUCCImplTest {
     });
   }
 
+  @DisplayName("Test getAllForSchoolYear")
+  @Test
+  public void testGetAllForSchoolYear() {
+    // Arrange
+    entreprise.setId(1);
+    entreprise.setTradeName("zaza");
+    List<EntrepriseDTO> entrepriseList = new ArrayList<>();
+    entrepriseList.add(entreprise);
+    when(entrepriseDAO.getAllForSchoolYear(1)).thenReturn(entrepriseList);
+
+    // Act
+    List<EntrepriseDTO> result = entrepriseUcc.getAllForSchoolYear(1);
+
+    // Assert
+    assertEquals(1, result.get(0).getId());
+    assertEquals("zaza", entreprise.getTradeName());
+  }
+
+  @DisplayName("Test getAllForSchoolYear with exception")
+  @Test
+  public void getAllForSchoolYearWithException() {
+    // Arrange
+    when(entrepriseDAO.getAllForSchoolYear(1)).thenThrow(RuntimeException.class);
+
+    // Act & Act
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getAllForSchoolYear(1));
+  }
+
+  @DisplayName("Test getStagesCountForSchoolYear")
+  @Test
+  public void getStagesCountForSchoolYear() {
+    // Arrange
+    when(entrepriseDAO.getNbStagesForCurrentYear(1)).thenReturn(5);
+
+    // Act
+    int result = entrepriseUcc.getStagesCountForSchoolYear(1);
+
+    // Assert
+    assertEquals(5, result);
+  }
+
+  @DisplayName("Test getStagesCountForSchoolYear with exception")
+  @Test
+  public void getStagesCountForSchoolYearWithException() {
+    // Arrange
+    when(entrepriseDAO.getNbStagesForCurrentYear(1)).thenThrow(RuntimeException.class);
+
+    // Act & Act
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getStagesCountForSchoolYear(1));
+  }
 }

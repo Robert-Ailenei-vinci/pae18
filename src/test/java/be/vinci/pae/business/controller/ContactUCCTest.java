@@ -2,6 +2,7 @@ package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -371,5 +372,29 @@ class ContactUCCTest {
     assertThrows(BizExceptionNotFound.class,
         () -> contactUCC.acceptContact(contact.getUserId(), 789,
             contact.getVersion()));
+  }
+
+  @DisplayName("Test cancelInternshipsBasedOnEntreprise")
+  @Test
+  void cancelInternshipsBasedOnEntreprise() {
+    // Arrange
+    contact.setId(1);
+
+    when(contactDAO.cancelInternshipsBasedOnEntrepriseId(1)).thenReturn(true);
+
+    // Act & Assert
+    assertTrue(contactUCC.cancelInternshipsBasedOnEntreprise(1));
+  }
+
+  @DisplayName("Test cancelInternshipsBasedOnEntreprise with transaction exception")
+  @Test
+  void cancelInternshipsBasedOnEntrepriseWithException() {
+    // Arrange
+    contact.setId(1);
+
+    when(contactDAO.cancelInternshipsBasedOnEntrepriseId(1)).thenThrow(RuntimeException.class);
+
+    // Act & Assert
+    assertThrows(RuntimeException.class, () -> contactUCC.cancelInternshipsBasedOnEntreprise(1));
   }
 }
