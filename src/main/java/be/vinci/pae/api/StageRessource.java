@@ -58,7 +58,7 @@ public class StageRessource {
   @PUT
   @Path("modifyStage")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public StageDTO modifyStage(JsonNode json, @Context ContainerRequestContext requestContext) {
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
