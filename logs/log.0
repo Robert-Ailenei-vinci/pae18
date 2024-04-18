@@ -50,7 +50,7 @@ be.vinci.pae.exception.BadRequestException:
 	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
 	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
- 
+ .
 [2024-04-14 18:44:15] [INFO] get one user by id with id: 3 
 [2024-04-14 18:44:15] [INFO] schoolyear getone + id : 2 
 [2024-04-14 18:44:15] [INFO] schoolyear getAll 
