@@ -333,13 +333,16 @@ class ContactUCCTest {
     contact.setState("rencontre");
     contactResult.setId(123);
     contactResult.setState("accepte");
+    String signDate = "2023-11-11";
+    String internshipPoject = "SQL: avancée";
+    int supervisorId = 2;
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
 
     // Act and Assert
     ContactDTO result = contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
-        contact.getVersion());
+        contact.getVersion(),supervisorId,signDate,internshipPoject);
     assertEquals(contactResult.getId(), result.getId());
     assertEquals(contactResult.getState(), result.getState());
   }
@@ -350,13 +353,16 @@ class ContactUCCTest {
     // Arrange
     contact.setId(123);
     contact.setState("accepte");
+    String signDate = "2023-11-11";
+    String internshipPoject = "SQL: avancée";
+    int supervisorId = 2;
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
 
     // Act and Assert
     assertThrows(BizException.class,
         () -> contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
-            contact.getVersion()));
+            contact.getVersion(),supervisorId,signDate,internshipPoject));
   }
 
   @DisplayName("Test acceptContact with wrong given user")
@@ -365,13 +371,16 @@ class ContactUCCTest {
     // Arrange
     contact.setId(123);
     contact.setState("accepte");
+    String signDate = "2023-11-11";
+    String internshipPoject = "SQL: avancée";
+    int supervisorId = 2;
 
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
 
     // Act and Assert
     assertThrows(BizExceptionNotFound.class,
         () -> contactUCC.acceptContact(contact.getUserId(), 789,
-            contact.getVersion()));
+            contact.getVersion(),supervisorId,signDate,internshipPoject));
   }
 
   @DisplayName("Test cancelInternshipsBasedOnEntreprise")
