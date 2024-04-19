@@ -85,9 +85,10 @@ async function onLogin(e) {
   if (!response.ok) {
     if (response.status === 401) {
       // Display a popup message for incorrect username or password
-      alert("Username or password is incorrect. Please try again.");
+      alert("Veuillez vous connecter pour accéder à cette ressource.");
   } else {
       // For other errors, handle them accordingly
+      alert(`Une erreur est survenue : ${response.statusText}`);
       console.error("An error occurred:", response.statusText);
   }
       return;

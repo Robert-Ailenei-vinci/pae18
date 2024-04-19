@@ -9,7 +9,7 @@ import Navigate from "../Router/Navigate";
 const CreateStagePage = (contact) => {
   clearPage();
   renderPageTitle(
-      `Accepté le contact et crée un stage pour ${contact.entreprise.tradeName}`);
+      `Accepter le contact et créer un stage pour ${contact.entreprise.tradeName}`);
   renderCreateStageForm(contact);
 
 }
@@ -70,10 +70,9 @@ async function renderCreateStageForm(contact) {
     try {
     await createStage(selectedSupervisorId, contact.id, dateSign, project,
         contact.version);
-    alert('Un stage a été crée');
+    alert('Votre stage a été créé');
     location.reload();
     }catch(error){
-      alert('An error occurred while create stage from contact. Please try again later.');
       return;
     }
   });
@@ -104,10 +103,11 @@ async function createStage(selectedSupervisorId, contactId, dateSign, project,
   try {
     const response = await fetch(`${baseURL}/contacts/accept`, options);
     if (!response.ok) {
-      alert(`Failed to create stage from contact: ${response.statusText}`);
+      alert(`Une erreur est survenue lors de la création de votre stage : ${response.statusText}`);
     }
     const newContact = await response.json();
   } catch (error) {
+    alert(`Une erreur est survenue lors de la création de votre stage : ${error.message}`);
     console.error('Error adding contact:', error.message);
     throw error
   }
@@ -129,7 +129,7 @@ async function getAllSupervisor(entrepriseId) {
       options);
 
   if (!response.ok) {
-    alert('Prob avec fetch')
+    alert(`Une erreur est survenue avec la base de données : ${response.statusText}`)
     return null;
   }
 
@@ -189,7 +189,7 @@ function createDropdownButton() {
   dropdownButton.id = 'dropbtn';
   dropdownButton.className = 'btn btn-secondary dropdown-toggle btn-block';
   dropdownButton.type = 'button';
-  dropdownButton.textContent = 'Selectionnez Votre maitre de stage';
+  dropdownButton.textContent = 'Sélectionnez votre maitre de stage';
   return dropdownButton;
 }
 
@@ -212,7 +212,7 @@ function createDropdownContent(supervisors) {
 
     const message = document.createElement('span');
     message.className = 'dropdown-item';
-    message.textContent = 'No supervisors available';
+    message.textContent = 'Aucun maitre de stage disponible pour cette entreprise.';
     dropdownContent.appendChild(message);
 
   }
@@ -224,7 +224,7 @@ function createSubmitButton() {
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
   submitButton.className = 'btn btn-primary mr-2';
-  submitButton.textContent = 'Submit';
+  submitButton.textContent = 'Valider';
   return submitButton;
 }
 
@@ -232,7 +232,7 @@ function createCancelButton() {
   const cancelButton = document.createElement('button');
   cancelButton.type = 'button';
   cancelButton.className = 'btn btn-secondary';
-  cancelButton.textContent = 'Cancel';
+  cancelButton.textContent = 'Annuler';
   cancelButton.addEventListener('click', () => {
     location.reload()
   });

@@ -23,9 +23,9 @@ async function fetchEntrepriseContacts(user) {
   const response = await fetch(`http://localhost:3000/entreprise/entrepriseDetailsAllContacts/${usePathParams()}`, options);
   if (!response.ok) {
     if (response.status === 401) {
-      alert("Username or password is incorrect. Please try again.");
+      alert("Veuillez vous connecter pour accéder à cette ressource.");
     } else {
-      alert("An error occurred:"+response.statusText);
+      alert("Une erreur est survenue : "+response.statusText);
     }
   }
   return response.json();
@@ -43,9 +43,9 @@ async function fetchEntrepriseDetails(user) {
   const response = await fetch(`http://localhost:3000/entreprise/getOne/${usePathParams()}`, options);
   if (!response.ok) {
     if (response.status === 401) {
-      alert("Username or password is incorrect. Please try again.");
+      alert("Veuillez vous connecter pour accéder à cette ressource.");
     } else {
-      alert("An error occurred:"+response.statusText);
+      alert("Une erreur est survenue : "+response.statusText);
     }
   }
   return response.json();
@@ -62,9 +62,9 @@ async function fetchStagesCountForCurrentYear(user) {
   const response = await fetch(`http://localhost:3000/entreprise/getStagesCountForCurrentYear/${usePathParams()}`, options);
   if (!response.ok) {
     if (response.status === 401) {
-      alert("Username or password is incorrect. Please try again.");
+      alert("Veuillez vous connecter pour accéder à cette ressource.");
     } else {
-      alert("An error occurred:"+response.statusText);
+      alert("Une erreur est survenue : "+response.statusText);
     }
   }
   return response.json();
@@ -131,7 +131,7 @@ form.addEventListener('submit', function(event) {
 
   // Show an alert asking for confirmation
   console.log("zaza ", input.value, " zaza ", entreprise.id)
-  const isConfirmed = confirm('Are you sure?');
+  const isConfirmed = confirm('Êtes vous certains ?');
   if (isConfirmed) {
     //
     blacklistEntreprise(input.value, entreprise.id, entreprise.version);
@@ -150,7 +150,7 @@ form.addEventListener('submit', function(event) {
 
 // Create a header row and append it to the table
   const headerRow = document.createElement('tr');
-  ['Nom de l\'étudiant','Prénom de l\'étudiant','Année académique','Etat', 'Lieu de rencontre', 'Raison du refus'].forEach(text => {
+  ['Nom de l\'étudiant','Prénom de l\'étudiant','Année académique','État', 'Lieu de rencontre', 'Raison du refus'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
     headerRow.appendChild(th);
@@ -206,7 +206,7 @@ form.addEventListener('submit', function(event) {
   
     // Create the "Deblacklister" button
     const deblacklistButton = document.createElement('button');
-    deblacklistButton.textContent = 'Deblacklister';
+    deblacklistButton.textContent = 'Déblacklister';
     deblacklistButton.className = 'btn btn-primary';
     deblacklistButton.type = 'button';
   
@@ -214,7 +214,7 @@ form.addEventListener('submit', function(event) {
     deblacklistButton.addEventListener('click', function() {
       // Show an alert asking for confirmation
       console.log(entrepriseBlacklisted, " ver")
-      const isConfirmed = confirm('Are you sure?');
+      const isConfirmed = confirm('Êtes vous certains ?');
       if (isConfirmed) {
         // If confirmed, unblacklist the company
         // Replace "unblacklistEntreprise" with the actual function to unblacklist the company
