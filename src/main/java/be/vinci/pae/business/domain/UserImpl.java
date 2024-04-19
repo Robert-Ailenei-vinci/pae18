@@ -2,6 +2,7 @@ package be.vinci.pae.business.domain;
 
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.exception.BizException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.text.Normalizer;
 import java.util.Objects;
 import org.mindrot.jbcrypt.BCrypt;
@@ -13,6 +14,7 @@ public class UserImpl implements User {
 
   private int id;
   private String email;
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 
   private String password;
 

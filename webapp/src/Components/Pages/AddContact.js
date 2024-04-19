@@ -73,7 +73,7 @@ function createDropdownButton() {
   dropdownButton.id = 'dropbtn';
   dropdownButton.className = 'btn btn-secondary dropdown-toggle btn-block';
   dropdownButton.type = 'button';
-  dropdownButton.textContent = 'Select Entreprise';
+  dropdownButton.textContent = 'Choisir une entreprise';
   return dropdownButton;
 }
 
@@ -121,9 +121,8 @@ function createCancelButton() {
   const cancelButton = document.createElement('button');
   cancelButton.type = 'button';
   cancelButton.className = 'btn btn-secondary';
-  cancelButton.textContent = 'Cancel';
+  cancelButton.textContent = 'Annuler';
   cancelButton.addEventListener('click', () => {
-    alert('Form cancelled');
     Navbar();
     Navigate('/users/userData');
   });
@@ -177,6 +176,7 @@ function handleError(response) {
   if (response.status === 401) {
     alert("An error occured while fetching with the server.");
   } else {
+    alert("Une erreur est survenue : ", response.statusText);
     console.error("An error occurred:", response.statusText);
   }
 }

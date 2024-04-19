@@ -101,7 +101,7 @@ public class StageDAOImpl implements StageDAO {
 
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "UPDATE pae.stages SET internship_project = ? , _version = _version + 1"
-            + "WHERE _user = ? AND contact = ? AND _version = ?")) {
+        + "WHERE _user = ? AND contact = ? AND _version = ?")) {
       preparedStatement.setString(1, stageDTO.getInternshipProject());
       preparedStatement.setInt(2, stageDTO.getUserId());
       preparedStatement.setInt(3, stageDTO.getContactId());

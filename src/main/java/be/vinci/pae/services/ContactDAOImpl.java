@@ -27,14 +27,18 @@ public class ContactDAOImpl implements ContactDAO {
   private DALBackServices dalBackServices;
   @Inject
   private EntrepriseDAO entrepriseDAO;
+  @Inject
+  private UserDAO userDAO;
+  @Inject
+  private SchoolYearDAO schoolYearDAO;
 
   @Override
   public ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "INSERT INTO pae.contacts "
-            + "(state, id_contact, _user, entreprise, school_year, "
-            + "reason_for_refusal, meeting_type, _version)"
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, 0)"
+        + "(state, id_contact, _user, entreprise, school_year, "
+        + "reason_for_refusal, meeting_type, _version)"
+        + "VALUES (?, ?, ?, ?, ?, ?, ?, 0)"
     )) {
       int contactId = nextItemId();
       preparedStatement.setString(1, "initie");
@@ -105,6 +109,8 @@ public class ContactDAOImpl implements ContactDAO {
       contact.setReasonForRefusal(rs.getString("reason_for_refusal"));
       contact.setMeetingType(rs.getString("meeting_type"));
       contact.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
+      contact.setUser(userDAO.getOne(rs.getInt("_user")));
+      contact.setSchoolYearDTO(schoolYearDAO.getOne(rs.getInt("school_year")));
       contact.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
@@ -194,6 +200,27 @@ public class ContactDAOImpl implements ContactDAO {
     return null;
   }
 
+  @Override
+  public List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId) {
+    PreparedStatement getAllContacts = dalBackServices.getPreparedStatement(
+        "SELECT * FROM pae.contacts WHERE entreprise = ?");
+    List<ContactDTO> contacts = new ArrayList<>();
+    try {
+      getAllContacts.setInt(1, entrepriseId);
+      try (ResultSet rs = getAllContacts.executeQuery()) {
+        while (rs.next()) {
+          ContactDTO contact;
+          contact = getContactMethodFromDB(rs);
+          contacts.add(contact);
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    LoggerUtil.logInfo("get all contact for the entreprise with id " + entrepriseId);
+    return contacts;
+  }
+
   private int getLastVersionFromDB(int contactId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT _version FROM pae.contacts WHERE id_contact = ? ")) {
@@ -235,4 +262,21 @@ public class ContactDAOImpl implements ContactDAO {
   }
 
 
+  @Override
+  public boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId) {
+    PreparedStatement cancelInternships = dalBackServices.getPreparedStatement(
+        "UPDATE pae.contacts SET state = 'annule', reason_for_refusal = 'Entreprise blacklistée' "
+        + "WHERE entreprise = ? AND state = 'initie' OR state = 'rencontre'");
+    try {
+      cancelInternships.setInt(1, entrepriseId);
+      int rowsAffected = cancelInternships.executeUpdate();
+      if (rowsAffected > 0) {
+        LoggerUtil.logInfo("cancel internships for the entreprise with id " + entrepriseId);
+        return true;
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return false;
+  }
 }

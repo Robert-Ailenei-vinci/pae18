@@ -37,25 +37,29 @@ public class SupervisorRessource {
   SupervisorUCC mySupervisorUCC;
 
   /**
-   * Retrieves a list of all supervisors. This method is accessed via HTTP GET request to the path
-   * "/supervisor/getAll". It returns the list of all supervisors in JSON format. Requires
-   * authorization.
+   * Retrieves a list of all supervisors for one enterprise. This method is accessed via HTTP GET
+   * request to the path "/supervisor/getAllForOneEnterprise". It returns the list of all
+   * supervisors for the specified enterprise in JSON format. Requires authorization.
    *
-   * @return A list of {@link SupervisorDTO} representing all enterprises.
+   * @param entrepriseId the ID of the enterprise
+   * @return A list of {@link SupervisorDTO} representing all supervisors for the specified
+   *     enterprise.
+   * @throws BadRequestException if the enterprise ID is invalid or missing
    */
   @GET
   @Path("getAllForOneEnterprise")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
-  public List<SupervisorDTO> getAllForOneEnterprise(@QueryParam("entrepriseId") int entrepriseId) {
+  @Authorize(roles = {"etudiant"})
+  public List<SupervisorDTO> getAllForOneEnterprise(@QueryParam("entrepriseId") int entrepriseId)
+      throws BadRequestException {
     if (entrepriseId <= 0) {
       throw new BadRequestException(
-          "L'identifiant de l'entreprise est requis et doit être supérieur à zéro");
+          "Enterprise ID is required and must be greater than zero");
     }
 
     List<SupervisorDTO> toReturn = mySupervisorUCC.getAll(entrepriseId);
     if (toReturn != null) {
-      LoggerUtil.logInfo("GetAll successful");
+      LoggerUtil.logInfo("GetAllForOneEnterprise successful");
     }
     return toReturn;
   }
@@ -67,21 +71,19 @@ public class SupervisorRessource {
    * Requires authorization.
    *
    * @param requestContext The context of the HTTP request.
-   * @param json           The JSON object containing enterprise details.
+   * @param json           The JSON object containing supervisor details.
    * @return The {@link SupervisorDTO} representing the added supervisor.
-   * @throws be.vinci.pae.exception.BadRequestException If any required field is missing in the JSON
-   *                                                    object.
-   * @throws AuthorisationException                     If the user is not recognized.
+   * @throws BadRequestException    If any required field is missing in the JSON object.
+   * @throws AuthorisationException If the user is not recognized.
    */
   @POST
   @Path("addSupervisor")
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public SupervisorDTO addOneSupervisor(@Context ContainerRequestContext requestContext,
       JsonNode json) throws BadRequestException, AuthorisationException {
 
     return null;
   }
 }
-

@@ -3,7 +3,8 @@ package be.vinci.pae.business.domain;
 /**
  * Implementation of the SupervisorDTO interface representing a supervisor.
  */
-public class SupervisorImpl implements SupervisorDTO {
+public class SupervisorImpl implements Supervisor {
+
   private int supervisorId;
   private String lastName;
   private String firstName;

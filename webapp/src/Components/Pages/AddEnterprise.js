@@ -13,16 +13,16 @@ const AddEnterprisePage = async () => {
 async function renderNewEnterpriseForm() {
   const form = createFormElement();
 
-  const tradeNameInput = createTextInput('trade_name', 'Trade Name');
+  const tradeNameInput = createTextInput('trade_name', 'Nom Commercial');
   form.appendChild(tradeNameInput);
 
-  const designationInput = createTextInput('designation', 'Designation');
+  const designationInput = createTextInput('designation', 'Appelation');
   form.appendChild(designationInput);
 
-  const addressInput = createTextInput('address', 'Address');
+  const addressInput = createTextInput('address', 'Adresse');
   form.appendChild(addressInput);
 
-  const phoneNumInput = createTextInput('phone_num', 'Phone Number');
+  const phoneNumInput = createTextInput('phone_num', 'Numéro de téléphone');
   form.appendChild(phoneNumInput);
 
   const emailInput = createTextInput('email', 'Email');
@@ -74,7 +74,7 @@ function createSubmitButton() {
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
   submitButton.className = 'btn btn-primary mr-2';
-  submitButton.textContent = 'Submit';
+  submitButton.textContent = 'Valider';
   return submitButton;
 }
 
@@ -82,7 +82,7 @@ function createCancelButton() {
   const cancelButton = document.createElement('button');
   cancelButton.type = 'button';
   cancelButton.className = 'btn btn-secondary';
-  cancelButton.textContent = 'Cancel';
+  cancelButton.textContent = 'Annuler';
   cancelButton.addEventListener('click', () => {
     Navbar();
     Navigate('/addContact');
@@ -92,7 +92,7 @@ function createCancelButton() {
 
 async function handleSubmit(trade_name, designation, address, phone_num, email) {
   if (!trade_name || !address) {
-    alert('Trade Name & address are required.');
+    alert("Le nom et l'adresse de l'entreprise sont nécessaires.");
     return;
   }
 
@@ -117,13 +117,13 @@ async function handleSubmit(trade_name, designation, address, phone_num, email) 
     if (!response.ok) {
       throw new Error(`Failed to add contact: ${response.statusText}`);
     }
-    const newContact = await response.json();
-    alert(`Added enterprise : ${JSON.stringify(newContact)}`);
+    await response.json();
+    alert(`Entreprise ajouté.`);
     Navbar();
     Navigate('/addContact');
   } catch (error) {
     console.error('Error adding contact:', error.message);
-    alert('An error occurred while adding contact. Please try again later.');
+    alert(`Une erreur est survenue lors de l'ajout d'un contact. Veuillez réessayer.`);
   }
 }
 

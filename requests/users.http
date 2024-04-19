@@ -92,4 +92,37 @@ Content-Type: application/json
 }
 
 
+### Login a student
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "login": "Caroline.line@student.vinci.be",
+  "password": "mdpuser.1"
+}
+
+> {%
+  client.global.set("user", response.body.token);
+%}
+
+### Login a prof
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+  "login": "laurent.leleux@vinci.be",
+  "password": "Prof24,z"
+}
+
+> {%
+  client.global.set("user", response.body.token);
+%}
+
+### Get all the users
+GET {{baseUrl}}/users/getAll
+Content-Type: application/json
+Authorization: {{user}}
+
+
+
 

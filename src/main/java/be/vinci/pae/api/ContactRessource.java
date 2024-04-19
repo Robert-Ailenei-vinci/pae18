@@ -10,8 +10,6 @@ import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
-import be.vinci.pae.business.domain.StageDTO;
-import be.vinci.pae.business.domain.SupervisorDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
@@ -62,8 +60,9 @@ public class ContactRessource {
   @Path("add")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO addContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/add");
     if (!json.hasNonNull("entreprise")) {
       throw new BadRequestException("User, entreprise, and school year required");
     }
@@ -105,8 +104,9 @@ public class ContactRessource {
   @GET
   @Path("allContactsByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
+    LoggerUtil.logInfo("Starting : contact/getAllContactsByUserId");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
     List<ContactDTO> toReturn = myContactUCC.getAllContactsByUserId(userId);
@@ -127,8 +127,9 @@ public class ContactRessource {
   @Path("meet")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO meetContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/meet");
     if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
       throw new BadRequestException("contact id and meeting type required");
     }
@@ -155,9 +156,10 @@ public class ContactRessource {
   @Path("stopFollow")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO stopFollowContact(@Context ContainerRequestContext requestContext,
       JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/stopFollow");
     if (!json.hasNonNull("id_contact")) {
       throw new BadRequestException("contact id required");
     }
@@ -184,8 +186,9 @@ public class ContactRessource {
   @Path("refused")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/refused");
     if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
       throw new BadRequestException("contact id and refusal reason required");
     }
@@ -212,8 +215,8 @@ public class ContactRessource {
   @Path("accept")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
-  public StageDTO acceptContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+  @Authorize(roles = {"etudiant"})
+  public ContactDTO acceptContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact")) {
       throw new BadRequestException("contact id required");
     }
@@ -225,18 +228,15 @@ public class ContactRessource {
     if (signatureDate.isBlank() || signatureDate.isEmpty()) {
       throw new BadRequestException("Signature date is mandatory");
     }
-    if (internshipProject.isBlank() || internshipProject.isEmpty()) {
-      throw new BadRequestException("Internship project is mandatory");
-    }
+
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int userId = user.getId();
-    ContactDTO acceptedContact = myContactUCC.acceptContact(contactId, userId, contactVersion);
-    SupervisorDTO supervisor = mySupervisorUCC.getOneById(supervisorId);
-    StageDTO toReturn = myStageUCC.createOne(acceptedContact, signatureDate, internshipProject,
-        supervisor.getSupervisorId());
-    if (toReturn != null) {
+    ContactDTO acceptedContact = myContactUCC.acceptContact(contactId, userId, contactVersion,
+        supervisorId, signatureDate, internshipProject);
+
+    if (acceptedContact != null) {
       LoggerUtil.logInfo("Stage accepted successfully");
     }
-    return toReturn;
+    return acceptedContact;
   }
 }
