@@ -9,7 +9,6 @@ import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
-import be.vinci.pae.services.StageDAO;
 import jakarta.inject.Inject;
 import java.util.List;
 
@@ -23,9 +22,9 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
   @Inject
   private ContactDAO contactDAO;
   @Inject
-  private StageDAO stageDAO;
-  @Inject
   private DALServices dalServices;
+  @Inject
+  private ContactUCC myContactUCC;
 
 
   /**
@@ -87,7 +86,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
       if (!((User) user).checkIsStudent()) {
         throw new BizException(
-          "This user is not a student.");
+            "This user is not a student.");
       }
       Entreprise entreprise = (Entreprise) myEntrepriseDAO.createOne(tradeName, designation,
           address, phoneNum, email);
@@ -118,7 +117,7 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
    * Blacklists an enterprise.
    *
    * @param entrepriseId id of the entreprise to blacklist
-   * @param reason      reason for blacklisting
+   * @param reason       reason for blacklisting
    * @return blacklisted entreprise
    */
   @Override
@@ -130,8 +129,10 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
       entreprise.setIsBlacklisted(true);
       entreprise.setBlacklistReason(reason);
 
-      dalServices.commitTransaction();
       EntrepriseDTO updatedEntreprise = myEntrepriseDAO.blacklist(entreprise, version);
+      myContactUCC.cancelInternshipsBasedOnEntreprise(entrepriseId);
+
+      dalServices.commitTransaction();
       return updatedEntreprise;
     } catch (Exception e) {
       dalServices.rollbackTransaction();

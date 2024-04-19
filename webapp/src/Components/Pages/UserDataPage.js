@@ -70,7 +70,8 @@ async function fetchStageData(user) {
     }
 
     if (!responseStage.ok) {
-      throw new Error(`Une erreur est survenue lors de la recherche des stages : ${responseStage.statusText}`);
+      throw new Error(
+          `Une erreur est survenue lors de la recherche des stages : ${responseStage.statusText}`);
     }
 
     const stageData = await responseStage.json();
@@ -96,8 +97,10 @@ async function renderPersonnalInfoPage() {
   ul.className = 'p-5';
 
   isRendering = true; // Marquer le rendu comme en cours
-  const contactsData = await fetchContactsData(user);
-  const stageData = await fetchStageData(user);
+
+    const contactsData = await fetchContactsData(user);
+    const stageData = await fetchStageData(user);
+
   isRendering = false; // Marquer le rendu comme terminé
 
   console.log('Contacts : ', contactsData);
@@ -129,6 +132,7 @@ async function renderPersonnalInfoPage() {
 
   // Creating table for contacts
   const table = document.createElement('table');
+  table.className = 'table table-bordered table-striped';
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
   const trHead = document.createElement('tr');
@@ -162,7 +166,7 @@ async function renderPersonnalInfoPage() {
     // Bouton pour changer l'état
     const tdButton = document.createElement('td');
     const button = document.createElement('button');
-    button.textContent = 'Changer état';
+    button.textContent = 'Avancement';
     button.className = 'btn btn-primary';
     button.setAttribute('type', 'button');
     button.setAttribute('data-bs-toggle', 'collapse');
@@ -178,7 +182,7 @@ async function renderPersonnalInfoPage() {
       // Création du formulaire
       const form = document.createElement('form');
       const select = document.createElement('select');
-      select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
+      select.className = 'form-select mt-2 mb-2'; // Ajoutez des classes Bootstrap si nécessaire
       ['Rencontré', 'Suivi stoppé'].forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText;
@@ -187,34 +191,57 @@ async function renderPersonnalInfoPage() {
       });
       form.appendChild(select);
 
-// Création de la zone de texte pour la raison ou le lieu
+      // Création de la zone de texte pour le lieu
       const extraInput = document.createElement('input');
       extraInput.type = 'text';
       extraInput.placeholder = 'Lieu';
+      extraInput.className = 'm-2';
+
       extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
 
-// Gérer l'affichage de la zone de texte en fonction de la sélection
+      // Création des boutons par défaut pour "Rencontré"
+      const surPlaceButton = document.createElement('button');
+      surPlaceButton.textContent = 'Sur place';
+      surPlaceButton.className = 'btn btn-primary me-2';
+      surPlaceButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        extraInput.value = 'Sur place';
+      });
+
+      const aDistanceButton = document.createElement('button');
+      aDistanceButton.textContent = 'À distance';
+      aDistanceButton.className = 'btn btn-primary me-2';
+      aDistanceButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        extraInput.value = 'À distance';
+      });
+
+      // Gérer l'affichage de la zone de texte en fonction de la sélection
       select.addEventListener('change', () => {
         if (select.value === 'Rencontré') {
-          extraInput.style.display = 'block'; // Afficher la zone de texte si "Rencontré" ou "Refusé" est sélectionné
+          extraInput.style.display = 'block'; // Afficher la zone de texte si "Rencontré" est sélectionné
+          surPlaceButton.style.display = 'inline-block'; // Afficher les boutons par défaut
+          aDistanceButton.style.display = 'inline-block';
         } else {
           extraInput.style.display = 'none'; // Masquer la zone de texte pour les autres options
+          surPlaceButton.style.display = 'none'; // Masquer les boutons par défaut
+          aDistanceButton.style.display = 'none';
         }
       });
 
-// Création du bouton de soumission
+      // Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
-      submitButton.className = 'btn btn-primary';
+      submitButton.className = 'btn btn-primary me-2';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
-// Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
+      // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
       form.addEventListener('submit', () => {
 
         const selectedOption = select.value;
         let additionalInfo = ''; // Informations supplémentaires à envoyer avec la soumission
 
-        // Si "Rencontré" ou "Refusé" est sélectionné, récupérez le contenu de la zone de texte
+        // Si "Rencontré" est sélectionné, récupérez le contenu de la zone de texte
         if (selectedOption === 'Rencontré') {
           additionalInfo = extraInput.value;
         }
@@ -226,7 +253,6 @@ async function renderPersonnalInfoPage() {
             break;
           case 'Suivi stoppé':
             stopFollowContact(contact.id, contact.version);
-
             break;
           default:
             // Action par défaut ou erreur
@@ -240,23 +266,26 @@ async function renderPersonnalInfoPage() {
         bsCollapse.hide();
       });
 
-// Ajout des éléments au formulaire
+      // Ajout des éléments au formulaire
       form.appendChild(extraInput);
+      form.appendChild(surPlaceButton);
+      form.appendChild(aDistanceButton);
       form.appendChild(submitButton);
 
-// Ajout du formulaire au divForm
+      // Ajout du formulaire au divForm
       divForm.appendChild(form);
 
       tdButton.appendChild(button);
       tdButton.appendChild(divForm);
       tr.appendChild(tdButton);
+
     }
 
     if (contact.state === "rencontre") {
       // Création du formulaire
       const form = document.createElement('form');
       const select = document.createElement('select');
-      select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
+      select.className = 'form-select mt-2 mb-2'; // Ajoutez des classes Bootstrap si nécessaire
       ['Refusé', 'Suivi stoppé', 'Accepté'].forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText;
@@ -269,6 +298,7 @@ async function renderPersonnalInfoPage() {
       const extraInput = document.createElement('input');
       extraInput.type = 'text';
       extraInput.placeholder = 'Raison';
+      extraInput.className = 'm-2'
       extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
 
 // Gérer l'affichage de la zone de texte en fonction de la sélection
@@ -283,7 +313,7 @@ async function renderPersonnalInfoPage() {
 // Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
-      submitButton.className = 'btn btn-primary';
+      submitButton.className = 'btn btn-primary me-2';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
 // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
@@ -356,7 +386,7 @@ async function renderPersonnalInfoPage() {
   table.appendChild(tbody);
 
   const stageTable = document.createElement('table');
-  stageTable.className = 'table';
+  stageTable.className = 'table table-bordered table-striped';
   const stageThead = document.createElement('thead');
   const stageTbody = document.createElement('tbody');
   const stageTrHead = document.createElement('tr');
