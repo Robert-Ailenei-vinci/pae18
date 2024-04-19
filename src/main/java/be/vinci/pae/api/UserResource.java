@@ -14,6 +14,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
@@ -36,6 +37,25 @@ public class UserResource {
    */
   @Inject
   private UserUCC myUser;
+
+  /**
+   * Get one user based on id.
+   *
+   * @param userId id of user to get.
+   * @return a dto of the user.
+   */
+  @GET
+  @Path("getOne/{userId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"professeur", "administratif"})
+  public UserDTO getOne(@PathParam("userId") int userId) {
+    LoggerUtil.logInfo("Starting : users/getOne");
+    UserDTO toReturn = myUser.getOne(userId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("getOne " + userId + " successful");
+    }
+    return toReturn;
+  }
 
   /**
    * Retrieves a list of all users. This method is annotated with {@link jakarta.ws.rs.GET} and

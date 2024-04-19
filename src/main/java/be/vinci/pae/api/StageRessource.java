@@ -11,6 +11,7 @@ import jakarta.inject.Singleton;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
@@ -40,6 +41,20 @@ public class StageRessource {
     LoggerUtil.logInfo("Starting : stages/getAllByUserId");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
+    StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetStageByUserId successful");
+    }
+    return toReturn;
+  }
+
+  @GET
+  @Path("stageByUserId/{userId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  public StageDTO getOneStageByUserId(@PathParam("userId") int userId) {
+    LoggerUtil.logInfo("Starting : stages/getAllByUserId");
+
     StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetStageByUserId successful");
