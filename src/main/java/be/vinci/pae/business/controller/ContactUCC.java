@@ -61,6 +61,15 @@ public interface ContactUCC {
    */
   ContactDTO refusedContact(int contactId, String refusalReason, int userId, int version);
 
+
+  /**
+   * set all internships of a contact to refusé if an entreprise is blacklisted.
+   *
+   * @param idEntreprise the id of the entreprise.
+   * @return true if the internships are canceled.
+   */
+  boolean cancelInternshipsBasedOnEntreprise(int idEntreprise);
+
   /**
    * Sets the state of a contact to "accepted".
    *

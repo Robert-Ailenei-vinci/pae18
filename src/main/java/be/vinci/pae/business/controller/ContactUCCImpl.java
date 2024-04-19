@@ -152,7 +152,7 @@ public class ContactUCCImpl implements ContactUCC {
       dalServices.startTransaction();
 
       Contact contact = (Contact) myContactDAO.getOneContactById(contactId);
-      
+
       if (contact.getUserId() != userId) {
         throw new BizExceptionNotFound("The contact does not belong to the user");
       }
@@ -181,4 +181,23 @@ public class ContactUCCImpl implements ContactUCC {
     }
   }
 
+  /**
+   * set all internships of a contact to refusé if an entreprise is blacklisted.
+   *
+   * @param idEntreprise  the id of the entreprise.
+   * @return true if the internships are canceled.
+   */
+  @Override
+  public boolean cancelInternshipsBasedOnEntreprise(int idEntreprise) {
+
+    try {
+      dalServices.startTransaction();
+      boolean result = myContactDAO.cancelInternshipsBasedOnEntrepriseId(idEntreprise);
+      dalServices.commitTransaction();
+      return result;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
 }

@@ -71,6 +71,9 @@ function renderNavbar() {
           <li class="nav-item">
             <a class="nav-link" href="#" data-uri="/seeUsers">Voir Utilisateurs</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-uri="/seeEntreprises">Voir les entreprises</a>
+          </li>
         </ul>
       </div>
     </div>

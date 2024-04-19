@@ -16,6 +16,15 @@ public interface StageUCC {
    */
   StageDTO getOneStageByUserId(int userId);
 
+  /**
+   * Create a stage.
+   *
+   * @param contact         the contact
+   * @param signatureDate   the signature date
+   * @param internshipProject the internship project
+   * @param supervisorId    the supervisor id
+   * @return the created stage
+   */
   StageDTO createOne(ContactDTO contact, String signatureDate, String internshipProject,
       int supervisorId);
 

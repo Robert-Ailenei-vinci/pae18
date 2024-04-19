@@ -62,8 +62,9 @@ public class ContactRessource {
   @Path("add")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO addContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/add");
     if (!json.hasNonNull("entreprise")) {
       throw new BadRequestException("User, entreprise, and school year required");
     }
@@ -105,8 +106,9 @@ public class ContactRessource {
   @GET
   @Path("allContactsByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<ContactDTO> getAllContactsByUserId(@Context ContainerRequestContext requestContext) {
+    LoggerUtil.logInfo("Starting : contact/getAllContactsByUserId");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
     List<ContactDTO> toReturn = myContactUCC.getAllContactsByUserId(userId);
@@ -127,8 +129,9 @@ public class ContactRessource {
   @Path("meet")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO meetContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/meet");
     if (!json.hasNonNull("id_contact") && json.hasNonNull("meetingType")) {
       throw new BadRequestException("contact id and meeting type required");
     }
@@ -155,9 +158,10 @@ public class ContactRessource {
   @Path("stopFollow")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO stopFollowContact(@Context ContainerRequestContext requestContext,
       JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/stopFollow");
     if (!json.hasNonNull("id_contact")) {
       throw new BadRequestException("contact id required");
     }
@@ -184,8 +188,9 @@ public class ContactRessource {
   @Path("refused")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO refusedContact(@Context ContainerRequestContext requestContext, JsonNode json) {
+    LoggerUtil.logInfo("Starting : contacts/refused");
     if (!json.hasNonNull("id_contact") && json.hasNonNull("refusalReason")) {
       throw new BadRequestException("contact id and refusal reason required");
     }
