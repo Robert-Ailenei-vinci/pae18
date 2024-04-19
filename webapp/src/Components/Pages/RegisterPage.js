@@ -14,7 +14,8 @@ const RegisterPage = () => {
 function renderRegisterForm() {
   const main = document.querySelector('main');
   const form = document.createElement('form');
-  form.className = 'p-5';
+  form.className = 'p-5 shadow-lg rounded-lg';
+
   const login = document.createElement('input');
   login.type = 'email';
   login.id = 'login';
