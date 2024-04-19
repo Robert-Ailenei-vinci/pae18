@@ -84,8 +84,8 @@ async function renderDetailsEntreprise() {
   console.log(entreprise);
   renderPageTitle('Détails de l\'entreprise : ' + entreprise.tradeName);
   const allContactsData = await fetchEntrepriseContacts(user);
-  const nbStages = await fetchStagesCountForCurrentYear(user);
-  console.log("nbStages : "+nbStages);
+  const nbStagesData = await fetchStagesCountForCurrentYear(user);
+  console.log("nbStagesData : "+nbStagesData);
   isRendering = false;
   console.log("Contacts data : "+JSON.stringify(allContactsData));
 
@@ -93,7 +93,7 @@ async function renderDetailsEntreprise() {
 
   const nbStudentTitle = document.createElement('h4')
   nbStudentTitle.textContent = 'Nombre d\'étudiants en stage ' +
-      'pour l\'année courante : '+nbStages;
+      'pour l\'année courante : '+nbStagesData.nbStages;
 
   const submitButton = document.createElement('button');
   submitButton.textContent = 'Blacklister';
