@@ -52,7 +52,7 @@ public class EntrepriseResource {
   @GET
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public List<EntrepriseDTO> getAll() {
     LoggerUtil.logInfo("Starting : enterprises/getAll");
     List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAll();
@@ -74,7 +74,7 @@ public class EntrepriseResource {
   @GET
   @Path("getOne/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
     LoggerUtil.logInfo("Starting : enterprise/getOne");
     EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
@@ -213,7 +213,7 @@ public class EntrepriseResource {
   @GET
   @Path("entrepriseDetailsAllContacts/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public List<ContactDTO> getAllContactsByEntrepriseId(
       @PathParam("entrepriseId") int entrepriseId) {
     List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
