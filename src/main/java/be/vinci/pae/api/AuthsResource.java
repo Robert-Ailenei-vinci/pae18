@@ -63,6 +63,7 @@ public class AuthsResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public ObjectNode login(JsonNode json) {
+    LoggerUtil.logInfo("Starting : login");
     // Get and check credentials
     if (!json.hasNonNull("email") || !json.hasNonNull("password")) {
       throw new BadRequestException("email and password required");
@@ -116,9 +117,9 @@ public class AuthsResource {
   @GET
   @Path("user")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public ObjectNode getUser(@Context ContainerRequestContext requestContext) {
-    System.out.println("refresh");
+    LoggerUtil.logInfo("Starting : refresh");
     UserDTO user = (UserDTO) requestContext.getProperty("user");
 
     if (user == null) {
@@ -169,6 +170,7 @@ public class AuthsResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public ObjectNode register(UserDTO jsonUserDTO) {
+    LoggerUtil.logInfo("Starting : register");
     String psw = jsonUserDTO.getPassword();
     if (
         jsonUserDTO.getEmail() == null || jsonUserDTO.getEmail().isEmpty()

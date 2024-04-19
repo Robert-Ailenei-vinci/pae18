@@ -54,6 +54,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public List<EntrepriseDTO> getAll() {
+    LoggerUtil.logInfo("Starting : enterprises/getAll");
     List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAll();
 
     if (toReturn != null) {
@@ -75,6 +76,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
+    LoggerUtil.logInfo("Starting : enterprise/getOne");
     EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetOne successful");
@@ -94,12 +96,10 @@ public class EntrepriseResource {
   @Path("blacklist")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"professeur"})
   public EntrepriseDTO blacklist(JsonNode json) {
     String reason = json.get("reason_blacklist").asText();
     int entrepriseId = json.get("id_entreprise").asInt();
-    int version = json.get("version").asInt();
-
     if (entrepriseId == 0 && reason.isEmpty()) {
 
       throw new BadRequestException("All fields required to blacklist an enterprise.");
@@ -114,7 +114,7 @@ public class EntrepriseResource {
     if (entreprise.isBlacklisted()) {
       throw new BadRequestException("Enterprise already blacklisted");
     }
-
+    int version = json.get("version").asInt();
     EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason, version);
     myContactUCC.cancelInternshipsBasedOnEntreprise(entrepriseId);
     if (toReturn != null) {
@@ -136,10 +136,9 @@ public class EntrepriseResource {
   @Path("unblacklist")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"professeur"})
   public EntrepriseDTO unblacklist(JsonNode json) {
     int entrepriseId = json.get("id_entreprise").asInt();
-    int version = json.get("version").asInt();
     if (entrepriseId == 0) {
 
       throw new BadRequestException("All fields required to blacklist an enterprise.");
@@ -154,6 +153,7 @@ public class EntrepriseResource {
     if (!entreprise.isBlacklisted()) {
       throw new BadRequestException("Enterprise not blacklisted");
     }
+    int version = json.get("version").asInt();
 
     EntrepriseDTO toReturn = myEntrepriseUCC.unblacklist(entrepriseId, version);
     if (toReturn != null) {
@@ -179,9 +179,10 @@ public class EntrepriseResource {
   @Path("addOne")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public EntrepriseDTO addEnterprise(@Context ContainerRequestContext requestContext,
       JsonNode json) throws BadRequestException, AuthorisationException {
+    LoggerUtil.logInfo("Starting : enterprise/addOne");
     if (!json.hasNonNull("trade_name")
         || !json.hasNonNull("address")) {
       throw new BadRequestException("All fields required to create an enterprise.");
