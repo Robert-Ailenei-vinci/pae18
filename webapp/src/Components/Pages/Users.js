@@ -22,12 +22,13 @@ async function fetchAllUsers(user) {
     try {
         const response = await fetch(`${baseURL}/users/getAll`, options);
         if (!response.ok) {
-            throw new Error(`Failed to fetch users: ${response.statusText}`);
+            throw new Error(`Une erreur est survenue lors de la recherche des utilisateurs : ${response.statusText}`);
         }
         const usersData = await response.json();
         console.log('Users data:', usersData); // Afficher les données récupérées dans la console
         return usersData;
     } catch (error) {
+        alert(error.message);
         console.error('Error fetching users:', error); // Afficher l'erreur dans la console
         throw new Error(`An error occurred while fetching users: ${error.message}`);
     }
@@ -72,6 +73,7 @@ async function renderAllUsers2() {
 
         main.appendChild(table);
     } catch (error) {
+        alert(`Une erreur est survenue lors de l'affichage des utilisateurs.`);
         console.error('Error rendering all users:', error);
     }
 }

@@ -20,9 +20,9 @@ async function fetchEntreprisesForSchoolYear(user, schoolYearId) {
     const response = await fetch(`http://localhost:3000/entreprise/getAllForSchoolYear/${schoolYearId}`, options);
     if (!response.ok) {
         if (response.status === 401) {
-            alert("Username or password is incorrect. Please try again.");
+            alert("Veuillez vous connecter pour accéder à cette ressource.");
         } else {
-            alert("An error occurred:"+response.statusText);
+            alert("Une erreur est survenue : "+response.statusText);
         }
     }
     return response.json();
@@ -38,6 +38,7 @@ async function fetchSchoolYears(user) {
     };
     const response = await fetch('http://localhost:3000/schoolYears/getAllSchoolYears', options);
     if (!response.ok) {
+        alert(`Une erreur est survenue ${response.statusText}`);
         console.error('Failed to fetch school years');
         return [];
     }
@@ -93,6 +94,7 @@ async function renderEntreprisesWithSchoolYear() {
 async function getDefaultSchoolYear() {
     const response = await fetch('http://localhost:3000/schoolYears/getDefaultSchoolYear');
     if (!response.ok) {
+        alert(`Une erreur est survenue : ${response.textContent}`);
         console.error('Failed to fetch default school year');
         return null;
     }
@@ -106,7 +108,7 @@ function renderEntreprisesTable(entreprises) {
     const table = document.createElement('table');
     table.className = 'table table-bordered table-striped';
     const tableHead = document.createElement('tr')
-    const columns = ["Nom", "Appelation", "N°Téléphone","Adresse","Blacklisté", "Raison du blacklist"];
+    const columns = ["Nom", "Appellation", "N° de Téléphone","Adresse","Blacklisté", "Raison"];
     columns.forEach(text => {
             const th = document.createElement('th');
             th.textContent = text;

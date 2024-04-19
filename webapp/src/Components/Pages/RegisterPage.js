@@ -56,7 +56,7 @@ function renderRegisterForm() {
     const phoneNumberPattern = /^04\d{8}$/;
     if (!phoneNumberPattern.test(this.value)) {
       this.setCustomValidity(
-          'Invalid phone number. It should start with 04 and followed by 8 digits.');
+          `Numéro de téléphone invalide. Il doit commencer par "04" et suivi de 8 chiffres.`);
     } else {
       this.setCustomValidity('');
     }
@@ -200,7 +200,7 @@ async function onRegister(e) {
   }
 // Check if at least one checkbox is checked
   if (!roleAdmin && !roleProf && role !== "etudiant") {
-    alert('Veuillez indiquer si vous etes un administratif ou un professeur: ');
+    alert('Veuillez indiquer si vous êtes un administratif ou un professeur: ');
     return;
   }
   const options = {
