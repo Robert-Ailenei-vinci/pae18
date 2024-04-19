@@ -771,3 +771,370 @@ Caused by: org.postgresql.util.PSQLException: ERROR: syntax error at end of inpu
 [2024-04-14 19:19:07] [INFO] get one user by id with id: 3 
 [2024-04-14 19:19:07] [INFO] schoolyear getone + id : 2 
 [2024-04-14 19:19:07] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:03:54] [INFO] get one user by email with email: raphael.baroni@vinci.be 
+[2024-04-19 02:03:54] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:03:54] [INFO] Login successful 
+[2024-04-19 02:03:54] [INFO] get one user by id with id: 3 
+[2024-04-19 02:03:54] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:03:54] [INFO] GetAllContactById successful 
+[2024-04-19 02:03:54] [INFO] get one user by id with id: 3 
+[2024-04-19 02:03:54] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:03:55] [INFO] get one user by id with id: 3 
+[2024-04-19 02:03:55] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:03:55] [INFO] schoolyear getAll 
+[2024-04-19 02:03:55] [INFO] build year method 
+[2024-04-19 02:03:56] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:03:56] [INFO] get one user by id with id: 3 
+[2024-04-19 02:03:56] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:03:56] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:03:57] [INFO] get one user by id with id: 3 
+[2024-04-19 02:03:57] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:03:57] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:03:58] [INFO] get one user by id with id: 3 
+[2024-04-19 02:03:58] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:03:58] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:03:59] [INFO] get one user by id with id: 3 
+[2024-04-19 02:03:59] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:03:59] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:01] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:01] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:01] [INFO] GetUser successful 
+[2024-04-19 02:04:01] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:01] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:01] [INFO] entreprise getone with id 4 
+[2024-04-19 02:04:01] [INFO] GetOne successful 
+[2024-04-19 02:04:02] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:02] [INFO] entreprise getone with id 4 
+[2024-04-19 02:04:02] [INFO] get one user by id with id: 8 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:02] [INFO] entreprise getone with id 4 
+[2024-04-19 02:04:02] [INFO] get one user by id with id: 9 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:02] [INFO] entreprise getone with id 4 
+[2024-04-19 02:04:02] [INFO] get one user by id with id: 7 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:02] [INFO] entreprise getone with id 4 
+[2024-04-19 02:04:02] [INFO] get one user by id with id: 10 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:02] [INFO] get all contact for the entreprise with id 4 
+[2024-04-19 02:04:02] [INFO] GetAllContactById successful 
+[2024-04-19 02:04:02] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:02] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:02] [INFO] build year method 
+[2024-04-19 02:04:02] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:02] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-19 02:04:18] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:18] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:18] [INFO] schoolyear getAll 
+[2024-04-19 02:04:18] [INFO] build year method 
+[2024-04-19 02:04:18] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:18] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:18] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:18] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:19] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:20] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:20] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:21] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:21] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:21] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:22] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:22] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:22] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:24] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:24] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:24] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:25] [INFO] Get All successful 
+[2024-04-19 02:04:26] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:26] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:26] [INFO] GetAllContactById successful 
+[2024-04-19 02:04:26] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:26] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:27] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:27] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:28] [INFO] Get All successful 
+[2024-04-19 02:04:28] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:28] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:28] [INFO] schoolyear getAll 
+[2024-04-19 02:04:28] [INFO] build year method 
+[2024-04-19 02:04:28] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:28] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:28] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:28] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:30] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:30] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:30] [INFO] Get All successful 
+[2024-04-19 02:04:31] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:31] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:31] [INFO] schoolyear getAll 
+[2024-04-19 02:04:31] [INFO] build year method 
+[2024-04-19 02:04:31] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:31] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:31] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:31] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:32] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:32] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:32] [INFO] GetUser successful 
+[2024-04-19 02:04:33] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:33] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:33] [INFO] entreprise getone with id 1 
+[2024-04-19 02:04:33] [INFO] GetOne successful 
+[2024-04-19 02:04:33] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:33] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:33] [INFO] entreprise getone with id 1 
+[2024-04-19 02:04:33] [INFO] get one user by id with id: 9 
+[2024-04-19 02:04:33] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:33] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:33] [INFO] get all contact for the entreprise with id 1 
+[2024-04-19 02:04:33] [INFO] GetAllContactById successful 
+[2024-04-19 02:04:33] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:33] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:33] [INFO] build year method 
+[2024-04-19 02:04:33] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:33] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-19 02:04:36] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:36] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:36] [INFO] schoolyear getAll 
+[2024-04-19 02:04:36] [INFO] build year method 
+[2024-04-19 02:04:36] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:36] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:36] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:36] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:38] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:38] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:38] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:39] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:39] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:39] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:40] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:40] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:40] [INFO] GetUser successful 
+[2024-04-19 02:04:40] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:40] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:40] [INFO] entreprise getone with id 1 
+[2024-04-19 02:04:40] [INFO] GetOne successful 
+[2024-04-19 02:04:40] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:40] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:40] [INFO] entreprise getone with id 1 
+[2024-04-19 02:04:40] [INFO] get one user by id with id: 9 
+[2024-04-19 02:04:40] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:40] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:40] [INFO] get all contact for the entreprise with id 1 
+[2024-04-19 02:04:40] [INFO] GetAllContactById successful 
+[2024-04-19 02:04:40] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:40] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:40] [INFO] build year method 
+[2024-04-19 02:04:40] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:40] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-19 02:04:42] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:42] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:42] [INFO] schoolyear getAll 
+[2024-04-19 02:04:42] [INFO] build year method 
+[2024-04-19 02:04:42] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:42] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:42] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:42] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:42] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:43] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:43] [INFO] GetUser successful 
+[2024-04-19 02:04:43] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:43] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:43] [INFO] entreprise getone with id 1 
+[2024-04-19 02:04:43] [INFO] GetOne successful 
+[2024-04-19 02:04:43] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:43] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:43] [INFO] entreprise getone with id 1 
+[2024-04-19 02:04:43] [INFO] get one user by id with id: 9 
+[2024-04-19 02:04:43] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:43] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:43] [INFO] get all contact for the entreprise with id 1 
+[2024-04-19 02:04:43] [INFO] GetAllContactById successful 
+[2024-04-19 02:04:43] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:43] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:43] [INFO] build year method 
+[2024-04-19 02:04:43] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:43] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-19 02:04:45] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:45] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:45] [INFO] schoolyear getAll 
+[2024-04-19 02:04:45] [INFO] build year method 
+[2024-04-19 02:04:45] [INFO] Current school year found: 2023-2024 
+[2024-04-19 02:04:45] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:45] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:45] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 02:04:49] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] Get All successful 
+[2024-04-19 02:04:49] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] Get All successful 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:49] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] Get All successful 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:50] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] Get All successful 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:50] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] Get All successful 
+[2024-04-19 02:04:50] [INFO] Get All successful 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] Get All successful 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:50] [INFO] Get All successful 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:50] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] Get All successful 
+[2024-04-19 02:04:51] [INFO] get one user by id with id: 3 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 02:04:51] [INFO] Get All successful 
