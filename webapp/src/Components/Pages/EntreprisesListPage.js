@@ -125,30 +125,48 @@ function renderEntreprisesTable(entreprises) {
     const tableBody = document.createElement('tbody');
     entreprises.forEach(entreprise => {
         const tr = document.createElement('tr');
-        const tdNom = document.createElement('a');
-        tdNom.href = `/detailsEntreprise/${entreprise.id}`;
-        tdNom.textContent = entreprise.tradeName;
+        console.log(entreprise);
+    
+        const tdNom = document.createElement('td');
         const tdAppelation = document.createElement('td');
-        tdAppelation.textContent = entreprise.designation;
         const tdPhone = document.createElement('td');
-        tdPhone.textContent = entreprise.phoneNumber;
         const tdAdresse = document.createElement('td');
-        tdAdresse.textContent = entreprise.address;
         const tdBlacklisted = document.createElement('td');
-        if (entreprise.blacklisted) {
-            tdBlacklisted.textContent = "Oui";
-        } else {
-            tdBlacklisted.textContent = "Non";
-        }
         const tdBlacklistReason = document.createElement('td');
-        if (entreprise.blacklistReason === null) {
-            tdBlacklistReason.textContent = "/";
-            tdBlacklistReason.style.color = "grey";
+        
+        const link = document.createElement('a'); // Create an anchor element
+        link.href = `/detailsEntreprise/${entreprise.id}`; // Set the href attribute
+        link.textContent = entreprise.tradeName; // Set the text content of the link
+        // Apply styles directly to the anchor element
+        link.style.color = '#007bff'; // Blue color
+        link.style.fontWeight = 'bold'; // Bold font
+        link.style.textDecoration = 'none'; // Remove underline
+        // Add hover effect
+        link.addEventListener('mouseover', () => {
+            link.style.color = '#0056b3'; // Darker blue color on hover
+        });
+        link.addEventListener('mouseout', () => {
+            link.style.color = '#007bff'; // Restore original color on mouseout
+        });
+        tdNom.appendChild(link); // Append the link to the td element
+        
+        tdAppelation.textContent = entreprise.designation;
+        tdPhone.textContent = entreprise.phoneNumber;
+        tdAdresse.textContent = entreprise.address;
+        tdBlacklisted.textContent = entreprise.blacklisted ? "Oui" : "Non";
+        tdBlacklistReason.textContent = entreprise.blacklistReason || "/"; // Set default value if null
+        tdBlacklistReason.style.color = entreprise.blacklistReason ? "black" : "grey"; // Adjust color
+        
+        if (entreprise.blacklisted) {
+            // Set color for specific cells if entreprise is blacklisted
+            tdNom.style.color = 'red';
+            tdAppelation.style.color = 'red';
+            tdPhone.style.color = 'red';
+            tdAdresse.style.color = 'red';
+            tdBlacklisted.style.color = 'red';
+            tdBlacklistReason.style.color = 'red';
         }
-        else {
-            tdBlacklistReason.textContent = entreprise.blacklistReason;
-        }
-
+    
         tr.appendChild(tdNom);
         tr.appendChild(tdAppelation);
         tr.appendChild(tdPhone);
@@ -157,6 +175,8 @@ function renderEntreprisesTable(entreprises) {
         tr.appendChild(tdBlacklistReason);
         tableBody.appendChild(tr);
     });
+    
+    
     table.appendChild(tableHead);
     table.appendChild(tableBody);
     main.appendChild(table);
