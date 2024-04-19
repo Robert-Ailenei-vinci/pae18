@@ -74,7 +74,7 @@ public class EntrepriseResource {
   @GET
   @Path("getOne/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
     LoggerUtil.logInfo("Starting : enterprise/getOne");
     EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
