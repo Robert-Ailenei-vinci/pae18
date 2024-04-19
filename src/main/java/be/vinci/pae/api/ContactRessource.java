@@ -10,8 +10,6 @@ import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
-import be.vinci.pae.business.domain.StageDTO;
-import be.vinci.pae.business.domain.SupervisorDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
