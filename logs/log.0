@@ -1154,3 +1154,11 @@ Caused by: org.postgresql.util.PSQLException: ERROR: syntax error at end of inpu
 [2024-04-19 09:12:48] [INFO] get one user by id with id: 12 
 [2024-04-19 09:12:48] [INFO] schoolyear getone + id : 1 
 [2024-04-19 09:12:48] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 09:14:48] [INFO] get one user by id with id: 12 
+[2024-04-19 09:14:48] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:14:48] [INFO] schoolyear getAll 
+[2024-04-19 09:14:48] [INFO] build year method 
+[2024-04-19 09:14:48] [INFO] Current school year found: 2023-2024 
+[2024-04-19 09:14:48] [INFO] get one user by id with id: 12 
+[2024-04-19 09:14:48] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:14:48] [INFO] GetAllForSchoolYear successful 

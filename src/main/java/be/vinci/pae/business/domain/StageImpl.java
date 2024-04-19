@@ -1,5 +1,7 @@
 package be.vinci.pae.business.domain;
 
+import java.util.Objects;
+
 /**
  * Implementation of the StageDTO interface representing a stage.
  */
@@ -118,5 +120,27 @@ public class StageImpl implements Stage {
 
   public void setSupervisor(SupervisorDTO supervisor) {
     this.supervisor = supervisor;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof StageImpl stage)) {
+      return false;
+    }
+    return getContactId() == stage.getContactId() && getSupervisorId() == stage.getSupervisorId()
+        && getUserId() == stage.getUserId() && getSchoolYearId() == stage.getSchoolYearId()
+        && getVersion() == stage.getVersion() && Objects.equals(getSignatureDate(),
+        stage.getSignatureDate()) && Objects.equals(getInternshipProject(),
+        stage.getInternshipProject());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getContactId(), getSignatureDate(), getInternshipProject(),
+        getSupervisorId(),
+        getUserId(), getSchoolYearId(), getVersion());
   }
 }
