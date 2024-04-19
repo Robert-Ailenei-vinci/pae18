@@ -767,3 +767,121 @@ Caused by: org.postgresql.util.PSQLException: Cannot rollback when autoCommit is
 [2024-04-19 11:16:07] [INFO] get one user by id with id: 12 
 [2024-04-19 11:16:07] [INFO] schoolyear getone + id : 1 
 [2024-04-19 11:16:07] [INFO] Starting : stages/getAllByUserId 
+[2024-04-19 11:46:40] [INFO] Starting : authorize 
+[2024-04-19 11:46:40] [INFO] Token verified 
+[2024-04-19 11:46:40] [INFO] Starting : login 
+[2024-04-19 11:46:41] [INFO] get one user by email with email: zaza.zaza@vinci.be 
+[2024-04-19 11:46:41] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:41] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:41] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:41] [INFO] Starting : refresh 
+[2024-04-19 11:46:41] [INFO] GetUser successful 
+[2024-04-19 11:46:41] [INFO] Starting : authorize 
+[2024-04-19 11:46:41] [INFO] Token verified 
+[2024-04-19 11:46:41] [INFO] Login successful 
+[2024-04-19 11:46:41] [INFO] Starting : authorize 
+[2024-04-19 11:46:41] [INFO] Token verified 
+[2024-04-19 11:46:41] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:41] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:41] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 11:46:41] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:41] [INFO] GetAllContactById successful 
+[2024-04-19 11:46:41] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:41] [INFO] Starting : authorize 
+[2024-04-19 11:46:41] [INFO] Token verified 
+[2024-04-19 11:46:41] [INFO] schoolyear getAll 
+[2024-04-19 11:46:41] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:41] [INFO] Starting : authorize 
+[2024-04-19 11:46:41] [INFO] Token verified 
+[2024-04-19 11:46:41] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:41] [INFO] Starting : stages/getAllByUserId 
+[2024-04-19 11:46:41] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:41] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:41] [INFO] build year method 
+[2024-04-19 11:46:41] [INFO] Current school year found: 2023-2024 
+[2024-04-19 11:46:41] [INFO] Starting : authorize 
+[2024-04-19 11:46:41] [INFO] Token verified 
+[2024-04-19 11:46:41] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:41] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:41] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:46:43] [INFO] Starting : authorize 
+[2024-04-19 11:46:43] [INFO] Token verified 
+[2024-04-19 11:46:43] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:43] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:43] [INFO] schoolyear getAll 
+[2024-04-19 11:46:43] [INFO] Starting : authorize 
+[2024-04-19 11:46:43] [INFO] Token verified 
+[2024-04-19 11:46:43] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:43] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:43] [INFO] build year method 
+[2024-04-19 11:46:43] [INFO] Current school year found: 2023-2024 
+[2024-04-19 11:46:43] [INFO] Starting : authorize 
+[2024-04-19 11:46:43] [INFO] Token verified 
+[2024-04-19 11:46:43] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:43] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:43] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:46:48] [INFO] Starting : authorize 
+[2024-04-19 11:46:48] [INFO] Token verified 
+[2024-04-19 11:46:48] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:48] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:48] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:46:51] [INFO] Starting : authorize 
+[2024-04-19 11:46:51] [INFO] Token verified 
+[2024-04-19 11:46:51] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:51] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:46:52] [INFO] Starting : authorize 
+[2024-04-19 11:46:52] [INFO] Token verified 
+[2024-04-19 11:46:52] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:52] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:52] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:46:53] [INFO] Starting : authorize 
+[2024-04-19 11:46:53] [INFO] Token verified 
+[2024-04-19 11:46:53] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:53] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:53] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:46:53] [INFO] Starting : authorize 
+[2024-04-19 11:46:53] [INFO] Token verified 
+[2024-04-19 11:46:53] [INFO] get one user by id with id: 12 
+[2024-04-19 11:46:53] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:46:53] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:47:01] [INFO] Starting : authorize 
+[2024-04-19 11:47:01] [INFO] Token verified 
+[2024-04-19 11:47:01] [INFO] get one user by id with id: 12 
+[2024-04-19 11:47:01] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:47:01] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:47:02] [INFO] Starting : authorize 
+[2024-04-19 11:47:02] [INFO] Token verified 
+[2024-04-19 11:47:02] [INFO] get one user by id with id: 12 
+[2024-04-19 11:47:02] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:47:02] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:47:07] [INFO] Starting : authorize 
+[2024-04-19 11:47:07] [INFO] Token verified 
+[2024-04-19 11:47:07] [INFO] get one user by id with id: 12 
+[2024-04-19 11:47:07] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:47:07] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:47:09] [INFO] Starting : authorize 
+[2024-04-19 11:47:09] [INFO] Token verified 
+[2024-04-19 11:47:09] [INFO] get one user by id with id: 12 
+[2024-04-19 11:47:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:47:09] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:47:11] [INFO] Starting : authorize 
+[2024-04-19 11:47:11] [INFO] Token verified 
+[2024-04-19 11:47:11] [INFO] get one user by id with id: 12 
+[2024-04-19 11:47:11] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:47:11] [INFO] GetAllForSchoolYear successful 
+[2024-04-19 11:49:28] [INFO] Starting : login 
+[2024-04-19 11:49:28] [INFO] get one user by email with email: zaza.zaza@vinci.be 
+[2024-04-19 11:49:28] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:49:28] [INFO] Login successful 
+[2024-04-19 11:49:28] [INFO] Starting : authorize 
+[2024-04-19 11:49:28] [INFO] Token verified 
+[2024-04-19 11:49:28] [INFO] get one user by id with id: 12 
+[2024-04-19 11:49:28] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:49:28] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 11:49:28] [INFO] GetAllContactById successful 
+[2024-04-19 11:49:28] [INFO] Starting : authorize 
+[2024-04-19 11:49:28] [INFO] Token verified 
+[2024-04-19 11:49:28] [INFO] get one user by id with id: 12 
+[2024-04-19 11:49:28] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:49:28] [INFO] Starting : stages/getAllByUserId 

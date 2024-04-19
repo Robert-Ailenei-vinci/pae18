@@ -69,7 +69,7 @@ async function renderEntreprisesWithSchoolYear() {
     main.appendChild(selectSchoolYear);
 
     // Fetch and render enterprises for the default school year when the page is loaded
-    const defaultYear = await getDefaultSchoolYear();
+    const defaultYear = await getDefaultSchoolYear(user);
     console.log('Default year:', defaultYear);
     if (defaultYear !== null) {
         const defaultEntreprises = await fetchEntreprisesForSchoolYear(user, defaultYear.id, 'trade_name,designation');
@@ -91,8 +91,15 @@ async function renderEntreprisesWithSchoolYear() {
     });
 }
 
-async function getDefaultSchoolYear() {
-    const response = await fetch('http://localhost:3000/schoolYears/getDefaultSchoolYear');
+async function getDefaultSchoolYear(user) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${user.token}`,
+        },
+    };
+    const response = await fetch('http://localhost:3000/schoolYears/getDefaultSchoolYear',options);
     if (!response.ok) {
         alert(`Une erreur est survenue : ${response.status + " " + response.statusText}`);
         console.error('Failed to fetch default school year');
@@ -108,7 +115,7 @@ function renderEntreprisesTable(entreprises) {
     const table = document.createElement('table');
     table.className = 'table table-bordered table-striped';
     const tableHead = document.createElement('tr');
-    const columns = ["Nom", "Appelation", "N°Téléphone","Adresse","Blacklisté", "Raison du blacklist"];
+    const columns = ["Nom", "Appelation", "N°Téléphone", "Adresse", "Blacklisté", "Raison du blacklist"];
     const fields = ["trade_name", "designation", "phone_num", "address", "blacklisted", "reason_blacklist"];
     columns.forEach((text, index) => {
         const th = document.createElement('th');
@@ -157,8 +164,7 @@ function renderEntreprisesTable(entreprises) {
         if (entreprise.blacklistReason === null) {
             tdBlacklistReason.textContent = "/";
             tdBlacklistReason.style.color = "grey";
-        }
-        else {
+        } else {
             tdBlacklistReason.textContent = entreprise.blacklistReason;
         }
 

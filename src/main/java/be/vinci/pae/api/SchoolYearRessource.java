@@ -46,7 +46,7 @@ public class SchoolYearRessource {
   @GET
   @Path("getDefaultSchoolYear")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"professeur", "administratif"})
+  @Authorize(roles = {"etudiant","professeur", "administratif"})
   public SchoolYearDTO getDefaultSchoolYear() {
     return schoolYearUCC.getCurrentSchoolYear();
   }
