@@ -67,7 +67,7 @@ function renderLoginForm() {
   const submit = document.createElement('button');
   submit.textContent = 'Login';
   submit.type = 'submit';
-  submit.className = 'btn btn-info btn-block mt-4';
+  submit.className = 'btn btn-info btn-block mt-4 bg-custom';
 
   form.appendChild(mailGroup);
   form.appendChild(passwordGroup);

@@ -91,7 +91,7 @@ function renderRegisterForm() {
   const submit = document.createElement('input');
   submit.value = 'Register';
   submit.type = 'submit';
-  submit.className = 'btn btn-info';
+  submit.className = 'btn btn-info bg-custom';
   const formCheckWrapper = document.createElement('div');
   formCheckWrapper.className = 'mb-3 form-check';
 
