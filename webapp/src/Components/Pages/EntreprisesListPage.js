@@ -22,7 +22,7 @@ async function fetchEntreprisesForSchoolYear(user, schoolYearId) {
         if (response.status === 401) {
             alert("Veuillez vous connecter pour accéder à cette ressource.");
         } else {
-            alert("Une erreur est survenue : "+response.statusText);
+            alert(`Une erreur est survenue : ${response.status + " " + response.statusText}`);
         }
     }
     return response.json();
@@ -38,7 +38,7 @@ async function fetchSchoolYears(user) {
     };
     const response = await fetch('http://localhost:3000/schoolYears/getAllSchoolYears', options);
     if (!response.ok) {
-        alert(`Une erreur est survenue ${response.statusText}`);
+        alert(`Une erreur est survenue : ${response.status + " " + response.statusText}`);
         console.error('Failed to fetch school years');
         return [];
     }
@@ -92,9 +92,16 @@ async function renderEntreprisesWithSchoolYear() {
 }
 
 async function getDefaultSchoolYear() {
-    const response = await fetch('http://localhost:3000/schoolYears/getDefaultSchoolYear');
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${getAuthenticatedUser().token}`,
+        },
+    };
+    const response = await fetch('http://localhost:3000/schoolYears/getDefaultSchoolYear', options);
     if (!response.ok) {
-        alert(`Une erreur est survenue : ${response.textContent}`);
+        alert(`Une erreur est survenue : ${response.status + " " + response.statusText}`);
         console.error('Failed to fetch default school year');
         return null;
     }

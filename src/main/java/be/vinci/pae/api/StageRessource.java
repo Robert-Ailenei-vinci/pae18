@@ -35,7 +35,7 @@ public class StageRessource {
   @GET
   @Path("stageByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant"})
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public StageDTO getOneStageByUserId(@Context ContainerRequestContext requestContext) {
     LoggerUtil.logInfo("Starting : stages/getAllByUserId");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");

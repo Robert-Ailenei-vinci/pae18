@@ -74,7 +74,7 @@ public class EntrepriseResource {
   @GET
   @Path("getOne/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant"})
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
     LoggerUtil.logInfo("Starting : enterprise/getOne");
     EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
@@ -212,7 +212,7 @@ public class EntrepriseResource {
   @GET
   @Path("entrepriseDetailsAllContacts/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant"})
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<ContactDTO> getAllContactsByEntrepriseId(
       @PathParam("entrepriseId") int entrepriseId) {
     List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
@@ -231,7 +231,7 @@ public class EntrepriseResource {
   @GET
   @Path("getAllForSchoolYear/{idSchoolYear}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear) {
     List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear);
     if (toReturn != null) {
@@ -249,7 +249,7 @@ public class EntrepriseResource {
   @GET
   @Path("getStagesCountForCurrentYear/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public int getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
     int toReturn = -1;
     toReturn = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
