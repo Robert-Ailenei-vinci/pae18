@@ -9,7 +9,6 @@ import be.vinci.pae.exception.BizException;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
-import be.vinci.pae.services.StageDAO;
 import jakarta.inject.Inject;
 import java.util.List;
 
