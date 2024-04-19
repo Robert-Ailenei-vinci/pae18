@@ -147,7 +147,8 @@ public class ContactUCCImpl implements ContactUCC {
   }
 
   @Override
-  public ContactDTO acceptContact(int contactId, int userId, int version,int supervisorId,String signatureDate,String internshipProject) {
+  public ContactDTO acceptContact(int contactId, int userId, int version, int supervisorId,
+      String signatureDate, String internshipProject) {
     try {
       dalServices.startTransaction();
 
@@ -169,7 +170,7 @@ public class ContactUCCImpl implements ContactUCC {
 
       SupervisorDTO supervisor = mySupervisorUCC.getOneById(supervisorId);
 
-      StageDTO stage = myStageUCC.createOne(contactToReturn, signatureDate, internshipProject,
+      myStageUCC.createOne(contactToReturn, signatureDate, internshipProject,
           supervisor.getSupervisorId());
 
       return contactToReturn;
@@ -184,7 +185,7 @@ public class ContactUCCImpl implements ContactUCC {
   /**
    * set all internships of a contact to refusé if an entreprise is blacklisted.
    *
-   * @param idEntreprise  the id of the entreprise.
+   * @param idEntreprise the id of the entreprise.
    * @return true if the internships are canceled.
    */
   @Override

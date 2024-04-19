@@ -354,7 +354,7 @@ class ContactUCCTest {
     when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
     // Act and Assert
     ContactDTO result = contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
-        contact.getVersion(),supervisorId,signDate,internshipPoject);
+        contact.getVersion(), supervisorId, signDate, internshipPoject);
     assertEquals(contactResult.getId(), result.getId());
     assertEquals(contactResult.getState(), result.getState());
   }
@@ -378,11 +378,10 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
     when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
 
-
     // Act and Assert
     assertThrows(BizException.class,
         () -> contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
-            contact.getVersion(),supervisorId,signDate,internshipPoject));
+            contact.getVersion(), supervisorId, signDate, internshipPoject));
   }
 
   @DisplayName("Test acceptContact with wrong given user")
@@ -404,11 +403,10 @@ class ContactUCCTest {
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
     when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
 
-
     // Act and Assert
     assertThrows(BizExceptionNotFound.class,
         () -> contactUCC.acceptContact(contact.getUserId(), 789,
-            contact.getVersion(),supervisorId,signDate,internshipPoject));
+            contact.getVersion(), supervisorId, signDate, internshipPoject));
   }
 
   @DisplayName("Test cancelInternshipsBasedOnEntreprise")
