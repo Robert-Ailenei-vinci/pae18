@@ -15,6 +15,7 @@ import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
@@ -40,6 +41,8 @@ class EntrepriseUCCImplTest {
   private DomainFactory factory;
   private EntrepriseDTO actualEntreprise;
   private ContactDTO contact;
+  private ContactUCC contactUCC;
+  private ContactDAO contactDAO;
 
   private DALServices dalServices;
 
@@ -47,6 +50,8 @@ class EntrepriseUCCImplTest {
   void setUp() {
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
     this.entrepriseUcc = locator.getService(EntrepriseUCC.class);
+    this.contactDAO = locator.getService(ContactDAO.class);
+    this.contactUCC = locator.getService(ContactUCC.class);
     this.factory = locator.getService(DomainFactory.class);
     this.dalServices = locator.getService(DALServices.class);
     this.entreprise = (Entreprise) factory.getEntreprise();
@@ -61,7 +66,7 @@ class EntrepriseUCCImplTest {
   @AfterEach
   public void tearDown() {
     // Clean up resources, reset state, etc.
-    Mockito.reset(entrepriseDAO, dalServices);
+    Mockito.reset(entrepriseDAO, dalServices, contactDAO);
   }
 
   @DisplayName("Test getOne")
@@ -170,6 +175,7 @@ class EntrepriseUCCImplTest {
     assertThrows(RuntimeException.class, () -> entrepriseUcc.getAll());
   }
 
+  @DisplayName("Test getAll with transaction exception")
   @Test
   public void testGetAllWithException() {
     when(entrepriseUcc.getAll());
@@ -178,6 +184,7 @@ class EntrepriseUCCImplTest {
     });
   }
 
+  @DisplayName("Test Blacklist")
   @Test
   void blacklistSuccess() {
     // Arrange
@@ -198,6 +205,7 @@ class EntrepriseUCCImplTest {
     assertEquals(reason, blacklistedEntreprise.getBlacklistReason());
   }
 
+  @DisplayName("Test with transaction exception")
   @Test
   void blacklistWithException() {
     // Arrange
@@ -211,7 +219,7 @@ class EntrepriseUCCImplTest {
     });
   }
 
-
+  @DisplayName("Test Unblacklist")
   @Test
   void unblacklistSuccess() {
     // Arrange
@@ -231,6 +239,7 @@ class EntrepriseUCCImplTest {
     assertNull(unblacklistedEntreprise.getBlacklistReason());
   }
 
+  @DisplayName("Test Unblacklist with transaction exception")
   @Test
   void unblacklistWithException() {
     // Arrange
@@ -292,5 +301,30 @@ class EntrepriseUCCImplTest {
 
     // Act & Act
     assertThrows(RuntimeException.class, () -> entrepriseUcc.getStagesCountForSchoolYear(1));
+  }
+
+  @DisplayName("Test getAllContactsByEntrepriseId")
+  @Test
+  public void getAllContactsByEntrepriseId() {
+    // Arrange
+    List<ContactDTO> contactList = new ArrayList<>();
+    contactList.add(contact);
+    when(contactDAO.getAllContactsByEntrepriseId(1)).thenReturn(contactList);
+
+    // Act
+    List<ContactDTO> result = entrepriseUcc.getAllContactsByEntrepriseId(1);
+
+    // Assert
+    assertEquals(contact.getId(), result.get(0).getId());
+  }
+
+  @DisplayName("Test getAllContactsByEntrepriseId with exception")
+  @Test
+  public void getAllContactsByEntrepriseIdWithException() {
+    // Arrange
+    when(contactDAO.getAllContactsByEntrepriseId(1)).thenThrow(RuntimeException.class);
+
+    // Act & Act
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getAllContactsByEntrepriseId(1));
   }
 }
