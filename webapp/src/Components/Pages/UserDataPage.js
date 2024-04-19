@@ -48,7 +48,7 @@ async function fetchContactsData(user) {
     const contactsData = await responseContacts.json();
     return contactsData;
   } catch (error) {
-    return undefined;
+    console.log(error);
   }
 }
 
@@ -78,7 +78,7 @@ async function fetchStageData(user) {
 
     return stageData;
   } catch (error) {
-    return undefined;
+    console.log(error);
   }
 }
 

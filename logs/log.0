@@ -756,3 +756,14 @@ Caused by: org.postgresql.util.PSQLException: Cannot rollback when autoCommit is
 [2024-04-19 09:33:44] [INFO] schoolyear getone + id : 1 
 [2024-04-19 09:33:44] [INFO] supervisor getAll in DAO 
 [2024-04-19 09:33:44] [INFO] GetAllForOneEnterprise successful 
+[2024-04-19 11:16:06] [INFO] Starting : authorize 
+[2024-04-19 11:16:06] [INFO] Token verified 
+[2024-04-19 11:16:07] [INFO] get one user by id with id: 12 
+[2024-04-19 11:16:07] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:16:07] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 11:16:07] [INFO] GetAllContactById successful 
+[2024-04-19 11:16:07] [INFO] Starting : authorize 
+[2024-04-19 11:16:07] [INFO] Token verified 
+[2024-04-19 11:16:07] [INFO] get one user by id with id: 12 
+[2024-04-19 11:16:07] [INFO] schoolyear getone + id : 1 
+[2024-04-19 11:16:07] [INFO] Starting : stages/getAllByUserId 
