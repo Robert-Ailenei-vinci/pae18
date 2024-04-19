@@ -215,7 +215,7 @@ public class ContactRessource {
   @Path("accept")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public ContactDTO acceptContact(@Context ContainerRequestContext requestContext, JsonNode json) {
     if (!json.hasNonNull("id_contact")) {
       throw new BadRequestException("contact id required");
