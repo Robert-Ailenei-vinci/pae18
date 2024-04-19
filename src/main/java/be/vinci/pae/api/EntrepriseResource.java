@@ -127,7 +127,7 @@ public class EntrepriseResource {
    * Unblacklists an enterprise. This method is accessed via HTTP POST request to the path
    * "/entreprise/blacklist". It returns the unblacklisted enterprise in JSON format. Requires
    * authorization. This doesn't change the state of the contacts, it just allows to take a contact
-   * with the blacklisted entreprise.
+   * with the beforehand blacklisted entreprise.
    *
    * @param json The JSON object containing the enterprise id.
    * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
