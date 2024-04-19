@@ -48,8 +48,7 @@ async function fetchContactsData(user) {
     const contactsData = await responseContacts.json();
     return contactsData;
   } catch (error) {
-    throw new Error(
-        `An error occurred while fetching contacts: ${error.message}`);
+    console.log(error);
   }
 }
 
@@ -78,7 +77,7 @@ async function fetchStageData(user) {
 
     return stageData;
   } catch (error) {
-    return undefined;
+    console.log(error);
   }
 }
 
