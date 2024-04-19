@@ -1,7 +1,6 @@
 
 import { getAuthenticatedUser } from '../../utils/auths';
 import { clearPage, renderPageTitle } from '../../utils/render';
-import baseURL from '../../../config';
 
 const UsersPage = () => {
     clearPage();
@@ -20,7 +19,7 @@ async function fetchAllUsers(user) {
     };
 
     try {
-        const response = await fetch(`${baseURL}/users/getAll`, options);
+        const response = await fetch('http://localhost:3000/users/getAll', options);
         if (!response.ok) {
             throw new Error(`Failed to fetch users: ${response.statusText}`);
         }

@@ -49,9 +49,8 @@ public class UserResource {
   @GET
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"professeur"})
+  @Authorize
   public List<UserDTO> getAll() {
-    LoggerUtil.logInfo("Starting : users/getAll");
     List<UserDTO> toReturn = myUser.getAll();
     if (toReturn != null) {
       LoggerUtil.logInfo("Get All successful");
@@ -73,9 +72,8 @@ public class UserResource {
   @Path("changeData")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  @Authorize
   public ObjectNode changeData(JsonNode json, @Context ContainerRequestContext requestContext) {
-    LoggerUtil.logInfo("Starting : users/changeData");
 
     String email = json.get("login").asText();
 

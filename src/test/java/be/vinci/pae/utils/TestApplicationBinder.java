@@ -40,7 +40,7 @@ public class TestApplicationBinder extends AbstractBinder {
   protected void configure() {
     bind(DomainFactoryImpl.class).to(DomainFactory.class);
     bind(Mockito.mock(UserDAOImpl.class)).to(UserDAO.class);
-    bind(Mockito.mock(DALServicesImpl.class)).to(DALServices.class);
+    bind(DALServicesImpl.class).to(DALServices.class);
     bind(UserUCCImpl.class).to(UserUCC.class);
     bind(ContactUCCImpl.class).to(ContactUCC.class);
     bind(Mockito.mock(ContactDAOImpl.class)).to(ContactDAO.class);

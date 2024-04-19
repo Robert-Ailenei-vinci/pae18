@@ -36,6 +36,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("No SchoolYear for input id : " + id, e);
       throw new SchoolYearNotFoundException("No Schoolyear for input id : " + id + e.getMessage());
     }
     return null;
@@ -56,16 +57,20 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error while fetching current school year", e);
       throw new FatalError("Error while fetching current school year: " + e.getMessage());
     }
 
     // Handle the case where the current school year is not found
-
+    LoggerUtil.logError("Current school year not found: " + schoolYearFormat,
+        new SchoolYearNotFoundException(
+            "Current school year not found: " + schoolYearFormat));
     throw new SchoolYearNotFoundException("Current school year not found: "
-      + schoolYearFormat);
+        + schoolYearFormat);
   }
 
 
+  // Integrate the buildYear() method here
   @Override
   public String buildYear() {
     int year;
@@ -78,13 +83,13 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
     return year + "-" + (year + 1);
   }
 
-  @Override
-  public SchoolYearDTO getSchoolYearMethodFromDB(ResultSet rs) {
+  private SchoolYearDTO getSchoolYearMethodFromDB(ResultSet rs) {
     SchoolYearDTO schoolYear = myDomainFactory.getSchoolYear();
     try {
       schoolYear.setId(rs.getInt("id_year"));
       schoolYear.setYearFormat(rs.getString("years_format"));
     } catch (Exception e) {
+      LoggerUtil.logError("Error in getSchoolYearMethodFromDB", e);
       throw new FatalError("Error in getSchoolYearMethodFromDB" + e.getMessage());
     }
     return schoolYear;
@@ -101,6 +106,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
         schoolYears.add(schoolYear);
       }
     } catch (Exception e) {
+      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     LoggerUtil.logInfo("schoolyear getAll");

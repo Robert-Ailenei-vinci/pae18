@@ -2,7 +2,6 @@ import { getAuthenticatedUser } from '../../utils/auths';
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
-import baseURL from '../../../config';
 
 const AddContactPage = async () => {
   clearPage();
@@ -156,7 +155,7 @@ async function handleSubmit(selectedEntrepriseId) {
     },
   };
 
-  const response = await fetch(`${baseURL}/contacts/add`, options);
+  const response = await fetch(`http://localhost:3000/contacts/add`, options);
 
   if (!response.ok) {
     handleError(response);
@@ -190,7 +189,7 @@ async function fetchEntreprises() {
     },
   };
 
-  const response = await fetch(`${baseURL}/entreprise/getAll`, options);
+  const response = await fetch(`http://localhost:3000/entreprise/getAll`, options);
 
   if (!response.ok) {
     handleError(response);

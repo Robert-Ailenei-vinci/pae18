@@ -3,7 +3,6 @@ package be.vinci.pae.services;
 import be.vinci.pae.business.domain.UserDTO;
 import java.util.List;
 
-
 /**
  * This interface provides methods for interacting with user data.
  */

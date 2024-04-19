@@ -2,8 +2,6 @@ import { getRememberMe, setAuthenticatedUser, setRememberMe } from '../../utils/
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
-import baseURL from '../../../config';
-
 
 const LoginPage = () => {
   clearPage();
@@ -66,13 +64,13 @@ function onCheckboxClicked(e) {
 async function onLogin(e) {
   e.preventDefault();
 
-  const email = document.querySelector('#mail').value;
+  const login = document.querySelector('#mail').value;
   const password = document.querySelector('#password').value;
 
   const options = {
     method: 'POST',
     body: JSON.stringify({
-      email,
+      login,
       password,
     }),
     headers: {
@@ -80,7 +78,7 @@ async function onLogin(e) {
     },
   };
 
-  const response = await fetch(`${baseURL}/auths/login`, options);
+  const response = await fetch(`http://localhost:3000/auths/login`, options);
 
   if (!response.ok) {
     if (response.status === 401) {

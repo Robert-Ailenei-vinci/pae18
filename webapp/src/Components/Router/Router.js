@@ -87,7 +87,7 @@ function onFrontendLoad() {
             options);
 
         if (!response.ok) {
-          alert('Failed to fetch user');
+          throw new Error('Failed to fetch user');
         }
         const user = await response.json();
         setAuthenticatedUser(user);

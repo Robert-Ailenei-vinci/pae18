@@ -48,40 +48,7 @@ public interface EntrepriseUCC {
    */
   List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId);
 
-
-  /**
-   * Blacklists an enterprise.
-   *
-   * @param entrepriseId id of the entreprise to blacklist
-   * @param reason       reason for blacklisting
-   * @param version      version of the entreprise
-   * @return blacklisted entreprise
-   */
-  EntrepriseDTO blacklist(int entrepriseId, String reason, int version);
-
-  /**
-   * Unblacklists an enterprise.
-   *
-   * @param entrepriseId id of the entreprise to unblacklist
-   * @param version      version of the entreprise
-   * @return unblacklisted entreprise
-   */
-  EntrepriseDTO unblacklist(int entrepriseId, int version);
-
-
-  /**
-   * Retrieves all enterprises for a given school year.
-   *
-   * @param idSchoolYear the school year id
-   * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
-   */
-  List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);
-
-  /**
-   * Retrieves the count of stages for a given school year.
-   *
-   * @param idEntreprise the entreprise id
-   * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
-   */
   int getStagesCountForSchoolYear(int idEntreprise);
+
+  List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear, String orderBy);
 }

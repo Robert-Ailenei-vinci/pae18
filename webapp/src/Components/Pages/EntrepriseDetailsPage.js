@@ -4,8 +4,6 @@ import {getAuthenticatedUser} from "../../utils/auths";
 import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
 import {makeStateClean} from "./utils/MakeStateClean";
-import {blacklistEntreprise} from "./utils/BlacklistEntreprise";
-import {unblacklistEntreprise} from "./utils/UnBlacklistEntreprise";
 
 const EntrepriseDetailsPage = async () => {
   clearPage();
@@ -67,25 +65,21 @@ async function fetchStagesCountForCurrentYear(user) {
       alert("An error occurred:"+response.statusText);
     }
   }
-  return response.json();
+    return response.json();
 }
+
 let isRendering = false;
 async function renderDetailsEntreprise() {
-  const user = getAuthenticatedUser();
-  const entreprise = await fetchEntrepriseDetails(user);
-  let isBlacklisted = entreprise.blacklisted;
-  if (isBlacklisted==false) {
   if (isRendering) {
     return;
   }
-  
+  const user = getAuthenticatedUser();
   isRendering = true;
-  
-  console.log(entreprise);
+  const entreprise = await fetchEntrepriseDetails(user);
   renderPageTitle('Détails de l\'entreprise : ' + entreprise.tradeName);
   const allContactsData = await fetchEntrepriseContacts(user);
-  const nbStages = await fetchStagesCountForCurrentYear(user);
-  console.log("nbStages : "+nbStages);
+  const nbStagesData = await fetchStagesCountForCurrentYear(user);
+  console.log("nbStagesData : "+JSON.stringify(nbStagesData));
   isRendering = false;
   console.log("Contacts data : "+JSON.stringify(allContactsData));
 
@@ -93,55 +87,10 @@ async function renderDetailsEntreprise() {
 
   const nbStudentTitle = document.createElement('h4')
   nbStudentTitle.textContent = 'Nombre d\'étudiants en stage ' +
-      'pour l\'année courante : '+nbStages;
+      'pour l\'année courante : '+nbStagesData.nbStages;
 
-  const submitButton = document.createElement('button');
-  submitButton.textContent = 'Blacklister';
-  submitButton.className = 'btn btn-primary';
-  submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
-// Create the form
-const form = document.createElement('form');
-form.style.display = 'none'; // Initially hide the form
+  main.appendChild(nbStudentTitle)
 
-// Create the label
-const label = document.createElement('label');
-label.textContent = 'Veuillez indiquer la raison du refus :';
-form.appendChild(label);
-
-// Create the input field
-const input = document.createElement('input');
-input.type = 'text';
-form.appendChild(input);
-
-// Create the "Confirm" button
-const confirmButton = document.createElement('button');
-confirmButton.textContent = 'Confirmer';
-confirmButton.type = 'submit'; // Set the type to "submit" to submit the form
-form.appendChild(confirmButton);
-
-// Replace the "Blacklister" button with the form when clicked
-submitButton.addEventListener('click', function() {
-  main.replaceChild(form, submitButton); // Replace the "Blacklister" button with the form
-  form.style.display = 'block'; // Show the form
-});
-
-// Add an event listener to the form to handle the submit event
-form.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent the form from being submitted normally
-
-  // Show an alert asking for confirmation
-  console.log("zaza ", input.value, " zaza ", entreprise.id)
-  const isConfirmed = confirm('Are you sure?');
-  if (isConfirmed) {
-    //
-    blacklistEntreprise(input.value, entreprise.id, entreprise.version);
-    setTimeout(function() {
-      Navigate('/seeEntreprises');
-    }, 500);
-  }
-});
-  main.appendChild(nbStudentTitle);
-  main.appendChild(submitButton); 
   const tableContactsTitle = document.createElement('h5');
   tableContactsTitle.textContent = `Contacts de l'entreprise (${allContactsData.length}) : `;
 
@@ -194,40 +143,7 @@ form.addEventListener('submit', function(event) {
   Navbar();
 
   Navigate(`/detailsEntreprise/${usePathParams()}`);
-  }else {
-    const entrepriseBlacklisted = await fetchEntrepriseDetails(user);
 
-    const main = document.querySelector('main');
-
-    // Create a title
-    const title = document.createElement('h2');
-    title.textContent = 'Cette entreprise a été blacklistée';
-    main.appendChild(title);
-  
-    // Create the "Deblacklister" button
-    const deblacklistButton = document.createElement('button');
-    deblacklistButton.textContent = 'Deblacklister';
-    deblacklistButton.className = 'btn btn-primary';
-    deblacklistButton.type = 'button';
-  
-    // Add an event listener to the "Deblacklister" button
-    deblacklistButton.addEventListener('click', function() {
-      // Show an alert asking for confirmation
-      console.log(entrepriseBlacklisted, " ver")
-      const isConfirmed = confirm('Are you sure?');
-      if (isConfirmed) {
-        // If confirmed, unblacklist the company
-        // Replace "unblacklistEntreprise" with the actual function to unblacklist the company
-        unblacklistEntreprise(entreprise.id, entreprise.version);
-        setTimeout(function() {
-          Navigate('/seeEntreprises');
-        }, 500);
-      }
-    });
-  
-    // Add the "Deblacklister" button to the main element
-    main.appendChild(deblacklistButton);
-  }
 }
 
 export default EntrepriseDetailsPage;

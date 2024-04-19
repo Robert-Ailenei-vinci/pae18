@@ -1,16 +1,13 @@
 package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
@@ -37,6 +34,7 @@ class EntrepriseUCCImplTest {
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
   private EntrepriseDTO expectedEntreprise;
+
   private DALServices dalServices;
 
   @BeforeEach
@@ -54,40 +52,17 @@ class EntrepriseUCCImplTest {
     doNothing().when(dalServices).startTransaction();
     doNothing().when(dalServices).commitTransaction();
     doNothing().when(dalServices).rollbackTransaction();
+  }
 
-    // Arrange
-    // Arrange
-    Entreprise entreprise = (Entreprise) factory.getEntreprise();
+  @Test
+  public void testGetOne() {
     entreprise.setId(1);
-    when(entrepriseDAO.getOne(anyInt())).thenReturn(entreprise);
-  }
+    entreprise.setTradeName("zaza");
 
-  @Test
-  void getOneSuccess() {
-    // Arrange
-    int entrepriseId = 1;
-    Entreprise entreprise = (Entreprise) factory.getEntreprise();
-    entreprise.setId(entrepriseId);
+    when(entrepriseUcc.getOne(1)).thenReturn(entreprise);
+    expectedEntreprise = entrepriseUcc.getOne(1);
 
-    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
-    // Act
-    EntrepriseDTO retrievedEntreprise = entrepriseUcc.getOne(entrepriseId);
-
-    // Assert
-    assertNotNull(retrievedEntreprise);
-    assertEquals(entrepriseId, retrievedEntreprise.getId());
-  }
-
-  @Test
-  void getOneWithException() {
-    // Arrange
-    int entrepriseId = 1;
-    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
-
-    // Act and Assert
-    assertThrows(RuntimeException.class, () -> {
-      entrepriseUcc.getOne(entrepriseId);
-    });
+    assertEquals(entreprise.getId(), expectedEntreprise.getId());
   }
 
   @Test
@@ -96,6 +71,27 @@ class EntrepriseUCCImplTest {
     assertThrows(RuntimeException.class, () -> {
       entrepriseUcc.getOne(1);
     });
+  }
+
+
+  @Test
+  void createOne() {
+    // 1. Arrange
+    user.setRole("etudiant");
+    expectedEntreprise = entreprise1;
+    when(entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email"))
+        .thenReturn(expectedEntreprise);
+    when(
+        entrepriseDAO.createOne("tradeName", "designation", "address", "phoneNum", "email"))
+        .thenReturn(entreprise1);
+
+    // 2. Act
+    EntrepriseDTO actualEntreprise = entrepriseUcc.createOne(user, "tradeName", "designation",
+        "address", "phoneNum", "email");
+
+    // 3. Assert
+    assertNotNull(actualEntreprise);
+    assertEquals(expectedEntreprise, actualEntreprise);
   }
 
   @Test
@@ -116,7 +112,7 @@ class EntrepriseUCCImplTest {
     expectedEntreprises.add(entreprise1);
     expectedEntreprises.add(entreprise2);
 
-    when(entrepriseDAO.getAll()).thenReturn(expectedEntreprises);
+    when(entrepriseUcc.getAll()).thenReturn(expectedEntreprises);
 
     // 2. Act
     List<EntrepriseDTO> actualEntreprises = entrepriseUcc.getAll();
@@ -138,68 +134,83 @@ class EntrepriseUCCImplTest {
   }
 
   @Test
-  void blacklistSuccess() {
-    // Arrange
-    int entrepriseId = 1;
-    Entreprise entreprise = (Entreprise) factory.getEntreprise();
-    entreprise.setId(entrepriseId);
-    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
-    when(entrepriseDAO.blacklist(entreprise, entreprise.getVersion())).thenReturn(entreprise);
-    String reason = "Test reason";
+  public void testGetAllForSchoolYear() {
+    // 1. Arrange
+    List<EntrepriseDTO> expectedEntreprises = new ArrayList<>();
+    EntrepriseDTO entreprise1 = factory.getEntreprise();
+    EntrepriseDTO entreprise2 = factory.getEntreprise();
+    expectedEntreprises.add(entreprise1);
+    expectedEntreprises.add(entreprise2);
 
-    // Act
-    EntrepriseDTO blacklistedEntreprise = entrepriseUcc.blacklist(entrepriseId, reason,
-        entreprise.getVersion());
+    when(entrepriseUcc.getAllForSchoolYear(1, "orderBy")).thenReturn(expectedEntreprises);
 
-    // Assert
-    assertNotNull(blacklistedEntreprise);
-    assertTrue(blacklistedEntreprise.isBlacklisted());
-    assertEquals(reason, blacklistedEntreprise.getBlacklistReason());
+    // 2. Act
+    List<EntrepriseDTO> actualEntreprises = entrepriseUcc.getAllForSchoolYear(1, "orderBy");
+
+    // 3. Assert
+    assertNotNull(actualEntreprises);
+    assertEquals(expectedEntreprises.size(), actualEntreprises.size());
+    for (int i = 0; i < expectedEntreprises.size(); i++) {
+      assertEquals(expectedEntreprises.get(i), actualEntreprises.get(i));
+    }
   }
 
   @Test
-  void blacklistWithException() {
-    // Arrange
-    int entrepriseId = 1;
-    String reason = "Test reason";
-    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
-
-    // Act and Assert
+  public void testGetAllForSchoolYearWithException() {
+    when(entrepriseUcc.getAllForSchoolYear(1, "orderBy"));
     assertThrows(RuntimeException.class, () -> {
-      entrepriseUcc.blacklist(entrepriseId, reason, entreprise.getVersion());
+      entrepriseUcc.getAllForSchoolYear(1, "orderBy");
     });
   }
 
-
   @Test
-  void unblacklistSuccess() {
-    // Arrange
-    int entrepriseId = 1;
-    Entreprise entreprise = (Entreprise) factory.getEntreprise();
-    entreprise.setId(entrepriseId);
-    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
-    when(entrepriseDAO.unblacklist(entreprise, entreprise.getVersion())).thenReturn(entreprise);
+  public void testGetAllContactsByEntrepriseId() {
+    // 1. Arrange
+    List<ContactDTO> expectedContacts = new ArrayList<>();
+    ContactDTO contact1 = factory.getContact();
+    ContactDTO contact2 = factory.getContact();
+    expectedContacts.add(contact1);
+    expectedContacts.add(contact2);
 
-    // Act
-    EntrepriseDTO unblacklistedEntreprise = entrepriseUcc.unblacklist(entrepriseId,
-        entreprise.getVersion());
+    when(entrepriseUcc.getAllContactsByEntrepriseId(1)).thenReturn(expectedContacts);
 
-    // Assert
-    assertNotNull(unblacklistedEntreprise);
-    assertFalse(unblacklistedEntreprise.isBlacklisted());
-    assertNull(unblacklistedEntreprise.getBlacklistReason());
+    // 2. Act
+    List<ContactDTO> actualContacts = entrepriseUcc.getAllContactsByEntrepriseId(1);
+
+    // 3. Assert
+    assertNotNull(actualContacts);
+    assertEquals(expectedContacts.size(), actualContacts.size());
+    for (int i = 0; i < expectedContacts.size(); i++) {
+      assertEquals(expectedContacts.get(i), actualContacts.get(i));
+    }
   }
 
   @Test
-  void unblacklistWithException() {
-    // Arrange
-    int entrepriseId = 1;
-    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
-
-    // Act and Assert
+  public void testGetAllContactsByEntrepriseIdWithException() {
+    when(entrepriseUcc.getAllContactsByEntrepriseId(1));
     assertThrows(RuntimeException.class, () -> {
-      entrepriseUcc.unblacklist(entrepriseId, entreprise.getVersion());
+      entrepriseUcc.getAllContactsByEntrepriseId(1);
     });
   }
 
+  @Test
+  public void getStagesCountForSchoolYear() {
+    // 1. Arrange
+    int expectedCount = 2;
+    when(entrepriseUcc.getStagesCountForSchoolYear(1)).thenReturn(expectedCount);
+
+    // 2. Act
+    int actualCount = entrepriseUcc.getStagesCountForSchoolYear(1);
+
+    // 3. Assert
+    assertEquals(expectedCount, actualCount);
+  }
+
+  @Test
+  public void getStagesCountForSchoolYearWithException() {
+    when(entrepriseUcc.getStagesCountForSchoolYear(1));
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getStagesCountForSchoolYear(1);
+    });
+  }
 }

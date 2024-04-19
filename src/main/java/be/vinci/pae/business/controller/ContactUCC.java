@@ -30,53 +30,34 @@ public interface ContactUCC {
   List<ContactDTO> getAllContactsByUserId(int userId);
 
   /**
-   * Sets the state of a contact to "meeting" and the type of meeting.
+   * set the state of a contact to meet and the type of meeting.
    *
-   * @param idContact   The id of the contact to set.
-   * @param meetingType The type of the meeting.
-   * @param userId      The id of the user.
-   * @param version     The version of the contact in the frontend.
-   * @return The updated contact.
+   * @param idContact   the id of the contact to set.
+   * @param meetingType the type od the meeting.
+   * @param userId      the id of user.
+   * @param version     the version of the contact in the frontend.
+   * @return the contact.
    */
   ContactDTO meetContact(int idContact, String meetingType, int userId, int version);
 
   /**
-   * Sets the state of a contact to "stop followed".
+   * set the state of a contact to stop followed.
    *
-   * @param contactId The id of the contact to set.
-   * @param userId    The id of the user.
-   * @param version   The version of the contact in the frontend.
-   * @return The updated contact.
+   * @param contactId the id of the contact to set.
+   * @param userId    the id of user.
+   * @param version   the version of the contact in the frontend.
+   * @return the contact.
    */
   ContactDTO stopFollowContact(int contactId, int userId, int version);
 
   /**
-   * Sets the state of a contact to "refused" and provides the reason.
+   * set the state of a contact to refused and the reason.
    *
-   * @param contactId     The id of the contact to set.
-   * @param refusalReason The reason for refusal.
-   * @param userId        The id of the user.
-   * @param version       The version of the contact in the frontend.
-   * @return The updated contact.
+   * @param contactId     the id of the contact to set.
+   * @param refusalReason the type od the meeting.
+   * @param userId        the id of user.
+   * @param version       the version of the contact in the frontend.
+   * @return the contact.
    */
   ContactDTO refusedContact(int contactId, String refusalReason, int userId, int version);
-
-
-  /**
-   * set all internships of a contact to refusé if an entreprise is blacklisted.
-   *
-   * @param idEntreprise the id of the entreprise.
-   * @return true if the internships are canceled.
-   */
-  boolean cancelInternshipsBasedOnEntreprise(int idEntreprise);
-
-  /**
-   * Sets the state of a contact to "accepted".
-   *
-   * @param contactId The id of the contact to set.
-   * @param userId    The id of the user.
-   * @param version   The version of the contact in the frontend.
-   * @return The updated contact.
-   */
-  ContactDTO acceptContact(int contactId, int userId, int version);
 }

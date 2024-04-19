@@ -153,12 +153,12 @@ public interface StageDTO {
    *
    * @return the version of the stage
    */
-  int getVersion();
+  int get_version();
 
   /**
    * Sets the version of the stage.
    *
-   * @param version the version of the stage
+   * @param _version the version of the stage
    */
-  void setVersion(int version);
+  void set_version(int _version);
 }

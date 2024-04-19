@@ -35,9 +35,8 @@ public class StageRessource {
   @GET
   @Path("stageByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant"})
+  @Authorize
   public StageDTO getOneStageByUserId(@Context ContainerRequestContext requestContext) {
-    LoggerUtil.logInfo("Starting : stages/getAllByUserId");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
     StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
@@ -51,7 +50,6 @@ public class StageRessource {
   /**
    * Modify internship subject data.
    *
-   * @param json           new data in JSON format
    * @param requestContext the request context
    * @return the stage DTO
    */

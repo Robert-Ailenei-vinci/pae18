@@ -2,15 +2,12 @@ package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.SupervisorDTO;
-import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.SupervisorNotFoundException;
 import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class represents an implementation of the {@link SupervisorDAO} interface.
@@ -36,36 +33,10 @@ public class SupervisorDAOImpl implements SupervisorDAO {
         }
       }
     } catch (Exception e) {
+      LoggerUtil.logError("No Supervisor found with id : " + id, e);
       throw new SupervisorNotFoundException("Supervisor not found with this id " + id, e);
     }
     return null;
-  }
-
-  @Override
-  public List<SupervisorDTO> getAll(int entrepriseId) {
-
-    try (PreparedStatement getAll = dalBackServices.getPreparedStatement(
-        "SELECT * FROM pae.internship_supervisor WHERE entreprise = ? ")) {
-      getAll.setInt(1, entrepriseId);
-
-      List<SupervisorDTO> supervisorDTOS = new ArrayList<>();
-      try (ResultSet rs = getAll.executeQuery()) {
-        while (rs.next()) {
-          SupervisorDTO supervisorDTO;
-          supervisorDTO = getSupervisorMethodFromDB(rs);
-          supervisorDTOS.add(supervisorDTO);
-
-        }
-        LoggerUtil.logInfo("supervisor getAll in DAO");
-
-        return supervisorDTOS;
-      } catch (Exception e) {
-        throw new FatalError("Error processing result set", e);
-      }
-
-    } catch (Exception e) {
-      throw new EntrepriseNotFoundException("Entreprise not found with this id " + entrepriseId, e);
-    }
   }
 
   private SupervisorDTO getSupervisorMethodFromDB(ResultSet rs) {
@@ -79,6 +50,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
       supervisor.setEmail(rs.getString("email"));
       supervisor.setEntreprise(entrepriseDAO.getOne(rs.getInt("entreprise")));
     } catch (Exception e) {
+      LoggerUtil.logError("Error while getting supervisor from database", e);
       throw new FatalError("Error while getting supervisor from database", e);
     }
     return supervisor;

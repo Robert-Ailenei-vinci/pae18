@@ -61,14 +61,4 @@ public interface ContactDAO {
    * @return the list of contacts.
    */
   List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId);
-
-  /**
-   * cancel the internships if entreprise is blacklisted.
-   *
-   * @param entrepriseId the id of entreprise.
-   * @return true if the internships are canceled.
-   */
-  boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId);
-
-  void cancelAllContact(ContactDTO contact);
 }
