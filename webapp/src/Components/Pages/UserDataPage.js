@@ -48,8 +48,7 @@ async function fetchContactsData(user) {
     const contactsData = await responseContacts.json();
     return contactsData;
   } catch (error) {
-    throw new Error(
-        `Une erreur est survenue lors de la recherche des contacts : ${error.message}`);
+    return undefined;
   }
 }
 
@@ -71,14 +70,14 @@ async function fetchStageData(user) {
     }
 
     if (!responseStage.ok) {
-      throw new Error(`Une erreur est survenue lors de la recherche des stages : ${responseStage.statusText}`);
+      throw new Error(
+          `Une erreur est survenue lors de la recherche des stages : ${responseStage.statusText}`);
     }
 
     const stageData = await responseStage.json();
 
     return stageData;
   } catch (error) {
-    alert(error.message);
     return undefined;
   }
 }
@@ -98,8 +97,10 @@ async function renderPersonnalInfoPage() {
   ul.className = 'p-5';
 
   isRendering = true; // Marquer le rendu comme en cours
-  const contactsData = await fetchContactsData(user);
-  const stageData = await fetchStageData(user);
+
+    const contactsData = await fetchContactsData(user);
+    const stageData = await fetchStageData(user);
+
   isRendering = false; // Marquer le rendu comme terminé
 
   console.log('Contacts : ', contactsData);

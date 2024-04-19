@@ -34,7 +34,7 @@ public class SchoolYearRessource {
   @GET
   @Path("getAllSchoolYears")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant"})
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<SchoolYearDTO> getAllSchoolYears() {
     return schoolYearUCC.getAllSchoolYears();
   }

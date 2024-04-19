@@ -80,7 +80,7 @@ public class EntrepriseResource {
   @GET
   @Path("getOne/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant"})
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
     LoggerUtil.logInfo("Starting : enterprise/getOne");
     EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
@@ -218,7 +218,7 @@ public class EntrepriseResource {
   @GET
   @Path("entrepriseDetailsAllContacts/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant"})
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<ContactDTO> getAllContactsByEntrepriseId(
       @PathParam("entrepriseId") int entrepriseId) {
     List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
@@ -238,7 +238,7 @@ public class EntrepriseResource {
   @GET
   @Path("getAllForSchoolYear/{idSchoolYear}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear,
       @QueryParam("orderBy") String orderBy) {
     // Validate orderBy parameter
@@ -273,7 +273,7 @@ public class EntrepriseResource {
   @GET
   @Path("getStagesCountForCurrentYear/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public ObjectNode getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
     ObjectNode toReturn = jsonMapper.createObjectNode();
     int nbStages = -1;
