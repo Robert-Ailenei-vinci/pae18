@@ -2,6 +2,7 @@ import { getAuthenticatedUser } from '../../utils/auths';
 import { clearPage, renderPageTitle } from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
 import Navigate from '../Router/Navigate';
+import baseURL from '../../../config';
 
 const AddEnterprisePage = async () => {
   clearPage();
@@ -112,7 +113,7 @@ async function handleSubmit(trade_name, designation, address, phone_num, email) 
   };
 
   try {
-    const response = await fetch(`http://localhost:3000/entreprise/addOne`, options);
+    const response = await fetch(`${baseURL}/entreprise/addOne`, options);
     if (!response.ok) {
       throw new Error(`Failed to add contact: ${response.statusText}`);
     }

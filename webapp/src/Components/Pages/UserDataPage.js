@@ -1,20 +1,25 @@
+/* eslint-disable no-self-assign */
 /* eslint-disable spaced-comment */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
+import changeInternshipSubject from '../Pages/utils/ChangeInternship';
 import {
   getRememberMe,
   setAuthenticatedUser,
   setRememberMe,
   getAuthenticatedUser
 } from '../../utils/auths';
-import { clearPage, renderPageTitle } from '../../utils/render';
+import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
+
 import Navigate from '../Router/Navigate';
 import {
   meetContact,
   refuseContact,
   stopFollowContact
 } from "./utils/ChangeState";
+import baseURL from '../../../config';
+import CreateStagePage from "./CreateStagePage";
 
 const UserDataPage = () => {
   clearPage();
@@ -33,18 +38,18 @@ async function fetchContactsData(user) {
 
   try {
     const responseContacts = await fetch(
-      `http://localhost:3000/contacts/allContactsByUserId`, options);
+        `${baseURL}/contacts/allContactsByUserId`, options);
 
     if (!responseContacts.ok) {
       throw new Error(
-        `Failed to fetch contacts: ${responseContacts.statusText}`);
+          `Failed to fetch contacts: ${responseContacts.statusText}`);
     }
 
     const contactsData = await responseContacts.json();
     return contactsData;
   } catch (error) {
     throw new Error(
-      `An error occurred while fetching contacts: ${error.message}`);
+        `An error occurred while fetching contacts: ${error.message}`);
   }
 }
 
@@ -59,7 +64,7 @@ async function fetchStageData(user) {
 
   try {
     const responseStage = await fetch(
-      `http://localhost:3000/stages/stageByUserId`, options);
+        `${baseURL}/stages/stageByUserId`, options);
 
     if (responseStage == null) {
       return null;
@@ -70,6 +75,7 @@ async function fetchStageData(user) {
     }
 
     const stageData = await responseStage.json();
+
     return stageData;
   } catch (error) {
     return undefined;
@@ -97,14 +103,15 @@ async function renderPersonnalInfoPage() {
 
   console.log('Contacts : ', contactsData);
   console.log(user);
+  console.log('StageData: ', stageData)
   const items = [
-    { label: 'Nom de famille: ', value: user.lastName },
-    { label: 'Prénom: ', value: user.firstName },
-    { label: 'Email: ', value: user.email },
-    { label: 'Numéro de Téléphone: ', value: user.phoneNum },
-    { label: 'Date d\'enregistrement: ', value: user.registrationDate },
-    { label: 'Année académique: ', value: user.schoolYear },
-    { label: 'Role: ', value: user.role }
+    {label: 'Nom de famille: ', value: user.lastName},
+    {label: 'Prénom: ', value: user.firstName},
+    {label: 'Email: ', value: user.email},
+    {label: 'Numéro de Téléphone: ', value: user.phoneNum},
+    {label: 'Date d\'enregistrement: ', value: user.registrationDate},
+    {label: 'Année académique: ', value: user.schoolYear},
+    {label: 'Role: ', value: user.role}
   ];
 
   items.forEach(item => {
@@ -113,28 +120,26 @@ async function renderPersonnalInfoPage() {
     ul.appendChild(li);
   });
 
-  const changeData = document.createElement('input');
-  changeData.value = 'Changer mes données personelles';
-  changeData.type = 'button';
-  changeData.className = 'btn btn-info';
-  changeData.addEventListener('click', () => {
+  const submit = document.createElement('input');
+  submit.value = 'Changer mes données personelles';
+  submit.type = 'button';
+  submit.className = 'btn btn-info';
+  submit.addEventListener('click', () => {
     Navigate('/users/changeData');
   });
 
-
   // Creating table for contacts
   const table = document.createElement('table');
-  table.className = 'table';
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
   const trHead = document.createElement('tr');
 
   ['Entreprise', 'Appelation', 'Adresse', 'Mail', 'N°Telephone', 'Etat', ' ',
     'Lieu/Type de rencontre', 'Raison de refus'].forEach(text => {
-      const th = document.createElement('th');
-      th.textContent = text;
-      trHead.appendChild(th);
-    });
+    const th = document.createElement('th');
+    th.textContent = text;
+    trHead.appendChild(th);
+  });
 
   thead.appendChild(trHead);
   table.appendChild(thead);
@@ -144,11 +149,11 @@ async function renderPersonnalInfoPage() {
 
     // Fields from entreprise object
     ['tradeName', 'designation', 'address', 'email', 'phoneNumber'].forEach(
-      key => {
-        const td = document.createElement('td');
-        td.textContent = contact.entreprise[key] || '-';
-        tr.appendChild(td);
-      });
+        key => {
+          const td = document.createElement('td');
+          td.textContent = contact.entreprise[key] || '-';
+          tr.appendChild(td);
+        });
 
     // État
     const tdState = document.createElement('td');
@@ -165,8 +170,6 @@ async function renderPersonnalInfoPage() {
     button.setAttribute('data-bs-target', '#collapseExample_' + contact.id);
     button.setAttribute('aria-expanded', 'false');
     button.setAttribute('aria-controls', 'collapseExample_' + contact.id);
-
-
 
     const divForm = document.createElement('div');
     divForm.className = 'collapse';
@@ -185,13 +188,13 @@ async function renderPersonnalInfoPage() {
       });
       form.appendChild(select);
 
-      // Création de la zone de texte pour la raison ou le lieu
+// Création de la zone de texte pour la raison ou le lieu
       const extraInput = document.createElement('input');
       extraInput.type = 'text';
       extraInput.placeholder = 'Lieu';
       extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
 
-      // Gérer l'affichage de la zone de texte en fonction de la sélection
+// Gérer l'affichage de la zone de texte en fonction de la sélection
       select.addEventListener('change', () => {
         if (select.value === 'Rencontré') {
           extraInput.style.display = 'block'; // Afficher la zone de texte si "Rencontré" ou "Refusé" est sélectionné
@@ -200,14 +203,14 @@ async function renderPersonnalInfoPage() {
         }
       });
 
-      // Création du bouton de soumission
+// Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
       submitButton.className = 'btn btn-primary';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
-      // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
-      form.addEventListener('submit', (event) => {
+// Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
+      form.addEventListener('submit', () => {
 
         const selectedOption = select.value;
         let additionalInfo = ''; // Informations supplémentaires à envoyer avec la soumission
@@ -233,16 +236,16 @@ async function renderPersonnalInfoPage() {
 
         // Fermer le collapsible après la soumission
         const collapse = document.getElementById(
-          'collapseExample_' + contact.id);
+            'collapseExample_' + contact.id);
         const bsCollapse = new bootstrap.Collapse(collapse);
         bsCollapse.hide();
       });
 
-      // Ajout des éléments au formulaire
+// Ajout des éléments au formulaire
       form.appendChild(extraInput);
       form.appendChild(submitButton);
 
-      // Ajout du formulaire au divForm
+// Ajout du formulaire au divForm
       divForm.appendChild(form);
 
       tdButton.appendChild(button);
@@ -255,7 +258,7 @@ async function renderPersonnalInfoPage() {
       const form = document.createElement('form');
       const select = document.createElement('select');
       select.className = 'form-select'; // Ajoutez des classes Bootstrap si nécessaire
-      ['Refusé', 'Suivi stoppé'].forEach(optionText => {
+      ['Refusé', 'Suivi stoppé', 'Accepté'].forEach(optionText => {
         const option = document.createElement('option');
         option.value = optionText;
         option.textContent = optionText;
@@ -263,13 +266,13 @@ async function renderPersonnalInfoPage() {
       });
       form.appendChild(select);
 
-      // Création de la zone de texte pour la raison ou le lieu
+// Création de la zone de texte pour la raison ou le lieu
       const extraInput = document.createElement('input');
       extraInput.type = 'text';
       extraInput.placeholder = 'Raison';
       extraInput.style.display = 'block'; // Par défaut, cachez la zone de texte
 
-      // Gérer l'affichage de la zone de texte en fonction de la sélection
+// Gérer l'affichage de la zone de texte en fonction de la sélection
       select.addEventListener('change', () => {
         if (select.value === 'Refusé') {
           extraInput.style.display = 'block'; // Afficher la zone de texte si "Rencontré" ou "Refusé" est sélectionné
@@ -278,13 +281,13 @@ async function renderPersonnalInfoPage() {
         }
       });
 
-      // Création du bouton de soumission
+// Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
       submitButton.className = 'btn btn-primary';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
-      // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
+// Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
       form.addEventListener('submit', (event) => {
 
         const selectedOption = select.value;
@@ -305,6 +308,10 @@ async function renderPersonnalInfoPage() {
             refuseContact(contact.id, additionalInfo, contact.version);
 
             break;
+          case 'Accepté':
+            CreateStagePage(contact);
+
+            return;
           default:
             // Action par défaut ou erreur
             alert("Sélectionnez un état");
@@ -312,16 +319,16 @@ async function renderPersonnalInfoPage() {
 
         // Fermer le collapsible après la soumission
         const collapse = document.getElementById(
-          'collapseExample_' + contact.id);
+            'collapseExample_' + contact.id);
         const bsCollapse = new bootstrap.Collapse(collapse);
         bsCollapse.hide();
       });
 
-      // Ajout des éléments au formulaire
+// Ajout des éléments au formulaire
       form.appendChild(extraInput);
       form.appendChild(submitButton);
 
-      // Ajout du formulaire au divForm
+// Ajout du formulaire au divForm
       divForm.appendChild(form);
 
       tdButton.appendChild(button);
@@ -355,28 +362,76 @@ async function renderPersonnalInfoPage() {
   const stageTbody = document.createElement('tbody');
   const stageTrHead = document.createElement('tr');
 
-  ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone',
+  ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone', 'Sujet de stage',
     'Type de rencontre'].forEach(text => {
-      const th = document.createElement('th');
-      th.textContent = text;
-      stageTrHead.appendChild(th);
-    });
+    const th = document.createElement('th');
+    th.textContent = text;
+    stageTrHead.appendChild(th);
+  });
 
   stageThead.appendChild(stageTrHead);
   stageTable.appendChild(stageThead);
 
   const tr = document.createElement('tr');
 
-  // Fields from entreprise object
+// Fields from entreprise object
   ['tradeName', 'designation', 'email', 'phoneNumber'].forEach(key => {
     const td = document.createElement('td');
     if (stageData) {
-      td.textContent = stageData.contact.entreprise[key] || '-';
+      td.textContent = stageData.contact.entreprise[key] || '----';
     }
     tr.appendChild(td);
   });
 
-  // Field for meetingType
+  ['internshipProject'].forEach(key => {
+    const td = document.createElement('td');
+    if (stageData) {
+      td.textContent = stageData.internshipProject || '-';
+    }
+    var btn = document.createElement("button");
+
+    // Set the text of the button
+    btn.innerHTML = "Modifier sujet de stage";
+    btn.type = 'button'; // Change this to 'button' to prevent form submission on click
+
+    // Add an event listener to the button
+    btn.addEventListener('click', function () {
+      // Create an input field and a new button
+      var input = document.createElement("input");
+      var confirmBtn = document.createElement("button");
+
+      // Set the properties of the input field and the new button
+      input.type = 'text';
+      input.value = stageData.internshipProject
+          || 'Pas de sujet de stage defini'; // Set the value of the input field to the text content of the td element
+      confirmBtn.innerHTML = 'Confirmer';
+      confirmBtn.style.backgroundColor = 'green';
+      confirmBtn.type = 'button'; // Change this to 'button' to prevent form submission on click
+
+      // Add an event listener to the confirm button
+      confirmBtn.addEventListener('click', () => {
+        // Call the changeInternshipSubject method
+        changeInternshipSubject(stageData.contact.id, input.value,
+            stageData._version);
+        // Wait for 2 seconds (2000 milliseconds) and then reload the page
+        setTimeout(function () {
+          location.reload();
+        }, 500);
+
+      });
+
+      // Replace the text content of the td element with the input field and the new button
+      td.textContent = '';
+      td.appendChild(input);
+      td.appendChild(confirmBtn);
+    });
+
+    // Append the button to the td element
+    td.appendChild(btn);
+    tr.appendChild(td);
+  });
+
+// Field for meetingType
   const td = document.createElement('td');
   if (stageData) {
     td.textContent = stageData.contact.meetingType || '-';
@@ -387,7 +442,7 @@ async function renderPersonnalInfoPage() {
   stageTable.appendChild(stageTbody);
 
   main.appendChild(ul);
-  main.appendChild(changeData);
+  main.appendChild(submit);
 
   // Create and append a div to act as a spacer
   const spacer = document.createElement('div');

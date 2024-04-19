@@ -36,9 +36,9 @@ public class UserDAOImpl implements UserDAO {
   public List<UserDTO> getAll() {
     try (PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
         "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
-            + " u.phone_number, u.psw, u.registration_date,"
-            + " u.school_year, s.years_format AS academic_year, u._version "
-            + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year")) {
+        + " u.phone_number, u.psw, u.registration_date,"
+        + " u.school_year, s.years_format AS academic_year, u._version "
+        + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year")) {
       List<UserDTO> users = new ArrayList<>();
       try (ResultSet rs = getAllUsers.executeQuery()) {
         while (rs.next()) {
@@ -50,9 +50,8 @@ public class UserDAOImpl implements UserDAO {
         return users;
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error while getting all users", e);
+      throw new FatalError("Error processing result set", e);
     }
-    return null;
   }
 
   /**
@@ -65,11 +64,11 @@ public class UserDAOImpl implements UserDAO {
   public UserDTO getOne(String email) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT u.id_user, u.email, u.role_u, u.last_name,"
-            + " u.first_name, u.phone_number, u.psw,"
-            + " u.registration_date, u.school_year,"
-            + " s.years_format AS academic_year, u._version "
-            + "FROM pae.users u, pae.school_years s WHERE"
-            + " u.school_year=s.id_year AND u.email=?")) {
+        + " u.first_name, u.phone_number, u.psw,"
+        + " u.registration_date, u.school_year,"
+        + " s.years_format AS academic_year, u._version "
+        + "FROM pae.users u, pae.school_years s WHERE"
+        + " u.school_year=s.id_year AND u.email=?")) {
       preparedStatement.setString(1, email);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -80,7 +79,6 @@ public class UserDAOImpl implements UserDAO {
       }
       return null;
     } catch (Exception e) {
-      LoggerUtil.logError("User not found with emai : " + email, e);
       throw new UserNotFoundException("User not found with email " + email, e);
     }
   }
@@ -95,11 +93,11 @@ public class UserDAOImpl implements UserDAO {
   public UserDTO getOne(int id) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "SELECT u.id_user, u.email, u.role_u, u.last_name, "
-            + "u.first_name, u.phone_number, u.psw,"
-            + " u.registration_date, u.school_year,"
-            + " s.years_format AS academic_year, u._version "
-            + " FROM pae.users u, pae.school_years s WHERE"
-            + " u.school_year=s.id_year AND u.id_user=?")) {
+        + "u.first_name, u.phone_number, u.psw,"
+        + " u.registration_date, u.school_year,"
+        + " s.years_format AS academic_year, u._version "
+        + " FROM pae.users u, pae.school_years s WHERE"
+        + " u.school_year=s.id_year AND u.id_user=?")) {
       preparedStatement.setInt(1, id);
       try (ResultSet rs = preparedStatement.executeQuery()) {
 
@@ -109,7 +107,6 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("User not found with id : " + id, e);
       throw new UserNotFoundException("User not found with id " + id, e);
     }
     return null;
@@ -132,7 +129,6 @@ public class UserDAOImpl implements UserDAO {
         idYear = rs.getInt("id_year");
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
 
@@ -142,7 +138,6 @@ public class UserDAOImpl implements UserDAO {
         stmt.setString(1, buildYear());
         stmt.executeUpdate();
       } catch (Exception e) {
-        LoggerUtil.logError("Error processing result set", e);
         throw new FatalError("Error processing result set", e);
       }
       idYear = getLastInsertedYearId();
@@ -156,13 +151,12 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
 
     String sql4 =
         "INSERT INTO pae.users (id_user,email, role_u, last_name, first_name, phone_number,"
-            + " psw, registration_date, school_year, _version) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,0)";
+        + " psw, registration_date, school_year, _version) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?,0)";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql4)) {
       stmt.setInt(1, user.getId());
       stmt.setString(2, user.getEmail());
@@ -178,7 +172,6 @@ public class UserDAOImpl implements UserDAO {
 
       return stmt.executeUpdate() == 1;
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
   }
@@ -199,7 +192,6 @@ public class UserDAOImpl implements UserDAO {
       user.setSchoolYear(schoolYearDAO.getOne(rs.getInt("school_year")));
       user.setVersion(rs.getInt("_version"));
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return user;
@@ -214,6 +206,11 @@ public class UserDAOImpl implements UserDAO {
    */
   @Override
   public UserDTO changeUser(UserDTO user) {
+
+    if (getLastVersionFromDB(user.getEmail()) != user.getVersion()) {
+      throw new OptimisticLockException("User was updated by another transaction");
+    }
+
     StringBuilder sql = new StringBuilder("UPDATE pae.users SET ");
     List<Object> parameters = new ArrayList<>();
 
@@ -254,14 +251,10 @@ public class UserDAOImpl implements UserDAO {
       for (int i = 0; i < parameters.size(); i++) {
         stmt.setObject(i + 1, parameters.get(i));
       }
-      if (stmt.executeUpdate() == 0) {
-        LoggerUtil.logError("Error processing result set", new OptimisticLockException(""));
-        throw new OptimisticLockException("User was updated by another transaction");
-      }
 
+      stmt.executeUpdate();
       LoggerUtil.logInfo("user with id " + user.getId() + " was changed");
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return getOne(user.getEmail());
@@ -293,10 +286,25 @@ public class UserDAOImpl implements UserDAO {
         }
       }
     } catch (Exception e) {
-      LoggerUtil.logError("Error processing result set", e);
       throw new FatalError("Error processing result set", e);
     }
     return 0; // return 0 if no id was found
+  }
+
+  private int getLastVersionFromDB(String userId) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "SELECT _version FROM pae.users WHERE email = ? ")) {
+      preparedStatement.setString(1, userId);
+      try (ResultSet rs = preparedStatement.executeQuery()) {
+        if (rs.next()) {
+          return rs.getInt("_version");
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Erreur lors de la récupération de la dernière version");
+    }
+    return 0;
+
   }
 
 

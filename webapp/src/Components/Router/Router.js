@@ -36,15 +36,39 @@ function onHistoryChange() {
   });
 }
 
+function matchRoute(uri, route) {
+  const uriParts = uri.split('/');
+  const routeParts = route.split('/');
+  if (uriParts.length !== routeParts.length) {
+    return false;
+  }
+  for (let i = 0; i < routeParts.length; i++) {
+    if (routeParts[i].startsWith(':')) {
+      continue;
+    }
+    if (routeParts[i] !== uriParts[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function onFrontendLoad() {
   console.log("onFrontendLoad")
   window.addEventListener('load', async () => {
     const uri = removePathPrefix(window.location.pathname);
-    const componentToRender = routes[uri];
-    if (!componentToRender) {
-      throw Error(`The ${uri} ressource does not exist.`);
+
+    let componentToRender;
+    for (const route in routes) {
+      if (matchRoute(uri, route)) {
+        componentToRender = routes[route];
+        break;
+      }
     }
 
+    if (!componentToRender) {
+      throw Error(`The ${uri} resource does not exist.`);
+    }
     const user = getAuthenticatedUser();
 
     if (user) {
@@ -63,7 +87,7 @@ function onFrontendLoad() {
             options);
 
         if (!response.ok) {
-          throw new Error('Failed to fetch user');
+          alert('Failed to fetch user');
         }
         const user = await response.json();
         setAuthenticatedUser(user);

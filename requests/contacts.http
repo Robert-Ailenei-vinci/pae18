@@ -5,8 +5,8 @@ POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-  "login": "zaza@student.vinci.be",
-  "password": "mdp1"
+  "login": "Caroline.line@student.vinci.be",
+  "password": "mdpuser.1"
 }
 
 > {%
@@ -18,8 +18,8 @@ POST {{baseUrl}}/auths/login
 Content-Type: application/json
 
 {
-  "login": "zuzu@student.vinci.be",
-  "password": "mdp1"
+  "email": "raf.mill@student.vinci.be",
+  "password": "raf"
 }
 
 > {%
@@ -46,7 +46,8 @@ Content-Type: application/json
 Authorization: {{user}}
 
 {
-  "id_contact" : "1"
+  "id_contact" : "15",
+  "version" : 0
 }
 
 ### refused a contact

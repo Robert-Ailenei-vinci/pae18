@@ -1,35 +1,58 @@
 package be.vinci.pae.business.controller;
 
-import be.vinci.pae.business.domain.*;
-import be.vinci.pae.exception.BizException;
+import be.vinci.pae.business.domain.SupervisorDTO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.SupervisorDAO;
-import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
+import java.util.List;
 
+/**
+ * This class represents an implementation of the {@link SupervisorUCC} interface.
+ */
 public class SupervisorUCCImpl implements SupervisorUCC {
 
-    @Inject
-    private DALServices dalServices;
+  @Inject
+  private SupervisorDAO mySupervisorDAO;
+  @Inject
+  private DALServices dalServices;
 
-    @Inject
-    private SupervisorDAO mySupervisor;
+  @Override
+  public SupervisorDTO getOneById(int supervisorId) {
+    try {
+      // Start a new transaction
+      dalServices.startTransaction();
 
-    @Override
-    public SupervisorDTO createOne(String last_name, String first_name, int id_entreprise, String email, String numero) {
-        try {
-            dalServices.startTransaction();
+      // Retrieve the EntrepriseDTO from the DAO
+      SupervisorDTO supervisorDTO = mySupervisorDAO.getOneById(supervisorId);
 
-            Supervisor supervisor = (Supervisor) mySupervisor.createOne(last_name, first_name, id_entreprise,
-                    email, numero);
+      // Commit the transaction
+      dalServices.commitTransaction();
 
-            dalServices.commitTransaction();
-
-            return supervisor;
-        } catch (Exception e) {
-            LoggerUtil.logError("BizError", e);
-            dalServices.rollbackTransaction();
-            throw e;
-        }
+      return supervisorDTO;
+    } catch (Exception e) {
+      // Rollback the transaction in case of an error
+      dalServices.rollbackTransaction();
+      throw e;
     }
+  }
+
+  @Override
+  public List<SupervisorDTO> getAll(int entrepriseId) {
+    try {
+      // Start a new transaction
+      dalServices.startTransaction();
+
+      // Retrieve the list of EntrepriseDTO from the DAO
+      List<SupervisorDTO> supervisorDTOs = mySupervisorDAO.getAll(entrepriseId);
+
+      // Commit the transaction
+      dalServices.commitTransaction();
+
+      return supervisorDTOs;
+    } catch (Exception e) {
+      // Rollback the transaction in case of an error
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
 }

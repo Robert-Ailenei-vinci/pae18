@@ -63,18 +63,17 @@ public class AuthsResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public ObjectNode login(JsonNode json) {
+    LoggerUtil.logInfo("Starting : login");
     // Get and check credentials
-    if (!json.hasNonNull("login") || !json.hasNonNull("password")) {
-      LoggerUtil.logError("Login and password required", new BadRequestException(""));
-      throw new BadRequestException("Login and password required");
+    if (!json.hasNonNull("email") || !json.hasNonNull("password")) {
+      throw new BadRequestException("email and password required");
     }
-    String login = json.get("login").asText();
+    String email = json.get("email").asText();
     String password = json.get("password").asText();
 
     // Try to login
-    UserDTO publicUser = userUCC.login(login, password);
+    UserDTO publicUser = userUCC.login(email, password);
     if (publicUser == null) {
-      LoggerUtil.logError("Login failed", new AuthorisationException(""));
       throw new AuthorisationException("Login failed");
     }
     String token;
@@ -105,7 +104,6 @@ public class AuthsResource {
       return toReturn;
 
     } catch (Exception e) {
-      LoggerUtil.logError("Unable to create token", e);
       throw new AuthorisationException("Unable to create token");
     }
   }
@@ -119,13 +117,12 @@ public class AuthsResource {
   @GET
   @Path("user")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public ObjectNode getUser(@Context ContainerRequestContext requestContext) {
-    System.out.println("refresh");
+    LoggerUtil.logInfo("Starting : refresh");
     UserDTO user = (UserDTO) requestContext.getProperty("user");
 
     if (user == null) {
-      LoggerUtil.logError("User not recognised", new AuthorisationException(""));
       throw new AuthorisationException("User not recognised");
     }
     String token;
@@ -156,7 +153,6 @@ public class AuthsResource {
       return toReturn;
 
     } catch (Exception e) {
-      LoggerUtil.logError("Unable to create token", e);
       throw new AuthorisationException("Unable to create token");
     }
   }
@@ -164,51 +160,40 @@ public class AuthsResource {
   /**
    * Register a new user.
    *
-   * @param json JSON object containing the user's registration information. It must contain keys
-   *             "login", "password", "lname", "fname" and "phoneNum".
+   * @param jsonUserDTO JSON object cast into UserDTO containing the user's registration
+   *                    information. It must contain keys *             "email", "password",
+   *                    "lname", "fname" and "phoneNum".
    * @return true if the user is registered, false if not.
-   * @throws WebApplicationException If any of the required fields are missing, a
-   *                                 WebApplicationException with the appropriate error code is
-   *                                 thrown.
    */
   @POST
   @Path("register")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public ObjectNode register(JsonNode json) {
-    if (!json.hasNonNull("login") || !json.hasNonNull("password") || !json.hasNonNull("l_name")
-        || !json.hasNonNull("f_name") || !json.hasNonNull("phone_number") || !json.hasNonNull(
-        "role")) {
-      LoggerUtil.logError("All fields are required", new BadRequestException(""));
+  public ObjectNode register(UserDTO jsonUserDTO) {
+    LoggerUtil.logInfo("Starting : register");
+    String psw = jsonUserDTO.getPassword();
+    if (
+        jsonUserDTO.getEmail() == null || jsonUserDTO.getEmail().isEmpty()
+            || jsonUserDTO.getPassword() == null || jsonUserDTO.getPassword().isEmpty()
+            || jsonUserDTO.getFirstName() == null || jsonUserDTO.getFirstName().isEmpty()
+            || jsonUserDTO.getLastName() == null || jsonUserDTO.getLastName().isEmpty()
+            || jsonUserDTO.getPhoneNum() == null || jsonUserDTO.getPhoneNum().isEmpty()
+            || jsonUserDTO.getRole() == null || jsonUserDTO.getRole().isEmpty()
+    ) {
       throw new BadRequestException("All fields are required");
     }
 
-    String email = json.has("login") ? json.get("login").asText() : "";
-    String password = json.has("password") ? json.get("password").asText() : "";
-    String lname = json.has("l_name") ? json.get("l_name").asText() : "";
-    String fname = json.has("f_name") ? json.get("f_name").asText() : "";
-    String phoneNum = json.has("phone_number") ? json.get("phone_number").asText() : "";
-    String role = json.has("role") ? json.get("role").asText() : "";
-    UserDTO user = myDomainFactory.getUser();
-    user.setEmail(email);
-    user.setPassword(password);
-    user.setFirstName(fname);
-    user.setLastName(lname);
-    user.setPhoneNum(phoneNum);
-    user.setRole(role);
-    user.setVersion(0);
-    if (userUCC.register(user)) {
+    if (userUCC.register(jsonUserDTO)) {
       try {
-        ObjectNode toReturn = jsonMapper.createObjectNode()
-            .put("login", email)
-            .put("password", password);
-        if (toReturn != null) {
+        ObjectNode toLogin = jsonMapper.createObjectNode()
+            .put("email", jsonUserDTO.getEmail())
+            .put("password", psw);
+        if (toLogin != null) {
           LoggerUtil.logInfo("Register successful");
         }
-        return login(toReturn);
+        return login(toLogin);
 
       } catch (Exception e) {
-        LoggerUtil.logError("Unable to create user", e);
         throw new AuthorisationException("Unable to create user");
       }
     }
