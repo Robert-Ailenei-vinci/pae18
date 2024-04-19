@@ -1,0 +1,393 @@
+[2024-04-15 15:16:20] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:16:20] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-15 15:16:28] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:28] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:28] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:28] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:28] [INFO] entreprise blacklist with id 3 
+[2024-04-15 15:16:28] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:29] [INFO] Blacklist successful 
+[2024-04-15 15:16:29] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:29] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:29] [INFO] schoolyear getAll 
+[2024-04-15 15:16:29] [INFO] build year method 
+[2024-04-15 15:16:29] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:16:29] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:29] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:29] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 15:16:34] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:34] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:34] [INFO] GetUser successful 
+[2024-04-15 15:16:35] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:35] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:35] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:35] [INFO] GetOne successful 
+[2024-04-15 15:16:35] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:35] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:35] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:35] [INFO] GetOne successful 
+[2024-04-15 15:16:37] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:37] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:37] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:37] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:37] [INFO] entreprise unblacklist with id 3 
+[2024-04-15 15:16:37] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:37] [INFO] Blacklist successful 
+[2024-04-15 15:16:38] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:38] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:38] [INFO] schoolyear getAll 
+[2024-04-15 15:16:38] [INFO] build year method 
+[2024-04-15 15:16:38] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:16:38] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:38] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:38] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 15:16:48] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:48] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:48] [INFO] GetUser successful 
+[2024-04-15 15:16:48] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:48] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:48] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:48] [INFO] GetOne successful 
+[2024-04-15 15:16:48] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:49] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:49] [INFO] get one user by id with id: 8 
+[2024-04-15 15:16:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:49] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:49] [INFO] get one user by id with id: 9 
+[2024-04-15 15:16:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:49] [INFO] entreprise getone with id 3 
+[2024-04-15 15:16:49] [INFO] get one user by id with id: 7 
+[2024-04-15 15:16:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:49] [INFO] get all contact for the entreprise with id 3 
+[2024-04-15 15:16:49] [INFO] GetAllContactById successful 
+[2024-04-15 15:16:49] [INFO] get one user by id with id: 12 
+[2024-04-15 15:16:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:16:49] [INFO] build year method 
+[2024-04-15 15:16:49] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:16:49] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-15 15:17:36] [INFO] build year method 
+[2024-04-15 15:17:36] [INFO] used adduser method with mail: zeze.zeze@vinci.be and id: 13 
+[2024-04-15 15:17:36] [INFO] Register successful 
+[2024-04-15 15:17:36] [INFO] get one user by email with email: zeze.zeze@vinci.be 
+[2024-04-15 15:17:36] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:36] [INFO] Login successful 
+[2024-04-15 15:17:37] [INFO] get one user by id with id: 13 
+[2024-04-15 15:17:37] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:37] [INFO] GetAllContactById successful 
+[2024-04-15 15:17:37] [INFO] get one user by id with id: 13 
+[2024-04-15 15:17:37] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:38] [INFO] get one user by id with id: 13 
+[2024-04-15 15:17:38] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:38] [INFO] schoolyear getAll 
+[2024-04-15 15:17:38] [INFO] build year method 
+[2024-04-15 15:17:38] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:17:38] [INFO] get one user by id with id: 13 
+[2024-04-15 15:17:38] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:38] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 15:17:41] [INFO] get one user by id with id: 12 
+[2024-04-15 15:17:41] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:41] [INFO] schoolyear getAll 
+[2024-04-15 15:17:41] [INFO] build year method 
+[2024-04-15 15:17:41] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:17:42] [INFO] get one user by id with id: 12 
+[2024-04-15 15:17:42] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:42] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 15:17:49] [INFO] get one user by id with id: 12 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] GetUser successful 
+[2024-04-15 15:17:49] [INFO] get one user by id with id: 12 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] entreprise getone with id 2 
+[2024-04-15 15:17:49] [INFO] GetOne successful 
+[2024-04-15 15:17:49] [INFO] get one user by id with id: 12 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] entreprise getone with id 2 
+[2024-04-15 15:17:49] [INFO] get one user by id with id: 11 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] entreprise getone with id 2 
+[2024-04-15 15:17:49] [INFO] get one user by id with id: 9 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] entreprise getone with id 2 
+[2024-04-15 15:17:49] [INFO] get one user by id with id: 7 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] get all contact for the entreprise with id 2 
+[2024-04-15 15:17:49] [INFO] GetAllContactById successful 
+[2024-04-15 15:17:49] [INFO] get one user by id with id: 12 
+[2024-04-15 15:17:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:49] [INFO] build year method 
+[2024-04-15 15:17:49] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:17:50] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-15 15:17:50] [INFO] get one user by id with id: 13 
+[2024-04-15 15:17:50] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:50] [INFO] GetUser successful 
+[2024-04-15 15:17:50] [INFO] get one user by id with id: 13 
+[2024-04-15 15:17:50] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:50] [INFO] entreprise getone with id 2 
+[2024-04-15 15:17:50] [INFO] GetOne successful 
+[2024-04-15 15:17:50] [INFO] get one user by id with id: 13 
+[2024-04-15 15:17:50] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:51] [INFO] entreprise getone with id 2 
+[2024-04-15 15:17:51] [INFO] get one user by id with id: 11 
+[2024-04-15 15:17:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:51] [INFO] entreprise getone with id 2 
+[2024-04-15 15:17:51] [INFO] get one user by id with id: 9 
+[2024-04-15 15:17:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:51] [INFO] entreprise getone with id 2 
+[2024-04-15 15:17:51] [INFO] get one user by id with id: 7 
+[2024-04-15 15:17:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:51] [INFO] get all contact for the entreprise with id 2 
+[2024-04-15 15:17:51] [INFO] GetAllContactById successful 
+[2024-04-15 15:17:51] [INFO] get one user by id with id: 13 
+[2024-04-15 15:17:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:17:51] [INFO] build year method 
+[2024-04-15 15:17:51] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:17:51] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-15 15:18:02] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:02] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:03] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:03] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:03] [INFO] entreprise blacklist with id 2 
+[2024-04-15 15:18:03] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:03] [INFO] cancel internships for the entreprise with id 2 
+[2024-04-15 15:18:03] [INFO] Blacklist successful 
+[2024-04-15 15:18:03] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:03] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:03] [INFO] schoolyear getAll 
+[2024-04-15 15:18:03] [INFO] build year method 
+[2024-04-15 15:18:03] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:18:03] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:03] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:03] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 15:18:05] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:06] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:06] [INFO] GetUser successful 
+[2024-04-15 15:18:06] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:06] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:06] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:06] [INFO] GetOne successful 
+[2024-04-15 15:18:06] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:06] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:06] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:06] [INFO] GetOne successful 
+[2024-04-15 15:18:13] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:13] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:13] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:13] [SEVERE] Enterprise already blacklisted
+be.vinci.pae.exception.BadRequestException: 
+	at be.vinci.pae.api.EntrepriseResource.blacklist(EntrepriseResource.java:117)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+ 
+[2024-04-15 15:18:15] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:15] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:15] [INFO] schoolyear getAll 
+[2024-04-15 15:18:15] [INFO] build year method 
+[2024-04-15 15:18:15] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:18:15] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:15] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:15] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 15:18:33] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:33] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:33] [INFO] GetUser successful 
+[2024-04-15 15:18:33] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:33] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:33] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:33] [INFO] GetOne successful 
+[2024-04-15 15:18:33] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:33] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:33] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:33] [INFO] GetOne successful 
+[2024-04-15 15:18:36] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:36] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:36] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:36] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:36] [INFO] entreprise unblacklist with id 2 
+[2024-04-15 15:18:36] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:36] [INFO] Blacklist successful 
+[2024-04-15 15:18:37] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:37] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:37] [INFO] schoolyear getAll 
+[2024-04-15 15:18:37] [INFO] build year method 
+[2024-04-15 15:18:37] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:18:37] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:37] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:37] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 15:18:50] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:50] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:50] [INFO] GetUser successful 
+[2024-04-15 15:18:51] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:51] [INFO] GetOne successful 
+[2024-04-15 15:18:51] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:51] [INFO] get one user by id with id: 11 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:51] [INFO] get one user by id with id: 9 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:51] [INFO] get one user by id with id: 7 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] get all contact for the entreprise with id 2 
+[2024-04-15 15:18:51] [INFO] GetAllContactById successful 
+[2024-04-15 15:18:51] [INFO] get one user by id with id: 12 
+[2024-04-15 15:18:51] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:51] [INFO] build year method 
+[2024-04-15 15:18:51] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:18:51] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-15 15:18:55] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:55] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:55] [INFO] entreprise getone with id 2 
+[2024-04-15 15:18:56] [SEVERE] Enterprise already blacklisted
+be.vinci.pae.exception.BadRequestException: 
+	at be.vinci.pae.api.EntrepriseResource.unblacklist(EntrepriseResource.java:160)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory.lambda$static$0(ResourceMethodInvocationHandlerFactory.java:52)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:146)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:189)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$TypeOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:219)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:93)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:478)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:400)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:81)
+	at org.glassfish.jersey.server.ServerRuntime$1.run(ServerRuntime.java:261)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:248)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:244)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:292)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:274)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:244)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:265)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:240)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:697)
+	at org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer.service(GrizzlyHttpContainer.java:367)
+	at org.glassfish.grizzly.http.server.HttpHandler$1.run(HttpHandler.java:190)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.doWork(AbstractThreadPool.java:535)
+	at org.glassfish.grizzly.threadpool.AbstractThreadPool$Worker.run(AbstractThreadPool.java:515)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+ 
+[2024-04-15 15:18:57] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:57] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:57] [INFO] schoolyear getAll 
+[2024-04-15 15:18:57] [INFO] build year method 
+[2024-04-15 15:18:57] [INFO] Current school year found: 2023-2024 
+[2024-04-15 15:18:57] [INFO] get one user by id with id: 13 
+[2024-04-15 15:18:57] [INFO] schoolyear getone + id : 1 
+[2024-04-15 15:18:57] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 18:47:30] [INFO] get one user by email with email: zaza.zaza@vinci.be 
+[2024-04-15 18:47:30] [INFO] get one user by email with email: zaza.zaza@vinci.be 
+[2024-04-15 18:47:30] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:30] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:30] [INFO] Login successful 
+[2024-04-15 18:47:30] [INFO] Login successful 
+[2024-04-15 18:47:30] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:30] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:30] [INFO] GetAllContactById successful 
+[2024-04-15 18:47:31] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:31] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:32] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:32] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:32] [INFO] schoolyear getAll 
+[2024-04-15 18:47:33] [INFO] build year method 
+[2024-04-15 18:47:33] [INFO] Current school year found: 2023-2024 
+[2024-04-15 18:47:33] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:33] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:33] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 18:47:35] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:36] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:36] [INFO] GetUser successful 
+[2024-04-15 18:47:36] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:36] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:36] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:36] [INFO] GetOne successful 
+[2024-04-15 18:47:36] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:36] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:36] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:36] [INFO] get one user by id with id: 9 
+[2024-04-15 18:47:36] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:36] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:36] [INFO] get all contact for the entreprise with id 1 
+[2024-04-15 18:47:36] [INFO] GetAllContactById successful 
+[2024-04-15 18:47:37] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:37] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:37] [INFO] build year method 
+[2024-04-15 18:47:37] [INFO] Current school year found: 2023-2024 
+[2024-04-15 18:47:37] [INFO] GetStagesCountForCurrentYear successful 
+[2024-04-15 18:47:41] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:41] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:42] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:42] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:42] [INFO] entreprise blacklist with id 1 
+[2024-04-15 18:47:42] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:42] [INFO] Blacklist successful 
+[2024-04-15 18:47:42] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:43] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:43] [INFO] schoolyear getAll 
+[2024-04-15 18:47:43] [INFO] build year method 
+[2024-04-15 18:47:43] [INFO] Current school year found: 2023-2024 
+[2024-04-15 18:47:43] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:43] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:43] [INFO] GetAllForSchoolYear successful 
+[2024-04-15 18:47:45] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:45] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:45] [INFO] GetUser successful 
+[2024-04-15 18:47:45] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:45] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:45] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:45] [INFO] GetOne successful 
+[2024-04-15 18:47:45] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:45] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:45] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:45] [INFO] GetOne successful 
+[2024-04-15 18:47:47] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:47] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:47] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:47] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:47] [INFO] entreprise unblacklist with id 1 
+[2024-04-15 18:47:48] [INFO] entreprise getone with id 1 
+[2024-04-15 18:47:48] [INFO] Blacklist successful 
+[2024-04-15 18:47:49] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:49] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:49] [INFO] schoolyear getAll 
+[2024-04-15 18:47:50] [INFO] build year method 
+[2024-04-15 18:47:50] [INFO] Current school year found: 2023-2024 
+[2024-04-15 18:47:50] [INFO] get one user by id with id: 12 
+[2024-04-15 18:47:50] [INFO] schoolyear getone + id : 1 
+[2024-04-15 18:47:50] [INFO] GetAllForSchoolYear successful 

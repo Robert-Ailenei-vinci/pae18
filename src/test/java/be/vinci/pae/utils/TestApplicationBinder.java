@@ -9,6 +9,8 @@ import be.vinci.pae.business.controller.SchoolYearUCC;
 import be.vinci.pae.business.controller.SchoolYearUCCImpl;
 import be.vinci.pae.business.controller.StageUCC;
 import be.vinci.pae.business.controller.StageUCCImpl;
+import be.vinci.pae.business.controller.SupervisorUCC;
+import be.vinci.pae.business.controller.SupervisorUCCImpl;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.controller.UserUCCImpl;
 import be.vinci.pae.business.domain.DomainFactory;
@@ -40,7 +42,7 @@ public class TestApplicationBinder extends AbstractBinder {
   protected void configure() {
     bind(DomainFactoryImpl.class).to(DomainFactory.class);
     bind(Mockito.mock(UserDAOImpl.class)).to(UserDAO.class);
-    bind(DALServicesImpl.class).to(DALServices.class);
+    bind(Mockito.mock(DALServicesImpl.class)).to(DALServices.class);
     bind(UserUCCImpl.class).to(UserUCC.class);
     bind(ContactUCCImpl.class).to(ContactUCC.class);
     bind(Mockito.mock(ContactDAOImpl.class)).to(ContactDAO.class);
@@ -48,6 +50,7 @@ public class TestApplicationBinder extends AbstractBinder {
     bind(Mockito.mock(EntrepriseDAOImpl.class)).to(EntrepriseDAO.class);
     bind(StageUCCImpl.class).to(StageUCC.class);
     bind(Mockito.mock(StageDAOImpl.class)).to(StageDAO.class);
+    bind(SupervisorUCCImpl.class).to(SupervisorUCC.class);
     bind(Mockito.mock(SupervisorDAOImpl.class)).to(SupervisorDAO.class);
     bind(SchoolYearUCCImpl.class).to(SchoolYearUCC.class);
     bind(Mockito.mock(SchoolYearDAOImpl.class)).to(SchoolYearDAO.class);

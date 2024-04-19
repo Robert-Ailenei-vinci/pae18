@@ -28,6 +28,30 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   private final ThreadLocal<Connection> threadLocalConnection;
   private final BasicDataSource dataSource;
 
+  private int transactionCounter;
+
+  /**
+   * Increase the transactions count.
+   */
+  private void increaseTransactionCounter() {
+    transactionCounter++;
+  }
+
+  /**
+   * Decrease le compteur de transactions.
+   */
+  private void decreaseTransactionCounter() {
+    transactionCounter--;
+  }
+
+  /**
+   * Get the count of transaction.
+   *
+   * @return number of transaction going on.
+   */
+  private int getTransactionCount() {
+    return transactionCounter;
+  }
 
   /**
    * Constructs a new DALServicesImpl instance. Initializes the ThreadLocal for connection and sets
@@ -39,9 +63,10 @@ public class DALServicesImpl implements DALBackServices, DALServices {
     dataSource = new BasicDataSource();
     dataSource.setMaxTotal(MAX_CONNECTION);
     dataSource.setUrl(DATA_BASEURL);
-    dataSource.setMaxTotal(5); // Set maximum number of connections to 5
     dataSource.setUsername(DATABASE_USER);
     dataSource.setPassword(DATABASE_PASSWORD);
+
+    transactionCounter = 0;
   }
 
   private Connection getConnection() {
@@ -92,8 +117,16 @@ public class DALServicesImpl implements DALBackServices, DALServices {
 
   @Override
   public void startTransaction() {
+
+    if (getTransactionCount() > 0) {
+      // if not first transaction return
+      increaseTransactionCounter();
+      return;
+    }
+
     try {
       getConnection().setAutoCommit(false);
+      increaseTransactionCounter();
     } catch (SQLException e) {
       throw new FatalError("Unable to start transaction: " + e.getMessage(), e);
     }
@@ -101,12 +134,22 @@ public class DALServicesImpl implements DALBackServices, DALServices {
 
   @Override
   public void commitTransaction() {
+
+    if (getTransactionCount()>1) {
+      // if not last commit return
+      decreaseTransactionCounter();
+      return;
+    }
+
     try {
       getConnection().commit();
       getConnection().setAutoCommit(true);
-      closeConnection();
+      decreaseTransactionCounter();
+
     } catch (SQLException e) {
       throw new FatalError("Unable to commit transaction: " + e.getMessage(), e);
+    } finally {
+      closeConnection();
     }
   }
 
@@ -115,9 +158,12 @@ public class DALServicesImpl implements DALBackServices, DALServices {
     try {
       getConnection().rollback();
       getConnection().setAutoCommit(true);
-      closeConnection();
+      transactionCounter = 0;
+
     } catch (SQLException e) {
       throw new FatalError("Unable to rollback transaction: " + e.getMessage(), e);
+    } finally {
+      closeConnection();
     }
   }
 }

@@ -2,126 +2,179 @@ package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.StageDTO;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.StageDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class StageUCCTest {
 
   private StageUCC stageUCC;
   private StageDTO stage;
-  private StageDTO expectedStage;
+  private StageDTO stageResult;
   private DomainFactory factory;
   private StageDAO stageDAO;
+  private DALServices dalServices;
 
   @BeforeEach
   void setUp() {
+    // Arrange
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
-    this.stageUCC = locator.getService(StageUCC.class);
-    this.factory = locator.getService(DomainFactory.class);
-    this.stageDAO = locator.getService(StageDAO.class);
-    //utiliser des factory
-    this.stage = factory.getStage();
-    this.expectedStage = factory.getStage();
+    stageUCC = locator.getService(StageUCC.class);
+    factory = locator.getService(DomainFactory.class);
+    stageDAO = locator.getService(StageDAO.class);
+    dalServices = locator.getService(DALServices.class);
+    stage = factory.getStage();
+    stageResult = factory.getStage();
+  }
+
+  @AfterEach
+  public void tearDown() {
+    // Clean up resources, reset state, etc.
+    Mockito.reset(stageDAO, dalServices);
   }
 
   @DisplayName("Test getOneStageByUserId")
   @Test
   void getOneStageByUserId() {
+    // Arrange
     int userId = 123;
-
     when(stageDAO.getOneStageByUserId(userId)).thenReturn(stage);
-    assertEquals(stageUCC.getOneStageByUserId(userId), stage);
+
+    // Act
+    StageDTO result = stageUCC.getOneStageByUserId(userId);
+
+    // Assert
+    assertEquals(stage, result);
   }
 
-  @DisplayName("Test getOneStageByUserId with transaction error")
+  @DisplayName("Test getOneStageByUserId with exception")
   @Test
   void getOneStageByUserIdWithException() {
+    // Arrange
     int userId = 123;
+    when(stageDAO.getOneStageByUserId(userId)).thenThrow(RuntimeException.class);
 
-    when(stageUCC.getOneStageByUserId(userId));
+    // Act & Assert
     assertThrows(RuntimeException.class, () -> stageUCC.getOneStageByUserId(userId));
+  }
+
+  @DisplayName("Test modifyStage with exception")
+  @Test
+  void modifyStageWithException() {
+    // Arrange
+    int userId = 123;
+    stage.setUserId(userId);
+    String subject = "subject";
+    stage.setInternshipProject(subject);
+    int contactId = 456;
+    stage.setContactId(contactId);
+    int version = 789;
+    stage.setVersion(version);
+
+    when(stageDAO.modifyStage(stage)).thenThrow(RuntimeException.class);
+
+    // Act & Assert
+    assertThrows(RuntimeException.class,
+        () -> stageUCC.modifyStage(userId, subject, contactId, version));
+  }
+
+  @DisplayName("Test modifyStage")
+  @Test
+  void modifyStage() {
+    // Arrange
+    int userId = 123;
+    stage.setUserId(userId);
+    stageResult.setUserId(userId);
+    String subject = "new subject";
+    stage.setInternshipProject(subject);
+    stageResult.setInternshipProject(subject);
+    int contactId = 456;
+    stage.setContactId(contactId);
+    stageResult.setContactId(userId);
+    int version = 789;
+    stage.setVersion(version);
+    stageResult.setVersion(version);
+
+    when(stageDAO.modifyStage(stage)).thenReturn(stageResult);
+
+    // Act
+    StageDTO result = stageUCC.modifyStage(userId, subject, contactId, version);
+
+    // Assert
+    assertEquals(stageResult.getContactId(), result.getContactId());
+    assertEquals(stageResult.getInternshipProject(), result.getInternshipProject());
+    assertEquals(stageResult.getUserId(), result.getUserId());
   }
 
   @DisplayName("Test createOne")
   @Test
   void createOne() {
-    ContactDTO contact = factory.getContact();
-    contact.setId(123);
-    contact.setUserId(456);
+    // Arrange
+    int userId = 123;
+    ContactDTO contactDTO = mock(ContactDTO.class);
+    contactDTO.setId(789);
+    contactDTO.setUserId(userId);
+    contactDTO.setSchoolYearId(456);
+    stage.setUserId(userId);
+    stageResult.setUserId(userId);
+    String signatureDate = "2024-04-12";
+    stage.setSignatureDate(signatureDate);
+    stageResult.setSignatureDate(signatureDate);
+    String subject = "subject";
+    stage.setInternshipProject(subject);
+    stageResult.setInternshipProject(subject);
+    int supervisorId = 789;
+    stage.setSupervisorId(supervisorId);
+    stageResult.setSupervisorId(supervisorId);
 
-    expectedStage.setContactId(123);
-    expectedStage.setUserId(456);
-    expectedStage.setSchoolYearId(789);
-    String expectedDesc = "test";
-    String expectedDate = "2000-01-01";
-    int expectedSupervisor = 852;
+    when(stageDAO.createOne(contactDTO.getId(), signatureDate, subject, supervisorId,
+        contactDTO.getUserId(), contactDTO.getSchoolYearId())).thenReturn(stageResult);
 
-    when(stageUCC.createOne(contact, expectedDate, expectedDesc, expectedSupervisor)).thenReturn(
-        expectedStage);
+    // Act
+    StageDTO result = stageUCC.createOne(contactDTO, signatureDate, subject, supervisorId);
 
-    StageDTO actualStage = stageUCC.createOne(contact, expectedDate, expectedDesc,
-        expectedSupervisor);
-    assertEquals(expectedStage.getContactId(), actualStage.getContactId());
-    assertEquals(expectedStage.getUserId(), actualStage.getUserId());
-    assertEquals(expectedStage.getSchoolYearId(), actualStage.getSchoolYearId());
+    // Assert
+    assertEquals(stageResult.getUserId(), result.getUserId());
+    assertEquals(stageResult.getSignatureDate(), result.getSignatureDate());
   }
 
-  @DisplayName("Test createOne with wrong given format on signatureDate")
+  @DisplayName("Test createOne wrong date format")
   @Test
-  void createOneWrongDate() {
-    ContactDTO contact = factory.getContact();
-    contact.setId(123);
-    contact.setUserId(456);
+  void createOneWrongFormat() {
+    // Arrange
+    int userId = 123;
+    ContactDTO contactDTO = mock(ContactDTO.class);
+    contactDTO.setId(789);
+    contactDTO.setUserId(userId);
+    contactDTO.setSchoolYearId(456);
+    stage.setUserId(userId);
+    stageResult.setUserId(userId);
+    String signatureDate = "2024-66-12";
+    stage.setSignatureDate(signatureDate);
+    stageResult.setSignatureDate(signatureDate);
+    String subject = "subject";
+    stage.setInternshipProject(subject);
+    stageResult.setInternshipProject(subject);
+    int supervisorId = 789;
+    stage.setSupervisorId(supervisorId);
+    stageResult.setSupervisorId(supervisorId);
 
-    expectedStage.setContactId(123);
-    expectedStage.setUserId(456);
-    expectedStage.setSchoolYearId(789);
-    String expectedDesc = "test";
-    String expectedDate = "01/001/2000";
-    int expectedSupervisor = 852;
-
+    // Act & Assert
     assertThrows(BizException.class,
-        () -> stageUCC.createOne(contact, expectedDate, expectedDesc, expectedSupervisor));
-  }
-
-
-  @Test
-  void modifyStageSuccess() {
-    int userId = 123;
-    String subject = "Test Subject";
-    int contactId = 456;
-    int version = 1;
-
-    when(stageDAO.modifyStage(any(StageDTO.class))).thenReturn(stage);
-
-    StageDTO result = stageUCC.modifyStage(userId, subject, contactId, version);
-
-    assertEquals(stage, result);
-  }
-
-  @Test
-  void modifyStageWithException() {
-    int userId = 123;
-    String subject = "Test Subject";
-    int contactId = 456;
-    int version = 1;
-
-    when(stageDAO.modifyStage(any(StageDTO.class))).thenThrow(new RuntimeException());
-
-    assertThrows(RuntimeException.class,
-        () -> stageUCC.modifyStage(userId, subject, contactId, version));
-
+        () -> stageUCC.createOne(contactDTO, signatureDate, subject, supervisorId));
   }
 }

@@ -22,37 +22,53 @@ public interface ContactDAO {
   ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear);
 
   /**
-   * Retrieves all contacts.
+   * Retrieves a contact associated with the provided stage ID.
    *
-   * @param stageId the id of the stage associated with the contact
+   * @param stageId the ID of the stage associated with the contact
    * @return the contact associated with the stage
    */
   ContactDTO getOneContactByStageId(int stageId);
 
   /**
-   * Retrieves all contacts associated with the provided user id.
+   * Retrieves all contacts associated with the provided user ID.
    *
-   * @param userId the id of the user associated with the contacts
+   * @param userId the ID of the user associated with the contacts
    * @return the list of contacts associated with the user
    */
   List<ContactDTO> getAllContactsByUserId(int userId);
 
 
   /**
-   * Update the contact in db.
+   * Updates the provided contact in the database.
    *
-   * @param contactDTO the contact to update.
-   * @return the updated contact.
+   * @param contactDTO the contact to update
+   * @return the updated contact
    */
   ContactDTO updateContact(ContactDTO contactDTO);
 
   /**
-   * get one contact by id.
+   * Retrieves a contact by its ID.
    *
-   * @param idContact the id of contact.
-   * @return the contact.
+   * @param idContact the ID of the contact
+   * @return the contact
    */
   ContactDTO getOneContactById(int idContact);
+
+  /**
+   * get all contacts by entreprise id.
+   *
+   * @param entrepriseId the id of entreprise.
+   * @return the list of contacts.
+   */
+  List<ContactDTO> getAllContactsByEntrepriseId(int entrepriseId);
+
+  /**
+   * cancel the internships if entreprise is blacklisted.
+   *
+   * @param entrepriseId the id of entreprise.
+   * @return true if the internships are canceled.
+   */
+  boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId);
 
   void cancelAllContact(ContactDTO contact);
 }
