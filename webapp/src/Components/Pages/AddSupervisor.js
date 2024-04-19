@@ -34,6 +34,16 @@ async function createForm() {
     container.appendChild(form);
     const main = document.querySelector('main');
     main.appendChild(container);
+
+    document.getElementById('mybtn').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const lastName = document.getElementById('trade_name').value;
+        const firstName = document.getElementById('designation').value;
+        const entreprise = document.getElementById('address').value;
+        const phoneNum = document.getElementById('phone_num').value;
+        const email = document.getElementById('email').value;        
+        //handle submit et fetch                                                                           
+    })
 }
 
 function createFormElement() {
@@ -112,6 +122,7 @@ function createSubmitButton() {
     submitButton.className = 'btn btn-primary mr-2';
     submitButton.type = 'submit';
     submitButton.innerText = 'Add Supervisor';
+    submitButton.id = 'mybtn';
     return submitButton;
 }
 
