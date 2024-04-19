@@ -25,7 +25,6 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
-
 import java.util.Arrays;
 import java.util.List;
 
