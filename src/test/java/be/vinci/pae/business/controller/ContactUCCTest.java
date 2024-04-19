@@ -11,11 +11,13 @@ import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
+import be.vinci.pae.business.domain.SupervisorDTO;
 import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.BizException;
 import be.vinci.pae.exception.BizExceptionNotFound;
 import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
+import be.vinci.pae.services.SupervisorDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +37,16 @@ class ContactUCCTest {
   private DomainFactory factory;
   private ContactDAO contactDAO;
   private DALServices dalServices;
+  private SupervisorUCC supervisorUCC;
+  private SupervisorDAO supervisorDAO;
 
   @BeforeEach
   void setUp() {
     // Arrange
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
     this.contactUCC = locator.getService(ContactUCC.class);
+    this.supervisorUCC = locator.getService(SupervisorUCC.class);
+    this.supervisorDAO = locator.getService(SupervisorDAO.class);
     this.factory = locator.getService(DomainFactory.class);
     this.contactDAO = locator.getService(ContactDAO.class);
     this.dalServices = locator.getService(DALServices.class);
@@ -337,9 +343,15 @@ class ContactUCCTest {
     String internshipPoject = "SQL: avancée";
     int supervisorId = 2;
 
+    SupervisorDTO supervisorDTO = Mockito.mock(SupervisorDTO.class);
+    supervisorDTO.setEntreprise(contact.getEntreprise());
+    supervisorDTO.setSupervisorId(supervisorId);
+    supervisorDTO.setFirstName("First");
+    supervisorDTO.setLastName("Last");
+
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
-
+    when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
     // Act and Assert
     ContactDTO result = contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
         contact.getVersion(),supervisorId,signDate,internshipPoject);
@@ -357,7 +369,15 @@ class ContactUCCTest {
     String internshipPoject = "SQL: avancée";
     int supervisorId = 2;
 
+    SupervisorDTO supervisorDTO = Mockito.mock(SupervisorDTO.class);
+    supervisorDTO.setEntreprise(contact.getEntreprise());
+    supervisorDTO.setSupervisorId(supervisorId);
+    supervisorDTO.setFirstName("First");
+    supervisorDTO.setLastName("Last");
+
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
+    when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
+
 
     // Act and Assert
     assertThrows(BizException.class,
@@ -375,7 +395,15 @@ class ContactUCCTest {
     String internshipPoject = "SQL: avancée";
     int supervisorId = 2;
 
+    SupervisorDTO supervisorDTO = Mockito.mock(SupervisorDTO.class);
+    supervisorDTO.setEntreprise(contact.getEntreprise());
+    supervisorDTO.setSupervisorId(supervisorId);
+    supervisorDTO.setFirstName("First");
+    supervisorDTO.setLastName("Last");
+
     when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
+    when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
+
 
     // Act and Assert
     assertThrows(BizExceptionNotFound.class,
