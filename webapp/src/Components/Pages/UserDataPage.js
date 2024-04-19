@@ -131,6 +131,7 @@ async function renderPersonnalInfoPage() {
 
   // Creating table for contacts
   const table = document.createElement('table');
+  table.className = 'table table-bordered table-striped';
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');
   const trHead = document.createElement('tr');
@@ -384,7 +385,7 @@ async function renderPersonnalInfoPage() {
   table.appendChild(tbody);
 
   const stageTable = document.createElement('table');
-  stageTable.className = 'table';
+  stageTable.className = 'table table-bordered table-striped';
   const stageThead = document.createElement('thead');
   const stageTbody = document.createElement('tbody');
   const stageTrHead = document.createElement('tr');
