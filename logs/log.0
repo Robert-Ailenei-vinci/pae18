@@ -391,3 +391,164 @@ be.vinci.pae.exception.BadRequestException:
 [2024-04-15 18:47:50] [INFO] get one user by id with id: 12
 [2024-04-15 18:47:50] [INFO] schoolyear getone + id : 1
 [2024-04-15 18:47:50] [INFO] GetAllForSchoolYear successful
+[2024-04-19 09:07:46] [INFO] Starting : login 
+[2024-04-19 09:08:10] [INFO] Starting : login 
+[2024-04-19 09:08:12] [INFO] Starting : login 
+[2024-04-19 09:08:21] [INFO] Starting : login 
+[2024-04-19 09:09:15] [INFO] Starting : login 
+[2024-04-19 09:09:15] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-19 09:09:15] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:15] [INFO] Login successful 
+[2024-04-19 09:09:15] [INFO] Starting : authorize 
+[2024-04-19 09:09:15] [INFO] Token verified 
+[2024-04-19 09:09:15] [INFO] get one user by id with id: 7 
+[2024-04-19 09:09:15] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:15] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 09:09:15] [INFO] entreprise getone with id 3 
+[2024-04-19 09:09:15] [INFO] get one user by id with id: 7 
+[2024-04-19 09:09:16] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:16] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:16] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:09:16] [INFO] entreprise getone with id 4 
+[2024-04-19 09:09:16] [INFO] get one user by id with id: 7 
+[2024-04-19 09:09:16] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:16] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:16] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:09:16] [INFO] entreprise getone with id 2 
+[2024-04-19 09:09:16] [INFO] get one user by id with id: 7 
+[2024-04-19 09:09:16] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:16] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:16] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:09:16] [INFO] GetAllContactById successful 
+[2024-04-19 09:09:16] [INFO] Starting : authorize 
+[2024-04-19 09:09:16] [INFO] Token verified 
+[2024-04-19 09:09:16] [INFO] get one user by id with id: 7 
+[2024-04-19 09:09:16] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:09:16] [INFO] Starting : stages/getAllByUserId 
+[2024-04-19 09:10:05] [INFO] Starting : authorize 
+[2024-04-19 09:10:05] [INFO] Token verified 
+[2024-04-19 09:10:05] [INFO] get one user by id with id: 7 
+[2024-04-19 09:10:05] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] Starting : authorize 
+[2024-04-19 09:10:09] [INFO] Token verified 
+[2024-04-19 09:10:09] [INFO] get one user by id with id: 7 
+[2024-04-19 09:10:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 09:10:09] [INFO] entreprise getone with id 3 
+[2024-04-19 09:10:09] [INFO] get one user by id with id: 7 
+[2024-04-19 09:10:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:10:09] [INFO] entreprise getone with id 4 
+[2024-04-19 09:10:09] [INFO] get one user by id with id: 7 
+[2024-04-19 09:10:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:10:09] [INFO] entreprise getone with id 2 
+[2024-04-19 09:10:09] [INFO] get one user by id with id: 7 
+[2024-04-19 09:10:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:10:09] [INFO] GetAllContactById successful 
+[2024-04-19 09:10:09] [INFO] Starting : authorize 
+[2024-04-19 09:10:09] [INFO] Token verified 
+[2024-04-19 09:10:09] [INFO] get one user by id with id: 7 
+[2024-04-19 09:10:09] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:10:09] [INFO] Starting : stages/getAllByUserId 
+[2024-04-19 09:11:49] [INFO] Starting : login 
+[2024-04-19 09:11:49] [INFO] get one user by email with email: laurent.leleux@vinci.be 
+[2024-04-19 09:11:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:49] [INFO] Login successful 
+[2024-04-19 09:11:49] [INFO] Starting : authorize 
+[2024-04-19 09:11:49] [INFO] Token verified 
+[2024-04-19 09:11:49] [INFO] get one user by id with id: 5 
+[2024-04-19 09:11:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:49] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 09:11:49] [INFO] GetAllContactById successful 
+[2024-04-19 09:11:49] [INFO] Starting : authorize 
+[2024-04-19 09:11:49] [INFO] Token verified 
+[2024-04-19 09:11:49] [INFO] get one user by id with id: 5 
+[2024-04-19 09:11:49] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:51] [INFO] Starting : authorize 
+[2024-04-19 09:11:51] [INFO] Token verified 
+[2024-04-19 09:11:51] [INFO] get one user by id with id: 5 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:51] [INFO] Starting : users/getAll 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:11:51] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:11:52] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:11:52] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:11:52] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:11:52] [INFO] Get All successful 
+[2024-04-19 09:11:52] [INFO] Starting : authorize 
+[2024-04-19 09:11:52] [INFO] Token verified 
+[2024-04-19 09:11:52] [INFO] get one user by id with id: 5 
+[2024-04-19 09:11:52] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:52] [INFO] build year method 
+[2024-04-19 09:11:52] [INFO] Current school year found: 2023-2024 
+[2024-04-19 09:11:52] [INFO] Starting : authorize 
+[2024-04-19 09:11:52] [INFO] Token verified 
+[2024-04-19 09:11:53] [INFO] get one user by id with id: 5 
+[2024-04-19 09:11:53] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:58] [INFO] Starting : authorize 
+[2024-04-19 09:11:58] [INFO] Token verified 
+[2024-04-19 09:11:58] [INFO] get one user by id with id: 5 
+[2024-04-19 09:11:58] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:11:58] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 09:11:58] [INFO] GetAllContactById successful 
+[2024-04-19 09:11:58] [INFO] Starting : authorize 
+[2024-04-19 09:11:58] [INFO] Token verified 
+[2024-04-19 09:11:58] [INFO] get one user by id with id: 5 
+[2024-04-19 09:11:58] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:12:02] [INFO] Starting : authorize 
+[2024-04-19 09:12:02] [INFO] Token verified 
+[2024-04-19 09:12:02] [INFO] get one user by id with id: 5 
+[2024-04-19 09:12:02] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:12:02] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 09:12:02] [INFO] GetAllContactById successful 
+[2024-04-19 09:12:02] [INFO] Starting : authorize 
+[2024-04-19 09:12:02] [INFO] Token verified 
+[2024-04-19 09:12:02] [INFO] get one user by id with id: 5 
+[2024-04-19 09:12:02] [INFO] schoolyear getone + id : 2 
+[2024-04-19 09:12:24] [INFO] Starting : login 
+[2024-04-19 09:12:24] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-19 09:12:24] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:24] [INFO] Login successful 
+[2024-04-19 09:12:24] [INFO] Starting : authorize 
+[2024-04-19 09:12:24] [INFO] Token verified 
+[2024-04-19 09:12:24] [INFO] get one user by id with id: 7 
+[2024-04-19 09:12:24] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:24] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-19 09:12:24] [INFO] entreprise getone with id 3 
+[2024-04-19 09:12:24] [INFO] get one user by id with id: 7 
+[2024-04-19 09:12:24] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:24] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:24] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:12:24] [INFO] entreprise getone with id 4 
+[2024-04-19 09:12:24] [INFO] get one user by id with id: 7 
+[2024-04-19 09:12:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:25] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:12:25] [INFO] entreprise getone with id 2 
+[2024-04-19 09:12:25] [INFO] get one user by id with id: 7 
+[2024-04-19 09:12:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:25] [INFO] get all contact for the user with id 7 
+[2024-04-19 09:12:25] [INFO] GetAllContactById successful 
+[2024-04-19 09:12:25] [INFO] Starting : authorize 
+[2024-04-19 09:12:25] [INFO] Token verified 
+[2024-04-19 09:12:25] [INFO] get one user by id with id: 7 
+[2024-04-19 09:12:25] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:12:25] [INFO] Starting : stages/getAllByUserId 
+[2024-04-19 09:15:34] [INFO] Starting : authorize 
+[2024-04-19 09:15:34] [INFO] Token verified 
+[2024-04-19 09:15:34] [INFO] get one user by id with id: 7 
+[2024-04-19 09:15:34] [INFO] schoolyear getone + id : 1 
+[2024-04-19 09:15:34] [INFO] Starting : refresh 
+[2024-04-19 09:15:34] [INFO] GetUser successful 

@@ -9,6 +9,7 @@ import UsersPage from '../Pages/Users';
 import AddEnterprisePage from '../Pages/AddEnterprise';
 import EntreprisesListPage from '../Pages/EntreprisesListPage';
 import EntrepriseDetailsPage from '../Pages/EntrepriseDetailsPage';
+import AddSupervisorPage from '../Pages/AddSupervisor';
 
 const routes = {
   '/': HomePage,
@@ -22,6 +23,7 @@ const routes = {
   '/addEnterprise': AddEnterprisePage,
   '/seeEntreprises' : EntreprisesListPage,
   '/detailsEntreprise/:id': EntrepriseDetailsPage,
+  '/addsupervisor': AddSupervisorPage,
 };
 
 export default routes;

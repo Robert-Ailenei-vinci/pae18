@@ -1,6 +1,10 @@
 package be.vinci.pae.services;
 
+import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SupervisorDTO;
+import be.vinci.pae.business.domain.UserDTO;
+
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -24,4 +28,13 @@ public interface SupervisorDAO {
    * @return A list of {@link SupervisorDTO} representing all enterprises.
    */
   List<SupervisorDTO> getAll(int entrepriseId);
+
+
+  /**
+   * Creates a supervisor for a given stage
+   * *
+   * @param user : user, entreprise : entreprise
+   * @return The supervisorDTO representing a supervisor
+   */
+  SupervisorDTO createOne(UserDTO user, EntrepriseDTO entreprise);
 }

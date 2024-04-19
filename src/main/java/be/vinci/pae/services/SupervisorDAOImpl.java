@@ -1,14 +1,19 @@
 package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.DomainFactory;
+import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SupervisorDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.EntrepriseNotFoundException;
 import be.vinci.pae.exception.FatalError;
 import be.vinci.pae.exception.SupervisorNotFoundException;
 import be.vinci.pae.utils.LoggerUtil;
 import jakarta.inject.Inject;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +28,8 @@ public class SupervisorDAOImpl implements SupervisorDAO {
   private DALBackServices dalBackServices;
   @Inject
   private EntrepriseDAO entrepriseDAO;
+
+  private Connection connection;
 
   @Override
   public SupervisorDTO getOneById(int id) {
@@ -82,5 +89,44 @@ public class SupervisorDAOImpl implements SupervisorDAO {
       throw new FatalError("Error while getting supervisor from database", e);
     }
     return supervisor;
+  }
+
+  public SupervisorDTO createOne(UserDTO user, EntrepriseDTO entreprise) throws SQLException {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+            "INSERT INTO internship_supervisor "
+                    + "(last_name, first_name, entreprise, phone_number, email)"
+                    + " VALUES (?, ?, ?, ?, ?) RETURNING id_supervisor"
+    )) {
+      int supervisorId = nextItemId();
+      preparedStatement.setString(1, "initie");
+      preparedStatement.setInt(2, supervisorId);
+      preparedStatement.setInt(3, user.getId());
+      preparedStatement.setInt(4, entreprise.getId());
+      preparedStatement.setString(5, null);
+      preparedStatement.setString(6, null);
+
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        LoggerUtil.logInfo("create one supervisor with id " + supervisorId);
+        return getOneById(supervisorId);
+      }
+    } catch (SQLException e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return null;
+  }
+
+  private int nextItemId() throws SQLException {
+    String sql = "SELECT MAX(id_supervisor) FROM internship_supervisor";
+    try (PreparedStatement stmt = connection.prepareStatement(sql);
+         ResultSet rs = stmt.executeQuery()) {
+      if (rs.next()) {
+        int maxId = rs.getInt(1);
+        return maxId + 1;
+      }
+    } catch (SQLException e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return 1;
   }
 }
