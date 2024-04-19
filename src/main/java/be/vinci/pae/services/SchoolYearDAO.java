@@ -30,6 +30,7 @@ public interface SchoolYearDAO {
    * @return the current school year
    */
   String buildYear();
+
   /**
    * Retrieves all school years.
    *

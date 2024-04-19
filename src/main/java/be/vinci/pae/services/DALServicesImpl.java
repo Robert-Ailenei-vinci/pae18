@@ -135,7 +135,7 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   @Override
   public void commitTransaction() {
 
-    if (getTransactionCount()>1) {
+    if (getTransactionCount() > 1) {
       // if not last commit return
       decreaseTransactionCounter();
       return;

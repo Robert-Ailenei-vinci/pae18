@@ -19,10 +19,8 @@ import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
 import org.junit.jupiter.api.AfterEach;
