@@ -14,7 +14,7 @@ const RegisterPage = () => {
 function renderRegisterForm() {
   const main = document.querySelector('main');
   const form = document.createElement('form');
-  form.className = 'p-5 shadow-lg rounded-lg';
+  form.className = 'p-5 shadow-lg rounded-lg fade';
 
   const login = document.createElement('input');
   login.type = 'email';
@@ -129,7 +129,10 @@ function renderRegisterForm() {
   form.appendChild(phone_num);
   form.appendChild(formCheckWrapper);
   form.appendChild(submit);
+  form.offsetWidth;
 
+  // Add the 'show' class to start the animation
+  form.classList.add('show');
   main.appendChild(form);
   form.addEventListener('submit', onRegister);
 }
