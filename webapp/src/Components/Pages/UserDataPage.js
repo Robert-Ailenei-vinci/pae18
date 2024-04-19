@@ -78,6 +78,7 @@ async function fetchStageData(user) {
 
     return stageData;
   } catch (error) {
+    alert(error.message);
     return undefined;
   }
 }
