@@ -5,7 +5,7 @@ import RegisterPage from '../Pages/RegisterPage';
 import UserDataPage from '../Pages/UserDataPage';
 import modifyUserDataPage from '../Pages/ModifyUserDataPage';
 import AddContactPage from '../Pages/AddContact';
-import UsersPage from '../Pages/Users';
+import UsersPage from '../Pages/UsersPage';
 import AddEnterprisePage from '../Pages/AddEnterprise';
 import EntreprisesListPage from '../Pages/EntreprisesListPage';
 import EntrepriseDetailsPage from '../Pages/EntrepriseDetailsPage';
