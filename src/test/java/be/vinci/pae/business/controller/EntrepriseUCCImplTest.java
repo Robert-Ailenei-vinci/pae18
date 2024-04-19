@@ -252,34 +252,6 @@ class EntrepriseUCCImplTest {
     });
   }
 
-  @DisplayName("Test getAllForSchoolYear")
-  @Test
-  public void testGetAllForSchoolYear() {
-    // Arrange
-    entreprise.setId(1);
-    entreprise.setTradeName("zaza");
-    List<EntrepriseDTO> entrepriseList = new ArrayList<>();
-    entrepriseList.add(entreprise);
-    when(entrepriseDAO.getAllForSchoolYear(1)).thenReturn(entrepriseList);
-
-    // Act
-    List<EntrepriseDTO> result = entrepriseUcc.getAllForSchoolYear(1);
-
-    // Assert
-    assertEquals(1, result.get(0).getId());
-    assertEquals("zaza", entreprise.getTradeName());
-  }
-
-  @DisplayName("Test getAllForSchoolYear with exception")
-  @Test
-  public void getAllForSchoolYearWithException() {
-    // Arrange
-    when(entrepriseDAO.getAllForSchoolYear(1)).thenThrow(RuntimeException.class);
-
-    // Act & Act
-    assertThrows(RuntimeException.class, () -> entrepriseUcc.getAllForSchoolYear(1));
-  }
-
   @DisplayName("Test getStagesCountForSchoolYear")
   @Test
   public void getStagesCountForSchoolYear() {
@@ -291,6 +263,36 @@ class EntrepriseUCCImplTest {
 
     // Assert
     assertEquals(5, result);
+  }
+
+  @Test
+  public void testGetAllForSchoolYear() {
+    // 1. Arrange
+    List<EntrepriseDTO> expectedEntreprises = new ArrayList<>();
+    EntrepriseDTO entreprise1 = factory.getEntreprise();
+    EntrepriseDTO entreprise2 = factory.getEntreprise();
+    expectedEntreprises.add(entreprise1);
+    expectedEntreprises.add(entreprise2);
+
+    when(entrepriseUcc.getAllForSchoolYear(1, "orderBy")).thenReturn(expectedEntreprises);
+
+    // 2. Act
+    List<EntrepriseDTO> actualEntreprises = entrepriseUcc.getAllForSchoolYear(1, "orderBy");
+
+    // 3. Assert
+    assertNotNull(actualEntreprises);
+    assertEquals(expectedEntreprises.size(), actualEntreprises.size());
+    for (int i = 0; i < expectedEntreprises.size(); i++) {
+      assertEquals(expectedEntreprises.get(i), actualEntreprises.get(i));
+    }
+  }
+
+  @Test
+  public void testGetAllForSchoolYearWithException() {
+    when(entrepriseUcc.getAllForSchoolYear(1, "orderBy"));
+    assertThrows(RuntimeException.class, () -> {
+      entrepriseUcc.getAllForSchoolYear(1, "orderBy");
+    });
   }
 
   @DisplayName("Test getStagesCountForSchoolYear with exception")

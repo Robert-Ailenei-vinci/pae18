@@ -166,10 +166,10 @@ public class EntrepriseUCCImpl implements EntrepriseUCC {
 
 
   @Override
-  public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
+  public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear, String orderBy) {
     try {
       dalServices.startTransaction();
-      List<EntrepriseDTO> entreprises = myEntrepriseDAO.getAllForSchoolYear(idSchoolYear);
+      List<EntrepriseDTO> entreprises = myEntrepriseDAO.getAllForSchoolYear(idSchoolYear, orderBy);
       dalServices.commitTransaction();
       return entreprises;
     } catch (Exception e) {
