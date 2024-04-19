@@ -11,6 +11,8 @@ import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.exception.BadRequestException;
 import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.Consumes;
@@ -19,9 +21,11 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -32,6 +36,7 @@ import java.util.List;
 @Path("/entreprise")
 public class EntrepriseResource {
 
+  private final ObjectMapper jsonMapper = new ObjectMapper();
   /**
    * The business controller for enterprise-related operations.
    */
@@ -226,18 +231,36 @@ public class EntrepriseResource {
    * Retrieves all enterprises for a given school year.
    *
    * @param idSchoolYear the school year id
-   * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
+   * @param orderBy      the field to order by
+   * @return the list of enterprises for the school year
    */
   @GET
   @Path("getAllForSchoolYear/{idSchoolYear}")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize(roles = {"etudiant", "professeur", "administratif"})
-  public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear) {
-    List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear);
+  public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear,
+      @QueryParam("orderBy") String orderBy) {
+    // Validate orderBy parameter
+    if (orderBy != null && !orderBy.isEmpty()) {
+      String[] fields = orderBy.split(",");
+      for (String field : fields) {
+        if (!isValidField(field)) {
+          throw new BadRequestException("Invalid field name in orderBy parameter: " + field);
+        }
+      }
+    }
+    List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear, orderBy);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAllForSchoolYear successful");
     }
     return toReturn;
+  }
+
+  private boolean isValidField(String field) {
+    // List of valid field names in the pae.entreprises table
+    List<String> validFields = Arrays.asList("id_entreprise", "email", "designation", "address",
+        "phone_num", "blacklisted", "trade_name", "reason_blacklist");
+    return validFields.contains(field);
   }
 
   /**
@@ -250,10 +273,12 @@ public class EntrepriseResource {
   @Path("getStagesCountForCurrentYear/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize(roles = {"etudiant", "professeur", "administratif"})
-  public int getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
-    int toReturn = -1;
-    toReturn = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
-    if (toReturn != -1) {
+  public ObjectNode getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
+    ObjectNode toReturn = jsonMapper.createObjectNode();
+    int nbStages = -1;
+    nbStages = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);
+    toReturn.put("nbStages", nbStages);
+    if (nbStages != -1) {
       LoggerUtil.logInfo("GetStagesCountForCurrentYear successful");
     }
     return toReturn;
