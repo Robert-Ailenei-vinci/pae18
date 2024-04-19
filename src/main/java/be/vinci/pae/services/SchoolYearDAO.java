@@ -1,7 +1,6 @@
 package be.vinci.pae.services;
 
 import be.vinci.pae.business.domain.SchoolYearDTO;
-import java.sql.ResultSet;
 import java.util.List;
 
 /**

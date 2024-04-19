@@ -13,7 +13,7 @@ public interface EntrepriseDAO {
    *
    * @param id the identifier of the entreprise to retrieve
    * @return the EntrepriseDTO object corresponding to the provided identifier, or null if no
-   * entreprise with the given identifier exists
+   *    entreprise with the given identifier exists
    */
   EntrepriseDTO getOne(int id);
 
@@ -40,10 +40,15 @@ public interface EntrepriseDAO {
   /**
    * Retrieves all enterprises for a given school year.
    *
-   * @param idSchoolYear
+   * @param idSchoolYear the identifier of the school year for which to retrieve enterprises
    * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
    */
   List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear, String orderBy);
 
+  /**
+   * Retrieves the number of stages for the current year for the specified entreprise.
+   * @param entrepriseId the identifier of the entreprise for which to retrieve the number of stages
+   * @return
+   */
   int getNbStagesForCurrentYear(int entrepriseId);
 }
