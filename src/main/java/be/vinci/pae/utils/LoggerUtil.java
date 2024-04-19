@@ -54,20 +54,19 @@ public class LoggerUtil {
   }
 
   /**
-   * Logs an informational message.
+   * the lofInfo.
    *
-   * @param message the message to log
+   * @param message the message.
    */
   public static void logInfo(String message) {
     logger.info(message);
   }
 
   /**
-   * Logs an error message along with the stack trace of the provided throwable.
+   * add a error in log.
    *
-   * @param message   the error message
-   * @param throwable the throwable containing the stack trace
-   * @param errorCode the error code to map to logging level
+   * @param message   the message.
+   * @param throwable the upstream exception.
    */
   public static void logError(String message, Throwable throwable) {
     StringWriter sw = new StringWriter();

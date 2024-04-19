@@ -22,35 +22,35 @@ public interface ContactDAO {
   ContactDTO createOne(UserDTO user, EntrepriseDTO entreprise, SchoolYearDTO schoolYear);
 
   /**
-   * Retrieves a contact associated with the provided stage ID.
+   * Retrieves all contacts.
    *
-   * @param stageId the ID of the stage associated with the contact
+   * @param stageId the id of the stage associated with the contact
    * @return the contact associated with the stage
    */
   ContactDTO getOneContactByStageId(int stageId);
 
   /**
-   * Retrieves all contacts associated with the provided user ID.
+   * Retrieves all contacts associated with the provided user id.
    *
-   * @param userId the ID of the user associated with the contacts
+   * @param userId the id of the user associated with the contacts
    * @return the list of contacts associated with the user
    */
   List<ContactDTO> getAllContactsByUserId(int userId);
 
 
   /**
-   * Updates the provided contact in the database.
+   * Update the contact in db.
    *
-   * @param contactDTO the contact to update
-   * @return the updated contact
+   * @param contactDTO the contact to update.
+   * @return the updated contact.
    */
   ContactDTO updateContact(ContactDTO contactDTO);
 
   /**
-   * Retrieves a contact by its ID.
+   * get one contact by id.
    *
-   * @param idContact the ID of the contact
-   * @return the contact
+   * @param idContact the id of contact.
+   * @return the contact.
    */
   ContactDTO getOneContactById(int idContact);
 

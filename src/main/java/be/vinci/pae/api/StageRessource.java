@@ -27,7 +27,7 @@ public class StageRessource {
   private StageUCC stageUCC;
 
   /**
-   * Retrieves a stage by user id.
+   * Get one stage by user id.
    *
    * @param requestContext the request context
    * @return the stage DTO
@@ -35,9 +35,8 @@ public class StageRessource {
   @GET
   @Path("stageByUserId")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant"})
+  @Authorize
   public StageDTO getOneStageByUserId(@Context ContainerRequestContext requestContext) {
-    LoggerUtil.logInfo("Starting : stages/getAllByUserId");
     UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
     int userId = authentifiedUser.getId();
     StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
@@ -49,25 +48,24 @@ public class StageRessource {
 
 
   /**
-   * Modifies internship subject data.
+   * Modify internship subject data.
    *
-   * @param json           the JSON node containing modified data
    * @param requestContext the request context
-   * @return the modified stage DTO
+   * @return the stage DTO
    */
   @PUT
   @Path("modifyStage")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize
   public StageDTO modifyStage(JsonNode json, @Context ContainerRequestContext requestContext) {
-    UserDTO authenticatedUser = (UserDTO) requestContext.getProperty("user");
-    int userId = authenticatedUser.getId();
+    UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
+    int userId = authentifiedUser.getId();
     String subject = json.get("internship_project").asText();
     int contactId = json.get("id_contact").asInt();
-    int version = json.get("version").asInt();
-    StageDTO toReturn = stageUCC.modifyStage(userId, subject, contactId, version);
+    int ver = json.get("version").asInt();
+    StageDTO toReturn = stageUCC.modifyStage(userId, subject, contactId, ver);
     if (toReturn != null) {
-      LoggerUtil.logInfo("ModifyStage successful");
+      LoggerUtil.logInfo("GetStageByUserId successful");
     }
     return toReturn;
   }
