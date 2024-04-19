@@ -42,14 +42,14 @@ async function fetchContactsData(user) {
 
     if (!responseContacts.ok) {
       throw new Error(
-          `Failed to fetch contacts: ${responseContacts.statusText}`);
+          `Une erreur est survenue lors de la recherche des contacts : ${responseContacts.statusText}`);
     }
 
     const contactsData = await responseContacts.json();
     return contactsData;
   } catch (error) {
     throw new Error(
-        `An error occurred while fetching contacts: ${error.message}`);
+        `Une erreur est survenue lors de la recherche des contacts : ${error.message}`);
   }
 }
 
@@ -71,13 +71,14 @@ async function fetchStageData(user) {
     }
 
     if (!responseStage.ok) {
-      throw new Error(`Failed to fetch stages: ${responseStage.statusText}`);
+      throw new Error(`Une erreur est survenue lors de la recherche des stages : ${responseStage.statusText}`);
     }
 
     const stageData = await responseStage.json();
 
     return stageData;
   } catch (error) {
+    alert(error.message);
     return undefined;
   }
 }
@@ -111,7 +112,7 @@ async function renderPersonnalInfoPage() {
     {label: 'Numéro de Téléphone: ', value: user.phoneNum},
     {label: 'Date d\'enregistrement: ', value: user.registrationDate},
     {label: 'Année académique: ', value: user.schoolYear},
-    {label: 'Role: ', value: user.role}
+    {label: 'Rôle: ', value: user.role}
   ];
 
   items.forEach(item => {
@@ -134,7 +135,7 @@ async function renderPersonnalInfoPage() {
   const tbody = document.createElement('tbody');
   const trHead = document.createElement('tr');
 
-  ['Entreprise', 'Appelation', 'Adresse', 'Mail', 'N°Telephone', 'Etat', ' ',
+  ['Entreprise', 'Appellation', 'Adresse', 'Mail', 'N°Téléphone', 'État', ' ',
     'Lieu/Type de rencontre', 'Raison de refus'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
@@ -362,7 +363,7 @@ async function renderPersonnalInfoPage() {
   const stageTbody = document.createElement('tbody');
   const stageTrHead = document.createElement('tr');
 
-  ['Entreprise', 'Appelation', 'Mail', 'N°Téléphone', 'Sujet de stage',
+  ['Entreprise', 'Appellation', 'Mail', 'N°Téléphone', 'Sujet de stage',
     'Type de rencontre'].forEach(text => {
     const th = document.createElement('th');
     th.textContent = text;
