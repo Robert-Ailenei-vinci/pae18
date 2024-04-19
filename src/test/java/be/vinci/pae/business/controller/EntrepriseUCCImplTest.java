@@ -6,16 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import be.vinci.pae.business.domain.Contact;
+import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.Entreprise;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.User;
 import be.vinci.pae.exception.BizException;
+import be.vinci.pae.services.ContactDAO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.EntrepriseDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
@@ -23,97 +23,133 @@ import java.util.ArrayList;
 import java.util.List;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.utilities.ServiceLocatorUtilities;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class EntrepriseUCCImplTest {
 
   private Entreprise entreprise;
-  private Entreprise entreprise1;
+  private Entreprise resultEntreprise;
   private Entreprise entreprise2;
 
   private EntrepriseDAO entrepriseDAO;
   private User user;
   private EntrepriseUCC entrepriseUcc;
   private DomainFactory factory;
-  private EntrepriseDTO expectedEntreprise;
+  private EntrepriseDTO actualEntreprise;
+  private ContactDTO contact;
+  private ContactUCC contactUCC;
+  private ContactDAO contactDAO;
+
   private DALServices dalServices;
 
   @BeforeEach
   void setUp() {
     ServiceLocator locator = ServiceLocatorUtilities.bind(new TestApplicationBinder());
     this.entrepriseUcc = locator.getService(EntrepriseUCC.class);
+    this.contactDAO = locator.getService(ContactDAO.class);
+    this.contactUCC = locator.getService(ContactUCC.class);
     this.factory = locator.getService(DomainFactory.class);
-    this.dalServices = mock(DALServices.class);
+    this.dalServices = locator.getService(DALServices.class);
     this.entreprise = (Entreprise) factory.getEntreprise();
-    this.entreprise1 = (Entreprise) factory.getEntreprise();
+    this.resultEntreprise = (Entreprise) factory.getEntreprise();
     this.entreprise2 = (Entreprise) factory.getEntreprise();
-    this.expectedEntreprise = factory.getEntreprise();
+    this.actualEntreprise = factory.getEntreprise();
     this.user = (User) factory.getUser();
+    this.contact = (Contact) factory.getContact();
     this.entrepriseDAO = locator.getService(EntrepriseDAO.class);
-    doNothing().when(dalServices).startTransaction();
-    doNothing().when(dalServices).commitTransaction();
-    doNothing().when(dalServices).rollbackTransaction();
-
-    // Arrange
-    // Arrange
-    Entreprise entreprise = (Entreprise) factory.getEntreprise();
-    entreprise.setId(1);
-    when(entrepriseDAO.getOne(anyInt())).thenReturn(entreprise);
   }
 
-  @Test
-  void getOneSuccess() {
-    // Arrange
-    int entrepriseId = 1;
-    Entreprise entreprise = (Entreprise) factory.getEntreprise();
-    entreprise.setId(entrepriseId);
+  @AfterEach
+  public void tearDown() {
+    // Clean up resources, reset state, etc.
+    Mockito.reset(entrepriseDAO, dalServices, contactDAO);
+  }
 
-    when(entrepriseDAO.getOne(entrepriseId)).thenReturn(entreprise);
+  @DisplayName("Test getOne")
+  @Test
+  public void testGetOne() {
+    // Arrange
+    entreprise.setId(1);
+    entreprise.setTradeName("zaza");
+
+    when(entrepriseDAO.getOne(1)).thenReturn(entreprise);
+
     // Act
-    EntrepriseDTO retrievedEntreprise = entrepriseUcc.getOne(entrepriseId);
+    actualEntreprise = entrepriseUcc.getOne(1);
 
     // Assert
-    assertNotNull(retrievedEntreprise);
-    assertEquals(entrepriseId, retrievedEntreprise.getId());
+    assertEquals(entreprise.getId(), actualEntreprise.getId());
   }
 
-  @Test
-  void getOneWithException() {
-    // Arrange
-    int entrepriseId = 1;
-    when(entrepriseDAO.getOne(entrepriseId)).thenThrow(new RuntimeException());
-
-    // Act and Assert
-    assertThrows(RuntimeException.class, () -> {
-      entrepriseUcc.getOne(entrepriseId);
-    });
-  }
-
+  @DisplayName("Test getOne with exception")
   @Test
   public void testGetOneWithException() {
-    when(entrepriseUcc.getOne(1));
-    assertThrows(RuntimeException.class, () -> {
-      entrepriseUcc.getOne(1);
-    });
+    // Arrange
+    entreprise.setId(1);
+    entreprise.setTradeName("zaza");
+
+    when(entrepriseDAO.getOne(1)).thenThrow(RuntimeException.class);
+
+    // Act & Act
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getOne(1));
   }
 
+  @DisplayName("Test createOne")
+  @Test
+  void createOne() {
+    // 1. Arrange
+    user.setRole("etudiant");
+    String tradeName = "tradeName";
+    entreprise.setTradeName(tradeName);
+    resultEntreprise.setTradeName(tradeName);
+    String designation = "designation";
+    entreprise.setDesignation(designation);
+    resultEntreprise.setDesignation(designation);
+    String address = "address";
+    entreprise.setAddress(address);
+    resultEntreprise.setAddress(address);
+    String phoneNum = "phoneNum";
+    entreprise.setPhoneNumber(phoneNum);
+    resultEntreprise.setPhoneNumber(phoneNum);
+    String email = "email";
+    entreprise.setEmail(email);
+    resultEntreprise.setEmail(email);
+
+    when(
+        entrepriseDAO.createOne(tradeName, designation, address, phoneNum, email))
+        .thenReturn(entreprise);
+
+    // 2. Act
+    EntrepriseDTO actualEntreprise = entrepriseUcc.createOne(user, tradeName, designation,
+        address, phoneNum, email);
+
+    // 3. Assert
+    assertNotNull(actualEntreprise);
+    assertEquals(this.entreprise.getDesignation(), actualEntreprise.getDesignation());
+  }
+
+  @DisplayName("Test createOne with wrong user role")
   @Test
   void createOneWithException() {
-    // 1. Arrange
+    // Arrange
     user.setRole("professeur");
 
-    // 2. Act and Asserts
+    // Act and Asserts
     assertThrows(BizException.class, () -> {
       entrepriseUcc.createOne(user, "tradeName", "designation", "address", "phoneNum", "email");
     });
   }
 
+  @DisplayName("Test getAll")
   @Test
   void getAll() {
     // 1. Arrange
     List<EntrepriseDTO> expectedEntreprises = new ArrayList<>();
-    expectedEntreprises.add(entreprise1);
+    expectedEntreprises.add(resultEntreprise);
     expectedEntreprises.add(entreprise2);
 
     when(entrepriseDAO.getAll()).thenReturn(expectedEntreprises);
@@ -129,6 +165,17 @@ class EntrepriseUCCImplTest {
     }
   }
 
+  @DisplayName("Test getOne with exception")
+  @Test
+  void getOneWithException() {
+    // Arrange
+    when(entrepriseDAO.getAll()).thenThrow(RuntimeException.class);
+
+    // Act and Asserts
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getAll());
+  }
+
+  @DisplayName("Test getAll with transaction exception")
   @Test
   public void testGetAllWithException() {
     when(entrepriseUcc.getAll());
@@ -137,6 +184,7 @@ class EntrepriseUCCImplTest {
     });
   }
 
+  @DisplayName("Test Blacklist")
   @Test
   void blacklistSuccess() {
     // Arrange
@@ -157,6 +205,7 @@ class EntrepriseUCCImplTest {
     assertEquals(reason, blacklistedEntreprise.getBlacklistReason());
   }
 
+  @DisplayName("Test with transaction exception")
   @Test
   void blacklistWithException() {
     // Arrange
@@ -170,7 +219,7 @@ class EntrepriseUCCImplTest {
     });
   }
 
-
+  @DisplayName("Test Unblacklist")
   @Test
   void unblacklistSuccess() {
     // Arrange
@@ -190,6 +239,7 @@ class EntrepriseUCCImplTest {
     assertNull(unblacklistedEntreprise.getBlacklistReason());
   }
 
+  @DisplayName("Test Unblacklist with transaction exception")
   @Test
   void unblacklistWithException() {
     // Arrange
@@ -202,4 +252,79 @@ class EntrepriseUCCImplTest {
     });
   }
 
+  @DisplayName("Test getAllForSchoolYear")
+  @Test
+  public void testGetAllForSchoolYear() {
+    // Arrange
+    entreprise.setId(1);
+    entreprise.setTradeName("zaza");
+    List<EntrepriseDTO> entrepriseList = new ArrayList<>();
+    entrepriseList.add(entreprise);
+    when(entrepriseDAO.getAllForSchoolYear(1)).thenReturn(entrepriseList);
+
+    // Act
+    List<EntrepriseDTO> result = entrepriseUcc.getAllForSchoolYear(1);
+
+    // Assert
+    assertEquals(1, result.get(0).getId());
+    assertEquals("zaza", entreprise.getTradeName());
+  }
+
+  @DisplayName("Test getAllForSchoolYear with exception")
+  @Test
+  public void getAllForSchoolYearWithException() {
+    // Arrange
+    when(entrepriseDAO.getAllForSchoolYear(1)).thenThrow(RuntimeException.class);
+
+    // Act & Act
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getAllForSchoolYear(1));
+  }
+
+  @DisplayName("Test getStagesCountForSchoolYear")
+  @Test
+  public void getStagesCountForSchoolYear() {
+    // Arrange
+    when(entrepriseDAO.getNbStagesForCurrentYear(1)).thenReturn(5);
+
+    // Act
+    int result = entrepriseUcc.getStagesCountForSchoolYear(1);
+
+    // Assert
+    assertEquals(5, result);
+  }
+
+  @DisplayName("Test getStagesCountForSchoolYear with exception")
+  @Test
+  public void getStagesCountForSchoolYearWithException() {
+    // Arrange
+    when(entrepriseDAO.getNbStagesForCurrentYear(1)).thenThrow(RuntimeException.class);
+
+    // Act & Act
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getStagesCountForSchoolYear(1));
+  }
+
+  @DisplayName("Test getAllContactsByEntrepriseId")
+  @Test
+  public void getAllContactsByEntrepriseId() {
+    // Arrange
+    List<ContactDTO> contactList = new ArrayList<>();
+    contactList.add(contact);
+    when(contactDAO.getAllContactsByEntrepriseId(1)).thenReturn(contactList);
+
+    // Act
+    List<ContactDTO> result = entrepriseUcc.getAllContactsByEntrepriseId(1);
+
+    // Assert
+    assertEquals(contact.getId(), result.get(0).getId());
+  }
+
+  @DisplayName("Test getAllContactsByEntrepriseId with exception")
+  @Test
+  public void getAllContactsByEntrepriseIdWithException() {
+    // Arrange
+    when(contactDAO.getAllContactsByEntrepriseId(1)).thenThrow(RuntimeException.class);
+
+    // Act & Act
+    assertThrows(RuntimeException.class, () -> entrepriseUcc.getAllContactsByEntrepriseId(1));
+  }
 }

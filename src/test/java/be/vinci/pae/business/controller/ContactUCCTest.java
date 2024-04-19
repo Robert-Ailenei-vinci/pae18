@@ -2,6 +2,7 @@ package be.vinci.pae.business.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -322,5 +323,78 @@ class ContactUCCTest {
     assertThrows(BizExceptionNotFound.class,
         () -> contactUCC.refusedContact(contact.getUserId(), refusalReason, contact.getUserId(),
             contact.getVersion()));
+  }
+
+  @DisplayName("Test acceptContact")
+  @Test
+  void acceptContact() {
+    // Arrange
+    contact.setId(123);
+    contact.setState("rencontre");
+    contactResult.setId(123);
+    contactResult.setState("accepte");
+
+    when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
+    when(contactDAO.updateContact(contact)).thenReturn(contactResult);
+
+    // Act and Assert
+    ContactDTO result = contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
+        contact.getVersion());
+    assertEquals(contactResult.getId(), result.getId());
+    assertEquals(contactResult.getState(), result.getState());
+  }
+
+  @DisplayName("Test acceptContact with wrong given state")
+  @Test
+  void acceptContactWithWrongState() {
+    // Arrange
+    contact.setId(123);
+    contact.setState("accepte");
+
+    when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
+
+    // Act and Assert
+    assertThrows(BizException.class,
+        () -> contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
+            contact.getVersion()));
+  }
+
+  @DisplayName("Test acceptContact with wrong given user")
+  @Test
+  void acceptContactWithWrongUser() {
+    // Arrange
+    contact.setId(123);
+    contact.setState("accepte");
+
+    when(contactDAO.getOneContactById(contact.getId())).thenReturn(contact);
+
+    // Act and Assert
+    assertThrows(BizExceptionNotFound.class,
+        () -> contactUCC.acceptContact(contact.getUserId(), 789,
+            contact.getVersion()));
+  }
+
+  @DisplayName("Test cancelInternshipsBasedOnEntreprise")
+  @Test
+  void cancelInternshipsBasedOnEntreprise() {
+    // Arrange
+    contact.setId(1);
+
+    when(contactDAO.cancelInternshipsBasedOnEntrepriseId(1)).thenReturn(true);
+
+    // Act & Assert
+    assertTrue(contactUCC.cancelInternshipsBasedOnEntreprise(1));
+  }
+
+  @DisplayName("Test cancelInternshipsBasedOnEntreprise with transaction exception")
+  @Test
+  void cancelInternshipsBasedOnEntrepriseWithException() {
+    // Arrange
+    contact.setId(1);
+
+    when(contactDAO.cancelInternshipsBasedOnEntrepriseId(1)).thenThrow(RuntimeException.class);
+
+    // Act & Assert
+    assertThrows(RuntimeException.class, () -> contactUCC.cancelInternshipsBasedOnEntreprise(1));
   }
 }
