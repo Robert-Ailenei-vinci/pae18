@@ -165,13 +165,12 @@ public class ContactUCCImpl implements ContactUCC {
 
       myContactDAO.cancelAllContact(contact);
 
-      dalServices.commitTransaction();
-
       SupervisorDTO supervisor = mySupervisorUCC.getOneById(supervisorId);
 
       myStageUCC.createOne(contactToReturn, signatureDate, internshipProject,
           supervisor.getSupervisorId());
 
+      dalServices.commitTransaction();
       return contactToReturn;
 
 
