@@ -49,7 +49,7 @@ public class SupervisorRessource {
   @GET
   @Path("getAllForOneEnterprise")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public List<SupervisorDTO> getAllForOneEnterprise(@QueryParam("entrepriseId") int entrepriseId)
       throws BadRequestException {
     if (entrepriseId <= 0) {
@@ -80,7 +80,7 @@ public class SupervisorRessource {
   @Path("addSupervisor")
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public SupervisorDTO addOneSupervisor(@Context ContainerRequestContext requestContext,
       JsonNode json) throws BadRequestException, AuthorisationException {
 

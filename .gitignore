@@ -122,3 +122,4 @@ target/
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,java-web
 
 /logs/
+/requests/http-client.env.json

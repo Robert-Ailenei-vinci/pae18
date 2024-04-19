@@ -22,12 +22,12 @@ function renderInfoChangeForm() {
   
   const expl = document.createElement('h3');
   expl.type = 'text';
-  expl.textContent ='Ne rentrez des donées que dans les champs ou vous voulez changer vos informations:'
+  expl.textContent ='Ne rentrez des données que dans les champs où vous voulez changer vos informations :'
 
 
   const br1 = document.createElement('div');
   br1.type = 'text';
-  br1.textContent ='Le mail ne peut pas etre modifie'
+  br1.textContent ='Le mail ne peut pas être modifié'
   
   const login = document.createElement('input');
   login.type = 'email';
@@ -81,14 +81,14 @@ function renderInfoChangeForm() {
   phone_num.addEventListener('input', function (event) {
     const phoneNumberPattern = /^04\d{8}$/;
     if (!phoneNumberPattern.test(this.value)) {
-      this.setCustomValidity('Invalid phone number. It should start with 04 and followed by 8 digits.');
+      this.setCustomValidity('Numéro de téléphone invalide. Il doit commencer par 04 et être suivi de 8 chiffres.');
     } else {
       this.setCustomValidity('');
     }
   });
 
   const submit = document.createElement('input');
-  submit.value = 'Envoyer';
+  submit.value = 'Confirmer';
   submit.type = 'submit';
   submit.className = 'btn btn-info';
   const formCheckWrapper = document.createElement('div');
@@ -124,7 +124,7 @@ async function onSubmit(e) {
   const version = user.version;
 
   if (password !== passwordRepet) {
-    alert('The passwords do not match. Please try again.');
+    alert('Les mots de passe sont différent. Veuillez réessayer.');
     return; // Stop the function if the passwords do not match
   }
 
@@ -155,9 +155,10 @@ async function onSubmit(e) {
   if (!response.ok) {
     if (response.status === 400) {
       // Display a popup message for incorrect username or password
-      alert("L'utilisateur existe déjà, veuillez vous connecter ou créer un autre compte.");
+      alert("L'utilisateur n'a pas été trouvé");
   } else {
       // For other errors, handle them accordingly
+      alert("Une erreur est survenue : ", response.statusText);
       console.error("An error occurred:", response.statusText);
   }
       return;

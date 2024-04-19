@@ -52,7 +52,7 @@ public class EntrepriseResource {
   @GET
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public List<EntrepriseDTO> getAll() {
     LoggerUtil.logInfo("Starting : enterprises/getAll");
     List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAll();
@@ -74,7 +74,7 @@ public class EntrepriseResource {
   @GET
   @Path("getOne/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public EntrepriseDTO getOne(@PathParam("id") int entrepriseId) {
     LoggerUtil.logInfo("Starting : enterprise/getOne");
     EntrepriseDTO toReturn = myEntrepriseUCC.getOne(entrepriseId);
@@ -116,7 +116,6 @@ public class EntrepriseResource {
     }
     int version = json.get("version").asInt();
     EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason, version);
-    myContactUCC.cancelInternshipsBasedOnEntreprise(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("Blacklist successful");
     }
@@ -127,7 +126,7 @@ public class EntrepriseResource {
    * Unblacklists an enterprise. This method is accessed via HTTP POST request to the path
    * "/entreprise/blacklist". It returns the unblacklisted enterprise in JSON format. Requires
    * authorization. This doesn't change the state of the contacts, it just allows to take a contact
-   * with the blacklisted entreprise.
+   * with the beforehand blacklisted entreprise.
    *
    * @param json The JSON object containing the enterprise id.
    * @return The {@link EntrepriseDTO} representing the blacklisted enterprise.
@@ -188,21 +187,14 @@ public class EntrepriseResource {
       throw new BadRequestException("All fields required to create an enterprise.");
     }
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
-    int userId = user.getId();
+
     String tradeName = json.get("trade_name").asText();
     String designation = json.get("designation").asText();
     String address = json.get("address").asText();
     String phoneNum = json.get("phone_num").asText();
     String email = json.get("email").asText();
 
-    // Try to get user, enterprise, and school year
-    UserDTO userDTO = myUserUCC.getOne(userId);
-    if (userDTO == null) {
-      throw new AuthorisationException("User not recognised");
-    }
-
-    EntrepriseDTO entrepriseDTO = myEntrepriseUCC.createOne(userDTO, tradeName, designation,
-        address,
+    EntrepriseDTO entrepriseDTO = myEntrepriseUCC.createOne(user, tradeName, designation, address,
         phoneNum, email);
     if (entrepriseDTO == null) {
       throw new BadRequestException("Contact not created");
@@ -220,7 +212,7 @@ public class EntrepriseResource {
   @GET
   @Path("entrepriseDetailsAllContacts/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<ContactDTO> getAllContactsByEntrepriseId(
       @PathParam("entrepriseId") int entrepriseId) {
     List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
@@ -239,7 +231,7 @@ public class EntrepriseResource {
   @GET
   @Path("getAllForSchoolYear/{idSchoolYear}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear) {
     List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear);
     if (toReturn != null) {
@@ -257,7 +249,7 @@ public class EntrepriseResource {
   @GET
   @Path("getStagesCountForCurrentYear/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public int getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
     int toReturn = -1;
     toReturn = myEntrepriseUCC.getStagesCountForSchoolYear(entrepriseId);

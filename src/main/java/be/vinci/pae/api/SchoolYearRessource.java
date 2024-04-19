@@ -12,8 +12,8 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
- * The class {@link SchoolYearRessource} is a RESTful web service that manages school years.
- * It provides endpoints to get all school years and the default school year.
+ * The class {@link SchoolYearRessource} is a RESTful web service that manages school years. It
+ * provides endpoints to get all school years and the default school year.
  */
 @Singleton
 @Path("/schoolYears")
@@ -26,15 +26,14 @@ public class SchoolYearRessource {
   private SchoolYearUCC schoolYearUCC;
 
   /**
-   * Retrieves all school years.
-   * This method is accessible only to authorized users.
+   * Retrieves all school years. This method is accessible only to authorized users.
    *
    * @return a list of all {@link SchoolYearDTO} instances
    */
   @GET
   @Path("getAllSchoolYears")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public List<SchoolYearDTO> getAllSchoolYears() {
     return schoolYearUCC.getAllSchoolYears();
   }
@@ -47,6 +46,7 @@ public class SchoolYearRessource {
   @GET
   @Path("getDefaultSchoolYear")
   @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"professeur", "administratif"})
   public SchoolYearDTO getDefaultSchoolYear() {
     return schoolYearUCC.getCurrentSchoolYear();
   }
