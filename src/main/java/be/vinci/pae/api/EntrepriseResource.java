@@ -116,7 +116,6 @@ public class EntrepriseResource {
     }
     int version = json.get("version").asInt();
     EntrepriseDTO toReturn = myEntrepriseUCC.blacklist(entrepriseId, reason, version);
-    myContactUCC.cancelInternshipsBasedOnEntreprise(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("Blacklist successful");
     }
