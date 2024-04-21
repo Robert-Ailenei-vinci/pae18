@@ -134,6 +134,23 @@ class ContactUCCTest {
         () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
   }
 
+  @DisplayName("Test create with blacklisted enterprise")
+  @Test
+  void createOneWithBlacklistedEnterprise() {
+    // Arrange
+    UserDTO userDTO = factory.getUser();
+    userDTO.setId(123);
+    userDTO.setRole("etudiant");
+
+    EntrepriseDTO entrepriseDTO = mock(EntrepriseDTO.class);
+    when(entrepriseDTO.isBlacklisted()).thenReturn(true);
+    SchoolYearDTO schoolYearDTO = mock(SchoolYearDTO.class);
+
+    // Act and Assert
+    assertThrows(BizException.class,
+        () -> contactUCC.createOne(userDTO, entrepriseDTO, schoolYearDTO));
+  }
+
   @DisplayName("Test CreateOne with transaction error")
   @Test
   void createOneWithTransactionError() {
