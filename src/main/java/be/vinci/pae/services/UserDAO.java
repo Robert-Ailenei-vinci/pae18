@@ -51,16 +51,16 @@ public interface UserDAO {
 
   /**
    * Retrieves the number of the students who has a stage.
-   * @param yearID the id of the year
    *
+   * @param yearID the id of the year
    * @return A list of all students with their stage.
    */
   int studsWithStage(int yearID);
 
   /**
    * Retrieves the number of the students who have no stage.
-   * @param yearID the id of the year
    *
+   * @param yearID the id of the year
    * @return A list of all students with no stage.
    */
   int studsWithNoStage(int yearID);

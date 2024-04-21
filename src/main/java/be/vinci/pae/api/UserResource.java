@@ -106,6 +106,15 @@ public class UserResource {
     return toReturn;
   }
 
+  /**
+   * Retrieves the number of students with internships. This method is annotated with {@link jakarta.ws.rs.GET}
+   * and {@link jakarta.ws.rs.Path}, indicating that it handles HTTP GET requests and consumes JSON
+   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize}, indicating
+   * that authorization is required to access this endpoint.
+   *
+   * @param yearID The identifier of the user to retrieve.
+   * @return The user with the specified identifier.
+   */
   @GET
   @Path("studWithStage/{filtre}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -119,6 +128,15 @@ public class UserResource {
     return toReturn;
   }
 
+  /**
+   * Retrieves the number of students without internships. This method is annotated with {@link jakarta.ws.rs.GET}
+   * and {@link jakarta.ws.rs.Path}, indicating that it handles HTTP GET requests and consumes JSON
+   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize}, indicating
+   * that authorization is required to access this endpoint.
+   *
+   * @param yearID The identifier of the user to retrieve.
+   * @return The user with the specified identifier.
+   */
   @GET
   @Path("studWithNoStage/{filtre}")
   @Produces(MediaType.APPLICATION_JSON)

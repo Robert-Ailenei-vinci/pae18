@@ -269,8 +269,8 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public int studsWithStage(int yearID) {
     String sql = "SELECT COUNT(*) FROM pae.users u "
-      + "JOIN pae.stages s ON u.id_user = s._user "
-      + "WHERE u.role_u = 'etudiant' AND u.school_year = ?";
+        + "JOIN pae.stages s ON u.id_user = s._user "
+        + "WHERE u.role_u = 'etudiant' AND u.school_year = ?";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
       stmt.setInt(1, yearID);
       try (ResultSet rs = stmt.executeQuery()) {
@@ -294,8 +294,8 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public int studsWithNoStage(int yearID) {
     String sql = "SELECT COUNT(*) FROM pae.users u "
-      + "LEFT JOIN pae.stages s ON u.id_user = s._user "
-      + "WHERE u.role_u = 'etudiant' AND u.school_year = ? AND s._user IS NULL";
+        + "LEFT JOIN pae.stages s ON u.id_user = s._user "
+        + "WHERE u.role_u = 'etudiant' AND u.school_year = ? AND s._user IS NULL";
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
       stmt.setInt(1, yearID);
       try (ResultSet rs = stmt.executeQuery()) {
