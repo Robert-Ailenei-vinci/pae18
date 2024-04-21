@@ -63,4 +63,20 @@ public interface UserUCC {
    * @return the hashed password.
    */
   String hashPassword(String password);
+
+  /**
+   * Get the number of students with a stage.
+   *
+   * @param yearID the year id
+   * @return the number of students with a stage
+   */
+  int studsWithStage(int yearID);
+
+  /**
+   * Get the number of students without a stage.
+   *
+   * @param yearID the year id
+   * @return the number of students without a stage
+   */
+  int studsWithNoStage(int yearID);
 }

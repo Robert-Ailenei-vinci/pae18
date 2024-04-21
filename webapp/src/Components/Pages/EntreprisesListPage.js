@@ -2,15 +2,26 @@ import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
 import {getAuthenticatedUser} from "../../utils/auths";
+import {fetchStudentsWithStages, fetchStudentsWithNoStages} from "./utils/FetchsGraphs"
+
 // eslint-disable-next-line no-undef
 const Chart = require('chart.js/auto');
 const EntreprisesListPage = () => {
     clearPage();
     renderPageTitle('Toutes les entreprises');
+    renderPieChart();
     renderEntreprisesWithSchoolYear().then(r => r);
     // eslint-disable-next-line no-undef
-    renderPieChart();
+    
 };
+
+async function updatePieChart(yearId) {
+    const studentsWithStage = await fetchStudentsWithStages(yearId);
+    const studentsWithNoStage = await fetchStudentsWithNoStages(yearId);
+
+    myChart.data.datasets[0].data = [studentsWithStage, studentsWithNoStage];
+    myChart.update();
+}
 
 async function fetchEntreprisesForSchoolYear(user, schoolYearId) {
     const options = {
@@ -50,6 +61,7 @@ async function fetchSchoolYears(user) {
     return schoolYears;
 }
 
+let myChart;
 async function renderEntreprisesWithSchoolYear() {
     const user = getAuthenticatedUser();
     const main = document.querySelector('main');
@@ -77,7 +89,10 @@ async function renderEntreprisesWithSchoolYear() {
     if (defaultYear !== null) {
         const defaultEntreprises = await fetchEntreprisesForSchoolYear(user, defaultYear.id);
         renderEntreprisesTable(defaultEntreprises);
+
+        await updatePieChart(defaultYear.id);
     }
+    
 
     // Update the enterprises whenever a different year is selected from the dropdown
     selectSchoolYear.addEventListener('change', async () => {
@@ -90,6 +105,10 @@ async function renderEntreprisesWithSchoolYear() {
         if (table) {
             main.removeChild(table);
         }
+
+        await updatePieChart(selectedYearId);
+
+
         renderEntreprisesTable(entreprises);
     });
 }
@@ -191,12 +210,11 @@ function renderPieChart() {
     const ctx = canvas.getContext('2d');
 
     // Render the pie chart using Chart.js
-    new Chart(ctx, {
+    myChart =new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ['Label 1', 'Label 2'], // Example labels
+            labels: ['Etudiants avec stage', 'Etudiants sans stage'], // Example labels
             datasets: [{
-                data: [10, 20], // Example data
                 backgroundColor: ['rgb(208,45,35)', 'rgb(65,73,105)'], // Example colors
             }]
         },

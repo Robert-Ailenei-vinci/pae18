@@ -69,6 +69,12 @@ async function fetchStagesCountForCurrentYear(user) {
   }
   return response.json();
 }
+
+
+
+
+
+
 let isRendering = false;
 async function renderDetailsEntreprise() {
   const user = getAuthenticatedUser();
