@@ -78,8 +78,7 @@ public class SchoolYearDAOImpl implements SchoolYearDAO {
     return year + "-" + (year + 1);
   }
 
-  @Override
-  public SchoolYearDTO getSchoolYearMethodFromDB(ResultSet rs) {
+  private SchoolYearDTO getSchoolYearMethodFromDB(ResultSet rs) {
     SchoolYearDTO schoolYear = myDomainFactory.getSchoolYear();
     try {
       schoolYear.setId(rs.getInt("id_year"));

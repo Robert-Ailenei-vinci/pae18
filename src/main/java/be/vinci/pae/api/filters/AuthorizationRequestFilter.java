@@ -56,16 +56,19 @@ public class AuthorizationRequestFilter implements ContainerRequestFilter {
     }
     // Check if the user has required roles
     if (!userHasValidToken(requestContext)) {
+      LoggerUtil.logInfo("Accessing resource without being connected");
       requestContext.abortWith(Response.status(Status.FORBIDDEN)
           .entity("You need to be connected to access to this resource").build());
       return;
     }
     UserDTO authenticatedUser = authenticateUser(requestContext);
     if (rolesAllowed == null) {
+      LoggerUtil.logInfo("Error while initialising Authorize");
       requestContext.abortWith(Response.status(Status.FORBIDDEN)
           .entity("Error initialising Authorize").build());
     }
     if (!userHasRequiredRoles(authenticatedUser, rolesAllowed)) {
+      LoggerUtil.logInfo("Accessing resource without correct roles");
       requestContext.abortWith(Response.status(Status.FORBIDDEN)
           .entity("You are forbidden to access this resource").build());
       return;

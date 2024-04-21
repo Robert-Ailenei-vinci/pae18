@@ -154,17 +154,26 @@ async function renderPersonnalInfoPage() {
     ['tradeName', 'designation', 'address', 'email', 'phoneNumber'].forEach(
         key => {
           const td = document.createElement('td');
+          if (contact.entreprise.blacklisted) {
+            td.style.color = 'red';
+          }
           td.textContent = contact.entreprise[key] || '-';
           tr.appendChild(td);
         });
 
     // État
     const tdState = document.createElement('td');
+    if (contact.entreprise.blacklisted) {
+      tdState.style.color = 'red';
+    }
     tdState.textContent = contact.state || '-';
     tr.appendChild(tdState);
 
     // Bouton pour changer l'état
     const tdButton = document.createElement('td');
+    if (contact.entreprise.blacklisted) {
+      tdButton.style.color = 'red';
+    }
     const button = document.createElement('button');
     button.textContent = 'Avancement';
     button.className = 'btn btn-primary';
@@ -178,7 +187,17 @@ async function renderPersonnalInfoPage() {
     divForm.className = 'collapse';
     divForm.id = 'collapseExample_' + contact.id;
 
-    if (contact.state === "initie") {
+    const avancementButtonDisplayed = contact.state === "initie";
+
+    if (!avancementButtonDisplayed) {
+        // If the button is not displayed, display "-"
+        const tdAvancement = document.createElement('td');
+        if (contact.entreprise.blacklisted) {
+          tdButton.style.color = 'red';
+        }
+        tdAvancement.textContent = '-';
+        tr.appendChild(tdAvancement);
+    } else {
       // Création du formulaire
       const form = document.createElement('form');
       const select = document.createElement('select');
@@ -367,17 +386,26 @@ async function renderPersonnalInfoPage() {
 
     if (contact.state === "stop follow" || contact.state === "refuse") {
       const tdVide = document.createElement('td');
+      if (contact.entreprise.blacklisted) {
+        tdVide.style.color = 'red';
+      }
       tdVide.textContent = '-';
       tr.appendChild(tdVide);
     }
 
     // Lieu/Type de rencontre
     const tdMeeting = document.createElement('td');
+    if (contact.entreprise.blacklisted) {
+      tdMeeting.style.color = 'red';
+    }
     tdMeeting.textContent = contact.meetingType || '-';
     tr.appendChild(tdMeeting);
 
     // Raison de refus
     const tdReason = document.createElement('td');
+    if (contact.entreprise.blacklisted) {
+      tdReason.style.color = 'red';
+    }
     tdReason.textContent = contact.reasonForRefusal || '-';
     tr.appendChild(tdReason);
 

@@ -165,24 +165,29 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   }
 
   @Override
-  public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear) {
-    PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT DISTINCT e.* FROM pae.entreprises e "
-          + "JOIN pae.contacts c ON e.id_entreprise = c.entreprise "
-          + "WHERE c.school_year = ?");
-    List<EntrepriseDTO> entreprises = new ArrayList<>();
-    try {
+  public List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear, String orderBy) {
+    String sql = "SELECT e.* FROM pae.entreprises e "
+        + "JOIN pae.contacts c ON e.id_entreprise = c.entreprise "
+        + "WHERE c.school_year = ? "
+        + "GROUP BY e.id_entreprise ";
+    if (orderBy != null && !orderBy.isEmpty()) {
+      sql += "ORDER BY " + orderBy;
+    } else {
+      sql += "ORDER BY e.trade_name,e.designation";
+    }
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(sql)) {
       preparedStatement.setInt(1, idSchoolYear);
+      List<EntrepriseDTO> entreprises = new ArrayList<>();
       try (ResultSet rs = preparedStatement.executeQuery()) {
         while (rs.next()) {
           EntrepriseDTO entreprise = getEntrepriseMethodFromDB(rs);
           entreprises.add(entreprise);
         }
       }
+      return entreprises;
     } catch (Exception e) {
       throw new FatalError("Error processing result set", e);
     }
-    return entreprises;
   }
 
   private EntrepriseDTO getEntrepriseMethodFromDB(ResultSet rs) {
@@ -205,9 +210,10 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
   @Override
   public int getNbStagesForCurrentYear(int entrepriseId) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-        "SELECT COUNT(*) FROM pae.entreprises e "
-          + "JOIN pae.contacts c ON e.id_entreprise = c.entreprise "
-          + "WHERE c.school_year = ? AND e.id_entreprise = ?")) {
+        "SELECT COUNT(*) FROM pae.stages s "
+            + "JOIN pae.contacts c ON s.contact = c.id_contact "
+            + "JOIN pae.entreprises e ON c.entreprise = e.id_entreprise "
+            + "WHERE s.school_year = ? AND e.id_entreprise = ?")) {
       preparedStatement.setInt(1, schoolYearDAO.getCurrentSchoolYear().getId());
       preparedStatement.setInt(2, entrepriseId); // Set the entreprise id
       try (ResultSet rs = preparedStatement.executeQuery()) {

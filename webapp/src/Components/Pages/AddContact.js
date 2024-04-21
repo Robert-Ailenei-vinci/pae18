@@ -82,12 +82,14 @@ function createDropdownContent(entreprises) {
   dropdownContent.id = 'myDropdown';
   dropdownContent.className = 'dropdown-menu';
   entreprises.forEach(entreprise => {
-    const option = document.createElement('button');
-    option.className = 'dropdown-item';
-    option.type = 'button';
-    option.textContent = entreprise.tradeName;
-    option.id = entreprise.id;
-    dropdownContent.appendChild(option);
+    if (!entreprise.blacklisted) {
+      const option = document.createElement('button');
+      option.className = 'dropdown-item';
+      option.type = 'button';
+      option.textContent = entreprise.tradeName;
+      option.id = entreprise.id;
+      dropdownContent.appendChild(option);
+    }
   });
   return dropdownContent;
 }
