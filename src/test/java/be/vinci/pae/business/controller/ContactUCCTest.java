@@ -339,8 +339,8 @@ class ContactUCCTest {
     contact.setState("rencontre");
     contactResult.setId(123);
     contactResult.setState("accepte");
-    String signDate = "2023-11-11";
-    String internshipPoject = "SQL: avancée";
+
+
     int supervisorId = 2;
 
     SupervisorDTO supervisorDTO = Mockito.mock(SupervisorDTO.class);
@@ -353,6 +353,8 @@ class ContactUCCTest {
     when(contactDAO.updateContact(contact)).thenReturn(contactResult);
     when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
     // Act and Assert
+    String signDate = "2023-11-11";
+    String internshipPoject = "SQL: avancée";
     ContactDTO result = contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
         contact.getVersion(), supervisorId, signDate, internshipPoject);
     assertEquals(contactResult.getId(), result.getId());
@@ -365,8 +367,8 @@ class ContactUCCTest {
     // Arrange
     contact.setId(123);
     contact.setState("accepte");
-    String signDate = "2023-11-11";
-    String internshipPoject = "SQL: avancée";
+
+
     int supervisorId = 2;
 
     SupervisorDTO supervisorDTO = Mockito.mock(SupervisorDTO.class);
@@ -379,6 +381,8 @@ class ContactUCCTest {
     when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
 
     // Act and Assert
+    String signDate = "2023-11-11";
+    String internshipPoject = "SQL: avancée";
     assertThrows(BizException.class,
         () -> contactUCC.acceptContact(contact.getUserId(), contact.getUserId(),
             contact.getVersion(), supervisorId, signDate, internshipPoject));
@@ -390,8 +394,6 @@ class ContactUCCTest {
     // Arrange
     contact.setId(123);
     contact.setState("accepte");
-    String signDate = "2023-11-11";
-    String internshipPoject = "SQL: avancée";
     int supervisorId = 2;
 
     SupervisorDTO supervisorDTO = Mockito.mock(SupervisorDTO.class);
@@ -404,6 +406,8 @@ class ContactUCCTest {
     when(supervisorDAO.getOneById(supervisorId)).thenReturn(supervisorDTO);
 
     // Act and Assert
+    String signDate = "2023-11-11";
+    String internshipPoject = "SQL: avancée";
     assertThrows(BizExceptionNotFound.class,
         () -> contactUCC.acceptContact(contact.getUserId(), 789,
             contact.getVersion(), supervisorId, signDate, internshipPoject));

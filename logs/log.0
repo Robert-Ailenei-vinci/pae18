@@ -968,3 +968,14 @@ Caused by: org.postgresql.util.PSQLException: Cannot rollback when autoCommit is
 [2024-04-21 23:38:10] [INFO] Starting : users/studWithStage 
 [2024-04-21 23:38:10] [INFO] user: studsWithNoStage 
 [2024-04-21 23:38:10] [INFO] Get studWithStage successful 
+[2024-04-22 00:32:01] [INFO] Starting : authorize 
+[2024-04-22 00:32:01] [INFO] Token verified 
+[2024-04-22 00:32:02] [INFO] get one user by id with id: 12 
+[2024-04-22 00:32:02] [INFO] schoolyear getone + id : 1 
+[2024-04-22 00:32:02] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-22 00:32:02] [INFO] GetAllContactById successful 
+[2024-04-22 00:32:02] [INFO] Starting : authorize 
+[2024-04-22 00:32:02] [INFO] Token verified 
+[2024-04-22 00:32:02] [INFO] get one user by id with id: 12 
+[2024-04-22 00:32:02] [INFO] schoolyear getone + id : 1 
+[2024-04-22 00:32:02] [INFO] Starting : stages/getAllByUserId 
