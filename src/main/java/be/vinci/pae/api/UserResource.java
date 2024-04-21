@@ -14,6 +14,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
@@ -101,6 +102,50 @@ public class UserResource {
         .put("version", publicUser.getVersion());
     if (toReturn != null) {
       LoggerUtil.logInfo("Change Data successful");
+    }
+    return toReturn;
+  }
+
+  /**
+   * Retrieves the number of students with internships. This method is annotated with {@link jakarta.ws.rs.GET}
+   * and {@link jakarta.ws.rs.Path}, indicating that it handles HTTP GET requests and consumes JSON
+   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize}, indicating
+   * that authorization is required to access this endpoint.
+   *
+   * @param yearID The identifier of the user to retrieve.
+   * @return The user with the specified identifier.
+   */
+  @GET
+  @Path("studWithStage/{filtre}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"professeur","administratif"})
+  public int studsWithStage(@PathParam("filtre") int yearID) {
+    LoggerUtil.logInfo("Starting : users/studWithStage");
+    int toReturn = myUser.studsWithStage(yearID);
+    if (toReturn != 0) {
+      LoggerUtil.logInfo("Get studWithStage successful");
+    }
+    return toReturn;
+  }
+
+  /**
+   * Retrieves the number of students without internships. This method is annotated with {@link jakarta.ws.rs.GET}
+   * and {@link jakarta.ws.rs.Path}, indicating that it handles HTTP GET requests and consumes JSON
+   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize}, indicating
+   * that authorization is required to access this endpoint.
+   *
+   * @param yearID The identifier of the user to retrieve.
+   * @return The user with the specified identifier.
+   */
+  @GET
+  @Path("studWithNoStage/{filtre}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"professeur","administratif"})
+  public int studsWithNoStage(@PathParam("filtre") int yearID) {
+    LoggerUtil.logInfo("Starting : users/studWithStage");
+    int toReturn = myUser.studsWithNoStage(yearID);
+    if (toReturn != 0) {
+      LoggerUtil.logInfo("Get studWithStage successful");
     }
     return toReturn;
   }

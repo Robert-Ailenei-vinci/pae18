@@ -2,12 +2,26 @@ import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
 import {getAuthenticatedUser} from "../../utils/auths";
+import {fetchStudentsWithStages, fetchStudentsWithNoStages} from "./utils/FetchsGraphs"
 
+// eslint-disable-next-line no-undef
+const Chart = require('chart.js/auto');
 const EntreprisesListPage = () => {
     clearPage();
     renderPageTitle('Toutes les entreprises');
+    renderPieChart();
     renderEntreprisesWithSchoolYear().then(r => r);
+    // eslint-disable-next-line no-undef
+
 };
+
+async function updatePieChart(yearId) {
+    const studentsWithStage = await fetchStudentsWithStages(yearId);
+    const studentsWithNoStage = await fetchStudentsWithNoStages(yearId);
+
+    myChart.data.datasets[0].data = [studentsWithStage, studentsWithNoStage];
+    myChart.update();
+}
 
 async function fetchEntreprisesForSchoolYear(user, schoolYearId, orderBy = '') {
     const options = {
@@ -47,6 +61,7 @@ async function fetchSchoolYears(user) {
     return schoolYears;
 }
 
+let myChart;
 async function renderEntreprisesWithSchoolYear() {
     const user = getAuthenticatedUser();
     const main = document.querySelector('main');
@@ -74,7 +89,10 @@ async function renderEntreprisesWithSchoolYear() {
     if (defaultYear !== null) {
         const defaultEntreprises = await fetchEntreprisesForSchoolYear(user, defaultYear.id, 'trade_name,designation');
         renderEntreprisesTable(defaultEntreprises);
+
+        await updatePieChart(defaultYear.id);
     }
+
 
     // Update the enterprises whenever a different year is selected from the dropdown
     selectSchoolYear.addEventListener('change', async () => {
@@ -87,6 +105,10 @@ async function renderEntreprisesWithSchoolYear() {
         if (table) {
             main.removeChild(table);
         }
+
+        await updatePieChart(selectedYearId);
+
+
         renderEntreprisesTable(entreprises);
     });
 }
@@ -183,6 +205,41 @@ function renderEntreprisesTable(entreprises) {
     Navbar();
 
     Navigate('/seeEntreprises');
+}
+
+// eslint-disable-next-line no-unused-vars
+function renderPieChart() {
+    const main = document.querySelector('main');
+
+    // Create a container for the pie chart
+    const pieChartContainer = document.createElement('div');
+    pieChartContainer.className = 'pie-chart-container';
+    pieChartContainer.style.width = '600px'; // Set the width of the container
+    pieChartContainer.style.height = '400px'; //
+    main.appendChild(pieChartContainer);
+
+    // Create canvas for the pie chart inside the container
+    const canvas = document.createElement('canvas');
+    canvas.id = 'pieChart';
+    canvas.width = '600'; // Set the width of the canvas
+    canvas.height = '400'; // Set the height of the canvas
+    pieChartContainer.appendChild(canvas);
+
+    // Get the context of the canvas
+    const ctx = canvas.getContext('2d');
+
+    // Render the pie chart using Chart.js
+    myChart =new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Etudiants avec stage', 'Etudiants sans stage'], // Example labels
+            datasets: [{
+                backgroundColor: ['rgb(208,45,35)', 'rgb(65,73,105)'], // Example colors
+            }]
+        },
+        options: {
+        }
+    });
 }
 
 export default EntreprisesListPage;

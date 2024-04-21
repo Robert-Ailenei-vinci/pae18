@@ -261,6 +261,56 @@ public class UserDAOImpl implements UserDAO {
   }
 
   /**
+   * Retrieves the number of the students who has a stage.
+   *
+   * @param yearID the id of the year
+   * @return A list of all students with their stage.
+   */
+  @Override
+  public int studsWithStage(int yearID) {
+    String sql = "SELECT COUNT(*) FROM pae.users u "
+        + "JOIN pae.stages s ON u.id_user = s._user "
+        + "WHERE u.role_u = 'etudiant' AND u.school_year = ?";
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
+      stmt.setInt(1, yearID);
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          LoggerUtil.logInfo("user: studsWithStage");
+          return rs.getInt(1);
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return 0;
+  }
+
+  /**
+   * Retrieves the number of the students who have no stage.
+   *
+   * @param yearID the id of the year
+   * @return A list of all students with no stage.
+   */
+  @Override
+  public int studsWithNoStage(int yearID) {
+    String sql = "SELECT COUNT(*) FROM pae.users u "
+        + "LEFT JOIN pae.stages s ON u.id_user = s._user "
+        + "WHERE u.role_u = 'etudiant' AND u.school_year = ? AND s._user IS NULL";
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
+      stmt.setInt(1, yearID);
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (rs.next()) {
+          LoggerUtil.logInfo("user: studsWithNoStage");
+          return rs.getInt(1);
+        }
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return 0;
+  }
+
+  /**
    * Builds the year format.
    *
    * @return The year format.

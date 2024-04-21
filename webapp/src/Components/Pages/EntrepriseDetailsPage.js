@@ -69,6 +69,12 @@ async function fetchStagesCountForCurrentYear(user) {
   }
   return response.json();
 }
+
+
+
+
+
+
 let isRendering = false;
 async function renderDetailsEntreprise() {
   const user = getAuthenticatedUser();
@@ -97,7 +103,7 @@ async function renderDetailsEntreprise() {
 
   const submitButton = document.createElement('button');
   submitButton.textContent = 'Blacklister';
-  submitButton.className = 'btn btn-primary';
+  submitButton.className = 'btn btn-primary bg-custom';
   submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 // Create the form
 const form = document.createElement('form');

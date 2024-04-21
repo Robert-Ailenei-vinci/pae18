@@ -12,7 +12,7 @@ function renderNavbar() {
   const authenticatedUser = getAuthenticatedUser();
 
   const anonymousUserNavbar = `
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
+<nav class="navbar navbar-expand-lg navbar-light bg-custom">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">${SITE_NAME}</a>
         <button
@@ -42,7 +42,7 @@ function renderNavbar() {
 `;
 
   const authenticatedAdminOrProfNavbar = `
-  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <nav class="navbar navbar-expand-lg navbar-light bg-custom">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">StaGo</a>
       <button
@@ -80,7 +80,7 @@ function renderNavbar() {
   </nav>`
 
   const authenticatedStudentNavbar = `
-  <nav class="navbar navbar-expand-lg navbar-light bg-info">
+  <nav class="navbar navbar-expand-lg navbar-light bg-custom">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">StaGo</a>
       <button

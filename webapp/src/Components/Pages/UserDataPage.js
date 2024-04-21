@@ -125,7 +125,7 @@ async function renderPersonnalInfoPage() {
   const submit = document.createElement('input');
   submit.value = 'Changer mes données personelles';
   submit.type = 'button';
-  submit.className = 'btn btn-info';
+  submit.className = 'btn btn-info bg-custom' ;
   submit.addEventListener('click', () => {
     Navigate('/users/changeData');
   });

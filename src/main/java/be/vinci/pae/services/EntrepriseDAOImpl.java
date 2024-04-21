@@ -82,8 +82,8 @@ public class EntrepriseDAOImpl implements EntrepriseDAO {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "INSERT INTO pae.entreprises "
         + "(id_entreprise, trade_name, designation, address, phone_num, "
-        + "email, blacklisted)"
-        + "VALUES (?, ?, ?, ?, ?, ?, false)"
+        + "email, blacklisted, _version)"
+        + "VALUES (?, ?, ?, ?, ?, ?, false, 0)"
     )) {
       int entrepriseId = nextItemId();
       preparedStatement.setInt(1, entrepriseId);

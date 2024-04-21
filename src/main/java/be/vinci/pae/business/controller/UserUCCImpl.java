@@ -92,6 +92,33 @@ public class UserUCCImpl implements UserUCC {
   }
 
   @Override
+  public int studsWithStage(int yearID) {
+    try {
+      dalServices.startTransaction();
+      int toReturn = myUserDAO.studsWithStage(yearID);
+      dalServices.commitTransaction();
+      return toReturn;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
+
+
+  @Override
+  public int studsWithNoStage(int yearID) {
+    try {
+      dalServices.startTransaction();
+      int toReturn = myUserDAO.studsWithNoStage(yearID);
+      dalServices.commitTransaction();
+      return toReturn;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
+    }
+  }
+
+  @Override
   public List<UserDTO> getAll() {
     try {
       dalServices.startTransaction();
