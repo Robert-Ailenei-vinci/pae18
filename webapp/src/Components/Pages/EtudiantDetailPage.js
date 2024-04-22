@@ -6,7 +6,7 @@ import baseURL from "../../../config";
 
 const EntrepriseDetailsPage = async () => {
   clearPage();
-  renderPageTitle('detail')
+  renderPageTitle('Detail étudiant')
   renderEtudiantDetail();
 };
 

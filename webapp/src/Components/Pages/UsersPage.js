@@ -33,12 +33,16 @@ async function fetchAllUsers(user) {
   }
 }
 
-const searchUsers = (users, term, selectedYear) => {
+// Fonction pour filtrer les utilisateurs en fonction du type sélectionné
+const searchUsers = (users, term, selectedYear, showOnlyStudents) => {
   return users.filter(user => {
     const firstNameMatch = user.firstName.toLowerCase().includes(term);
     const lastNameMatch = user.lastName.toLowerCase().includes(term);
-    const yearMatch = !selectedYear || user.schoolYear.yearFormat === selectedYear;
-    return (firstNameMatch || lastNameMatch) && yearMatch;
+    const yearMatch = !selectedYear || user.schoolYear.yearFormat
+        === selectedYear;
+    const typeMatch = !showOnlyStudents || (showOnlyStudents && user.role
+        === 'etudiant');
+    return (firstNameMatch || lastNameMatch) && yearMatch && typeMatch;
   });
 };
 
@@ -48,33 +52,17 @@ async function renderAllUsers2() {
     const usersData = await fetchAllUsers(userData);
     const main = document.querySelector('main');
 
-    // Création du bouton de filtrage
-    const filterButton = document.createElement('button');
-    filterButton.className = 'btn btn-primary m-4'
-    filterButton.innerHTML = '<i class="bi bi-filter"></i> Afficher seulement les étudiants';
-
-    filterButton.addEventListener('click', () => {
-      toggleFilterButton(filterButton, usersData);
-    });
-    main.appendChild(filterButton);
-
     // Création du champ de recherche
     const searchInput = document.createElement('input');
     searchInput.type = 'text';
     searchInput.placeholder = 'Rechercher par prénom ou nom';
-    /*
-    searchInput.addEventListener('click', () => {
-      const searchTerm = searchInput.value.trim().toLowerCase();
-      const filteredUsers = searchUsers(usersData, searchTerm);
-
-      renderFilteredUsers(filteredUsers);
-    });
-    */
+    searchInput.className = ' me-5'
     main.appendChild(searchInput);
 
     // Création du menu déroulant des années scolaires
     const yearSelect = document.createElement('select');
     yearSelect.innerHTML = '<option value="">Toutes les années</option>';
+    yearSelect.className = 'me-3'
     const distinctYears = [...new Set(
         usersData.map(user => user.schoolYear.yearFormat))];
     distinctYears.forEach(year => {
@@ -85,14 +73,35 @@ async function renderAllUsers2() {
     });
     main.appendChild(yearSelect);
 
+    // Création de la case à cocher
+    const studentCheckboxLabel = document.createElement('label');
+    studentCheckboxLabel.textContent = 'Afficher seulement les étudiants';
+    studentCheckboxLabel.className = 'me-3';
+    const studentCheckbox = document.createElement('input');
+    studentCheckbox.type = 'checkbox';
+    studentCheckbox.addEventListener('change', () => {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      const selectedYear = yearSelect.value;
+      const showOnlyStudents = studentCheckbox.checked;
+      const filteredUsers = searchUsers(usersData, searchTerm, selectedYear,
+          showOnlyStudents);
+      renderAllUsers(filteredUsers);
+    });
+    studentCheckboxLabel.appendChild(studentCheckbox);
+    main.appendChild(studentCheckboxLabel);
+
     // Création du bouton de recherche
     const searchButton = document.createElement('button');
     searchButton.textContent = 'Rechercher';
-    searchButton.className = 'btn btn-primary';
+    searchButton.className = 'btn btn-primary me-5';
     searchButton.addEventListener('click', () => {
       const searchTerm = searchInput.value.trim().toLowerCase();
       const selectedYear = yearSelect.value;
-      const filteredUsers = searchUsers(usersData, searchTerm, selectedYear);
+      const showOnlyStudents = studentCheckbox.checked;
+
+      const filteredUsers = searchUsers(usersData, searchTerm, selectedYear,
+          showOnlyStudents);
+
       renderAllUsers(filteredUsers);
     });
     main.appendChild(searchButton);
@@ -112,16 +121,37 @@ async function renderAllUsers2() {
 
     const tbody = document.createElement('tbody');
     usersData.forEach(userU => {
-      const row = document.createElement('tr');
-      ['-', 'firstName', 'lastName', 'role'].forEach(fieldName => {
-        const cell = document.createElement('td');
-        cell.textContent = userU[fieldName];
-        row.appendChild(cell);
-      });
-      const schoolYearCell = document.createElement('td');
-      schoolYearCell.textContent = userU.schoolYear.yearFormat;
-      row.appendChild(schoolYearCell);
-      tbody.appendChild(row);
+      if (userU.role === 'etudiant') {
+
+        const row = document.createElement('tr');
+
+        const detailButton = document.createElement('a');
+        detailButton.href = `/detailsEtudiant/${userU.id}`;
+        detailButton.className = 'bi bi-arrow-through-heart-fill'
+
+        row.appendChild(detailButton);
+
+        [`firstName`, 'lastName', 'role'].forEach(fieldName => {
+          const cell = document.createElement('td');
+          cell.textContent = userU[fieldName];
+          row.appendChild(cell);
+        });
+        const schoolYearCell = document.createElement('td');
+        schoolYearCell.textContent = userU.schoolYear.yearFormat;
+        row.appendChild(schoolYearCell);
+        tbody.appendChild(row);
+      } else {
+        const row = document.createElement('tr');
+        ['-', 'firstName', 'lastName', 'role'].forEach(fieldName => {
+          const cell = document.createElement('td');
+          cell.textContent = userU[fieldName];
+          row.appendChild(cell);
+        });
+        const schoolYearCell = document.createElement('td');
+        schoolYearCell.textContent = userU.schoolYear.yearFormat;
+        row.appendChild(schoolYearCell);
+        tbody.appendChild(row);
+      }
     });
     table.appendChild(tbody);
 
@@ -130,48 +160,6 @@ async function renderAllUsers2() {
     alert(`Une erreur est survenue lors de l'affichage des utilisateurs.`);
     console.error('Error rendering all users:', error);
   }
-}
-
-function toggleFilterButton(button, usersData) {
-  if (button.dataset.filtered === "true") {
-    button.innerHTML = '<i class="bi bi-filter"></i> Afficher seulement les étudiants';
-    button.dataset.filtered = "false";
-    renderAllUsers(usersData);
-  } else {
-    button.innerHTML = '<i class="bi bi-filter"></i> Afficher tous les utilisateurs';
-    button.dataset.filtered = "true";
-    renderFilteredUsers(usersData);
-  }
-}
-
-function renderFilteredUsers(usersData) {
-  const main = document.querySelector('main');
-  const table = main.querySelector('table');
-  const tbody = table.querySelector('tbody');
-  tbody.innerHTML = ''; // Effacer le contenu actuel du tbody
-  usersData.forEach(userU => {
-    // Filtrer les utilisateurs pour n'afficher que les étudiants
-    if (userU.role === 'etudiant') {
-
-      const row = document.createElement('tr');
-
-      const detailButton = document.createElement('a');
-      detailButton.href = `/detailsEtudiant/${userU.id}`;
-      detailButton.className = 'bi bi-arrow-through-heart-fill'
-
-      row.appendChild(detailButton);
-
-      [`firstName`, 'lastName', 'role'].forEach(fieldName => {
-        const cell = document.createElement('td');
-        cell.textContent = userU[fieldName];
-        row.appendChild(cell);
-      });
-      const schoolYearCell = document.createElement('td');
-      schoolYearCell.textContent = userU.schoolYear.yearFormat;
-      row.appendChild(schoolYearCell);
-      tbody.appendChild(row);
-    }
-  });
 }
 
 function renderAllUsers(usersData) {
