@@ -71,7 +71,7 @@ function createDropdownContainer() {
 function createDropdownButton() {
   const dropdownButton = document.createElement('button');
   dropdownButton.id = 'dropbtn';
-  dropdownButton.className = 'btn btn-secondary dropdown-toggle btn-block';
+  dropdownButton.className = 'btn btn-secondary dropdown-toggle btn-block bg-custom';
   dropdownButton.type = 'button';
   dropdownButton.textContent = 'Choisir une entreprise';
   return dropdownButton;
@@ -82,12 +82,14 @@ function createDropdownContent(entreprises) {
   dropdownContent.id = 'myDropdown';
   dropdownContent.className = 'dropdown-menu';
   entreprises.forEach(entreprise => {
-    const option = document.createElement('button');
-    option.className = 'dropdown-item';
-    option.type = 'button';
-    option.textContent = entreprise.tradeName;
-    option.id = entreprise.id;
-    dropdownContent.appendChild(option);
+    if (!entreprise.blacklisted) {
+      const option = document.createElement('button');
+      option.className = 'dropdown-item';
+      option.type = 'button';
+      option.textContent = entreprise.tradeName;
+      option.id = entreprise.id;
+      dropdownContent.appendChild(option);
+    }
   });
   return dropdownContent;
 }
@@ -101,7 +103,7 @@ function createAddEntrepriseButtonContainer() {
 
 function createAddEntrepriseButton() {
   const addEntrepriseButton = document.createElement('button');
-  addEntrepriseButton.className = 'btn btn-primary btn-block';
+  addEntrepriseButton.className = 'btn btn-primary btn-block bg-custom';
   addEntrepriseButton.textContent = 'Ajouter une entreprise';
   addEntrepriseButton.addEventListener('click', () => {
     Navigate('/addEnterprise');
@@ -112,7 +114,7 @@ function createAddEntrepriseButton() {
 function createSubmitButton() {
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
-  submitButton.className = 'btn btn-primary mr-2';
+  submitButton.className = 'btn btn-primary mr-2 bg-custom';
   submitButton.textContent = 'Submit';
   return submitButton;
 }
@@ -120,7 +122,7 @@ function createSubmitButton() {
 function createCancelButton() {
   const cancelButton = document.createElement('button');
   cancelButton.type = 'button';
-  cancelButton.className = 'btn btn-secondary';
+  cancelButton.className = 'btn btn-secondary bg-custom';
   cancelButton.textContent = 'Annuler';
   cancelButton.addEventListener('click', () => {
     Navbar();

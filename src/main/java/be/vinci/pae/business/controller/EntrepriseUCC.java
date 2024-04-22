@@ -68,15 +68,6 @@ public interface EntrepriseUCC {
    */
   EntrepriseDTO unblacklist(int entrepriseId, int version);
 
-
-  /**
-   * Retrieves all enterprises for a given school year.
-   *
-   * @param idSchoolYear the school year id
-   * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
-   */
-  List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear);
-
   /**
    * Retrieves the count of stages for a given school year.
    *
@@ -84,4 +75,6 @@ public interface EntrepriseUCC {
    * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
    */
   int getStagesCountForSchoolYear(int idEntreprise);
+
+  List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear, String orderBy);
 }

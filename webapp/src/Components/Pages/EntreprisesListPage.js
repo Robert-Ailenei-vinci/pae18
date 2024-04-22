@@ -2,14 +2,28 @@ import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
 import {getAuthenticatedUser} from "../../utils/auths";
+import {fetchStudentsWithStages, fetchStudentsWithNoStages} from "./utils/FetchsGraphs"
 
+// eslint-disable-next-line no-undef
+const Chart = require('chart.js/auto');
 const EntreprisesListPage = () => {
     clearPage();
     renderPageTitle('Toutes les entreprises');
+    renderPieChart();
     renderEntreprisesWithSchoolYear().then(r => r);
+    // eslint-disable-next-line no-undef
+
 };
 
-async function fetchEntreprisesForSchoolYear(user, schoolYearId) {
+async function updatePieChart(yearId) {
+    const studentsWithStage = await fetchStudentsWithStages(yearId);
+    const studentsWithNoStage = await fetchStudentsWithNoStages(yearId);
+
+    myChart.data.datasets[0].data = [studentsWithStage, studentsWithNoStage];
+    myChart.update();
+}
+
+async function fetchEntreprisesForSchoolYear(user, schoolYearId, orderBy = '') {
     const options = {
         method: 'GET',
         headers: {
@@ -17,12 +31,12 @@ async function fetchEntreprisesForSchoolYear(user, schoolYearId) {
             'Authorization': `${user.token}`,
         },
     };
-    const response = await fetch(`http://localhost:3000/entreprise/getAllForSchoolYear/${schoolYearId}`, options);
+    const response = await fetch(`http://localhost:3000/entreprise/getAllForSchoolYear/${schoolYearId}?orderBy=${orderBy}`, options);
     if (!response.ok) {
         if (response.status === 401) {
             alert("Veuillez vous connecter pour accéder à cette ressource.");
         } else {
-            alert("Une erreur est survenue : "+response.statusText);
+            alert(`Une erreur est survenue : ${response.status + " " + response.statusText}`);
         }
     }
     return response.json();
@@ -38,7 +52,7 @@ async function fetchSchoolYears(user) {
     };
     const response = await fetch('http://localhost:3000/schoolYears/getAllSchoolYears', options);
     if (!response.ok) {
-        alert(`Une erreur est survenue ${response.statusText}`);
+        alert(`Une erreur est survenue : ${response.status + " " + response.statusText}`);
         console.error('Failed to fetch school years');
         return [];
     }
@@ -47,6 +61,7 @@ async function fetchSchoolYears(user) {
     return schoolYears;
 }
 
+let myChart;
 async function renderEntreprisesWithSchoolYear() {
     const user = getAuthenticatedUser();
     const main = document.querySelector('main');
@@ -69,12 +84,15 @@ async function renderEntreprisesWithSchoolYear() {
     main.appendChild(selectSchoolYear);
 
     // Fetch and render enterprises for the default school year when the page is loaded
-    const defaultYear = await getDefaultSchoolYear();
+    const defaultYear = await getDefaultSchoolYear(user);
     console.log('Default year:', defaultYear);
     if (defaultYear !== null) {
-        const defaultEntreprises = await fetchEntreprisesForSchoolYear(user, defaultYear.id);
+        const defaultEntreprises = await fetchEntreprisesForSchoolYear(user, defaultYear.id, 'trade_name,designation');
         renderEntreprisesTable(defaultEntreprises);
+
+        await updatePieChart(defaultYear.id);
     }
+
 
     // Update the enterprises whenever a different year is selected from the dropdown
     selectSchoolYear.addEventListener('change', async () => {
@@ -87,14 +105,25 @@ async function renderEntreprisesWithSchoolYear() {
         if (table) {
             main.removeChild(table);
         }
+
+        await updatePieChart(selectedYearId);
+
+
         renderEntreprisesTable(entreprises);
     });
 }
 
-async function getDefaultSchoolYear() {
-    const response = await fetch('http://localhost:3000/schoolYears/getDefaultSchoolYear');
+async function getDefaultSchoolYear(user) {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${user.token}`,
+        },
+    };
+    const response = await fetch('http://localhost:3000/schoolYears/getDefaultSchoolYear',options);
     if (!response.ok) {
-        alert(`Une erreur est survenue : ${response.textContent}`);
+        alert(`Une erreur est survenue : ${response.status + " " + response.statusText}`);
         console.error('Failed to fetch default school year');
         return null;
     }
@@ -107,26 +136,46 @@ function renderEntreprisesTable(entreprises) {
     const main = document.querySelector('main');
     const table = document.createElement('table');
     table.className = 'table table-bordered table-striped';
-    const tableHead = document.createElement('tr')
-    const columns = ["Nom", "Appellation", "N° de Téléphone","Adresse","Blacklisté", "Raison"];
-    columns.forEach(text => {
-            const th = document.createElement('th');
-            th.textContent = text;
-            tableHead.appendChild(th);
-        }
-    );
+    const tableHead = document.createElement('tr');
+    const columns = ["Nom", "Appelation", "N°Téléphone", "Adresse", "Blacklisté", "Raison du blacklist"];
+    const fields = ["trade_name", "designation", "phone_num", "address", "blacklisted", "reason_blacklist"];
+    columns.forEach((text, index) => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        th.style.cursor = 'pointer';
+        th.addEventListener('mouseover', () => {
+            th.style.color = 'blue';
+        });
+        th.addEventListener('mouseout', () => {
+            th.style.color = '';
+        });
+        th.addEventListener('click', async () => {
+            const user = getAuthenticatedUser();
+            const selectedYearId = document.querySelector('select').value;
+            const orderBy = fields[index];
+            const entreprises = await fetchEntreprisesForSchoolYear(user, selectedYearId, orderBy);
+            console.log('Fetched entreprises for selected school year:', entreprises);
+            // Clear the current enterprises before rendering the new ones
+            const table = main.querySelector('table');
+            if (table) {
+                main.removeChild(table);
+            }
+            renderEntreprisesTable(entreprises);
+        });
+        tableHead.appendChild(th);
+    });
     const tableBody = document.createElement('tbody');
     entreprises.forEach(entreprise => {
         const tr = document.createElement('tr');
-        const tdNom = document.createElement('a');
-        tdNom.href = `/detailsEntreprise/${entreprise.id}`;
-        tdNom.textContent = entreprise.tradeName;
-        const tdAppelation = document.createElement('td');
-        tdAppelation.textContent = entreprise.designation;
+        const tdTradeName = document.createElement('a');
+        tdTradeName.href = `/detailsEntreprise/${entreprise.id}`;
+        tdTradeName.textContent = entreprise.tradeName;
+        const tdDesignation = document.createElement('td');
+        tdDesignation.textContent = entreprise.designation;
         const tdPhone = document.createElement('td');
         tdPhone.textContent = entreprise.phoneNumber;
-        const tdAdresse = document.createElement('td');
-        tdAdresse.textContent = entreprise.address;
+        const tdAdress = document.createElement('td');
+        tdAdress.textContent = entreprise.address;
         const tdBlacklisted = document.createElement('td');
         if (entreprise.blacklisted) {
             tdBlacklisted.textContent = "Oui";
@@ -137,15 +186,14 @@ function renderEntreprisesTable(entreprises) {
         if (entreprise.blacklistReason === null) {
             tdBlacklistReason.textContent = "/";
             tdBlacklistReason.style.color = "grey";
-        }
-        else {
+        } else {
             tdBlacklistReason.textContent = entreprise.blacklistReason;
         }
 
-        tr.appendChild(tdNom);
-        tr.appendChild(tdAppelation);
+        tr.appendChild(tdTradeName);
+        tr.appendChild(tdDesignation);
         tr.appendChild(tdPhone);
-        tr.appendChild(tdAdresse);
+        tr.appendChild(tdAdress);
         tr.appendChild(tdBlacklisted);
         tr.appendChild(tdBlacklistReason);
         tableBody.appendChild(tr);
@@ -157,6 +205,41 @@ function renderEntreprisesTable(entreprises) {
     Navbar();
 
     Navigate('/seeEntreprises');
+}
+
+// eslint-disable-next-line no-unused-vars
+function renderPieChart() {
+    const main = document.querySelector('main');
+
+    // Create a container for the pie chart
+    const pieChartContainer = document.createElement('div');
+    pieChartContainer.className = 'pie-chart-container';
+    pieChartContainer.style.width = '600px'; // Set the width of the container
+    pieChartContainer.style.height = '400px'; //
+    main.appendChild(pieChartContainer);
+
+    // Create canvas for the pie chart inside the container
+    const canvas = document.createElement('canvas');
+    canvas.id = 'pieChart';
+    canvas.width = '600'; // Set the width of the canvas
+    canvas.height = '400'; // Set the height of the canvas
+    pieChartContainer.appendChild(canvas);
+
+    // Get the context of the canvas
+    const ctx = canvas.getContext('2d');
+
+    // Render the pie chart using Chart.js
+    myChart =new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Etudiants avec stage', 'Etudiants sans stage'], // Example labels
+            datasets: [{
+                backgroundColor: ['rgb(208,45,35)', 'rgb(65,73,105)'], // Example colors
+            }]
+        },
+        options: {
+        }
+    });
 }
 
 export default EntreprisesListPage;

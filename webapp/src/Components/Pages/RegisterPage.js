@@ -14,7 +14,8 @@ const RegisterPage = () => {
 function renderRegisterForm() {
   const main = document.querySelector('main');
   const form = document.createElement('form');
-  form.className = 'p-5';
+  form.className = 'p-5 shadow-lg rounded-lg fade';
+
   const login = document.createElement('input');
   login.type = 'email';
   login.id = 'login';
@@ -90,7 +91,7 @@ function renderRegisterForm() {
   const submit = document.createElement('input');
   submit.value = 'Register';
   submit.type = 'submit';
-  submit.className = 'btn btn-info';
+  submit.className = 'btn btn-info bg-custom';
   const formCheckWrapper = document.createElement('div');
   formCheckWrapper.className = 'mb-3 form-check';
 
@@ -128,7 +129,10 @@ function renderRegisterForm() {
   form.appendChild(phone_num);
   form.appendChild(formCheckWrapper);
   form.appendChild(submit);
+  form.offsetWidth;
 
+  // Add the 'show' class to start the animation
+  form.classList.add('show');
   main.appendChild(form);
   form.addEventListener('submit', onRegister);
 }

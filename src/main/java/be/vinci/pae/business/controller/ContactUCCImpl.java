@@ -39,6 +39,9 @@ public class ContactUCCImpl implements ContactUCC {
         throw new BizException(
             "This user is not a student.");
       }
+      if (entreprise.isBlacklisted()) {
+        throw new BizException("Enterprise is blacklisted");
+      }
       for (ContactDTO contactDTO : myContactDAO.getAllContactsByUserId(user.getId())
       ) {
         Contact tempContact = (Contact) contactDTO;

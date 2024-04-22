@@ -69,6 +69,12 @@ async function fetchStagesCountForCurrentYear(user) {
   }
   return response.json();
 }
+
+
+
+
+
+
 let isRendering = false;
 async function renderDetailsEntreprise() {
   const user = getAuthenticatedUser();
@@ -84,8 +90,8 @@ async function renderDetailsEntreprise() {
   console.log(entreprise);
   renderPageTitle('Détails de l\'entreprise : ' + entreprise.tradeName);
   const allContactsData = await fetchEntrepriseContacts(user);
-  const nbStages = await fetchStagesCountForCurrentYear(user);
-  console.log("nbStages : "+nbStages);
+  const nbStagesData = await fetchStagesCountForCurrentYear(user);
+  console.log("nbStagesData : "+nbStagesData);
   isRendering = false;
   console.log("Contacts data : "+JSON.stringify(allContactsData));
 
@@ -93,11 +99,11 @@ async function renderDetailsEntreprise() {
 
   const nbStudentTitle = document.createElement('h4')
   nbStudentTitle.textContent = 'Nombre d\'étudiants en stage ' +
-      'pour l\'année courante : '+nbStages;
+      'pour l\'année courante : '+nbStagesData.nbStages;
 
   const submitButton = document.createElement('button');
   submitButton.textContent = 'Blacklister';
-  submitButton.className = 'btn btn-primary';
+  submitButton.className = 'btn btn-primary bg-custom';
   submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 // Create the form
 const form = document.createElement('form');
