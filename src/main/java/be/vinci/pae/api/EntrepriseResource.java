@@ -217,7 +217,7 @@ public class EntrepriseResource {
   @GET
   @Path("entrepriseDetailsAllContacts/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  @Authorize(roles = {"professeur", "administratif"})
   public List<ContactDTO> getAllContactsByEntrepriseId(
       @PathParam("entrepriseId") int entrepriseId) {
     List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
@@ -237,7 +237,7 @@ public class EntrepriseResource {
   @GET
   @Path("getAllForSchoolYear/{idSchoolYear}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  @Authorize(roles = {"professeur", "administratif"})
   public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear,
       @QueryParam("orderBy") String orderBy) {
     // Validate orderBy parameter
@@ -272,7 +272,7 @@ public class EntrepriseResource {
   @GET
   @Path("getStagesCountForCurrentYear/{entrepriseId}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  @Authorize(roles = {"professeur", "administratif"})
   public ObjectNode getStagesCountForCurrentYear(@PathParam("entrepriseId") int entrepriseId) {
     ObjectNode toReturn = jsonMapper.createObjectNode();
     int nbStages = -1;
