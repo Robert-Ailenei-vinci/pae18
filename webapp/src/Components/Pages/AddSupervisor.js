@@ -1,8 +1,13 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
-const AddSupervisorPage = () => {
+import { getAuthenticatedUser } from '../../utils/auths';
+import Navbar from '../Navbar/Navbar';
+import Navigate from '../Router/Navigate';
+import baseURL from '../../../config';
+
+const AddSupervisorPage = async () => {
     clearPage();
     renderPageTitle('Add supervisor');
-    createForm();
+    await createForm();
 };
 
 async function createForm() {
@@ -42,8 +47,8 @@ async function createForm() {
         const entreprise = document.getElementById('address').value;
         const phoneNum = document.getElementById('phone_num').value;
         const email = document.getElementById('email').value;        
-        //handle submit et fetch                                                                           
-    })
+        fetchSupervisor(lastName, firstName, entreprise, phoneNum, email);                                                                           
+    });
 }
 
 function createFormElement() {
@@ -107,14 +112,26 @@ async function createDropdown(id, label, options, required) {
 }
 
 async function fetchEnterprises() {
-    // Perform your fetch operation here to get enterprises from the server
-    // This function should return an array of enterprise objects
-    // For demonstration purposes, I'll return a sample array
-    return [
-        { id: 1, name: 'Enterprise 1' },
-        { id: 2, name: 'Enterprise 2' },
-        { id: 3, name: 'Enterprise 3' }
-    ];
+    try {
+        const token = getAuthenticatedUser().token;
+        const response = await fetch(`${baseURL}/entreprise/getAll`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch enterprises: ${response.statusText}`);
+        }
+
+        const enterprises = await response.json();
+        return enterprises;
+    } catch (error) {
+        console.error('Error fetching enterprises:', error.message);
+        // Handle the error gracefully, such as displaying an error message to the user
+        return []; // Return an empty array as a fallback
+    }
 }
 
 function createSubmitButton() {
@@ -133,6 +150,43 @@ function createCancelButton() {
     cancelButton.innerText = 'Cancel';
     return cancelButton;
 }
+
+async function fetchSupervisor(lastName, firstName, entreprise, phoneNum, email) {
+    if (!lastName || !firstName || !email || !entreprise || !phoneNum) {
+      alert('All rows are required.');
+      return;
+    }
+  
+    const options = {
+      method: 'POST',
+      body: JSON.stringify({
+        lastName,
+        firstName,
+        entreprise,
+        phoneNum,
+        email,
+        user: getAuthenticatedUser().id,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': getAuthenticatedUser().token,
+      },
+    };
+  
+    try {
+      const response = await fetch(`${baseURL}/supervisor/addOne`, options);
+      if (!response.ok) {
+        throw new Error(`Failed to add supervisor: ${response.statusText}`);
+      }
+      const newSupervisor = await response.json();
+      alert(`Added supervisor : ${JSON.stringify(newSupervisor)}`);
+      Navbar();
+      Navigate('/addsupervisor');
+    } catch (error) {
+      console.error('Error adding supervisor:', error.message);
+      alert('An error occurred while adding the supervisor. Please try again later.');
+    }
+  }
 
 createForm();
 
