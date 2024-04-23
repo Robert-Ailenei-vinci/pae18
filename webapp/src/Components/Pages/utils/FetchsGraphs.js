@@ -1,9 +1,5 @@
 
-import {getAuthenticatedUser} from "../../../utils/auths";
-
-const user = getAuthenticatedUser();
-
-async function fetchStudentsWithStages(filtre){
+async function fetchStudentsWithStages(filtre, user){
     console.log("fetchStudentsWithStages:",filtre);
     const options = {
         method: 'GET',
@@ -25,7 +21,7 @@ async function fetchStudentsWithStages(filtre){
       }
 }
 
-async function fetchStudentsWithNoStages(filtre){
+async function fetchStudentsWithNoStages(filtre, user){
     console.log("fetchStudentsWithNoStages:",filtre);
     const options = {
         method: 'GET',
