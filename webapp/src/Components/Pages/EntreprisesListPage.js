@@ -2,8 +2,7 @@ import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
 import {getAuthenticatedUser} from "../../utils/auths";
-import {fetchStudentsWithStages, fetchStudentsWithNoStages} from "./utils/FetchsGraphs"  
-const user = getAuthenticatedUser();
+import {fetchStudentsWithStages, fetchStudentsWithNoStages} from "./utils/FetchsGraphs";
 // eslint-disable-next-line no-undef
 const Chart = require('chart.js/auto');
 const EntreprisesListPage = () => {
@@ -15,6 +14,7 @@ const EntreprisesListPage = () => {
 };
 
 async function updatePieChart(yearId) {
+    const user = getAuthenticatedUser();
     const studentsWithStage = await fetchStudentsWithStages(yearId, user);
     const studentsWithNoStage = await fetchStudentsWithNoStages(yearId, user);
 
@@ -64,7 +64,7 @@ let myChart;
 async function renderEntreprisesWithSchoolYear() {
   
     const main = document.querySelector('main');
-
+    const user = getAuthenticatedUser();
     const selectSchoolYearLabel = document.createElement('label');
     selectSchoolYearLabel.textContent = 'Choisir une année académique : ';
     const selectSchoolYear = document.createElement('select');
@@ -133,6 +133,7 @@ async function getDefaultSchoolYear(user) {
 function renderEntreprisesTable(entreprises) {
     console.log('Rendering entreprises:', entreprises);
     const main = document.querySelector('main');
+    const user = getAuthenticatedUser();
     const table = document.createElement('table');
     table.className = 'table table-bordered table-striped';
     const tableHead = document.createElement('tr');
@@ -149,7 +150,6 @@ function renderEntreprisesTable(entreprises) {
             th.style.color = '';
         });
         th.addEventListener('click', async () => {
-            const user = getAuthenticatedUser();
             const selectedYearId = document.querySelector('select').value;
             const orderBy = fields[index];
             const entreprises = await fetchEntreprisesForSchoolYear(user, selectedYearId, orderBy);
