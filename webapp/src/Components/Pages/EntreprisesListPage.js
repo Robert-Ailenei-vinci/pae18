@@ -166,9 +166,15 @@ function renderEntreprisesTable(entreprises) {
     const tableBody = document.createElement('tbody');
     entreprises.forEach(entreprise => {
         const tr = document.createElement('tr');
-        const tdTradeName = document.createElement('a');
-        tdTradeName.href = `/detailsEntreprise/${entreprise.id}`;
-        tdTradeName.textContent = entreprise.tradeName;
+        const tdTradeName = document.createElement('td'); // Change from <a> to <td>
+        const tradeNameLink = document.createElement('a');
+        tradeNameLink.href = `/detailsEntreprise/${entreprise.id}`;
+        tradeNameLink.textContent = entreprise.tradeName;
+        tradeNameLink.style.color = 'blue';
+        tdTradeName.appendChild(tradeNameLink); // Append link to tdTradeName
+        tdTradeName.style.overflow = 'hidden'; // Add CSS to prevent overflow
+        tdTradeName.style.whiteSpace = 'nowrap'; // Add CSS to prevent line breaks
+        tdTradeName.style.textOverflow = 'ellipsis'; // Add CSS for ellipsis
         const tdDesignation = document.createElement('td');
         tdDesignation.textContent = entreprise.designation;
         const tdPhone = document.createElement('td');
@@ -187,6 +193,15 @@ function renderEntreprisesTable(entreprises) {
             tdBlacklistReason.style.color = "grey";
         } else {
             tdBlacklistReason.textContent = entreprise.blacklistReason;
+        }
+
+        if (entreprise.blacklisted) {
+            tdTradeName.style.color = 'red';
+            tdDesignation.style.color = 'red';
+            tdPhone.style.color = 'red';
+            tdAdress.style.color = 'red';
+            tdBlacklisted.style.color = 'red';
+            tdBlacklistReason.style.color = 'red';
         }
 
         tr.appendChild(tdTradeName);
