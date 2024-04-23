@@ -539,6 +539,39 @@ async function renderPersonnalInfoPage() {
       stageTitle.textContent = 'Stage';
       main.appendChild(stageTitle);
       main.appendChild(stageTable);
+
+      const supervisorTable = document.createElement('table');
+      supervisorTable.className = 'table table-bordered table-striped';
+      const supervisorThead = document.createElement('thead');
+      const supervisorTbody = document.createElement('tbody');
+      const supervisorTrHead = document.createElement('tr');
+
+      ['Email', 'Prénom', 'Nom', 'Numéro de Téléphone'].forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        supervisorTrHead.appendChild(th);
+      });
+
+      supervisorThead.appendChild(supervisorTrHead);
+      supervisorTable.appendChild(supervisorThead);
+
+      const supervisorTr = document.createElement('tr');
+
+      ['email', 'firstName', 'lastName', 'phoneNumber'].forEach(key => {
+        const td = document.createElement('td');
+        if (stageData.supervisor) {
+          td.textContent = stageData.supervisor[key] || '----';
+        }
+        supervisorTr.appendChild(td);
+      });
+
+      supervisorTbody.appendChild(supervisorTr);
+      supervisorTable.appendChild(supervisorTbody);
+
+      const supervisorTitle = document.createElement('h2');
+      supervisorTitle.textContent = 'Superviseur';
+      main.appendChild(supervisorTitle);
+      main.appendChild(supervisorTable);
     }
   }
 }

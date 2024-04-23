@@ -39,6 +39,25 @@ public class UserResource {
   private UserUCC myUser;
 
   /**
+   * Get one user based on id.
+   *
+   * @param userId id of user to get.
+   * @return a dto of the user.
+   */
+  @GET
+  @Path("getOne/{userId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"professeur", "administratif"})
+  public UserDTO getOne(@PathParam("userId") int userId) {
+    LoggerUtil.logInfo("Starting : users/getOne");
+    UserDTO toReturn = myUser.getOne(userId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("getOne " + userId + " successful");
+    }
+    return toReturn;
+  }
+
+  /**
    * Retrieves a list of all users. This method is annotated with {@link jakarta.ws.rs.GET} and
    * {@link jakarta.ws.rs.Produces}, indicating that it handles HTTP GET requests and produces JSON
    * responses. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize},
