@@ -18,6 +18,7 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   private static final String DATABASE_PASSWORD;
   private static final int MAX_CONNECTION;
 
+
   static {
     DATA_BASEURL = Config.getProperty("DatabaseFilePath");
     DATABASE_USER = Config.getProperty("DataBaseUser");
@@ -28,29 +29,32 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   private final ThreadLocal<Connection> threadLocalConnection;
   private final BasicDataSource dataSource;
 
-  private int transactionCounter;
+  private final ThreadLocal<Integer> transactionCounter;
 
   /**
    * Increase the transactions count.
    */
   private void increaseTransactionCounter() {
-    transactionCounter++;
+    transactionCounter.set(transactionCounter.get() + 1);
   }
+
 
   /**
    * Decrease le compteur de transactions.
    */
   private void decreaseTransactionCounter() {
-    transactionCounter--;
+    transactionCounter.set(transactionCounter.get() - 1);
   }
+
 
   /**
    * Get the count of transaction.
    *
    * @return number of transaction going on.
    */
+
   private int getTransactionCount() {
-    return transactionCounter;
+    return transactionCounter.get();
   }
 
   /**
@@ -66,7 +70,8 @@ public class DALServicesImpl implements DALBackServices, DALServices {
     dataSource.setUsername(DATABASE_USER);
     dataSource.setPassword(DATABASE_PASSWORD);
 
-    transactionCounter = 0;
+    transactionCounter = ThreadLocal.withInitial(() -> 0); // Initialiser le compteur à 0 pour chaque thread
+
   }
 
   private Connection getConnection() {
@@ -156,9 +161,15 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   @Override
   public void rollbackTransaction() {
     try {
+      if (getTransactionCount()>1) {
+        // if not last commit return
+        decreaseTransactionCounter();
+        return;
+      }
+
       getConnection().rollback();
       getConnection().setAutoCommit(true);
-      transactionCounter = 0;
+      decreaseTransactionCounter();
 
     } catch (SQLException e) {
       throw new FatalError("Unable to rollback transaction: " + e.getMessage(), e);

@@ -22,6 +22,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
@@ -115,6 +116,27 @@ public class ContactRessource {
     }
     return toReturn;
   }
+
+  /**
+   * Retrieves all  contacts associated with one user.
+   *
+   * @param userId id of the user.
+   * @return the list of contacts associated with the user.
+   */
+  @GET
+  @Path("allContactsByUserId/{userId}")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  public List<ContactDTO> getAllContactsByUserId(@PathParam("userId") int userId) {
+    LoggerUtil.logInfo("Starting : contact/getAllContactsByUserId");
+
+    List<ContactDTO> toReturn = myContactUCC.getAllContactsByUserId(userId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("GetAllContactById successful");
+    }
+    return toReturn;
+  }
+
 
   /**
    * path to meet a contact.

@@ -5,23 +5,25 @@ import RegisterPage from '../Pages/RegisterPage';
 import UserDataPage from '../Pages/UserDataPage';
 import modifyUserDataPage from '../Pages/ModifyUserDataPage';
 import AddContactPage from '../Pages/AddContact';
-import UsersPage from '../Pages/Users';
+import UsersPage from '../Pages/UsersPage';
 import AddEnterprisePage from '../Pages/AddEnterprise';
 import EntreprisesListPage from '../Pages/EntreprisesListPage';
 import EntrepriseDetailsPage from '../Pages/EntrepriseDetailsPage';
+import EtudiantDetailPage from '../Pages/EtudiantDetailPage';
 
 const routes = {
   '/': HomePage,
   '/login': LoginPage,
   '/register': RegisterPage,
-  '/seeUsers' : UsersPage,
+  '/seeUsers': UsersPage,
   '/users/userData': UserDataPage,
   '/users/changeData': modifyUserDataPage,
   '/logout': Logout,
   '/addContact': AddContactPage,
   '/addEnterprise': AddEnterprisePage,
-  '/seeEntreprises' : EntreprisesListPage,
+  '/seeEntreprises': EntreprisesListPage,
   '/detailsEntreprise/:id': EntrepriseDetailsPage,
+  '/detailsEtudiant/:id': EtudiantDetailPage,
 };
 
 export default routes;
