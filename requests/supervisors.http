@@ -1,0 +1,6 @@
+@baseUrl = http://localhost:3000
+
+### Create a new supervisor
+POST {{baseUrl}}/supervisor/add
+Content-Type: application/json
+Authorization: {{user}}

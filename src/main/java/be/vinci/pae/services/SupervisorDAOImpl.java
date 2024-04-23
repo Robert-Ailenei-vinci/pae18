@@ -91,7 +91,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
     return supervisor;
   }
 
-  public SupervisorDTO createOne(UserDTO user, EntrepriseDTO entreprise) throws SQLException {
+  public SupervisorDTO createOne(UserDTO user, EntrepriseDTO entreprise) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
             "INSERT INTO internship_supervisor "
                     + "(last_name, first_name, entreprise, phone_number, email)"

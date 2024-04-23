@@ -552,3 +552,207 @@ be.vinci.pae.exception.BadRequestException:
 [2024-04-19 09:15:34] [INFO] schoolyear getone + id : 1 
 [2024-04-19 09:15:34] [INFO] Starting : refresh 
 [2024-04-19 09:15:34] [INFO] GetUser successful 
+[2024-04-23 14:04:18] [INFO] Starting : login 
+[2024-04-23 14:04:19] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] Login successful 
+[2024-04-23 14:04:19] [INFO] Starting : authorize 
+[2024-04-23 14:04:19] [INFO] Token verified 
+[2024-04-23 14:04:19] [INFO] get one user by id with id: 7 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-23 14:04:19] [INFO] entreprise getone with id 3 
+[2024-04-23 14:04:19] [INFO] get one user by id with id: 7 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] get all contact for the user with id 7 
+[2024-04-23 14:04:19] [INFO] entreprise getone with id 4 
+[2024-04-23 14:04:19] [INFO] get one user by id with id: 7 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] get all contact for the user with id 7 
+[2024-04-23 14:04:19] [INFO] entreprise getone with id 2 
+[2024-04-23 14:04:19] [INFO] get one user by id with id: 7 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] get all contact for the user with id 7 
+[2024-04-23 14:04:19] [INFO] entreprise getone with id 1 
+[2024-04-23 14:04:19] [INFO] get one user by id with id: 7 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:19] [INFO] get all contact for the user with id 7 
+[2024-04-23 14:04:19] [INFO] GetAllContactById successful 
+[2024-04-23 14:04:19] [INFO] Starting : authorize 
+[2024-04-23 14:04:19] [INFO] Token verified 
+[2024-04-23 14:04:19] [INFO] get one user by id with id: 7 
+[2024-04-23 14:04:20] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:20] [INFO] Starting : stages/getAllByUserId 
+[2024-04-23 14:04:29] [INFO] Starting : authorize 
+[2024-04-23 14:04:29] [INFO] Token verified 
+[2024-04-23 14:04:29] [INFO] get one user by id with id: 7 
+[2024-04-23 14:04:29] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:04:29] [INFO] Starting : refresh 
+[2024-04-23 14:04:29] [INFO] GetUser successful 
+[2024-04-23 14:19:26] [INFO] Starting : authorize 
+[2024-04-23 14:19:26] [INFO] Token verified 
+[2024-04-23 14:19:26] [INFO] get one user by id with id: 7 
+[2024-04-23 14:19:26] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:19:26] [INFO] Starting : refresh 
+[2024-04-23 14:19:26] [INFO] GetUser successful 
+[2024-04-23 14:35:49] [INFO] Starting : login 
+[2024-04-23 14:35:49] [INFO] get one user by email with email: Caroline.line@student.vinci.be 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] Login successful 
+[2024-04-23 14:35:49] [INFO] Starting : authorize 
+[2024-04-23 14:35:49] [INFO] Token verified 
+[2024-04-23 14:35:49] [INFO] get one user by id with id: 7 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] Starting : contact/getAllContactsByUserId 
+[2024-04-23 14:35:49] [INFO] entreprise getone with id 3 
+[2024-04-23 14:35:49] [INFO] get one user by id with id: 7 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] get all contact for the user with id 7 
+[2024-04-23 14:35:49] [INFO] entreprise getone with id 4 
+[2024-04-23 14:35:49] [INFO] get one user by id with id: 7 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] get all contact for the user with id 7 
+[2024-04-23 14:35:49] [INFO] entreprise getone with id 2 
+[2024-04-23 14:35:49] [INFO] get one user by id with id: 7 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] get all contact for the user with id 7 
+[2024-04-23 14:35:49] [INFO] entreprise getone with id 1 
+[2024-04-23 14:35:49] [INFO] get one user by id with id: 7 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:49] [INFO] get all contact for the user with id 7 
+[2024-04-23 14:35:49] [INFO] GetAllContactById successful 
+[2024-04-23 14:35:49] [INFO] Starting : authorize 
+[2024-04-23 14:35:49] [INFO] Token verified 
+[2024-04-23 14:35:50] [INFO] get one user by id with id: 7 
+[2024-04-23 14:35:50] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:50] [INFO] Starting : stages/getAllByUserId 
+[2024-04-23 14:35:55] [INFO] Starting : authorize 
+[2024-04-23 14:35:55] [INFO] Token verified 
+[2024-04-23 14:35:55] [INFO] get one user by id with id: 7 
+[2024-04-23 14:35:55] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:35:55] [INFO] Starting : refresh 
+[2024-04-23 14:35:55] [INFO] GetUser successful 
+[2024-04-23 14:39:28] [INFO] Starting : authorize 
+[2024-04-23 14:39:28] [INFO] Token verified 
+[2024-04-23 14:39:28] [INFO] get one user by id with id: 7 
+[2024-04-23 14:39:28] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:39:28] [INFO] Starting : refresh 
+[2024-04-23 14:39:28] [INFO] GetUser successful 
+[2024-04-23 14:40:26] [INFO] Starting : authorize 
+[2024-04-23 14:40:26] [INFO] Token verified 
+[2024-04-23 14:40:26] [INFO] get one user by id with id: 7 
+[2024-04-23 14:40:26] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:40:26] [INFO] Starting : refresh 
+[2024-04-23 14:40:26] [INFO] GetUser successful 
+[2024-04-23 14:46:26] [INFO] Starting : authorize 
+[2024-04-23 14:46:26] [INFO] Token verified 
+[2024-04-23 14:46:27] [INFO] get one user by id with id: 7 
+[2024-04-23 14:46:27] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:46:27] [INFO] Starting : refresh 
+[2024-04-23 14:46:27] [INFO] GetUser successful 
+[2024-04-23 14:46:34] [INFO] Starting : authorize 
+[2024-04-23 14:46:34] [INFO] Token verified 
+[2024-04-23 14:46:34] [INFO] get one user by id with id: 7 
+[2024-04-23 14:46:34] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:46:34] [INFO] Starting : refresh 
+[2024-04-23 14:46:34] [INFO] GetUser successful 
+[2024-04-23 14:46:43] [INFO] Starting : authorize 
+[2024-04-23 14:46:43] [INFO] Token verified 
+[2024-04-23 14:46:43] [INFO] get one user by id with id: 7 
+[2024-04-23 14:46:43] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:46:43] [INFO] Starting : refresh 
+[2024-04-23 14:46:43] [INFO] GetUser successful 
+[2024-04-23 14:46:46] [INFO] Starting : authorize 
+[2024-04-23 14:46:46] [INFO] Token verified 
+[2024-04-23 14:46:46] [INFO] get one user by id with id: 7 
+[2024-04-23 14:46:46] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:46:46] [INFO] Starting : refresh 
+[2024-04-23 14:46:46] [INFO] GetUser successful 
+[2024-04-23 14:47:47] [INFO] Starting : authorize 
+[2024-04-23 14:47:47] [INFO] Token verified 
+[2024-04-23 14:48:01] [INFO] Starting : authorize 
+[2024-04-23 14:48:01] [INFO] Token verified 
+[2024-04-23 14:48:02] [INFO] Starting : authorize 
+[2024-04-23 14:48:02] [INFO] Token verified 
+[2024-04-23 14:48:02] [INFO] get one user by id with id: 7 
+[2024-04-23 14:48:02] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:48:02] [INFO] Starting : refresh 
+[2024-04-23 14:48:02] [INFO] GetUser successful 
+[2024-04-23 14:48:05] [INFO] Starting : authorize 
+[2024-04-23 14:48:05] [INFO] Token verified 
+[2024-04-23 14:49:11] [INFO] Starting : authorize 
+[2024-04-23 14:49:11] [INFO] Starting : authorize 
+[2024-04-23 14:49:11] [INFO] Token verified 
+[2024-04-23 14:49:11] [INFO] get one user by id with id: 7 
+[2024-04-23 14:49:11] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:49:11] [INFO] Starting : refresh 
+[2024-04-23 14:49:11] [INFO] GetUser successful 
+[2024-04-23 14:49:11] [INFO] Starting : authorize 
+[2024-04-23 14:49:17] [INFO] Starting : authorize 
+[2024-04-23 14:49:17] [INFO] Starting : authorize 
+[2024-04-23 14:49:17] [INFO] Token verified 
+[2024-04-23 14:49:17] [INFO] get one user by id with id: 7 
+[2024-04-23 14:49:17] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:49:17] [INFO] Starting : refresh 
+[2024-04-23 14:49:17] [INFO] GetUser successful 
+[2024-04-23 14:49:17] [INFO] Starting : authorize 
+[2024-04-23 14:52:55] [INFO] Starting : authorize 
+[2024-04-23 14:52:55] [INFO] Token verified 
+[2024-04-23 14:52:55] [INFO] Starting : authorize 
+[2024-04-23 14:52:55] [INFO] Token verified 
+[2024-04-23 14:52:55] [INFO] get one user by id with id: 7 
+[2024-04-23 14:52:55] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:52:55] [INFO] Starting : refresh 
+[2024-04-23 14:52:55] [INFO] GetUser successful 
+[2024-04-23 14:52:55] [INFO] Starting : authorize 
+[2024-04-23 14:52:55] [INFO] Token verified 
+[2024-04-23 14:53:05] [INFO] Starting : authorize 
+[2024-04-23 14:53:05] [INFO] Token verified 
+[2024-04-23 14:53:06] [INFO] Starting : authorize 
+[2024-04-23 14:53:06] [INFO] Token verified 
+[2024-04-23 14:53:06] [INFO] get one user by id with id: 7 
+[2024-04-23 14:53:06] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:53:06] [INFO] Starting : refresh 
+[2024-04-23 14:53:06] [INFO] GetUser successful 
+[2024-04-23 14:53:06] [INFO] Starting : authorize 
+[2024-04-23 14:53:06] [INFO] Token verified 
+[2024-04-23 14:53:11] [INFO] Starting : authorize 
+[2024-04-23 14:53:11] [INFO] Token verified 
+[2024-04-23 14:53:11] [INFO] get one user by id with id: 7 
+[2024-04-23 14:53:11] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:53:11] [INFO] Starting : refresh 
+[2024-04-23 14:53:11] [INFO] GetUser successful 
+[2024-04-23 14:53:16] [INFO] Starting : authorize 
+[2024-04-23 14:53:16] [INFO] Token verified 
+[2024-04-23 14:53:16] [INFO] get one user by id with id: 7 
+[2024-04-23 14:53:16] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:53:16] [INFO] Starting : refresh 
+[2024-04-23 14:53:16] [INFO] GetUser successful 
+[2024-04-23 14:53:20] [INFO] Starting : authorize 
+[2024-04-23 14:53:20] [INFO] Token verified 
+[2024-04-23 14:53:20] [INFO] Starting : authorize 
+[2024-04-23 14:53:20] [INFO] Token verified 
+[2024-04-23 14:53:20] [INFO] get one user by id with id: 7 
+[2024-04-23 14:53:20] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:53:20] [INFO] Starting : refresh 
+[2024-04-23 14:53:20] [INFO] GetUser successful 
+[2024-04-23 14:53:20] [INFO] Starting : authorize 
+[2024-04-23 14:53:20] [INFO] Token verified 
+[2024-04-23 14:53:27] [INFO] Starting : authorize 
+[2024-04-23 14:53:27] [INFO] Token verified 
+[2024-04-23 14:53:28] [INFO] Starting : authorize 
+[2024-04-23 14:53:28] [INFO] Token verified 
+[2024-04-23 14:53:28] [INFO] get one user by id with id: 7 
+[2024-04-23 14:53:28] [INFO] schoolyear getone + id : 1 
+[2024-04-23 14:53:28] [INFO] Starting : refresh 
+[2024-04-23 14:53:28] [INFO] GetUser successful 
+[2024-04-23 14:53:28] [INFO] Starting : authorize 
+[2024-04-23 14:53:28] [INFO] Token verified 
