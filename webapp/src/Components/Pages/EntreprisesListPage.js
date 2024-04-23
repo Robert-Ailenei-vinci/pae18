@@ -2,8 +2,8 @@ import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from "../Navbar/Navbar";
 import Navigate from "../Router/Navigate";
 import {getAuthenticatedUser} from "../../utils/auths";
-import {fetchStudentsWithStages, fetchStudentsWithNoStages} from "./utils/FetchsGraphs"
-
+import {fetchStudentsWithStages, fetchStudentsWithNoStages} from "./utils/FetchsGraphs"  
+const user = getAuthenticatedUser();
 // eslint-disable-next-line no-undef
 const Chart = require('chart.js/auto');
 const EntreprisesListPage = () => {
@@ -12,12 +12,11 @@ const EntreprisesListPage = () => {
     renderPieChart();
     renderEntreprisesWithSchoolYear().then(r => r);
     // eslint-disable-next-line no-undef
-
 };
 
 async function updatePieChart(yearId) {
-    const studentsWithStage = await fetchStudentsWithStages(yearId);
-    const studentsWithNoStage = await fetchStudentsWithNoStages(yearId);
+    const studentsWithStage = await fetchStudentsWithStages(yearId, user);
+    const studentsWithNoStage = await fetchStudentsWithNoStages(yearId, user);
 
     myChart.data.datasets[0].data = [studentsWithStage, studentsWithNoStage];
     myChart.update();
@@ -63,7 +62,7 @@ async function fetchSchoolYears(user) {
 
 let myChart;
 async function renderEntreprisesWithSchoolYear() {
-    const user = getAuthenticatedUser();
+  
     const main = document.querySelector('main');
 
     const selectSchoolYearLabel = document.createElement('label');
