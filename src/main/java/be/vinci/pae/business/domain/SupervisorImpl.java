@@ -1,5 +1,7 @@
 package be.vinci.pae.business.domain;
 
+import java.util.Objects;
+
 /**
  * Implementation of the SupervisorDTO interface representing a supervisor.
  */
@@ -67,5 +69,22 @@ public class SupervisorImpl implements Supervisor {
 
   public void setEntreprise(EntrepriseDTO entreprise) {
     this.entreprise = entreprise;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof SupervisorImpl that)) {
+      return false;
+    }
+    return getEntrepriseId() == that.getEntrepriseId() && Objects.equals(getLastName(),
+        that.getLastName()) && Objects.equals(getFirstName(), that.getFirstName());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getLastName(), getFirstName(), getEntrepriseId());
   }
 }

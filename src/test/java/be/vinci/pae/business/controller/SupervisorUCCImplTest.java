@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import be.vinci.pae.business.domain.DomainFactory;
 import be.vinci.pae.business.domain.Supervisor;
 import be.vinci.pae.business.domain.SupervisorDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.services.DALServices;
 import be.vinci.pae.services.SupervisorDAO;
 import be.vinci.pae.utils.TestApplicationBinder;
@@ -98,5 +99,66 @@ class SupervisorUCCImplTest {
 
     // Act & Assert
     assertThrows(RuntimeException.class, () -> supervisorUCC.getAll(supervisor.getEntrepriseId()));
+  }
+
+  @DisplayName("Test createOne")
+  @Test
+  void createOne() {
+    // Arrange
+    String lastName = "lastname";
+    supervisor.setLastName(lastName);
+    initialSupervisor.setLastName(lastName);
+    String firstName = "firstname";
+    supervisor.setFirstName(firstName);
+    initialSupervisor.setFirstName(firstName);
+    int entrepriseId = 1;
+    supervisor.setEntrepriseId(entrepriseId);
+    initialSupervisor.setEntrepriseId(entrepriseId);
+    String phoneNumber = "0485747296";
+    supervisor.setPhoneNumber(phoneNumber);
+    initialSupervisor.setPhoneNumber(phoneNumber);
+    String email = "test@gmail.com";
+    supervisor.setEmail(email);
+    initialSupervisor.setEmail(email);
+    UserDTO user = factory.getUser();
+    user.setRole("etudiant");
+
+    when(supervisorDAO.createOne(supervisor, entrepriseId)).thenReturn(supervisor);
+
+    // Act
+    SupervisorDTO result = supervisorUCC.createOne(user, lastName, firstName, entrepriseId,
+        phoneNumber, email);
+
+    // Assert
+    assertEquals(initialSupervisor, result);
+  }
+
+  @DisplayName("Test createOne with exception")
+  @Test
+  void createOneWithException() {
+    // Arrange
+    String lastName = "lastname";
+    supervisor.setLastName(lastName);
+    initialSupervisor.setLastName(lastName);
+    String firstName = "firstname";
+    supervisor.setFirstName(firstName);
+    initialSupervisor.setFirstName(firstName);
+    int entrepriseId = 1;
+    supervisor.setEntrepriseId(entrepriseId);
+    initialSupervisor.setEntrepriseId(entrepriseId);
+    String phoneNumber = "0485747296";
+    supervisor.setPhoneNumber(phoneNumber);
+    initialSupervisor.setPhoneNumber(phoneNumber);
+    String email = "test@gmail.com";
+    supervisor.setEmail(email);
+    initialSupervisor.setEmail(email);
+    UserDTO user = factory.getUser();
+    when(supervisorDAO.createOne(supervisor, entrepriseId))
+        .thenThrow(RuntimeException.class);
+
+    // Act & Assert
+    assertThrows(RuntimeException.class,
+        () -> supervisorUCC.createOne(user, lastName, firstName, entrepriseId,
+            phoneNumber, email));
   }
 }
