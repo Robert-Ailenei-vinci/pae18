@@ -47,6 +47,7 @@ async function renderNewContactForm() {
       selectedEntrepriseId = item.id;
       document.getElementById('dropbtn').textContent = item.textContent;
     });
+    item.addEventListener('click', toggleDropdown);
   });
   document.getElementById('dropbtn').addEventListener('click', toggleDropdown);
   document.getElementById('myForm').addEventListener('submit', () =>{
