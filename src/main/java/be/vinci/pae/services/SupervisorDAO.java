@@ -33,5 +33,4 @@ public interface SupervisorDAO {
    * @return The created {@link SupervisorDTO}.
    */
   SupervisorDTO createOne(SupervisorDTO user, int entreprise);
-
 }
