@@ -465,14 +465,14 @@ async function renderPersonnalInfoPage() {
       input.value = stageData.internshipProject
           || 'Pas de sujet de stage defini'; // Set the value of the input field to the text content of the td element
       confirmBtn.innerHTML = 'Confirmer';
-      confirmBtn.style.backgroundColor = 'green';
+      confirmBtn.className = 'btn btn-secondary btn-block bg-custom';
       confirmBtn.type = 'button'; // Change this to 'button' to prevent form submission on click
 
       // Add an event listener to the confirm button
       confirmBtn.addEventListener('click', () => {
         // Call the changeInternshipSubject method
         changeInternshipSubject(stageData.contact.id, input.value,
-            stageData._version);
+            stageData.version);
         // Wait for 2 seconds (2000 milliseconds) and then reload the page
         setTimeout(function () {
           location.reload();
