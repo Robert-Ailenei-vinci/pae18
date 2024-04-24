@@ -98,8 +98,8 @@ async function renderPersonnalInfoPage() {
 
   isRendering = true; // Marquer le rendu comme en cours
 
-    const contactsData = await fetchContactsData(user);
-    const stageData = await fetchStageData(user);
+  const contactsData = await fetchContactsData(user);
+  const stageData = await fetchStageData(user);
 
   isRendering = false; // Marquer le rendu comme terminé
 
@@ -190,13 +190,12 @@ async function renderPersonnalInfoPage() {
     const avancementButtonDisplayed = contact.state === "initie";
 
     if (!avancementButtonDisplayed) {
-        // If the button is not displayed, display "-"
-        const tdAvancement = document.createElement('td');
-        if (contact.entreprise.blacklisted) {
-          tdButton.style.color = 'red';
-        }
-        tdAvancement.textContent = '-';
-        tr.appendChild(tdAvancement);
+      // If the button is not displayed, display "-"
+      const tdAvancement = document.createElement('td');
+      if (contact.entreprise.blacklisted) {
+        tdButton.style.color = 'red';
+      }
+      tdAvancement.textContent = '-';
     } else {
       // Création du formulaire
       const form = document.createElement('form');
@@ -384,7 +383,8 @@ async function renderPersonnalInfoPage() {
       tr.appendChild(tdButton);
     }
 
-    if (contact.state === "stop follow" || contact.state === "refuse") {
+    if (contact.state === "stop follow" || contact.state === "refuse"
+        || contact.state === "annule") {
       const tdVide = document.createElement('td');
       if (contact.entreprise.blacklisted) {
         tdVide.style.color = 'red';
