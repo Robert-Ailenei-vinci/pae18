@@ -157,6 +157,7 @@ async function renderPersonnalInfoPage() {
           if (contact.entreprise.blacklisted) {
             td.style.color = 'red';
           }
+          console.log(contact.entreprise)
           td.textContent = contact.entreprise[key] || '-';
           tr.appendChild(td);
         });

@@ -87,7 +87,7 @@ function createDropdownContent(entreprises) {
       const option = document.createElement('button');
       option.className = 'dropdown-item';
       option.type = 'button';
-      option.textContent = entreprise.tradeName;
+      option.textContent = entreprise.designation ? (`${entreprise.tradeName} - ${entreprise.designation}`) : (entreprise.tradeName);
       option.id = entreprise.id;
       dropdownContent.appendChild(option);
     }
