@@ -125,7 +125,7 @@ async function renderPersonnalInfoPage() {
   const submit = document.createElement('input');
   submit.value = 'Changer mes données personelles';
   submit.type = 'button';
-  submit.className = 'btn btn-info bg-custom';
+  submit.className = 'btn btn-primary btn-block bg-custom' ;
   submit.addEventListener('click', () => {
     Navigate('/users/changeData');
   });
@@ -176,7 +176,7 @@ async function renderPersonnalInfoPage() {
     }
     const button = document.createElement('button');
     button.textContent = 'Avancement';
-    button.className = 'btn btn-primary';
+    button.className = 'btn btn-primary btn-block bg-custom';
     button.setAttribute('type', 'button');
     button.setAttribute('data-bs-toggle', 'collapse');
     button.setAttribute('data-bs-target', '#collapseExample_' + contact.id);
@@ -220,7 +220,7 @@ async function renderPersonnalInfoPage() {
       // Création des boutons par défaut pour "Rencontré"
       const surPlaceButton = document.createElement('button');
       surPlaceButton.textContent = 'Sur place';
-      surPlaceButton.className = 'btn btn-primary me-2';
+      surPlaceButton.className = 'btn btn-primary btn-block bg-custom me-2';
       surPlaceButton.addEventListener('click', (e) => {
         e.preventDefault();
         extraInput.value = 'Sur place';
@@ -228,7 +228,7 @@ async function renderPersonnalInfoPage() {
 
       const aDistanceButton = document.createElement('button');
       aDistanceButton.textContent = 'À distance';
-      aDistanceButton.className = 'btn btn-primary me-2';
+      aDistanceButton.className = 'btn btn-primary btn-block bg-custom me-2';
       aDistanceButton.addEventListener('click', (e) => {
         e.preventDefault();
         extraInput.value = 'À distance';
@@ -250,7 +250,7 @@ async function renderPersonnalInfoPage() {
       // Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
-      submitButton.className = 'btn btn-primary me-2';
+      submitButton.className = 'btn btn-primary btn-block bg-custom me-2';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
       // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
@@ -331,7 +331,7 @@ async function renderPersonnalInfoPage() {
 // Création du bouton de soumission
       const submitButton = document.createElement('button');
       submitButton.textContent = 'Soumettre';
-      submitButton.className = 'btn btn-primary me-2';
+      submitButton.className = 'btn btn-primary btn-block bg-custom me-2';
       submitButton.type = 'submit'; // Définir le type sur "submit" pour soumettre le formulaire
 
 // Ajout d'un écouteur d'événements pour gérer la soumission du formulaire
@@ -384,7 +384,7 @@ async function renderPersonnalInfoPage() {
     }
 
     if (contact.state === "stop follow" || contact.state === "refuse"
-        || contact.state === "annule") {
+        || contact.state === "annule" || contact.state === "accepte" || contact.state === "suspendu") {
       const tdVide = document.createElement('td');
       if (contact.entreprise.blacklisted) {
         tdVide.style.color = 'red';
@@ -442,12 +442,15 @@ async function renderPersonnalInfoPage() {
 
   ['internshipProject'].forEach(key => {
     const td = document.createElement('td');
+    td.style.display = 'flex';
+    td.style.justifyContent = 'space-between';
     if (stageData) {
       td.textContent = stageData.internshipProject || '-';
     }
     var btn = document.createElement("button");
 
     // Set the text of the button
+    btn.className = 'btn btn-primary btn-block bg-custom';
     btn.innerHTML = "Modifier sujet de stage";
     btn.type = 'button'; // Change this to 'button' to prevent form submission on click
 
@@ -462,14 +465,14 @@ async function renderPersonnalInfoPage() {
       input.value = stageData.internshipProject
           || 'Pas de sujet de stage defini'; // Set the value of the input field to the text content of the td element
       confirmBtn.innerHTML = 'Confirmer';
-      confirmBtn.style.backgroundColor = 'green';
+      confirmBtn.className = 'btn btn-secondary btn-block bg-custom';
       confirmBtn.type = 'button'; // Change this to 'button' to prevent form submission on click
 
       // Add an event listener to the confirm button
       confirmBtn.addEventListener('click', () => {
         // Call the changeInternshipSubject method
         changeInternshipSubject(stageData.contact.id, input.value,
-            stageData._version);
+            stageData.version);
         // Wait for 2 seconds (2000 milliseconds) and then reload the page
         setTimeout(function () {
           location.reload();
@@ -509,7 +512,7 @@ async function renderPersonnalInfoPage() {
   // Create the button for adding a contact
   const addButton = document.createElement('button');
   addButton.textContent = 'Ajouter un contact';
-  addButton.className = 'btn btn-info';
+  addButton.className = 'btn btn-primary btn-block bg-custom';
   addButton.addEventListener('click', () => {
     Navigate('/addContact');
   });

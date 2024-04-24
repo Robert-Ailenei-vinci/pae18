@@ -14,7 +14,7 @@ function renderNavbar() {
   const anonymousUserNavbar = `
 <nav class="navbar navbar-expand-lg navbar-light bg-custom">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">${SITE_NAME}</a>
+        <a class="navbar-brand" href="#" style="color: #F5F5F5;">${SITE_NAME}</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -30,10 +30,10 @@ function renderNavbar() {
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                
             <li id="loginItem" class="nav-item">
-              <a class="nav-link" href="#" data-uri="/login">Login</a>
+              <a class="nav-link" href="#" style="color: #F5F5F5;" data-uri="/login">Login</a>
             </li>
             <li id="registerItem" class="nav-item">
-              <a class="nav-link" href="#" data-uri="/register">Register</a>
+              <a class="nav-link" href="#" style="color: #F5F5F5;" data-uri="/register">Register</a>
             </li>            
           </ul>
         </div>
@@ -44,7 +44,7 @@ function renderNavbar() {
   const authenticatedAdminOrProfNavbar = `
   <nav class="navbar navbar-expand-lg navbar-light bg-custom">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">StaGo</a>
+      <a class="navbar-brand" href="#" style="color: #F5F5F5;">StaGo</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -60,19 +60,19 @@ function renderNavbar() {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                      
           <li class="nav-item">
-            <a class="nav-link" href="#" data-uri="/logout">Logout</a>
+            <a class="nav-link" href="#" style="color: #F5F5F5;" data-uri="/logout">Logout</a>
           </li> 
           <li class="nav-item">
-            <a class="nav-link" href="#" data-uri="/users/userData">Voir données personelles</a>
+            <a class="nav-link" href="#" style="color: #F5F5F5;" data-uri="/users/userData">Voir données personelles</a>
           </li>   
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">${authenticatedUser?.email}</a>
+            <a class="nav-link disabled" href="#" style="color: grey;">${authenticatedUser?.email}</a>
           </li>   
           <li class="nav-item">
-            <a class="nav-link" href="#" data-uri="/seeUsers">Voir Utilisateurs</a>
+            <a class="nav-link" href="#" style="color: #F5F5F5;" data-uri="/seeUsers">Voir Utilisateurs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" data-uri="/seeEntreprises">Voir les entreprises</a>
+            <a class="nav-link" href="#" style="color: #F5F5F5;" data-uri="/seeEntreprises">Voir les entreprises</a>
           </li>
         </ul>
       </div>
@@ -82,7 +82,7 @@ function renderNavbar() {
   const authenticatedStudentNavbar = `
   <nav class="navbar navbar-expand-lg navbar-light bg-custom">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">StaGo</a>
+      <a class="navbar-brand" href="#" style="color: #F5F5F5;">StaGo</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -98,13 +98,13 @@ function renderNavbar() {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     
           <li class="nav-item">
-            <a class="nav-link" href="#" data-uri="/logout">Logout</a>
+            <a class="nav-link" href="#" style="color: #F5F5F5;" data-uri="/logout">Logout</a>
           </li> 
           <li class="nav-item">
-            <a class="nav-link" href="#" data-uri="/users/userData">Voir données personelles</a>
+            <a class="nav-link" href="#" style="color: #F5F5F5;" data-uri="/users/userData">Voir données personelles</a>
           </li>   
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">${authenticatedUser?.email}</a>
+            <a class="nav-link disabled" href="#" style="color: grey;">${authenticatedUser?.email}</a>
           </li>  
         </ul>
       </div>

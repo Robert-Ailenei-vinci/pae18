@@ -47,6 +47,7 @@ async function renderNewContactForm() {
       selectedEntrepriseId = item.id;
       document.getElementById('dropbtn').textContent = item.textContent;
     });
+    item.addEventListener('click', toggleDropdown);
   });
   document.getElementById('dropbtn').addEventListener('click', toggleDropdown);
   document.getElementById('myForm').addEventListener('submit', () =>{
@@ -103,7 +104,7 @@ function createAddEntrepriseButtonContainer() {
 
 function createAddEntrepriseButton() {
   const addEntrepriseButton = document.createElement('button');
-  addEntrepriseButton.className = 'btn btn-primary btn-block bg-custom';
+  addEntrepriseButton.className = 'btn btn-secondary btn-block bg-custom';
   addEntrepriseButton.textContent = 'Ajouter une entreprise';
   addEntrepriseButton.addEventListener('click', () => {
     Navigate('/addEnterprise');
@@ -114,7 +115,7 @@ function createAddEntrepriseButton() {
 function createSubmitButton() {
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
-  submitButton.className = 'btn btn-primary mr-2 bg-custom';
+  submitButton.className = 'btn btn-secondary mr-2 bg-custom';
   submitButton.textContent = 'Submit';
   return submitButton;
 }

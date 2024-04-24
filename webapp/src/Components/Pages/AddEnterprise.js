@@ -73,7 +73,7 @@ function createTextInput(id, label) {
 function createSubmitButton() {
   const submitButton = document.createElement('button');
   submitButton.type = 'submit';
-  submitButton.className = 'btn btn-primary mr-2';
+  submitButton.className = 'btn btn-secondary btn-block bg-custom mr-2';
   submitButton.textContent = 'Valider';
   return submitButton;
 }
@@ -81,7 +81,7 @@ function createSubmitButton() {
 function createCancelButton() {
   const cancelButton = document.createElement('button');
   cancelButton.type = 'button';
-  cancelButton.className = 'btn btn-secondary';
+  cancelButton.className = 'btn btn-secondary btn-block bg-custom';
   cancelButton.textContent = 'Annuler';
   cancelButton.addEventListener('click', () => {
     Navbar();
