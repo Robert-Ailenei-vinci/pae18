@@ -384,7 +384,7 @@ async function renderPersonnalInfoPage() {
     }
 
     if (contact.state === "stop follow" || contact.state === "refuse"
-        || contact.state === "annule") {
+        || contact.state === "annule" || contact.state === "accepte" || contact.state === "suspendu") {
       const tdVide = document.createElement('td');
       if (contact.entreprise.blacklisted) {
         tdVide.style.color = 'red';
