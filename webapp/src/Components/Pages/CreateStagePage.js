@@ -23,9 +23,15 @@ async function renderCreateStageForm(contact) {
   const form = createFormElement();
 
   const allSupervisor = await getAllSupervisor(contact.entrepriseId)
+  const supervisorRow = document.createElement('div');
+  supervisorRow.className = 'd-flex mb-3 align-items-center'; // Flexbox with margin-bottom
 
   const dropdownContainer = createDropdownContainer();
   dropdownContainer.appendChild(createDropdownButton());
+    // Create the new "Add Supervisor" button
+  const addSupervisorButton = createAddSupervisorButton();
+  dropdownContainer.appendChild(addSupervisorButton);
+  
   const dropdownContent = createDropdownContent(allSupervisor);
   dropdownContainer.appendChild(dropdownContent);
   row.appendChild(dropdownContainer);
@@ -76,6 +82,17 @@ async function renderCreateStageForm(contact) {
       return;
     }
   });
+}
+
+function createAddSupervisorButton() {
+  const addButton = document.createElement('button');
+  addButton.type = 'button';
+  addButton.className = 'btn btn-secondary btn-block bg-custom';
+  addButton.textContent = 'Ajouter un superviseur';
+  addButton.addEventListener('click', () => {
+    Navigate('/addSupervisor');
+  });
+  return addButton;
 }
 
 async function createStage(selectedSupervisorId, contactId, dateSign, project,
