@@ -81,11 +81,11 @@ public class SupervisorRessource {
   @Path("addSupervisor")
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
-  @Authorize
+  @Authorize(roles = {"etudiant"})
   public SupervisorDTO addOneSupervisor(@Context ContainerRequestContext requestContext,
       JsonNode json) throws BadRequestException, AuthorisationException {
     LoggerUtil.logInfo("Starting: supervisor/addOne");
-
+    LoggerUtil.logInfo(json.asText());
     if (!json.hasNonNull("last_name")
         || !json.hasNonNull("first_name")
         || !json.hasNonNull("entreprise")

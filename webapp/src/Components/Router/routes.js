@@ -10,7 +10,7 @@ import AddEnterprisePage from '../Pages/AddEnterprise';
 import EntreprisesListPage from '../Pages/EntreprisesListPage';
 import EntrepriseDetailsPage from '../Pages/EntrepriseDetailsPage';
 import EtudiantDetailPage from '../Pages/EtudiantDetailPage';
-import AddSupervisorPage from '../Pages/AddSupervisor';
+import AddSupervisorPage from '../Pages/AddSupervisorPage';
 
 const routes = {
   '/': HomePage,

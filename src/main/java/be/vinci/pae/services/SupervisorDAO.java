@@ -24,4 +24,7 @@ public interface SupervisorDAO {
    * @return A list of {@link SupervisorDTO} representing all enterprises.
    */
   List<SupervisorDTO> getAll(int entrepriseId);
+
+  SupervisorDTO createOne(SupervisorDTO user, int entreprise);
+
 }
