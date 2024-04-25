@@ -83,4 +83,44 @@ public class SupervisorDAOImpl implements SupervisorDAO {
     }
     return supervisor;
   }
+
+  public SupervisorDTO createOne(SupervisorDTO user, int entreprise) {
+    try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
+        "INSERT INTO pae.internship_supervisor "
+            + "(id_supervisor, last_name, first_name, entreprise, phone_number, email)"
+            + " VALUES (?, ?, ?, ?, ?, ?)"
+    )) {
+      int supervisorId = nextItemId();
+      preparedStatement.setInt(1, supervisorId);
+      preparedStatement.setString(2, user.getLastName());
+      preparedStatement.setString(3, user.getFirstName());
+      preparedStatement.setInt(4, entreprise);
+      preparedStatement.setString(5, user.getPhoneNumber());
+      preparedStatement.setString(6, user.getEmail());
+
+      int rowsAffected = preparedStatement.executeUpdate();
+      if (rowsAffected > 0) {
+        LoggerUtil.logInfo("create one supervisor with id " + supervisorId);
+        return getOneById(supervisorId);
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return null;
+  }
+
+  private int nextItemId() {
+    String sql = "SELECT MAX(id_supervisor) FROM pae.internship_supervisor";
+    try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql);
+        ResultSet rs = stmt.executeQuery()) {
+      if (rs.next()) {
+        int maxId = rs.getInt(1);
+        return maxId + 1;
+      }
+    } catch (Exception e) {
+      throw new FatalError("Error processing result set", e);
+    }
+    return 1;
+  }
+
 }

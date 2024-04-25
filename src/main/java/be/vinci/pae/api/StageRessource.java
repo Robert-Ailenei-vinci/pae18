@@ -28,47 +28,53 @@ public class StageRessource {
   private StageUCC stageUCC;
 
   /**
-   * Retrieves a stage by user id.
+   * Retrieves a stage by the authenticated user's ID.
    *
-   * @param requestContext the request context
-   * @return the stage DTO
+   * @param requestContext The context of the current request.
+   * @return The {@link StageDTO} representing the stage for the authenticated user, or {@code null}
+   *     if not found.
    */
   @GET
   @Path("stageByUserId")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public StageDTO getOneStageByUserId(@Context ContainerRequestContext requestContext) {
-    LoggerUtil.logInfo("Starting : stages/getAllByUserId");
-    UserDTO authentifiedUser = (UserDTO) requestContext.getProperty("user");
-    int userId = authentifiedUser.getId();
-    StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
-    if (toReturn != null) {
+    LoggerUtil.logInfo("Starting: stages/getAllByUserId");
+    UserDTO authenticatedUser = (UserDTO) requestContext.getProperty("user");
+    int userId = authenticatedUser.getId();
+    StageDTO stage = stageUCC.getOneStageByUserId(userId);
+    if (stage != null) {
       LoggerUtil.logInfo("GetStageByUserId successful");
     }
-    return toReturn;
+    return stage;
   }
 
+  /**
+   * Retrieves a stage by a specific user ID.
+   *
+   * @param userId The ID of the user whose stage is to be retrieved.
+   * @return The {@link StageDTO} representing the stage for the specified user, or {@code null} if
+   *     not found.
+   */
   @GET
   @Path("stageByUserId/{userId}")
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize(roles = {"etudiant", "professeur", "administratif"})
   public StageDTO getOneStageByUserId(@PathParam("userId") int userId) {
-    LoggerUtil.logInfo("Starting : stages/getAllByUserId");
-
-    StageDTO toReturn = stageUCC.getOneStageByUserId(userId);
-    if (toReturn != null) {
+    LoggerUtil.logInfo("Starting: stages/getAllByUserId");
+    StageDTO stage = stageUCC.getOneStageByUserId(userId);
+    if (stage != null) {
       LoggerUtil.logInfo("GetStageByUserId successful");
     }
-    return toReturn;
+    return stage;
   }
 
-
   /**
-   * Modifies internship subject data.
+   * Modifies the internship subject for a stage.
    *
-   * @param json           the JSON node containing modified data
-   * @param requestContext the request context
-   * @return the modified stage DTO
+   * @param json           The JSON node containing modified data for the stage.
+   * @param requestContext The context of the current request.
+   * @return The modified {@link StageDTO} representing the updated stage.
    */
   @PUT
   @Path("modifyStage")
@@ -80,10 +86,10 @@ public class StageRessource {
     String subject = json.get("internship_project").asText();
     int contactId = json.get("id_contact").asInt();
     int version = json.get("version").asInt();
-    StageDTO toReturn = stageUCC.modifyStage(userId, subject, contactId, version);
-    if (toReturn != null) {
+    StageDTO stage = stageUCC.modifyStage(userId, subject, contactId, version);
+    if (stage != null) {
       LoggerUtil.logInfo("ModifyStage successful");
     }
-    return toReturn;
+    return stage;
   }
 }

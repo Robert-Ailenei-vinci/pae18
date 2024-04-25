@@ -5,6 +5,7 @@ import be.vinci.pae.business.controller.EntrepriseUCC;
 import be.vinci.pae.business.controller.SupervisorUCC;
 import be.vinci.pae.business.controller.UserUCC;
 import be.vinci.pae.business.domain.SupervisorDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import be.vinci.pae.exception.AuthorisationException;
 import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -83,7 +84,38 @@ public class SupervisorRessource {
   @Authorize(roles = {"etudiant"})
   public SupervisorDTO addOneSupervisor(@Context ContainerRequestContext requestContext,
       JsonNode json) throws BadRequestException, AuthorisationException {
+    LoggerUtil.logInfo("Starting: supervisor/addOne");
+    LoggerUtil.logInfo(json.asText());
+    if (!json.hasNonNull("last_name")
+        || !json.hasNonNull("first_name")
+        || !json.hasNonNull("entreprise")
+        || !json.hasNonNull("phone_number")) {
+      throw new BadRequestException("All fields required to create a supervisor.");
+    }
 
-    return null;
+    UserDTO user = (UserDTO) requestContext.getProperty("user");
+    int userId = user.getId();
+
+    String lastName = json.get("last_name").asText();
+    String firstName = json.get("first_name").asText();
+    int entrepriseId = json.get("entreprise").asInt(); // si identifizant fourni
+    String phoneNumber = json.get("phone_number").asText();
+    String email = json.hasNonNull("email") ? json.get("email").asText() : null; // email null
+
+    // check
+    UserDTO userDTO = myUserUCC.getOne(userId);
+    if (userDTO == null) {
+      throw new AuthorisationException("User not recognised");
+    }
+
+    // creation du superviseur
+    SupervisorDTO supervisorDTO = mySupervisorUCC.createOne(userDTO, lastName, firstName,
+        entrepriseId,
+        phoneNumber, email);
+    if (supervisorDTO == null) {
+      throw new BadRequestException("Supervisor not created");
+    }
+    LoggerUtil.logInfo("addOneSupervisor successful");
+    return supervisorDTO;
   }
 }

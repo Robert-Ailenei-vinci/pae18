@@ -1,6 +1,7 @@
 package be.vinci.pae.business.controller;
 
 import be.vinci.pae.business.domain.SupervisorDTO;
+import be.vinci.pae.business.domain.UserDTO;
 import java.util.List;
 
 /**
@@ -24,4 +25,19 @@ public interface SupervisorUCC {
    * @return A list of {@link SupervisorDTO} representing all enterprises.
    */
   List<SupervisorDTO> getAll(int entrepriseId);
+
+
+  /**
+   * Creates a new supervisor.
+   *
+   * @param user         A {@link UserDTO} representing the user creating the supervisor.
+   * @param lastName     The last name of the supervisor.
+   * @param firstName    The first name of the supervisor.
+   * @param entrepriseId The enterprise ID to which the supervisor belongs.
+   * @param phoneNumber  The phone number of the supervisor.
+   * @param email        The email of the supervisor.
+   * @return A {@link SupervisorDTO} representing the newly created supervisor.
+   */
+  SupervisorDTO createOne(UserDTO user, String lastName, String firstName, int entrepriseId,
+      String phoneNumber, String email);
 }

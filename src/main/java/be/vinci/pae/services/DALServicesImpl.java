@@ -32,32 +32,6 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   private final ThreadLocal<Integer> transactionCounter;
 
   /**
-   * Increase the transactions count.
-   */
-  private void increaseTransactionCounter() {
-    transactionCounter.set(transactionCounter.get() + 1);
-  }
-
-
-  /**
-   * Decrease le compteur de transactions.
-   */
-  private void decreaseTransactionCounter() {
-    transactionCounter.set(transactionCounter.get() - 1);
-  }
-
-
-  /**
-   * Get the count of transaction.
-   *
-   * @return number of transaction going on.
-   */
-
-  private int getTransactionCount() {
-    return transactionCounter.get();
-  }
-
-  /**
    * Constructs a new DALServicesImpl instance. Initializes the ThreadLocal for connection and sets
    * up the BasicDataSource with the database URL, username, and password. The database
    * configuration is retrieved from the Config class.
@@ -70,8 +44,32 @@ public class DALServicesImpl implements DALBackServices, DALServices {
     dataSource.setUsername(DATABASE_USER);
     dataSource.setPassword(DATABASE_PASSWORD);
 
-    transactionCounter = ThreadLocal.withInitial(() -> 0); // Initialiser le compteur à 0 pour chaque thread
+    transactionCounter = ThreadLocal.withInitial(() -> 0);
 
+  }
+
+  /**
+   * Increase the transactions count.
+   */
+  private void increaseTransactionCounter() {
+    transactionCounter.set(transactionCounter.get() + 1);
+  }
+
+  /**
+   * Decrease le compteur de transactions.
+   */
+  private void decreaseTransactionCounter() {
+    transactionCounter.set(transactionCounter.get() - 1);
+  }
+
+  /**
+   * Get the count of transaction.
+   *
+   * @return number of transaction going on.
+   */
+
+  private int getTransactionCount() {
+    return transactionCounter.get();
   }
 
   private Connection getConnection() {
@@ -161,7 +159,7 @@ public class DALServicesImpl implements DALBackServices, DALServices {
   @Override
   public void rollbackTransaction() {
     try {
-      if (getTransactionCount()>1) {
+      if (getTransactionCount() > 1) {
         // if not last commit return
         decreaseTransactionCounter();
         return;

@@ -329,4 +329,60 @@ public class UserUCCTest {
       userUCC.getOne(userId);
     });
   }
+
+  @DisplayName("Test studsWithStage")
+  @Test
+  public void studsWithStage() {
+    // Arrange
+    int yearId = 12;
+    int expectedResult = 23;
+
+    // Mock the method
+    when(userDAO.studsWithStage(yearId)).thenReturn(23);
+
+    // Act
+    int result = userUCC.studsWithStage(yearId);
+
+    // Assert
+    assertEquals(expectedResult, result);
+  }
+
+  @DisplayName("Test studsWithStage with transaction error")
+  @Test
+  public void studsWithStageWithException() {
+    // Arrange & Act & Assert
+    int yearId = 1;
+    when(userUCC.studsWithStage(yearId)).thenThrow(new RuntimeException());
+    assertThrows(RuntimeException.class, () -> {
+      userUCC.studsWithStage(yearId);
+    });
+  }
+
+  @DisplayName("Test studsWithNoStage")
+  @Test
+  public void studsWithNoStage() {
+    // Arrange
+    int yearId = 12;
+    int expectedResult = 23;
+
+    // Mock the method
+    when(userDAO.studsWithNoStage(yearId)).thenReturn(23);
+
+    // Act
+    int result = userUCC.studsWithNoStage(yearId);
+
+    // Assert
+    assertEquals(expectedResult, result);
+  }
+
+  @DisplayName("Test studsWithNoStage with transaction error")
+  @Test
+  public void studsWithNoStageWithException() {
+    // Arrange & Act & Assert
+    int yearId = 1;
+    when(userUCC.studsWithNoStage(yearId)).thenThrow(new RuntimeException());
+    assertThrows(RuntimeException.class, () -> {
+      userUCC.studsWithNoStage(yearId);
+    });
+  }
 }
