@@ -19,7 +19,7 @@ async function createForm() {
     const firstNameInput = createInputField('first_name', 'First Name', 'text', true);
     form.appendChild(firstNameInput);
 
-    const entrepriseDropdown = await createDropdown('entreprise', 'Enterprise', await fetchEnterprises(), true);
+    const entrepriseDropdown = await createDropdown('entreprise', 'Enterprise', fetchEnterprises(), true);
     form.appendChild(entrepriseDropdown);
 
     const phoneNumberInput = createInputField('phone_number', 'Phone Number', 'text', true);
@@ -111,7 +111,7 @@ async function createDropdown(id, label, options, required) {
     return div;
 }
 
-async function fetchEnterprises() {
+/**async function fetchEnterprises() {
     try {
         const token = getAuthenticatedUser().token;
         const response = await fetch(`${baseURL}/entreprise/getAll`, {
@@ -132,6 +132,38 @@ async function fetchEnterprises() {
         // Handle the error gracefully, such as displaying an error message to the user
         return []; // Return an empty array as a fallback
     }
+}*/
+
+function fetchEnterprises() {
+    return [
+        {
+            trade_name: "Entreprise 1",
+            designation: "Designation 1",
+            address: "Address 1",
+            phone_num: "1234567890",
+            email: "enterprise1@example.com",
+            blacklisted: false,
+            reason_blacklist: null
+        },
+        {
+            trade_name: "Entreprise 2",
+            designation: "Designation 2",
+            address: "Address 2",
+            phone_num: "0987654321",
+            email: "enterprise2@example.com",
+            blacklisted: false,
+            reason_blacklist: null
+        },
+        {
+            trade_name: "Entreprise 3",
+            designation: "Designation 3",
+            address: "Address 3",
+            phone_num: "5555555555",
+            email: "enterprise3@example.com",
+            blacklisted: true,
+            reason_blacklist: "Raison de la mise en liste noire de l'entreprise 3"
+        }
+    ];
 }
 
 function createSubmitButton() {
