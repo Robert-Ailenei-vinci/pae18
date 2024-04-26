@@ -17,13 +17,7 @@ import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -137,6 +131,25 @@ public class ContactRessource {
     return toReturn;
   }
 
+  /**
+   * Retrieves one contacts by id.
+   *
+   * @param contactId id of the user.
+   * @return a contact.
+   */
+  @GET
+  @Path("getOneContactById")
+  @Produces(MediaType.APPLICATION_JSON)
+  @Authorize(roles = {"etudiant", "professeur", "administratif"})
+  public ContactDTO getOneContactById(@QueryParam("contactId") int contactId) {
+    LoggerUtil.logInfo("Starting : contact/getOneContactById");
+
+    ContactDTO toReturn = myContactUCC.getOneContactById(contactId);
+    if (toReturn != null) {
+      LoggerUtil.logInfo("getOneContactById successful");
+    }
+    return toReturn;
+  }
 
   /**
    * path to meet a contact.
