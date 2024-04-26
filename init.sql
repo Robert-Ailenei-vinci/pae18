@@ -157,7 +157,7 @@ INSERT INTO pae.users (id_user, email, role_u, last_name, first_name, phone_numb
 VALUES (26,'theophile.ile@student.vinci.be', 'etudiant', 'Ile', 'Théophile', '0488 35 33 89', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '01/03/2024', (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'), 1);
 -- Jeremy Demoulin
 INSERT INTO pae.users (id_user, email, role_u, last_name, first_name, phone_number, psw, registration_date, school_year, _version)
-VALUES (27,'jeremy.demoulin@student.vinci.be', 'Demoulin', 'Jeremy', 'Théophile', '0497 00 00 20', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '23/09/2022', (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 1);
+VALUES (27,'jeremy.demoulin@student.vinci.be', 'etudiant', 'Demoulin', 'Jeremy', '0497 00 00 20', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '23/09/2022', (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 1);
 
 
 --Insert into pae.entreprises
