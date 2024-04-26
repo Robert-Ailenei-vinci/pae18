@@ -125,17 +125,10 @@ public class AuthsResource {
     if (user == null) {
       throw new AuthorisationException("User not recognised");
     }
-    String token;
-    Instant now = Instant.now();
-    Instant expirationTime = now.plusSeconds(3600); // 1 heure à partir de maintenant
+    String token = requestContext.getHeaderString("Authorization");
+
 
     try {
-      token = JWT.create()
-          .withIssuer("auth0")
-          .withClaim("user", user.getId())
-          .withExpiresAt(Date.from(expirationTime))
-          .sign(this.jwtAlgorithm);
-      System.out.println("Token " + token);
       ObjectNode toReturn = jsonMapper.createObjectNode()
           .put("token", token)
           .put("id", user.getId())
