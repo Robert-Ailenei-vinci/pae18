@@ -1,25 +1,23 @@
 import { clearPage, renderPageTitle } from '../../utils/render';
 import { getAuthenticatedUser } from '../../utils/auths';
-import Navbar from '../Navbar/Navbar';
-import Navigate from '../Router/Navigate';
 import baseURL from '../../../config';
 
 const AddSupervisorPage = async () => {
     clearPage();
-    renderPageTitle('Add Supervisor');
+    renderPageTitle('Ajouter un superviseur');
     await createForm();
 };
 
 async function createForm() {
     const form = createFormElement();
 
-    form.appendChild(createInputField('last_name', 'Last Name', 'text', true));
-    form.appendChild(createInputField('first_name', 'First Name', 'text', true));
+    form.appendChild(createInputField('last_name', 'Nom', 'text', true));
+    form.appendChild(createInputField('first_name', 'Prénom', 'text', true));
     
     const entreprises = await fetchEnterprises();
     form.appendChild(await createDropdown('entreprise', 'Enterprise', entreprises, true));
     
-    form.appendChild(createInputField('phone_number', 'Phone Number', 'text', true));
+    form.appendChild(createInputField('phone_number', 'N°telephone', 'text', true));
     form.appendChild(createInputField('email', 'Email', 'email', false));
 
     // Horizontal alignment for buttons
@@ -93,7 +91,7 @@ async function createDropdown(id, label, options, required) {
 
     const defaultOption = document.createElement('option');
     defaultOption.value = '';
-    defaultOption.innerText = 'Select ' + label;
+    defaultOption.innerText = 'Selectionner une  ' + label;
     selectElement.appendChild(defaultOption);
 
     options.forEach(option => {
@@ -145,8 +143,8 @@ async function handleFormSubmit() {
         
         await response.json();
         alert(`Supervisor ${firstName} ${lastName} added successfully!`, 'success'); // Show success message
-        Navbar(); // Re-render Navbar
-        Navigate('/users/userData'); // Redirect to the supervisors page
+        history.back();
+        // Redirect to precedent page
     } catch (error) {
         alert(`Error adding supervisor: ${error.message}`, 'error'); // Show error message
         console.error('Error adding supervisor:', error);
@@ -158,7 +156,7 @@ function createSubmitButton() {
     const submitButton = document.createElement('button');
     submitButton.className = 'btn btn-primary mr-2';
     submitButton.type = 'submit';
-    submitButton.innerText = 'Add Supervisor';
+    submitButton.innerText = 'Ajouter un superviseur';
     submitButton.id = 'mybtn';
     return submitButton;
 }
@@ -168,10 +166,9 @@ function createCancelButton() {
     const cancelButton = document.createElement('button');
     cancelButton.className = 'btn btn-secondary';
     cancelButton.type = 'button';
-    cancelButton.innerText = 'Cancel';
+    cancelButton.innerText = 'Annulée';
     cancelButton.addEventListener('click', () => {
-        Navbar();
-        Navigate('/supervisors'); // Navigate to the supervisors page on cancel
+        history.back();
     });
     return cancelButton;
 }

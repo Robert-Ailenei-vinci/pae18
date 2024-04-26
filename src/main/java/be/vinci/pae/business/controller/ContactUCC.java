@@ -4,6 +4,7 @@ import be.vinci.pae.business.domain.ContactDTO;
 import be.vinci.pae.business.domain.EntrepriseDTO;
 import be.vinci.pae.business.domain.SchoolYearDTO;
 import be.vinci.pae.business.domain.UserDTO;
+
 import java.util.List;
 
 /**
@@ -80,4 +81,12 @@ public interface ContactUCC {
    */
   ContactDTO acceptContact(int contactId, int userId, int version, int supervisorId,
       String signatureDate, String internshipProject);
+
+  /**
+   * get one contact.
+   *
+   * @param contactId the contact id
+   * @return the contact
+   */
+  ContactDTO getOneContactById(int contactId);
 }

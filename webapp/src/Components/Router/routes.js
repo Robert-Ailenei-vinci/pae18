@@ -10,7 +10,8 @@ import AddEnterprisePage from '../Pages/AddEnterprise';
 import EntreprisesListPage from '../Pages/EntreprisesListPage';
 import EntrepriseDetailsPage from '../Pages/EntrepriseDetailsPage';
 import EtudiantDetailPage from '../Pages/EtudiantDetailPage';
-import AddSupervisorPage from '../Pages/AddSupervisorPage';
+import CreateStagePage from "../Pages/CreateStagePage";
+import AddSupervisorPage from "../Pages/AddSupervisorPage";
 
 const routes = {
   '/': HomePage,
@@ -25,7 +26,9 @@ const routes = {
   '/seeEntreprises': EntreprisesListPage,
   '/detailsEntreprise/:id': EntrepriseDetailsPage,
   '/detailsEtudiant/:id': EtudiantDetailPage,
+  '/accepte-stage/:id': CreateStagePage,
   '/addSupervisor': AddSupervisorPage,
+
 };
 
 export default routes;

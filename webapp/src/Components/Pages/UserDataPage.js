@@ -357,7 +357,7 @@ async function renderPersonnalInfoPage() {
 
             break;
           case 'Accepté':
-            CreateStagePage(contact);
+            Navigate(`/accepte-stage/${contact.id}`);
 
             return;
           default:
