@@ -134,87 +134,102 @@ function renderEntreprisesTable(entreprises) {
     console.log('Rendering entreprises:', entreprises);
     const main = document.querySelector('main');
     const user = getAuthenticatedUser();
+    
+    // Créer une nouvelle table
     const table = document.createElement('table');
     table.className = 'table table-bordered table-striped';
+    
+    // Créer l'en-tête de la table
     const tableHead = document.createElement('tr');
-    const columns = ["Nom", "Appelation", "N°Téléphone", "Adresse", "Blacklisté", "Raison du blacklist"];
+    const columns = ["Nom", "Appellation", "N°Téléphone", "Adresse", "Blacklisté", "Raison du blacklist"];
     const fields = ["trade_name", "designation", "phone_num", "address", "blacklisted", "reason_blacklist"];
+    
     columns.forEach((text, index) => {
         const th = document.createElement('th');
         th.textContent = text;
         th.style.cursor = 'pointer';
+        th.className = 'text-center'; // Centrer le texte
+        
         th.addEventListener('mouseover', () => {
-            th.style.color = 'blue';
+            th.style.color = 'blue'; // Changer la couleur au survol
         });
+        
         th.addEventListener('mouseout', () => {
-            th.style.color = '';
+            th.style.color = ''; // Revenir à la couleur d'origine
         });
+        
         th.addEventListener('click', async () => {
             const selectedYearId = document.querySelector('select').value;
             const orderBy = fields[index];
             const entreprises = await fetchEntreprisesForSchoolYear(user, selectedYearId, orderBy);
             console.log('Fetched entreprises for selected school year:', entreprises);
-            // Clear the current enterprises before rendering the new ones
-            const table = main.querySelector('table');
-            if (table) {
-                main.removeChild(table);
+            
+            // Effacer l'ancienne table avant de rendre les nouvelles entreprises
+            const existingTable = main.querySelector('table');
+            if (existingTable) {
+                main.removeChild(existingTable);
             }
-            renderEntreprisesTable(entreprises);
+            
+            renderEntreprisesTable(entreprises); // Rendre la nouvelle table
         });
-        tableHead.appendChild(th);
+        
+        tableHead.appendChild(th); // Ajouter les en-têtes à la table
     });
+    
     const tableBody = document.createElement('tbody');
+    
     entreprises.forEach(entreprise => {
         const tr = document.createElement('tr');
-        const tdTradeName = document.createElement('td'); // Change from <a> to <td>
+        
+        // Cellule pour le lien vers l'entreprise
+        const tdTradeName = document.createElement('td'); 
         const tradeNameLink = document.createElement('a');
+        
+        // Rendre le lien plus esthétique
         tradeNameLink.href = `/detailsEntreprise/${entreprise.id}`;
         tradeNameLink.textContent = entreprise.tradeName;
-        tradeNameLink.style.color = 'blue';
-        tdTradeName.appendChild(tradeNameLink); // Append link to tdTradeName
-        tdTradeName.style.overflow = 'hidden'; // Add CSS to prevent overflow
-        tdTradeName.style.whiteSpace = 'nowrap'; // Add CSS to prevent line breaks
-        tdTradeName.style.textOverflow = 'ellipsis'; // Add CSS for ellipsis
-        const tdDesignation = document.createElement('td');
-        tdDesignation.textContent = entreprise.designation;
-        const tdPhone = document.createElement('td');
-        tdPhone.textContent = entreprise.phoneNumber;
-        const tdAdress = document.createElement('td');
-        tdAdress.textContent = entreprise.address;
+        tradeNameLink.style.color = 'black';
+        tradeNameLink.style.textDecoration = 'none';
+        tradeNameLink.style.fontWeight = 'bold';
+                tradeNameLink.addEventListener('mouseover', () => {
+            tradeNameLink.style.color = 'blue';
+        });
+        tradeNameLink.addEventListener('mouseout', () => {
+            tradeNameLink.style.color = 'black';
+            tradeNameLink.style.textDecoration = 'none';
+        });
+        
+        tdTradeName.appendChild(tradeNameLink);
+        
+        // Limiter la largeur pour éviter le débordement
+        tdTradeName.style.overflow = 'hidden';
+        tdTradeName.style.whiteSpace = 'nowrap';
+        tdTradeName.style.textOverflow = 'ellipsis'; // Ajouter des ellipses
+        
+        tr.appendChild(tdTradeName); // Ajouter la cellule à la ligne
+        
+        // Ajouter les autres cellules
+        ["designation", "phone_num", "address"].forEach(fieldName => {
+            const cell = document.createElement('td');
+            cell.textContent = entreprise[fieldName];
+            tr.appendChild(cell);
+        });
+        
         const tdBlacklisted = document.createElement('td');
-        if (entreprise.blacklisted) {
-            tdBlacklisted.textContent = "Oui";
-        } else {
-            tdBlacklisted.textContent = "Non";
-        }
+        tdBlacklisted.textContent = entreprise.blacklisted ? "Oui" : "Non";
+        
         const tdBlacklistReason = document.createElement('td');
-        if (entreprise.blacklistReason === null) {
-            tdBlacklistReason.textContent = "/";
-            tdBlacklistReason.style.color = "grey";
-        } else {
-            tdBlacklistReason.textContent = entreprise.blacklistReason;
-        }
-
-        if (entreprise.blacklisted) {
-            tdTradeName.style.color = 'red';
-            tdDesignation.style.color = 'red';
-            tdPhone.style.color = 'red';
-            tdAdress.style.color = 'red';
-            tdBlacklisted.style.color = 'red';
-            tdBlacklistReason.style.color = 'red';
-        }
-
-        tr.appendChild(tdTradeName);
-        tr.appendChild(tdDesignation);
-        tr.appendChild(tdPhone);
-        tr.appendChild(tdAdress);
+        tdBlacklistReason.textContent = entreprise.blacklistReason ?? "/";
+        
         tr.appendChild(tdBlacklisted);
         tr.appendChild(tdBlacklistReason);
-        tableBody.appendChild(tr);
+        
+        tableBody.appendChild(tr); // Ajouter la ligne au corps de la table
     });
+    
     table.appendChild(tableHead);
     table.appendChild(tableBody);
-    main.appendChild(table);
+    main.appendChild(table); // Ajouter la table au contenu principal
 
     Navbar();
 
