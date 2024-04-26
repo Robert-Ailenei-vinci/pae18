@@ -33,7 +33,7 @@ async function renderEtudiantDetail() {
     {label: 'Numéro de Téléphone: ', value: getuser.phoneNum},
     {label: 'Date d\'enregistrement: ', value: getuser.registrationDate},
     {label: 'Année académique: ', value: getuser.schoolYear.yearFormat},
-    {label: 'Rôle: ', value: getuser.role}
+    { label: 'Rôle: ', value: getuser.role === 'etudiant' ? 'étudiant' : getuser.role }
   ];
 
   items.forEach(item => {

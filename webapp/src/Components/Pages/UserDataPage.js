@@ -107,14 +107,15 @@ async function renderPersonnalInfoPage() {
   console.log(user);
   console.log('StageData: ', stageData)
   const items = [
-    {label: 'Nom de famille: ', value: user.lastName},
-    {label: 'Prénom: ', value: user.firstName},
-    {label: 'Email: ', value: user.email},
-    {label: 'Numéro de Téléphone: ', value: user.phoneNum},
-    {label: 'Date d\'enregistrement: ', value: user.registrationDate},
-    {label: 'Année académique: ', value: user.schoolYear},
-    {label: 'Rôle: ', value: user.role}
+    { label: 'Nom de famille: ', value: user.lastName },
+    { label: 'Prénom: ', value: user.firstName },
+    { label: 'Email: ', value: user.email },
+    { label: 'Numéro de Téléphone: ', value: user.phoneNum },
+    { label: 'Date d\'enregistrement: ', value: user.registrationDate },
+    { label: 'Année académique: ', value: user.schoolYear },
+    { label: 'Rôle: ', value: user.role === 'etudiant' ? 'étudiant' : user.role }
   ];
+  
 
   items.forEach(item => {
     const li = document.createElement('li');
