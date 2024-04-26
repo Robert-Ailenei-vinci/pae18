@@ -1,5 +1,6 @@
 import {getAuthenticatedUser} from '../../utils/auths';
 import {clearPage, renderPageTitle} from '../../utils/render';
+import { makeRoleClean } from './utils/MakeRoleClean';
 import baseURL from '../../../config';
 
 const UsersPage = () => {
@@ -143,7 +144,11 @@ async function renderAllUsers2() {
 
         [`firstName`, 'lastName', 'role'].forEach(fieldName => {
           const cell = document.createElement('td');
-          cell.textContent = userU[fieldName];
+          if (fieldName === 'role' && userU[fieldName] === 'etudiant') {
+            makeRoleClean(userU[fieldName], cell);
+          } else {
+            cell.textContent = userU[fieldName];
+          }
           row.appendChild(cell);
         });
         const schoolYearCell = document.createElement('td');
@@ -154,7 +159,12 @@ async function renderAllUsers2() {
         const row = document.createElement('tr');
         ['-', 'firstName', 'lastName', 'role'].forEach(fieldName => {
           const cell = document.createElement('td');
-          cell.textContent = userU[fieldName];
+
+          if (fieldName === 'role' && userU[fieldName] === 'etudiant') {
+            makeRoleClean(userU[fieldName], cell);
+          } else {
+            cell.textContent = userU[fieldName];
+          }
           row.appendChild(cell);
         });
         const schoolYearCell = document.createElement('td');
