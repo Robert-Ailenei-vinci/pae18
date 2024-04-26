@@ -183,20 +183,20 @@ public class ContactUCCImpl implements ContactUCC {
     }
   }
 
-    @Override
-    public ContactDTO getOneContactById(int contactId) {
-      try {
-        dalServices.startTransaction();
-        ContactDTO contact = myContactDAO.getOneContactById(contactId);
-        dalServices.commitTransaction();
-        return contact;
-      } catch (Exception e) {
-        dalServices.rollbackTransaction();
-        throw e;
-      }
+  @Override
+  public ContactDTO getOneContactById(int contactId) {
+    try {
+      dalServices.startTransaction();
+      ContactDTO contact = myContactDAO.getOneContactById(contactId);
+      dalServices.commitTransaction();
+      return contact;
+    } catch (Exception e) {
+      dalServices.rollbackTransaction();
+      throw e;
     }
+  }
 
-    /**
+  /**
    * set all internships of a contact to refusé if an entreprise is blacklisted.
    *
    * @param idEntreprise the id of the entreprise.
