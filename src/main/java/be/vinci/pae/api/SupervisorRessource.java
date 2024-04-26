@@ -44,7 +44,7 @@ public class SupervisorRessource {
    *
    * @param entrepriseId the ID of the enterprise
    * @return A list of {@link SupervisorDTO} representing all supervisors for the specified
-   *     enterprise.
+   * enterprise.
    * @throws BadRequestException if the enterprise ID is invalid or missing
    */
   @GET
@@ -86,20 +86,20 @@ public class SupervisorRessource {
       JsonNode json) throws BadRequestException, AuthorisationException {
     LoggerUtil.logInfo("Starting: supervisor/addOne");
     LoggerUtil.logInfo(json.asText());
-    if (!json.hasNonNull("last_name")
-        || !json.hasNonNull("first_name")
+    if (!json.hasNonNull("lastName")
+        || !json.hasNonNull("firstName")
         || !json.hasNonNull("entreprise")
-        || !json.hasNonNull("phone_number")) {
+        || !json.hasNonNull("phoneNum")) {
       throw new BadRequestException("All fields required to create a supervisor.");
     }
 
     UserDTO user = (UserDTO) requestContext.getProperty("user");
     int userId = user.getId();
 
-    String lastName = json.get("last_name").asText();
-    String firstName = json.get("first_name").asText();
+    String lastName = json.get("lastName").asText();
+    String firstName = json.get("firstName").asText();
     int entrepriseId = json.get("entreprise").asInt(); // si identifizant fourni
-    String phoneNumber = json.get("phone_number").asText();
+    String phoneNumber = json.get("phoneNum").asText();
     String email = json.hasNonNull("email") ? json.get("email").asText() : null; // email null
 
     // check
