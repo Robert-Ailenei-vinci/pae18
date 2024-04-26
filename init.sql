@@ -74,7 +74,6 @@ INSERT INTO pae.school_years VALUES (1, '2020-2021');
 INSERT INTO pae.school_years VALUES (2, '2021-2022');
 INSERT INTO pae.school_years VALUES (3, '2022-2023');
 INSERT INTO pae.school_years VALUES (4, '2023-2024');
-INSERT INTO pae.school_years VALUES (5, '2024-2025');
 
 
 --Insert into pae.users
