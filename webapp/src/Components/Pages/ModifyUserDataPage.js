@@ -90,7 +90,7 @@ function renderInfoChangeForm() {
   const submit = document.createElement('input');
   submit.value = 'Confirmer';
   submit.type = 'submit';
-  submit.className = 'btn btn-info bg-custom';
+  submit.className = 'btn btn-primary bg-custom';
   const formCheckWrapper = document.createElement('div');
   formCheckWrapper.className = 'mb-3 form-check';
 
