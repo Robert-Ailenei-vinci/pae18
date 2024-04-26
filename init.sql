@@ -127,7 +127,7 @@ INSERT INTO pae.users (id_user, email, role_u, last_name, first_name, phone_numb
 VALUES (16,'jeremy.demoulin@student.vinci.be', 'etudiant', 'Demoulin', 'Jeremy', '0497 00 00 20', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '23/09/2022', (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 1);
 -- Aurèle Mile
 INSERT INTO pae.users (id_user, email, role_u, last_name, first_name, phone_number, psw, registration_date, school_year, _version)
-VALUES (17,'aurèle.mile@student.vinci.be', 'etudiant', 'Mile', 'Aurèle', '0497 00 00 21', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '23/09/2022', (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 1);
+VALUES (17,'aurele.mile@student.vinci.be', 'etudiant', 'Mile', 'Aurèle', '0497 00 00 21', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '23/09/2022', (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 1);
 -- Frank Mile
 INSERT INTO pae.users (id_user, email, role_u, last_name, first_name, phone_number, psw, registration_date, school_year, _version)
 VALUES (18,'frank.mile@student.vinci.be', 'etudiant', 'Mile', 'Frank', '0497 00 00 75', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '27/09/2022', (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 1);
