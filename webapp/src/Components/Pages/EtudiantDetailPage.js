@@ -2,6 +2,7 @@
 import {clearPage, renderPageTitle} from "../../utils/render";
 import {getAuthenticatedUser} from "../../utils/auths";
 import {usePathParams} from "../../utils/path-params";
+import {makeStateClean} from "./utils/MakeStateClean";
 import baseURL from "../../../config";
 
 const EntrepriseDetailsPage = async () => {
@@ -63,7 +64,7 @@ async function renderEtudiantDetail() {
           });
 
       const tdState = document.createElement('td');
-      tdState.textContent = contact.state || '-';
+      makeStateClean(contact.state,tdState)
       tr.appendChild(tdState);
 
       const tdMeeting = document.createElement('td');

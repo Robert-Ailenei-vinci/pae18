@@ -1,20 +1,16 @@
-const makeStateClean = (stateData,stateCell) => {
-    if (stateData === 'accepte'){
-        stateCell.textContent = 'Accepté';
-    }else if(stateData === 'refuse'){
-        stateCell.textContent = "Refusé";
-    }else if (stateData === 'suspendu'){
-        stateCell.textContent = 'Suspendus';
-    }else if(stateData === 'initie'){
-        stateCell.textContent = 'Initié';
-    }else if(stateData === 'annule'){
-        stateCell.textContent = 'Annulé';
-    }else if(stateData === 'stop follow'){
-        stateCell.textContent = 'Suivi stoppé';
-    }else if(stateData === 'rencontre'){
-        stateCell.textContent = 'Rencontré';
-    }
-    else stateCell.textContent = stateData;
-}
+const stateMapping = {
+    'accepte': 'Accepté',
+    'refuse': 'Refusé',
+    'suspendu': 'Suspendu',
+    'initie': 'Initié',
+    'annule': 'Annulé',
+    'stop follow': 'Suivi stoppé',
+    'rencontre': 'Rencontré',
+};
 
-export {makeStateClean}
+const makeStateClean = (stateData, stateCell) => {
+    const cleanText = stateMapping[stateData] || stateData; // Obtenir le texte du mappage ou utiliser l'original
+    stateCell.textContent = cleanText; // Assigner le texte à la cellule
+};
+
+export { makeStateClean };

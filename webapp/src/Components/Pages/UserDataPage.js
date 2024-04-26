@@ -11,7 +11,7 @@ import {
 } from '../../utils/auths';
 import {clearPage, renderPageTitle} from '../../utils/render';
 import Navbar from '../Navbar/Navbar';
-
+import {makeStateClean} from "./utils/MakeStateClean";
 import Navigate from '../Router/Navigate';
 import {
   meetContact,
@@ -167,7 +167,7 @@ async function renderPersonnalInfoPage() {
     if (contact.entreprise.blacklisted) {
       tdState.style.color = 'red';
     }
-    tdState.textContent = contact.state || '-';
+    makeStateClean(contact.state,tdState);
     tr.appendChild(tdState);
 
     // Bouton pour changer l'état
