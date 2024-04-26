@@ -93,7 +93,7 @@ async function renderAllUsers2() {
     // Création du bouton de recherche
     const searchButton = document.createElement('button');
     searchButton.textContent = 'Rechercher';
-    searchButton.className = 'btn btn-primary me-5';
+    searchButton.className = 'btn btn-primary bg-custom';
     searchButton.addEventListener('click', () => {
       const searchTerm = searchInput.value.trim().toLowerCase();
       const selectedYear = yearSelect.value;
@@ -125,11 +125,21 @@ async function renderAllUsers2() {
 
         const row = document.createElement('tr');
 
-        const detailButton = document.createElement('a');
-        detailButton.href = `/detailsEtudiant/${userU.id}`;
-        detailButton.className = 'bi bi-arrow-through-heart-fill'
+    // Amélioration de la cellule pour le bouton de détails
+    const detailButtonCell = document.createElement('td');
+    detailButtonCell.className = 'text-center';
+    detailButtonCell.style.padding = '0.5rem';
 
-        row.appendChild(detailButton);
+    const detailButton = document.createElement('a');
+    detailButton.href = `/detailsEtudiant/${userU.id}`;
+    detailButton.className = 'btn btn-outline-danger btn-sm';
+    detailButton.title = 'Voir les détails de l’étudiant';
+    detailButton.innerHTML = '<i class="bi bi-eye-fill"></i>';
+    detailButtonCell.style.maxWidth = '5px';
+
+    detailButtonCell.appendChild(detailButton);
+    row.appendChild(detailButtonCell);
+
 
         [`firstName`, 'lastName', 'role'].forEach(fieldName => {
           const cell = document.createElement('td');
@@ -173,11 +183,20 @@ function renderAllUsers(usersData) {
 
       const row = document.createElement('tr');
 
+      // Amélioration de la cellule pour le bouton de détails
+      const detailButtonCell = document.createElement('td');
+      detailButtonCell.className = 'text-center';
+      detailButtonCell.style.padding = '0.5rem';
+
       const detailButton = document.createElement('a');
       detailButton.href = `/detailsEtudiant/${userU.id}`;
-      detailButton.className = 'bi bi-arrow-through-heart-fill'
+      detailButton.className = 'btn btn-outline-danger btn-sm';
+      detailButton.title = 'Voir les détails de l’étudiant';
+      detailButton.innerHTML = '<i class="bi bi-eye-fill"></i>';
+      detailButtonCell.style.maxWidth = '5px';
 
-      row.appendChild(detailButton);
+      detailButtonCell.appendChild(detailButton);
+      row.appendChild(detailButtonCell);
 
       [`firstName`, 'lastName', 'role'].forEach(fieldName => {
         const cell = document.createElement('td');
