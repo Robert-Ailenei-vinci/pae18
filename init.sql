@@ -548,44 +548,91 @@ VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM 
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, reason_for_refusal, meeting_type, _version)
 VALUES (34,'refuse', (SELECT id_user FROM pae.users WHERE email = 'Basile.frilot@student.vinci.be'), (SELECT id_entreprise FROM pae.entreprises WHERE trade_name = 'Sopra Steria'), (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 'Choix autre étudiant', 'A distance', 1);
 
------• Comptage du nombre d’utilisateurs.
-SELECT COUNT(*) AS user_count FROM pae.users;
-
------• Comptage du nombre d’entreprises.
-SELECT COUNT(*) AS entreprise_count FROM pae.entreprises;
-
-------• Comptage du nombre de stages par année académique.
-
+-- 1. Comptage du nombre d’utilisateurs, par rôle et par année académique.
 SELECT
-    s.years_format,
-    COUNT(*) AS stage_count
+    s.years_format AS "Année académique",
+    u.role_u AS "Rôle",
+    COUNT(u.id_user) AS "Nombre d'utilisateurs"
+FROM
+    pae.users u
+        JOIN pae.school_years s ON u.school_year = s.id_year
+GROUP BY
+    s.years_format, u.role_u
+ORDER BY
+    s.years_format, u.role_u;
+
+-- 2. Année académique et comptage du nombre de stages par année académique.
+SELECT
+    s.years_format AS "Année académique",
+    COUNT(st.contact) AS "Nombre de stages"
 FROM
     pae.stages st
-        JOIN
-    pae.school_years s ON st.school_year = s.id_year
+        JOIN pae.school_years s ON st.school_year = s.id_year
 GROUP BY
+    s.years_format
+ORDER BY
     s.years_format;
 
-------• Comptage du nombre de contacts par année académique.
-
+-- 3. Entreprise, année académique, et comptage du nombre de stages par entreprise et année académique.
 SELECT
-    s.years_format AS academic_year,
-    COUNT(*) AS contact_count
+    e.trade_name AS "Entreprise",
+    sy.years_format AS "Année académique",
+    COUNT(st.contact) AS "Nombre de stages"
 FROM
-    pae.contacts c
-        JOIN
-    pae.school_years s ON c.school_year = s.id_year
+    pae.stages st
+        JOIN pae.contacts ct ON st.contact = ct.id_contact
+        JOIN pae.entreprises e ON ct.entreprise = e.id_entreprise
+        JOIN pae.school_years sy ON st.school_year = sy.id_year
 GROUP BY
-    s.years_format;
------• Etats (en format lisible par le client) et comptage du nombre de contacts dans chacun des etat
+    e.trade_name, sy.years_format
+ORDER BY
+    sy.years_format, e.trade_name;
 
+-- 4. Année académique et comptage du nombre de contacts par année académique.
 SELECT
-    state,
-    COUNT(*) AS state_count
+    sy.years_format AS "Année académique",
+    COUNT(ct.id_contact) AS "Nombre de contacts"
 FROM
-    pae.contacts
+    pae.contacts ct
+        JOIN pae.school_years sy ON ct.school_year = sy.id_year
 GROUP BY
-    state;
+    sy.years_format
+ORDER BY
+    sy.years_format;
 
+-- 5. Etats (en format lisible par le client) et comptage du nombre de contacts dans chacun des états.
+SELECT
+    ct.state AS "État",
+    COUNT(ct.id_contact) AS "Nombre de contacts"
+FROM
+    pae.contacts ct
+GROUP BY
+    ct.state
+ORDER BY
+    ct.state;
 
+-- 6. Année académique, états (en format lisible par le client) et comptage du nombre de contacts dans chacun des états par année académique.
+SELECT
+    sy.years_format AS "Année académique",
+    ct.state AS "État",
+    COUNT(ct.id_contact) AS "Nombre de contacts"
+FROM
+    pae.contacts ct
+        JOIN pae.school_years sy ON ct.school_year = sy.id_year
+GROUP BY
+    sy.years_format, ct.state
+ORDER BY
+    sy.years_format, ct.state;
 
+-- 7. Entreprise, états (en format lisible par le client) et comptage du nombre de contacts dans chacun des états par entreprise.
+SELECT
+    e.trade_name AS "Entreprise",
+    ct.state AS "État",
+    COUNT(ct.id_contact) AS "Nombre de contacts"
+FROM
+    pae.contacts ct
+        JOIN pae.entreprises e ON ct.entreprise = e.id_entreprise
+GROUP BY
+    e.trade_name, ct.state
+ORDER BY
+    e.trade_name, ct.state;
