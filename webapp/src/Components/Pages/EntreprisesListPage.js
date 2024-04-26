@@ -209,7 +209,7 @@ function renderEntreprisesTable(entreprises) {
         tr.appendChild(tdTradeName); // Ajouter la cellule à la ligne
         
         // Ajouter les autres cellules
-        ["designation", "phone_num", "address"].forEach(fieldName => {
+        ["designation", "phoneNumber", "address"].forEach(fieldName => {
             const cell = document.createElement('td');
             cell.textContent = entreprise[fieldName];
             tr.appendChild(cell);
