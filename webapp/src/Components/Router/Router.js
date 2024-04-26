@@ -38,7 +38,8 @@ function onHistoryChange() {
         if (!isNaN(lastSegment)) {
             // Reconstruct l'URI sans le dernier segment s'il est un nombre
             const uriWithoutLastSegment = uriSegments.join('/');
-            const componentToRender = routes[uriWithoutLastSegment];
+            const uriFinal = uriWithoutLastSegment+'/:id';
+            const componentToRender = routes[uriFinal];
             if (componentToRender) {
                 componentToRender();
             } else {
