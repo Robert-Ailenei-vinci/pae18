@@ -156,6 +156,9 @@ VALUES (25,'Carole.skile@student.vinci.be', 'etudiant', 'Skile', 'Carole', '0489
 -- Théophile Ile
 INSERT INTO pae.users (id_user, email, role_u, last_name, first_name, phone_number, psw, registration_date, school_year, _version)
 VALUES (26,'theophile.ile@student.vinci.be', 'etudiant', 'Ile', 'Théophile', '0488 35 33 89', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '01/03/2024', (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'), 1);
+-- Jeremy Demoulin
+INSERT INTO pae.users (id_user, email, role_u, last_name, first_name, phone_number, psw, registration_date, school_year, _version)
+VALUES (27,'jeremy.demoulin@student.vinci.be', 'Demoulin', 'Jeremy', 'Théophile', '0497 00 00 20', '$2a$10$xmQOV5fGTVRvZJMulzj7X.9eybyFXS7Lf1NmjJC0mmZyQcheGRqFO', '23/09/2022', (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 1);
 
 
 --Insert into pae.entreprises
@@ -223,13 +226,13 @@ INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor,
 VALUES ((SELECT id_contact
          FROM pae.contacts
          WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Carole.skile@student.vinci.be')
-           AND entreprise = (SELECT id_entreprise FROM pae.entreprises WHERE trade_name = 'LetsBuild')),
-        '10/10/2023',
-        'Un ERP : Odoo',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Dossche'),
-        (SELECT id_user FROM pae.users WHERE email = 'Carole.skile@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'),
-        1);
+    AND entreprise = (SELECT id_entreprise FROM pae.entreprises WHERE trade_name = 'LetsBuild')),
+    '10/10/2023',
+    'Un ERP : Odoo',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Dossche'),
+       (SELECT id_user FROM pae.users WHERE email = 'Carole.skile@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'),
+    1);
 
 
 -- Achille Ile - Sopra Steria
@@ -242,12 +245,12 @@ VALUES (2,'accepte\e',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Ach.ile@student.vinci.be') AND entreprise = (SELECT id_entreprise FROM pae.entreprises WHERE trade_name = 'Sopra Steria')),
-        '23/11/2023',
-        'sBMS project - a complex environment',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'),
-        (SELECT id_user FROM pae.users WHERE email = 'Ach.ile@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'),
-        1);
+    '23/11/2023',
+    'sBMS project - a complex environment',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'),
+       (SELECT id_user FROM pae.users WHERE email = 'Ach.ile@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'),
+    1);
 
 -- Achille Ile - Niboo
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, meeting_type, reason_for_refusal, _version)
@@ -269,12 +272,12 @@ VALUES (4,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts as c WHERE c._user = (SELECT id_user FROM pae.users WHERE email = 'Basile.Ile@student.vinci.be') AND entreprise = (SELECT id_entreprise FROM pae.entreprises WHERE trade_name = 'Assyst Europe')),
-        '12/10/2023',
-        'CRM : Microsoft Dynamics 365 For Sales',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Assal'),
-        (SELECT id_user FROM pae.users WHERE email = 'Basile.Ile@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'),
-        1);
+    '12/10/2023',
+    'CRM : Microsoft Dynamics 365 For Sales',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Assal'),
+       (SELECT id_user FROM pae.users WHERE email = 'Basile.Ile@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'),
+    1);
 
 -- Basile Ile - LetsBuild
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, reason_for_refusal, meeting_type, _version)
@@ -347,12 +350,12 @@ VALUES (18,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project,supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Arnaud.dito@student.vinci.be')),
-        '17/11/2021',
-        'L''analyste au centre du développement',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'),
-        (SELECT id_user FROM pae.users WHERE email = 'Arnaud.dito@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2021-2022'),
-        1);
+    '17/11/2021',
+    'L''analyste au centre du développement',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'),
+       (SELECT id_user FROM pae.users WHERE email = 'Arnaud.dito@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2021-2022'),
+    1);
 -- Arnaud Dilo - L'analyste au centre du développement (Stage)
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, meeting_type, reason_for_refusal, _version)
 VALUES (19,'accepte',
@@ -393,12 +396,12 @@ VALUES (22,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Auristelle.linot@student.vinci.be')),
-        '22/11/2021',
-        'Entretien des rails',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'),
-        (SELECT id_user FROM pae.users WHERE email = 'Auristelle.linot@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2021-2022'),
-        1);
+    '22/11/2021',
+    'Entretien des rails',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'),
+       (SELECT id_user FROM pae.users WHERE email = 'Auristelle.linot@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2021-2022'),
+    1);
 
 -- Auristelle Linot - Sopra Steria
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, meeting_type, _version)
@@ -434,12 +437,12 @@ VALUES (25,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, _user, school_year, supervisor,  _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Jeremy.demoulin@student.vinci.be')),
-        '23/11/2022',
-        'CRM : Microsoft Dynamics 365 For Sales',
-        (SELECT id_user FROM pae.users WHERE email = 'Jeremy.demoulin@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Assal'),
-        1);
+    '23/11/2022',
+    'CRM : Microsoft Dynamics 365 For Sales',
+       (SELECT id_user FROM pae.users WHERE email = 'Jeremy.demoulin@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Assal'),
+    1);
 
 -- Arthur Moulin - AXIS SRL (contact)
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, meeting_type, _version)
@@ -451,12 +454,12 @@ VALUES (26,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Arthur.moulin@student.vinci.be')),
-        '19/10/2022',
-        'Un métier : chef de projet',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Assal'),
-        (SELECT id_user FROM pae.users WHERE email = 'Arthur.moulin@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
-        1);
+    '19/10/2022',
+    'Un métier : chef de projet',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Assal'),
+       (SELECT id_user FROM pae.users WHERE email = 'Arthur.moulin@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
+    1);
 
 
 -- Hugo Moulin - AXIS SRL (contact)
@@ -469,12 +472,12 @@ VALUES (27,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Hugo.moulin@student.vinci.be')),
-        '19/10/2022',
-        'Un métier : chef de projet',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Barn'),
-        (SELECT id_user FROM pae.users WHERE email = 'Hugo.moulin@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
-        1);
+    '19/10/2022',
+    'Un métier : chef de projet',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Barn'),
+       (SELECT id_user FROM pae.users WHERE email = 'Hugo.moulin@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
+    1);
 
 -- Aurèle Mile - AXIS SRL (contact)
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, meeting_type, _version)
@@ -486,12 +489,12 @@ VALUES (28,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Aurèle.mile@student.vinci.be')),
-        '19/10/2022',
-        'Un métier : chef de projet',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Barn'),
-        (SELECT id_user FROM pae.users WHERE email = 'Aurèle.mile@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
-        1);
+    '19/10/2022',
+    'Un métier : chef de projet',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Barn'),
+       (SELECT id_user FROM pae.users WHERE email = 'Aurèle.mile@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
+    1);
 
 
 -- Frank Mile - AXIS SRL (contact)
@@ -504,12 +507,12 @@ VALUES (29,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Frank.mile@student.vinci.be')),
-        '19/10/2022',
-        'Un métier : chef de projet',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Barn'),
-        (SELECT id_user FROM pae.users WHERE email = 'Frank.mile@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
-        1);
+    '19/10/2022',
+    'Un métier : chef de projet',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Barn'),
+       (SELECT id_user FROM pae.users WHERE email = 'Frank.mile@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
+    1);
 
 
 -- Basile Dumoulin - AXIS SRL (refused)
@@ -534,12 +537,12 @@ VALUES (33,'accepte',
         1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
 VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Axel.dumoulin@student.vinci.be')),
-        '17/10/2022',
-        'sBMS project - Java Development',
-        (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'),
-        (SELECT id_user FROM pae.users WHERE email = 'Axel.dumoulin@student.vinci.be'),
-        (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
-        1);
+    '17/10/2022',
+    'sBMS project - Java Development',
+       (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'),
+       (SELECT id_user FROM pae.users WHERE email = 'Axel.dumoulin@student.vinci.be'),
+       (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'),
+    1);
 
 -- Basile Frilot - Sopra Steria (refused)
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, reason_for_refusal, meeting_type, _version)
