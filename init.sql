@@ -234,7 +234,7 @@ VALUES ((SELECT id_contact
 
 -- Achille Ile - Sopra Steria
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, meeting_type, _version)
-VALUES (2,'accepte\e',
+VALUES (2,'accepte',
         (SELECT id_user FROM pae.users WHERE email = 'Ach.ile@student.vinci.be'),
         (SELECT id_entreprise FROM pae.entreprises WHERE trade_name = 'Sopra Steria'),
         (SELECT id_year FROM pae.school_years WHERE years_format = '2023-2024'),
@@ -377,7 +377,7 @@ VALUES (19,
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, meeting_type, _version)
 VALUES (20,'accepte', (SELECT id_user FROM pae.users WHERE email = 'Cedric.dilot@student.vinci.be'), (SELECT id_entreprise FROM pae.entreprises WHERE trade_name = 'Assyst Europe'), (SELECT id_year FROM pae.school_years WHERE years_format = '2021-2022'), 'Dans l''entreprise', 1);
 INSERT INTO pae.stages (contact, signature_date, internship_project, supervisor, _user, school_year, _version)
-VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Cedric.dilot@student.vinci.be')), '23/11/2021', 'ERP : Microsoft Dynamics 366', (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez CorcheteE'), (SELECT id_user FROM pae.users WHERE email = 'Cedric.dilot@student.vinci.be'), (SELECT id_year FROM pae.school_years WHERE years_format = '2021-2022'), 1);
+VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM pae.users WHERE email = 'Cedric.dilot@student.vinci.be')), '23/11/2021', 'ERP : Microsoft Dynamics 366', (SELECT id_supervisor FROM pae.internship_supervisor AS s WHERE s.last_name = 'Alvarez Corchete'), (SELECT id_user FROM pae.users WHERE email = 'Cedric.dilot@student.vinci.be'), (SELECT id_year FROM pae.school_years WHERE years_format = '2021-2022'), 1);
 
 -- Cedric Dilot - Sopra Steria
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, reason_for_refusal, meeting_type, _version)
@@ -545,25 +545,58 @@ VALUES ((SELECT id_contact FROM pae.contacts WHERE _user = (SELECT id_user FROM 
 INSERT INTO pae.contacts (id_contact, state, _user, entreprise, school_year, reason_for_refusal, meeting_type, _version)
 VALUES (34,'refuse', (SELECT id_user FROM pae.users WHERE email = 'Basile.frilot@student.vinci.be'), (SELECT id_entreprise FROM pae.entreprises WHERE trade_name = 'Sopra Steria'), (SELECT id_year FROM pae.school_years WHERE years_format = '2022-2023'), 'Choix autre étudiant', 'A distance', 1);
 
------• Comptage du nombre d’utilisateurs.
-SELECT COUNT(*) AS user_count FROM pae.users;
+-----• 1.Comptage du nombre d’utilisateurs par role et annees academique
+SELECT
+    sy.years_format AS academic_year,
+    u.role_u AS user_role,
+    COUNT(u.id_user) AS user_count
+FROM
+    pae.users u
+        JOIN
+    pae.school_years sy ON u.school_year = sy.id_year
+GROUP BY
+    sy.years_format, u.role_u
+ORDER BY
+    sy.years_format, u.role_u;
 
------• Comptage du nombre d’entreprises.
-SELECT COUNT(*) AS entreprise_count FROM pae.entreprises;
-
-------• Comptage du nombre de stages par année académique.
+------• 2.Comptage du nombre de stages par année académique.
 
 SELECT
-    s.years_format,
+    sy.years_format,
     COUNT(*) AS stage_count
 FROM
-    pae.stages st
+    pae.stages s
         JOIN
-    pae.school_years s ON st.school_year = s.id_year
+    pae.contacts c ON s.contact = c.id_contact
+        JOIN
+    pae.school_years sy ON s.school_year = sy.id_year
+WHERE
+    c.state = 'accepte'
 GROUP BY
-    s.years_format;
+    sy.years_format;
 
-------• Comptage du nombre de contacts par année académique.
+
+-----•3. Entreprise, année académique, et comptage du nombre de stages par entreprise et année académique:
+SELECT
+    e.trade_name AS enterprise_name,
+    sy.years_format AS academic_year,
+    COUNT(s.contact) AS stage_count
+FROM
+    pae.stages s
+        JOIN
+    pae.contacts c ON s.contact = c.id_contact
+        JOIN
+    pae.entreprises e ON c.entreprise = e.id_entreprise
+        JOIN
+    pae.school_years sy ON s.school_year = sy.id_year
+GROUP BY
+    e.trade_name, sy.years_format
+ORDER BY
+    e.trade_name, sy.years_format;
+
+
+
+------• 4. Année académique et comptage du nombre de contacts par année académique.
 
 SELECT
     s.years_format AS academic_year,
@@ -574,15 +607,54 @@ FROM
     pae.school_years s ON c.school_year = s.id_year
 GROUP BY
     s.years_format;
------• Etats (en format lisible par le client) et comptage du nombre de contacts dans chacun des etat
+
+------• 5.Etats (en format lisible par le client) et comptage du nombre de contacts dans chacun des états.
 
 SELECT
-    state,
-    COUNT(*) AS state_count
+    c.state AS Libellé_de_l_état,
+    COUNT(*) AS nombre_d_occurrences_de_l_etat
+
 FROM
-    pae.contacts
+    pae.contacts c
 GROUP BY
-    state;
+    c.state
+ORDER BY
+    c.state;
+
+--* 6.Année académique, états (en format lisible par le client) et comptage du nombre de contacts dans chacun des états par année académique
+SELECT
+    sy.years_format AS academic_year,
+    c.state AS Libellé_de_l_état,
+    COUNT(*) AS nombre_de_contacts
+FROM
+    pae.contacts c
+        JOIN
+    pae.school_years sy ON c.school_year = sy.id_year
+GROUP BY
+    sy.years_format, c.state
+ORDER BY
+    sy.years_format, c.state;
+
+-----• 7.Entreprise, états (en format lisible par le client) et comptage du nombre de contacts dans chacun des états par entreprise.
+
+SELECT
+    e.trade_name AS enterprise_name,
+    c.state AS state_fr,
+    COUNT(*) AS contact_count
+FROM
+    pae.contacts c
+        JOIN
+    pae.entreprises e ON c.entreprise = e.id_entreprise
+GROUP BY
+    e.trade_name, c.state
+ORDER BY
+    e.trade_name, c.state;
+
+
+
+
+
+
 
 
 
