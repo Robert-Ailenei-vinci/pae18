@@ -69,6 +69,11 @@ async function renderEntreprisesWithSchoolYear() {
     selectSchoolYearLabel.textContent = 'Choisir une année académique : ';
     const selectSchoolYear = document.createElement('select');
 
+    const allYearsOption = document.createElement('option');
+    allYearsOption.value = -1;
+    allYearsOption.textContent = 'Toutes les années';
+    selectSchoolYear.appendChild(allYearsOption);
+
     const schoolYears = await fetchSchoolYears(user);
     schoolYears.forEach(schoolYear => {
         const option = document.createElement('option');

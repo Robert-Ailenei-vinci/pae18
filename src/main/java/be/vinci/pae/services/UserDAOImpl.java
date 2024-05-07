@@ -271,6 +271,13 @@ public class UserDAOImpl implements UserDAO {
     String sql = "SELECT COUNT(*) FROM pae.users u "
         + "JOIN pae.stages s ON u.id_user = s._user "
         + "WHERE u.role_u = 'etudiant' AND u.school_year = ?";
+    if(yearID==-1){
+      sql="SELECT COUNT(*) FROM pae.users u"
+      +"JOIN pae.stage s ON u.id_user = s._user"
+      +"WHERE u.role_u = 'etudiant'";
+    }
+
+
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
       stmt.setInt(1, yearID);
       try (ResultSet rs = stmt.executeQuery()) {
@@ -296,6 +303,12 @@ public class UserDAOImpl implements UserDAO {
     String sql = "SELECT COUNT(*) FROM pae.users u "
         + "LEFT JOIN pae.stages s ON u.id_user = s._user "
         + "WHERE u.role_u = 'etudiant' AND u.school_year = ? AND s._user IS NULL";
+
+    if(yearID==-1){
+      sql="SELECT COUNT(*) FROM pae.users u "
+          + "LEFT JOIN pae.stages s ON u.id_user = s._user "
+          + "WHERE u.role_u = 'etudiant' AND s._user IS NULL";
+    }
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
       stmt.setInt(1, yearID);
       try (ResultSet rs = stmt.executeQuery()) {
