@@ -17,7 +17,14 @@ import be.vinci.pae.utils.LoggerUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
@@ -69,7 +76,7 @@ public class ContactRessource {
     // Try to get user, entreprise, and school year
     UserDTO userDTO = myUserUCC.getOne(userId);
     EntrepriseDTO entrepriseDTO = myEntrepriseUCC.getOne(entrepriseId);
-    SchoolYearDTO schoolYearDTO = mySchoolYearUCC.getOne(schoolYearId);
+    SchoolYearDTO schoolYearDTO = mySchoolYearUCC.getCurrentSchoolYear();
     if (userDTO == null) {
       throw new AuthorisationException("User not recognised");
     }
