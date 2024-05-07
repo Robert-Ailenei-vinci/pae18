@@ -69,7 +69,7 @@ public class UserResource {
   @GET
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"professeur"})
+  @Authorize(roles = {"professeur", "administratif"})
   public List<UserDTO> getAll() {
     LoggerUtil.logInfo("Starting : users/getAll");
     List<UserDTO> toReturn = myUser.getAll();
@@ -126,10 +126,11 @@ public class UserResource {
   }
 
   /**
-   * Retrieves the number of students with internships. This method is annotated with {@link jakarta.ws.rs.GET}
-   * and {@link jakarta.ws.rs.Path}, indicating that it handles HTTP GET requests and consumes JSON
-   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize}, indicating
-   * that authorization is required to access this endpoint.
+   * Retrieves the number of students with internships. This method is annotated with
+   * {@link jakarta.ws.rs.GET} and {@link jakarta.ws.rs.Path}, indicating that it handles HTTP GET
+   * requests and consumes JSON data. Additionally, it is annotated with
+   * {@link be.vinci.pae.api.filters.Authorize}, indicating that authorization is required to access
+   * this endpoint.
    *
    * @param yearID The identifier of the user to retrieve.
    * @return The user with the specified identifier.
@@ -137,7 +138,7 @@ public class UserResource {
   @GET
   @Path("studWithStage/{filtre}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"professeur","administratif"})
+  @Authorize(roles = {"professeur", "administratif"})
   public int studsWithStage(@PathParam("filtre") int yearID) {
     LoggerUtil.logInfo("Starting : users/studWithStage");
     int toReturn = myUser.studsWithStage(yearID);
@@ -148,10 +149,11 @@ public class UserResource {
   }
 
   /**
-   * Retrieves the number of students without internships. This method is annotated with {@link jakarta.ws.rs.GET}
-   * and {@link jakarta.ws.rs.Path}, indicating that it handles HTTP GET requests and consumes JSON
-   * data. Additionally, it is annotated with {@link be.vinci.pae.api.filters.Authorize}, indicating
-   * that authorization is required to access this endpoint.
+   * Retrieves the number of students without internships. This method is annotated with
+   * {@link jakarta.ws.rs.GET} and {@link jakarta.ws.rs.Path}, indicating that it handles HTTP GET
+   * requests and consumes JSON data. Additionally, it is annotated with
+   * {@link be.vinci.pae.api.filters.Authorize}, indicating that authorization is required to access
+   * this endpoint.
    *
    * @param yearID The identifier of the user to retrieve.
    * @return The user with the specified identifier.
@@ -159,7 +161,7 @@ public class UserResource {
   @GET
   @Path("studWithNoStage/{filtre}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"professeur","administratif"})
+  @Authorize(roles = {"professeur", "administratif"})
   public int studsWithNoStage(@PathParam("filtre") int yearID) {
     LoggerUtil.logInfo("Starting : users/studWithStage");
     int toReturn = myUser.studsWithNoStage(yearID);
