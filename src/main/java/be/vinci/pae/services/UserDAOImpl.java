@@ -35,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public List<UserDTO> getAll() {
     try (PreparedStatement getAllUsers = dalBackServices.getPreparedStatement(
-       "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
+        "SELECT u.id_user,u.email, u.role_u, u.last_name, u.first_name,"
         + " u.phone_number, u.psw, u.registration_date,"
         + " u.school_year, s.years_format AS academic_year, u._version "
         + "FROM pae.users u, pae.school_years s WHERE u.school_year=s.id_year")) {
@@ -63,7 +63,7 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public UserDTO getOne(String email) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
-       "SELECT u.id_user, u.email, u.role_u, u.last_name,"
+        "SELECT u.id_user, u.email, u.role_u, u.last_name,"
         + " u.first_name, u.phone_number, u.psw,"
         + " u.registration_date, u.school_year,"
         + " s.years_format AS academic_year, u._version "
@@ -269,7 +269,7 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public int studsWithStage(int yearID) {
     String sql = "SELECT COUNT(*) FROM pae.users u "
-       + "JOIN pae.stages s ON u.id_user = s._user "
+        + "JOIN pae.stages s ON u.id_user = s._user "
         + "WHERE u.role_u = 'etudiant' AND u.school_year = ?";
     if (yearID == -1) {
       sql = "SELECT COUNT(*) FROM pae.users u "
@@ -303,8 +303,8 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public int studsWithNoStage(int yearID) {
     String sql = "SELECT COUNT(*) FROM pae.users u "
-       + "LEFT JOIN pae.stages s ON u.id_user = s._user "
-       + "WHERE u.role_u = 'etudiant' AND u.school_year = ? AND s._user IS NULL";
+        + "LEFT JOIN pae.stages s ON u.id_user = s._user "
+        + "WHERE u.role_u = 'etudiant' AND u.school_year = ? AND s._user IS NULL";
 
     if (yearID == -1) {
       sql = "SELECT COUNT(*) FROM pae.users u "

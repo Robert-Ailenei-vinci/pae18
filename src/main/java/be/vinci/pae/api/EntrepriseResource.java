@@ -200,7 +200,7 @@ public class EntrepriseResource {
     String email = json.get("email").asText();
 
     EntrepriseDTO entrepriseDTO = myEntrepriseUCC.createOne(user, tradeName, designation, address,
-       phoneNum, email);
+        phoneNum, email);
     if (entrepriseDTO == null) {
       throw new BadRequestException("Contact not created");
     }
@@ -219,7 +219,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize(roles = {"professeur", "administratif"})
   public List<ContactDTO> getAllContactsByEntrepriseId(
-     @PathParam("entrepriseId") int entrepriseId) {
+      @PathParam("entrepriseId") int entrepriseId) {
     List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAllContactById successful");
