@@ -68,22 +68,30 @@ async function renderEntreprisesWithSchoolYear() {
     const selectSchoolYearLabel = document.createElement('label');
     selectSchoolYearLabel.textContent = 'Choisir une année académique : ';
     const selectSchoolYear = document.createElement('select');
+    const defaultYear = await getDefaultSchoolYear(user);
 
     const schoolYears = await fetchSchoolYears(user);
     schoolYears.forEach(schoolYear => {
         const option = document.createElement('option');
         option.value = schoolYear.id;
         option.textContent = schoolYear.yearFormat;
+        if (schoolYear.id === defaultYear.id) {
+            option.selected = true;
+        }
         console.log('Option:', option);
         selectSchoolYear.appendChild(option);
     });
+
+    const allYearsOption = document.createElement('option');
+    allYearsOption.value = -1;
+    allYearsOption.textContent = 'Toutes les années';
+    selectSchoolYear.appendChild(allYearsOption);
 
     // Append the dropdown to the main element before fetching and rendering enterprises
     main.appendChild(selectSchoolYearLabel);
     main.appendChild(selectSchoolYear);
 
     // Fetch and render enterprises for the default school year when the page is loaded
-    const defaultYear = await getDefaultSchoolYear(user);
     console.log('Default year:', defaultYear);
     if (defaultYear !== null) {
         const defaultEntreprises = await fetchEntreprisesForSchoolYear(user, defaultYear.id, 'trade_name,designation');

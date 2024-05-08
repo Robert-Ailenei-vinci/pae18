@@ -249,7 +249,12 @@ public class EntrepriseResource {
         }
       }
     }
-    List<EntrepriseDTO> toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear, orderBy);
+    List<EntrepriseDTO> toReturn;
+    if (idSchoolYear == -1) {
+      toReturn = myEntrepriseUCC.getAll();
+    } else {
+      toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear, orderBy);
+    }
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAllForSchoolYear successful");
     }

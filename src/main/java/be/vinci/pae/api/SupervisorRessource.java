@@ -43,8 +43,7 @@ public class SupervisorRessource {
    * supervisors for the specified enterprise in JSON format. Requires authorization.
    *
    * @param entrepriseId the ID of the enterprise
-   * @return A list of {@link SupervisorDTO} representing all supervisors for the specified
-   * enterprise.
+   * @return A list of {@link SupervisorDTO} representing all supervisors for the specified entrpr
    * @throws BadRequestException if the enterprise ID is invalid or missing
    */
   @GET
