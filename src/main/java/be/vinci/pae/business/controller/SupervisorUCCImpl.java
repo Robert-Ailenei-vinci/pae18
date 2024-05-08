@@ -61,6 +61,7 @@ public class SupervisorUCCImpl implements SupervisorUCC {
     }
   }
 
+@Override
   public SupervisorDTO createOne(UserDTO user, String lastName, String firstName, int entrepriseId,
       String phoneNumber, String email) {
     try {
