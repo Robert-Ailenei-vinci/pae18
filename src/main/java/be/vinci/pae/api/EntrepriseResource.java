@@ -252,7 +252,7 @@ public class EntrepriseResource {
     List<EntrepriseDTO> toReturn;
     if (idSchoolYear == -1) {
       toReturn = myEntrepriseUCC.getAll();
-    }else {
+    } else {
       toReturn = myEntrepriseUCC.getAllForSchoolYear(idSchoolYear, orderBy);
     }
     if (toReturn != null) {
