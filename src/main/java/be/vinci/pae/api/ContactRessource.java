@@ -71,12 +71,11 @@ public class ContactRessource {
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
     int userId = user.getId();
     int entrepriseId = json.get("entreprise").asInt();
-    int schoolYearId = user.getSchooYearId();
 
     // Try to get user, entreprise, and school year
     UserDTO userDTO = myUserUCC.getOne(userId);
     EntrepriseDTO entrepriseDTO = myEntrepriseUCC.getOne(entrepriseId);
-    SchoolYearDTO schoolYearDTO = mySchoolYearUCC.getOne(schoolYearId);
+    SchoolYearDTO schoolYearDTO = mySchoolYearUCC.getCurrentSchoolYear();
     if (userDTO == null) {
       throw new AuthorisationException("User not recognised");
     }

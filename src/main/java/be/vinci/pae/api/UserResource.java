@@ -69,7 +69,7 @@ public class UserResource {
   @GET
   @Path("getAll")
   @Produces(MediaType.APPLICATION_JSON)
-  @Authorize(roles = {"professeur"})
+  @Authorize(roles = {"professeur", "administratif"})
   public List<UserDTO> getAll() {
     LoggerUtil.logInfo("Starting : users/getAll");
     List<UserDTO> toReturn = myUser.getAll();
