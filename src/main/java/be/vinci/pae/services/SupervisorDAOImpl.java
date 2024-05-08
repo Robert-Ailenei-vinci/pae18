@@ -84,6 +84,7 @@ public class SupervisorDAOImpl implements SupervisorDAO {
     return supervisor;
   }
 
+  @Override
   public SupervisorDTO createOne(SupervisorDTO user, int entreprise) {
     try (PreparedStatement preparedStatement = dalBackServices.getPreparedStatement(
         "INSERT INTO pae.internship_supervisor "

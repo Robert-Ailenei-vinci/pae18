@@ -76,5 +76,12 @@ public interface EntrepriseUCC {
    */
   int getStagesCountForSchoolYear(int idEntreprise);
 
+  /**
+   * Retrieves all enterprises for a given school year.
+   *
+   * @param idSchoolYear the identifier of the school year for which to retrieve enterprises
+   * @param orderBy      the column to order the results by
+   * @return A list of {@link EntrepriseDTO} representing all enterprises for the given school year.
+   */
   List<EntrepriseDTO> getAllForSchoolYear(int idSchoolYear, String orderBy);
 }

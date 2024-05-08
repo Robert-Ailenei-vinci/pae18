@@ -70,5 +70,10 @@ public interface ContactDAO {
    */
   boolean cancelInternshipsBasedOnEntrepriseId(int entrepriseId);
 
+  /**
+   * cancel all contacts of a user.
+   *
+   * @param contact the contact to cancel.
+   */
   void cancelAllContact(ContactDTO contact);
 }

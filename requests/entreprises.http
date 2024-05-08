@@ -29,7 +29,7 @@ Content-Type: application/json
 Authorization: {{user}}
 
 ### Get all entreprises for a school year
-GET {{baseUrl}}/entreprise/getAllForSchoolYear/1
+GET {{baseUrl}}/entreprise/getAllForSchoolYear/-1
 Content-Type: application/json
 Authorization: {{user}}
 

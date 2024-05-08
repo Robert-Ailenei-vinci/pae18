@@ -106,6 +106,8 @@ public interface EntrepriseDTO {
 
   /**
   * Sets the reason for blacklisting the enterprise.
+   *
+   * @param reason the reason to set for blacklisting the enterprise
    */
   void setBlacklistReason(String reason);
 
