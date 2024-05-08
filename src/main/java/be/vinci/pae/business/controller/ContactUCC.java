@@ -77,6 +77,9 @@ public interface ContactUCC {
    * @param contactId The id of the contact to set.
    * @param userId    The id of the user.
    * @param version   The version of the contact in the frontend.
+   * @param supervisorId The id of the supervisor.
+   * @param signatureDate The date of the signature.
+   * @param internshipProject The internship project.
    * @return The updated contact.
    */
   ContactDTO acceptContact(int contactId, int userId, int version, int supervisorId,

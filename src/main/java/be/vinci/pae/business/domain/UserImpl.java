@@ -30,6 +30,9 @@ public class UserImpl implements User {
   private int schoolYearId;
   private SchoolYearDTO schoolYear;
 
+  /**
+   * Empty user constructor.
+   */
   public UserImpl() {
   }
 
