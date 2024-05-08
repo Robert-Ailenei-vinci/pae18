@@ -269,17 +269,19 @@ public class UserDAOImpl implements UserDAO {
   @Override
   public int studsWithStage(int yearID) {
     String sql = "SELECT COUNT(*) FROM pae.users u "
-        + "JOIN pae.stages s ON u.id_user = s._user "
-        + "WHERE u.role_u = 'etudiant' AND u.school_year = ?";
+      + "JOIN pae.stages s ON u.id_user = s._user "
+      + "WHERE u.role_u = 'etudiant' AND u.school_year = ?";
     if(yearID==-1){
-      sql="SELECT COUNT(*) FROM pae.users u"
-      +"JOIN pae.stage s ON u.id_user = s._user"
-      +"WHERE u.role_u = 'etudiant'";
+      sql="SELECT COUNT(*) FROM pae.users u "
+        +"JOIN pae.stages s ON u.id_user = s._user "
+        +"WHERE u.role_u = 'etudiant'";
     }
 
-
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
-      stmt.setInt(1, yearID);
+      if (yearID!=-1){
+        stmt.setInt(1, yearID);
+      }
+
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
           LoggerUtil.logInfo("user: studsWithStage");
@@ -310,7 +312,9 @@ public class UserDAOImpl implements UserDAO {
           + "WHERE u.role_u = 'etudiant' AND s._user IS NULL";
     }
     try (PreparedStatement stmt = dalBackServices.getPreparedStatement(sql)) {
-      stmt.setInt(1, yearID);
+      if (yearID!=-1){
+        stmt.setInt(1, yearID);
+      }
       try (ResultSet rs = stmt.executeQuery()) {
         if (rs.next()) {
           LoggerUtil.logInfo("user: studsWithNoStage");
