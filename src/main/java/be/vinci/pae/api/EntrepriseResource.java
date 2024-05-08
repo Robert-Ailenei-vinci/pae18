@@ -185,10 +185,10 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize(roles = {"etudiant"})
   public EntrepriseDTO addEnterprise(@Context ContainerRequestContext requestContext,
-    JsonNode json) throws BadRequestException, AuthorisationException {
+      JsonNode json) throws BadRequestException, AuthorisationException {
     LoggerUtil.logInfo("Starting : enterprise/addOne");
     if (!json.hasNonNull("trade_name")
-      || !json.hasNonNull("address")) {
+        || !json.hasNonNull("address")) {
       throw new BadRequestException("All fields required to create an enterprise.");
     }
     UserDTO user = (UserDTO) requestContext.getProperty("user"); // Conversion en int
@@ -200,7 +200,7 @@ public class EntrepriseResource {
     String email = json.get("email").asText();
 
     EntrepriseDTO entrepriseDTO = myEntrepriseUCC.createOne(user, tradeName, designation, address,
-      phoneNum, email);
+       phoneNum, email);
     if (entrepriseDTO == null) {
       throw new BadRequestException("Contact not created");
     }
@@ -219,7 +219,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize(roles = {"professeur", "administratif"})
   public List<ContactDTO> getAllContactsByEntrepriseId(
-    @PathParam("entrepriseId") int entrepriseId) {
+     @PathParam("entrepriseId") int entrepriseId) {
     List<ContactDTO> toReturn = myEntrepriseUCC.getAllContactsByEntrepriseId(entrepriseId);
     if (toReturn != null) {
       LoggerUtil.logInfo("GetAllContactById successful");
@@ -239,7 +239,7 @@ public class EntrepriseResource {
   @Produces(MediaType.APPLICATION_JSON)
   @Authorize(roles = {"professeur", "administratif"})
   public List<EntrepriseDTO> getAllForSchoolYear(@PathParam("idSchoolYear") int idSchoolYear,
-    @QueryParam("orderBy") String orderBy) {
+      @QueryParam("orderBy") String orderBy) {
     // Validate orderBy parameter
     if (orderBy != null && !orderBy.isEmpty()) {
       String[] fields = orderBy.split(",");
@@ -264,7 +264,7 @@ public class EntrepriseResource {
   private boolean isValidField(String field) {
     // List of valid field names in the pae.entreprises table
     List<String> validFields = Arrays.asList("id_entreprise", "email", "designation", "address",
-      "phone_num", "blacklisted", "trade_name", "reason_blacklist");
+        "phone_num", "blacklisted", "trade_name", "reason_blacklist");
     return validFields.contains(field);
   }
 
